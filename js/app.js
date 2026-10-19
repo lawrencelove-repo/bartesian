@@ -1,8 +1,11 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v11";
+  const APP_VERSION = "bartesian-v12";
 
   const root = document.getElementById("app");
+  let cameraScanner = null;
+  let cameraTarget = null; // "scan" | "admin" | null
+
   const state = {
     search: "",
     sort: "name",
@@ -21,7 +24,108 @@
     adminKind: "capsule",
     adminCocktailId: "",
     adminLookupNote: "",
+    cameraOn: false,
+    cameraStatus: "",
   };
+
+  function stopCamera() {
+    if (cameraScanner) {
+      cameraScanner.stop();
+      cameraScanner = null;
+    }
+    cameraTarget = null;
+    state.cameraOn = false;
+    state.cameraStatus = "";
+  }
+
+  function applyScannedCode(code, target) {
+    const normalized = BartesianBarcodes.normalizeCode(code);
+    if (!normalized) return;
+    if (target === "admin") {
+      state.adminCode = normalized;
+      state.adminLookupNote = "";
+      // Reuse lookup logic by synthesizing a click path
+      const decoded = BartesianBarcodes.decodeCapsule(normalized);
+      const existing = BartesianDB.findBarcode(normalized);
+      if (existing) {
+        state.adminKind = existing.kind;
+        if (existing.cocktail_id) state.adminCocktailId = String(existing.cocktail_id);
+        state.adminLookupNote =
+          "Scanned — already saved as " + BartesianBarcodes.kindLabel(existing.kind) + ".";
+      } else if (decoded && decoded.slug) {
+        const c = BartesianDB.findCocktailBySlug(decoded.slug);
+        state.adminKind = "capsule";
+        if (c) {
+          state.adminCocktailId = String(c.id);
+          state.adminLookupNote =
+            "Scanned romkal match: " + decoded.romkalName + " → " + c.name + ". Save to link.";
+        } else {
+          state.adminLookupNote =
+            "Scanned: “" + decoded.romkalName + "” not in catalog. Pick cocktail, then Save.";
+        }
+      } else if (decoded) {
+        state.adminKind = "capsule";
+        state.adminLookupNote =
+          "Scanned capsule (Drink ID " + decoded.drinkId + "). Pick cocktail, then Save.";
+      } else {
+        state.adminLookupNote = "Scanned retail/other code. Choose Kind + target, then Save.";
+      }
+      stopCamera();
+      render();
+      return;
+    }
+
+    // Default: scan inventory page
+    state.scanDelta = -1;
+    state.scanPreview = BartesianBarcodes.resolve(BartesianDB, normalized, {
+      capsuleDelta: state.scanDelta,
+      rimmerDelta: state.scanDelta,
+    });
+    stopCamera();
+    render();
+    const box = root.querySelector("[data-scan-result]");
+    if (box) box.innerHTML = scanPreviewHtml(state.scanPreview);
+    const input = root.querySelector("[data-scan-lookup] input[name=code]");
+    if (input) input.value = normalized;
+  }
+
+  async function startCamera(target) {
+    stopCamera();
+    cameraTarget = target;
+    state.cameraOn = true;
+    state.cameraStatus = "Starting camera…";
+    render();
+    const video = root.querySelector("[data-camera-video]");
+    const canvas = root.querySelector("[data-camera-canvas]");
+    if (!video || !canvas) {
+      state.cameraOn = false;
+      state.flash = "Camera UI missing.";
+      render();
+      return;
+    }
+    try {
+      cameraScanner = BartesianCameraScan.createScanner({
+        onCode: (code) => applyScannedCode(code, target),
+        onStatus: (msg) => {
+          state.cameraStatus = msg;
+          const el = root.querySelector("[data-camera-status]");
+          if (el) el.textContent = msg;
+        },
+        onError: (err) => {
+          state.flash = String(err && err.message ? err.message : err);
+        },
+      });
+      await cameraScanner.start(video, canvas);
+      state.cameraOn = true;
+    } catch (err) {
+      stopCamera();
+      state.flash =
+        "Camera failed: " +
+        (err && err.message ? err.message : err) +
+        ". Use typed/USB entry, or allow camera permission.";
+      render();
+    }
+  }
 
   function esc(s) {
     return String(s == null ? "" : s)
@@ -601,6 +705,26 @@
       </div>`;
   }
 
+  function cameraPanelHtml(target) {
+    if (!state.cameraOn || cameraTarget !== target) {
+      return `
+        <div class="camera-actions">
+          <button type="button" data-camera-start="${esc(target)}">Open camera</button>
+        </div>`;
+    }
+    return `
+      <div class="camera-panel">
+        <div class="camera-viewport">
+          <video data-camera-video playsinline muted autoplay></video>
+          <div class="camera-guide" aria-hidden="true"></div>
+        </div>
+        <canvas data-camera-canvas class="camera-canvas" hidden></canvas>
+        <p class="hint" data-camera-status>${esc(state.cameraStatus || "Scanning…")}</p>
+        <p class="hint">Hold the capsule lid barcode in the middle band. Bartesian uses a non-standard Code&nbsp;128 (no start; stop bar width&nbsp;2) — see <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal/BARCODES.md</a>.</p>
+        <button type="button" class="ghost" data-camera-stop>Close camera</button>
+      </div>`;
+  }
+
   function renderScan() {
     const previewHtml = scanPreviewHtml(state.scanPreview);
     return shell(
@@ -609,17 +733,18 @@
       <section class="panel">
         <p class="section-label">Inventory</p>
         <h1>Scan barcode</h1>
-        <p class="lede">Scan or type a capsule, rimmer, single-flavor case, or variety-pack barcode. Nothing changes until you confirm. Confirming a romkal-matched capsule also saves the Capsule Barcode mapping (export to write it into git).</p>
+        <p class="lede">Use the camera, a USB wedge scanner, or type a code. Nothing changes until you confirm.</p>
         <ul class="plain muted">
           <li>Capsule / rimmer → default <strong>−1</strong> (flip to +1 before confirm)</li>
           <li>Case → +case qty for that cocktail</li>
           <li>Variety pack → + each included cocktail</li>
         </ul>
+        ${cameraPanelHtml("scan")}
         <form class="scan-form" data-scan-lookup>
-          <input name="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Barcode" required autofocus />
+          <input name="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Barcode" required ${state.cameraOn ? "" : "autofocus"} />
           <button type="submit">Look up</button>
         </form>
-        <p class="hint">USB scanners work as keyboard input (press Enter to look up). Capsule codes decode via the <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal bit map</a> + drink list.</p>
+        <p class="hint">USB scanners type into the field (Enter = look up). Capsule lids use the custom Bartesian decoder; retail case/pack codes use the browser BarcodeDetector when available.</p>
         <div data-scan-result>${previewHtml}</div>
       </section>
     `
@@ -674,7 +799,8 @@
       <section class="panel">
         <p class="section-label">Admin</p>
         <h1>Barcode associations</h1>
-        <p class="lede">Enter a barcode, <strong>Look up</strong> (romkal capsule decode), then set Kind / Cocktail (or pack / rimmer) and <strong>Save</strong>. That writes the local mapping used by Scan and, after Export, the <code>Capsule Barcode:</code> field in cocktail <code>.txt</code> files.</p>
+        <p class="lede">Enter or camera-scan a barcode, <strong>Look up</strong> (romkal capsule decode), then set Kind / Cocktail (or pack / rimmer) and <strong>Save</strong>. Export writes <code>Capsule Barcode:</code> into cocktail <code>.txt</code> files for git.</p>
+        ${cameraPanelHtml("admin")}
 
         <form class="admin-barcode-form" data-admin-barcode>
           <label>Barcode
@@ -836,6 +962,14 @@
 
   function render() {
     const route = parseHash();
+    // Stop camera when leaving scan/admin
+    if (
+      state.cameraOn &&
+      route.view !== "scan" &&
+      route.view !== "admin-barcodes"
+    ) {
+      stopCamera();
+    }
     if (route.view === "detail") root.innerHTML = renderDetail(route.id);
     else if (route.view === "rimmers") root.innerHTML = renderRimmers();
     else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
@@ -964,6 +1098,19 @@
     if (prefill) {
       state.adminCode = prefill.getAttribute("data-admin-prefill") || "";
       state.adminKind = "capsule";
+    }
+
+    const camStart = e.target.closest("[data-camera-start]");
+    if (camStart) {
+      e.preventDefault();
+      await startCamera(camStart.getAttribute("data-camera-start") || "scan");
+      return;
+    }
+    if (e.target.closest("[data-camera-stop]")) {
+      e.preventDefault();
+      stopCamera();
+      render();
+      return;
     }
 
     if (e.target.closest("[data-force-refresh]")) {
@@ -1234,6 +1381,7 @@
 
     const adminKind = e.target.closest("[data-admin-kind]");
     if (adminKind) {
+      if (state.cameraOn) stopCamera();
       state.adminKind = adminKind.value;
       render();
     }
