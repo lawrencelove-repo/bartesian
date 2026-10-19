@@ -134,7 +134,8 @@ Unified timeline of household cocktail activity — not just raw `inventory_log`
 - [x] Query API: `listActivity({ limit, cocktailId, rimmerId })` ordered by `created_at DESC, id DESC`
 
 **UI:**
-- [x] Per-item history only (no global menu entry): History link on cocktail/rimmer detail → `#/history/cocktail/:id` / `#/history/rimmer/:id` chronological feed, local datetime
+- [x] Per-item history only (no global menu entry): History button in detail Inventory box → `#/history/cocktail/:id` / `#/history/rimmer/:id` chronological feed, local datetime
+- [x] Admin history editing: Edit modal (timestamp + used-by free-text name → creates Person, stored as `person_id`; blank = none) and Delete with confirmation modal (quantities unchanged)
 - [x] Back link from item History → item detail
 - [x] Empty state when no events yet
 

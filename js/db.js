@@ -1257,6 +1257,70 @@
       try { return query(sql, params); } catch (_) { return []; }
     },
 
+    getActivity(id) {
+      try {
+        return (
+          queryOne(
+            `SELECT a.*,
+               c.name AS cocktail_name, c.slug AS cocktail_slug,
+               r.name AS rimmer_name, r.slug AS rimmer_slug,
+               p.name AS pack_name, p.slug AS pack_slug,
+               pe.name AS person_name
+             FROM activity_log a
+             LEFT JOIN cocktails c ON c.id = a.cocktail_id
+             LEFT JOIN rimmers r ON r.id = a.rimmer_id
+             LEFT JOIN packs p ON p.id = a.pack_id
+             LEFT JOIN people pe ON pe.id = a.person_id
+             WHERE a.id = ?`,
+            [id]
+          ) || null
+        );
+      } catch (_) {
+        return null;
+      }
+    },
+
+    /** Admin: permanently remove a history record (does not change quantities). */
+    async deleteActivity(id) {
+      exec("DELETE FROM activity_log WHERE id = ?", [id]);
+      await persist();
+    },
+
+    /**
+     * Admin: edit a history record's timestamp and (optionally) who used it.
+     * personName: undefined = leave as-is, "" = clear to blank, otherwise the
+     * name is matched to a Person (created if new) and stored as person_id —
+     * never as free text — so renaming that Person shows the new name and
+     * deleting them leaves the entry blank (LEFT JOIN yields no name).
+     */
+    async updateActivity(id, { createdAt, personName } = {}) {
+      const row = queryOne("SELECT * FROM activity_log WHERE id = ?", [id]);
+      if (!row) throw new Error("History record not found.");
+      let created = row.created_at;
+      if (createdAt != null && createdAt !== "") {
+        const d = new Date(createdAt);
+        if (Number.isNaN(d.getTime())) throw new Error("Invalid date/time.");
+        created = d.toISOString();
+      }
+      let personId = row.person_id != null ? row.person_id : null;
+      if (personName !== undefined) {
+        const trimmed = String(personName || "").trim();
+        if (!trimmed) {
+          personId = null;
+        } else {
+          const person = await this.addPerson(trimmed);
+          personId = person ? person.id : null;
+        }
+      }
+      exec("UPDATE activity_log SET created_at = ?, person_id = ? WHERE id = ?", [
+        created,
+        personId,
+        id,
+      ]);
+      await persist();
+      return this.getActivity(id);
+    },
+
     listWishlist() {
       try {
         return query(

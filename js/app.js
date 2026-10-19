@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v34";
+  const APP_VERSION = "bartesian-v36";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -26,6 +26,7 @@
     rimmerFavoritesOnly: false,
     rimmerAvailableOnly: false,
     qtyOpenKey: "",
+    historyModal: null,
     flash: "",
     randomSpirit: "",
     randomFavoritesOnly: false,
@@ -786,7 +787,6 @@
                 ? `<p class="muted"><a href="${esc(c.help_url)}" target="_blank" rel="noopener">Nutrition / help article ↗</a></p>`
                 : ""
             }
-            <p><a href="#/history/cocktail/${c.id}" data-go="#/history/cocktail/${c.id}">History →</a></p>
           </div>
         </div>
 
@@ -840,6 +840,7 @@
               ${c.favorite ? "Remove from Favorites" : "Add to Favorites"}
             </button>
             <button type="button" class="ghost" data-wishlist-add-cocktail="${c.id}">Add to Wishlist</button>
+            <button type="button" class="ghost" data-go="#/history/cocktail/${c.id}">History</button>
             ${c.restock && c.quantity === 0 ? '<span class="pill pill-restock">Restock needed</span>' : ""}
           </div>
         </section>
@@ -976,7 +977,6 @@
                 ? `<p><a href="${esc(r.bartesian_url)}" target="_blank" rel="noopener">View on Bartesian ↗</a></p>`
                 : ""
             }
-            <p><a href="#/history/rimmer/${r.id}" data-go="#/history/rimmer/${r.id}">History →</a></p>
           </div>
         </div>
         ${
@@ -997,6 +997,7 @@
               ${r.favorite ? "Remove from Favorites" : "Add to Favorites"}
             </button>
             <button type="button" class="ghost" data-wishlist-add-rimmer="${r.id}">Add to Wishlist</button>
+            <button type="button" class="ghost" data-go="#/history/rimmer/${r.id}">History</button>
             ${r.restock && r.quantity === 0 ? '<span class="pill pill-restock">Restock needed</span>' : ""}
           </div>
         </section>
@@ -1023,9 +1024,11 @@
     const name = a.cocktail_name || a.rimmer_name || a.pack_name || "";
     switch (a.kind) {
       case "use":
-        return (a.delta != null ? "Used " + Math.abs(Number(a.delta)) + " · " : "Used · ") + name;
+        return (a.delta != null ? "Used " + Math.abs(Number(a.delta)) + " · " : "Used · ") + name +
+          (a.person_name ? " — " + a.person_name : "");
       case "restock":
-        return (a.delta != null ? "Added +" + Number(a.delta) + " · " : "Added · ") + name;
+        return (a.delta != null ? "Added +" + Number(a.delta) + " · " : "Added · ") + name +
+          (a.person_name ? " — " + a.person_name : "");
       case "rating":
         return "Feedback · " + name + (a.person_name ? " — " + a.person_name : "") +
           (a.stars ? " " + a.stars + "★" : "") + (a.detail ? ": " + a.detail : "");
@@ -1047,13 +1050,76 @@
   function activityRowsHtml(rows, emptyText) {
     if (!rows.length) return `<p class="empty">${esc(emptyText)}</p>`;
     return rows.map((a) => {
+      const adminBtns = state.isAdmin
+        ? `<div class="row-actions history-actions">
+             <button type="button" class="ghost small" data-history-edit="${a.id}">Edit</button>
+             <button type="button" class="ghost danger small" data-history-delete="${a.id}">Delete</button>
+           </div>`
+        : "";
       const inner = `
         <div class="row-body">
           <div class="row-title">${esc(activityLabel(a))}</div>
           <div class="row-meta">${esc(formatWhen(a.created_at))}${a.barcode && a.kind !== "barcode" ? " · " + esc(a.barcode) : ""}${a.detail && a.kind !== "rating" && a.kind !== "favorite" ? " · " + esc(a.detail) : ""}</div>
+          ${adminBtns}
         </div>`;
       return `<div class="cocktail-row history-row"><span class="history-dot" aria-hidden="true"></span>${inner}</div>`;
     }).join("");
+  }
+
+  /** ISO timestamp → value for <input type="datetime-local"> (local time). */
+  function toLocalInputValue(iso) {
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return "";
+    const pad = (n) => String(n).padStart(2, "0");
+    return (
+      d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) +
+      "T" + pad(d.getHours()) + ":" + pad(d.getMinutes())
+    );
+  }
+
+  function historyModalHtml(people) {
+    const m = state.historyModal;
+    if (!m) return "";
+    if (m.mode === "delete") {
+      return `<div class="modal-backdrop" data-history-modal-backdrop>
+        <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="history-modal-title">
+          <h2 id="history-modal-title">Delete history record?</h2>
+          <p>${esc(m.label)}</p>
+          <p class="muted">${esc(m.when)}</p>
+          <p>This permanently removes the record. It does <strong>not</strong> change inventory quantities.</p>
+          <div class="modal-actions">
+            <button type="button" class="ghost" data-history-modal-close>Cancel</button>
+            <button type="button" class="danger" data-history-delete-confirm="${m.id}">Delete permanently</button>
+          </div>
+        </div>
+      </div>`;
+    }
+    const personField =
+      m.kind === "use" || m.kind === "restock"
+        ? `<label>${m.kind === "use" ? "Consumed / used by" : "Added by"} <span class="muted">(optional)</span>
+             <input name="person_name" type="text" list="history-people-options" placeholder="Leave blank, or any name" value="${esc(m.personName || "")}" />
+           </label>
+           <datalist id="history-people-options">
+             ${(people || []).map((p) => `<option value="${esc(p.name)}"></option>`).join("")}
+           </datalist>
+           <p class="hint">A new name is added as a Person. Clearing the field leaves it blank.</p>`
+        : "";
+    return `<div class="modal-backdrop" data-history-modal-backdrop>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="history-modal-title">
+        <h2 id="history-modal-title">Edit history</h2>
+        <p>${esc(m.label)}</p>
+        <form class="modal-form" data-history-edit-form data-id="${m.id}">
+          <label>Date &amp; time
+            <input name="created_at" type="datetime-local" required value="${esc(m.createdLocal || "")}" />
+          </label>
+          ${personField}
+          <div class="modal-actions">
+            <button type="button" class="ghost" data-history-modal-close>Cancel</button>
+            <button type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>`;
   }
 
   function renderItemHistory(itemType, id) {
@@ -1067,6 +1133,7 @@
     );
     const backHref = isCocktail ? "#/cocktail/" + id : "#/rimmer/" + id;
     const img = isCocktail ? primaryImage(item) : item.image || "";
+    const people = state.isAdmin ? BartesianDB.listPeople() : [];
     return shell(isCocktail ? "list" : "rimmers", `
       <section class="panel">
         <a class="back" href="${backHref}" data-go="${backHref}">← Back to ${esc(item.name)}</a>
@@ -1076,10 +1143,12 @@
             <p class="detail-kicker">${isCocktail ? "Cocktail" : "Rimmer"} history</p>
             <h1 class="detail-title">${esc(item.name)}</h1>
             <p class="count">${rows.length} event${rows.length === 1 ? "" : "s"}</p>
+            ${state.isAdmin ? `<p class="hint">Admin: Edit changes timestamp${rows.some((r) => r.kind === "use" || r.kind === "restock") ? " / who used it" : ""}; Delete removes a record permanently (quantities unchanged).</p>` : ""}
           </div>
         </div>
         <div class="list">${activityRowsHtml(rows, "No history for this item yet.")}</div>
-      </section>`);
+      </section>
+      ${historyModalHtml(people)}`);
   }
 
   function bartesianArrow(url) {
@@ -1629,6 +1698,7 @@
     ) {
       stopCamera();
     }
+    if (route.view !== "item-history") state.historyModal = null;
     if (ADMIN_VIEWS.includes(route.view) && !state.isAdmin) {
       root.innerHTML = shell("list", `
         <section class="panel">
@@ -1705,6 +1775,60 @@
         render();
         return;
       }
+    }
+
+    // History admin modals
+    if (e.target.closest("[data-history-modal-close]")) {
+      state.historyModal = null;
+      render();
+      return;
+    }
+    if (
+      state.historyModal &&
+      e.target.hasAttribute &&
+      e.target.hasAttribute("data-history-modal-backdrop")
+    ) {
+      state.historyModal = null;
+      render();
+      return;
+    }
+    const historyEdit = e.target.closest("[data-history-edit]");
+    if (historyEdit) {
+      const entry = BartesianDB.getActivity(Number(historyEdit.getAttribute("data-history-edit")));
+      if (!entry) return;
+      state.historyModal = {
+        mode: "edit",
+        id: entry.id,
+        kind: entry.kind,
+        label: activityLabel(entry),
+        createdLocal: toLocalInputValue(entry.created_at),
+        personName: entry.person_name || "",
+      };
+      render();
+      return;
+    }
+    const historyDelete = e.target.closest("[data-history-delete]");
+    if (historyDelete) {
+      const entry = BartesianDB.getActivity(Number(historyDelete.getAttribute("data-history-delete")));
+      if (!entry) return;
+      state.historyModal = {
+        mode: "delete",
+        id: entry.id,
+        label: activityLabel(entry),
+        when: formatWhen(entry.created_at),
+      };
+      render();
+      return;
+    }
+    const historyDeleteConfirm = e.target.closest("[data-history-delete-confirm]");
+    if (historyDeleteConfirm) {
+      await BartesianDB.deleteActivity(
+        Number(historyDeleteConfirm.getAttribute("data-history-delete-confirm"))
+      );
+      state.historyModal = null;
+      state.flash = "History record deleted.";
+      render();
+      return;
     }
 
     const jump = e.target.closest('[data-act="jump-index"]');
@@ -2118,6 +2242,21 @@
       return;
     }
 
+    const historyEditForm = e.target.closest("[data-history-edit-form]");
+    if (historyEditForm) {
+      e.preventDefault();
+      const fd = new FormData(historyEditForm);
+      const hasPersonField = historyEditForm.querySelector("[name=person_name]") != null;
+      await BartesianDB.updateActivity(Number(historyEditForm.getAttribute("data-id")), {
+        createdAt: String(fd.get("created_at") || ""),
+        personName: hasPersonField ? String(fd.get("person_name") || "") : undefined,
+      });
+      state.historyModal = null;
+      state.flash = "History updated.";
+      render();
+      return;
+    }
+
     const personForm = e.target.closest("[data-add-person]");
     if (personForm) {
       e.preventDefault();
@@ -2237,6 +2376,12 @@
   }
 
   window.addEventListener("hashchange", render);
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && state.historyModal) {
+      state.historyModal = null;
+      render();
+    }
+  });
   document.addEventListener("click", (e) => {
     onClick(e).catch((err) => {
       state.flash = err.message;
