@@ -1,5 +1,5 @@
 /* Bartesian app shell service worker — offline-friendly cache for static assets. */
-const CACHE_VERSION = "bartesian-v3";
+const CACHE_VERSION = "bartesian-v5";
 const PRECACHE = [
   "./",
   "./index.html",
@@ -16,16 +16,21 @@ const PRECACHE = [
   "./assets/favicon/android-chrome-192x192.png",
   "./assets/favicon/android-chrome-512x512.png",
   "./assets/favicon/site.webmanifest",
-  "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.11.0/sql-wasm.js",
-  "https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.11.0/sql-wasm.wasm",
-  "https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js",
 ];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches
       .open(CACHE_VERSION)
-      .then((cache) => cache.addAll(PRECACHE))
+      .then((cache) =>
+        Promise.all(
+          PRECACHE.map((url) =>
+            cache.add(url).catch(() => {
+              /* skip missing optional assets so install still succeeds */
+            })
+          )
+        )
+      )
       .then(() => self.skipWaiting())
   );
 });
@@ -45,16 +50,57 @@ self.addEventListener("fetch", (event) => {
   const { request } = event;
   if (request.method !== "GET") return;
 
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      const networked = fetch(request)
+  const url = new URL(request.url);
+  const sameOrigin = url.origin === self.location.origin;
+
+  // Navigations: always prefer the live server so a different app on the same
+  // port (e.g. recipes) cannot keep showing a cached shell.
+  if (request.mode === "navigate") {
+    event.respondWith(
+      fetch(request)
         .then((response) => {
           const copy = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => {});
+          caches.open(CACHE_VERSION).then((cache) => cache.put("./index.html", copy)).catch(() => {});
           return response;
         })
-        .catch(() => cached);
-      return cached || networked;
-    })
-  );
+        .catch(() => caches.match("./index.html"))
+    );
+    return;
+  }
+
+  if (sameOrigin) {
+    event.respondWith(
+      caches.match(request).then((cached) => {
+        const networked = fetch(request)
+          .then((response) => {
+            if (response && response.status === 200) {
+              const copy = response.clone();
+              caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => {});
+            }
+            return response;
+          })
+          .catch(() => cached);
+        // Prefer network for JS/CSS so port reuse does not keep a sibling app's assets.
+        if (/\.(js|css)$/i.test(url.pathname)) {
+          return networked;
+        }
+        return cached || networked;
+      })
+    );
+    return;
+  }
+
+  if (url.hostname === "cdnjs.cloudflare.com") {
+    event.respondWith(
+      caches.match(request).then(
+        (cached) =>
+          cached ||
+          fetch(request).then((response) => {
+            const copy = response.clone();
+            caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => {});
+            return response;
+          })
+      )
+    );
+  }
 });
