@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v17";
+  const APP_VERSION = "bartesian-v18";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ALPHA_INDEX_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
 

@@ -44,8 +44,10 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 
 ### Cookies (mahjong-tools pattern)
 
-- [ ] Cookie-backed settings module like [mahjong-tools `js/settings.js`](https://github.com/lawrencelove-repo/mahjong-tools/blob/main/js/settings.js): `path=/`, `SameSite=Lax`, long `max-age`, read/write helpers
-- [ ] Persist UI prefs in cookies (e.g. last filters/sort, favorites-only default, selected person for ratings, UI scale / theme if added)
+- [x] Cookie helpers (`path=/`, `SameSite=Lax`, long `max-age`) for list prefs
+- [x] Persist cocktail list prefs in cookie `bartesian_list_prefs` (search, sort, spirit, in-stock / favorites / seasonal)
+- [ ] Cookie-backed settings module like [mahjong-tools `js/settings.js`](https://github.com/lawrencelove-repo/mahjong-tools/blob/main/js/settings.js) (shared read/write helpers)
+- [ ] Persist more UI prefs (selected person for ratings, UI scale / theme if added)
 - [ ] Soft site access gate cookie (optional; recipes-style password hash + cookie) if you want a deterrent on public Pages
 
 ### Safari & iPad
@@ -65,13 +67,40 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] iPadOS Take photo / Choose image / Files via `<input type="file" accept="image/*">` (+ optional live scan)
 - [x] Custom UPC-A/EAN-13 decoder for case/pack labels (iPad; no BarcodeDetector)
 - [x] Merge seed Case/Capsule barcodes into existing IndexedDB on launch
-- [ ] Inventory history UI (from `inventory_log`)
 - [ ] Pack/case restock undo
+- [x] Cocktail list: qty badge (left), A–Z# jump rail, wrapping filter checkboxes, cookie-backed filters/sort
+
+### Activity history (chronological)
+
+Unified timeline of household cocktail activity — not just raw `inventory_log` rows. History screen shows newest→oldest (or reverse) across all event types.
+
+**Events to capture (at write time):**
+- [ ] Capsule / rimmer used (qty −1 from scan confirm or Use 1)
+- [ ] Capsules / packs / cases added (restock +N, variety pack expand, manual ±)
+- [ ] Feedback added or updated (rating stars + optional comment, by person)
+- [ ] Favorited / unfavorited
+- [ ] (Nice) Barcode associations saved; cocktail enabled/disabled if admin lands
+
+**Storage (exportable):**
+- [ ] Extend beyond today’s `inventory_log` (qty-only) — e.g. `activity_log` (or equivalent) with: `id`, `created_at` (ISO), `kind` (`use` | `restock` | `rating` | `favorite` | …), `cocktail_id` / `rimmer_id` / `pack_id` nullable, `person_id` nullable, `delta` nullable, `stars` nullable, `detail` text/JSON (reason, barcode, comment, favorite on/off)
+- [ ] Write an activity row whenever the corresponding action succeeds (same transaction / persist as the inventory or rating change)
+- [ ] Query API: `listActivity({ limit, before, cocktailId })` ordered by `created_at DESC, id DESC` for the History screen
+
+**UI:**
+- [ ] `#/history` (or Settings → History) — chronological feed with cocktail/rimmer name, event label, relative or local datetime
+- [ ] Tap row → cocktail/rimmer detail when applicable
+- [ ] Empty state when no events yet
+
+**Import / export:**
+- [ ] Include `activity.json` (or fold into export zip alongside `ratings.json` / `barcodes.json`)
+- [ ] `exportSnapshot()` + Settings export write full activity history
+- [ ] `import-data.js` / zip merge: restore activity into DB on import (and seed-rev apply if needed) without wiping unrelated local rows incorrectly
+- [ ] Document that Reset local DB clears activity unless it was exported and re-imported
 
 ### Polish
 
 - [ ] Favorites UX polish
-- [ ] Full export parity (ratings/people round-trip into seed if desired)
+- [ ] Full export parity (ratings/people/activity round-trip into seed or export zip)
 - [x] Cocktail detail iconography for garnish / pairs-with (book-style circular marks)
 - [x] Keep site private (no public marketing; access gate / robots as desired)
 - [x] Enable GitHub Pages from repo root and smoke on a real `*.github.io` URL (private household use)
