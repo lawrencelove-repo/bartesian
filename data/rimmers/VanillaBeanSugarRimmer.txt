@@ -3,9 +3,17 @@ Slug: vanilla-bean-sugar-rimmer
 Description: This indulgent flavor of warm and creamy vanilla bean adds a touch of elegance to your favorite cocktails. Perfect for enhancing sweet and spiced cocktails.
 Kind: sugar
 Pairs With: Espresso Martini, Apple Pie, Frosty's Bananas Foster, and all types of Old Fashioneds
-Cocktail Slugs: espresso-martini, apple-pie
+Cocktail Slugs: espresso-martini, apple-pie, holiday-spiced-old-fashioned, low-cal-old-fashioned, old-fashioned
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
-Nutrition Image: images/nutrition/rimmer-vanilla-bean-sugar-rimmer.png
+Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 0
+Favorite: 0

@@ -3,8 +3,19 @@ Slug: naughty-collection-2025
 Barcode: 
 Notes: This kind of naughty will get you on everyone's nice list. Get in the holiday spirit with this year’s Bartesian Naughty Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Jollypeño Margarita: a margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño. - Yuletide Hurricane: a fruity, tropical rum cocktail with added shimmer. - Ginger Pear Noel: a tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor. - The Grinch Appletini: a shimmering sweet and tart vodka cocktail with green apple flavors.
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 0
 Items:
+	Shopify Variant ID:
 	4-curated-seasonal-cocktails-jollype-o-margarita-a-margarita-bursting-with-flavors-of-vibrant-pineapple: 2
+	Shopify Handle:
 	zesty-lime: 2
 	a-kick-of-jalape-o: 2
+	Gorgias Article ID:

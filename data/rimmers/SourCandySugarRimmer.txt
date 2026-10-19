@@ -3,9 +3,17 @@ Slug: sour-candy-sugar-rimmer
 Description: Inspired by our favorite sour candies, this rimming sugar combines sweetness with a tantalizing burst of tartness for a unique, mouth-puckering cocktail experience. Sour Candy Sugar pairs well with sweet, sour, and citrus cocktails.
 Kind: sugar
 Pairs With: Cosmopolitan, Sidecar, Bee's Knees, Lemon Drops, Margaritas, and Gimlets
-Cocktail Slugs: cosmopolitan, sidecar, bees-knees
+Cocktail Slugs: cosmopolitan, sidecar, bees-knees, blueberry-lemon-drop, lemon-drop, strawberry-lemon-drop, blackberry-margarita, candyman-margarita, jollype-o-margarita, low-cal-margarita, mango-habanero-margarita, mango-margarita, margarita, mistletoe-margarita, passion-fruit-margarita, pineapple-margarita, pomegranate-margarita, spicy-margarita, strawberry-guava-margarita, watermelon-margarita, raspberry-ginger-gimlet
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
-Nutrition Image: images/nutrition/rimmer-sour-candy-sugar-rimmer.png
+Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 0
+Favorite: 0

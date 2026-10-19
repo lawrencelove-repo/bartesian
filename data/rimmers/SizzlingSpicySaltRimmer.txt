@@ -3,10 +3,17 @@ Slug: sizzling-spicy-salt-rimmer
 Description: Kick your cocktails up a notch with this spicy salt blend that will add the perfect amount of heat to any cocktail.
 Kind: salt
 Pairs With: All types of Margaritas and Jalapeño Lime Shrub
-Cocktail Slugs: jalape-o-lime-shrub
+Cocktail Slugs: blackberry-margarita, candyman-margarita, jollype-o-margarita, low-cal-margarita, mango-habanero-margarita, mango-margarita, margarita, mistletoe-margarita, passion-fruit-margarita, pineapple-margarita, pomegranate-margarita, spicy-margarita, strawberry-guava-margarita, watermelon-margarita, jalape-o-lime-shrub
 Bartesian URL: https://bartesian.com/products/sizzling-spicy-salt-rimmer?variant=42058992156871
+Shopify Product ID: 6725158666439
+Shopify Variant ID: 42058992156871
+Shopify Handle: sizzling-spicy-salt-rimmer
 Help URL: https://bartesian.gorgias.help/en-US/sizzling-spicy-salt-rimmer-338295
+Gorgias Article ID: 338295
 Image: images/rimmers/sizzling-spicy-salt-rimmer.jpg
-Nutrition Image: images/nutrition/rimmer-sizzling-spicy-salt-rimmer.png
+Nutrition Image: images/nutrition/sizzling-spicy-salt-rimmer.png
+Nutrition Image EU: images/nutrition/sizzling-spicy-salt-rimmer-eu.jpg
 Barcode: 
 Quantity: 0
+Enabled: 1
+Favorite: 0

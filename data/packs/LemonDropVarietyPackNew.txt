@@ -3,8 +3,17 @@ Slug: lemon-drop-variety-pack-new
 Barcode: 
 Notes: Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini. Shake with ice, serve in a martini glass, rim with lemon sugar, and garnish with lemon.
 Bartesian URL: https://bartesian.com/products/lemon-drop-variety-pack?variant=46107183710407
+Shopify Product ID: 8599659675847
+Shopify Variant ID: 46107183710407
+Shopify Handle: lemon-drop-variety-pack
+Help URL: 
+Gorgias Article ID: 
 Image: images/packs/lemon-drop-variety-pack-new.jpg
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 1
 Items:
 	strawberry-lemon-drop: 2
 	tart-with-flavors-of-juicy-strawberry: 2
 	candied-lemon: 2
+	Gorgias Article ID:

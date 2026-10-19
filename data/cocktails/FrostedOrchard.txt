@@ -1,16 +1,25 @@
 Name: Frosted Orchard
 Slug: frosted-orchard
 Description: The Frosted Orchard is a crisp, refreshing vodka cocktail with a cozy twist. Juicy apple and tangy lemonade are infused with flavors of cinnamon and cardamom for a balanced blend of sweet, citrus and spices. This cool-weather sipper eases the chill with a quiet warmth that unfolds sip by sip.
+Details: 
 Spirits: Vodka
 Glassware: Highball Glass
 Garnish: Apple slice, rosemary sprig and cinnamon stick
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/frosted-orchard.jpg"}
+Nutrition: {"label_image":"images/nutrition/frosted-orchard.png"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/frosted-orchard-3388354
-Image: 
+Gorgias Article ID: 3388354
+Hero Image: images/hero/frosted-orchard.jpg
+Marketing Image: images/marketing/frosted-orchard.jpg
+Image: images/hero/frosted-orchard.jpg
 Seasonal: 1
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

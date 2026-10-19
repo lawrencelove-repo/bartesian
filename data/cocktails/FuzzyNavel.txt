@@ -1,16 +1,25 @@
 Name: Fuzzy Navel
 Slug: fuzzy-navel
 Description: Indulge in the sweet, sun-kissed flavors of the Fuzzy Navel, a vibrant blend of tangy orange and juicy peach flavors. This smooth, refreshing cocktail perfectly balances the zing of citrus with fruity sweetness, making every sip feel like a golden hour escape.
+Details: 
 Spirits: Vodka
 Glassware: Highball Glass
 Garnish: Orange Peel or Peach Slice
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/fuzzy-navel.jpg"}
+Nutrition: {"label_image":"images/nutrition/fuzzy-navel.png","label_image_eu":"images/nutrition/fuzzy-navel-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/fuzzy-navel-2027470
-Image: 
+Gorgias Article ID: 2027470
+Hero Image: images/hero/fuzzy-navel.jpg
+Marketing Image: 
+Image: images/hero/fuzzy-navel.jpg
 Seasonal: 0
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

@@ -1,6 +1,7 @@
 Name: Bee's Knees
 Slug: bees-knees
 Description: A sweet, citrus, and refreshing cocktail from the Prohibition Era, the Bee's Knees is a delicious pairing of lemon and honey, combined with floral notes of clover and alfalfa. Shake on ice and garnish with a lemon peel.
+Details: Bartesian Bee’s Knees Capsules\n\nThe Bee’s Knees cocktail is a delicious pairing of lemon and honey combined with light floral notes of clover and alfalfa.\n\nThis gin-based cocktail contains honey syrup and lemon juice to create an exquisite easy-to-drink cocktail. Bartesian’s cocktail capsules are easy to use and will always produce a high-quality premium Bee’s Knees cocktail.\n\nMaking a Bee’s Knees Cocktail with the Bartesian Cocktail Maker\n\nYou’ll be sipping on a crisp, light cocktail in less than 30 seconds with the Bartesian cocktail maker! Simply fill the cocktail maker with your favorite gin, pop in a Bee’s Knees cocktail capsule, select your desired strength, and press “Mix.”\n\nShake on ice, serve in a chilled cocktail glass, and garnish with a lemon peel or lemon twist.\n\nBase spirit: Gin\n\nLeveling up your cocktail experience at home is just a few clicks away! Bee’s Knees cocktails can be created and enjoyed for dinner parties, after work, at-home happy hours, and honestly, whenever you want. Ready for a refreshing cocktail? Order your Bee’s Knees Cocktail capsules now!
 Spirits: Gin
 Glassware: Coupe Glass
 Garnish: with a lemon peel
@@ -8,9 +9,17 @@ Pairs With:
 Nutrition: {"label_image":"images/nutrition/bees-knees.png"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/bees-knees?variant=41695090573511
+Shopify Product ID: 7224383701191
+Shopify Variant ID: 41695090573511
+Shopify Handle: bees-knees
+Shopify SKU: 55485
 Help URL: https://bartesian.gorgias.help/en-US/bees-knees-36519
-Image: images/cocktails/bees-knees.jpg
+Gorgias Article ID: 36519
+Hero Image: images/hero/bees-knees.jpg
+Marketing Image: images/marketing/bees-knees.jpg
+Image: images/hero/bees-knees.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

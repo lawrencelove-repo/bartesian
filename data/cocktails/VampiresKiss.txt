@@ -1,16 +1,25 @@
 Name: Vampire's Kiss
 Slug: vampires-kiss
 Description: Vampire's Kiss is a deep crimson vodka cocktail built around the unmistakable sweetness of red licorice flavor, layered with juicy strawberry and fruit punch flavor. Smooth and fruit-forward, it delivers a candy-like sip. Shake and serve in a martini glass garnished with licorice or a blood-red drizzle.
+Details: Enjoy this seasonal release while it lasts.
 Spirits: Vodka
 Glassware: Martini Glass
 Garnish: ed with licorice or a blood-red drizzle
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/vampires-kiss.png"}
+Nutrition: {"label_image":"images/nutrition/vampires-kiss.png","label_image_eu":"images/nutrition/vampires-kiss-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/vampires-kiss-capsules?variant=46632567832775
+Shopify Product ID: 8726367502535
+Shopify Variant ID: 46632567832775
+Shopify Handle: vampires-kiss-capsules
+Shopify SKU: 75714
 Help URL: https://bartesian.gorgias.help/en-US/vampires-kiss-8043822
-Image: images/cocktails/vampires-kiss.jpg
+Gorgias Article ID: 8043822
+Hero Image: 
+Marketing Image: images/marketing/vampires-kiss.jpg
+Image: images/marketing/vampires-kiss.jpg
 Seasonal: 1
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

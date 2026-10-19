@@ -1,16 +1,25 @@
 Name: Midnight Passion Martini
 Slug: midnight-passion-martini
 Description: An alluring twist on the classic Pornstar Martini, this vodka cocktail dazzles with juicy passion fruit, zesty lime, and a hint of vanilla flavor. Sweet and tart in perfect harmony, it’s a smooth martini designed to be savored whenever you want to make the night feel a little more electric. Shake and serve in a martini glass garnished with a lemon peel.
+Details: 
 Spirits: Vodka
 Glassware: Martini Glass
 Garnish: ed with a lemon peel
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/midnight-passion-martini.jpg"}
+Nutrition: {"label_image":"images/nutrition/midnight-passion-martini.png","label_image_eu":"images/nutrition/midnight-passion-martini-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/midnight-passion-martini-6792810
-Image: 
+Gorgias Article ID: 6792810
+Hero Image: images/hero/midnight-passion-martini.jpg
+Marketing Image: images/marketing/midnight-passion-martini.jpg
+Image: images/hero/midnight-passion-martini.jpg
 Seasonal: 0
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

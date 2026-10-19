@@ -1,6 +1,7 @@
 Name: Rum Breeze
 Slug: rum-breeze
-Description: The Rum Breeze features a sweet, tropical blend of pineapple, lime, and strawberry juices, light rum, and a hint of coconut. Fresh and flavorful, with a slight tang from the pineapple juice and coconut undertones.
+Description: The Rum Breeze features a sweet, tropical blend of pineapple, lime, and strawberry juices, light rum, and a hint of coconut. Fresh and flavorful, it’s a must-have addition to your at-home bar. With a slight tang from the pineapple juice and coconut undertones, this will thrill and delight anyone who tries it.
+Details: Featuring pineapple juice, lime juice, and light rum, you’ll be instantly transported to your favorite tropical beach with just one sip. Ideal for fruity drink lovers, the juices in a Rum Breeze conceal any bite from the light rum for a refreshing, playful cocktail.\n\nMixing premium rum cocktails on demand is easy with Bartesian. Pop one of our Rum Breeze capsules into your cocktail maker, select the desired strength, and then press mix! You’ll be sipping on a sweet, tangy, boozy rum cocktail in seconds. Level up your bartending skills to a professional mixologist with the touch of a button.\n\nWhen vacation is on your mind but you’re at home, light rum cocktails inspire beachy vibes and relaxed energy. Pour one out after a long day or when you’re hosting friends for happy hour. Bring the tropics to your home with Bartesian.
 Spirits: Rum
 Glassware: Highball Glass
 Garnish: Orange & Cherry
@@ -8,9 +9,17 @@ Pairs With:
 Nutrition: {"label_image":"images/nutrition/rum-breeze.png"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/rum-breeze-cocktails?variant=15685657034801
+Shopify Product ID: 2029030735921
+Shopify Variant ID: 15685657034801
+Shopify Handle: rum-breeze-cocktails
+Shopify SKU: 55354
 Help URL: https://bartesian.gorgias.help/en-US/rum-breeze-39076
-Image: images/cocktails/rum-breeze.jpg
+Gorgias Article ID: 39076
+Hero Image: 
+Marketing Image: images/marketing/rum-breeze.jpg
+Image: images/marketing/rum-breeze.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

@@ -1,16 +1,25 @@
 Name: Great Gatsby
 Slug: great-gatsby
 Description: Raise a glass to the Roaring Twenties with this elegant, shimmering gin cocktail. Flavors of grapefruit and citrus blend with notes of elderflower for a perfect tribute to the literary classic. Shake with ice and serve in a champagne glass or coupe.
+Details: 
 Spirits: Gin
 Glassware: Coupe Glass
 Garnish: Grapefruit Peel
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/great-gatsby.jpg"}
+Nutrition: {"label_image":"images/nutrition/great-gatsby.png","label_image_eu":"images/nutrition/great-gatsby-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/great-gatsby-267144
+Gorgias Article ID: 267144
+Hero Image: 
+Marketing Image: 
 Image: 
 Seasonal: 0
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

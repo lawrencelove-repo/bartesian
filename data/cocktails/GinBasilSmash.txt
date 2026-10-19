@@ -1,16 +1,25 @@
 Name: Gin Basil Smash (UK Only)
 Slug: gin-basil-smash
 Description: Citrus and basil flavours create a refreshing, herbaceous sip that's as striking in the glass as it is easy to enjoy.
+Details: 
 Spirits: Gin
 Glassware: Lowball Glass
 Garnish: Basil Leaf
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/gin-basil-smash.jpg"}
+Nutrition: {"label_image":"images/nutrition/gin-basil-smash.png","label_image_eu":"images/nutrition/gin-basil-smash-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":0.7,"regular_oz":1.0,"strong_oz":1.7,"raw":"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1.0 oz., Strong = 1.7 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/gin-basil-smash-(uk-only)-8043833
-Image: 
+Gorgias Article ID: 8043833
+Hero Image: images/hero/gin-basil-smash.jpg
+Marketing Image: 
+Image: images/hero/gin-basil-smash.jpg
 Seasonal: 0
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

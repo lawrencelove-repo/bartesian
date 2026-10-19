@@ -5,7 +5,15 @@ Kind: sugar
 Pairs With: Apple Pie, Sidecar, Espresso Martini, Painkiller, Rum Swizzle, and other dessert cocktails to perfection
 Cocktail Slugs: apple-pie, sidecar, espresso-martini, painkiller, rum-swizzle
 Bartesian URL: https://bartesian.com/products/sweet-cinnamon-vanilla-sugar-rimmer?variant=42058994680007
+Shopify Product ID: 6725160304839
+Shopify Variant ID: 42058994680007
+Shopify Handle: sweet-cinnamon-vanilla-sugar-rimmer
+Help URL: 
+Gorgias Article ID: 
 Image: 
 Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 1
+Favorite: 0

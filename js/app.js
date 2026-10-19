@@ -110,8 +110,8 @@
         const spiritsText = (c.spirits_csv || "").split("|").filter(Boolean).join(", ");
         return `
           <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">
-            <div class="thumb ${c.image ? "" : "thumb-empty"}">
-              ${c.image ? `<img src="${esc(c.image)}" alt="">` : ""}
+            <div class="thumb ${primaryImage(c) ? "" : "thumb-empty"}">
+              ${primaryImage(c) ? `<img src="${esc(primaryImage(c))}" alt="">` : ""}
             </div>
             <div class="row-body">
               <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}${c.seasonal ? ' <span class="pill">Seasonal</span>' : ""}</div>
@@ -184,12 +184,26 @@
 
   function nutritionBlock(nutrition, rawFallback) {
     const labelImage = nutrition && nutrition.label_image;
-    if (labelImage) {
-      return `<p class="section-label">Nutrition</p>
+    const euImage = nutrition && nutrition.label_image_eu;
+    if (labelImage || euImage) {
+      return `<section class="nutrition-section">
+        <p class="section-label">Nutrition</p>
         <p class="detail-copy muted">Case label (nutrition, ingredients, UPC)</p>
-        <a class="nutrition-label" href="${esc(labelImage)}" target="_blank" rel="noopener">
-          <img src="${esc(labelImage)}" alt="Nutrition label">
-        </a>`;
+        ${
+          labelImage
+            ? `<a class="nutrition-label" href="${esc(labelImage)}" target="_blank" rel="noopener">
+                <img src="${esc(labelImage)}" alt="Nutrition label">
+              </a>`
+            : ""
+        }
+        ${
+          euImage
+            ? `<a class="nutrition-label" href="${esc(euImage)}" target="_blank" rel="noopener">
+                <img src="${esc(euImage)}" alt="Nutrition label (EU)">
+              </a>`
+            : ""
+        }
+      </section>`;
     }
     if (!nutrition && !rawFallback) return "";
     const text = nutrition
@@ -198,6 +212,21 @@
           .join(", ")
       : rawFallback;
     return text ? `<p class="section-label">Nutrition</p><p class="detail-copy">${esc(text)}</p>` : "";
+  }
+
+  function primaryImage(c) {
+    return c.hero_image || c.marketing_image || c.image || "";
+  }
+
+  function detailsHtml(details) {
+    const raw = String(details || "").trim();
+    if (!raw) return "";
+    return raw
+      .split(/\n\s*\n/)
+      .map((p) => p.trim())
+      .filter(Boolean)
+      .map((p) => `<p class="detail-copy">${esc(p).replace(/\n/g, "<br>")}</p>`)
+      .join("");
   }
 
   function metaRow(label, value) {
@@ -234,12 +263,21 @@
       : `<p class="muted">Not in any variety packs (yet).</p>`;
 
     const rimmerList = rimmers.length
-      ? `<ul class="plain">${rimmers
-          .map(
-            (r) =>
-              `<li><a href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">${esc(r.name)}</a></li>`
-          )
-          .join("")}</ul>`
+      ? `<div class="list rimmer-pair-list">${rimmers
+          .map((r) => {
+            const kind = (r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase());
+            return `
+              <a class="cocktail-row" href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">
+                <div class="thumb ${r.image ? "" : "thumb-empty"}">
+                  ${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}
+                </div>
+                <div class="row-body">
+                  <div class="row-title">${esc(r.name)}</div>
+                  <div class="row-meta">${esc(kind)}</div>
+                </div>
+              </a>`;
+          })
+          .join("")}</div>`
       : "";
 
     const ratingRows = ratings.length
@@ -253,14 +291,20 @@
           .join("")
       : `<li class="muted">No ratings yet.</li>`;
 
+    const heroSrc = c.hero_image || (!c.marketing_image ? c.image : "") || "";
+    const marketingSrc = c.marketing_image || (!c.hero_image ? c.image : "") || "";
+    // If only one photo exists, show it once at top.
+    const topSrc = heroSrc || marketingSrc || primaryImage(c);
+    const midSrc = heroSrc && marketingSrc && marketingSrc !== heroSrc ? marketingSrc : "";
+
     return shell(
       "list",
       `
       <section class="panel detail">
         <a class="back" href="#/" data-go="#/">← All cocktails</a>
         <div class="detail-hero">
-          <div class="thumb large ${c.image ? "" : "thumb-empty"}">
-            ${c.image ? `<img src="${esc(c.image)}" alt="">` : ""}
+          <div class="thumb large ${topSrc ? "" : "thumb-empty"}">
+            ${topSrc ? `<img src="${esc(topSrc)}" alt="">` : ""}
           </div>
           <div>
             <p class="detail-kicker">Cocktail${c.seasonal ? " · Seasonal" : ""}</p>
@@ -284,8 +328,20 @@
           <div>
             <p class="section-label">Description</p>
             <p class="detail-copy">${esc(c.description || "No description yet.")}</p>
+            ${
+              c.details
+                ? `<p class="section-label">Details</p>${detailsHtml(c.details)}`
+                : ""
+            }
             ${alcoholBlock(alcohol, c.alcohol_json)}
-            ${nutritionBlock(nutrition, c.nutrition_json)}
+            ${
+              midSrc
+                ? `<p class="section-label">Product</p>
+                   <div class="thumb large marketing-shot">
+                     <img src="${esc(midSrc)}" alt="">
+                   </div>`
+                : ""
+            }
           </div>
           <div>
             <p class="section-label">Best served with</p>
@@ -352,6 +408,8 @@
             <button type="submit">Save rating</button>
           </form>
         </section>
+
+        ${nutritionBlock(nutrition, c.nutrition_json)}
       </section>
     `
     );
@@ -406,12 +464,20 @@
     }
     const cocktails = BartesianDB.cocktailsForRimmer(id);
     const cocktailList = cocktails.length
-      ? `<ul class="plain">${cocktails
-          .map(
-            (c) =>
-              `<li><a href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">${esc(c.name)}</a></li>`
-          )
-          .join("")}</ul>`
+      ? `<div class="list">${cocktails
+          .map((c) => {
+            const thumb = c.image || "";
+            return `
+              <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">
+                <div class="thumb ${thumb ? "" : "thumb-empty"}">
+                  ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
+                </div>
+                <div class="row-body">
+                  <div class="row-title">${esc(c.name)}</div>
+                </div>
+              </a>`;
+          })
+          .join("")}</div>`
       : `<p class="muted">${esc(r.pairs_with || "No linked cocktails yet.")}</p>`;
 
     return shell(
@@ -773,10 +839,11 @@
           cocktails
             .map((c) => {
               const spiritsText = (c.spirits_csv || "").split("|").filter(Boolean).join(", ");
+              const thumb = primaryImage(c);
               return `
               <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">
-                <div class="thumb ${c.image ? "" : "thumb-empty"}">
-                  ${c.image ? `<img src="${esc(c.image)}" alt="">` : ""}
+                <div class="thumb ${thumb ? "" : "thumb-empty"}">
+                  ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
                 </div>
                 <div class="row-body">
                   <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}${c.seasonal ? ' <span class="pill">Seasonal</span>' : ""}</div>

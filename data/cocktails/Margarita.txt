@@ -1,16 +1,25 @@
 Name: Margarita
 Slug: margarita
-Description: The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits.
+Description: The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits. Pairs perfectly with our Stemless Margarita glassware.
+Details: The Best Margarita Recipes Come from Bartesian\n\nFill our cocktail maker’s glass spirit bottle with your go-to blanco or reposado tequila, place a margarita capsule in the cocktail maker, select your desired strength, and press “Mix.” In a few seconds, you’ll be enjoying an ice-cold premium margarita in the comfort of your home.\n\nA salted rim perfectly complements the citrus of the lime juice for lip-smacking sips that will impress your guests every time. Our classic margarita capsules pair perfectly with our stemless margarita glassware.\n\nCreate a Tequila Bar at Home with Bartesian Margarita Capsules\n\nReady for a refreshing escape? Bring home the Bartesian cocktail maker for premium cocktails with your favorite spirits at home. Try our Margarita cocktail capsules today!
 Spirits: Tequila
 Glassware: Margarita Glass
 Garnish: Lime
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/margarita.jpg"}
+Nutrition: {"label_image":"images/nutrition/margarita.png","label_image_eu":"images/nutrition/margarita-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/margarita-cocktails?variant=15685650022449
+Shopify Product ID: 2029028048945
+Shopify Variant ID: 15685650022449
+Shopify Handle: margarita-cocktails
+Shopify SKU: 55351
 Help URL: https://bartesian.gorgias.help/en-US/margarita-39059
-Image: images/cocktails/margarita.jpg
+Gorgias Article ID: 39059
+Hero Image: images/hero/margarita.jpg
+Marketing Image: images/marketing/margarita.jpg
+Image: images/hero/margarita.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

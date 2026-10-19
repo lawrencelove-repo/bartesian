@@ -1,16 +1,25 @@
 Name: Apple Pie
 Slug: apple-pie
-Description: Your favorite dessert is served as a cocktail. The sweet combination of baked apple and fall spices is perfectly balanced with hints of lemon and cayenne in this whiskey and vodka cocktail. Wonderfully reminiscent of a slice of grandma's apple pie.
+Description: Your favorite dessert is now served as a whiskey and vodka cocktail. The sweet combination of baked apple and fall spices is perfectly balanced with hints of lemon and cayenne in our innovative capsules. Wonderfully reminiscent of a slice of grandma's apple pie. Add this to your collection of whiskey cocktails for holidays, hosting, or any time of year! Base spirits: Whiskey and Vodka.
+Details: What’s better than a fresh slice of apple pie? A cocktail that evokes warm feelings of seasonal joy, of course! Featuring sweet notes of lemon and apple that pair smoothly to ease the bite of the liquor.\n\nCraft a truly indulgent drinking experience with Bartesian’s cocktail capsules. Each capsule is made with high-quality ingredients to create a premium beverage at home. Impress your guests with a perfectly mixed drink in 30 seconds thanks to our cocktail mixer!\n\nUsing Apple Pie Capsules with the Bartesian Cocktail Maker\n\nAvoid the headache involved with finding recipes and mixing ingredients, and skip right to the fun part — enjoying your beverage! Pop one of our Apple Pie capsules into your cocktail maker, select your desired strength, and press Mix. Watch our Apple Pie capsules transform into a fantastic drink in no time.
 Spirits: Vodka, Whiskey
 Glassware: Lowball Glass
 Garnish: Apple
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/apple-pie.jpg"}
+Nutrition: {"label_image":"images/nutrition/apple-pie.png","label_image_eu":"images/nutrition/apple-pie-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/apple-pie?variant=32387502047281
+Shopify Product ID: 4756374454321
+Shopify Variant ID: 32387502047281
+Shopify Handle: apple-pie
+Shopify SKU: 55415
 Help URL: https://bartesian.gorgias.help/en-US/apple-pie-36517
-Image: images/cocktails/apple-pie.jpg
+Gorgias Article ID: 36517
+Hero Image: images/hero/apple-pie.jpg
+Marketing Image: images/marketing/apple-pie.jpg
+Image: images/hero/apple-pie.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

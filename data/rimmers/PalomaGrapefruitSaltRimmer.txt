@@ -3,9 +3,17 @@ Slug: paloma-grapefruit-salt-rimmer
 Description: Give your cocktails a citrus twist and bright, sour grapefruit notes with this sweet and sour salt rimmer.
 Kind: salt
 Pairs With: Mrs. Claus's Nightcap, Clausmopolitan, and all types of Margaritas
-Cocktail Slugs: clausmopolitan
+Cocktail Slugs: clausmopolitan, blackberry-margarita, candyman-margarita, jollype-o-margarita, low-cal-margarita, mango-habanero-margarita, mango-margarita, margarita, mistletoe-margarita, passion-fruit-margarita, pineapple-margarita, pomegranate-margarita, spicy-margarita, strawberry-guava-margarita, watermelon-margarita
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
-Nutrition Image: images/nutrition/rimmer-paloma-grapefruit-salt-rimmer.png
+Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 0
+Favorite: 0

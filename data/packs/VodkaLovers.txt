@@ -3,8 +3,17 @@ Slug: vodka-lovers
 Barcode: 
 Notes: Four of Bartesian’s most-loved vodka cocktails, crafted by expert mixologists for bar-quality taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Lemon Drop: a sweet and tart, lemon candy-inspired martini. - Espresso Martini: a smooth, sippable cocktail with flavours of rich espresso and bold coffee liqueur. - Amaretto Sour: nutty almond and orange citrus flavours pair to create the perfect dessert cocktail. - Cosmopolitan: tart cranberry is lifted by hints of lime and sweet orange flavour in this sophisticated classic.
 Bartesian URL: https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303
+Shopify Product ID: 7735029399751
+Shopify Variant ID: 43332779311303
+Shopify Handle: vodka-lovers-variety-pack
+Help URL: 
+Gorgias Article ID: 
 Image: images/packs/vodka-lovers.jpg
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 1
 Items:
 	4-cocktails-lemon-drop-a-sweet: 2
 	tart: 2
 	lemon-candy-inspired-martini: 2
+	Gorgias Article ID:

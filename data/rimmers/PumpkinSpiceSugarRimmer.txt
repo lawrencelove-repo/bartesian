@@ -5,7 +5,15 @@ Kind: sugar
 Pairs With: Apple Pie, Old Fashioned, and other dessert cocktails
 Cocktail Slugs: apple-pie, old-fashioned
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
-Nutrition Image: images/nutrition/rimmer-pumpkin-spice-sugar-rimmer.png
+Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 0
+Favorite: 0

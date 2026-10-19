@@ -3,7 +3,16 @@ Slug: gin-lovers
 Barcode: 
 Notes: Four of Bartesian’s most-loved gin cocktails, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Uptown Rocks: an elegant gin cocktail featuring peach and lemon with a graceful kick of cilantro flavour. - Bramble: sweet yet tart, blending blackberry, lemon, and floral flavours for a refreshing classic. - Vesper: a sophisticated gin-and-vodka martini with a smooth balance of bitter, sweet, and herbal flavours. - Aviation: a violet-hued favourite, combining floral Crème de Violette and Maraschino liqueur flavours with a squeeze of lemon.
 Bartesian URL: https://bartesian.com/products/gin-lovers-collection?variant=39601114775751
+Shopify Product ID: 6631991574727
+Shopify Variant ID: 39601114775751
+Shopify Handle: gin-lovers-collection
+Help URL: 
+Gorgias Article ID: 
 Image: images/packs/gin-lovers.jpg
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 1
 Items:
 	4-cocktails-uptown-rocks-an-elegant-gin-cocktail-featuring-peach: 2
 	lemon-with-a-graceful-kick-of-cilantro-flavour: 2
+	Gorgias Article ID:

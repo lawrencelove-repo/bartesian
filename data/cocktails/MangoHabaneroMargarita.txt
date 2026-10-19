@@ -1,16 +1,25 @@
 Name: Mango Habanero Margarita
 Slug: mango-habanero-margarita
 Description: Tropical and fiery, this vibrant margarita pairs ripe mango and lime juices with a kick of habanero flavor. Each sip unfolds with the perfect harmony of sweet and heat. Serve in a lowball with ice and garnish with a spicy rim, lime wheel and habanero pepper. Get this limited seasonal release while it lasts.
+Details: 
 Spirits: Tequila
 Glassware: Lowball Glass
 Garnish: with a spicy rim, lime wheel and habanero pepper. Get this limited seasonal release while it lasts
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/mango-habanero-margarita.jpg"}
+Nutrition: {"label_image":"images/nutrition/mango-habanero-margarita.png","label_image_eu":"images/nutrition/mango-habanero-margarita-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/mango-habanero-margarita-capsules?variant=46099570884807
+Shopify Product ID: 8598305669319
+Shopify Variant ID: 46099570884807
+Shopify Handle: mango-habanero-margarita-capsules
+Shopify SKU: 75684
 Help URL: https://bartesian.gorgias.help/en-US/mango-habanero-margarita-6360703
-Image: images/cocktails/mango-habanero-margarita.jpg
+Gorgias Article ID: 6360703
+Hero Image: images/hero/mango-habanero-margarita.jpg
+Marketing Image: images/marketing/mango-habanero-margarita.jpg
+Image: images/hero/mango-habanero-margarita.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

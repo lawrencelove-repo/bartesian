@@ -1,16 +1,25 @@
 Name: Tequila Sunrise
 Slug: tequila-sunrise
 Description: This classic brunch tequila cocktail mixes orange juice with sweet grenadine cherry notes. Serve over ice in a lowball garnished with an orange wedge and maraschino cherry.
+Details: Tequila Sunrise Bartesian Cocktail Capsules\n\nReady to create a perfectly crafted Tequila Sunrise to wow your friends and guests? All you need is our capsule, a Bartesian filled with your favorite tequila brand, and a lowball glass!\n\nChoose your favorite type of tequila; from añejo to reposado or blanco tequila, whatever pleases your taste buds will be mixed to perfection with a Tequila Sunrise cocktail capsule from Bartesian.\n\nSimply place the capsule in the Bartesian cocktail maker, select your preferred strength, and press “Mix.” In less than 30 seconds, you’ll be sipping on something sweet and refreshing. Bursting with hints of orange and cherry, this cocktail will have you picturing an ocean breeze, palm trees, and sunshine on your face.\n\nServe over ice in a lowball glass with an orange wedge and maraschino cherry garnish.\n\nShop Bartesian Cocktail Capsules\n\nBring the bar to your home with Bartesian’s Tequila Sunrise capsules! We offer premium-quality cocktails that can be made at home, from the bar to the beach in less than 30 seconds. Explore our Tequila Sunrise capsules now!
 Spirits: Tequila
 Glassware: Lowball
 Garnish: ed with an orange wedge and maraschino cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/tequila-sunrise.jpg"}
+Nutrition: {"label_image":"images/nutrition/tequila-sunrise.png","label_image_eu":"images/nutrition/tequila-sunrise-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/tequila-sunrise-capsules?variant=43044245176519
+Shopify Product ID: 7612569387207
+Shopify Variant ID: 43044245176519
+Shopify Handle: tequila-sunrise-capsules
+Shopify SKU: 55477
 Help URL: https://bartesian.gorgias.help/en-US/tequila-sunrise-217642
-Image: images/cocktails/tequila-sunrise.jpg
+Gorgias Article ID: 217642
+Hero Image: images/hero/tequila-sunrise.jpg
+Marketing Image: images/marketing/tequila-sunrise.jpg
+Image: images/hero/tequila-sunrise.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

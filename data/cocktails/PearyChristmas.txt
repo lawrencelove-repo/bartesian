@@ -1,16 +1,25 @@
 Name: Peary Christmas
 Slug: peary-christmas
 Description: You'll have a very "peary" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond flavors.
+Details: 
 Spirits: Tequila
 Glassware: Lowball Glass
 Garnish: Sugar Rim and Pear Slice
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/peary-christmas.jpg"}
+Nutrition: {"label_image":"images/nutrition/peary-christmas.png","label_image_eu":"images/nutrition/peary-christmas-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":0.7,"regular_oz":1.0,"strong_oz":1.7,"raw":"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1.0 oz., Strong = 1.7 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/peary-christmas-3074903
+Gorgias Article ID: 3074903
+Hero Image: 
+Marketing Image: 
 Image: 
 Seasonal: 1
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

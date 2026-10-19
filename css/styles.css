@@ -262,6 +262,10 @@ button.danger {
   vertical-align: middle;
 }
 
+.nutrition-section {
+  margin-top: 1.75rem;
+}
+
 .nutrition-label {
   display: block;
   max-width: 420px;
@@ -276,6 +280,10 @@ button.danger {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.marketing-shot {
+  margin: 0.75rem 0 1.25rem;
 }
 
 .thumb {

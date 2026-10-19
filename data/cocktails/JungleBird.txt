@@ -1,16 +1,25 @@
 Name: Jungle Bird
 Slug: jungle-bird
-Description: Take a tropical adventure to the jungle! The Jungle Bird is a unique tiki cocktail driven by pineapple juice balanced with refreshing lime and bitters. With a Jungle Bird in hand, sit back, relax and enjoy a taste of the jungle.
+Description: Jungle Bird Cocktail Capsules
+Details: Take a tropical adventure to the jungle! The Jungle Bird is a unique tiki rum cocktail driven by pineapple juice balanced with refreshing lime and bitters. With a Jungle Bird in hand, sit back, relax and enjoy a taste of the jungle with one of the best rum cocktails. Base spirit: Rum.\n\nBest served shaken and served in a bird glass or lowball garnished with pineapple leaves, with premium Bartesian Clear Ice\n\nBartesian’s cocktail capsules are convenient and easy to use, so cocktail enthusiasts and amateurs alike can create their own Jungle Bird at the touch of a button. With a Jungle Bird in hand, sit back, relax, and enjoy a taste of the jungle with one of the best tiki-inspired cocktails.\n\nMake a Delicious Tropical Rum Cocktail at Home\n\nReady to be living on island time? Choose your favorite rum, pop your Jungle Bird capsule in our cocktail maker, choose your designed strength, and press “Mix.” After 30 seconds, your cocktail should be ready!\n\nServe in a bird glass or lowball, then garnish with a pineapple wedge or leaves. Take your cocktail to the next level with premium Bartesian clear ice.\n\nShop Jungle Bird Cocktail Capsules at Bartesian\n\nFrom happy hours at home to dinner parties with friends, Bartesian cocktail capsules are the perfect way to provide a premium cocktail experience for guests. Bring the bar to your home with our Jungle Bird capsules. Order now!
 Spirits: Rum
 Glassware: Bird Glass or Lowball Glass
 Garnish: Lemon Wedge
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/jungle-bird.png"}
+Nutrition: {"label_image":"images/nutrition/jungle-bird.png","label_image_eu":"images/nutrition/jungle-bird-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/jungle-bird-capsules?variant=42144683983047
+Shopify Product ID: 7329670693063
+Shopify Variant ID: 42144683983047
+Shopify Handle: jungle-bird-capsules
+Shopify SKU: 55478
 Help URL: https://bartesian.gorgias.help/en-US/jungle-bird-70414
-Image: images/cocktails/jungle-bird.jpg
+Gorgias Article ID: 70414
+Hero Image: images/hero/jungle-bird.jpg
+Marketing Image: images/marketing/jungle-bird.jpg
+Image: images/hero/jungle-bird.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

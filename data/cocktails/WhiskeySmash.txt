@@ -1,16 +1,25 @@
 Name: Whiskey Smash
 Slug: whiskey-smash
-Description: This classic cocktail appeals to both whiskey lovers and whiskey skeptics alike. Think minty like a Mojito but with lemon and Whiskey instead of lime and Rum. The Whiskey Smash provides whiskey barrel sweetness balanced with refreshing mint, but with a lemon citrus twist.
+Description: There are no sure things in life, but when you combine a Whiskey Sour and a Mint Julep the resulting delicious Whiskey Smash is about as close as you can get. This classic cocktail appeals to both whiskey lovers and whiskey skeptics alike. Think minty like a Mojito but with lemon and Whiskey instead of lime and Rum.
+Details: Tasting Notes\n\nSweet and balanced with mint barrel notes with a lemon citrus twist\n\nBest served with premium Bartesian Clear Ice
 Spirits: Whiskey
 Glassware: Lowball Glass
 Garnish: Lemon & Mint
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/whiskey-smash.jpg"}
+Nutrition: {"label_image":"images/nutrition/whiskey-smash.png","label_image_eu":"images/nutrition/whiskey-smash-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/whiskey-smash-cocktails?variant=31660702269489
+Shopify Product ID: 4515865755697
+Shopify Variant ID: 31660702269489
+Shopify Handle: whiskey-smash-cocktails
+Shopify SKU: 55388
 Help URL: https://bartesian.gorgias.help/en-US/whiskey-smash-39505
-Image: images/cocktails/whiskey-smash.jpg
+Gorgias Article ID: 39505
+Hero Image: images/hero/whiskey-smash.jpg
+Marketing Image: images/marketing/whiskey-smash.jpg
+Image: images/hero/whiskey-smash.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

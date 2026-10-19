@@ -1,16 +1,25 @@
 Name: Ginger Peach Iced Tea
 Slug: ginger-peach-iced-tea
-Description: This refreshing, juicy cocktail is what a summer day calls for with notes of caffeine-free black tea, sweet peach, and herbal ginger.
+Description: Bartesian’s Ginger Peach Iced Tea capsules offer a delightful blend of flavors that creates the perfect cocktail for those warm, sunny days.
+Details: Refreshingly Unique and Quick Drinks\n\nThis cocktail is a summer must-have, combining the lush sweetness of peach, the zesty kick of ginger, and the spiciness of vodka. This is a refreshing, juicy cocktail a hot day calls for with notes of caffeine-free black tea, sweet peach, and herbal ginger. It’s always the ideal choice for those who love the best of both worlds.\n\nWhether you're hosting a summer barbecue, lounging by the pool, or simply unwinding after a long day, a Ginger Peach Iced Tea cocktail by Bartesian fits every occasion.\n\nCraft the Perfect Ginger Peach Iced Tea Every Time with Bartesian\n\nCreating this refreshing cocktail is effortless with Bartesian's cocktail maker! Just pop in a Ginger Peach Iced Tea capsule, get your favorite vodka, select your desired strength, and let the machine do the rest. In moments, you'll be savoring the perfect balance of sweet, spicy, and tangy flavors. Pour your drink into premium high-ball glasses, and top it off with fresh peach slices. Cheers!\n\nBase spirit: Vodka.
 Spirits: Vodka
 Glassware: Highball Glass
 Garnish: Peach
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/ginger-peach-iced-tea.png"}
+Nutrition: {"label_image":"images/nutrition/ginger-peach-iced-tea.png","label_image_eu":"images/nutrition/ginger-peach-iced-tea-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/ginger-peach-iced-tea-cocktails?variant=32387392536625
+Shopify Product ID: 2067659784241
+Shopify Variant ID: 32387392536625
+Shopify Handle: ginger-peach-iced-tea-cocktails
+Shopify SKU: 55435
 Help URL: https://bartesian.gorgias.help/en-US/ginger-peach-iced-tea-39011
-Image: images/cocktails/ginger-peach-iced-tea.jpg
+Gorgias Article ID: 39011
+Hero Image: images/hero/ginger-peach-iced-tea.jpg
+Marketing Image: images/marketing/ginger-peach-iced-tea.jpg
+Image: images/hero/ginger-peach-iced-tea.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

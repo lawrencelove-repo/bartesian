@@ -3,10 +3,17 @@ Slug: lemon-sugar-rimmer
 Description: Inspired by the bright punch of lemon candy, this rimmer balances tangy zest with just the right touch of sweetness. One dip is all it takes to transform your cocktail into something extra zesty, extra fun, and totally irresistible. Lemon Sugar pairs with sweet, sour, and citrus cocktails.
 Kind: sugar
 Pairs With: Bee's Knees, Cosmopolitan, Sidecar, and all types of Lemon Drops and Margaritas
-Cocktail Slugs: bees-knees, cosmopolitan, sidecar
+Cocktail Slugs: bees-knees, cosmopolitan, sidecar, blueberry-lemon-drop, lemon-drop, strawberry-lemon-drop, blackberry-margarita, candyman-margarita, jollype-o-margarita, low-cal-margarita, mango-habanero-margarita, mango-margarita, margarita, mistletoe-margarita, passion-fruit-margarita, pineapple-margarita, pomegranate-margarita, spicy-margarita, strawberry-guava-margarita, watermelon-margarita
 Bartesian URL: https://bartesian.com/products/lemon-sugar-rimmer?variant=46099540017351
+Shopify Product ID: 8598302720199
+Shopify Variant ID: 46099540017351
+Shopify Handle: lemon-sugar-rimmer
 Help URL: https://bartesian.gorgias.help/en-US/lemon-sugar-rimmer-5776146
+Gorgias Article ID: 5776146
 Image: images/rimmers/lemon-sugar-rimmer.jpg
-Nutrition Image: images/nutrition/rimmer-lemon-sugar-rimmer.png
+Nutrition Image: images/nutrition/lemon-sugar-rimmer.png
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 1
+Favorite: 0

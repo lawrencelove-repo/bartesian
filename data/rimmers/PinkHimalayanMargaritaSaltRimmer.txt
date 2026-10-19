@@ -3,10 +3,17 @@ Slug: pink-himalayan-margarita-salt-rimmer
 Description: Pink Himalayan salt will take your cocktails to the next level. The pink hue and coarse texture are welcome additions to all types of cocktails including citrus, fruity, and spicy.
 Kind: salt
 Pairs With: All types of Margaritas
-Cocktail Slugs: 
+Cocktail Slugs: blackberry-margarita, candyman-margarita, jollype-o-margarita, low-cal-margarita, mango-habanero-margarita, mango-margarita, margarita, mistletoe-margarita, passion-fruit-margarita, pineapple-margarita, pomegranate-margarita, spicy-margarita, strawberry-guava-margarita, watermelon-margarita
 Bartesian URL: https://bartesian.com/products/pink-himalayan-margarita-salt-rimmer?variant=41668494950599
+Shopify Product ID: 6725157880007
+Shopify Variant ID: 41668494950599
+Shopify Handle: pink-himalayan-margarita-salt-rimmer
 Help URL: https://bartesian.gorgias.help/en-US/pink-himalayan-margarita-salt-rimmer-39075
+Gorgias Article ID: 39075
 Image: images/rimmers/pink-himalayan-margarita-salt-rimmer.jpg
-Nutrition Image: 
+Nutrition Image: images/nutrition/pink-himalayan-margarita-salt-rimmer.png
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 1
+Favorite: 0

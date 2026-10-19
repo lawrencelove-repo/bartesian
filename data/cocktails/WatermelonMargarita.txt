@@ -1,16 +1,25 @@
 Name: Watermelon Margarita
 Slug: watermelon-margarita
-Description: Like summertime in a glass, the Watermelon Margarita is a refreshing sweet and salty tequila cocktail blending watermelon with notes of citrus and triple sec. Serve in a margarita glass with a Zesty Lime Salt rim. Get this limited seasonal release while it lasts.
+Description: Like summertime in a glass, the Watermelon Margarita is a refreshing sweet and salty tequila cocktail blending watermelon, citrus, and triple sec flavors. Serve in a margarita glass with a Zesty Lime Salt rim.
+Details: 
 Spirits: Tequila
 Glassware: Margarita Glass
 Garnish: Watermelon wedge and Zesty Lime Salt
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/watermelon-margarita.jpg"}
+Nutrition: {"label_image":"images/nutrition/watermelon-margarita.png","label_image_eu":"images/nutrition/watermelon-margarita-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/watermelon-margarita-capsules?variant=43188394819783
+Shopify Product ID: 7672860868807
+Shopify Variant ID: 43188394819783
+Shopify Handle: watermelon-margarita-capsules
+Shopify SKU: 55523
 Help URL: https://bartesian.gorgias.help/en-US/watermelon-margarita-260338
-Image: images/cocktails/watermelon-margarita.jpg
+Gorgias Article ID: 260338
+Hero Image: 
+Marketing Image: images/marketing/watermelon-margarita.jpg
+Image: images/marketing/watermelon-margarita.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

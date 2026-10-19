@@ -1,16 +1,25 @@
 Name: Old Fashioned
 Slug: old-fashioned
-Description: The Old Fashioned is a spirit-forward whiskey cocktail that provides a perfect balance between bitter and sweet, with notes of oak and orange citrus.
+Description: Old Fashioned Cocktail Capsules
+Details: The Old Fashioned is a spirit-forward whiskey cocktail that perfectly balances bitter and sweet, with notes of oak and orange citrus. Our capsules emulate the classic Old Fashioned recipe and its classic taste with premium ingredients that you’ll only get in a high-end cocktail lounge. Base spirit: Whiskey.\n\nMaking Old Fashioned Cocktails with the Bartesian Cocktail Maker\n\nCreating this classic cocktail has never been easier than with the Bartesian cocktail maker and cocktail capsules. To make your favorite beverage, simply pick your favorite whiskey, pop a capsule into the cocktail maker, select your desired strength, place the recommended glassware on the machine, and press “Mix.” In 30 seconds, you’ll be sipping your go-to beverage and unwinding after a long day.\n\nGarnish with an orange peel or a brandied Maraschino cherry.\n\nCreate the Classic Old Fashioned at Home with Bartesian Capsules\n\nExperience the convenience and quality of Bartesian—add the Old Fashioned cocktail capsules to your cart today!
 Spirits: Whiskey
 Glassware: Lowball Glass
 Garnish: Orange Peel & Cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/old-fashioned.png"}
+Nutrition: {"label_image":"images/nutrition/old-fashioned.png","label_image_eu":"images/nutrition/old-fashioned-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/old-fashioned-cocktails?variant=15687215546417
+Shopify Product ID: 2029412646961
+Shopify Variant ID: 15687215546417
+Shopify Handle: old-fashioned-cocktails
+Shopify SKU: 55357
 Help URL: https://bartesian.gorgias.help/en-US/old-fashioned-39072
-Image: images/cocktails/old-fashioned.jpg
+Gorgias Article ID: 39072
+Hero Image: images/hero/old-fashioned.jpg
+Marketing Image: images/marketing/old-fashioned.jpg
+Image: images/hero/old-fashioned.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

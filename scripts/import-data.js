@@ -15,6 +15,7 @@ const COCKTAIL_KEYS = {
   Name: "name",
   Slug: "slug",
   Description: "description",
+  Details: "details",
   Spirits: "spirits",
   Glassware: "glassware",
   Garnish: "garnish",
@@ -23,8 +24,16 @@ const COCKTAIL_KEYS = {
   Alcohol: "alcohol_json",
   "Bartesian URL": "bartesian_url",
   "Help URL": "help_url",
+  "Shopify Product ID": "shopify_product_id",
+  "Shopify Variant ID": "shopify_variant_id",
+  "Shopify Handle": "shopify_handle",
+  "Shopify SKU": "shopify_sku",
+  "Gorgias Article ID": "gorgias_article_id",
   Image: "image",
+  "Hero Image": "hero_image",
+  "Marketing Image": "marketing_image",
   Seasonal: "seasonal",
+  Enabled: "enabled",
   Favorite: "favorite",
   Quantity: "quantity",
   "Capsule Barcode": "capsule_barcode",
@@ -38,7 +47,14 @@ const PACK_KEYS = {
   Barcode: "barcode",
   Notes: "notes",
   Image: "image",
+  "Nutrition Image": "nutrition_image",
   "Bartesian URL": "bartesian_url",
+  "Help URL": "help_url",
+  "Shopify Product ID": "shopify_product_id",
+  "Shopify Variant ID": "shopify_variant_id",
+  "Shopify Handle": "shopify_handle",
+  "Gorgias Article ID": "gorgias_article_id",
+  Enabled: "enabled",
 };
 
 const RIMMER_KEYS = {
@@ -50,11 +66,16 @@ const RIMMER_KEYS = {
   "Cocktail Slugs": "cocktail_slugs",
   "Bartesian URL": "bartesian_url",
   "Help URL": "help_url",
+  "Shopify Product ID": "shopify_product_id",
+  "Shopify Variant ID": "shopify_variant_id",
+  "Shopify Handle": "shopify_handle",
+  "Gorgias Article ID": "gorgias_article_id",
   Image: "image",
   "Nutrition Image": "nutrition_image",
   Barcode: "barcode",
   Quantity: "quantity",
   Favorite: "favorite",
+  Enabled: "enabled",
 };
 
 function stripIndent(line) {
@@ -86,6 +107,7 @@ function parseCocktailText(raw, filename) {
     name: "",
     slug: "",
     description: "",
+    details: "",
     spirits: [],
     glassware: "",
     garnish: "",
@@ -95,12 +117,20 @@ function parseCocktailText(raw, filename) {
     bartesian_url: "",
     help_url: "",
     image: "",
+    hero_image: "",
+    marketing_image: "",
     seasonal: 0,
+    enabled: 1,
     favorite: 0,
     quantity: 0,
     capsule_barcode: "",
     case_barcode: "",
     case_qty: 8,
+    shopify_product_id: "",
+    shopify_variant_id: "",
+    shopify_handle: "",
+    shopify_sku: "",
+    gorgias_article_id: "",
     _file: filename,
   };
 
@@ -116,15 +146,21 @@ function parseCocktailText(raw, filename) {
         .split(",")
         .map((s) => s.trim())
         .filter(Boolean);
-    } else if (mapped === "favorite" || mapped === "seasonal") {
+    } else if (mapped === "favorite" || mapped === "seasonal" || mapped === "enabled") {
       cocktail[mapped] = parseBoolish(rest);
     } else if (mapped === "quantity" || mapped === "case_qty") {
       cocktail[mapped] = Number(rest) || 0;
     } else if (mapped === "nutrition_json" || mapped === "alcohol_json") {
       cocktail[mapped] = parseMaybeJson(rest);
+    } else if (mapped === "details") {
+      cocktail.details = rest.replace(/\\n/g, "\n").replace(/\\\\/g, "\\");
     } else {
       cocktail[mapped] = rest;
     }
+  }
+
+  if (!cocktail.image) {
+    cocktail.image = cocktail.hero_image || cocktail.marketing_image || "";
   }
 
   if (!cocktail.slug && cocktail.name) {
@@ -144,7 +180,14 @@ function parsePackText(raw, filename) {
     barcode: "",
     notes: "",
     image: "",
+    nutrition_image: "",
     bartesian_url: "",
+    help_url: "",
+    shopify_product_id: "",
+    shopify_variant_id: "",
+    shopify_handle: "",
+    gorgias_article_id: "",
+    enabled: 1,
     items: [],
     _file: filename,
   };
@@ -159,7 +202,10 @@ function parsePackText(raw, filename) {
       const header = line.match(/^([A-Za-z][A-Za-z0-9 ]*):[ \t]*(.*)$/);
       if (!header) continue;
       const mapped = PACK_KEYS[header[1]];
-      if (mapped) pack[mapped] = (header[2] || "").trim();
+      if (!mapped) continue;
+      const rest = (header[2] || "").trim();
+      if (mapped === "enabled") pack.enabled = parseBoolish(rest);
+      else pack[mapped] = rest;
       continue;
     }
     const body = stripIndent(line).trim();
@@ -195,6 +241,11 @@ function parseRimmerText(raw, filename) {
     barcode: "",
     quantity: 0,
     favorite: 0,
+    enabled: 1,
+    shopify_product_id: "",
+    shopify_variant_id: "",
+    shopify_handle: "",
+    gorgias_article_id: "",
     _file: filename,
   };
 
@@ -209,8 +260,8 @@ function parseRimmerText(raw, filename) {
         .split(",")
         .map((s) => s.trim())
         .filter(Boolean);
-    } else if (mapped === "favorite") {
-      rimmer.favorite = parseBoolish(rest);
+    } else if (mapped === "favorite" || mapped === "enabled") {
+      rimmer[mapped] = parseBoolish(rest);
     } else if (mapped === "quantity") {
       rimmer.quantity = Number(rest) || 0;
     } else {

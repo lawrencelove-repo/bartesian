@@ -3,8 +3,17 @@ Slug: low-cal-variety-pack
 Barcode: 
 Notes: Bartesian's Low-Cal Variety Pack features the same great taste of four of our classic cocktail offerings with no added sugar.
 Bartesian URL: https://bartesian.com/products/low-cal-variety-pack?variant=43436826165447
+Shopify Product ID: 7779393568967
+Shopify Variant ID: 43436826165447
+Shopify Handle: low-cal-variety-pack
+Help URL: 
+Gorgias Article ID: 
 Image: images/packs/low-cal-variety-pack.jpg
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 1
 Items:
 	low-cal-margarita: 2
 	refreshing-tequila-cocktail-with-lemon: 2
 	lime: 2
+	Gorgias Article ID:

@@ -3,9 +3,17 @@ Slug: tangy-hibiscus-sugar-rimmer
 Description: Sweet and sour, this vibrant purple rimming sugar delights with a unique floral tartness.
 Kind: sugar
 Pairs With: Cosmopolitan, Lemon Drop, Holly Hibiscus Sour, Sugar Plum Fairy, and all fruit-forward margaritas
-Cocktail Slugs: cosmopolitan, lemon-drop
+Cocktail Slugs: cosmopolitan, lemon-drop, blackberry-margarita, candyman-margarita, jollype-o-margarita, low-cal-margarita, mango-habanero-margarita, mango-margarita, margarita, mistletoe-margarita, passion-fruit-margarita, pineapple-margarita, pomegranate-margarita, spicy-margarita, strawberry-guava-margarita, watermelon-margarita
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
-Nutrition Image: images/nutrition/rimmer-tangy-hibiscus-sugar-rimmer.png
+Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 0
+Favorite: 0

@@ -1,16 +1,25 @@
 Name: Pomegranate Margarita
 Slug: pomegranate-margarita
 Description: A tart, refreshing addition to the collection of Bartesian Margaritas, the pomegranate margarita is a perfect pick for any tequila lover. Bursting with pomegranate flavor, a splash of lime, and notes of triple sec, the Pomegranate Margarita is a bold alternative to our Classic Margarita.
+Details: 
 Spirits: Tequila
 Glassware: Margarita Glass
 Garnish: Lime Wedge
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/pomegranate-margarita.jpg"}
+Nutrition: {"label_image":"images/nutrition/pomegranate-margarita.png","label_image_eu":"images/nutrition/pomegranate-margarita-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/pomegranate-margarita-cocktails?variant=42475700224199
+Shopify Product ID: 7412099252423
+Shopify Variant ID: 42475700224199
+Shopify Handle: pomegranate-margarita-cocktails
+Shopify SKU: 55495
 Help URL: https://bartesian.gorgias.help/en-US/pomegranate-margarita-109602
-Image: images/cocktails/pomegranate-margarita.jpg
+Gorgias Article ID: 109602
+Hero Image: images/hero/pomegranate-margarita.jpg
+Marketing Image: images/marketing/pomegranate-margarita.jpg
+Image: images/hero/pomegranate-margarita.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

@@ -1,16 +1,25 @@
 Name: Rum Swizzle
 Slug: rum-swizzle
-Description: You'll be transported to the Caribbean with this sweet, fruity rum cocktail with pineapple, citrus, and notes of triple sec and bitters. Shake and serve over crushed ice in a highball, garnished with a pineapple wedge and maraschino cherry.
+Description: Known as Bermuda’s national drink, the Rum Swizzle is a fresh and fruity cocktail enjoyed around the world. You'll be transported to the Caribbean with this sweet, fruity rum cocktail with pineapple, citrus, and notes of spiced rum, triple sec, falernum, and bitters. Shake and serve over crushed ice in a highball garnished with a pineapple wedge and maraschino cherry.
+Details: Create Perfect Rum Swizzles in 30 Seconds\n\nYou may not be on a tropical vacation, but that doesn’t mean you can’t enjoy a tasty Bermuda Rum Swizzle cocktail! With the Bartesian cocktail maker and capsules, you can choose from over 50 cocktails to create the relaxing vibe of a beach vacation or a night out on the town.\n\nRather than mixing and pouring the ingredients yourself, place the Rum Swizzle capsule in your cocktail maker, select your desired strength, and press “Mix.” Creating bar-quality cocktails at home is that easy with Bartesian, and it takes 30 seconds or less!\n\nAdd the Bermuda Rum Swizzle to Your At-Home Cocktails Today\n\nBring the Caribbean to your home by purchasing our Rum Swizzle cocktail capsules today!
 Spirits: Rum
 Glassware: Highball Glass
 Garnish: ed with a pineapple wedge and maraschino cherry
 Pairs With: 
-Nutrition: {}
+Nutrition: {"label_image":"images/nutrition/rum-swizzle.png","label_image_eu":"images/nutrition/rum-swizzle-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/rum-swizzle-capsules?variant=43168682672327
+Shopify Product ID: 7662016364743
+Shopify Variant ID: 43168682672327
+Shopify Handle: rum-swizzle-capsules
+Shopify SKU: 55511
 Help URL: https://bartesian.gorgias.help/en-US/rum-swizzle-248614
-Image: images/cocktails/rum-swizzle.jpg
+Gorgias Article ID: 248614
+Hero Image: 
+Marketing Image: images/marketing/rum-swizzle.jpg
+Image: images/marketing/rum-swizzle.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

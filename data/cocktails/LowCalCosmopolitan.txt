@@ -1,6 +1,7 @@
 Name: Low-Cal Cosmopolitan
 Slug: low-cal-cosmopolitan
-Description: Tart cranberry is balanced out by the citrus of lime and sweetness of orange to create this classic vodka cocktail. This lower calorie Cosmopolitan delivers the same great taste without added sugar.
+Description: Enjoy a guilt-free Cosmo with our low-calorie option! Tart cranberry is balanced out by the citrus of lime and the sweetness of orange to create this classic vodka cocktail. The low-cal Cosmo capsules contain the quality juice, natural flavors, and bitters you expect from a Cosmo, including lime juice, cranberry juice, and lemon juice.
+Details: Shake with ice, serve in a martini glass, and garnish with orange for the perfect Cosmopolitan....\n\nBartesian’s Low-Carb Cosmopolitan Cocktail\n\nLooking for a low-carb Cosmo without sacrificing flavor or quality? We’ve got the perfect solution! Our low-calorie Cosmopolitan cocktail contains less sugar than a standard Cosmo, with most people not even noticing a difference in flavor.\n\nBenefits of Finding a Low-Calorie Cocktail\n\nIf you’re trying to cut sugar from your diet or simply enjoy more frugally, finding a low-carb cocktail is an effective, healthy way to do so. Many regular cocktails contain high sugar content, making it a great option to switch to low-calorie cocktails.\n\nMixing Low-Calorie Cocktails at Home with Bartesian\n\nWhether you’re watching your sugar intake or just want a healthier option, Bartesian delivers with our low-calorie cocktail line. Simply pop a capsule in the Bartesian cocktail maker, select your desired strength, and press mix! Enjoy a low-cal Cosmo in just a few seconds.\n\nCraft a classic Cosmopolitan with fewer calories. Order your capsules today!
 Spirits: Vodka
 Glassware: Martini Glass
 Garnish: Orange peel
@@ -8,9 +9,17 @@ Pairs With:
 Nutrition: {"label_image":"images/nutrition/low-cal-cosmopolitan.png"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":0.9,"regular_oz":1.35,"strong_oz":2.3,"raw":"Mocktail = 0 oz., Light = 0.9 oz., Regular = 1.35 oz., Strong = 2.3 oz"}
 Bartesian URL: https://bartesian.com/products/low-calorie-cosmopolitan-martini-cocktails?variant=32387401547825
+Shopify Product ID: 4515872964657
+Shopify Variant ID: 32387401547825
+Shopify Handle: low-calorie-cosmopolitan-martini-cocktails
+Shopify SKU: 55442
 Help URL: https://bartesian.gorgias.help/en-US/low-cal-cosmopolitan-39047
-Image: images/cocktails/low-cal-cosmopolitan.jpg
+Gorgias Article ID: 39047
+Hero Image: images/hero/low-cal-cosmopolitan.jpg
+Marketing Image: images/marketing/low-cal-cosmopolitan.jpg
+Image: images/hero/low-cal-cosmopolitan.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

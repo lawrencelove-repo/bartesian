@@ -5,7 +5,15 @@ Kind: sugar
 Pairs With: Espresso Martini, Holly Hibiscus Sour, and Clausmopolitan
 Cocktail Slugs: espresso-martini, clausmopolitan
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
 Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 0
+Favorite: 0

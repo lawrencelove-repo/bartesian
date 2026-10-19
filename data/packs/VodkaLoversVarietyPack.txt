@@ -3,9 +3,18 @@ Slug: vodka-lovers-variety-pack
 Barcode: 
 Notes: Calling all vodka lovers!
 Bartesian URL: https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303
+Shopify Product ID: 7735029399751
+Shopify Variant ID: 43332779311303
+Shopify Handle: vodka-lovers-variety-pack
+Help URL: 
+Gorgias Article ID: 
 Image: images/packs/vodka-lovers-variety-pack.jpg
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 1
 Items:
 	espresso-martini: 2
 	sippable-cocktail-with-flavors-of-rich: 2
 	creamy-espresso: 2
 	bold-coffee-liqueur: 2
+	Gorgias Article ID:

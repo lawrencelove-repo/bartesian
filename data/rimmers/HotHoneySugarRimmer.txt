@@ -5,8 +5,15 @@ Kind: sugar
 Pairs With: Ginger Pear Noel, Holiday Spiced Old Fashioned, Jollypeño Margarita, Winter Pear-adise, Spicy Margarita, Bee's Knees, and Lemon Drop
 Cocktail Slugs: holiday-spiced-old-fashioned, jollype-o-margarita, spicy-margarita, bees-knees, lemon-drop
 Bartesian URL: https://bartesian.com/products/hot-honey-sugar-rimmer?variant=45098457465031
+Shopify Product ID: 8367847932103
+Shopify Variant ID: 45098457465031
+Shopify Handle: hot-honey-sugar-rimmer
 Help URL: https://bartesian.gorgias.help/en-US/hot-honey-sugar-rimmer-3066569
+Gorgias Article ID: 3066569
 Image: images/rimmers/hot-honey-sugar-rimmer.jpg
-Nutrition Image: images/nutrition/rimmer-hot-honey-sugar-rimmer.png
+Nutrition Image: images/nutrition/hot-honey-sugar-rimmer.png
+Nutrition Image EU: images/nutrition/hot-honey-sugar-rimmer-eu.jpg
 Barcode: 
 Quantity: 0
+Enabled: 1
+Favorite: 0

@@ -3,8 +3,17 @@ Slug: whiskey-lovers
 Barcode: 
 Notes: Four of Bartesian's best-selling whiskey cocktail varieties, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Whiskey Sour: a refreshing classic with bright lemon, vanilla, and orange flavours. - Sidecar: a traditional whiskey cocktail favorite balancing tart lemon juice with sweet triple sec flavour. - Old Fashioned: a timeless serve, marrying flavours of oak, bitters, and orange citrus. - Manhattan: bold yet smooth, with the rich flavours of sweet vermouth and bitters.
 Bartesian URL: https://bartesian.com/products/whiskey-lovers-collection?variant=32387435167793
+Shopify Product ID: 4756368326705
+Shopify Variant ID: 32387435167793
+Shopify Handle: whiskey-lovers-collection
+Help URL: 
+Gorgias Article ID: 
 Image: images/packs/whiskey-lovers.jpg
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 1
 Items:
 	4-cocktails-whiskey-sour-a-refreshing-classic-with-bright-lemon: 2
 	vanilla: 2
 	orange-flavours: 2
+	Gorgias Article ID:

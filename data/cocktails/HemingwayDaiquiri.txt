@@ -1,6 +1,7 @@
 Name: Hemingway Daiquiri
 Slug: hemingway-daiquiri
 Description: The Hemingway Daiquiri is a variation of the Papa Doble. Combining rum and vodka, this cocktail provides a refreshing blend of sweet and tart grapefruit, citrus lime and dry-cherry notes of maraschino liqueur for an easy sipping experience.
+Details: 
 Spirits: Rum, Vodka
 Glassware: Coupe Glass
 Garnish: Orange Peel Twist
@@ -8,9 +9,17 @@ Pairs With:
 Nutrition: {"label_image":"images/nutrition/hemingway-daiquiri.png"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.7,"regular_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.7 oz., Regular = 2.5 oz., Strong: 4.2 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/hemingway-daiquiri-39027
-Image: 
+Gorgias Article ID: 39027
+Hero Image: images/hero/hemingway-daiquiri.jpg
+Marketing Image: images/marketing/hemingway-daiquiri.jpg
+Image: images/hero/hemingway-daiquiri.jpg
 Seasonal: 0
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

@@ -1,16 +1,25 @@
 Name: Low-Cal Margarita
 Slug: low-cal-margarita
-Description: The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits.
+Description: The low calorie Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits. Pairs perfectly with our Stemless Margarita glassware.
+Details: 10 calories per capsule.
 Spirits: Tequila
 Glassware: Margarita Glass
 Garnish: Lime
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/low-cal-margarita.jpg"}
+Nutrition: {"label_image":"images/nutrition/low-cal-margarita.png"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":0.9,"regular_oz":1.4,"strong_oz":2.3,"raw":"Mocktail = 0 oz., Light = 0.9 oz., Regular = 1.4 oz., Strong = 2.3 oz"}
 Bartesian URL: https://bartesian.com/products/low-calorie-margarita-cocktails?variant=32387497394225
+Shopify Product ID: 4756373864497
+Shopify Variant ID: 32387497394225
+Shopify Handle: low-calorie-margarita-cocktails
+Shopify SKU: 55413
 Help URL: https://bartesian.gorgias.help/en-US/low-cal-margarita-39048
-Image: images/cocktails/low-cal-margarita.jpg
+Gorgias Article ID: 39048
+Hero Image: images/hero/low-cal-margarita.jpg
+Marketing Image: images/marketing/low-cal-margarita.jpg
+Image: images/hero/low-cal-margarita.jpg
 Seasonal: 0
+Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

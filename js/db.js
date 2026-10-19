@@ -2,7 +2,7 @@
   const IDB_NAME = "bartesian-sqlite";
   const IDB_STORE = "kv";
   const DB_KEY = "database";
-  const SCHEMA_VERSION = 2;
+  const SCHEMA_VERSION = 5;
 
   const SEED_SQL = `
     CREATE TABLE IF NOT EXISTS meta (
@@ -26,7 +26,10 @@
       slug TEXT NOT NULL UNIQUE,
       name TEXT NOT NULL,
       description TEXT NOT NULL DEFAULT '',
+      details TEXT NOT NULL DEFAULT '',
       image TEXT NOT NULL DEFAULT '',
+      hero_image TEXT NOT NULL DEFAULT '',
+      marketing_image TEXT NOT NULL DEFAULT '',
       glassware TEXT NOT NULL DEFAULT '',
       garnish TEXT NOT NULL DEFAULT '',
       pairs_with TEXT NOT NULL DEFAULT '',
@@ -34,6 +37,11 @@
       alcohol_json TEXT NOT NULL DEFAULT '',
       bartesian_url TEXT NOT NULL DEFAULT '',
       help_url TEXT NOT NULL DEFAULT '',
+      shopify_product_id TEXT NOT NULL DEFAULT '',
+      shopify_variant_id TEXT NOT NULL DEFAULT '',
+      shopify_handle TEXT NOT NULL DEFAULT '',
+      shopify_sku TEXT NOT NULL DEFAULT '',
+      gorgias_article_id TEXT NOT NULL DEFAULT '',
       seasonal INTEGER NOT NULL DEFAULT 0,
       favorite INTEGER NOT NULL DEFAULT 0,
       enabled INTEGER NOT NULL DEFAULT 1,
@@ -62,6 +70,10 @@
       nutrition_image TEXT NOT NULL DEFAULT '',
       bartesian_url TEXT NOT NULL DEFAULT '',
       help_url TEXT NOT NULL DEFAULT '',
+      shopify_product_id TEXT NOT NULL DEFAULT '',
+      shopify_variant_id TEXT NOT NULL DEFAULT '',
+      shopify_handle TEXT NOT NULL DEFAULT '',
+      gorgias_article_id TEXT NOT NULL DEFAULT '',
       favorite INTEGER NOT NULL DEFAULT 0,
       enabled INTEGER NOT NULL DEFAULT 1,
       quantity INTEGER NOT NULL DEFAULT 0,
@@ -83,7 +95,14 @@
       name TEXT NOT NULL,
       notes TEXT NOT NULL DEFAULT '',
       image TEXT NOT NULL DEFAULT '',
+      nutrition_image TEXT NOT NULL DEFAULT '',
       bartesian_url TEXT NOT NULL DEFAULT '',
+      help_url TEXT NOT NULL DEFAULT '',
+      shopify_product_id TEXT NOT NULL DEFAULT '',
+      shopify_variant_id TEXT NOT NULL DEFAULT '',
+      shopify_handle TEXT NOT NULL DEFAULT '',
+      gorgias_article_id TEXT NOT NULL DEFAULT '',
+      enabled INTEGER NOT NULL DEFAULT 1,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
     );
@@ -242,17 +261,25 @@
 
   function insertCocktail(c) {
     const ts = nowIso();
+    const hero = c.hero_image || "";
+    const marketing = c.marketing_image || "";
+    const primary = c.image || hero || marketing || "";
     exec(
       `INSERT INTO cocktails (
-        slug, name, description, image, glassware, garnish, pairs_with,
-        nutrition_json, alcohol_json, bartesian_url, help_url, seasonal,
-        favorite, enabled, quantity, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        slug, name, description, details, image, hero_image, marketing_image,
+        glassware, garnish, pairs_with, nutrition_json, alcohol_json,
+        bartesian_url, help_url, shopify_product_id, shopify_variant_id,
+        shopify_handle, shopify_sku, gorgias_article_id, seasonal, favorite,
+        enabled, quantity, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         c.slug,
         c.name,
         c.description || "",
-        c.image || "",
+        c.details || "",
+        primary,
+        hero,
+        marketing,
         c.glassware || "",
         c.garnish || "",
         c.pairs_with || "",
@@ -260,6 +287,11 @@
         jsonField(c.alcohol_json),
         c.bartesian_url || "",
         c.help_url || "",
+        c.shopify_product_id || "",
+        c.shopify_variant_id || "",
+        c.shopify_handle || "",
+        c.shopify_sku || "",
+        c.gorgias_article_id || "",
         c.seasonal ? 1 : 0,
         c.favorite ? 1 : 0,
         c.enabled === 0 || c.enabled === false ? 0 : 1,
@@ -291,8 +323,10 @@
     exec(
       `INSERT INTO rimmers (
         slug, name, description, image, kind, pairs_with, nutrition_image,
-        bartesian_url, help_url, favorite, enabled, quantity, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        bartesian_url, help_url, shopify_product_id, shopify_variant_id,
+        shopify_handle, gorgias_article_id, favorite, enabled, quantity,
+        created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         r.slug,
         r.name,
@@ -303,6 +337,10 @@
         r.nutrition_image || "",
         r.bartesian_url || "",
         r.help_url || "",
+        r.shopify_product_id || "",
+        r.shopify_variant_id || "",
+        r.shopify_handle || "",
+        r.gorgias_article_id || "",
         r.favorite ? 1 : 0,
         r.enabled === 0 || r.enabled === false ? 0 : 1,
         Number(r.quantity) || 0,
@@ -334,8 +372,27 @@
   function insertPack(p, slugToId) {
     const ts = nowIso();
     exec(
-      "INSERT INTO packs (slug, name, notes, image, bartesian_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
-      [p.slug, p.name, p.notes || "", p.image || "", p.bartesian_url || "", ts, ts]
+      `INSERT INTO packs (
+        slug, name, notes, image, nutrition_image, bartesian_url, help_url,
+        shopify_product_id, shopify_variant_id, shopify_handle, gorgias_article_id,
+        enabled, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        p.slug,
+        p.name,
+        p.notes || "",
+        p.image || "",
+        p.nutrition_image || "",
+        p.bartesian_url || "",
+        p.help_url || "",
+        p.shopify_product_id || "",
+        p.shopify_variant_id || "",
+        p.shopify_handle || "",
+        p.gorgias_article_id || "",
+        p.enabled === 0 || p.enabled === false ? 0 : 1,
+        ts,
+        ts,
+      ]
     );
     const packId = queryOne("SELECT last_insert_rowid() AS id").id;
     (p.items || []).forEach((item) => {

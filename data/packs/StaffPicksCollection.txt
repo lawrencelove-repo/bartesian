@@ -3,6 +3,15 @@ Slug: staff-picks-collection
 Barcode: 
 Notes: Handpicked by our team, the Staff Picks Collection is an easy crowd-pleaser for any gathering.
 Bartesian URL: https://bartesian.com/products/staff-picks-collection?variant=46171816493255
+Shopify Product ID: 8616008286407
+Shopify Variant ID: 46171816493255
+Shopify Handle: staff-picks-collection
+Help URL: 
+Gorgias Article ID: 
 Image: images/packs/staff-picks-collection.jpg
+Nutrition Image: 
+Nutrition Image EU: 
+Enabled: 1
 Items:
 	4-curated-cocktails: 2
+	Gorgias Article ID:

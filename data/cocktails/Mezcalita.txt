@@ -1,16 +1,25 @@
 Name: Mezcalita
 Slug: mezcalita
 Description: Escape to Tulum with the smoky allure of the Mezcalita, crafted in collaboration with Mezcalum. This sophisticated cocktail blends the bright tang of fresh orange and lime juices with flavors of smoky mezcal, a hint of campfire wood, and a touch of sweetness.
+Details: 
 Spirits: Tequila
 Glassware: Lowball Glass
 Garnish: Fresh Citrus Wheels and Spicy Salt Rim
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/mezcalita.jpg"}
+Nutrition: {"label_image":"images/nutrition/mezcalita.png","label_image_eu":"images/nutrition/mezcalita-eu.jpg"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
 Help URL: https://bartesian.gorgias.help/en-US/mezcalita-1120804
-Image: 
+Gorgias Article ID: 1120804
+Hero Image: images/hero/mezcalita.jpg
+Marketing Image: 
+Image: images/hero/mezcalita.jpg
 Seasonal: 0
+Enabled: 0
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 

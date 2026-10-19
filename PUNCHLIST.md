@@ -28,9 +28,17 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Rimmers table/page (`#/rimmers`) with pairings + inventory ±
 - [x] Alcohol volume (Mocktail/Light/Regular/Strong) + nutrition label images
 - [x] Product URLs with Shopify `?variant=` where the item is still sold online
+- [x] Nutrition Facts label images from Gorgias (US + EU when present)
+- [x] Shopify/Gorgias ID fields (`Shopify Product/Variant/Handle/SKU`, `Gorgias Article ID`)
+- [x] Disabled stubs (`Enabled: 0`) for catalog items not currently sold on bartesian.com
+- [x] Cocktail hero vs marketing images (`images/hero/`, `images/marketing/`) + nutrition at end of detail
+- [x] Shopify long-form `Details` (Read More / how-to copy) on cocktail records
+- [x] Reverse rimmer→cocktail pairings into `cocktail_rimmers` join (cocktail detail “Recommended rimmers”)
 - [ ] **Cocktail admin page** — create / edit / disable cocktails (name, image, spirits, description, nutrition, alcohol, glassware, garnish, pairs-with, Bartesian URL, barcodes, case qty)
 - [ ] Variety-pack admin (create/edit packs and item quantities)
 - [ ] Richer metadata editors (structured nutrition / alcohol fields)
+- [ ] Optional OCR of nutrition labels → calories/ingredients/case UPC into structured fields
+- [ ] UI toggle to show disabled stubs; flip `Enabled` when SKUs return
 - [ ] Fill remaining empty Bartesian URLs for discontinued/seasonal SKUs if product pages reappear
 
 ### Cookies (mahjong-tools pattern)

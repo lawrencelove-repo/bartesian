@@ -5,7 +5,15 @@ Kind: sugar
 Pairs With: Jollypeño Margarita, Starry Night, Yuletide Hurricane, Clausmopolitan, Frosty Navel, Holiday Spiced Old Fashioned, Tequila Sunrise, and Hurricane
 Cocktail Slugs: jollype-o-margarita, starry-night, yuletide-hurricane, clausmopolitan, frosty-navel, holiday-spiced-old-fashioned, tequila-sunrise, hurricane
 Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Help URL: 
+Gorgias Article ID: 
 Image: 
-Nutrition Image: images/nutrition/rimmer-zesty-orange-sugar-rimmer.png
+Nutrition Image: 
+Nutrition Image EU: 
 Barcode: 
 Quantity: 0
+Enabled: 0
+Favorite: 0
