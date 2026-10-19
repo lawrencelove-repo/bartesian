@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Serve Bartesian (8099)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "python -m http.server 8099",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+Name: Old Fashioned
+Slug: old-fashioned
+Description: Classic whiskey cocktail capsule — placeholder catalog entry for scaffold.
+Spirits: Whiskey
+Glassware: Rocks
+Garnish: Orange peel
+Pairs With: Steak
+Nutrition: {"calories":140,"sugar_g":6}
+Alcohol: {"abv_pct":18,"volume_ml":180}
+Bartesian URL: https://www.bartesian.com/
+Image:
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 850000000002
+Case Barcode: 850000000102
+Case Qty: 8

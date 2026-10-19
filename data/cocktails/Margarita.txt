@@ -1,0 +1,16 @@
+Name: Margarita
+Slug: margarita
+Description: Lime-forward tequila capsule cocktail — placeholder catalog entry for scaffold.
+Spirits: Tequila
+Glassware: Margarita
+Garnish: Salt rim, Lime wedge
+Pairs With: Tacos, Fruit salad
+Nutrition: {"calories":160,"sugar_g":12}
+Alcohol: {"abv_pct":13,"volume_ml":220}
+Bartesian URL: https://www.bartesian.com/
+Image:
+Favorite: 1
+Quantity: 5
+Capsule Barcode: 850000000003
+Case Barcode: 850000000103
+Case Qty: 8
