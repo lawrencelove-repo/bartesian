@@ -367,6 +367,50 @@ button.danger {
   color: var(--ink);
 }
 
+.chip-block {
+  margin-top: 1.25rem;
+}
+
+.chip-block .section-label {
+  margin-bottom: 0.7rem;
+}
+
+.icon-chip-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.icon-chip {
+  display: grid;
+  grid-template-columns: 2.35rem 1fr;
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.icon-circle {
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1.5px solid #c5c9d0;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  color: #6b7280;
+  background: #fff;
+}
+
+.icon-circle svg {
+  width: 1.2rem;
+  height: 1.2rem;
+  display: block;
+}
+
+.icon-chip-label {
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
 .inventory-box {
   margin-top: 0.25rem;
   padding: 1rem 1.1rem;

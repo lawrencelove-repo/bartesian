@@ -3,8 +3,8 @@ Slug: margarita
 Description: Lime-forward tequila capsule cocktail — placeholder catalog entry for scaffold.
 Spirits: Tequila
 Glassware: Margarita
-Garnish: Salt rim, lime wedge
-Pairs With: Tacos
+Garnish: Salt rim, Lime wedge
+Pairs With: Tacos, Fruit salad
 Nutrition: {"calories":160,"sugar_g":12}
 Alcohol: {"abv_pct":13,"volume_ml":220}
 Bartesian URL: https://www.bartesian.com/

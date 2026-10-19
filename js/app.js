@@ -237,10 +237,18 @@
             <div class="meta-stack">
               ${metaRow("Base spirit", spiritsText)}
               ${metaRow("Glassware", c.glassware)}
-              ${metaRow("Garnish", c.garnish)}
-              ${metaRow("Pairs with", c.pairs_with)}
               ${metaRow("Avg rating", starsLabel(c.avg_rating) + (c.rating_count ? ` (${c.rating_count})` : ""))}
             </div>
+            ${
+              c.garnish
+                ? `<div class="chip-block"><p class="section-label">Garnish</p>${BartesianIcons.chipList(c.garnish)}</div>`
+                : ""
+            }
+            ${
+              c.pairs_with
+                ? `<div class="chip-block"><p class="section-label">Pairs well with</p>${BartesianIcons.chipList(c.pairs_with)}</div>`
+                : ""
+            }
           </div>
         </div>
 
