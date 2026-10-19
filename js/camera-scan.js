@@ -1,10 +1,78 @@
 /**
- * Live camera barcode capture for Bartesian inventory.
+ * Live camera + photo/file barcode capture for Bartesian inventory.
  *
  * 1) Custom Bartesian Code128 C line scan (capsule lids)
  * 2) Optional BarcodeDetector for retail UPC/EAN (cases / packs)
+ * 3) Still images from iOS/iPadOS Take Photo / Photo Library / Files
  */
 (function (global) {
+  async function initDetector() {
+    if (!("BarcodeDetector" in global)) return null;
+    try {
+      const formats = await global.BarcodeDetector.getSupportedFormats();
+      const wanted = ["upc_a", "upc_e", "ean_13", "ean_8", "code_128"].filter((f) =>
+        formats.includes(f)
+      );
+      if (!wanted.length) return null;
+      return new global.BarcodeDetector({ formats: wanted });
+    } catch (_) {
+      return null;
+    }
+  }
+
+  /**
+   * Decode a still image File/Blob (from camera roll, Files, or Take Photo).
+   * @returns {Promise<{ code: string, source: string }|null>}
+   */
+  async function decodeImageFile(file) {
+    if (!file) return null;
+    const bitmap = await createImageBitmap(file);
+    try {
+      const canvas = document.createElement("canvas");
+      canvas.width = bitmap.width;
+      canvas.height = bitmap.height;
+      const ctx = canvas.getContext("2d", { willReadFrequently: true });
+      ctx.drawImage(bitmap, 0, 0);
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+
+      if (global.BartesianCode128) {
+        const capsule = global.BartesianCode128.scanImageData(imageData);
+        if (capsule != null) {
+          return { code: String(capsule), source: "bartesian-code128" };
+        }
+      }
+
+      const detector = await initDetector();
+      if (detector) {
+        try {
+          const codes = await detector.detect(bitmap);
+          if (codes && codes.length && codes[0].rawValue) {
+            return {
+              code: String(codes[0].rawValue).replace(/\s+/g, ""),
+              source: "barcode-detector",
+            };
+          }
+        } catch (_) {
+          /* try canvas fallback */
+          try {
+            const codes = await detector.detect(canvas);
+            if (codes && codes.length && codes[0].rawValue) {
+              return {
+                code: String(codes[0].rawValue).replace(/\s+/g, ""),
+                source: "barcode-detector",
+              };
+            }
+          } catch (_) {
+            /* ignore */
+          }
+        }
+      }
+      return null;
+    } finally {
+      if (bitmap && bitmap.close) bitmap.close();
+    }
+  }
+
   function createScanner(options) {
     const opts = options || {};
     const onCode = opts.onCode || function () {};
@@ -21,20 +89,6 @@
     let lastCandidate = "";
     let lastCount = 0;
     let lastEmit = 0;
-
-    async function initDetector() {
-      if (!("BarcodeDetector" in global)) return null;
-      try {
-        const formats = await global.BarcodeDetector.getSupportedFormats();
-        const wanted = ["upc_a", "upc_e", "ean_13", "ean_8", "code_128"].filter((f) =>
-          formats.includes(f)
-        );
-        if (!wanted.length) return null;
-        return new global.BarcodeDetector({ formats: wanted });
-      } catch (_) {
-        return null;
-      }
-    }
 
     function stop() {
       running = false;
@@ -148,5 +202,5 @@
     return { start, stop, isRunning: () => running };
   }
 
-  global.BartesianCameraScan = { createScanner };
+  global.BartesianCameraScan = { createScanner, decodeImageFile };
 })(window);

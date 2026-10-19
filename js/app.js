@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v12";
+  const APP_VERSION = "bartesian-v13";
 
   const root = document.getElementById("app");
   let cameraScanner = null;
@@ -706,13 +706,27 @@
   }
 
   function cameraPanelHtml(target) {
+    // iPadOS/iOS: <input type="file" accept="image/*"> opens the system sheet
+    // (Take Photo / Photo Library / Browse). capture=environment jumps to camera.
+    const pickers = `
+      <div class="camera-actions">
+        <label class="btn-file">
+          Take photo or choose image
+          <input type="file" accept="image/*" data-image-pick="${esc(target)}" />
+        </label>
+        <label class="btn-file ghost">
+          Take photo
+          <input type="file" accept="image/*" capture="environment" data-image-pick="${esc(target)}" />
+        </label>
+        <button type="button" class="ghost" data-camera-start="${esc(target)}">Live scan</button>
+      </div>
+      <p class="hint">On iPad, “Take photo or choose image” uses the system prompt for Camera, Photos, or Files. Live scan needs camera permission in Safari/PWA.</p>`;
+
     if (!state.cameraOn || cameraTarget !== target) {
-      return `
-        <div class="camera-actions">
-          <button type="button" data-camera-start="${esc(target)}">Open camera</button>
-        </div>`;
+      return pickers;
     }
     return `
+      ${pickers}
       <div class="camera-panel">
         <div class="camera-viewport">
           <video data-camera-video playsinline muted autoplay></video>
@@ -720,8 +734,8 @@
         </div>
         <canvas data-camera-canvas class="camera-canvas" hidden></canvas>
         <p class="hint" data-camera-status>${esc(state.cameraStatus || "Scanning…")}</p>
-        <p class="hint">Hold the capsule lid barcode in the middle band. Bartesian uses a non-standard Code&nbsp;128 (no start; stop bar width&nbsp;2) — see <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal/BARCODES.md</a>.</p>
-        <button type="button" class="ghost" data-camera-stop>Close camera</button>
+        <p class="hint">Hold the capsule lid barcode in the middle band. Bartesian uses a non-standard Code&nbsp;128 — see <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal/BARCODES.md</a>.</p>
+        <button type="button" class="ghost" data-camera-stop>Close live scan</button>
       </div>`;
   }
 
@@ -1310,6 +1324,29 @@
     }
   }
 
+  async function onImagePicked(input) {
+    const file = input.files && input.files[0];
+    const target = input.getAttribute("data-image-pick") || "scan";
+    input.value = "";
+    if (!file) return;
+    state.flash = "Reading image…";
+    render();
+    try {
+      const result = await BartesianCameraScan.decodeImageFile(file);
+      if (!result || !result.code) {
+        state.flash =
+          "No barcode found in that image. Try a sharper close-up of the capsule lid bars, or enter the code manually.";
+        render();
+        return;
+      }
+      state.flash = "";
+      applyScannedCode(result.code, target);
+    } catch (err) {
+      state.flash = "Could not read image: " + (err && err.message ? err.message : err);
+      render();
+    }
+  }
+
   function onInput(e) {
     if (e.target.matches("[data-admin-code]")) {
       state.adminCode = e.target.value;
@@ -1412,7 +1449,16 @@
     });
   });
   document.addEventListener("input", onInput);
-  document.addEventListener("change", onChange);
+  document.addEventListener("change", (e) => {
+    if (e.target && e.target.matches("[data-image-pick]")) {
+      onImagePicked(e.target).catch((err) => {
+        state.flash = err.message;
+        render();
+      });
+      return;
+    }
+    onChange(e);
+  });
 
   boot();
 })();
