@@ -1626,7 +1626,9 @@
                 ? "restock_pack"
                 : row.delta < 0
                   ? "use_capsule"
-                  : "restock_capsule";
+                  : row.delta > 1
+                    ? "Pack (+" + row.delta + ")"
+                    : "restock_capsule";
           const next = await this.adjustQuantity(row.id, row.delta, reason, code);
           changes.push({
             name: row.name,

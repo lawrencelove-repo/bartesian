@@ -138,6 +138,13 @@
     };
   }
 
+  /** Capsule delta: −1 (use) or a positive count (+1, or +8 for a pack). */
+  function capsuleDeltaValue(v) {
+    const n = Number(v);
+    if (!Number.isFinite(n) || n === 0) return -1;
+    return n > 0 ? Math.floor(n) : -1;
+  }
+
   function cocktailBySlug(db, slug) {
     if (!slug || !db.findCocktailBySlug) return null;
     return db.findCocktailBySlug(slug);
@@ -176,7 +183,7 @@
     if (decoded && decoded.slug) {
       const c = cocktailBySlug(db, decoded.slug);
       if (c) {
-        const delta = capsuleDelta >= 0 ? 1 : -1;
+        const delta = capsuleDeltaValue(capsuleDelta);
         return {
           ok: true,
           code: normalized,
@@ -256,7 +263,7 @@
     if (bc.kind === "capsule") {
       const c = db.getCocktail(bc.cocktail_id);
       if (!c) return { ok: false, error: "Barcode points to a missing cocktail." };
-      const delta = capsuleDelta >= 0 ? 1 : -1;
+      const delta = capsuleDeltaValue(capsuleDelta);
       proposed.push({
         type: "cocktail",
         id: c.id,
@@ -384,7 +391,7 @@
     if (type === "cocktail") {
       const c = db.getCocktail(id);
       if (!c) return { ok: false, error: "Cocktail not found." };
-      const delta = capsuleDelta >= 0 ? 1 : -1;
+      const delta = capsuleDeltaValue(capsuleDelta);
       return {
         ok: true,
         code: "",

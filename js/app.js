@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v38";
+  const APP_VERSION = "bartesian-v39";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -1278,7 +1278,8 @@
       preview.adjustable
         ? `<div class="scan-delta" role="group" aria-label="Quantity change">
             <button type="button" class="ghost ${state.scanDelta < 0 ? "on" : ""}" data-scan-delta="-1">Use (−1)</button>
-            <button type="button" class="ghost ${state.scanDelta > 0 ? "on" : ""}" data-scan-delta="1">Restock (+1)</button>
+            <button type="button" class="ghost ${state.scanDelta === 1 ? "on" : ""}" data-scan-delta="1">Restock (+1)</button>
+            ${preview.kind === "capsule" ? `<button type="button" class="ghost ${state.scanDelta === 8 ? "on" : ""}" data-scan-delta="8">Pack (Add +8)</button>` : ""}
           </div>`
         : `<p class="muted">Restock from case / pack (confirm to apply).</p>`;
 

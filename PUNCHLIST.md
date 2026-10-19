@@ -67,6 +67,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Capsule barcode decode via [romkal/bartesian_barcode](https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md) + `pods_data.csv` drink map
 - [x] Scan lookup → confirm (capsule/rimmer default −1, optional +1; case/pack restock preview)
 - [x] Scan page name search (cocktail/rimmer/pack) → same confirm preview (`resolveItem`)
+- [x] Scan preview Pack (Add +8) toggle for capsules; history reads “Added +8 · …” with `Pack (+8)` detail
 - [x] Admin `#/admin/barcodes` to associate codes; export includes `barcodes.json` + Capsule/Case fields
 - [x] Camera scanning: custom Bartesian Code128 C line scan + optional BarcodeDetector for retail GTINs
 - [x] iPadOS Take photo / Choose image / Files via `<input type="file" accept="image/*">` (+ optional live scan)
