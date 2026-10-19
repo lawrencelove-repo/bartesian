@@ -41,29 +41,35 @@ window.BARTESIAN_SEED = {
     {
       "name": "2026 Advent Calendar (spoiler alert!)",
       "slug": "2026-advent-calendar-spoiler-alert",
-      "description": "Spoiler Alert: If you wish to keep each day a festive surprise - the information below discloses the capsule selections. With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. - Berry & Bright: A shimmering tequila cocktail combining juicy blueberry, zesty lemon, and a hint of cozy cardamom flavor. The result is a vibrant cocktail that sparkles with the magic of the season. - Brown Butter Old Fashioned: A rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange. - Frosted Ambrosia: A nostalgic vodka cocktail with flavors of juicy orange, pineapple, coconut, cherry, and a soft marshmallow finish. Sweet, creamy, and fruit-forward, it’s a playful holiday dessert cocktail - Ginger Pear Noel: A tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor. - Holiday Spiced Old Fashioned: A spirit-forward cocktail with flavors of orange, bitters, cinnamon and brown sugar. - Jollypeño Margarita: A margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño. - Mistletoe Margarita: A blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita. - Peary Christmas: You'll have a very \"peary\" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond notes. - Salted Caramel Espresso Martini: Flavors of rich coffee, buttery caramel, and a hint of sea salt come together in this smooth, velvety espresso martini. Decadent yet refined, it's a luxurious twist on a cocktail favorite. - The Grinch Appletini: A shimmering sweet and tart vodka cocktail with green apple flavors. - Winter Pear-adise: A sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime. - Yuletide Hurricane: A fruity, tropical rum cocktail with added shimmer.",
-      "details": "",
-      "spirits": [],
+      "description": "Spoiler Alert: If you wish to keep each day a festive surprise — the information below discloses the capsule selections. With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year.",
+      "details": "Berry & Bright (NEW)\nA shimmering tequila cocktail combining juicy blueberry, zesty lemon, and a hint of cozy cardamom flavor. The result is a vibrant cocktail that sparkles with the magic of the season.\nBase spirit: Tequila\n\nBrown Butter Old Fashioned\nA rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange.\nBase spirit: Whiskey\n\nFrosted Ambrosia (NEW)\nA nostalgic vodka cocktail with flavors of juicy orange, pineapple, coconut, cherry, and a soft marshmallow finish. Sweet, creamy, and fruit-forward, it's a playful holiday dessert cocktail.\nBase spirit: Vodka\n\nGinger Pear Noel\nA tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor.\nBase spirit: Whiskey\n\nHoliday Spiced Old Fashioned\nA spirit-forward cocktail with flavors of orange, bitters, cinnamon and brown sugar.\nBase spirit: Whiskey\n\nJollypeño Margarita\nA margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño.\nBase spirit: Tequila\n\nMistletoe Margarita\nA blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita.\nBase spirit: Tequila\n\nPeary Christmas\nYou'll have a very \"peary\" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond notes.\nBase spirit: Tequila\n\nSalted Caramel Espresso Martini (NEW)\nFlavors of rich coffee, buttery caramel, and a hint of sea salt come together in this smooth, velvety espresso martini. Decadent yet refined, it's a luxurious twist on a cocktail favorite.\nBase spirit: Vodka\n\nThe Grinch Appletini\nA shimmering sweet and tart vodka cocktail with green apple flavors.\nBase spirit: Vodka\n\nWinter Pear-adise\nA sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime.\nBase spirit: Gin\n\nYuletide Hurricane\nA fruity, tropical rum cocktail with added shimmer.\nBase spirit: Rum",
+      "spirits": [
+        "Tequila",
+        "Whiskey",
+        "Vodka",
+        "Gin",
+        "Rum"
+      ],
       "glassware": "",
       "garnish": "",
       "pairs_with": "",
       "nutrition_json": "{\"label_image\":\"images/nutrition/2026-advent-calendar-spoiler-alert.png\",\"label_image_eu\":\"images/nutrition/2026-advent-calendar-spoiler-alert-eu.jpg\"}",
       "alcohol_json": "{}",
-      "bartesian_url": "",
+      "bartesian_url": "https://bartesian.com/products/advent-calendar?variant=47520593445063",
       "help_url": "https://bartesian.gorgias.help/en-US/2026-advent-calendar-(spoiler-alert)-7886629",
-      "image": "",
+      "image": "images/packs/advent-calendar-2026.jpg",
       "hero_image": "",
-      "marketing_image": "",
+      "marketing_image": "images/packs/advent-calendar-2026.jpg",
       "seasonal": 1,
       "enabled": 0,
       "favorite": 0,
       "quantity": 0,
       "capsule_barcode": "",
       "case_barcode": "",
-      "case_qty": 8,
-      "shopify_product_id": "",
-      "shopify_variant_id": "",
-      "shopify_handle": "",
+      "case_qty": 12,
+      "shopify_product_id": "8913630003399",
+      "shopify_variant_id": "47520593445063",
+      "shopify_handle": "advent-calendar",
       "shopify_sku": "",
       "gorgias_article_id": "7886629",
       "_file": "2026AdventCalendarSpoilerAlert.txt"
@@ -196,6 +202,38 @@ window.BARTESIAN_SEED = {
       "shopify_sku": "55485",
       "gorgias_article_id": "36519",
       "_file": "BeesKnees.txt"
+    },
+    {
+      "name": "Berry & Bright",
+      "slug": "berry-and-bright",
+      "description": "A shimmering tequila cocktail combining juicy blueberry, zesty lemon, and a hint of cozy cardamom flavor. The result is a vibrant cocktail that sparkles with the magic of the season.",
+      "details": "",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{}",
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "hero_image": "",
+      "marketing_image": "",
+      "seasonal": 1,
+      "enabled": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "shopify_product_id": "",
+      "shopify_variant_id": "",
+      "shopify_handle": "",
+      "shopify_sku": "",
+      "gorgias_article_id": "",
+      "_file": "BerryAndBright.txt"
     },
     {
       "name": "Blackberry Mango Refresher (US Only)",
@@ -356,6 +394,38 @@ window.BARTESIAN_SEED = {
       "shopify_sku": "",
       "gorgias_article_id": "2559242",
       "_file": "Bramble.txt"
+    },
+    {
+      "name": "Brown Butter Old Fashioned",
+      "slug": "brown-butter-old-fashioned",
+      "description": "A rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange.",
+      "details": "",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{}",
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "hero_image": "",
+      "marketing_image": "",
+      "seasonal": 1,
+      "enabled": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "shopify_product_id": "",
+      "shopify_variant_id": "",
+      "shopify_handle": "",
+      "shopify_sku": "",
+      "gorgias_article_id": "",
+      "_file": "BrownButterOldFashioned.txt"
     },
     {
       "name": "Cafécito Churro",
@@ -646,6 +716,38 @@ window.BARTESIAN_SEED = {
       "_file": "EspressoMartini.txt"
     },
     {
+      "name": "Frosted Ambrosia",
+      "slug": "frosted-ambrosia",
+      "description": "A nostalgic vodka cocktail with flavors of juicy orange, pineapple, coconut, cherry, and a soft marshmallow finish. Sweet, creamy, and fruit-forward, it's a playful holiday dessert cocktail.",
+      "details": "",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{}",
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "hero_image": "",
+      "marketing_image": "",
+      "seasonal": 1,
+      "enabled": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "shopify_product_id": "",
+      "shopify_variant_id": "",
+      "shopify_handle": "",
+      "shopify_sku": "",
+      "gorgias_article_id": "",
+      "_file": "FrostedAmbrosia.txt"
+    },
+    {
       "name": "Frosted Orchard",
       "slug": "frosted-orchard",
       "description": "The Frosted Orchard is a crisp, refreshing vodka cocktail with a cozy twist. Juicy apple and tangy lemonade are infused with flavors of cinnamon and cardamom for a balanced blend of sweet, citrus and spices. This cool-weather sipper eases the chill with a quiet warmth that unfolds sip by sip.",
@@ -804,6 +906,38 @@ window.BARTESIAN_SEED = {
       "shopify_sku": "55435",
       "gorgias_article_id": "39011",
       "_file": "GingerPeachIcedTea.txt"
+    },
+    {
+      "name": "Ginger Pear Noel",
+      "slug": "ginger-pear-noel",
+      "description": "A tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor.",
+      "details": "",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{}",
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "hero_image": "",
+      "marketing_image": "",
+      "seasonal": 1,
+      "enabled": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "shopify_product_id": "",
+      "shopify_variant_id": "",
+      "shopify_handle": "",
+      "shopify_sku": "",
+      "gorgias_article_id": "",
+      "_file": "GingerPearNoel.txt"
     },
     {
       "name": "Golden Ace",
@@ -2155,6 +2289,38 @@ window.BARTESIAN_SEED = {
       "_file": "RumSwizzle.txt"
     },
     {
+      "name": "Salted Caramel Espresso Martini",
+      "slug": "salted-caramel-espresso-martini",
+      "description": "Flavors of rich coffee, buttery caramel, and a hint of sea salt come together in this smooth, velvety espresso martini. Decadent yet refined, it's a luxurious twist on a cocktail favorite.",
+      "details": "",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{}",
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "hero_image": "",
+      "marketing_image": "",
+      "seasonal": 1,
+      "enabled": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "shopify_product_id": "",
+      "shopify_variant_id": "",
+      "shopify_handle": "",
+      "shopify_sku": "",
+      "gorgias_article_id": "",
+      "_file": "SaltedCaramelEspressoMartini.txt"
+    },
+    {
       "name": "Sex on the Beach",
       "slug": "sex-on-the-beach",
       "description": "The most iconic beach cocktail of all time is undoubtedly the Sex on the Beach. Made with vodka, juicy peach, pineapple, cranberry juice, and other fruit juices, this cocktail turns heads for its bold name and maintains its fan base for the perfect blend of sweet fruit juices and smooth spirits.",
@@ -2828,6 +2994,38 @@ window.BARTESIAN_SEED = {
       "_file": "WhiteSangria.txt"
     },
     {
+      "name": "Winter Pear-adise",
+      "slug": "winter-pear-adise",
+      "description": "A sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime.",
+      "details": "",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{}",
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "hero_image": "",
+      "marketing_image": "",
+      "seasonal": 1,
+      "enabled": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "shopify_product_id": "",
+      "shopify_variant_id": "",
+      "shopify_handle": "",
+      "shopify_sku": "",
+      "gorgias_article_id": "",
+      "_file": "WinterPearAdise.txt"
+    },
+    {
       "name": "Witch's Heart",
       "slug": "witchs-heart",
       "description": "The perfect Halloween cocktail, Witch's Heart is a blend of berry and green apple flavors to help you get in the spirit of the season. With edible shimmer for added luminosity, this vodka cocktail will put guests at your Halloween gatherings under a magical spell. Shake with ice and serve in a martini glass garnished with berries and a Sour Apple Sugar rim.",
@@ -2897,17 +3095,66 @@ window.BARTESIAN_SEED = {
       "name": "Advent Calendar 2026",
       "slug": "advent-calendar-2026",
       "barcode": "",
-      "notes": "The 2026 Bartesian Cocktail Advent Calendar today! With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. How pre-order redemption works: - Retrieve your code: Check your pre-sale order confirmation or reminder email and copy your unique code. - Add your calendar(s): Above, select the number of calendars you pre-ordered and click \"Add to Cart\". - Apply your code: At checkout, enter your code in the \"Discount code or gift card\" box and click \"Apply\". Limit four (4) Advent Calendars per customer.",
+      "notes": "With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. NEW for 2026: Berry & Bright, Frosted Ambrosia, Salted Caramel Espresso Martini. See the spoiler article for full capsule descriptions.",
       "image": "images/packs/advent-calendar-2026.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/advent-calendar?variant=47520593445063",
-      "help_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/2026-advent-calendar-(spoiler-alert)-7886629",
       "shopify_product_id": "8913630003399",
       "shopify_variant_id": "47520593445063",
       "shopify_handle": "advent-calendar",
-      "gorgias_article_id": "",
+      "gorgias_article_id": "7886629",
       "enabled": 1,
-      "items": [],
+      "items": [
+        {
+          "cocktail_slug": "berry-and-bright",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "brown-butter-old-fashioned",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "frosted-ambrosia",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "ginger-pear-noel",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "holiday-spiced-old-fashioned",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "jollype-o-margarita",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "mistletoe-margarita",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "peary-christmas",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "salted-caramel-espresso-martini",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "the-grinch-appletini",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "winter-pear-adise",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "yuletide-hurricane",
+          "qty": 1
+        }
+      ],
       "_file": "AdventCalendar2026.txt"
     },
     {

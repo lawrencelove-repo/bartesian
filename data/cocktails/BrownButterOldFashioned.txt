@@ -1,0 +1,27 @@
+Name: Brown Butter Old Fashioned
+Slug: brown-butter-old-fashioned
+Description: A rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange.
+Details: 
+Spirits: Whiskey
+Glassware: 
+Garnish: 
+Pairs With: 
+Nutrition: {}
+Alcohol: {}
+Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Help URL: 
+Gorgias Article ID: 
+Hero Image: 
+Marketing Image: 
+Image: 
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

@@ -1,0 +1,27 @@
+Name: Frosted Ambrosia
+Slug: frosted-ambrosia
+Description: A nostalgic vodka cocktail with flavors of juicy orange, pineapple, coconut, cherry, and a soft marshmallow finish. Sweet, creamy, and fruit-forward, it's a playful holiday dessert cocktail.
+Details: 
+Spirits: Vodka
+Glassware: 
+Garnish: 
+Pairs With: 
+Nutrition: {}
+Alcohol: {}
+Bartesian URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Help URL: 
+Gorgias Article ID: 
+Hero Image: 
+Marketing Image: 
+Image: 
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

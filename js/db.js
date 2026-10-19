@@ -2,7 +2,7 @@
   const IDB_NAME = "bartesian-sqlite";
   const IDB_STORE = "kv";
   const DB_KEY = "database";
-  const SCHEMA_VERSION = 6;
+  const SCHEMA_VERSION = 7;
 
   const SEED_SQL = `
     CREATE TABLE IF NOT EXISTS meta (
