@@ -1,0 +1,18 @@
+Name: Rum Runner
+Slug: rum-runner
+Description: Packed with tropical pineapple, banana, blackberry, orange, and a splash of grenadine, the Rum Runner is the definition of fruity and sweet.
+Spirits: Rum, Vodka
+Glassware: Highball Glass
+Garnish: Pineapple & Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/rum-runner.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":2.0,"regular_oz":3.0,"strong_oz":5.1,"raw":"Mocktail = 0 oz., Light = 2.0 oz., Regular = 3.0 oz., Strong = 5.1 oz"}
+Bartesian URL: https://bartesian.com/products/rum-runner-cocktails?variant=32387450175537
+Help URL: https://bartesian.gorgias.help/en-US/rum-runner-39077
+Image: images/cocktails/rum-runner.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

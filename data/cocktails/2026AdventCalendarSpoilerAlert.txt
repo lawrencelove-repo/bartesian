@@ -1,0 +1,18 @@
+Name: 2026 Advent Calendar (spoiler alert!)
+Slug: 2026-advent-calendar-spoiler-alert
+Description: Spoiler Alert: If you wish to keep each day a festive surprise - the information below discloses the capsule selections. With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. - Berry & Bright: A shimmering tequila cocktail combining juicy blueberry, zesty lemon, and a hint of cozy cardamom flavor. The result is a vibrant cocktail that sparkles with the magic of the season. - Brown Butter Old Fashioned: A rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange. - Frosted Ambrosia: A nostalgic vodka cocktail with flavors of juicy orange, pineapple, coconut, cherry, and a soft marshmallow finish. Sweet, creamy, and fruit-forward, it’s a playful holiday dessert cocktail - Ginger Pear Noel: A tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor. - Holiday Spiced Old Fashioned: A spirit-forward cocktail with flavors of orange, bitters, cinnamon and brown sugar. - Jollypeño Margarita: A margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño. - Mistletoe Margarita: A blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita. - Peary Christmas: You'll have a very "peary" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond notes. - Salted Caramel Espresso Martini: Flavors of rich coffee, buttery caramel, and a hint of sea salt come together in this smooth, velvety espresso martini. Decadent yet refined, it's a luxurious twist on a cocktail favorite. - The Grinch Appletini: A shimmering sweet and tart vodka cocktail with green apple flavors. - Winter Pear-adise: A sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime. - Yuletide Hurricane: A fruity, tropical rum cocktail with added shimmer.
+Spirits: 
+Glassware: 
+Garnish: 
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/2026-advent-calendar-spoiler-alert.png"}
+Alcohol: {}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/2026-advent-calendar-(spoiler-alert)-7886629
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

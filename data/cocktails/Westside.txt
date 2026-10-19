@@ -1,0 +1,18 @@
+Name: Westside
+Slug: westside
+Description: A sweet and smooth combination of lemon and mint, the Westside is a refreshing, easy drinking vodka cocktail. Serve over ice in a low ball garnished with a mint sprig.
+Spirits: Vodka
+Glassware: Lowball Glass
+Garnish: ed with a mint sprig
+Pairs With: 
+Nutrition: {}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/westside-238788
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

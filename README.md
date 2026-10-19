@@ -34,6 +34,16 @@ On GitHub Pages, the same files are hosted from the repo root.
    ```
 5. Commit and push `data/`, `js/seed-data.js`, and any `images/`.
 
+### Refresh catalog from Bartesian sources
+
+```bash
+python scripts/scrape-catalog.py
+python scripts/backfill-product-urls.py
+node scripts/import-data.js
+```
+
+Then reset the local DB in Settings (or clear site data) so IndexedDB re-seeds.
+
 ## Barcodes (scaffold)
 
 | Scan | Effect |

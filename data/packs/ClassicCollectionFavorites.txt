@@ -1,0 +1,10 @@
+Name: Classic Collection Favorites
+Slug: classic-collection-favorites
+Barcode: 
+Notes: All of our classics are together in one collection. The Classic Collection Favorites Variety Pack contains 1 each of: - Cosmopolitan: a classic vodka cocktail with tart cranberry, sweet orange, and lime. - Old Fashioned: a spirit-forward whiskey cocktail balancing bitter and sweet with flavors of oak and orange citrus. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and stra
+Bartesian URL: https://bartesian.com/products/classic-cocktails-favorites?variant=44303522562247
+Image: images/packs/classic-collection-favorites.jpg
+Items:
+	cosmopolitan: 1
+	sweet-orange: 1
+	lime: 1

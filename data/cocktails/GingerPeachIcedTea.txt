@@ -1,0 +1,18 @@
+Name: Ginger Peach Iced Tea
+Slug: ginger-peach-iced-tea
+Description: This refreshing, juicy cocktail is what a summer day calls for with notes of caffeine-free black tea, sweet peach, and herbal ginger.
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: Peach
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/ginger-peach-iced-tea.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/ginger-peach-iced-tea-cocktails?variant=32387392536625
+Help URL: https://bartesian.gorgias.help/en-US/ginger-peach-iced-tea-39011
+Image: images/cocktails/ginger-peach-iced-tea.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

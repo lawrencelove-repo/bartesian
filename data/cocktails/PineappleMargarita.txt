@@ -1,0 +1,18 @@
+Name: Pineapple Margarita
+Slug: pineapple-margarita
+Description: Pineapple Margarita, bursting with notes of juicy tart pineapple and sweet coconut, balanced with lime and notes of orange triple sec.
+Spirits: Tequila
+Glassware: Margarita Glass
+Garnish: Pineapple
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/pineapple-margarita.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/pineapple-margarita-capsules?variant=41965982613703
+Help URL: https://bartesian.gorgias.help/en-US/pineapple-margarita-45861
+Image: images/cocktails/pineapple-margarita.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

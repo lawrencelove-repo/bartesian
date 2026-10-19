@@ -1,0 +1,18 @@
+Name: Mistletoe Margarita
+Slug: mistletoe-margarita
+Description: A holiday smooch for the senses, the Mistletoe Margarita will have you head over heels. This holly, jolly margarita with jammy pomegranate and holiday baking spice flavors is the perfect present for any tequila lover. Best served in a margarita glass garnished with a Cranberry Cheer Sugar rim.
+Spirits: Tequila
+Glassware: Lowball Glass
+Garnish: ed with a Cranberry Cheer Sugar rim
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/mistletoe-margarita.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/mistletoe-margarita-3388359
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

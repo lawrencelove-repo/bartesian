@@ -1,0 +1,18 @@
+Name: Whiskey Smash
+Slug: whiskey-smash
+Description: This classic cocktail appeals to both whiskey lovers and whiskey skeptics alike. Think minty like a Mojito but with lemon and Whiskey instead of lime and Rum. The Whiskey Smash provides whiskey barrel sweetness balanced with refreshing mint, but with a lemon citrus twist.
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: Lemon & Mint
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/whiskey-smash.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/whiskey-smash-cocktails?variant=31660702269489
+Help URL: https://bartesian.gorgias.help/en-US/whiskey-smash-39505
+Image: images/cocktails/whiskey-smash.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

@@ -1,0 +1,11 @@
+Name: Cranberry Cheer Sugar Rimmer
+Slug: cranberry-cheer-sugar-rimmer
+Description: Bring a hint of festive cheer to your favorite cocktails. The Cranberry Cheer Sugar Rimmer has flavors of sweet cranberry and warm baking spices.
+Kind: sugar
+Pairs With: Bee Merry, Mistletoe Margarita, Lemon Drop, and all types of Cosmopolitans
+Cocktail Slugs: mistletoe-margarita, lemon-drop
+Bartesian URL: 
+Image: 
+Nutrition Image: 
+Barcode: 
+Quantity: 0

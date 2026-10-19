@@ -1,0 +1,18 @@
+Name: Lychee Martini
+Slug: lychee-martini
+Description: Delicately fruity and lightly floral, the Lychee Martini is an elegant, slightly sweeter twist on a vodka martini. Enjoy this graceful cocktail, inspired by the aromatic and floral flavors of the tropical fruit, shaken over ice and served in a martini glass garnished with lychee.
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: ed with lychee
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/lychee-martini.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":0.7,"regular_oz":1.0,"strong_oz":1.7,"raw":"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1.0 oz., Strong = 1.7 oz"}
+Bartesian URL: https://bartesian.com/products/lychee-martini-capsules?variant=43540349616327
+Help URL: https://bartesian.gorgias.help/en-US/lychee-martini-445992
+Image: images/cocktails/lychee-martini.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

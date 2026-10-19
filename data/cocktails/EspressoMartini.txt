@@ -1,16 +1,18 @@
 Name: Espresso Martini
 Slug: espresso-martini
-Description: Bold espresso and vodka capsule cocktail — placeholder catalog entry for scaffold.
+Description: A crowd pleaser for even the most refined palates, the Espresso Martini is a smooth, sippable cocktail with notes of rich and creamy espresso and bold coffee liqueur. Best served shaken and on ice, this martini is the perfect elegant addition to your cocktail selection.
 Spirits: Vodka
-Glassware: Coupe
-Garnish: Coffee beans
-Pairs With: Dark chocolate, Dessert
-Nutrition: {"calories":150,"sugar_g":10}
-Alcohol: {"abv_pct":14,"volume_ml":200}
-Bartesian URL: https://www.bartesian.com/
-Image:
-Favorite: 1
-Quantity: 3
-Capsule Barcode: 850000000001
-Case Barcode: 850000000101
+Glassware: Shaker + Martini
+Garnish: Coffee Beans
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/espresso-martini.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/espresso-martini-capsules?variant=42144722419911
+Help URL: https://bartesian.gorgias.help/en-US/espresso-martini-98045
+Image: images/cocktails/espresso-martini.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
 Case Qty: 8

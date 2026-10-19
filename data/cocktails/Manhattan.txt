@@ -1,0 +1,18 @@
+Name: Manhattan
+Slug: manhattan
+Description: The Manhattan stirred up its popularity with its mix of savory sweet vermouth, whiskey, and aromatic bitters with a hint of cherry.
+Spirits: Whiskey
+Glassware: Coupe Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/manhattan.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/manhattan-cocktails?variant=39353828737223
+Help URL: https://bartesian.gorgias.help/en-US/manhattan-39058
+Image: images/cocktails/manhattan.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

@@ -1,0 +1,18 @@
+Name: Sex on the Beach
+Slug: sex-on-the-beach
+Description: Enjoy the fruity Sex on the Beach, with juicy peach, pineapple, banana, cranberry, and hint of lemon flavor for a sweet and tropical experience and citrus orange make a winning combination for this classic vodka cocktail.
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/sex-on-the-beach.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/sex-on-the-beach-vodka-cocktails?variant=15685661982769
+Help URL: https://bartesian.gorgias.help/en-US/sex-on-the-beach-39082
+Image: images/cocktails/sex-on-the-beach.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

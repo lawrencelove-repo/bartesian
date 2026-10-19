@@ -1,0 +1,10 @@
+Name: Margarita Lovers (EU/UK)
+Slug: margarita-lovers
+Barcode: 
+Notes: Four of Bartesian's best-selling margaritas, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Blackberry Margarita: a rich and juicy blend of blackberry and lime with flavours of honeyed fig. - Pineapple Margarita: bursting with tropical pineapple and tart lime, balanced with sweet coconut and orange triple sec flavours. - Pomegranate Margarita: sweet, jammy pomegranate with a splash of lime,and triple sec flavour. - Margarita: a refreshing mix of lemon and lime for the perfect timeless serve.
+Bartesian URL: 
+Image: 
+Items:
+	4-cocktails-blackberry-margarita-a-rich: 2
+	juicy-blend-of-blackberry: 2
+	lime-with-flavours-of-honeyed-fig: 2

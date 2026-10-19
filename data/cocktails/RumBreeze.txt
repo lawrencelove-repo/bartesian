@@ -1,0 +1,18 @@
+Name: Rum Breeze
+Slug: rum-breeze
+Description: The Rum Breeze features a sweet, tropical blend of pineapple, lime, and strawberry juices, light rum, and a hint of coconut. Fresh and flavorful, with a slight tang from the pineapple juice and coconut undertones.
+Spirits: Rum
+Glassware: Highball Glass
+Garnish: Orange & Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/rum-breeze.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/rum-breeze-cocktails?variant=15685657034801
+Help URL: https://bartesian.gorgias.help/en-US/rum-breeze-39076
+Image: images/cocktails/rum-breeze.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

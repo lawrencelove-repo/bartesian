@@ -1,0 +1,18 @@
+Name: Southern Blossom
+Slug: southern-blossom
+Description: Sweet and fruity, this refreshing vodka cocktail combines juicy pineapple, zesty lemonade, and grenadine flavors. Each sip is like a stroll down a lush fairway bordered with blossoming flowers. Whether enjoyed on the green or off, the Southern Blossom will have you raising your glass to birdies, bogeys, and everything in between.
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: Lemon Wheel and Maraschino Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/southern-blossom.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/southern-blossom-1201767
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

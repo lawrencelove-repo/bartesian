@@ -47,11 +47,14 @@ bartesian/
   data/
     cocktails/      # one .txt per cocktail (catalog + qty seed)
     packs/          # variety pack definitions
-  images/           # committed cocktail photos
+    rimmers/        # salt/sugar rimmers
+  images/           # cocktail / rimmer / nutrition label photos
   assets/favicon/
   exports/          # local export target (.gitkeep)
   scripts/
-    import-data.js  # data/** → js/seed-data.js
+    import-data.js             # data/** → js/seed-data.js
+    scrape-catalog.py          # Gorgias + Shopify → data/ + images/
+    backfill-product-urls.py   # Shopify product URLs with ?variant=
   PLAN.md
   README.md
   DISCLAIMER.md
@@ -65,19 +68,27 @@ spirits(id, name)                         -- whiskey, vodka, tequila, …
 cocktails(
   id, slug, name, description, image,
   glassware, garnish, pairs_with,
-  nutrition_json, alcohol_json,          -- flexible structured blobs
-  bartesian_url, favorite, enabled,
+  nutrition_json, alcohol_json,          -- label_image; mocktail/light/regular/strong oz
+  bartesian_url, help_url,               -- shop product URL (+variant); Gorgias article
+  seasonal, favorite, enabled,
   quantity,                              -- on-hand capsules
   created_at, updated_at
 )
 cocktail_spirits(cocktail_id, spirit_id) -- M:N
+rimmers(
+  id, slug, name, description, image, kind,
+  pairs_with, nutrition_image, bartesian_url, help_url,
+  favorite, enabled, quantity, created_at, updated_at
+)
+cocktail_rimmers(cocktail_id, rimmer_id)
 barcodes(
-  id, code UNIQUE, kind,                 -- 'capsule' | 'case' | 'variety_pack'
+  id, code UNIQUE, kind,                 -- 'capsule' | 'case' | 'variety_pack' | 'rimmer'
   cocktail_id NULL,                      -- capsule/case target
   pack_id NULL,                          -- variety pack target
+  rimmer_id NULL,
   case_qty INTEGER DEFAULT 8             -- for single-flavor cases
 )
-packs(id, slug, name, barcode, notes)
+packs(id, slug, name, notes, image, bartesian_url)
 pack_items(pack_id, cocktail_id, qty)
 ratings(id, cocktail_id, person_id, stars, comment, created_at, updated_at)
 inventory_log(id, cocktail_id, delta, reason, barcode, created_at)
@@ -130,8 +141,10 @@ Items:
 
 | Route | Purpose |
 |-------|---------|
-| `#/` | Cocktail list (search, filters, sort) |
-| `#/cocktail/:id` | Detail + inventory ± / use one + ratings + packs |
+| `#/` | Cocktail list (search, filters, sort, seasonal) |
+| `#/cocktail/:id` | Detail + inventory ± / use one + ratings + packs + rimmers |
+| `#/rimmers` | Salt/sugar rimmer catalog |
+| `#/rimmer/:id` | Rimmer detail + pairings + inventory ± |
 | `#/scan` | Barcode entry (camera later) |
 | `#/random` | Randomizer with spirit / favorites / in-stock |
 | `#/people` | Manage people for ratings |

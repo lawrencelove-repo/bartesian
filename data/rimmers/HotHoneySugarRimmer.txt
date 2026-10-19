@@ -1,0 +1,12 @@
+Name: Hot Honey Sugar Rimmer
+Slug: hot-honey-sugar-rimmer
+Description: The Hot Honey Sugar Rimmer is a delicate dance of warm honey and subtle spice flavors. It's the perfect blend of sweet and heat.
+Kind: sugar
+Pairs With: Ginger Pear Noel, Holiday Spiced Old Fashioned, Jollypeño Margarita, Winter Pear-adise, Spicy Margarita, Bee's Knees, and Lemon Drop
+Cocktail Slugs: holiday-spiced-old-fashioned, jollype-o-margarita, spicy-margarita, bees-knees, lemon-drop
+Bartesian URL: https://bartesian.com/products/hot-honey-sugar-rimmer?variant=45098457465031
+Help URL: https://bartesian.gorgias.help/en-US/hot-honey-sugar-rimmer-3066569
+Image: images/rimmers/hot-honey-sugar-rimmer.jpg
+Nutrition Image: images/nutrition/rimmer-hot-honey-sugar-rimmer.png
+Barcode: 
+Quantity: 0

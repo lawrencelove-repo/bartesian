@@ -1,0 +1,10 @@
+Name: Refreshers Collection (US Only)
+Slug: refreshers-collection
+Barcode: 
+Notes: Refreshers are your anytime pick-me-up: crafted to be enjoyed primarily as mocktails, lightly caffeinated and bursting with vibrant, juicy fruit flavors. With an intentionally lower alcohol level than our other offerings, they deliver a lighter, effortlessly refreshing sip. Just shake, pour over ice in a highball glass, and top with fresh fruit.
+Bartesian URL: https://bartesian.com/products/refreshers-collection?variant=45626534265031
+Image: images/packs/refreshers-collection.jpg
+Items:
+	strawberry-acai-lush-strawberry: 2
+	tangy-acai-flavors-blend-in-a-perfect-balance-of-sweet: 2
+	tart: 2

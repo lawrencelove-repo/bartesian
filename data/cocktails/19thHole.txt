@@ -1,0 +1,18 @@
+Name: 19th Hole
+Slug: 19th-hole
+Description: A delicious sipper on and off the links, the 19th Hole is a refreshing vodka cocktail celebrating the classic combination of sweet lemonade and refreshing black tea flavors. Enjoy over ice in a highball glass garnished with a lemon wedge.
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: ed with a lemon wedge
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/19th-hole.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/19th-hole-502336
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

@@ -1,0 +1,18 @@
+Name: Strawberry Guava Margarita
+Slug: strawberry-guava-margarita
+Description: Sweet and refreshing, the Strawberry Guava Margarita is a fruit-forward cocktail with tropical guava combined with flavors of strawberry, triple sec, and lime. Serve in a margarita glass garnished with Pink Himalayan salt and a strawberry.
+Spirits: Tequila
+Glassware: Margarita Glassware
+Garnish: ed with Pink Himalayan salt and a strawberry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/strawberry-guava-margarita.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail =0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/strawberry-guava-margarita-capsules?variant=43255546446023
+Help URL: https://bartesian.gorgias.help/en-US/strawberry-guava-margarita-300193
+Image: images/cocktails/strawberry-guava-margarita.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

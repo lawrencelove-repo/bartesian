@@ -1,0 +1,18 @@
+Name: Southside
+Slug: southside
+Description: Named for Chicago's South Side, this refreshing, slightly sweet, blend of tart lime, mint, and gin is rumored to have been the preferred drink of Al Capone and his gang during Prohibition. Shake with ice and serve this gin cocktail in our premium Coupe Glassware garnished with mint
+Spirits: Gin
+Glassware: Coupe Glass
+Garnish: ed with mint
+Pairs With: 
+Nutrition: {}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/southside-238794
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

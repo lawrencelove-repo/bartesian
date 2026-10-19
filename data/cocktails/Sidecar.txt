@@ -1,0 +1,18 @@
+Name: Sidecar
+Slug: sidecar
+Description: Hop on in, the Sidecar is here! The Sidecar is a cognac-based cocktail with sour notes imparted from lemon juice, balanced with sweet notes of triple sec. Serve shaken with a sugar rim and garnish with a lemon twist.
+Spirits: Whiskey
+Glassware: Coupe Glass
+Garnish: with a lemon twist
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/sidecar.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/sidecar-capsules?variant=41853978050759
+Help URL: https://bartesian.gorgias.help/en-US/sidecar-65193
+Image: images/cocktails/sidecar.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

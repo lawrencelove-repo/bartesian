@@ -1,0 +1,18 @@
+Name: Peach Lychee Refresher (US Only)
+Slug: peach-lychee-refresher
+Description: With juicy peach and delicate lychee flavors, this caffeinated Refresher is a gentle nudge in the right direction. It's light, refreshing and effortlessly sippable. Proof that a little boost can feel like a breeze. Shake and serve over ice in a highball glass, garnished with peach slices. Contains ~56 mg of caffeine. Base spirit: Vodka. Try it as a mocktail!
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: ed with peach slices
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/peach-lychee-refresher.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":0.1,"regular_oz":0.2,"strong_oz":0.3,"raw":"Mocktail = 0 oz., Light = 0.1 oz., Regular = 0.2 oz., Strong = 0.3 oz"}
+Bartesian URL: https://bartesian.com/products/peach-lychee-capsules?variant=46118514360519
+Help URL: https://bartesian.gorgias.help/en-US/peach-lychee-refresher-(us-only)-4332577
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

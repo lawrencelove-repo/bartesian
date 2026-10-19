@@ -1,0 +1,18 @@
+Name: Aviation
+Slug: aviation
+Description: Aviation is a classic violet treasure that consists of Crème de Violette, Maraschino Liqueur, and a squeeze of lemon for a floral, sweet, and citrus libation.
+Spirits: Gin
+Glassware: Shaker + Coupe Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/aviation.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/aviation-cocktails?variant=38174568644807
+Help URL: https://bartesian.gorgias.help/en-US/aviation-36518
+Image: images/cocktails/aviation.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

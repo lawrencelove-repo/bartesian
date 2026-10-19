@@ -1,0 +1,18 @@
+Name: Witch's Heart
+Slug: witchs-heart
+Description: The perfect Halloween cocktail, Witch's Heart is a blend of berry, green apple, lemon juice, and white grape juice. With edible shimmer for added luminosity, this vodka cocktail will put guests at your Halloween gatherings under a magical spell.
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: Blackberry and Raspberry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/witchs-heart.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/witchs-heart-cocktails?variant=32387485466673
+Help URL: https://bartesian.gorgias.help/en-US/witchs-heart-120126
+Image: images/cocktails/witchs-heart.jpg
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

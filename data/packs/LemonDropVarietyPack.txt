@@ -1,0 +1,10 @@
+Name: Lemon Drop Variety Pack
+Slug: lemon-drop-variety-pack
+Barcode: 
+Notes: Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini, including a NEW Blue Raspberry Lemon Drop cocktail. For an added burst of sweet and sour, we recommend serving in a martini glass rimmed with a Sour Candy Sugar rimmer. Our 8-pack contains 2 each of: - Strawberry Lemon Drop: sweet and tart with flavors of juicy strawberry and candied lemon. - Blueberry Lemon Drop: jammy blueberry balanced with bright citrus flavor. - Apple Cayenne Lemon Drop: crisp apple and zesty citrus, with a subtly spicy kick of cayenne flavor. - Blue Raspberry Lemon Drop: tangy and sweet with blue raspberry and lemon candy-inspired flavors.
+Bartesian URL: https://bartesian.com/products/lemon-drop-variety-pack?variant=46107183710407
+Image: images/packs/lemon-drop-variety-pack.jpg
+Items:
+	strawberry-lemon-drop: 2
+	tart-with-flavors-of-juicy-strawberry: 2
+	candied-lemon: 2

@@ -248,6 +248,36 @@ button.danger {
   color: var(--accent-ink);
 }
 
+.pill {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.nutrition-label {
+  display: block;
+  max-width: 420px;
+  margin: 0.5rem 0 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-soft);
+}
+
+.nutrition-label img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .thumb {
   width: 64px;
   height: 64px;

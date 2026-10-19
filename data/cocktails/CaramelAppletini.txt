@@ -1,0 +1,18 @@
+Name: Caramel Appletini
+Slug: caramel-appletini
+Description: The Caramel Appletini is a wickedly smooth cocktail that blends flavors of tart green apple with rich, velvety caramel for a spellbinding sip. It's the perfect balance of crisp and cozy - like your favorite fall treat in a glass.
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: Apple Slices, a caramel drizzle or Sour Apple Sugar rim
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/caramel-appletini.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/caramel-appletini?variant=45074472534215
+Help URL: https://bartesian.gorgias.help/en-US/caramel-appletini-2387476
+Image: images/cocktails/caramel-appletini.jpg
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

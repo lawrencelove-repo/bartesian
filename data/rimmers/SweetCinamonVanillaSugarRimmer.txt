@@ -1,0 +1,11 @@
+Name: Sweet Cinamon Vanilla Sugar Rimmer
+Slug: sweet-cinamon-vanilla-sugar-rimmer
+Description: Your cocktail just got a whole lot sweeter. Our cinnamon sugar blend provides a hint of warm sweetness.
+Kind: sugar
+Pairs With: Apple Pie, Sidecar, Espresso Martini, Painkiller, Rum Swizzle, and other dessert cocktails to perfection
+Cocktail Slugs: apple-pie, sidecar, espresso-martini, painkiller, rum-swizzle
+Bartesian URL: https://bartesian.com/products/sweet-cinnamon-vanilla-sugar-rimmer?variant=42058994680007
+Image: 
+Nutrition Image: 
+Barcode: 
+Quantity: 0

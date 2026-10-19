@@ -1,0 +1,18 @@
+Name: Long Island Iced Tea
+Slug: long-island-iced-tea
+Description: Combines just the right amount of vodka, tequila, and rum, rounded with cola notes and liqueurs made from bitter and sweet citrus peels.
+Spirits: Vodka, Tequila, Rum
+Glassware: Highball Glass
+Garnish: Lemon
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/long-island-iced-tea.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":2.2,"regular_oz":3.0,"strong_oz":4.6,"raw":"Mocktail = 0 oz., Light = 2.2 oz., Regular = 3 oz., Strong = 4.6 oz"}
+Bartesian URL: https://bartesian.com/products/long-island-iced-tea-cocktails?variant=32123330428977
+Help URL: https://bartesian.gorgias.help/en-US/long-island-iced-tea-39050
+Image: images/cocktails/long-island-iced-tea.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

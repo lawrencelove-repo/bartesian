@@ -1,0 +1,18 @@
+Name: Yuletide Hurricane
+Slug: yuletide-hurricane
+Description: When the weather outside is frightful, choose the Yuletide Hurricane to keep your glass delightful. It's the fruity, tropical flavor you happily expect, with a shimmery, festive twist. Serve over ice and garnish with a cherry and orange wedge.
+Spirits: Rum
+Glassware: Highball Glass
+Garnish: with a cherry and orange wedge
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/yuletide-hurricane.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/yuletide-hurricane-1059915
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

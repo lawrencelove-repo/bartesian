@@ -1,0 +1,18 @@
+Name: Strawberry Coconut Daiquiri
+Slug: strawberry-coconut-daiquiri
+Description: The Strawberry Coconut Daiquiri is the perfect poolside rum cocktail with flavors of juicy strawberry, sweet coconut, and tart lime. Enjoy this tropical libation over ice garnished with lime and a strawberry.
+Spirits: Rum
+Glassware: Lowball Glass
+Garnish: ed with lime and a strawberry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/strawberry-coconut-daiquiri.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.0,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.0 oz"}
+Bartesian URL: https://bartesian.com/products/strawberry-coconut-daiquiri-capsules?variant=43894262333639
+Help URL: https://bartesian.gorgias.help/en-US/strawberry-coconut-daiquiri-574704
+Image: images/cocktails/strawberry-coconut-daiquiri.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

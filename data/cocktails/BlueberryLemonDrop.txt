@@ -1,0 +1,18 @@
+Name: Blueberry Lemon Drop
+Slug: blueberry-lemon-drop
+Description: Jammy, refreshingly tart, and delicately floral, this twist on the Lemon Drop is bursting with sweet, candied blueberry balanced with bright citrus flavors. Shake and serve in a martini glass garnished with a sugar rim, lemon peel, and blueberries.
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: ed with a sugar rim, lemon peel, and blueberries
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/blueberry-lemon-drop.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/blueberry-lemon-drop-1661998
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

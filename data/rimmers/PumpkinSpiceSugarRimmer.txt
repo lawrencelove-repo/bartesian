@@ -1,0 +1,11 @@
+Name: Pumpkin Spice Sugar Rimmer
+Slug: pumpkin-spice-sugar-rimmer
+Description: Like crisp leaves and cozy sweaters, Pumpkin Spice brings a hint of fall to your favorite cocktails, with notes of zesty pumpkin and warm baking spices.
+Kind: sugar
+Pairs With: Apple Pie, Old Fashioned, and other dessert cocktails
+Cocktail Slugs: apple-pie, old-fashioned
+Bartesian URL: 
+Image: 
+Nutrition Image: images/nutrition/rimmer-pumpkin-spice-sugar-rimmer.png
+Barcode: 
+Quantity: 0

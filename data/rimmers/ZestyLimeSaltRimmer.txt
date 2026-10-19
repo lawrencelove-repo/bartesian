@@ -1,0 +1,12 @@
+Name: Zesty Lime Salt Rimmer
+Slug: zesty-lime-salt-rimmer
+Description: Zesty Lime Salt is the perfect finishing touch to a refreshing, summertime cocktail. The vivid green hue and bright lime flavor will enhance all citrusy, fruity, and spicy cocktails.
+Kind: salt
+Pairs With: Watermelon Margarita, Kamikaze, and all other types of Margaritas
+Cocktail Slugs: watermelon-margarita
+Bartesian URL: https://bartesian.com/products/zesty-lime-salt-rimmer?variant=43161656099015
+Help URL: https://bartesian.gorgias.help/en-US/zesty-lime-salt-rimmer-261256
+Image: images/rimmers/zesty-lime-salt-rimmer.jpg
+Nutrition Image: images/nutrition/rimmer-zesty-lime-salt-rimmer.png
+Barcode: 
+Quantity: 0

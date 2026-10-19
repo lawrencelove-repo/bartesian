@@ -1,0 +1,11 @@
+Name: Maple Sugar Rimmer
+Slug: maple-sugar-rimmer
+Description: The sweet, rich flavor of maple sugar with a hint of salt creates a delightful contrast to complement your cocktail.
+Kind: sugar
+Pairs With: Old Fashioned, Maple Pecan Pie, Apple Pie, Sweater Weather, and other whiskey cocktails
+Cocktail Slugs: old-fashioned, maple-pecan-pie, apple-pie
+Bartesian URL: 
+Image: 
+Nutrition Image: images/nutrition/rimmer-maple-sugar-rimmer.png
+Barcode: 
+Quantity: 0

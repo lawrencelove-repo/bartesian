@@ -1,0 +1,12 @@
+Name: Spiced Tamarind Salt Rimmer
+Slug: spiced-tamarind-salt-rimmer
+Description: Tamarind, an exotic fruit known for its sweet and spicy flavor, provides a blended balance for an unforgettable salt experience.
+Kind: salt
+Pairs With: Jalapeño Lime Shrub, Kamikaze, all types of Margaritas
+Cocktail Slugs: jalape-o-lime-shrub
+Bartesian URL: https://bartesian.com/products/spiced-tamarind-salt-rimmer?variant=42058989895879
+Help URL: https://bartesian.gorgias.help/en-US/spiced-tamarind-salt-rimmer-39084
+Image: images/rimmers/spiced-tamarind-salt-rimmer.jpg
+Nutrition Image: 
+Barcode: 
+Quantity: 0

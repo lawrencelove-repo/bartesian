@@ -1,0 +1,11 @@
+Name: Zesty Orange Sugar Rimmer
+Slug: zesty-orange-sugar-rimmer
+Description: Add a pop of citrus to your holiday sips with our Zesty Orange Sugar Rimmer, a sweet and tangy blend that turns any cocktail into a celebration.
+Kind: sugar
+Pairs With: Jollypeño Margarita, Starry Night, Yuletide Hurricane, Clausmopolitan, Frosty Navel, Holiday Spiced Old Fashioned, Tequila Sunrise, and Hurricane
+Cocktail Slugs: jollype-o-margarita, starry-night, yuletide-hurricane, clausmopolitan, frosty-navel, holiday-spiced-old-fashioned, tequila-sunrise, hurricane
+Bartesian URL: 
+Image: 
+Nutrition Image: images/nutrition/rimmer-zesty-orange-sugar-rimmer.png
+Barcode: 
+Quantity: 0

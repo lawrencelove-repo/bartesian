@@ -1,0 +1,11 @@
+Name: Candy Cane Sugar Rimmer
+Slug: candy-cane-sugar-rimmer
+Description: Brighten up your holiday cocktails with a candy cane inspired rimming sugar with sweet peppermint notes.
+Kind: sugar
+Pairs With: Espresso Martini, Holly Hibiscus Sour, and Clausmopolitan
+Cocktail Slugs: espresso-martini, clausmopolitan
+Bartesian URL: 
+Image: 
+Nutrition Image: 
+Barcode: 
+Quantity: 0

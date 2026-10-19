@@ -1,0 +1,18 @@
+Name: Painkiller
+Slug: painkiller
+Description: If you're in need of an escape to a tropical island, try this sweet and fruity blend of pineapple, orange, and coconut - think piña colada flavors with an orange juice twist. Best served on ice and garnished with nutmeg and a pineapple wedge, the Painkiller cocktail will transport you to a vacation mindset.
+Spirits: Rum
+Glassware: Hurricane Glass
+Garnish: ed with nutmeg and a pineapple wedge, the Painkiller cocktail will transport you to a vacation mindset
+Pairs With: 
+Nutrition: {}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/painkiller-capsules?variant=42475717460167
+Help URL: https://bartesian.gorgias.help/en-US/painkiller-196624
+Image: images/cocktails/painkiller.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

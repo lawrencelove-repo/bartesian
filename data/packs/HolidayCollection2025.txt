@@ -1,0 +1,11 @@
+Name: Holiday Collection 2025
+Slug: holiday-collection-2025
+Barcode: 
+Notes: The best way for you and your holiday guests to get into the spirit of the season is with this year’s Bartesian Holiday Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Holiday Spiced Old Fashioned: a spirit-forward whiskey cocktail with flavors of orange, bitters, cinnamon and brown sugar. - Clausmopolitan: a shimmering version of the classic cranberry, lime, and orange flavored vodka cocktail. - Peary Christmas: an elegant tequila cocktail with sweet pear, citrus, and delicate almond flavors. - Yuletide Hurricane: a fruity, tropical rum cocktail with added shimmer.
+Bartesian URL: 
+Image: 
+Items:
+	4-curated-seasonal-cocktails-holiday-spiced-old-fashioned-a-spirit-forward-whiskey-cocktail-with-flavors-of-orange: 2
+	bitters: 2
+	cinnamon: 2
+	brown-sugar: 2

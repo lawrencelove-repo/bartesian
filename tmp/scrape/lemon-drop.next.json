@@ -1,0 +1,2472 @@
+{
+  "props": {
+    "pageProps": {
+      "headerNavigationItems": [
+        {
+          "title": "Home",
+          "url": "http://www.bartesian.com"
+        },
+        {
+          "title": "Cocktails",
+          "url": "https://bartesian.com/collections/cocktails"
+        },
+        {
+          "title": "Bartesian Club",
+          "url": "https://bartesian.com/pages/bartesian-mixologist-rewards"
+        }
+      ],
+      "footerNavigationItems": [
+        {
+          "title": "Bartesian",
+          "url": "https://www.bartesian.com"
+        },
+        {
+          "title": "Contact Order/Hardware Support",
+          "url": "https://bartesian.com/pages/contact"
+        }
+      ],
+      "socialLinks": [
+        {
+          "network": "facebook",
+          "url": "https://www.facebook.com/bartesian"
+        }
+      ],
+      "activeLocale": "en-US",
+      "availableLocales": [
+        "en-US",
+        "fr-FR",
+        "de-DE",
+        "en-GB"
+      ],
+      "helpCenterName": "Bartesian",
+      "contactInfo": {
+        "email": {
+          "enabled": false,
+          "description": "https://bartesian.com/pages/contact",
+          "email": "email@email.com"
+        },
+        "phone": {
+          "enabled": false,
+          "description": "here is the phone card",
+          "phoneNumbers": []
+        },
+        "chat": {
+          "enabled": false,
+          "description": ""
+        }
+      },
+      "chatAppKey": "01GYCC4PQ6RASJ0AD4Z5HCZCRZ",
+      "logoHyperlink": "https://bartesian.com/",
+      "brandLogoImageSrc": "https://attachments.gorgias.help/z8QbV2PqYp7ogePy/hc/w0l9dY2VKY7rZkLp/2025021118-d39020e1-e1be-47e0-841c-9b551346d423-bartesian_logo&slogan_wht.png",
+      "helpCenter": {
+        "id": 66,
+        "uid": "ykz5ulw1",
+        "name": "Bartesian",
+        "accountId": 44788,
+        "integrationId": 261542,
+        "domain": "bartesian.gorgias.help",
+        "defaultLocale": "en-US",
+        "supportedLocales": [
+          "en-US",
+          "fr-FR",
+          "de-DE",
+          "en-GB"
+        ],
+        "faviconURL": null,
+        "brandLogoURL": "https://uploads.gorgias.io/z8QbV2PqYp7ogePy/b2-fd70d3c1-da1e-4464-aa19-bd276e83f0b0.JPG",
+        "brandLogoLightURL": "https://attachments.gorgias.help/z8QbV2PqYp7ogePy/hc/w0l9dY2VKY7rZkLp/2025021118-d39020e1-e1be-47e0-841c-9b551346d423-bartesian_logo&slogan_wht.png",
+        "primaryColor": "#0693E3",
+        "primaryFontFamily": "Inter",
+        "theme": "dark",
+        "searchEnabled": true,
+        "poweredByEnabled": false,
+        "gaid": null,
+        "layout": "default",
+        "automationSettingsId": 4248,
+        "algoliaApiKey": "MWIxY2QwMjBjNDViYzI2YzViMDY5NTcwYzllZDdiMjUyZmM4NjA0YTAwYmM2NzM0YzgxZTYxNzRkNWIzNDJkMWZpbHRlcnM9aGVscF9jZW50ZXJfaWQlM0E2NiUyMEFORCUyMGN1c3RvbWVyX3Zpc2liaWxpdHklM0FQVUJMSUMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBBTkQlMjBjdXJyZW50JTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwQU5EJTIwKE5PVCUyMHBhcmVudF9jYXRlZ29yeV8xLmN1c3RvbWVyX3Zpc2liaWxpdHklM0FVTkxJU1RFRCklMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBBTkQlMjAoTk9UJTIwcGFyZW50X2NhdGVnb3J5XzIuY3VzdG9tZXJfdmlzaWJpbGl0eSUzQVVOTElTVEVEKSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMEFORCUyMChOT1QlMjBwYXJlbnRfY2F0ZWdvcnlfMy5jdXN0b21lcl92aXNpYmlsaXR5JTNBVU5MSVNURUQpJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwQU5EJTIwKE5PVCUyMHBhcmVudF9jYXRlZ29yeV80LmN1c3RvbWVyX3Zpc2liaWxpdHklM0FVTkxJU1RFRCklMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBBTkQlMjAoTk9UJTIwcGFyZW50X2NhdGVnb3J5XzUuY3VzdG9tZXJfdmlzaWJpbGl0eSUzQVVOTElTVEVEKSZyZXN0cmljdEluZGljZXM9ZW50aXRpZXMtdjI=",
+        "algoliaAppId": "LO28MF0H5E",
+        "algoliaIndexName": "entities-v2",
+        "shopName": "bartesianshop",
+        "shopIntegrationId": 218394,
+        "shopIntegration": {
+          "shopName": "bartesianshop",
+          "shopType": "shopify",
+          "shopIntegrationId": 218394
+        },
+        "selfServeEnabled": true,
+        "deactivated": false,
+        "allSubjectLines": {
+          "en-US": {
+            "allowOther": true,
+            "options": []
+          }
+        },
+        "contactFormEmailIntegrationId": 218337,
+        "isContactFormCardEnabled": false,
+        "translation": {
+          "chatAppKey": "01GYCC4PQ6RASJ0AD4Z5HCZCRZ",
+          "contactInfo": {
+            "email": {
+              "enabled": false,
+              "description": "https://bartesian.com/pages/contact",
+              "email": "email@email.com"
+            },
+            "phone": {
+              "enabled": false,
+              "description": "here is the phone card",
+              "phoneNumbers": []
+            },
+            "chat": {
+              "enabled": false,
+              "description": ""
+            }
+          },
+          "seoMeta": {
+            "title": "Bartesian Cocktail Maker Help Center",
+            "description": "Find the answers to your frequently asked Bartesian Cocktail Maker questions. The support you need is always available when shopping with Bartesian."
+          },
+          "extraHTML": {
+            "extraHead": "  // Put this as the very first line of Extra HTML content:\r\n<meta name=\"robots\" content=\"noindex\" />\r\n    <script type=\"application/ld+json\">\r\n      {\r\n        \"@context\": \"https://schema.org\",\r\n        \"@type\": \"FAQPage\",\r\n        \"mainEntity\": [\r\n          {\r\n            \"@type\": \"Question\",\r\n            \"name\": \"Is Bartesian discontinued?\",\r\n            \"acceptedAnswer\": {\r\n              \"@type\": \"Answer\",\r\n              \"text\": \"<p>No. Bartesian is not discontinued and will not be discontinued. Bartesian creates new cocktail offerings monthly and recently released a new cocktail maker, the Bartesian Duet, to bring even more options to this fast-growing market.</p>\"\r\n            }\r\n          },\r\n          {\r\n            \"@type\": \"Question\",\r\n            \"name\": \"About Bartesian\",\r\n            \"acceptedAnswer\": {\r\n              \"@type\": \"Answer\",\r\n              \"text\": \"<p>Bartesian is an innovative, effortless way to enjoy and serve premium cocktails on-demand at the press of a button. Bartesian was made to not only be perfect at home but for Food Service/Hospitality applications as well.</p>\"\r\n            }\r\n          },\r\n          {\r\n            \"@type\": \"Question\",\r\n            \"name\": \"Contact Bartesian\",\r\n            \"acceptedAnswer\": {\r\n              \"@type\": \"Answer\",\r\n              \"text\": \"<p>For Bartesian appliance hardware/operational inquiries, our hardware care team is available via support@bartesian.com. For all general/sales, and order inquiries, our sales team is available to assist via hello@bartesian.com.</p>\"\r\n            }\r\n          },\r\n          {\r\n            \"@type\": \"Question\",\r\n            \"name\": \"Does Bartesian ship internationally?\",\r\n            \"acceptedAnswer\": {\r\n              \"@type\": \"Answer\",\r\n              \"text\": \"<p>Currently, orders placed on Bartesian.com are exclusively shipped within North America (excluding Quebec). Stay tuned to our Newsletter for updates and developments on International availability.</p>\"\r\n            }\r\n          },\r\n          {\r\n            \"@type\": \"Question\",\r\n            \"name\": \"Is there alcohol in the capsules?\",\r\n            \"acceptedAnswer\": {\r\n              \"@type\": \"Answer\",\r\n              \"text\": \"<p>Bartesian capsules do not contain alcohol. This gives you the freedom not only to use the spirits of your own choosing but Bartesian also allows you to customize your cocktail from mocktail to strong.</p>\"\r\n            }\r\n          }\r\n        ]\r\n      }\r\n    </script>",
+            "extraHeadDeactivated": true,
+            "customHeader": "<p><span style=\"background-color: #000000;\"><img style=\"display: block; margin-left: auto; margin-right: auto;\" src=\"https://cdn.shopify.com/s/files/1/0038/6049/6433/files/logo_69aa1cc6-c025-40da-8337-1b5afa75cc4a.png?v=1649180537\" alt=\"\" width=\"459\" height=\"162\" /></span></p>\r\n<p><span style=\"background-color: #000000;\">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;<span style=\"color: #ffffff;\">HOME</span></span></p>",
+            "customHeaderDeactivated": true,
+            "customFooter": "<style>\n  .custom-paragraph-styling {\n    font-family: \"Inter\";\n    width: 75%;\n    line-height: 2;\n    margin-bottom: 2rem;\n  }\n  \n  @media screen and (max-width: 768px) {\n    .custom-paragraph-styling {\n      line-height: 1.5;\n      margin-top: 0.5rem;\n      margin-bottom: 1rem;\n    }\n  }\n</style>\n\n<script>\n  function insertAfter(newNode, existingNode) {\n    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);\n  }\n\n  var customHeaderChecker = setInterval(function () {\n    if (document.querySelector('.banner-text')) {\n      var customParagraph = document.createElement('p');\n      customParagraph.classList.add('custom-paragraph-styling');\n      customParagraph.textContent = \"Whether you\u2019re looking for more information on Bartesian capsules, how to benefit from Bartesian Rewards, or how to approach a hardware issue, this is the place to answer your questions. Take a look around.\";\n      insertAfter(customParagraph, document.querySelector('.banner-text'));\n      clearInterval(customHeaderChecker);\n    }\n  }, 100);\n\n  var getMoreInfoElementChecker = setInterval(function () {\n    if (document.querySelector('body h2') && document.querySelector('body h2').innerHTML === 'Get more information') {\n      document.querySelector('body h2').textContent = 'Find the information you\u2019re looking for here';    \n      clearInterval(getMoreInfoElementChecker);\n    }\n  }, 100);\n</script>",
+            "customFooterDeactivated": true
+          },
+          "bannerText": "How Can We Help You?",
+          "bannerImageUrl": "https://attachments.gorgias.help/z8QbV2PqYp7ogePy/hc/w0l9dY2VKY7rZkLp/2025021118-32a81ad2-6347-459f-9a63-d6f6ca723b0c-background%20image.jpg",
+          "bannerImageVerticalOffset": 0,
+          "logoHyperlink": "https://bartesian.com/"
+        },
+        "mainEmbedmentBaseUrl": null,
+        "experimentConfig": null
+      },
+      "metas": {
+        "locale": "en-US",
+        "noIndex": false,
+        "title": "Lemon Drop",
+        "description": "The Lemon Drop is as tasty as its candy namesake but with the added bonus of vodka. This sweet and sour lemon cocktail is perfectly complemented with a sugar rim and lemon for a delicious dessert cocktail. Base Spirit:\u00a0Vodka. Reco",
+        "localizedDefaultURL": "https://bartesian.gorgias.help/en-US/lemon-drop-39052",
+        "localizedAlternates": [
+          {
+            "locale": "en-US",
+            "url": "https://bartesian.gorgias.help/en-US/lemon-drop-39052"
+          }
+        ],
+        "canonicalURL": "https://bartesian.gorgias.help/en-US/lemon-drop-39052"
+      },
+      "_nextI18Next": {
+        "initialI18nStore": {
+          "en-US": {
+            "common": {
+              "allArticlesLabel": "All articles",
+              "allArticlesPageMetaDescription": "All articles of the {{helpCenterName}} Help Center",
+              "allArticlesPageMetaTitle": "All articles",
+              "allArticlesPageNavigationSectionTitle": "All categories",
+              "allArticlesPageNoCategorySectionTitle": "Other articles",
+              "alreadySignedInWith": "You are signed in as <bold>{{emailOrPhone}}</bold>.",
+              "articleLanguageFallbackWarningText": "This article is not available in English.",
+              "articleListArticleLinkLabel": "Read more",
+              "articleRatingQuestion": "Was this article helpful?",
+              "articleTOCHideButtonLabel": "Hide",
+              "articleTemplateApplyDiscountContent": "To apply a promo or discount code:<br>\u2022 Proceed to checkout and enter your code in the <strong>['Discount Code']</strong> field. <br>\u2022 Click <strong>['Apply']</strong> to see your new total before finalizing your order.<br>\u2022 Only one code can be used per order.<br>If you\u2019re having trouble entering your promo code, please try clearing the cache on your web browser or trying on a different device.",
+              "articleTemplateApplyDiscountExcerpt": "Learn how to apply discount codes.",
+              "articleTemplateApplyDiscountTitle": "How do I apply promo/discount codes?",
+              "articleTemplateCancelMembershipContent": "We are happy to assist with instructions on how to cancel your subscription.<br>1. Login into your account <strong>[Link to login page]</strong><br>2. Click <strong>[Subscriptions]</strong><br>3. Locate your subscription and click <strong>[Manage]</strong><br>4. Click <strong>[Cancel Subscription]</strong>. <br>Proceed to complete the steps to successfully cancel your subscription.",
+              "articleTemplateCancelMembershipExcerpt": "Learn how to cancel your membership.",
+              "articleTemplateCancelMembershipTitle": "How do I cancel my membership/subscription?",
+              "articleTemplateCancellationPolicyContent": "Orders can be canceled within <strong>[X hours]</strong>. <br>Please email our team with your cancellation request as soon as possible.<br>You will receive confirmation of your cancellation if we\u2019re able to make it happen. <br>After this period, we may not be able to cancel your order as it might already be in processing or shipment. <br>If you have already received an order confirmation email, it may be impossible to cancel your order. However, you can always request a return or exchange once your order arrives.",
+              "articleTemplateCancellationPolicyExcerpt": "Learn when and how you can cancel an order.",
+              "articleTemplateCancellationPolicyTitle": "What is your cancellation policy?",
+              "articleTemplateDamagedItemContent": "We\u2019re sorry your item(s) have damage! <br>Some items break during shipment. We\u2019ll do our best to help.<br>Please email our team with an image of your damaged item for further assistance.<br>While we may not be able to guarantee your exact order is replaced due to potential stock issues, we\u2019ll be sure to resolve the situation as best we can!<br>",
+              "articleTemplateDamagedItemExcerpt": "Learn what to do when your order arrives damaged.",
+              "articleTemplateDamagedItemTitle": "What do I do if my item(s) arrives damaged?",
+              "articleTemplateEditOrderContent": "Once an order is placed, we are unable to make changes to the order. However, if you need to update your shipping address or contact information, please contact our customer service team immediately after placing your order.",
+              "articleTemplateEditOrderExcerpt": "Learn when and how you can make changes to a recent order.",
+              "articleTemplateEditOrderTitle": "Can I edit or add anything to my order?",
+              "articleTemplateExpeditedShippingContent": "Yes, we do offer expedited shipping for domestic orders only for <strong>[$X]</strong>. <br>Please keep in mind that the order processing can take up to <strong>[# of hours]</strong>.",
+              "articleTemplateExpeditedShippingExcerpt": "Learn about the availability of faster shipping options.",
+              "articleTemplateExpeditedShippingTitle": "Do you offer expedited shipping?",
+              "articleTemplateFreeShippingContent": "We offer fast and free shipping for orders over <strong>[$X]</strong> within the contiguous United States (does not include Hawaii, Alaska, or US territories). <br>Orders shipped outside the United States are subject to taxes and duties that are paid for by the customer.",
+              "articleTemplateFreeShippingExcerpt": "Learn about the availability of free shipping.",
+              "articleTemplateFreeShippingTitle": "Do you offer free shipping?",
+              "articleTemplateHowLongDeliveryContent": "Delivery times vary depending on the destination and the shipping method selected. <br>\u2022 Standard Delivery: Typically arrives within <strong>[X days]</strong> business days.<br>\u2022 Express Delivery: Typically arrives within <strong>[X days]</strong> business days.<br>\u2022 Premium Delivery: Typically arrives within <strong>[X days]</strong> business days.<br>\u2022 International Delivery: Typically arrives within <strong>[X days]</strong> business days.",
+              "articleTemplateHowLongDeliveryExcerpt": "Learn how long shipments take to arrive.",
+              "articleTemplateHowLongDeliveryTitle": "How long does delivery take?",
+              "articleTemplateHowToCancelOrderContent": "<p>You will have the option to cancel your order within your confirmation email. You may also contact our customer service team at <b>[email/phone #]</b>. Please include your order number and the reason for cancellation in your message.</p>\\n<br/>\\n<p>Orders can only be canceled before they have been dispatched. If your order has already been shipped, please refer to our return policy for further instructions.</p>",
+              "articleTemplateHowToCancelOrderExcerpt": "<p>You will have the option to cancel your order within your confirmation email. You may also contact our customer service team at <b>[email/phone #]</b>. Please include your order number and the reason for cancellation in your message.</p>",
+              "articleTemplateHowToCancelOrderTitle": "How do I cancel my order?",
+              "articleTemplateHowToReturnContent": "<p>Returns must be initiated within <b>[x days]</b> of receiving your order. Items must be unused and in the original packaging.</p>\\n<br/>\\n<h3><b>Return by mail</b></h3>\\n<p>Reach out to our customer support team at <b>[email or phone #]</b> to initiate the return process with your order number and details about the item you wish to return. Print the shipping label and drop off your return at a <b>[Fedex/shipping center]</b> location.</p>\\n<p>Note: There is a <b>[$X]</b> shipping charge per order.</p>\\n<br/>\\n<h3><b>Return in store</b></h3>\\n<p>You can visit any of our retail stores and present your order confirmation or packing slip as proof of purchase. All items must have the original tags attached.</p>\\n<br/>\\n<h3><b>Refund process</b></h3>\\n<p>Upon receiving the returned item, we will inspect it to ensure it meets our return policy criteria. If the return is approved, a refund will be processed to the original payment method.</p>\\n<br/>\\n<h3><b>Non-Returnable items</b></h3>\\n<p>Certain items may not be eligible for return due to hygiene, final sale, or other reasons. These items will be clearly marked on the product page.</p>",
+              "articleTemplateHowToReturnExcerpt": "<p>Returns must be initiated within <b>[x days]</b> of receiving your order. Items must be unused and in the original packaging.</p>",
+              "articleTemplateHowToReturnTitle": "How do I make a return?",
+              "articleTemplateHowToTrackOrderContent": "<p>Once your order has been placed and processed, you will receive a confirmation email with your order details. This email will include a tracking number and a link to our tracking page.</p>\\n<br/>\\n<p><b>Click on the tracking number link or enter the tracking number into our tracking page.</b></p>\\n<br/>\\n<p>Tracking information may not be immediately available after your order is placed. It can take up to <b>[X hours]</b> for the number to become active in our system. If you don't see any updates right away, please be patient and check back later.</p>",
+              "articleTemplateHowToTrackOrderExcerpt": "<p>Once your order has been placed and processed, you will receive a confirmation email with your order details. This email will include a tracking number and a link to our tracking page.</p>",
+              "articleTemplateHowToTrackOrderTitle": "How do I track my order?",
+              "articleTemplateLoginIssueContent": "Sorry about that. Please make sure you\u2019ve <strong>[created your account]</strong> and then <strong>[activate your account]</strong> to log in to the new site. You should have gotten an email from us to activate the account. <br>Need to resend the email? Click here: <strong>[Link to resend email]</strong>",
+              "articleTemplateLoginIssueExcerpt": "Learn how to log into your account.",
+              "articleTemplateLoginIssueTitle": "I'm having trouble logging in",
+              "articleTemplateMissingDeliveryContent": "If no one was home at the time of delivery, the carrier will leave the package in a safe location.<br>Be sure to check around your home and with neighbors/building management who may have collected the package for you.<br>Also, please double-check the shipping address of your order (in the order confirmation email) to ensure it\u2019s headed to the right location. <br>On some occasions, packages may be marked as delivered but take additional time to arrive.<br>If you still are unable to locate the package, please reach out to the carrier. <br>If you need additional assistance, please email our team.",
+              "articleTemplateMissingDeliveryExcerpt": "Learn what to do if your package is missing after being marked delivered.",
+              "articleTemplateMissingDeliveryTitle": "My order was marked delivered but it\u2019s not here.",
+              "articleTemplatePackageLostOrDamagedContent": "<h3><b>Lost packages</b></h3>\\n<p>At <b>[your brand name]</b>, we strive to ensure every order reaches you in perfect condition. In the event that your order is lost during transit, please reach out to our customer support team at <b>[email or phone #]</b> with your order number and any relevant details.</p>\\n<br/>\\n<h3><b>Damaged packages</b></h3>\\n<p>We understand the disappointment of receiving a damaged package. In such instances, please report to our customer support team at <b>[email or phone #]</b> within <b>[X hours]</b> of receiving the order and include photos of the damaged items or package.</p>\\n<p>We will review the provided documentation and, if necessary, arrange for a replacement or issue a refund.</p>",
+              "articleTemplatePackageLostOrDamagedExcerpt": "<p>At <b>[your brand name]</b>, we strive to ensure every order reaches you in perfect condition. In the event that your order is lost during transit, please reach out to our customer support team at <b>[email or phone #]</b> with your order number and any relevant details.</p>",
+              "articleTemplatePackageLostOrDamagedTitle": "What if my package gets lost or arrives damaged?",
+              "articleTemplateRefundPolicyContent": "Our return policy allows returns or exchanges for <strong>[condition of product (e.g. unopened)]</strong> products purchased in the last <strong>[X days]</strong>. <br>Please note that <strong>[perishable / discounted / limited edition] </strong>items are not eligible for return.<br>You can expect your refund to be processed within <strong>[X days]</strong> business days or fewer, after our returns department receives the returned item.<br>If you'd like to start a return, please visit our Return Portal <strong>[link to return portal]</strong>.",
+              "articleTemplateRefundPolicyExcerpt": "Learn when we do (and don\u2019t) allow returns.",
+              "articleTemplateRefundPolicyTitle": "What\u2019s your return policy?",
+              "articleTemplateRefundTimingContent": "Once your return has been received and processed, you will be notified via email when the refund has been issued. <br>Please allow <strong>[X days] </strong>business days for the refund to reflect in your account.",
+              "articleTemplateRefundTimingExcerpt": "Learn how long refunds take to process.",
+              "articleTemplateRefundTimingTitle": "When will I get my refund?",
+              "articleTemplateRefundsOrExchangesContent": "<p><b>[\u2019Yes\u2019 answer]</b></p>\\n<p>Yes, we offer refunds and exchanges within <b>[# of days]</b> days of purchase. To be eligible for a refund or exchange, items must be returned in their original condition, with all tags and packaging intact. Please note that <b>[any exceptions, e.g., sale items, refurbished products]</b> are not eligible.</p>\\n<br/>\\n<p>For returns or exchanges, please contact our customer support at <b>[email/phone #]</b>. Refunds will be processed to the original payment method within <b>[# of days]</b> days of receiving the returned item.</p>\\n<br/>\\n<p><b>[\u2019No\u2019 answer]</b></p>\\n<p>Unfortunately, we are unable to offer refunds or exchanges after a purchase has been made. This policy is due to the nature of our products, which include <b>[mention specific types of products, e.g. perishable, custom, digital, etc.]</b>.</p>\\n<br/>\\n<p>However, we are committed to ensuring customer satisfaction. If you receive a damaged or incorrect item, please contact us immediately at <b>[email/phone #]</b>. We will review the situation and strive to resolve the issue, which may include a replacement, discount, or store credit.</p>",
+              "articleTemplateRefundsOrExchangesExcerpt": "<p>Yes, we offer refunds and exchanges within <b>[# of days]</b> days of purchase. To be eligible for a refund or exchange, items must be returned in their original condition, with all tags and packaging intact. Please note that <b>[any exceptions, e.g., sale items, refurbished products]</b> are not eligible.</p>",
+              "articleTemplateRefundsOrExchangesTitle": "Do you offer refunds or exchanges?",
+              "articleTemplateRewardsContent": "To use your rewards points, copy the code that we shared with you and proceed to checkout. Enter your code in the <strong>['Discount Code']</strong> field. <p>Click <strong>['Apply']</strong> to see your new total before finalizing your order. Only one code can be used per order. <p>If you've received <strong>[a referral link]</strong>, you may not see your discount right away, but don't worry. Once you add products to your cart, you'll see the <strong>[X%]</strong> discount applied at checkout. Be sure to double-check it has been applied before paying.",
+              "articleTemplateRewardsExcerpt": "Learn how to redeem your rewards points.",
+              "articleTemplateRewardsTitle": "How do I use my benefits/rewards points?",
+              "articleTemplateShippingCostContent": "<strong>Domestic Shipping [Country]: </strong>We offer free standard shipping on orders over <strong>[$X]</strong>. We also offer expedited shipping for <strong>[$X]</strong>.<br><strong>Canadian Shipping: </strong>We offer free standard shipping to Canada on orders over <strong>[$X]</strong> or about <strong>[X CAD]</strong>, which can vary based on the exchange rate. Faster Canadian shipping is available for <strong>[$X]</strong> on orders over <strong>[$X]</strong>. <br><strong>UK &amp; EU: </strong>Free shipping is available for UK and EU for orders over <strong>[X\u20ac]</strong>. For orders under that amount, fees are calculated at checkout.<br><strong>International Shipping: </strong>International shipping cost is <strong>[$X]</strong> for <strong>[Countries you ship to]</strong>.<br>Unfortunately, we do not ship to the following countries: <br><strong>[Countries you do not ship to]</strong>.",
+              "articleTemplateShippingCostExcerpt": "Learn the cost of shipping for various locations and items.",
+              "articleTemplateShippingCostTitle": "How much does shipping cost?",
+              "articleTemplateShippingPolicyContent": "<p><b>[No international shipping]</b></p>\\n<p>Our standard shipping time within <b>[country/region]</b> is <b>[# of days]</b> business days.</p>\\n<p>Shipping charges, if applicable, will be calculated and displayed at checkout. Please note that delivery times may vary depending on your location and the time of year.</p>\\n<br/>\\n<p>Currently, we do not offer international shipping, but we are working to provide this service in the future.</p>\\n<br/>\\n<p>For additional questions about our shipping policy, please contact us at <b>[email/phone #]</b>.</p>\\n<br/>\\n<p><b>[International shipping included]</b></p>\\n<p>Our standard shipping time within <b>[country/region]</b> is <b>[# of days]</b> business days.</p>\\n<p>For international orders, expect a shipping time of <b>[# of days]</b> business days.</p>\\n<br/>\\n<p>Shipping fees, if applicable, will be calculated and displayed at checkout. Please note that delivery times may vary depending on your location and the time of year.</p>\\n<br/>\\n<p>For additional questions about our shipping policy, please contact us at <b>[email/phone #]</b>.</p>",
+              "articleTemplateShippingPolicyExcerpt": "<p>Our standard shipping time within <b>[country/region]</b> is <b>[# of days]</b> business days.</p>\\n<p>Shipping charges, if applicable, will be calculated and displayed at checkout. Please note that delivery times may vary depending on your location and the time of year.</p>",
+              "articleTemplateShippingPolicyTitle": "What is your shipping policy?",
+              "articleTemplateSkipShipmentContent": "We are happy to assist with instructions on how to cancel your subscription.<br>1. Login into your account <strong>[Link to login page]</strong><br>2. Click <strong>[Subscriptions]</strong><br>3. Locate your subscription and click <strong>[Manage]</strong><br>4. Click [Skip Shipment]. <br>Proceed to complete the steps to successfully cancel your subscription.",
+              "articleTemplateSkipShipmentExcerpt": "Learn how to skip a shipment in your subscription.",
+              "articleTemplateSkipShipmentTitle": "How do I skip a subscription shipment?",
+              "articleTemplateStartReturnContent": "Our return policy allows returns for <strong>[condition of product (e.g. unopened)]</strong> products purchased in the last <strong>[X days]</strong>. <br>If you'd like to proceed with a return, please visit our Return Portal <strong>[link to return portal]</strong>.<br>Once your request is approved, you will receive a prepaid return label via email. All returns must be approved and processed with our company-issued return shipping label to ensure proper tracking and processing of the return.<br>Please note that <strong>[perishable / discounted / limited edition] </strong>items are not eligible for return.<br>You can expect your refund to be processed within <strong>[X days]</strong> business days or fewer after our returns department receives the return.",
+              "articleTemplateStartReturnExcerpt": "Learn how to start a return request.",
+              "articleTemplateStartReturnTitle": "How do I start a return?",
+              "articleTemplateTrackOrderContent": "Once your order has been placed and processed, you will receive a confirmation email with your order details. This email will include a tracking number and a link to our tracking page.<br>Tracking information may not be immediately available after your order is placed. It can take up to <strong>[X days]</strong> for the number to become active in our system. If you don't see any updates right away, please be patient and check back later.<br><strong>[X days] </strong>after placing your order, you can click the tracking number link in the email or track your order on our website here [<strong>link to Order Management: Track Order</strong>].",
+              "articleTemplateTrackOrderExcerpt": "Learn how to track the status of your order after it's been placed.",
+              "articleTemplateTrackOrderTitle": "How do I track my order?",
+              "articleTemplateUpdateSubscriptionContent": "We are happy to assist with instructions on how to cancel your subscription.<br>1. Login into your account  <strong>[Link to login page]</strong><br>2. Click <strong>[Subscriptions]</strong><br>3. Locate your subscription and click <strong>[Manage]</strong><br>4. Click <strong>[Change Items]</strong>. <br>Proceed to complete the steps to successfully cancel your subscription.",
+              "articleTemplateUpdateSubscriptionExcerpt": "Learn how to change the items in your subscription.",
+              "articleTemplateUpdateSubscriptionTitle": "How do I update my subscription items?",
+              "articleTemplateWorldwideShippingContent": "We do ship to most countries, however, there are a few that we are unable to send to. <br>To review the countries we currently don't ship to, please see below:<br><strong>[Countries where you don\u2019t ship.]</strong><br>Please note that international shipments can take <strong>[X days]</strong>. <br>If you have been waiting for more than <strong>[X days] </strong> to receive your order, please get in touch with our team to investigate the issue.",
+              "articleTemplateWorldwideShippingExcerpt": "Learn where we ship orders.",
+              "articleTemplateWorldwideShippingTitle": "Do you ship worldwide?",
+              "articleTemplateWrongItemContent": "We are sorry to hear you received the wrong item in your order! Please report your order issue to our team via email for further assistance.<br>Include a photo of the item received and the name of the missing item(s). Please double-check the package for any notes or packing slips that indicate your other item(s) were shipped separately. <br>While we may not be able to guarantee your exact order is replaced due to potential stock issues, we\u2019ll resolve the situation as best we can!",
+              "articleTemplateWrongItemExcerpt": "Learn what to do when your order doesn't contain the correct item(s).",
+              "articleTemplateWrongItemTitle": "What do I do if I receive the wrong item in my order?",
+              "articlesLabel": "Articles",
+              "attachFiles": "Attach Files",
+              "backToHome": "Back To Home",
+              "bannerText": "Hi, how can I help you?",
+              "browseArticlesLink": "Browse Articles",
+              "callLabel": "Call us",
+              "cancelFlowTitle": "Cancellation request",
+              "cantSignInText": "Can't sign in?",
+              "categoriesLabel": "Categories",
+              "categoryArticlesListArticleCount_one": "{{count}} article",
+              "categoryArticlesListArticleCount_other": "{{count}} articles",
+              "categoryArticlesListArticleLinkLabel": "Read more",
+              "categoryCategoriesListCategoryCount_one": "{{count}} category",
+              "categoryCategoriesListCategoryCount_other": "{{count}} categories",
+              "categoryLanguageFallbackWarningText": "This category is not available in English.",
+              "categoryPlaceholder": "Go to category...",
+              "chatHeaderBack": "Back",
+              "chatInputPlaceholder": "Ask anything",
+              "chatLabel": "Chat with us",
+              "checkpointAttemptFail": "Failed attempt",
+              "checkpointAvailableForPickup": "Available for pickup",
+              "checkpointDelivered": "Delivered",
+              "checkpointException": "Exception",
+              "checkpointException_001": "Exception",
+              "checkpointException_002": "Customer moved",
+              "checkpointException_003": "Customer refused delivery",
+              "checkpointException_004": "Delayed (Customs clearance)",
+              "checkpointException_005": "Delayed (External factors)",
+              "checkpointException_006": "Held for payment",
+              "checkpointException_007": "Incorrect Address",
+              "checkpointException_008": "Pick up missed",
+              "checkpointException_009": "Rejected by carrier",
+              "checkpointException_010": "Returning to sender",
+              "checkpointException_011": "Returned to sender",
+              "checkpointException_012": "Shipment damage",
+              "checkpointException_013": "Shipment lost",
+              "checkpointExpired": "Expired",
+              "checkpointInTransit": "In transit",
+              "checkpointInfoReceived": "Info received",
+              "checkpointOrderPlaced": "Order placed",
+              "checkpointOutForDelivery": "Out for delivery",
+              "checkpointPending": "Pending",
+              "closeButton": "Close",
+              "codeExpireText": "Code expires in",
+              "codeLabel": "6-digit code",
+              "codeSentText": "Code sent to <bold>{{value}}</bold>.",
+              "completeReturnDeepLink": "Complete your return in our return portal",
+              "completedFlowMessage": "Our support team will get back to you very soon.",
+              "completedFlowReportedIssue": "Issue reported",
+              "completedFlowSummaryTitle": "Summary",
+              "completedFlowTitle": "Your request was sent!",
+              "confirmOrder": "Confirm order",
+              "confirmed": "Confirmed",
+              "contact": "Contact",
+              "contactPageMetaDescription": "Contact {{helpCenterName}} Help Center",
+              "contactPageMetaTitle": "Contact us",
+              "contactSubjectCancelOrder": "Cancel Order",
+              "contactSubjectFeedback": "Feedback",
+              "contactSubjectOrderStatus": "Order status",
+              "contactSubjectOther": "Other",
+              "contactSubjectProductQuestion": "Product question",
+              "contactSubjectReportIssue": "Report an issue",
+              "contactSubjectRequestRefundOrDiscount": "Request refund or discount",
+              "contactSubjectReturn": "Return Order",
+              "contactSubjectTrack": "Track Order",
+              "contactUs": "Contact us",
+              "continue": "Continue",
+              "conversationalChatErrorLoadingRetryButton": "Try again",
+              "conversationalChatErrorLoadingText": "There was a problem loading the conversation.",
+              "conversationalFeedbackFormCancelButton": "Cancel",
+              "conversationalFeedbackFormErrorMessage": "Failed to submit feedback. Please try again later.",
+              "conversationalFeedbackFormSubmitButton": "Submit",
+              "conversationalFeedbackFormSuccessMessage": "Thank you for your feedback!",
+              "conversationalFeedbackFormTextLabel": "Did you find what you were looking for?",
+              "conversationalFeedbackFormTextPlaceholder": "Let us know what worked or what could\u2019ve gone better.",
+              "conversationalFeedbackFormTitle": "Leave feedback",
+              "countFulfillmentsText": "{{count}} Fulfillment",
+              "countFulfillmentsText_plural": "{{count}} Fulfillments",
+              "customerHasNoOrdersEmail": "No orders found for this email",
+              "customerHasNoOrdersPhone": "No orders found for this phone number",
+              "deliveredAt": "at",
+              "deliveredOn": "Delivered on",
+              "emailChannelOption": "Email",
+              "emailContactMethodLabel": "Email us",
+              "emailLabel": "Email",
+              "emailPlaceholder": "your@email.com",
+              "errorCodeExpired": "Code expired",
+              "errorFetchingOrder": "Something went wrong while fetching your orders.",
+              "errorGeneratingReturnPortalLink": "An error occurred generating the return portal link",
+              "errorInvalidCode": "Invalid code",
+              "errorInvalidPhone": "Invalid phone number",
+              "errorMaximumAttempts": "Maximum verification attempts reached",
+              "errorNoCustomerEmailFound": "No customer associated with this email address",
+              "errorNoCustomerPhoneFound": "No customer associated with this phone number",
+              "errorOrdersFailedRequest": "An error occurred while fetching your orders",
+              "errorSendRequest": "Something went wrong while sending your request",
+              "errorSendingReportIssue": "Something went wrong while sending the report issue.",
+              "errorWrongCredentials": "We have no record of that order number and email combination",
+              "estimatedDelivery": "Estimated delivery",
+              "etaProvidedBy": "ETA provided by",
+              "exampleText": "This is an example text",
+              "expectToBeDeliveredBy": "by",
+              "failure": "Failure",
+              "feedbackTriggerButton": "Leave Feedback",
+              "feedbackTriggerMenuLogout": "Logout",
+              "fileInfo": "Attach up to {{filesCount}} files. The maximum allowed size per file is {{fileSize}} MB.",
+              "findOrderLink": "Try signing in with order number",
+              "flowInputFeedback": "{{count}} characters",
+              "flowInputPlaceholder": "Type your answer here...",
+              "flowNotAllowedTitle": "You're not allowed to view this page. Redirecting to Orders...",
+              "flowOrderSelectionMustBeSignedIn": "To continue, you must be signed in to access your orders.",
+              "fulfillmentNumber": "Fulfillment {{fulfillmentNumber}}",
+              "fulfillmentStatus.attempted_delivery": "Attempted delivery",
+              "fulfillmentStatus.cancelled": "Cancelled",
+              "fulfillmentStatus.delivered": "Delivered",
+              "fulfillmentStatus.failed_delivery": "Failed delivery",
+              "fulfillmentStatus.failed_fulfillment": "Failed fulfillment",
+              "fulfillmentStatus.in_transit": "In transit",
+              "fulfillmentStatus.out_for_delivery": "Out for delivery",
+              "fulfillmentStatus.partially_refunded": "Partially refunded",
+              "fulfillmentStatus.pending_delivery": "Pending delivery",
+              "fulfillmentStatus.processing_fulfillment": "Processing fulfillment",
+              "fulfillmentStatus.ready_for_pickup": "Ready for pickup",
+              "fulfillmentStatus.refunded": "Refunded",
+              "fulfillmentStatus.shipment_status_unavailable": "Shipment status unavailable",
+              "fulfillmentStatus.status_unavailable": "Status unavailable",
+              "fulfillmentStatus.unfulfilled": "Unfulfilled",
+              "fulfillmentTitle": "Fulfillment {{current}} of {{total}}",
+              "fullNameHint": "Enter your first and last name",
+              "fullNameLabel": "Full name",
+              "fuzzySearchNoResults": "There are no results for \u201c{{query}}\u201d",
+              "getMoreInformationLabel": "Get more information",
+              "getSupport": "Get support",
+              "goToReturnPortal": "Go to return portal",
+              "helpCenterIsEmpty": "This help center is currently empty.",
+              "helpfulPrompt": "Was this helpful?",
+              "helpfulResponse": "Yes, Close This Request",
+              "homePageAllArticlesLinkLabel": "See all",
+              "homePageArticlesSectionTitle": "Help Articles",
+              "homePageManageOrdersNoFlows": "Self-service is currently unavailable",
+              "homePageMetaDescription": "Home page of the {{helpCenterName}} Help Center",
+              "homePageMetaTitle": "{{helpCenterName}} Help Center",
+              "homepageManageOrdersTitle": "Manage your orders",
+              "invalidCustomerEmail": "No customer found or no orders associated with this email",
+              "invalidCustomerPhone": "No customer found or no orders associated with this phone number",
+              "isThisTheCorrectOrder": "Is this the correct order?",
+              "languageSelectOptionLabelCsCZ": "\u010ce\u0161tina",
+              "languageSelectOptionLabelDaDK": "Dansk",
+              "languageSelectOptionLabelDeDE": "Deutsch",
+              "languageSelectOptionLabelEnGB": "English (GB)",
+              "languageSelectOptionLabelEnUS": "English (US)",
+              "languageSelectOptionLabelEsES": "Espa\u00f1ol",
+              "languageSelectOptionLabelFiFI": "Suomi",
+              "languageSelectOptionLabelFrCA": "Fran\u00e7ais (CA)",
+              "languageSelectOptionLabelFrFR": "Fran\u00e7ais (FR)",
+              "languageSelectOptionLabelItIT": "Italiano",
+              "languageSelectOptionLabelJaJP": "\u65e5\u672c\u8a9e",
+              "languageSelectOptionLabelNlNL": "Nederlands",
+              "languageSelectOptionLabelNoNO": "Norsk",
+              "languageSelectOptionLabelPtBR": "Portugu\u00eas (BR)",
+              "languageSelectOptionLabelSvSE": "Svenska",
+              "lastUpdated": "Last updated",
+              "learnMore": "Learn more",
+              "leaveAnotherMessage": "Leave Another Message",
+              "leaveUsYourEmailWeWillGetBack": "Leave us your email and we\u2019ll get back to you.",
+              "loginPageBreadcrumb": "Sign In",
+              "loginPageMetaTitle": "Sign In",
+              "loginPageTitle": "Enter the email or phone number used to place your order",
+              "logoutButtonText": "Log Out",
+              "lostOrderDetailsText": "Lost your order details?",
+              "manageOrdersLabelCancelOrder": "Cancel order",
+              "manageOrdersLabelReportIssue": "Report issue",
+              "manageOrdersLabelReturnOrder": "Return order",
+              "manageOrdersLabelTrackOrder": "Track order",
+              "messageLabel": "Message",
+              "navigationBreadCrumbAllArticlesLevelLabel": "All articles",
+              "navigationMenuCategoryArticleCount_one": "{{count}} article",
+              "navigationMenuCategoryArticleCount_other": "{{count}} articles",
+              "navigationMenuCategoryPageLinkLabel": "See more",
+              "navigationSidebarCategoryArticleCount_one": "{{count}} article",
+              "navigationSidebarCategoryArticleCount_other": "{{count}} articles",
+              "needHelp": "Need help?",
+              "notFoundPageExplanation": "Sorry, we were not able to find this page.",
+              "notFoundPageHomeLinkLabel": "Home",
+              "notFoundPageMetaTitle": "Not Found",
+              "notFoundPageTitle": "Oops, that\u2019s a 404",
+              "notHelpfulResponse": "No, I Need More Help",
+              "numberOfItemSelectedLabel_one": "{{count}} item selected",
+              "numberOfItemSelectedLabel_other": "{{count}} items selected",
+              "onePagerTitle": "FAQs",
+              "openInHelpCenterLink": "Open in Help Center",
+              "orderBillingInformation": "Billing information",
+              "orderCreatedLabel": "Order created:",
+              "orderDetailsPageMetaTitle": "Order details",
+              "orderFlowCancel": "Cancel",
+              "orderFlowReport": "Report Issue",
+              "orderFlowReturn": "Return",
+              "orderFlowTrack": "Track",
+              "orderFulfillmentsSummary": "Summary",
+              "orderManagementIsCurrentlyUnavailable": "Order management is currently unavailable",
+              "orderNumber": "Order {{orderNumber}}",
+              "orderNumberLabel": "Order number",
+              "orderPayment": "Payment",
+              "orderRefunded": "Refunded amount",
+              "orderShipping": "Shipping",
+              "orderShippingInformation": "Shipping information",
+              "orderShowLess": "Show Less",
+              "orderShowMore": "{{count}} More Item",
+              "orderShowMore_plural": "{{count}} More Items",
+              "orderStatus.awaiting_fulfillment": "Awaiting fulfillment",
+              "orderStatus.awaiting_payment": "Awaiting Payment",
+              "orderStatus.canceled": "Canceled",
+              "orderStatus.completed": "Completed",
+              "orderStatus.on_hold": "On Hold",
+              "orderStatus.order_pending": "Order Pending",
+              "orderStatus.partially_fulfilled": "Partially Fulfilled",
+              "orderStatus.scheduled": "Scheduled",
+              "orderSubtotal": "Subtotal (Inc. tax)",
+              "orderTotal": "Total",
+              "ordersListShowMore": "See {{count}} More Order",
+              "ordersListShowMore_plural": "See {{count}} More Orders",
+              "ordersPageBreadcrumb": "Orders",
+              "ordersPageMetaTitle": "Orders",
+              "paginationBack": "Back",
+              "paginationNext": "Next",
+              "poweredByGorgiasTextBeforeLogo": "Powered by",
+              "quantity": "Quantity",
+              "quantityToReturnLabel": "Quantity to return",
+              "ratingDownLabel": "No",
+              "ratingUpLabel": "Yes",
+              "reachOutSoon": "We will reach out to you via email soon.",
+              "reasonCancelOrder": "I'd like to cancel my order",
+              "reasonCancelSubscription": "I'd like to cancel my subscription",
+              "reasonChangeDeliveryDate": "I'd like to change the delivery date",
+              "reasonChangeShippingAddress": "I'd like to change my shipping address",
+              "reasonDidNotReceiveRefund": "I didn't get my refund",
+              "reasonDiscountNotWorking": "My discount code is not working",
+              "reasonEditOrder": "I'd like to edit my order",
+              "reasonEditSubscription": "I'd like to edit my subscription",
+              "reasonExchangeRequest": "I'd like to exchange items in my order",
+              "reasonForgotToUseDiscount": "I forgot to apply my discount code",
+              "reasonIncorrectItems": "The items are different from what I ordered",
+              "reasonItemsMissing": "Some items are missing from my order",
+              "reasonNotHappy": "I'm not happy with the product I received \ud83d\udc4e",
+              "reasonOrderDamaged": "My order was damaged in delivery",
+              "reasonOrderDefective": "The items in my order are defective",
+              "reasonOrderStillNotShipped": "My order should have shipped by now",
+              "reasonOrderStuckInTransit": "My order has been stuck in transit",
+              "reasonOther": "Other",
+              "reasonPastExpectedDeliveryDate": "I'm past my expected delivery date",
+              "reasonReorderItems": "I'd like to reorder some items",
+              "reasonReplaceItemsRequest": "I'd like to replace items in my order",
+              "reasonRequestDiscount": "I'd like a discount code",
+              "reasonRequestRefund": "I'd like to get a refund for this order",
+              "reasonReturnProduct": "I'd like to return a product",
+              "reasonVeryHappy": "I'm very happy with the product I received \ud83d\udc4d",
+              "reasonWhereIsMyOrder": "Where is my order?",
+              "recaptchaBranding": "This site is protected by reCAPTCHA. For more information, please refer to Gorgias' <a target=\"_blank\" href=\"https://www.gorgias.com/legal/privacy\">Privacy Policy</a>.",
+              "removeFilename": "Remove {{fileName}}",
+              "reportIssueFlowTitle": "Report Issue",
+              "reportIssuePageMetaTitle": "Report issue",
+              "reportOrderPageBreadcrumb": "Report issue",
+              "reportPageTitle": "Report issue",
+              "reportedIssueCaptureEmailAddress": "To keep you informed about your reported issue, please provide your email address.",
+              "requestCancelFulfillmentPageTitle": "Cancel Order",
+              "requestCancelOrderButtonLabel": "Request cancellation",
+              "resendCodeButtonLabel": "Resend Code",
+              "resendCodeStatusText": "Sent",
+              "retry": "Retry",
+              "returnFlowTitle": "Return request",
+              "returnRequestButtonLabel": "Request return",
+              "returnRequestPageTitle": "Return Request",
+              "searchComboboxInputPlaceholder": "Search",
+              "searchComboboxMoreResultsLink": "More results for \"{{query}}\"",
+              "searchComboboxNoResults": "No results",
+              "searchResultsPageBreadCrumb": "Search results",
+              "searchResultsPageMetaDescription": "Search articles on the {{helpCenterName}} Help Center",
+              "searchResultsPageMetaTitle": "Search results for \"{{query}}\"",
+              "searchResultsPageResultsCount_one": "{{count}} Result for \"{{query}}\"",
+              "searchResultsPageResultsCount_other": "{{count}} Results for \"{{query}}\"",
+              "seeOrdersButtonLabel": "See your orders",
+              "selectAllInputLabel": "Select all",
+              "selectItems": "Select items",
+              "send": "Send",
+              "sendCodeButtonLabel": "Send Code",
+              "sendCodeLink": "Sign in with your email or phone number",
+              "shipment": "Shipment",
+              "shippingAddressLabel": "Shipping Address:",
+              "shippingInformation": "Shipping information",
+              "showCountMoreButtonLabel": "Show {{count}} more",
+              "signInButtonLabel": "Sign In",
+              "signInToContinue": "Sign in to continue",
+              "signOutOfAccount": "Sign Out Of This Account",
+              "smsChannelOption": "SMS",
+              "smsLabel": "Your phone number",
+              "subCategoriesCount_one": "{count} sub-category",
+              "subCategoriesCount_other": "{count} sub-categories",
+              "subjectLabel": "Subject",
+              "subjectOtherPlaceholder": "Type a subject",
+              "subjectPlaceholder": "Select a subject",
+              "submitForm": "Submit",
+              "tableOfContentLabel": "Table of content",
+              "thankYouForYourConfirmation": "Thank you for your confirmation!",
+              "thankYouForYourResponse": "Thank you for your response!",
+              "thereAreSuggestions": "There are {{ number }} suggestions",
+              "totalAmountLabel": "Total amount:",
+              "totalCanceledAmountLabel": "Total canceled amount:",
+              "totalReturnedAmountLabel": "Total returned amount:",
+              "trackOrderPageBreadcrumb": "Track",
+              "trackOrderPageMetaTitle": "Track",
+              "trackOrderSentVia": "Sent via {{trackingCompany}}",
+              "trackOrderShippingAddress": "Shipping address",
+              "trackOrderTrackingNo": "Tracking no.",
+              "tracking": "Tracking",
+              "unsupportedBrowserExplanation": "You're using a web browser that we don't support yet.",
+              "unsupportedBrowserTitle": "Unsupported browser",
+              "unsupportedFileType": "Unsupported file type",
+              "updated": "Updated",
+              "uploadFailed": "Failed to upload",
+              "uploadFailedMaxFiles": "Failed to upload attachment(s): number of files is more than {{count}}.",
+              "uploaded": "Uploaded",
+              "uploading": "Uploading",
+              "validationEmailInvalid": "Enter a valid email",
+              "validationFieldRequired": "This field is required",
+              "viewProductButton": "View Product",
+              "weWillConsiderYourQuestionAnswered": "We'll consider your question answered on our end. If there's anything else we can assist with, simply reply to our email and we'll be happy to help.",
+              "weWillFollowUpViaEmail": "We will follow up via email shortly.",
+              "weWillGetBackToYouViaEmail": "We will get back to you via email.",
+              "whatIsWrongWithOrder": "What is wrong with your order?",
+              "workflowError": "An error occurred. Please try again and send us a message if the issue continues.",
+              "yourRequestWasSent": "Your request was sent!"
+            }
+          }
+        },
+        "initialLocale": "en-US",
+        "ns": [
+          "common"
+        ],
+        "userConfig": {
+          "i18n": {
+            "defaultLocale": "en-US",
+            "locales": [
+              "en-US",
+              "en-GB",
+              "fr-FR",
+              "fr-CA",
+              "es-ES",
+              "de-DE",
+              "nl-NL",
+              "cs-CZ",
+              "da-DK",
+              "no-NO",
+              "it-IT",
+              "sv-SE",
+              "fi-FI",
+              "ja-JP",
+              "pt-BR"
+            ],
+            "localeDetection": false
+          },
+          "default": {
+            "i18n": {
+              "defaultLocale": "en-US",
+              "locales": [
+                "en-US",
+                "en-GB",
+                "fr-FR",
+                "fr-CA",
+                "es-ES",
+                "de-DE",
+                "nl-NL",
+                "cs-CZ",
+                "da-DK",
+                "no-NO",
+                "it-IT",
+                "sv-SE",
+                "fi-FI",
+                "ja-JP",
+                "pt-BR"
+              ],
+              "localeDetection": false
+            }
+          }
+        }
+      },
+      "sidebarCategories": [
+        {
+          "id": "8409",
+          "title": "General Bartesian Information",
+          "link": {
+            "href": "/articles/general-8409"
+          },
+          "articles": [
+            {
+              "id": "33604",
+              "title": "About Bartesian",
+              "excerpt": "Bartesian is an innovative, effortless way to enjoy and serve premium, on-demand cocktails at the press of a button. Designed for both home and hospitality use, it combines convenience with sophistication. Simply stock your Bartesian with base spirit",
+              "link": {
+                "href": "/about-bartesian-33604"
+              }
+            },
+            {
+              "id": "34819",
+              "title": "What comes in the box?",
+              "excerpt": "Bartesian Premium Cocktail Maker. What comes in the box?- 1x Bartesian Premium cocktail maker",
+              "link": {
+                "href": "/what-comes-in-the-box-34819"
+              }
+            },
+            {
+              "id": "41345",
+              "title": "Do you ship internationally?",
+              "excerpt": "Currently, orders placed on Bartesian.com are shipped to the United States, Canada, the United Kingdom, Italy, France, and Germany. Please note: product availability may differ depending on destination country. Bartesian can also be purchased in Aust",
+              "link": {
+                "href": "/do-you-ship-internationally-41345"
+              }
+            },
+            {
+              "id": "42967",
+              "title": "What size cocktail does Bartesian make?",
+              "excerpt": "Our cocktails are crafted to replicate the cocktail lounge experience. Each cocktail's yield is designed to meet the standards of authentic recipes that make use of genuine ingredients.The amount of spirit(s) drawn can be adjusted for each cocktail s",
+              "link": {
+                "href": "/what-size-cocktail-does-bartesian-make-42967"
+              }
+            },
+            {
+              "id": "42968",
+              "title": "Does Bartesian chill cocktails?",
+              "excerpt": "Bartesian is all about an authentic cocktail lounge experience where cocktails are either served on ice, or shaken/strained over ice. We account for the dilution introduced by using ice in the development of our cocktails. Not using ice will likely r",
+              "link": {
+                "href": "/does-bartesian-chill-cocktails-42968"
+              }
+            },
+            {
+              "id": "42969",
+              "title": "What are the dimensions of the Bartesian cocktail maker?",
+              "excerpt": "Bartesian Premium Dimensions (12.5\"h \u00a0x 12.75\"d x 13.25\"w):Bartesian Duet Dimensions (12.5\u201dh x 12.75\u201dd x 9.5\u201dw):. Bartesian Professional Dimensions (12.5\u201dh x 12.75\u201dd x 13.25\u201dw):",
+              "link": {
+                "href": "/what-are-the-dimensions-of-the-bartesian-cocktail-maker-42969"
+              }
+            },
+            {
+              "id": "42970",
+              "title": "Do the capsules expire?",
+              "excerpt": "The dating on the packaging is a presentation guideline that is significantly different from an expiration or safety date. Regrettably, confusion between the two contributes to a significant amount of food waste in each year. Bartesian proudly uses g",
+              "link": {
+                "href": "/do-the-capsules-expire-42970"
+              }
+            },
+            {
+              "id": "181567",
+              "title": "Contact Bartesian",
+              "excerpt": "The most efficient route to reach our teams is via our\u00a0contact form here. Selecting the correct corresponding inquiry type helps us to provide the quickest resolutions possible. Prefer to talk? You can find our toll free number below for the US and C",
+              "link": {
+                "href": "/contact-bartesian-181567"
+              }
+            },
+            {
+              "id": "304086",
+              "title": "What chemical components are in the Bartesian Cocktail Maker?",
+              "excerpt": "Chromium Compounds. Authoritative Lists Referencing this Chemical:. California Toxic Air Contaminants (CA TACs). California Water Body Pollutants - 303(d). CDC 4th National Exposure Report. OEHHA Reference Exposure Levels (OEHHA RELs). Iron. Authorit",
+              "link": {
+                "href": "/what-chemical-components-are-in-the-bartesian-cocktail-maker-304086"
+              }
+            },
+            {
+              "id": "332054",
+              "title": "What is the warranty for the Bartesian?",
+              "excerpt": "This page is regarding the Manufacturer's Warranty.\u00a0For information regarding the Extended Protection Plan coverage for the Bartesian, please view\u00a0this FAQ page. Please find the details of the warranty for Bartesian below included with each machine s",
+              "link": {
+                "href": "/what-is-the-warranty-for-the-bartesian-332054"
+              }
+            },
+            {
+              "id": "340793",
+              "title": "Comparison of Bartesian models",
+              "excerpt": "",
+              "link": {
+                "href": "/comparison-of-bartesian-models-340793"
+              }
+            },
+            {
+              "id": "694713",
+              "title": "2026 Bartesian Advent Calendar Preorder",
+              "excerpt": "How the Advent calendar preorder works:. Upon placing your preorder you'll receive a unique preorder redemption code in your confirmation email. We recommend you save/bookmark your code for reference.\u00a0Preorders do not count towards your free shipping",
+              "link": {
+                "href": "/2026-bartesian-advent-calendar-preorder-694713"
+              }
+            },
+            {
+              "id": "1222991",
+              "title": "How to: Log in to Bartesian.com account",
+              "excerpt": "Experiencing issues or errors logging in?",
+              "link": {
+                "href": "/how-to-log-in-to-bartesiancom-account-1222991"
+              }
+            },
+            {
+              "id": "2662981",
+              "title": "2026 Advent calendar redemption assistance/questions",
+              "excerpt": "Q: I do not see how to add calendars to my cart. A: Please ensure you are logged into a Bartesian.com account using the same email address\u00a0that was used to place the pre-order and where the redemption notice/code was sent. If you do not see the optio",
+              "link": {
+                "href": "/2026-advent-calendar-redemption-assistancequestions-2662981"
+              }
+            },
+            {
+              "id": "5988707",
+              "title": "Where can I find Bartesian in stores?",
+              "excerpt": "Find the Bartesian cocktail maker and capsules in retail stores throughout the US using the store locator linked here. Click here to find Bartesian retail store partner locations with the US. Selection Varies by Location. Cocktail availability differ",
+              "link": {
+                "href": "/where-can-i-find-bartesian-in-stores-5988707"
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "8410",
+          "title": "Nutritional Information",
+          "link": {
+            "href": "/articles/nutritional-information-8410"
+          },
+          "articles": [
+            {
+              "id": "42971",
+              "title": "Do the capsules expire?",
+              "excerpt": "The dating on the packaging is a presentation guideline that is significantly different from an expiration or safety date. Regrettably, confusion between the two contributes to a significant amount of food waste in North America each year. Bartesian",
+              "link": {
+                "href": "/do-the-capsules-expire-42971"
+              }
+            },
+            {
+              "id": "2440620",
+              "title": "Percentage Juice (US)",
+              "excerpt": "What does \"Contains X% Juice\" on US labels mean?. This statement indicates the percentage of real fruit or vegetable juice in each Bartesian cocktail mix. Our carefully crafted cocktail capsules use premium juice ingredients to deliver an authentic c",
+              "link": {
+                "href": "/percentage-juice-(us)-2440620"
+              }
+            }
+          ],
+          "children": [
+            {
+              "id": "324907",
+              "title": "Vodka Cocktails",
+              "link": {
+                "href": "/articles/vodka-cocktails-324907"
+              },
+              "articles": [
+                {
+                  "id": "502336",
+                  "title": "19th Hole",
+                  "excerpt": "A delicious sipper on and off the links, the 19th Hole is a refreshing vodka cocktail celebrating the classic combination of sweet lemonade and refreshing black tea flavors. Enjoy over ice in a highball glass garnished with a lemon wedge. Base Spirit",
+                  "link": {
+                    "href": "/19th-hole-502336"
+                  }
+                },
+                {
+                  "id": "35050",
+                  "title": "Amaretto Sour",
+                  "excerpt": "The Amaretto Sour pairs nutty almond and orange citrus notes to make for the perfect vodka dessert cocktail. Whether you\u2019re enjoying it for dessert, brunch, or any other time of day, this cocktail is sophisticated and refreshing all at once. Base Spi",
+                  "link": {
+                    "href": "/amaretto-sour-35050"
+                  }
+                },
+                {
+                  "id": "36517",
+                  "title": "Apple Pie",
+                  "excerpt": "Your favorite dessert is served as a cocktail. The sweet combination of baked apple and fall spices is perfectly balanced with hints of lemon and cayenne in this whiskey and vodka cocktail. Wonderfully reminiscent of a slice of grandma's apple pie. B",
+                  "link": {
+                    "href": "/apple-pie-36517"
+                  }
+                },
+                {
+                  "id": "1661998",
+                  "title": "Blueberry Lemon Drop",
+                  "excerpt": "Jammy, refreshingly tart, and delicately floral, this twist on the Lemon Drop is bursting with sweet, candied blueberry balanced with bright citrus flavors. Shake and serve in a martini glass garnished with a sugar rim, lemon peel, and blueberries. B",
+                  "link": {
+                    "href": "/blueberry-lemon-drop-1661998"
+                  }
+                },
+                {
+                  "id": "38999",
+                  "title": "Cosmopolitan",
+                  "excerpt": "Tart cranberry is balanced out by the citrus of lime and sweetness of orange to create this classic vodka cocktail. Base Spirit:\u00a0Vodka. Recommended Glassware:\u00a0Martini Glass",
+                  "link": {
+                    "href": "/cosmopolitan-38999"
+                  }
+                },
+                {
+                  "id": "285761",
+                  "title": "Dirty Vodka Martini",
+                  "excerpt": "A savory riff on a classic vodka cocktail, the Dirty Vodka Martini remixes the traditional pairing of vodka and dry vermouth with a splash of olive brine. Shake with ice and serve in a martini glass garnished with olives. Base Spirit:\u00a0Vodka. Recommen",
+                  "link": {
+                    "href": "/dirty-vodka-martini-285761"
+                  }
+                },
+                {
+                  "id": "98045",
+                  "title": "Espresso Martini",
+                  "excerpt": "A crowd pleaser for even the most refined palates, the Espresso Martini is a smooth, sippable cocktail with notes of rich and creamy espresso and bold coffee liqueur. Best served shaken and on ice, this martini is the perfect elegant addition to your",
+                  "link": {
+                    "href": "/espresso-martini-98045"
+                  }
+                },
+                {
+                  "id": "2027470",
+                  "title": "Fuzzy Navel",
+                  "excerpt": "Indulge in the sweet, sun-kissed flavors of the Fuzzy Navel, a vibrant blend of tangy orange and juicy peach flavors. This smooth, refreshing cocktail perfectly balances the zing of citrus with fruity sweetness, making every sip feel like a golden ho",
+                  "link": {
+                    "href": "/fuzzy-navel-2027470"
+                  }
+                },
+                {
+                  "id": "39011",
+                  "title": "Ginger Peach Iced Tea",
+                  "excerpt": "This refreshing, juicy cocktail is what a summer day calls for with notes of caffeine-free black tea, sweet peach, and herbal ginger. Base Spirit:\u00a0Vodka. Recommended Glassware: Highball Glass",
+                  "link": {
+                    "href": "/ginger-peach-iced-tea-39011"
+                  }
+                },
+                {
+                  "id": "646841",
+                  "title": "Golden Ace",
+                  "excerpt": "This grand slam of a vodka cocktail refreshingly blends the flavors of tart lemonade, fruity raspberry liqueur, and sweet honeydew melon. A crowd pleaser whether you're on the sidelines or sipping at home, the Golden Ace is a visually stunning drink",
+                  "link": {
+                    "href": "/golden-ace-646841"
+                  }
+                },
+                {
+                  "id": "2567778",
+                  "title": "Hemingway Daiquiri",
+                  "excerpt": "The Hemingway Daiquiri is a variation of the Papa Doble. Combining rum and vodka, this cocktail provides a refreshing blend of sweet and tart grapefruit, citrus lime and dry-cherry notes of maraschino liqueur for an easy sipping experience. Base Spir",
+                  "link": {
+                    "href": "/hemingway-daiquiri-2567778"
+                  }
+                },
+                {
+                  "id": "39052",
+                  "title": "Lemon Drop",
+                  "excerpt": "The Lemon Drop is as tasty as its candy namesake but with the added bonus of vodka. This sweet and sour lemon cocktail is perfectly complemented with a sugar rim and lemon for a delicious dessert cocktail. Base Spirit:\u00a0Vodka. Reco",
+                  "link": {
+                    "href": "/lemon-drop-39052"
+                  }
+                },
+                {
+                  "id": "2567783",
+                  "title": "Long Island Iced Tea",
+                  "excerpt": "Combines just the right amount of vodka, tequila, and rum, rounded with cola notes and liqueurs made from bitter and sweet citrus peels. Base Spirit:\u00a0Vodka, Tequila, & Rum. Recommended Glassware: Highball Glass",
+                  "link": {
+                    "href": "/long-island-iced-tea-2567783"
+                  }
+                },
+                {
+                  "id": "39047",
+                  "title": "Low-Cal Cosmopolitan",
+                  "excerpt": "Tart cranberry is balanced out by the citrus of lime and sweetness of orange to create this classic vodka cocktail. This lower calorie Cosmopolitan delivers the same great taste without added sugar. Base Spirit:\u00a0Vodka. Recommended Glassware:\u00a0Martini",
+                  "link": {
+                    "href": "/low-cal-cosmopolitan-39047"
+                  }
+                },
+                {
+                  "id": "445992",
+                  "title": "Lychee Martini",
+                  "excerpt": "Delicately fruity and lightly floral, the Lychee Martini is an elegant, slightly sweeter twist on a vodka martini. Enjoy this graceful cocktail, inspired by the aromatic and floral flavors of the tropical fruit, shaken over ice and served in a martin",
+                  "link": {
+                    "href": "/lychee-martini-445992"
+                  }
+                },
+                {
+                  "id": "2567775",
+                  "title": "Maple Pecan Pie",
+                  "excerpt": "This decadent, dessert-inspired cocktail is the perfect complement to cooler temperatures. The combination of sweet maple, nutty pecan, and buttery shortbread crust flavors pairs with whiskey and vodka for an indulgent delight. Base Spirit:\u00a0Whiskey a",
+                  "link": {
+                    "href": "/maple-pecan-pie-2567775"
+                  }
+                },
+                {
+                  "id": "6792810",
+                  "title": "Midnight Passion Martini",
+                  "excerpt": "An alluring twist on the classic Pornstar Martini, this vodka cocktail dazzles with juicy passion fruit, zesty lime, and a hint of vanilla flavor. Sweet and tart in perfect harmony, it\u2019s a smooth martini designed to be savored whenever you want to ma",
+                  "link": {
+                    "href": "/midnight-passion-martini-6792810"
+                  }
+                },
+                {
+                  "id": "39066",
+                  "title": "Northside",
+                  "excerpt": "With Moscow Mule-inspired flavors, this smooth, sweet and tart lime vodka libation, the Northside is like a cool breeze on a hot day. Base Spirit:\u00a0Vodka. Recommended Glassware: Highball Glass",
+                  "link": {
+                    "href": "/northside-39066"
+                  }
+                },
+                {
+                  "id": "105537",
+                  "title": "Pineapple Sage Vodka Still",
+                  "excerpt": "Named for the still, an instrument used to distill vodka, our\u00a0deliciously flavorful Pineapple Sage Vodka Still is the perfect blend of sweet coconut and\u00a0tart pineapple. Infused with botanical sage, this refreshing cocktail is best suited for any pine",
+                  "link": {
+                    "href": "/pineapple-sage-vodka-still-105537"
+                  }
+                },
+                {
+                  "id": "2567780",
+                  "title": "Rum Runner",
+                  "excerpt": "Packed with tropical pineapple, banana, blackberry, orange, and a splash of grenadine, the Rum Runner is the definition of fruity and sweet. Base Spirit:\u00a0Rum & Vodka. Recommended Glassware: Highball Glass",
+                  "link": {
+                    "href": "/rum-runner-2567780"
+                  }
+                },
+                {
+                  "id": "39082",
+                  "title": "Sex on the Beach",
+                  "excerpt": "Enjoy the fruity Sex on the Beach, with juicy peach, pineapple, banana, cranberry, and hint of lemon flavor for a sweet and tropical experience and citrus orange make a winning combination for this classic vodka cocktail. Base Spirit:\u00a0Vodka",
+                  "link": {
+                    "href": "/sex-on-the-beach-39082"
+                  }
+                },
+                {
+                  "id": "1201767",
+                  "title": "Southern Blossom",
+                  "excerpt": "Sweet and fruity, this refreshing vodka cocktail combines juicy pineapple, zesty lemonade, and grenadine flavors. Each sip is like a stroll down a lush fairway bordered with blossoming flowers. Whether enjoyed on the green or off, the Southern Blosso",
+                  "link": {
+                    "href": "/southern-blossom-1201767"
+                  }
+                },
+                {
+                  "id": "1661999",
+                  "title": "Strawberry Lemon Drop",
+                  "excerpt": "This sweet and tart vodka cocktail blends the bright and juicy flavors of fresh-picked strawberries and tangy candied lemon. Shake and serve in a\u00a0martini glass garnished with a sugar rim, lemon wheel, and a strawberry. Base Spirit:\u00a0Vodka. Recommended",
+                  "link": {
+                    "href": "/strawberry-lemon-drop-1661999"
+                  }
+                },
+                {
+                  "id": "2567781",
+                  "title": "Vesper (EU/UK)",
+                  "excerpt": "This proofy martini is an elegant blend of gin and vodka, balancing bitter, sweet, and herbal flavours. Inspired by the infamous cocktail from a classic spy novel, it's best served with an herbal gin for a smooth, elevated finish. Base Spirit: Gin &",
+                  "link": {
+                    "href": "/vesper-(euuk)-2567781"
+                  }
+                },
+                {
+                  "id": "238788",
+                  "title": "Westside",
+                  "excerpt": "A sweet and smooth combination of lemon and mint, the Westside is a refreshing, easy drinking vodka cocktail. Serve over ice in a low ball garnished with a mint sprig. Base Spirit:\u00a0Vodka. Recommended Glassware: Lowball Glass",
+                  "link": {
+                    "href": "/westside-238788"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "324910",
+              "title": "Rum Cocktails",
+              "link": {
+                "href": "/articles/rum-cocktails-324910"
+              },
+              "articles": [
+                {
+                  "id": "5096344",
+                  "title": "Calamansi Daiquiri",
+                  "excerpt": "Calamansi - bright, exotic, and irresistibly tart - transforms the classic daiquiri into something unforgettable. It's a tropical twist perfect for those who love a smooth balance of bright citrus and refreshing sweetness. Shake with ice, serve in a",
+                  "link": {
+                    "href": "/calamansi-daiquiri-5096344"
+                  }
+                },
+                {
+                  "id": "39027",
+                  "title": "Hemingway Daiquiri",
+                  "excerpt": "The Hemingway Daiquiri is a variation of the Papa Doble. Combining rum and vodka, this cocktail provides a refreshing blend of sweet and tart grapefruit, citrus lime and dry-cherry notes of maraschino liqueur for an easy sipping experience. Base Spir",
+                  "link": {
+                    "href": "/hemingway-daiquiri-39027"
+                  }
+                },
+                {
+                  "id": "39034",
+                  "title": "Hurricane",
+                  "excerpt": "Bring Mardi Gras home with the Hurricane. This sweet, fruity, and tropical rum cocktail derives tart and sour flavors from passion fruit and sweetness from orange juice. A hint of citrus lime provides the perfect balance to this classic New Orleans c",
+                  "link": {
+                    "href": "/hurricane-39034"
+                  }
+                },
+                {
+                  "id": "70414",
+                  "title": "Jungle Bird",
+                  "excerpt": "Take a tropical adventure to the jungle! The Jungle Bird is a unique tiki cocktail driven by pineapple juice balanced with refreshing lime and bitters. With a Jungle Bird in hand, sit back, relax and enjoy a taste of the jungle. Base Spirit:\u00a0Rum. Rec",
+                  "link": {
+                    "href": "/jungle-bird-70414"
+                  }
+                },
+                {
+                  "id": "2567784",
+                  "title": "Long Island Iced Tea",
+                  "excerpt": "Combines just the right amount of vodka, tequila, and rum, rounded with cola notes and liqueurs made from bitter and sweet citrus peels. Base Spirit:\u00a0Vodka, Tequila, & Rum. Recommended Glassware: Highball Glass",
+                  "link": {
+                    "href": "/long-island-iced-tea-2567784"
+                  }
+                },
+                {
+                  "id": "39053",
+                  "title": "Mai Tai",
+                  "excerpt": "The Mai Tai brings together light and dark rums with sweet almond syrup. Orange curacao adds body and helps soften the brightness of the tart pineapple for a citrus and sweet cocktail. Base Spirit:\u00a0Rum. Recommended Glassware: Mai Tai Glass",
+                  "link": {
+                    "href": "/mai-tai-39053"
+                  }
+                },
+                {
+                  "id": "196624",
+                  "title": "Painkiller",
+                  "excerpt": "If you're in need of an escape to a tropical island, try this sweet and fruity blend of pineapple, orange, and coconut - think pi\u00f1a colada flavors with an orange juice twist. Best served on ice and garnished with nutmeg and a pineapple wedge, the Pai",
+                  "link": {
+                    "href": "/painkiller-196624"
+                  }
+                },
+                {
+                  "id": "39076",
+                  "title": "Rum Breeze",
+                  "excerpt": "The Rum Breeze features a sweet, tropical blend of pineapple, lime, and strawberry juices, light rum, and a hint of coconut. Fresh and flavorful, with a slight tang from the pineapple juice and coconut undertones. Base Spirit:\u00a0Rum. Recommended Glassw",
+                  "link": {
+                    "href": "/rum-breeze-39076"
+                  }
+                },
+                {
+                  "id": "39077",
+                  "title": "Rum Runner",
+                  "excerpt": "Packed with tropical pineapple, banana, blackberry, orange, and a splash of grenadine, the Rum Runner is the definition of fruity and sweet. Base Spirit:\u00a0Rum & Vodka. Recommended Glassware: Highball Glass",
+                  "link": {
+                    "href": "/rum-runner-39077"
+                  }
+                },
+                {
+                  "id": "248614",
+                  "title": "Rum Swizzle",
+                  "excerpt": "You'll be transported to the Caribbean with this sweet, fruity rum cocktail with pineapple, citrus, and notes of triple sec and bitters. Shake and serve over crushed ice in a highball, garnished with a pineapple wedge and maraschino cherry. Base Spir",
+                  "link": {
+                    "href": "/rum-swizzle-248614"
+                  }
+                },
+                {
+                  "id": "574704",
+                  "title": "Strawberry Coconut Daiquiri",
+                  "excerpt": "The Strawberry Coconut Daiquiri is the perfect poolside rum cocktail with flavors of juicy strawberry, sweet coconut, and tart lime. Enjoy this tropical libation over ice garnished with lime and a strawberry. Base Spirit:\u00a0Rum. Recommended Glassware:",
+                  "link": {
+                    "href": "/strawberry-coconut-daiquiri-574704"
+                  }
+                },
+                {
+                  "id": "275636",
+                  "title": "White Sangria",
+                  "excerpt": "Sangria is a lively, wine-based punch traditionally sweetened with fruit and fortified with additional liquor or liqueurs. Bartesian's take on sangria is an easy-sipping rum cocktail with tasting notes of buttery white wine, sweet peach, and triple s",
+                  "link": {
+                    "href": "/white-sangria-275636"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "324911",
+              "title": "Gin Cocktails",
+              "link": {
+                "href": "/articles/gin-cocktails-324911"
+              },
+              "articles": [
+                {
+                  "id": "36518",
+                  "title": "Aviation",
+                  "excerpt": "Aviation is a classic violet treasure that consists of Cr\u00e8me de Violette, Maraschino Liqueur, and a squeeze of lemon for a floral, sweet, and citrus libation. Base Spirit:\u00a0Gin. Recommended Glassware: Shaker + Coupe Glass",
+                  "link": {
+                    "href": "/aviation-36518"
+                  }
+                },
+                {
+                  "id": "36519",
+                  "title": "Bee's Knees",
+                  "excerpt": "A sweet, citrus, and refreshing cocktail from the Prohibition Era, the Bee's Knees is a delicious pairing of lemon and honey, combined with floral notes of clover and alfalfa. Shake on ice and garnish with a lemon peel. Base Spirits:\u00a0Gin. Recommended",
+                  "link": {
+                    "href": "/bees-knees-36519"
+                  }
+                },
+                {
+                  "id": "2559242",
+                  "title": "Bramble (EU/UK)",
+                  "excerpt": "Bright citrus and blackberries mingle with delicate floral flavours, creating a perfectly balanced sip - sweet, tart, and proofy. Best enjoyed with a herbal gin, which adds a smooth, refreshing finish. Base Spirit: Gin. Recommended Glassware: Lowball",
+                  "link": {
+                    "href": "/bramble-(euuk)-2559242"
+                  }
+                },
+                {
+                  "id": "8043833",
+                  "title": "Gin Basil Smash (UK Only)",
+                  "excerpt": "Citrus and basil flavours create a refreshing, herbaceous sip that's as striking in the glass as it is easy to enjoy. Base Spirit:\u00a0Gin. Recommended Glassware: Lowball Glass",
+                  "link": {
+                    "href": "/gin-basil-smash-(uk-only)-8043833"
+                  }
+                },
+                {
+                  "id": "267144",
+                  "title": "Great Gatsby",
+                  "excerpt": "Raise a glass to the Roaring Twenties with this elegant, shimmering gin cocktail. Flavors of grapefruit and citrus blend with notes of elderflower for a perfect tribute to the literary classic. Shake with ice and serve in a champagne glass or coupe.",
+                  "link": {
+                    "href": "/great-gatsby-267144"
+                  }
+                },
+                {
+                  "id": "39064",
+                  "title": "Negroni",
+                  "excerpt": "Bitters, sweet vermouth, and an orange garnish provide a sweet, savory, and floral profile which make the Negroni the perfect summertime gin drink. Base Spirit:\u00a0Gin. Recommended Glassware: Lowball Glass",
+                  "link": {
+                    "href": "/negroni-39064"
+                  }
+                },
+                {
+                  "id": "67035",
+                  "title": "Raspberry Ginger Gimlet",
+                  "excerpt": "A refreshing reimagining of the classic Gimlet, the Raspberry Ginger Gimlet is the perfect blend of sweet raspberry notes and tangy ginger zing! Enjoy this well-balanced cocktail with a lime and raspberry garnish. Base Spirit:\u00a0Gin. Recommended Glassw",
+                  "link": {
+                    "href": "/raspberry-ginger-gimlet-67035"
+                  }
+                },
+                {
+                  "id": "238794",
+                  "title": "Southside",
+                  "excerpt": "Named for Chicago's South Side, this refreshing, slightly sweet, blend of tart lime, mint, and gin is rumored to have been the preferred drink of Al Capone and his gang during Prohibition. Shake with ice and serve this gin cocktail in our premium Cou",
+                  "link": {
+                    "href": "/southside-238794"
+                  }
+                },
+                {
+                  "id": "39504",
+                  "title": "Uptown Rocks",
+                  "excerpt": "An elegant floral and sweet gin drink featuring a mix of peach, white grape, and lemon juices with a graceful cilantro kick. Made best with an herbal gin for a smooth finish for this refreshing cocktail. Base Spirit:\u00a0Gin. Recomme",
+                  "link": {
+                    "href": "/uptown-rocks-39504"
+                  }
+                },
+                {
+                  "id": "2559241",
+                  "title": "Vesper (EU/UK)",
+                  "excerpt": "This proofy martini is an elegant blend of gin and vodka, balancing bitter, sweet, and herbal flavours. Inspired by the infamous cocktail from a classic spy novel, it's best served with an herbal gin for a smooth, elevated finish. Base Spirit: Gin &",
+                  "link": {
+                    "href": "/vesper-(euuk)-2559241"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "324912",
+              "title": "Whiskey Cocktails",
+              "link": {
+                "href": "/articles/whiskey-cocktails-324912"
+              },
+              "articles": [
+                {
+                  "id": "2567777",
+                  "title": "Apple Pie",
+                  "excerpt": "Your favorite dessert is served as a cocktail. The sweet combination of baked apple and fall spices is perfectly balanced with hints of lemon and cayenne in this whiskey and vodka cocktail. Wonderfully reminiscent of a slice of grandma's apple pie. B",
+                  "link": {
+                    "href": "/apple-pie-2567777"
+                  }
+                },
+                {
+                  "id": "5452537",
+                  "title": "Blackberry Mint Julep",
+                  "excerpt": "A regal twist on a timeless favorite. This whiskey cocktail blends sweet, jammy blackberry and fresh mint flavors for a cooling, berry-forward sip. Serve in a Mint Julep Cup with crushed ice and garnish with blackberries and a mint sprig. Base Spirit",
+                  "link": {
+                    "href": "/blackberry-mint-julep-5452537"
+                  }
+                },
+                {
+                  "id": "383427",
+                  "title": "Low-Cal Old Fashioned",
+                  "excerpt": "The Low-Cal Old Fashioned is a spirit-forward whiskey cocktail that perfectly balances bitter and sweet, with notes of oak and orange citrus. Garnish with an orange peel or a brandied cherry and enjoy this classic whiskey cocktail with no sugar added",
+                  "link": {
+                    "href": "/low-cal-old-fashioned-383427"
+                  }
+                },
+                {
+                  "id": "39049",
+                  "title": "Low-Cal Whiskey Sour",
+                  "excerpt": "This cocktail provides a smooth balance of sweet and sour. Notes of vanilla, lemon, and orange round out the flavor profile and make for a classic whiskey citrus cocktail. This low calorie Whiskey Sour delivers the same great taste without added suga",
+                  "link": {
+                    "href": "/low-cal-whiskey-sour-39049"
+                  }
+                },
+                {
+                  "id": "39058",
+                  "title": "Manhattan",
+                  "excerpt": "The Manhattan stirred up its popularity with its mix of savory sweet vermouth, whiskey, and aromatic bitters with a hint of cherry. Base Spirit:\u00a0Whiskey. Recommended Glassware:\u00a0Coupe Glass",
+                  "link": {
+                    "href": "/manhattan-39058"
+                  }
+                },
+                {
+                  "id": "1203697",
+                  "title": "Maple Pecan Pie",
+                  "excerpt": "This decadent, dessert-inspired cocktail is the perfect complement to cooler temperatures. The combination of sweet maple, nutty pecan, and buttery shortbread crust flavors pairs with whiskey and vodka for an indulgent delight. Base Spirit:\u00a0Whiskey a",
+                  "link": {
+                    "href": "/maple-pecan-pie-1203697"
+                  }
+                },
+                {
+                  "id": "468827",
+                  "title": "Mint Julep",
+                  "excerpt": "The signature derby crown is not handed out to just any cocktail - and the Mint Julep has most definitely earned its seat on the throne. \u00a0Sweet and balanced with mint and whiskey barrel flavors. If you enjoy the minty refreshment of a Mojito, the Min",
+                  "link": {
+                    "href": "/mint-julep-468827"
+                  }
+                },
+                {
+                  "id": "39072",
+                  "title": "Old Fashioned",
+                  "excerpt": "The Old Fashioned is a spirit-forward whiskey cocktail that provides a perfect balance between bitter and sweet, with notes of oak and orange citrus. Base Spirit:\u00a0Whiskey. Recommended Glassware: Lowball Glass",
+                  "link": {
+                    "href": "/old-fashioned-39072"
+                  }
+                },
+                {
+                  "id": "39073",
+                  "title": "Paper Plane",
+                  "excerpt": "The Paper Plane expertly blends bitter, herbal, and sour notes with elegant symmetry. The flavor profile of this whiskey cocktail is finished with a touch of lemon citrus and sweetness. Base Spirit:\u00a0Whiskey. Recommended Glassware",
+                  "link": {
+                    "href": "/paper-plane-39073"
+                  }
+                },
+                {
+                  "id": "809946",
+                  "title": "Peanut Butter Cup",
+                  "excerpt": "No need to trick or treat with this cocktail. A decadent delight of smooth whiskey with creamy peanut butter and rich milk chocolate flavors. An irresistible blend of sweet and savory. Shake with ice and serve in a martini glass garnished with peanut",
+                  "link": {
+                    "href": "/peanut-butter-cup-809946"
+                  }
+                },
+                {
+                  "id": "65193",
+                  "title": "Sidecar",
+                  "excerpt": "Hop on in, the Sidecar is here! The Sidecar is a cognac-based cocktail with sour notes imparted from lemon juice, balanced with sweet notes of triple sec. Serve shaken with a sugar rim and garnish with a lemon twist.",
+                  "link": {
+                    "href": "/sidecar-65193"
+                  }
+                },
+                {
+                  "id": "76297",
+                  "title": "Whiskey Sour",
+                  "excerpt": "The Whiskey Sour provides a smooth balance of sweet and sour. Notes of vanilla, lemon, and orange round out the flavor profile, and make for a classic whiskey citrus cocktail. Base Spirit:\u00a0Whiskey. Recommended Glassware:",
+                  "link": {
+                    "href": "/whiskey-sour-76297"
+                  }
+                },
+                {
+                  "id": "39505",
+                  "title": "Whiskey Smash",
+                  "excerpt": "This classic cocktail appeals to both whiskey lovers and whiskey skeptics alike. Think minty like a Mojito but with lemon and Whiskey instead of lime and Rum. The Whiskey Smash provides whiskey barrel sweetness balanced with refreshing mint, but with",
+                  "link": {
+                    "href": "/whiskey-smash-39505"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "324913",
+              "title": "Tequila Cocktails",
+              "link": {
+                "href": "/articles/tequila-cocktails-324913"
+              },
+              "articles": [
+                {
+                  "id": "36521",
+                  "title": "Blackberry Margarita",
+                  "excerpt": "The Blackberry Margarita provides sweet and slightly tart berry notes with undertones of honeyed fig to create a juicy and jammy combination. Base Spirit:\u00a0Tequila. Recommended Glassware: Margarita Glass",
+                  "link": {
+                    "href": "/blackberry-margarita-36521"
+                  }
+                },
+                {
+                  "id": "4476621",
+                  "title": "Caf\u00e9cito Churro",
+                  "excerpt": "Caf\u00e9cito Churro is a coffeehouse-inspired cocktail with a smooth blend of churro, dark chocolate, coffee, and a hint of cinnamon flavors. Sweet and subtly spiced, it's your favorite treat reimagined over ice for a perfectly indulgent sip. Serve over",
+                  "link": {
+                    "href": "/cafecito-churro-4476621"
+                  }
+                },
+                {
+                  "id": "39041",
+                  "title": "Jalape\u00f1o Lime Shrub",
+                  "excerpt": "Equal parts refreshing, sour lime, citrusy, and jalapeno-level spicy, this unique tequila cocktail contains apple cider vinegar to provide balanced acidity. Base Spirit:\u00a0Tequila. Recommended Glassware: Lowball Glass",
+                  "link": {
+                    "href": "/jalapeno-lime-shrub-39041"
+                  }
+                },
+                {
+                  "id": "39050",
+                  "title": "Long Island Iced Tea",
+                  "excerpt": "Combines just the right amount of vodka, tequila, and rum, rounded with cola notes and liqueurs made from bitter and sweet citrus peels. Base Spirit:\u00a0Vodka, Tequila, & Rum. Recommended Glassware: Highball Glass",
+                  "link": {
+                    "href": "/long-island-iced-tea-39050"
+                  }
+                },
+                {
+                  "id": "39048",
+                  "title": "Low-Cal Margarita",
+                  "excerpt": "The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits. Base Spirit:\u00a0Tequila. Recommended Glassware:",
+                  "link": {
+                    "href": "/low-cal-margarita-39048"
+                  }
+                },
+                {
+                  "id": "6360703",
+                  "title": "Mango Habanero Margarita",
+                  "excerpt": "Tropical and fiery, this vibrant margarita pairs ripe mango and lime juices with a kick of habanero flavor. Each sip unfolds with the perfect harmony of sweet and heat. Serve in a lowball with ice and garnish with a spicy rim, lime wheel and habanero",
+                  "link": {
+                    "href": "/mango-habanero-margarita-6360703"
+                  }
+                },
+                {
+                  "id": "39056",
+                  "title": "Mango Margarita",
+                  "excerpt": "This cocktail is a fruity, juicy, and refreshing margarita with a sweet blend of tequila, mango, and lime served over ice with a salted rim. Base Spirit:\u00a0Tequila. Recommended Glassware: Margarita Glass",
+                  "link": {
+                    "href": "/mango-margarita-39056"
+                  }
+                },
+                {
+                  "id": "39059",
+                  "title": "Margarita",
+                  "excerpt": "The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits. Base Spirit:\u00a0Tequila. Recommended Glassware:",
+                  "link": {
+                    "href": "/margarita-39059"
+                  }
+                },
+                {
+                  "id": "1120804",
+                  "title": "Mezcalita",
+                  "excerpt": "Escape to Tulum with the smoky allure of the Mezcalita, crafted in collaboration with Mezcalum. This sophisticated cocktail blends the bright tang of fresh orange and lime juices with flavors of smoky mezcal, a hint of campfire wood, and a touch of s",
+                  "link": {
+                    "href": "/mezcalita-1120804"
+                  }
+                },
+                {
+                  "id": "39074",
+                  "title": "Passion Fruit Margarita",
+                  "excerpt": "Sweet, tropical, and tangy, the Passion Fruit Margarita is fruit-forward with tart and sour notes from passion fruit combined with citrus notes from triple sec and lime juice. Base Spirit:\u00a0Tequila. Recommende",
+                  "link": {
+                    "href": "/passion-fruit-margarita-39074"
+                  }
+                },
+                {
+                  "id": "45861",
+                  "title": "Pineapple Margarita",
+                  "excerpt": "Pineapple Margarita, bursting with notes of juicy tart pineapple and sweet coconut, balanced with lime and notes of orange triple sec. Base Spirit:\u00a0Tequila. Recommended Glassware: Margarita Glass",
+                  "link": {
+                    "href": "/pineapple-margarita-45861"
+                  }
+                },
+                {
+                  "id": "109602",
+                  "title": "Pomegranate Margarita",
+                  "excerpt": "A tart, refreshing addition to the collection of\u00a0Bartesian Margaritas, the pomegranate margarita is a perfect pick for any tequila lover.\u00a0Bursting with pomegranate flavor, a splash of lime, and notes of triple sec, the Pomegranate Margarita is a bold",
+                  "link": {
+                    "href": "/pomegranate-margarita-109602"
+                  }
+                },
+                {
+                  "id": "39502",
+                  "title": "Spicy Margarita",
+                  "excerpt": "Ready to spice things up? This margarita is for you. Savor the classic combination of lemon and lime with a fiery twist of jalape\u00f1o and cayenne flavor. Base Spirit:\u00a0Tequila. Recommended Glassware: Margarita Glass",
+                  "link": {
+                    "href": "/spicy-margarita-39502"
+                  }
+                },
+                {
+                  "id": "300193",
+                  "title": "Strawberry Guava Margarita",
+                  "excerpt": "Sweet and refreshing, the Strawberry Guava Margarita is a fruit-forward cocktail with tropical guava combined with flavors of strawberry, triple sec, and lime. Serve in a margarita glass garnished with Pink Himalayan salt and a strawberry. Base Spiri",
+                  "link": {
+                    "href": "/strawberry-guava-margarita-300193"
+                  }
+                },
+                {
+                  "id": "217642",
+                  "title": "Tequila Sunrise",
+                  "excerpt": "This classic brunch tequila cocktail mixes orange juice with sweet grenadine cherry notes. Serve over ice in a lowball garnished with an orange wedge and maraschino cherry. Base Spirit:\u00a0Tequila. Recommended Glassware: Lowball",
+                  "link": {
+                    "href": "/tequila-sunrise-217642"
+                  }
+                },
+                {
+                  "id": "260338",
+                  "title": "Watermelon Margarita",
+                  "excerpt": "Like summertime in a glass, the Watermelon Margarita is a refreshing sweet and salty tequila cocktail blending watermelon with notes of citrus and triple sec. Serve in a margarita glass with a Zesty Lime Salt rim. Get this limited seasonal release wh",
+                  "link": {
+                    "href": "/watermelon-margarita-260338"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "325180",
+              "title": "Seasonal Cocktails",
+              "link": {
+                "href": "/articles/seasonal-cocktails-325180"
+              },
+              "articles": [
+                {
+                  "id": "4332578",
+                  "title": "Blackberry Mango Refresher (US Only)",
+                  "excerpt": "Some days call for a little extra lift - and this Refresher delivers. Juicy, ripe blackberry meets sweet mango in a smooth, fruit-forward blend that\u2019s as vibrant as it is satisfying. It\u2019s the kind of drink that keeps things mellow but moving, perfect",
+                  "link": {
+                    "href": "/blackberry-mango-refresher-(us-only)-4332578"
+                  }
+                },
+                {
+                  "id": "129411",
+                  "title": "Candyman Margarita",
+                  "excerpt": "The seasonal Candyman Margarita is a fun and frightening addition to the Bartesian family of margaritas, with sweet, sour, citrus, berry and candy notes. A cocktail so delicious it'll make you say Candyman five times! It's the perfect margarita for t",
+                  "link": {
+                    "href": "/candyman-margarita-129411"
+                  }
+                },
+                {
+                  "id": "2387476",
+                  "title": "Caramel Appletini",
+                  "excerpt": "The Caramel Appletini is a wickedly smooth cocktail that blends flavors of tart green apple with rich, velvety caramel for a spellbinding sip. It's the perfect balance of crisp and cozy - like your favorite fall treat in a glass. Base Spirit: Vodka.",
+                  "link": {
+                    "href": "/caramel-appletini-2387476"
+                  }
+                },
+                {
+                  "id": "3388358",
+                  "title": "Clausmopolitan",
+                  "excerpt": "The shimmering holiday version of our classic cranberry, lime, and orange cocktail is sure to be a hit. Shake with ice and serve in a martini glass garnished with a Cranberry Cheer Sugar rim. Leave this out instead of milk and cookies for any guests",
+                  "link": {
+                    "href": "/clausmopolitan-3388358"
+                  }
+                },
+                {
+                  "id": "182164",
+                  "title": "Cupid's Arrow",
+                  "excerpt": "The Cupid's Arrow is a sweet, fruity combination of guava with notes of strawberry and lime\u00a0that will make your heart skip a beat!. Base Spirit:\u00a0Gin",
+                  "link": {
+                    "href": "/cupids-arrow-182164"
+                  }
+                },
+                {
+                  "id": "3388354",
+                  "title": "Frosted Orchard",
+                  "excerpt": "The Frosted Orchard is a crisp, refreshing vodka cocktail with a cozy twist. Juicy apple and tangy lemonade are infused with flavors of cinnamon and cardamom for a balanced blend of sweet, citrus and spices. This cool-weather sipper eases the chill w",
+                  "link": {
+                    "href": "/frosted-orchard-3388354"
+                  }
+                },
+                {
+                  "id": "3388360",
+                  "title": "Frosty Navel",
+                  "excerpt": "This snowman-approved vodka cocktail brings a burst of holiday cheer with its bright blend of tangy orange and juicy peach schnapps flavors, delivering a sweet and citrusy sip that tastes like sunshine on a snowy day. Enjoy Frosty Navel over ice in a",
+                  "link": {
+                    "href": "/frosty-navel-3388360"
+                  }
+                },
+                {
+                  "id": "3074904",
+                  "title": "Holiday Spiced Old Fashioned",
+                  "excerpt": "A festive twist on a cocktail classic, the Holiday Spiced Old Fashioned is a spirit-forward whiskey cocktail with flavors of orange, bitters, and cinnamon. Base Spirit:\u00a0Whiskey",
+                  "link": {
+                    "href": "/holiday-spiced-old-fashioned-3074904"
+                  }
+                },
+                {
+                  "id": "3388348",
+                  "title": "Jollype\u00f1o Margarita",
+                  "excerpt": "Bring the heat to your holiday cheer with a festive twist on a classic that\u2019s anything but ordinary. Bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalape\u00f1o, this cocktail strikes the perfect balance of sweetness, tang, and jus",
+                  "link": {
+                    "href": "/jollypeno-margarita-3388348"
+                  }
+                },
+                {
+                  "id": "1051826",
+                  "title": "Love Potion",
+                  "excerpt": "Sweet and tart, this enchanting gin cocktail combines juicy blueberry, zesty lemon, and delicate lavender flavors. Experience the magic of Love Potion and let its enchanting blend transport you to a world of serenity and floral bliss. Base Spirit:\u00a0Gi",
+                  "link": {
+                    "href": "/love-potion-1051826"
+                  }
+                },
+                {
+                  "id": "3388359",
+                  "title": "Mistletoe Margarita",
+                  "excerpt": "A holiday smooch for the senses, the Mistletoe Margarita will have you head over heels. This holly, jolly margarita with jammy pomegranate and holiday baking spice flavors is the perfect present for any tequila lover. Best served in a margarita glass",
+                  "link": {
+                    "href": "/mistletoe-margarita-3388359"
+                  }
+                },
+                {
+                  "id": "4332577",
+                  "title": "Peach Lychee Refresher (US Only)",
+                  "excerpt": "With juicy peach and delicate lychee flavors, this caffeinated Refresher is a gentle nudge in the right direction. It's light, refreshing and effortlessly sippable. Proof that a little boost can feel like a breeze. Shake and serve over ice in a highb",
+                  "link": {
+                    "href": "/peach-lychee-refresher-(us-only)-4332577"
+                  }
+                },
+                {
+                  "id": "3074903",
+                  "title": "Peary Christmas",
+                  "excerpt": "You'll have a very \"peary\" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond flavors. Base Spirit:\u00a0Tequila. Recommended Glassware: Lowball Glass",
+                  "link": {
+                    "href": "/peary-christmas-3074903"
+                  }
+                },
+                {
+                  "id": "8043821",
+                  "title": "Sour Spell",
+                  "excerpt": "Sour Spell is a sweet vodka cocktail with a mischievous glow and a burst of sour rainbow candy flavor. With every swirl, the iridescent shimmer brings a touch of magic to the glass, making it as mesmerizing as it is delicious. Shake and serve in a ma",
+                  "link": {
+                    "href": "/sour-spell-8043821"
+                  }
+                },
+                {
+                  "id": "3388353",
+                  "title": "Starry Night",
+                  "excerpt": "Celebrate the season with a sip of starlight. This refreshing tequila cocktail blends flavors of starfruit, grapefruit, guanabana, and citrus. One sip, and you'll be wrapped in the magic of a clear winter night\u2014crisp, bright, and enchanting. Best ser",
+                  "link": {
+                    "href": "/starry-night-3388353"
+                  }
+                },
+                {
+                  "id": "4332574",
+                  "title": "Strawberry Acai Refresher (US Only)",
+                  "excerpt": "When you need refreshment, look no further. Flavors of lush strawberry and tangy acai blend in a perfect balance of sweet and tart. Lightly caffeinated to give you a gentle boost, this Refresher lets you sip back, relax, and brighten your day with ev",
+                  "link": {
+                    "href": "/strawberry-acai-refresher-(us-only)-4332574"
+                  }
+                },
+                {
+                  "id": "1059897",
+                  "title": "The Grinch Appletini",
+                  "excerpt": "Holidays have you feeling like a humbug? Sweet and tart, The Grinch Appletini is sure to raise spirits with its green apple flavors. Shake over ice and serve in a martini glass with a sugar rim and apple wheel. Base Spirit:\u00a0Vodka. Recommended Glasswa",
+                  "link": {
+                    "href": "/the-grinch-appletini-1059897"
+                  }
+                },
+                {
+                  "id": "8043822",
+                  "title": "Vampire's Kiss",
+                  "excerpt": "Vampire's Kiss is a deep crimson vodka cocktail built around the unmistakable sweetness of red licorice flavor, layered with juicy strawberry and fruit punch flavor. Smooth and fruit-forward, it delivers a candy-like sip. Shake and serve in a martini",
+                  "link": {
+                    "href": "/vampires-kiss-8043822"
+                  }
+                },
+                {
+                  "id": "120126",
+                  "title": "Witch's Heart",
+                  "excerpt": "The perfect Halloween cocktail, Witch's Heart is a blend of berry, green apple, lemon juice, and white grape juice. With edible shimmer for added luminosity, this vodka cocktail will put guests at your Halloween gatherings under a magical spell. Base",
+                  "link": {
+                    "href": "/witchs-heart-120126"
+                  }
+                },
+                {
+                  "id": "1059915",
+                  "title": "Yuletide Hurricane",
+                  "excerpt": "When the weather outside is frightful, choose the Yuletide Hurricane to keep your glass delightful. It's the fruity, tropical flavor you happily expect, with a shimmery, festive twist. Serve over ice and garnish with a cherry and orange wedge. Base S",
+                  "link": {
+                    "href": "/yuletide-hurricane-1059915"
+                  }
+                },
+                {
+                  "id": "7886629",
+                  "title": "2026 Advent Calendar (spoiler alert!)",
+                  "excerpt": "Spoiler Alert: \u00a0If you wish to keep each day a festive surprise - the information below discloses the capsule selections. With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during",
+                  "link": {
+                    "href": "/2026-advent-calendar-(spoiler-alert)-7886629"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "325185",
+              "title": "Rimmers",
+              "link": {
+                "href": "/articles/rimmers-325185"
+              },
+              "articles": [
+                {
+                  "id": "148819",
+                  "title": "Candy Cane Sugar Rimmer",
+                  "excerpt": "Brighten up your holiday cocktails with a candy cane inspired rimming sugar with sweet peppermint notes. Cocktail pairings:\u00a0\u00a0Espresso Martini, Holly Hibiscus Sour, and Clausmopolitan",
+                  "link": {
+                    "href": "/candy-cane-sugar-rimmer-148819"
+                  }
+                },
+                {
+                  "id": "8043829",
+                  "title": "Citrus Popping Sugar Rimmer",
+                  "excerpt": "A citrus-forward popping sugar that brings a lively burst of flavor and playful fizz to every sip. Cocktail pairings:\u00a0\u00a0Sour Spell, Witch's Heart, Candyman Margarita, and all types of Cosmopolitans, Lemon Drops, and Margarita",
+                  "link": {
+                    "href": "/citrus-popping-sugar-rimmer-8043829"
+                  }
+                },
+                {
+                  "id": "148821",
+                  "title": "Cranberry Cheer Sugar Rimmer",
+                  "excerpt": "Bring a hint of festive cheer to your favorite cocktails. The Cranberry Cheer Sugar Rimmer has flavors of sweet cranberry and warm baking spices. Cocktail pairings:\u00a0Bee Merry, Mistletoe Margarita, Lemon Drop, and all types of Cosmopolitans",
+                  "link": {
+                    "href": "/cranberry-cheer-sugar-rimmer-148821"
+                  }
+                },
+                {
+                  "id": "39019",
+                  "title": "Golden Demerara Sugar",
+                  "excerpt": "Course and golden brown, Demerara brightens up a cocktail with a delightful texture and subtle sweetness. Cocktail pairings: Apple Pie, Sidecar, Great Gatsby, & other dessert cocktails",
+                  "link": {
+                    "href": "/golden-demerara-sugar-39019"
+                  }
+                },
+                {
+                  "id": "3066569",
+                  "title": "Hot Honey Sugar Rimmer",
+                  "excerpt": "The Hot Honey Sugar Rimmer is a delicate dance of warm honey and subtle spice flavors. It's the perfect blend of sweet and heat. Cocktail pairings:\u00a0\u00a0Ginger Pear Noel, Holiday Spiced Old Fashioned, Jollype\u00f1o Margarita, Winter Pear-adise, Spicy Margari",
+                  "link": {
+                    "href": "/hot-honey-sugar-rimmer-3066569"
+                  }
+                },
+                {
+                  "id": "5776146",
+                  "title": "Lemon Sugar Rimmer",
+                  "excerpt": "Inspired by the bright punch of lemon candy, this rimmer balances tangy zest with just the right touch of sweetness. One dip is all it takes to transform your cocktail into something extra zesty, extra fun, and totally irresistible. Lemon Sugar pairs",
+                  "link": {
+                    "href": "/lemon-sugar-rimmer-5776146"
+                  }
+                },
+                {
+                  "id": "921111",
+                  "title": "Maple Sugar Rimmer",
+                  "excerpt": "The sweet, rich flavor of maple sugar with a hint of salt creates a delightful contrast to complement your cocktail. Cocktail pairings:\u00a0Old Fashioned, Maple Pecan Pie, Apple Pie, Sweater Weather, and other whiskey cocktails",
+                  "link": {
+                    "href": "/maple-sugar-rimmer-921111"
+                  }
+                },
+                {
+                  "id": "348401",
+                  "title": "Paloma Grapefruit Salt Rimmer",
+                  "excerpt": "Give your cocktails a citrus twist and bright, sour grapefruit notes with this sweet and sour salt rimmer. Cocktail pairings:\u00a0\u00a0Mrs. Claus's Nightcap, Clausmopolitan, and all types of Margaritas",
+                  "link": {
+                    "href": "/paloma-grapefruit-salt-rimmer-348401"
+                  }
+                },
+                {
+                  "id": "39075",
+                  "title": "Pink Himalayan Margarita Salt Rimmer",
+                  "excerpt": "Pink Himalayan salt will take your cocktails to the next level. The pink hue and coarse texture are welcome additions to all types of cocktails including citrus, fruity, and spicy. Cocktail pairings:\u00a0All types of Margaritas",
+                  "link": {
+                    "href": "/pink-himalayan-margarita-salt-rimmer-39075"
+                  }
+                },
+                {
+                  "id": "326093",
+                  "title": "Pumpkin Spice Sugar Rimmer",
+                  "excerpt": "Like crisp leaves and cozy sweaters, Pumpkin Spice brings a hint of fall to your favorite cocktails, with notes of zesty pumpkin and warm baking spices. Cocktail pairings:\u00a0\u00a0Apple Pie, Old Fashioned, and other dessert cocktails",
+                  "link": {
+                    "href": "/pumpkin-spice-sugar-rimmer-326093"
+                  }
+                },
+                {
+                  "id": "338295",
+                  "title": "Sizzling Spicy Salt Rimmer",
+                  "excerpt": "Kick your cocktails up a notch with this spicy salt blend that will add the perfect amount of heat to any cocktail. Cocktail pairings:\u00a0\u00a0All types of Margaritas and Jalape\u00f1o Lime Shrub",
+                  "link": {
+                    "href": "/sizzling-spicy-salt-rimmer-338295"
+                  }
+                },
+                {
+                  "id": "2387858",
+                  "title": "Sour Apple Sugar Rimmer",
+                  "excerpt": "One swipe of Bartesian's Sour Apple Sugar Rimmer and your cocktail goes from sweet to spellbinding. With a candy-inspired kick, it\u2019s the ultimate potion topper for your Halloween sips. Sour Apple Sugar pairs well with sweet, sour, and citrus cocktail",
+                  "link": {
+                    "href": "/sour-apple-sugar-rimmer-2387858"
+                  }
+                },
+                {
+                  "id": "478580",
+                  "title": "Sour Candy Sugar Rimmer",
+                  "excerpt": "Inspired by our favorite sour candies, this rimming sugar combines sweetness with a tantalizing burst of tartness for a unique, mouth-puckering cocktail experience. Sour Candy Sugar pairs well with sweet, sour, and citrus cocktails. Cocktail pairings",
+                  "link": {
+                    "href": "/sour-candy-sugar-rimmer-478580"
+                  }
+                },
+                {
+                  "id": "39084",
+                  "title": "Spiced Tamarind Salt Rimmer",
+                  "excerpt": "Tamarind, an exotic fruit known for its sweet and spicy flavor, provides a blended balance for an unforgettable salt experience. Cocktail pairings:\u00a0Jalape\u00f1o Lime Shrub, Kamikaze, all types of Margaritas",
+                  "link": {
+                    "href": "/spiced-tamarind-salt-rimmer-39084"
+                  }
+                },
+                {
+                  "id": "39085",
+                  "title": "Sweet Cinamon Vanilla Sugar Rimmer",
+                  "excerpt": "Your cocktail just got a whole lot sweeter. Our cinnamon sugar blend provides a hint of warm sweetness. Cocktail pairings:\u00a0 Apple Pie, Sidecar, Espresso Martini, Painkiller, Rum Swizzle, and other dessert cocktails to perfection",
+                  "link": {
+                    "href": "/sweet-cinamon-vanilla-sugar-rimmer-39085"
+                  }
+                },
+                {
+                  "id": "921108",
+                  "title": "Tangy Hibiscus Sugar Rimmer",
+                  "excerpt": "Sweet and sour, this vibrant purple rimming sugar delights with a unique floral tartness. Cocktail pairings:\u00a0Cosmopolitan, Lemon Drop, Holly Hibiscus Sour, Sugar Plum Fairy, and all fruit-forward margaritas",
+                  "link": {
+                    "href": "/tangy-hibiscus-sugar-rimmer-921108"
+                  }
+                },
+                {
+                  "id": "39503",
+                  "title": "Triple Berry Sugar Rimmer",
+                  "excerpt": "With notes of strawberry, blueberry, and raspberry, this sugar elevates any cocktail to a sweet and indulgent experience. Cocktail pairings: Lemon Drop, all types of Margaritas, Raspberry Ginger Gimlet, & Cosmopolitan",
+                  "link": {
+                    "href": "/triple-berry-sugar-rimmer-39503"
+                  }
+                },
+                {
+                  "id": "921112",
+                  "title": "Vanilla Bean Sugar Rimmer",
+                  "excerpt": "This indulgent flavor of warm and creamy vanilla bean adds a touch of elegance to your favorite cocktails. Perfect for enhancing sweet and spiced cocktails. Cocktail pairings:\u00a0Espresso Martini, Apple Pie, Frosty's Bananas Foster, and all types of Old",
+                  "link": {
+                    "href": "/vanilla-bean-sugar-rimmer-921112"
+                  }
+                },
+                {
+                  "id": "261256",
+                  "title": "Zesty Lime Salt Rimmer",
+                  "excerpt": "Zesty Lime Salt is the perfect finishing touch to a refreshing, summertime cocktail. The vivid green hue and bright lime flavor will enhance all citrusy, fruity, and spicy cocktails. Cocktail pairings:\u00a0\u00a0Watermelon Margarita, Kamikaze, and all other t",
+                  "link": {
+                    "href": "/zesty-lime-salt-rimmer-261256"
+                  }
+                },
+                {
+                  "id": "3066581",
+                  "title": "Zesty Orange Sugar Rimmer",
+                  "excerpt": "Add a pop of citrus to your holiday sips with our Zesty Orange Sugar Rimmer, a sweet and tangy blend that turns any cocktail into a celebration. Cocktail pairings:\u00a0\u00a0Jollype\u00f1o Margarita, Starry Night, Yuletide Hurricane, Clausmopolitan, Frosty Navel,",
+                  "link": {
+                    "href": "/zesty-orange-sugar-rimmer-3066581"
+                  }
+                }
+              ],
+              "children": []
+            },
+            {
+              "id": "325205",
+              "title": "Variety Packs",
+              "link": {
+                "href": "/articles/variety-packs-325205"
+              },
+              "articles": [
+                {
+                  "id": "4032318",
+                  "title": "Berry in Love Collection",
+                  "excerpt": "The most charming way to sip, savor, and celebrate love this season? The bright and fruity Bartesian Berry in Love Collection. This limited-edition variety pack contains 4 each of 2 playful pours:. Base Spirit:\u00a0Gin",
+                  "link": {
+                    "href": "/berry-in-love-collection-4032318"
+                  }
+                },
+                {
+                  "id": "3744731",
+                  "title": "Cocktail Sampler Variety Pack",
+                  "excerpt": "Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of:",
+                  "link": {
+                    "href": "/cocktail-sampler-variety-pack-3744731"
+                  }
+                },
+                {
+                  "id": "3066527",
+                  "title": "Festive Collection 2025",
+                  "excerpt": "Get in the festive spirit with this year\u2019s Bartesian Festive Collection. This limited-edition variety pack features merry cocktails across two-spirit types, especially convenient for the\u00a0Duet Cocktail Maker. This limited-edition variety pack contains",
+                  "link": {
+                    "href": "/festive-collection-2025-3066527"
+                  }
+                },
+                {
+                  "id": "2559264",
+                  "title": "Gin Lovers (EU/UK)",
+                  "excerpt": "Four of Bartesian\u2019s most-loved gin cocktails, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients.\u00a0This variety pack contains 2 each of 4 cocktails:. B",
+                  "link": {
+                    "href": "/gin-lovers-(euuk)-2559264"
+                  }
+                },
+                {
+                  "id": "914248",
+                  "title": "Gin Lovers Variety Pack",
+                  "excerpt": "Calling all gin lovers! Try this refreshing and unique spirit with some of the most beloved gin cocktails in our collection. Our 8-pack contains 2 each of:. Base Spirit:\u00a0Gin",
+                  "link": {
+                    "href": "/gin-lovers-variety-pack-914248"
+                  }
+                },
+                {
+                  "id": "8043830",
+                  "title": "Halloween Collection",
+                  "excerpt": "The best way for you and your ghoulish guests to raise spirits this season? The spine-chillingly delicious Bartesian Halloween Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails:. Base Spirit(s):\u00a0Vodka",
+                  "link": {
+                    "href": "/halloween-collection-8043830"
+                  }
+                },
+                {
+                  "id": "3066084",
+                  "title": "Holiday Collection 2025",
+                  "excerpt": "The best way for you and your holiday guests to get into the spirit of the season is with this year\u2019s Bartesian Holiday Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails:. Base Spirit:\u00a0Rum, Vodka, Whiskey,",
+                  "link": {
+                    "href": "/holiday-collection-2025-3066084"
+                  }
+                },
+                {
+                  "id": "1321083",
+                  "title": "Lemon Drop Variety Pack",
+                  "excerpt": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini, including a NEW Blue Raspberry Lemon Drop cocktail. For an added burst of sweet and sour, we recommend servin",
+                  "link": {
+                    "href": "/lemon-drop-variety-pack-1321083"
+                  }
+                },
+                {
+                  "id": "5767693",
+                  "title": "Lemon Drop Variety Pack (New)",
+                  "excerpt": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini. Shake with ice, serve in a martini glass,\u00a0and garnish with lemon. Our 8-pack contains 2 each of:. Base Spirit",
+                  "link": {
+                    "href": "/lemon-drop-variety-pack-(new)-5767693"
+                  }
+                },
+                {
+                  "id": "7502687",
+                  "title": "Long Island Collection",
+                  "excerpt": "Crafted for those who appreciate a bolder pour, the Long Island Collection features spirit-forward takes on the classic cocktail, delivering flavor and timeless appeal in every sip. This variety pack contains 2 each of 4 curated cocktails:",
+                  "link": {
+                    "href": "/long-island-collection-7502687"
+                  }
+                },
+                {
+                  "id": "383426",
+                  "title": "Low-Cal Variety Pack",
+                  "excerpt": "Bartesian's Low-Cal Variety Pack features the same great taste of four of our classic cocktail offerings with no added sugar. Our 8-pack contains 2 each of:. If you're looking for no sugar added cocktails, you'll love this variety pack of Bartesian c",
+                  "link": {
+                    "href": "/low-cal-variety-pack-383426"
+                  }
+                },
+                {
+                  "id": "2484458",
+                  "title": "Margarita Lovers (EU/UK)",
+                  "excerpt": "Four of Bartesian's best-selling margaritas, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients.\u00a0This variety pack contains 2 each of 4 cocktails:. Ba",
+                  "link": {
+                    "href": "/margarita-lovers-(euuk)-2484458"
+                  }
+                },
+                {
+                  "id": "3063954",
+                  "title": "Naughty Collection 2025",
+                  "excerpt": "This kind of naughty will get you on everyone's nice list.\u00a0Get in the holiday spirit with this year\u2019s Bartesian Naughty Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails:. Base Spirit:\u00a0Rum, Vodka, Whiskey,",
+                  "link": {
+                    "href": "/naughty-collection-2025-3063954"
+                  }
+                },
+                {
+                  "id": "3063952",
+                  "title": "Nice Collection 2025",
+                  "excerpt": "The Bartesian Nice Collection is the gift that keeps on giving all holiday season long... but nobody said being nice means you have to share.\u00a0This limited-edition variety pack contains 2 each of 4 curated holiday cocktails:. Base Spirit:\u00a0Gin, Vodka,",
+                  "link": {
+                    "href": "/nice-collection-2025-3063952"
+                  }
+                },
+                {
+                  "id": "4317802",
+                  "title": "Refreshers Collection (US Only)",
+                  "excerpt": "Refreshers are your anytime pick-me-up: lightly caffeinated and bursting with vibrant, juicy fruit flavors. Just shake, pour over ice in a highball glass, and top with fresh fruit. Our 8-pack contains 2 each of:. Contains ~55-56 mg of caffeine. Try i",
+                  "link": {
+                    "href": "/refreshers-collection-(us-only)-4317802"
+                  }
+                },
+                {
+                  "id": "544570",
+                  "title": "Rum Lovers Variety Pack",
+                  "excerpt": "Four deliciously curated cocktails to transport you to the beach. Our 8-pack contains 2 each of:. Base Spirit:\u00a0Rum",
+                  "link": {
+                    "href": "/rum-lovers-variety-pack-544570"
+                  }
+                },
+                {
+                  "id": "5980410",
+                  "title": "Staff Picks Collection",
+                  "excerpt": "Handpicked by our team, the Staff Picks Collection is an easy crowd-pleaser for any gathering. This variety pack contains 2 each of 4 curated cocktails:. Base Spirit:\u00a0Gin, Vodka, Tequila, Rum",
+                  "link": {
+                    "href": "/staff-picks-collection-5980410"
+                  }
+                },
+                {
+                  "id": "911580",
+                  "title": "Tropical Margarita Collection Variety Pack",
+                  "excerpt": "Enjoy a variety of your favorite tequila cocktails with Bartesian\u2019s Tropical Collection. Grab some ice, salt, and lime for garnish, and you\u2019ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our 8-pack con",
+                  "link": {
+                    "href": "/tropical-margarita-collection-variety-pack-911580"
+                  }
+                },
+                {
+                  "id": "2484459",
+                  "title": "Vodka Lovers (EU/UK)",
+                  "excerpt": "Four of Bartesian\u2019s most-loved vodka cocktails, crafted by expert mixologists for bar-quality taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients.\u00a0This variety pack contains 2 each of 4 cocktails:.",
+                  "link": {
+                    "href": "/vodka-lovers-(euuk)-2484459"
+                  }
+                },
+                {
+                  "id": "911602",
+                  "title": "Vodka Lovers Variety Pack",
+                  "excerpt": "Calling all vodka lovers! Our 8-pack contains 2 each of:. Base Spirit:\u00a0Vodka",
+                  "link": {
+                    "href": "/vodka-lovers-variety-pack-911602"
+                  }
+                },
+                {
+                  "id": "3063948",
+                  "title": "Winter Tequila Collection 2025",
+                  "excerpt": "Embrace the magic of the season with Bartesian's Winter Tequila Collection, designed to bring warmth and cheer to your winter festivities. This limited-edition variety pack contains 2 each of 4 curated seasonal tequila cocktails:. Base Spirit:\u00a0Tequil",
+                  "link": {
+                    "href": "/winter-tequila-collection-2025-3063948"
+                  }
+                },
+                {
+                  "id": "914250",
+                  "title": "Whiskey Lovers Variety Pack",
+                  "excerpt": "For the whiskey lover in your life. Our 8-count pack contains 2 each of:. Base Spirit:\u00a0Whiskey",
+                  "link": {
+                    "href": "/whiskey-lovers-variety-pack-914250"
+                  }
+                },
+                {
+                  "id": "2559265",
+                  "title": "Whiskey Lovers (EU/UK)",
+                  "excerpt": "Four of Bartesian's best-selling whiskey cocktail varieties, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients.\u00a0This variety pack contains 2 each of",
+                  "link": {
+                    "href": "/whiskey-lovers-(euuk)-2559265"
+                  }
+                },
+                {
+                  "id": "3063950",
+                  "title": "Winter Vodka Collection 2025",
+                  "excerpt": "Discover the crisp elegance of Bartesian's Winter Vodka Collection, designed to bring a touch of sophistication to the frosty season. This limited-edition variety pack contains 2 each of 4 curated seasonal vodka cocktails:. Base Spirit:\u00a0Vodka",
+                  "link": {
+                    "href": "/winter-vodka-collection-2025-3063950"
+                  }
+                }
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "8411",
+          "title": "Bartesian Hardware",
+          "link": {
+            "href": "/articles/hardware-8411"
+          },
+          "articles": [
+            {
+              "id": "42974",
+              "title": "Bartesian use and care guides",
+              "excerpt": "English and French",
+              "link": {
+                "href": "/bartesian-use-and-care-guides-42974"
+              }
+            },
+            {
+              "id": "35034",
+              "title": "How to: Run first use",
+              "excerpt": "Periodic cleaning maintenance will help your Bartesian operate optimally. 1.\u00a0Fill Water Reservoir with water only. Do not fill with mixes, juices, club soda or other liquid. The cocktail machine may stop working and void warranty if other liquids are",
+              "link": {
+                "href": "/how-to-run-first-use-35034"
+              }
+            },
+            {
+              "id": "42976",
+              "title": "Bartesian does not properly identify when capsule is inserted",
+              "excerpt": "Open the lid, use a soft dry cloth to wipe off the cocktail capsule lid and bar code scanner on the underside of the lid to clear any potential water spots. When making a cocktail ensure the following:. - If there is a noticeable wrinkle or crease in",
+              "link": {
+                "href": "/bartesian-does-not-properly-identify-when-capsule-is-inserted-42976"
+              }
+            },
+            {
+              "id": "42977",
+              "title": "How to: Switch spirits",
+              "excerpt": "Directions for switching spirits can also be found in the Bartesian user guides.",
+              "link": {
+                "href": "/how-to-switch-spirits-42977"
+              }
+            },
+            {
+              "id": "42979",
+              "title": "Cocktail not dispensing correctly",
+              "excerpt": "1. As a best practice, it's best to keep your capsule holder clean. It's easy to remove and can be cleaned either in a dishwasher or using hot water. Replace the capsule holder securely into place. 2.\u00a0Bartesian uses genuine juices, bitters, and extra",
+              "link": {
+                "href": "/cocktail-not-dispensing-correctly-42979"
+              }
+            },
+            {
+              "id": "332067",
+              "title": "Extended Protection Plan",
+              "excerpt": "This page is regarding the Extended Protection Plan.\u00a0For information regarding the Warranty coverage for the Bartesian, please view\u00a0this FAQ page. This warranty applies to products purchased and used in the U.S. and Canada. This is the only express w",
+              "link": {
+                "href": "/extended-protection-plan-332067"
+              }
+            },
+            {
+              "id": "340792",
+              "title": "Comparison of Bartesian models",
+              "excerpt": "",
+              "link": {
+                "href": "/comparison-of-bartesian-models-340792"
+              }
+            },
+            {
+              "id": "4809618",
+              "title": "About:  Replacement bottles for Bartesian",
+              "excerpt": "Wondering which bottle is right for you?. Bartesian premium cocktail maker. Select the model as shown ensure \"premium\" is selected, followed by the desired associated spirit lid. Take me there. Bartesian Duet Cocktail Maker. Select the Duet model as",
+              "link": {
+                "href": "/about--replacement-bottles-for-bartesian-4809618"
+              }
+            },
+            {
+              "id": "7105292",
+              "title": "Bottle Use & Maintenance",
+              "excerpt": "Please find the article below for details on cleaning and maintaining your Bartesian spirit bottles. If you need assistance with your spirit bottles, please reach out to our customer care team via bartesian.com/care.The bottles are housed upside down",
+              "link": {
+                "href": "/bottle-use-and-maintenance-7105292"
+              }
+            },
+            {
+              "id": "5413411",
+              "title": "How to: Open the spirit bottle (Duet/Professional)",
+              "excerpt": "",
+              "link": {
+                "href": "/how-to-open-the-spirit-bottle-(duetprofessional)-5413411"
+              }
+            },
+            {
+              "id": "7277349",
+              "title": "Machine Not Dispensing",
+              "excerpt": "If the machine is making noise, but nothing is being dispensed, the gaskets in the unit might be stuck, preventing the liquid from flowing.\u00a0Alcohols, especially whiskey and dark rum, contain sugars and other additives that may build up in small amoun",
+              "link": {
+                "href": "/machine-not-dispensing-7277349"
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "8413",
+          "title": "Bartesian Shipping/Returns Policies",
+          "link": {
+            "href": "/articles/shippingreturns-8413"
+          },
+          "articles": [
+            {
+              "id": "36421",
+              "title": "If I order today, when will it ship?",
+              "excerpt": "Once your order is placed, you\u2019ll receive an email confirmation. Please review it carefully to ensure all items and your shipping address are correct. If expedited shipping is available for your delivery area, it will be presented as an option during",
+              "link": {
+                "href": "/if-i-order-today-when-will-it-ship-36421"
+              }
+            },
+            {
+              "id": "42972",
+              "title": "What is your return policy?",
+              "excerpt": "Please find the return policies for our product categories below. If you have any further questions, you may reach out to us via bartesian.com/pages/contact. All policies apply to purchases made directly via\u00a0Bartesian.com only. For purchases from thi",
+              "link": {
+                "href": "/what-is-your-return-policy-42972"
+              }
+            },
+            {
+              "id": "42985",
+              "title": "Do you ship internationally?",
+              "excerpt": "Orders placed on Bartesian.com are shipped from distribution centers within the United States, Canada, the United Kingdom, and Germany. At this time, France, Italy, and Germany are the only EU countries we are able to ship to. We will update once we",
+              "link": {
+                "href": "/do-you-ship-internationally-42985"
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "12340",
+          "title": "Subscriptions",
+          "link": {
+            "href": "/articles/bartesian-subscription-faq-12340"
+          },
+          "articles": [
+            {
+              "id": "46881",
+              "title": "I've ordered a subscription but cannot login",
+              "excerpt": "Experiencing issues or errors logging in?",
+              "link": {
+                "href": "/ive-ordered-a-subscription-but-cannot-login-46881"
+              }
+            },
+            {
+              "id": "563580",
+              "title": "Video: An introduction to Bartesian subscription features",
+              "excerpt": "A video walkthrough introducing the features of a Bartesian cocktail subscription.",
+              "link": {
+                "href": "/video-an-introduction-to-bartesian-subscription-features-563580"
+              }
+            },
+            {
+              "id": "1166117",
+              "title": "How to: Create a New Subscription (Video)",
+              "excerpt": "A video walkthrough detailing how to create a new subscription from Bartesian.com.",
+              "link": {
+                "href": "/how-to-create-a-new-subscription-(video)-1166117"
+              }
+            },
+            {
+              "id": "46882",
+              "title": "When is the best time to make changes to my subscription?",
+              "excerpt": "The optimal time to make changes to your subscription (change selections, skip, etc.) from within your account, is during the weeks between order dates up until the day before it is next scheduled to process. If you have reached your order date witho",
+              "link": {
+                "href": "/when-is-the-best-time-to-make-changes-to-my-subscription-46882"
+              }
+            },
+            {
+              "id": "64380",
+              "title": "How to: Change Cocktail Selections & Size of Your Subscription",
+              "excerpt": "With a Bartesian capsule subscription, you can customize your selections between deliveries. Please make sure you log into your account to start. Once logged in\u00a0you can click the Manage Subscription button from your \"My Account\" screen:. Or\u00a0from the",
+              "link": {
+                "href": "/how-to-change-cocktail-selections-and-size-of-your-subscription-64380"
+              }
+            },
+            {
+              "id": "46876",
+              "title": "How to: Skip an Order",
+              "excerpt": "With a Bartesian cocktail subscription, you can customize the frequency between deliveries and skip orders as needed.\u00a0Please make sure you log into your account to start. Once logged in\u00a0you can click the Manage Subscription button from your \"My Accou",
+              "link": {
+                "href": "/how-to-skip-an-order-46876"
+              }
+            },
+            {
+              "id": "46888",
+              "title": "How to: Order Now",
+              "excerpt": "With a Bartesian capsule subscription, you can process your subscription order straight way to get the subscription discount without\u00a0waiting for your next order date. Please make sure you log into your account to start. Once logged in\u00a0you can click t",
+              "link": {
+                "href": "/how-to-order-now-46888"
+              }
+            },
+            {
+              "id": "49282",
+              "title": "How to: Add or Remove One Time Items to an Upcoming Order",
+              "excerpt": "Got an order coming up and want to add some items before it ships? You can do so up to 24 hours in advance of your order. An add-on item is a one-time purchase you'd like included with your next order. If you'd like to adjust the number of boxes in y",
+              "link": {
+                "href": "/how-to-add-or-remove-one-time-items-to-an-upcoming-order-49282"
+              }
+            },
+            {
+              "id": "46883",
+              "title": "How to: Cancel a subscription",
+              "excerpt": "With a Bartesian capsule subscription, you can cancel at any time, with no penalty. Please make sure you log into your account to start. Once logged in\u00a0you can click the Manage Subscription button from your \"My Account\" Screen:. Or\u00a0from the Subscript",
+              "link": {
+                "href": "/how-to-cancel-a-subscription-46883"
+              }
+            },
+            {
+              "id": "48170",
+              "title": "How to: Reactivate a subscription",
+              "excerpt": "If you've cancelled a Bartesian subscription, you can reactivate it. Please make sure you log into your account to start. Once logged in\u00a0you can click the Manage Subscription button from your \"My Account\" page:. Or from the Subscriptions homepage:. O",
+              "link": {
+                "href": "/how-to-reactivate-a-subscription-48170"
+              }
+            },
+            {
+              "id": "569240",
+              "title": "How can I apply my Bartesian Club rewards to my subscription?",
+              "excerpt": "You can apply your Bartesian Club rewards directly in your subscription. Please make sure you log into your account to start. Once logged in\u00a0you can click the Manage Subscription button from your \"My Account\" page:. Or\u00a0from the Subscriptions homepage",
+              "link": {
+                "href": "/how-can-i-apply-my-bartesian-club-rewards-to-my-subscription-569240"
+              }
+            },
+            {
+              "id": "651896",
+              "title": "How to: Update Billing Information",
+              "excerpt": "With a Bartesian subscription, you can easily update your billing information on the main page of your subscription. Please make sure to log into your account to start. Once logged in you can click the Manage Subscription button from your \u2018My Account",
+              "link": {
+                "href": "/how-to-update-billing-information-651896"
+              }
+            },
+            {
+              "id": "1426226",
+              "title": "How to: Update Subscription Shipping Address",
+              "excerpt": "With a Bartesian subscription, you can easily update your shipping address on the main page of your subscription. Please make sure to log into your account to start. Once logged in you can click the Manage Subscription button from your \u2018My Account\u2019 p",
+              "link": {
+                "href": "/how-to-update-subscription-shipping-address-1426226"
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "34331",
+          "title": "Bartesian Club",
+          "link": {
+            "href": "/articles/bartesian-club-34331"
+          },
+          "articles": [
+            {
+              "id": "126975",
+              "title": "What is the Bartesian Club?",
+              "excerpt": "Bartesian Rewards is how we show appreciation to our customers. You\u2019ll earn points for activities like referring friends and making purchases. Only purchases made on our website,\u00a0https://bartesian.com/\u00a0are eligible to earn points. You can use points",
+              "link": {
+                "href": "/what-is-the-bartesian-club-126975"
+              }
+            },
+            {
+              "id": "127012",
+              "title": "Who can join?",
+              "excerpt": "The Program is available to individuals for their personal use only and is limited to one account per person. Anyone with an account is automatically enrolled. Account holders must receive orders shipped to the United States, Canada, and the United K",
+              "link": {
+                "href": "/who-can-join-127012"
+              }
+            },
+            {
+              "id": "127014",
+              "title": "Is there a limit to the number of points I can earn?",
+              "excerpt": "No. There is no limit to the number of points you can earn. You can also keep earning points and use them toward a larger reward ($50) or you can redeem them in smaller increments ($10).",
+              "link": {
+                "href": "/is-there-a-limit-to-the-number-of-points-i-can-earn-127014"
+              }
+            },
+            {
+              "id": "127015",
+              "title": "Do points expire?",
+              "excerpt": "Points will expire if no purchase is made within one (1) calendar year.",
+              "link": {
+                "href": "/do-points-expire-127015"
+              }
+            },
+            {
+              "id": "127016",
+              "title": "Can I use rewards on subscriptions?",
+              "excerpt": "Yes! You can apply your Bartesian Club rewards directly in your subscription. Please make sure you log into your account to start. Once logged in\u00a0you can click the Manage Subscription button from your \"My Account Screen:Or\u00a0from the Subscriptions home",
+              "link": {
+                "href": "/can-i-use-rewards-on-subscriptions-127016"
+              }
+            },
+            {
+              "id": "127019",
+              "title": "How do rewards work?",
+              "excerpt": "You can redeem 1,000 points for a $10 reward. You can apply rewards at checkout or opt to apply your points on a subscription reward that can be applied to your next cocktail subscription shipment. Don\u2019t forget referring friends is 2,500 points!",
+              "link": {
+                "href": "/how-do-rewards-work-127019"
+              }
+            },
+            {
+              "id": "127020",
+              "title": "How can I see my points?",
+              "excerpt": "Your available points and rewards will be located on The Bartesian Club page when you are logged in to your Bartesian account. You will also receive monthly updates by email with your balance and reward redemption options.",
+              "link": {
+                "href": "/how-can-i-see-my-points-127020"
+              }
+            },
+            {
+              "id": "127136",
+              "title": "Why did my account balance go down?",
+              "excerpt": "You may have redeemed points for rewards, or you, or someone you referred, cancelled or returned a purchase. Purchases made with points do not earn points. As points are redeemed for codes, the point balance is reduced and your available codes can be",
+              "link": {
+                "href": "/why-did-my-account-balance-go-down-127136"
+              }
+            },
+            {
+              "id": "127137",
+              "title": "I completed an activity but didn't earn points!",
+              "excerpt": "Points may take up to 24 hours to appear in your account after a purchase or activity.",
+              "link": {
+                "href": "/i-completed-an-activity-but-didnt-earn-points-127137"
+              }
+            },
+            {
+              "id": "127144",
+              "title": "How do I leave the program?",
+              "excerpt": "If you no longer wish to earn points, please contact us and ask to be unenrolled. We'll unenroll you and you will lose any points you have accrued. You may contact us via hello@bartesian.com or through our\u00a0Sales Support Contact Form.",
+              "link": {
+                "href": "/how-do-i-leave-the-program-127144"
+              }
+            },
+            {
+              "id": "127146",
+              "title": "How long will the Bartesian Club be offered?",
+              "excerpt": "We hope to expand and grow the Bartesian Club as our business grows. It\u2019s important to us to share special deals, early access and rewards with our best customers. We may cancel, change, or suspend any part of the Bartesian Club program at any time.",
+              "link": {
+                "href": "/how-long-will-the-bartesian-club-be-offered-127146"
+              }
+            },
+            {
+              "id": "136073",
+              "title": "How to: Refer friends and family",
+              "excerpt": "Referring friends is a great way to gain points in the Bartesian Club!. Please make sure you log into your account to start. You can complete the referral by clicking on the following tile under the Bartesian Club page:. Upon selecting the 'refer' bu",
+              "link": {
+                "href": "/how-to-refer-friends-and-family-136073"
+              }
+            }
+          ],
+          "children": []
+        },
+        {
+          "id": "200182",
+          "title": "Official Bartesian APP for Apple and Android",
+          "link": {
+            "href": "/articles/official-bartesian-app-for-apple-and-android-200182"
+          },
+          "articles": [
+            {
+              "id": "857460",
+              "title": "Bartesian App Help",
+              "excerpt": "We make frequent updates to our app, which is published on the official Apple and Android app stores. If you're encountering issues while using the app, we suggest first ensuring that the most recent version has been installed. You can also login to",
+              "link": {
+                "href": "/bartesian-app-help-857460"
+              }
+            }
+          ],
+          "children": []
+        }
+      ],
+      "sidebarUncategorizedArticles": [
+        {
+          "id": "641644",
+          "title": "I need to modify an order that was placed recently",
+          "link": {
+            "href": "/i-need-to-modify-an-order-that-was-placed-recently-641644"
+          }
+        }
+      ],
+      "isSearchActivated": true,
+      "algoliaApiKey": "MWIxY2QwMjBjNDViYzI2YzViMDY5NTcwYzllZDdiMjUyZmM4NjA0YTAwYmM2NzM0YzgxZTYxNzRkNWIzNDJkMWZpbHRlcnM9aGVscF9jZW50ZXJfaWQlM0E2NiUyMEFORCUyMGN1c3RvbWVyX3Zpc2liaWxpdHklM0FQVUJMSUMlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBBTkQlMjBjdXJyZW50JTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwQU5EJTIwKE5PVCUyMHBhcmVudF9jYXRlZ29yeV8xLmN1c3RvbWVyX3Zpc2liaWxpdHklM0FVTkxJU1RFRCklMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBBTkQlMjAoTk9UJTIwcGFyZW50X2NhdGVnb3J5XzIuY3VzdG9tZXJfdmlzaWJpbGl0eSUzQVVOTElTVEVEKSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMEFORCUyMChOT1QlMjBwYXJlbnRfY2F0ZWdvcnlfMy5jdXN0b21lcl92aXNpYmlsaXR5JTNBVU5MSVNURUQpJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwJTIwQU5EJTIwKE5PVCUyMHBhcmVudF9jYXRlZ29yeV80LmN1c3RvbWVyX3Zpc2liaWxpdHklM0FVTkxJU1RFRCklMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjAlMjBBTkQlMjAoTk9UJTIwcGFyZW50X2NhdGVnb3J5XzUuY3VzdG9tZXJfdmlzaWJpbGl0eSUzQVVOTElTVEVEKSZyZXN0cmljdEluZGljZXM9ZW50aXRpZXMtdjI=",
+      "algoliaAppId": "LO28MF0H5E",
+      "indexName": "entities-v2",
+      "htmlContent": "<p style=\"text-align: center;\"><span id=\"isPasted\" style=\"color: rgb(0, 0, 0); font-family: Inter; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-decoration-thickness: initial; text-decoration-style: initial; text-decoration-color: initial; float: none; display: inline !important;\">The Lemon Drop is as tasty as its candy namesake but with the added bonus of vodka. This sweet and sour lemon cocktail is perfectly complemented with a sugar rim and lemon for a delicious dessert cocktail.&#xA0;</span></p><p><img src=\"https://attachments.gorgias.help/z8QbV2PqYp7ogePy/hc/w0l9dY2VKY7rZkLp/2025031215-96e8ffc9-83e3-471f-a3fc-82c38d7316d9-5a593482-2e40-42d6-aac1-3f8806fbcb08.png\" style=\"width: 333px;\" class=\"fr-fic fr-dib\"></p><p id=\"isPasted\" style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 15px; letter-spacing: normal; color: rgba(17,24,39,var(--tw-text-opacity)); line-height: 1.9; -webkit-font-smoothing: antialiased !important; margin-top: 0px; margin-right: 0px; margin-bottom: 12px !important; margin-left: 0px; padding: 0px; --tw-text-opacity:1; text-decoration: none; text-transform: none; min-height: 1.55em !important; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; orphans: 2; text-indent: 0px; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-align: center;\"><span style=\"font-family: Inter; font-size: 14px;\"><strong style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif !important; -webkit-font-smoothing: antialiased !important;\">Base Spirit:</strong></span><strong style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif !important; -webkit-font-smoothing: antialiased !important;\"><span style=\"font-family: Inter; font-size: 14px;\">&#xA0;</span></strong><span style=\"font-family: Inter; font-size: 14px;\">Vodka</span></p><p style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 15px; letter-spacing: normal; color: rgba(17,24,39,var(--tw-text-opacity)); line-height: 1.9; -webkit-font-smoothing: antialiased !important; margin-top: 0px; margin-right: 0px; margin-bottom: 12px !important; margin-left: 0px; padding: 0px; --tw-text-opacity:1; text-decoration: none; text-transform: none; min-height: 1.55em !important; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; orphans: 2; text-indent: 0px; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-align: center;\"><span style=\"font-family: Inter; font-size: 14px;\"><strong style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif !important; -webkit-font-smoothing: antialiased !important;\">Recommended Glassware:</strong> Lowball Glass</span></p><p style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 15px; letter-spacing: normal; color: rgba(17,24,39,var(--tw-text-opacity)); line-height: 1.9; -webkit-font-smoothing: antialiased !important; margin-top: 0px; margin-right: 0px; margin-bottom: 12px !important; margin-left: 0px; padding: 0px; --tw-text-opacity:1; text-decoration: none; text-transform: none; min-height: 1.55em !important; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; orphans: 2; text-indent: 0px; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-align: center;\"><span style=\"font-family: Inter; font-size: 14px;\"><strong style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif !important; -webkit-font-smoothing: antialiased !important;\">Garnish:&#xA0;</strong>Lemon</span></p><p style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 15px; letter-spacing: normal; color: rgba(17,24,39,var(--tw-text-opacity)); line-height: 1.9; -webkit-font-smoothing: antialiased !important; margin-top: 0px; margin-right: 0px; margin-bottom: 12px !important; margin-left: 0px; padding: 0px; --tw-text-opacity:1; text-decoration: none; text-transform: none; min-height: 1.55em !important; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; orphans: 2; text-indent: 0px; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-align: center;\"><span style=\"font-family: Inter; font-size: 14px;\"><strong style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif !important; -webkit-font-smoothing: antialiased !important;\">Alcohol Volume:&#xA0;</strong>Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz.</span></p><p id=\"isPasted\" style=\"box-sizing: inherit; --tw-border-opacity:1; border: 0px; --tw-shadow:0 0 transparent; --tw-ring-inset:var(--tw-empty, ); --tw-ring-offset-width:0px; --tw-ring-offset-color:#fff; --tw-ring-color:rgba(59,130,246,0.5); --tw-ring-offset-shadow:0 0 transparent; --tw-ring-shadow:0 0 transparent; font-family: -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, Oxygen, Ubuntu, Cantarell, &quot;Fira Sans&quot;, &quot;Droid Sans&quot;, &quot;Helvetica Neue&quot;, sans-serif; font-size: 15px; letter-spacing: normal; color: rgba(17,24,39,var(--tw-text-opacity)); line-height: 1.9; -webkit-font-smoothing: antialiased !important; margin-top: 0px; margin-right: 0px; margin-bottom: 12px !important; margin-left: 0px; padding: 0px; --tw-text-opacity:1; text-decoration: none; text-transform: none; min-height: 1.55em !important; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; orphans: 2; text-indent: 0px; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: rgb(255, 255, 255); text-align: center;\"><img src=\"https://attachments.gorgias.help/uploads.gorgias.io/z8QbV2PqYp7ogePy/undefined-13f34df6-16d6-4e15-ab09-6f8b97707012\" style=\"width: 586px;\" class=\"fr-fic fr-dib\"><img src=\"https://attachments.gorgias.help/z8QbV2PqYp7ogePy/hc/w0l9dY2VKY7rZkLp/2024091216-dcc4272e-c5b3-4c88-ba7f-e61868d49db8-7b61e708-ee4b-437c-ab70-3f7ca904cc85.jpeg\" style=\"width: 692px;\" class=\"fr-fic fr-dib\"></p>",
+      "tableOfContentsItems": [],
+      "title": "Lemon Drop",
+      "baseUrl": "/lemon-drop-39052",
+      "showLanguageFallbackWarning": false,
+      "allArticlesLink": {
+        "href": "/articles"
+      },
+      "slugArticleId": "lemon-drop-39052",
+      "activeArticleId": "39052",
+      "activeCategoryId": "324907",
+      "parentsLevels": [
+        {
+          "title": "Nutritional Information",
+          "link": {
+            "href": "/articles/nutritional-information-8410"
+          }
+        },
+        {
+          "title": "Vodka Cocktails",
+          "link": {
+            "href": "/articles/vodka-cocktails-324907"
+          }
+        }
+      ],
+      "parentCategoryIds": [
+        "8410",
+        "324907"
+      ],
+      "lastUpdated": "2026-02-18T14:09:57.901Z",
+      "domain": "bartesian.gorgias.help",
+      "cachedCookies": {
+        "cachedIsGridMode": null,
+        "cachedSidebarOpened": null
+      },
+      "_sentryTraceData": "2f45d641279240e9a2ce1fdd498c1d73-84835bd1a7e3a0b0",
+      "_sentryBaggage": "sentry-environment=production,sentry-release=523b3a2c21d8067eefa0bdde73b18ade021ca1b3,sentry-public_key=339d07b3af324b43a69197fcfeeb4c08,sentry-trace_id=2f45d641279240e9a2ce1fdd498c1d73,sentry-org_id=10734"
+    },
+    "__N_SSP": true
+  },
+  "page": "/[slugArticleId]",
+  "query": {
+    "slugArticleId": "lemon-drop-39052"
+  },
+  "buildId": "h80B09Iekxe8CSk_5vkCy",
+  "assetPrefix": "https://assets.gorgias.help/523b3a2c21d8067eefa0bdde73b18ade021ca1b3",
+  "runtimeConfig": {
+    "environment": "production",
+    "chatSelfServicePortalApiUrl": "https://us-east1-898b.gorgias.chat",
+    "chatCdnBaseUrl": "https://config.gorgias.chat",
+    "recaptcha": {
+      "disabled": false,
+      "siteKey": "6LcIEKclAAAAANYKZuy20mvsprqiXITTJTMgCG-8"
+    },
+    "workflowsBaseUrl": "https://api.gorgias.work"
+  },
+  "isFallback": false,
+  "isExperimentalCompile": false,
+  "gssp": true,
+  "locale": "en-US",
+  "locales": [
+    "catchAll",
+    "en-US",
+    "en-GB",
+    "fr-FR",
+    "fr-CA",
+    "es-ES",
+    "de-DE",
+    "nl-NL",
+    "cs-CZ",
+    "da-DK",
+    "no-NO",
+    "it-IT",
+    "sv-SE",
+    "fi-FI",
+    "ja-JP",
+    "pt-BR"
+  ],
+  "defaultLocale": "catchAll",
+  "scriptLoader": [
+    {
+      "defer": true,
+      "src": "https://static.cloudflareinsights.com/beacon.min.js",
+      "data-cf-beacon": "{\"token\": \"868ba4fba67d4d5b918ad5290f6a8690\"}",
+      "strategy": "afterInteractive"
+    }
+  ]
+}

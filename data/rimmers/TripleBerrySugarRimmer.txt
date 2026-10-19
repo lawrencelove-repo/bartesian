@@ -1,0 +1,12 @@
+Name: Triple Berry Sugar Rimmer
+Slug: triple-berry-sugar-rimmer
+Description: With notes of strawberry, blueberry, and raspberry, this sugar elevates any cocktail to a sweet and indulgent experience.
+Kind: sugar
+Pairs With: Lemon Drop, all types of Margaritas, Raspberry Ginger Gimlet, & Cosmopolitan
+Cocktail Slugs: lemon-drop, raspberry-ginger-gimlet
+Bartesian URL: https://bartesian.com/products/triple-berry-sugar-rimmer?variant=41668489674951
+Help URL: https://bartesian.gorgias.help/en-US/triple-berry-sugar-rimmer-39503
+Image: images/rimmers/triple-berry-sugar-rimmer.jpg
+Nutrition Image: 
+Barcode: 
+Quantity: 0

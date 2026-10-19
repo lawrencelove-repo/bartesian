@@ -1,16 +1,18 @@
 Name: Margarita
 Slug: margarita
-Description: Lime-forward tequila capsule cocktail — placeholder catalog entry for scaffold.
+Description: The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits.
 Spirits: Tequila
-Glassware: Margarita
-Garnish: Salt rim, Lime wedge
-Pairs With: Tacos, Fruit salad
-Nutrition: {"calories":160,"sugar_g":12}
-Alcohol: {"abv_pct":13,"volume_ml":220}
-Bartesian URL: https://www.bartesian.com/
-Image:
-Favorite: 1
-Quantity: 5
-Capsule Barcode: 850000000003
-Case Barcode: 850000000103
+Glassware: Margarita Glass
+Garnish: Lime
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/margarita.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/margarita-cocktails?variant=15685650022449
+Help URL: https://bartesian.gorgias.help/en-US/margarita-39059
+Image: images/cocktails/margarita.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
 Case Qty: 8

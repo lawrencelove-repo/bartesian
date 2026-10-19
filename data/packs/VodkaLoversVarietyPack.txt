@@ -1,0 +1,11 @@
+Name: Vodka Lovers Variety Pack
+Slug: vodka-lovers-variety-pack
+Barcode: 
+Notes: Calling all vodka lovers!
+Bartesian URL: https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303
+Image: images/packs/vodka-lovers-variety-pack.jpg
+Items:
+	espresso-martini: 2
+	sippable-cocktail-with-flavors-of-rich: 2
+	creamy-espresso: 2
+	bold-coffee-liqueur: 2

@@ -1,0 +1,18 @@
+Name: Bee's Knees
+Slug: bees-knees
+Description: A sweet, citrus, and refreshing cocktail from the Prohibition Era, the Bee's Knees is a delicious pairing of lemon and honey, combined with floral notes of clover and alfalfa. Shake on ice and garnish with a lemon peel.
+Spirits: Gin
+Glassware: Coupe Glass
+Garnish: with a lemon peel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/bees-knees.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/bees-knees?variant=41695090573511
+Help URL: https://bartesian.gorgias.help/en-US/bees-knees-36519
+Image: images/cocktails/bees-knees.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

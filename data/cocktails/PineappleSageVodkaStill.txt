@@ -1,0 +1,18 @@
+Name: Pineapple Sage Vodka Still
+Slug: pineapple-sage-vodka-still
+Description: Named for the still, an instrument used to distill vodka, our deliciously flavorful Pineapple Sage Vodka Still is the perfect blend of sweet coconut and tart pineapple. Infused with botanical sage, this refreshing cocktail is best suited for any pineapple vodka lover looking for a new favorite with a tropical twist.
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: Lime
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/pineapple-sage-vodka-still.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/pineapple-sage-vodka-still-105537
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

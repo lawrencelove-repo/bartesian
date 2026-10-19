@@ -1,0 +1,18 @@
+Name: Calamansi Daiquiri
+Slug: calamansi-daiquiri
+Description: Calamansi - bright, exotic, and irresistibly tart - transforms the classic daiquiri into something unforgettable. It's a tropical twist perfect for those who love a smooth balance of bright citrus and refreshing sweetness. Shake with ice, serve in a coupe, and garnish with a lime peel.
+Spirits: Rum
+Glassware: Coupe Glass
+Garnish: with a lime peel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/calamansi-daiquiri.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/calamansi-daiquiri-capsules?variant=45649560764615
+Help URL: https://bartesian.gorgias.help/en-US/calamansi-daiquiri-5096344
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

@@ -1,0 +1,18 @@
+Name: Candyman Margarita
+Slug: candyman-margarita
+Description: The seasonal Candyman Margarita is a fun and frightening addition to the Bartesian family of margaritas, with sweet, sour, citrus, berry and candy notes. A cocktail so delicious it'll make you say Candyman five times! It's the perfect margarita for the tequila lover looking for a fun twist on the classic cocktail.
+Spirits: Tequila
+Glassware: Margarita Glass
+Garnish: Lime Wedge
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/candyman-margarita.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/candyman-margarita-129411
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

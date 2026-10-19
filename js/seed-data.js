@@ -7,115 +7,3196 @@ window.BARTESIAN_SEED = {
   ],
   "cocktails": [
     {
-      "name": "Espresso Martini",
-      "slug": "espresso-martini",
-      "description": "Bold espresso and vodka capsule cocktail — placeholder catalog entry for scaffold.",
+      "name": "19th Hole",
+      "slug": "19th-hole",
+      "description": "A delicious sipper on and off the links, the 19th Hole is a refreshing vodka cocktail celebrating the classic combination of sweet lemonade and refreshing black tea flavors. Enjoy over ice in a highball glass garnished with a lemon wedge.",
       "spirits": [
         "Vodka"
       ],
-      "glassware": "Coupe",
-      "garnish": "Coffee beans",
-      "pairs_with": "Dark chocolate, Dessert",
-      "nutrition_json": "{\"calories\":150,\"sugar_g\":10}",
-      "alcohol_json": "{\"abv_pct\":14,\"volume_ml\":200}",
-      "bartesian_url": "https://www.bartesian.com/",
+      "glassware": "Highball Glass",
+      "garnish": "ed with a lemon wedge",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/19th-hole.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/19th-hole-502336",
       "image": "",
-      "favorite": 1,
-      "quantity": 3,
-      "capsule_barcode": "850000000001",
-      "case_barcode": "850000000101",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "19thHole.txt"
+    },
+    {
+      "name": "2026 Advent Calendar (spoiler alert!)",
+      "slug": "2026-advent-calendar-spoiler-alert",
+      "description": "Spoiler Alert: If you wish to keep each day a festive surprise - the information below discloses the capsule selections. With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. - Berry & Bright: A shimmering tequila cocktail combining juicy blueberry, zesty lemon, and a hint of cozy cardamom flavor. The result is a vibrant cocktail that sparkles with the magic of the season. - Brown Butter Old Fashioned: A rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange. - Frosted Ambrosia: A nostalgic vodka cocktail with flavors of juicy orange, pineapple, coconut, cherry, and a soft marshmallow finish. Sweet, creamy, and fruit-forward, it’s a playful holiday dessert cocktail - Ginger Pear Noel: A tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor. - Holiday Spiced Old Fashioned: A spirit-forward cocktail with flavors of orange, bitters, cinnamon and brown sugar. - Jollypeño Margarita: A margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño. - Mistletoe Margarita: A blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita. - Peary Christmas: You'll have a very \"peary\" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond notes. - Salted Caramel Espresso Martini: Flavors of rich coffee, buttery caramel, and a hint of sea salt come together in this smooth, velvety espresso martini. Decadent yet refined, it's a luxurious twist on a cocktail favorite. - The Grinch Appletini: A shimmering sweet and tart vodka cocktail with green apple flavors. - Winter Pear-adise: A sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime. - Yuletide Hurricane: A fruity, tropical rum cocktail with added shimmer.",
+      "spirits": [],
+      "glassware": "",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/2026-advent-calendar-spoiler-alert.png\"}",
+      "alcohol_json": "{}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/2026-advent-calendar-(spoiler-alert)-7886629",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "2026AdventCalendarSpoilerAlert.txt"
+    },
+    {
+      "name": "Amaretto Sour",
+      "slug": "amaretto-sour",
+      "description": "The Amaretto Sour pairs nutty almond and orange citrus notes to make for the perfect vodka dessert cocktail. Whether you’re enjoying it for dessert, brunch, or any other time of day, this cocktail is sophisticated and refreshing all at once.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Orange & Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/amaretto-sour.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.7,\"regular_oz\":1,\"strong_oz\":1.7,\"raw\":\"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1 oz., Strong = 1.7 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/amaretto-sour-cocktails?variant=32387499491377",
+      "help_url": "https://bartesian.gorgias.help/en-US/amaretto-sour-35050",
+      "image": "images/cocktails/amaretto-sour.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "AmarettoSour.txt"
+    },
+    {
+      "name": "Apple Pie",
+      "slug": "apple-pie",
+      "description": "Your favorite dessert is served as a cocktail. The sweet combination of baked apple and fall spices is perfectly balanced with hints of lemon and cayenne in this whiskey and vodka cocktail. Wonderfully reminiscent of a slice of grandma's apple pie.",
+      "spirits": [
+        "Vodka",
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Apple",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/apple-pie.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/apple-pie?variant=32387502047281",
+      "help_url": "https://bartesian.gorgias.help/en-US/apple-pie-36517",
+      "image": "images/cocktails/apple-pie.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "ApplePie.txt"
+    },
+    {
+      "name": "Aviation",
+      "slug": "aviation",
+      "description": "Aviation is a classic violet treasure that consists of Crème de Violette, Maraschino Liqueur, and a squeeze of lemon for a floral, sweet, and citrus libation.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Shaker + Coupe Glass",
+      "garnish": "Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/aviation.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/aviation-cocktails?variant=38174568644807",
+      "help_url": "https://bartesian.gorgias.help/en-US/aviation-36518",
+      "image": "images/cocktails/aviation.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Aviation.txt"
+    },
+    {
+      "name": "Bee's Knees",
+      "slug": "bees-knees",
+      "description": "A sweet, citrus, and refreshing cocktail from the Prohibition Era, the Bee's Knees is a delicious pairing of lemon and honey, combined with floral notes of clover and alfalfa. Shake on ice and garnish with a lemon peel.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "with a lemon peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/bees-knees.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/bees-knees?variant=41695090573511",
+      "help_url": "https://bartesian.gorgias.help/en-US/bees-knees-36519",
+      "image": "images/cocktails/bees-knees.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "BeesKnees.txt"
+    },
+    {
+      "name": "Blackberry Mango Refresher (US Only)",
+      "slug": "blackberry-mango-refresher",
+      "description": "Some days call for a little extra lift - and this Refresher delivers. Juicy, ripe blackberry meets sweet mango in a smooth, fruit-forward blend that’s as vibrant as it is satisfying. It’s the kind of drink that keeps things mellow but moving, perfect for powering through the rest of your day without breaking a sweat. Shake and serve over ice in a highball glass, garnished with blackberries. Contains ~55 mg of caffeine. Base spirit: Vodka. Try it as a mocktail!",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "ed with blackberries",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/blackberry-mango-refresher.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.1,\"regular_oz\":0.2,\"strong_oz\":0.3,\"raw\":\"Mocktail = 0 oz., Light = 0.1 oz., Regular = 0.2 oz., Strong = 0.3 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/blackberry-mango-capsules?variant=46120106295495",
+      "help_url": "https://bartesian.gorgias.help/en-US/blackberry-mango-refresher-(us-only)-4332578",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "BlackberryMangoRefresher.txt"
+    },
+    {
+      "name": "Blackberry Margarita",
+      "slug": "blackberry-margarita",
+      "description": "The Blackberry Margarita provides sweet and slightly tart berry notes with undertones of honeyed fig to create a juicy and jammy combination.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Blackberries",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/blackberry-margarita.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/blackberry-margarita-cocktails?variant=40477928751303",
+      "help_url": "https://bartesian.gorgias.help/en-US/blackberry-margarita-36521",
+      "image": "images/cocktails/blackberry-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "BlackberryMargarita.txt"
+    },
+    {
+      "name": "Blackberry Mint Julep",
+      "slug": "blackberry-mint-julep",
+      "description": "A regal twist on a timeless favorite. This whiskey cocktail blends sweet, jammy blackberry and fresh mint flavors for a cooling, berry-forward sip. Serve in a Mint Julep Cup with crushed ice and garnish with blackberries and a mint sprig.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "with blackberries and a mint sprig",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/blackberry-mint-julep.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/blackberry-mint-julep-5452537",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "BlackberryMintJulep.txt"
+    },
+    {
+      "name": "Blueberry Lemon Drop",
+      "slug": "blueberry-lemon-drop",
+      "description": "Jammy, refreshingly tart, and delicately floral, this twist on the Lemon Drop is bursting with sweet, candied blueberry balanced with bright citrus flavors. Shake and serve in a martini glass garnished with a sugar rim, lemon peel, and blueberries.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with a sugar rim, lemon peel, and blueberries",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/blueberry-lemon-drop.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/blueberry-lemon-drop-1661998",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "BlueberryLemonDrop.txt"
+    },
+    {
+      "name": "Bramble (EU/UK)",
+      "slug": "bramble",
+      "description": "Bright citrus and blackberries mingle with delicate floral flavours, creating a perfectly balanced sip - sweet, tart, and proofy. Best enjoyed with a herbal gin, which adds a smooth, refreshing finish.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Blackberries & Lemon Wheel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/bramble.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/bramble-(euuk)-2559242",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Bramble.txt"
+    },
+    {
+      "name": "Cafécito Churro",
+      "slug": "caf-cito-churro",
+      "description": "Cafécito Churro is a coffeehouse-inspired cocktail with a smooth blend of churro, dark chocolate, coffee, and a hint of cinnamon flavors. Sweet and subtly spiced, it's your favorite treat reimagined over ice for a perfectly indulgent sip. Serve over ice in a lowball glass garnished with churro.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "ed with churro",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/caf-cito-churro.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/cafecito-churro-4476621",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "CafCitoChurro.txt"
+    },
+    {
+      "name": "Calamansi Daiquiri",
+      "slug": "calamansi-daiquiri",
+      "description": "Calamansi - bright, exotic, and irresistibly tart - transforms the classic daiquiri into something unforgettable. It's a tropical twist perfect for those who love a smooth balance of bright citrus and refreshing sweetness. Shake with ice, serve in a coupe, and garnish with a lime peel.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "with a lime peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/calamansi-daiquiri.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/calamansi-daiquiri-capsules?variant=45649560764615",
+      "help_url": "https://bartesian.gorgias.help/en-US/calamansi-daiquiri-5096344",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "CalamansiDaiquiri.txt"
+    },
+    {
+      "name": "Candyman Margarita",
+      "slug": "candyman-margarita",
+      "description": "The seasonal Candyman Margarita is a fun and frightening addition to the Bartesian family of margaritas, with sweet, sour, citrus, berry and candy notes. A cocktail so delicious it'll make you say Candyman five times! It's the perfect margarita for the tequila lover looking for a fun twist on the classic cocktail.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Lime Wedge",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/candyman-margarita.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/candyman-margarita-129411",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "CandymanMargarita.txt"
+    },
+    {
+      "name": "Caramel Appletini",
+      "slug": "caramel-appletini",
+      "description": "The Caramel Appletini is a wickedly smooth cocktail that blends flavors of tart green apple with rich, velvety caramel for a spellbinding sip. It's the perfect balance of crisp and cozy - like your favorite fall treat in a glass.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "Apple Slices, a caramel drizzle or Sour Apple Sugar rim",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/caramel-appletini.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/caramel-appletini?variant=45074472534215",
+      "help_url": "https://bartesian.gorgias.help/en-US/caramel-appletini-2387476",
+      "image": "images/cocktails/caramel-appletini.jpg",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "CaramelAppletini.txt"
+    },
+    {
+      "name": "Clausmopolitan",
+      "slug": "clausmopolitan",
+      "description": "The shimmering holiday version of our classic cranberry, lime, and orange cocktail is sure to be a hit. Shake with ice and serve in a martini glass garnished with a Cranberry Cheer Sugar rim. Leave this out instead of milk and cookies for any guests arriving by sleigh and you’ll be sure to get presents, no matter which list you're on.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with a Cranberry Cheer Sugar rim. Leave this out instead of milk and cookies for any guests arriving by sleigh and you’ll be sure to get presents, no matter which list you're on",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/clausmopolitan.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/clausmopolitan-3388358",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Clausmopolitan.txt"
+    },
+    {
+      "name": "Cosmopolitan",
+      "slug": "cosmopolitan",
+      "description": "Tart cranberry is balanced out by the citrus of lime and sweetness of orange to create this classic vodka cocktail.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "Orange Peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/cosmopolitan.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/cosmopolitan-martini-cocktails?variant=32387303211057",
+      "help_url": "https://bartesian.gorgias.help/en-US/cosmopolitan-38999",
+      "image": "images/cocktails/cosmopolitan.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Cosmopolitan.txt"
+    },
+    {
+      "name": "Cupid's Arrow",
+      "slug": "cupids-arrow",
+      "description": "The Cupid's Arrow is a sweet, fruity combination of guava with notes of strawberry and lime that will make your heart skip a beat!",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Coupe",
+      "garnish": "Strawberry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/cupids-arrow.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/cupids-arrow-182164",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "CupidsArrow.txt"
+    },
+    {
+      "name": "Dirty Vodka Martini",
+      "slug": "dirty-vodka-martini",
+      "description": "A savory riff on a classic vodka cocktail, the Dirty Vodka Martini remixes the traditional pairing of vodka and dry vermouth with a splash of olive brine. Shake with ice and serve in a martini glass garnished with olives.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with olives",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/dirty-vodka-martini.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/dirty-vodka-martini-285761",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "DirtyVodkaMartini.txt"
+    },
+    {
+      "name": "Espresso Martini",
+      "slug": "espresso-martini",
+      "description": "A crowd pleaser for even the most refined palates, the Espresso Martini is a smooth, sippable cocktail with notes of rich and creamy espresso and bold coffee liqueur. Best served shaken and on ice, this martini is the perfect elegant addition to your cocktail selection.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Shaker + Martini",
+      "garnish": "Coffee Beans",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/espresso-martini.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/espresso-martini-capsules?variant=42144722419911",
+      "help_url": "https://bartesian.gorgias.help/en-US/espresso-martini-98045",
+      "image": "images/cocktails/espresso-martini.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
       "case_qty": 8,
       "_file": "EspressoMartini.txt"
     },
     {
-      "name": "Margarita",
-      "slug": "margarita",
-      "description": "Lime-forward tequila capsule cocktail — placeholder catalog entry for scaffold.",
+      "name": "Frosted Orchard",
+      "slug": "frosted-orchard",
+      "description": "The Frosted Orchard is a crisp, refreshing vodka cocktail with a cozy twist. Juicy apple and tangy lemonade are infused with flavors of cinnamon and cardamom for a balanced blend of sweet, citrus and spices. This cool-weather sipper eases the chill with a quiet warmth that unfolds sip by sip.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Apple slice, rosemary sprig and cinnamon stick",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/frosted-orchard.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/frosted-orchard-3388354",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "FrostedOrchard.txt"
+    },
+    {
+      "name": "Frosty Navel",
+      "slug": "frosty-navel",
+      "description": "This snowman-approved vodka cocktail brings a burst of holiday cheer with its bright blend of tangy orange and juicy peach schnapps flavors, delivering a sweet and citrusy sip that tastes like sunshine on a snowy day. Enjoy Frosty Navel over ice in a highball glass with fresh fruit and a Zesty Orange Sugar rim.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Fresh fruit",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/frosty-navel.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/frosty-navel-3388360",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "FrostyNavel.txt"
+    },
+    {
+      "name": "Fuzzy Navel",
+      "slug": "fuzzy-navel",
+      "description": "Indulge in the sweet, sun-kissed flavors of the Fuzzy Navel, a vibrant blend of tangy orange and juicy peach flavors. This smooth, refreshing cocktail perfectly balances the zing of citrus with fruity sweetness, making every sip feel like a golden hour escape.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Orange Peel or Peach Slice",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/fuzzy-navel.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/fuzzy-navel-2027470",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "FuzzyNavel.txt"
+    },
+    {
+      "name": "Gin Basil Smash (UK Only)",
+      "slug": "gin-basil-smash",
+      "description": "Citrus and basil flavours create a refreshing, herbaceous sip that's as striking in the glass as it is easy to enjoy.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Basil Leaf",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/gin-basil-smash.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.7,\"regular_oz\":1,\"strong_oz\":1.7,\"raw\":\"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1.0 oz., Strong = 1.7 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/gin-basil-smash-(uk-only)-8043833",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "GinBasilSmash.txt"
+    },
+    {
+      "name": "Ginger Peach Iced Tea",
+      "slug": "ginger-peach-iced-tea",
+      "description": "This refreshing, juicy cocktail is what a summer day calls for with notes of caffeine-free black tea, sweet peach, and herbal ginger.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Peach",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/ginger-peach-iced-tea.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/ginger-peach-iced-tea-cocktails?variant=32387392536625",
+      "help_url": "https://bartesian.gorgias.help/en-US/ginger-peach-iced-tea-39011",
+      "image": "images/cocktails/ginger-peach-iced-tea.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "GingerPeachIcedTea.txt"
+    },
+    {
+      "name": "Golden Ace",
+      "slug": "golden-ace",
+      "description": "This grand slam of a vodka cocktail refreshingly blends the flavors of tart lemonade, fruity raspberry liqueur, and sweet honeydew melon. A crowd pleaser whether you're on the sidelines or sipping at home, the Golden Ace is a visually stunning drink that's as delightful to behold as it is to sip. Serve over ice and garnish with a trio of honeydew melon balls for the perfect late summer sipper.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "with a trio of honeydew melon balls for the perfect late summer sipper",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/golden-ace.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/golden-ace-capsules?variant=43895115153607",
+      "help_url": "https://bartesian.gorgias.help/en-US/golden-ace-646841",
+      "image": "images/cocktails/golden-ace.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "GoldenAce.txt"
+    },
+    {
+      "name": "Great Gatsby",
+      "slug": "great-gatsby",
+      "description": "Raise a glass to the Roaring Twenties with this elegant, shimmering gin cocktail. Flavors of grapefruit and citrus blend with notes of elderflower for a perfect tribute to the literary classic. Shake with ice and serve in a champagne glass or coupe.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "Grapefruit Peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/great-gatsby.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/great-gatsby-267144",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "GreatGatsby.txt"
+    },
+    {
+      "name": "Hemingway Daiquiri",
+      "slug": "hemingway-daiquiri",
+      "description": "The Hemingway Daiquiri is a variation of the Papa Doble. Combining rum and vodka, this cocktail provides a refreshing blend of sweet and tart grapefruit, citrus lime and dry-cherry notes of maraschino liqueur for an easy sipping experience.",
+      "spirits": [
+        "Rum",
+        "Vodka"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "Orange Peel Twist",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/hemingway-daiquiri.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.7,\"regular_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.7 oz., Regular = 2.5 oz., Strong: 4.2 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/hemingway-daiquiri-39027",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "HemingwayDaiquiri.txt"
+    },
+    {
+      "name": "Holiday Spiced Old Fashioned",
+      "slug": "holiday-spiced-old-fashioned",
+      "description": "A festive twist on a cocktail classic, the Holiday Spiced Old Fashioned is a spirit-forward whiskey cocktail with flavors of orange, bitters, and cinnamon.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Orange Peel and Spiced Rim",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/holiday-spiced-old-fashioned.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/holiday-spiced-old-fashioned-3074904",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "HolidaySpicedOldFashioned.txt"
+    },
+    {
+      "name": "Hurricane",
+      "slug": "hurricane",
+      "description": "Bring Mardi Gras home with the Hurricane. This sweet, fruity, and tropical rum cocktail derives tart and sour flavors from passion fruit and sweetness from orange juice. A hint of citrus lime provides the perfect balance to this classic New Orleans cocktail.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Hurricane Glass",
+      "garnish": "Orange/Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/hurricane.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/hurricane?variant=41598500274375",
+      "help_url": "https://bartesian.gorgias.help/en-US/hurricane-39034",
+      "image": "images/cocktails/hurricane.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Hurricane.txt"
+    },
+    {
+      "name": "Jalapeño Lime Shrub",
+      "slug": "jalape-o-lime-shrub",
+      "description": "Equal parts refreshing, sour lime, citrusy, and jalapeno-level spicy, this unique tequila cocktail contains apple cider vinegar to provide balanced acidity.",
       "spirits": [
         "Tequila"
       ],
-      "glassware": "Margarita",
-      "garnish": "Salt rim, Lime wedge",
-      "pairs_with": "Tacos, Fruit salad",
-      "nutrition_json": "{\"calories\":160,\"sugar_g\":12}",
-      "alcohol_json": "{\"abv_pct\":13,\"volume_ml\":220}",
-      "bartesian_url": "https://www.bartesian.com/",
+      "glassware": "Lowball Glass",
+      "garnish": "Jalapeño",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/jalape-o-lime-shrub.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/jalapeno-lime-shrub-cocktails?variant=31660700696625",
+      "help_url": "https://bartesian.gorgias.help/en-US/jalapeno-lime-shrub-39041",
       "image": "",
-      "favorite": 1,
-      "quantity": 5,
-      "capsule_barcode": "850000000003",
-      "case_barcode": "850000000103",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "JalapeOLimeShrub.txt"
+    },
+    {
+      "name": "Jollypeño Margarita",
+      "slug": "jollype-o-margarita",
+      "description": "Bring the heat to your holiday cheer with a festive twist on a classic that’s anything but ordinary. Bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño, this cocktail strikes the perfect balance of sweetness, tang, and just the right amount of fire. One sip, and you'll be feeling jollier than having your name on the nice list.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Pineapple slice and jalapeños",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/jollype-o-margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/jollypeno-margarita-3388348",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "JollypeOMargarita.txt"
+    },
+    {
+      "name": "Jungle Bird",
+      "slug": "jungle-bird",
+      "description": "Take a tropical adventure to the jungle! The Jungle Bird is a unique tiki cocktail driven by pineapple juice balanced with refreshing lime and bitters. With a Jungle Bird in hand, sit back, relax and enjoy a taste of the jungle.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Bird Glass or Lowball Glass",
+      "garnish": "Lemon Wedge",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/jungle-bird.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/jungle-bird-capsules?variant=42144683983047",
+      "help_url": "https://bartesian.gorgias.help/en-US/jungle-bird-70414",
+      "image": "images/cocktails/jungle-bird.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "JungleBird.txt"
+    },
+    {
+      "name": "Lemon Drop",
+      "slug": "lemon-drop",
+      "description": "The Lemon Drop is as tasty as its candy namesake but with the added bonus of vodka. This sweet and sour lemon cocktail is perfectly complemented with a sugar rim and lemon for a delicious dessert cocktail.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Lemon",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/lemon-drop.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/vodka-martini-lemon-drop-cocktails?variant=31660702203953",
+      "help_url": "https://bartesian.gorgias.help/en-US/lemon-drop-39052",
+      "image": "images/cocktails/lemon-drop.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LemonDrop.txt"
+    },
+    {
+      "name": "Long Island Iced Tea",
+      "slug": "long-island-iced-tea",
+      "description": "Combines just the right amount of vodka, tequila, and rum, rounded with cola notes and liqueurs made from bitter and sweet citrus peels.",
+      "spirits": [
+        "Vodka",
+        "Tequila",
+        "Rum"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Lemon",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/long-island-iced-tea.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":2.2,\"regular_oz\":3,\"strong_oz\":4.6,\"raw\":\"Mocktail = 0 oz., Light = 2.2 oz., Regular = 3 oz., Strong = 4.6 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/long-island-iced-tea-cocktails?variant=32123330428977",
+      "help_url": "https://bartesian.gorgias.help/en-US/long-island-iced-tea-39050",
+      "image": "images/cocktails/long-island-iced-tea.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LongIslandIcedTea.txt"
+    },
+    {
+      "name": "Love Potion",
+      "slug": "love-potion",
+      "description": "Sweet and tart, this enchanting gin cocktail combines juicy blueberry, zesty lemon, and delicate lavender flavors. Experience the magic of Love Potion and let its enchanting blend transport you to a world of serenity and floral bliss.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Lemon Peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/love-potion.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/love-potion-1051826",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LovePotion.txt"
+    },
+    {
+      "name": "Low-Cal Cosmopolitan",
+      "slug": "low-cal-cosmopolitan",
+      "description": "Tart cranberry is balanced out by the citrus of lime and sweetness of orange to create this classic vodka cocktail. This lower calorie Cosmopolitan delivers the same great taste without added sugar.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "Orange peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/low-cal-cosmopolitan.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.9,\"regular_oz\":1.35,\"strong_oz\":2.3,\"raw\":\"Mocktail = 0 oz., Light = 0.9 oz., Regular = 1.35 oz., Strong = 2.3 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/low-calorie-cosmopolitan-martini-cocktails?variant=32387401547825",
+      "help_url": "https://bartesian.gorgias.help/en-US/low-cal-cosmopolitan-39047",
+      "image": "images/cocktails/low-cal-cosmopolitan.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LowCalCosmopolitan.txt"
+    },
+    {
+      "name": "Low-Cal Margarita",
+      "slug": "low-cal-margarita",
+      "description": "The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Lime",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/low-cal-margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.9,\"regular_oz\":1.4,\"strong_oz\":2.3,\"raw\":\"Mocktail = 0 oz., Light = 0.9 oz., Regular = 1.4 oz., Strong = 2.3 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/low-calorie-margarita-cocktails?variant=32387497394225",
+      "help_url": "https://bartesian.gorgias.help/en-US/low-cal-margarita-39048",
+      "image": "images/cocktails/low-cal-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LowCalMargarita.txt"
+    },
+    {
+      "name": "Low-Cal Old Fashioned",
+      "slug": "low-cal-old-fashioned",
+      "description": "The Low-Cal Old Fashioned is a spirit-forward whiskey cocktail that perfectly balances bitter and sweet, with notes of oak and orange citrus. Garnish with an orange peel or a brandied cherry and enjoy this classic whiskey cocktail with no sugar added.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "with an orange peel or a brandied cherry and enjoy this classic whiskey cocktail with no sugar added",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/low-cal-old-fashioned.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/low-cal-old-fashioned-capsules?variant=43584092307655",
+      "help_url": "https://bartesian.gorgias.help/en-US/low-cal-old-fashioned-383427",
+      "image": "images/cocktails/low-cal-old-fashioned.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LowCalOldFashioned.txt"
+    },
+    {
+      "name": "Low-Cal Whiskey Sour",
+      "slug": "low-cal-whiskey-sour",
+      "description": "This cocktail provides a smooth balance of sweet and sour. Notes of vanilla, lemon, and orange round out the flavor profile and make for a classic whiskey citrus cocktail. This low calorie Whiskey Sour delivers the same great taste without added sugar.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/low-cal-whiskey-sour.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/low-calorie-whiskey-sour-cocktails?variant=32387404431409",
+      "help_url": "https://bartesian.gorgias.help/en-US/low-cal-whiskey-sour-39049",
+      "image": "images/cocktails/low-cal-whiskey-sour.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LowCalWhiskeySour.txt"
+    },
+    {
+      "name": "Lychee Martini",
+      "slug": "lychee-martini",
+      "description": "Delicately fruity and lightly floral, the Lychee Martini is an elegant, slightly sweeter twist on a vodka martini. Enjoy this graceful cocktail, inspired by the aromatic and floral flavors of the tropical fruit, shaken over ice and served in a martini glass garnished with lychee.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with lychee",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/lychee-martini.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.7,\"regular_oz\":1,\"strong_oz\":1.7,\"raw\":\"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1.0 oz., Strong = 1.7 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/lychee-martini-capsules?variant=43540349616327",
+      "help_url": "https://bartesian.gorgias.help/en-US/lychee-martini-445992",
+      "image": "images/cocktails/lychee-martini.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "LycheeMartini.txt"
+    },
+    {
+      "name": "Mai Tai",
+      "slug": "mai-tai",
+      "description": "The Mai Tai brings together light and dark rums with sweet almond syrup. Orange curacao adds body and helps soften the brightness of the tart pineapple for a citrus and sweet cocktail.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Mai Tai Glass",
+      "garnish": "Pineapple & Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/mai-tai.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/mai-tai-cocktails?variant=31660700860465",
+      "help_url": "https://bartesian.gorgias.help/en-US/mai-tai-39053",
+      "image": "images/cocktails/mai-tai.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "MaiTai.txt"
+    },
+    {
+      "name": "Mango Habanero Margarita",
+      "slug": "mango-habanero-margarita",
+      "description": "Tropical and fiery, this vibrant margarita pairs ripe mango and lime juices with a kick of habanero flavor. Each sip unfolds with the perfect harmony of sweet and heat. Serve in a lowball with ice and garnish with a spicy rim, lime wheel and habanero pepper. Get this limited seasonal release while it lasts.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "with a spicy rim, lime wheel and habanero pepper. Get this limited seasonal release while it lasts",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/mango-habanero-margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/mango-habanero-margarita-capsules?variant=46099570884807",
+      "help_url": "https://bartesian.gorgias.help/en-US/mango-habanero-margarita-6360703",
+      "image": "images/cocktails/mango-habanero-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "MangoHabaneroMargarita.txt"
+    },
+    {
+      "name": "Mango Margarita",
+      "slug": "mango-margarita",
+      "description": "This cocktail is a fruity, juicy, and refreshing margarita with a sweet blend of tequila, mango, and lime served over ice with a salted rim.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Lime",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/mango-margarita.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/mango-margarita-cocktails?variant=32387383722033",
+      "help_url": "https://bartesian.gorgias.help/en-US/mango-margarita-39056",
+      "image": "images/cocktails/mango-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "MangoMargarita.txt"
+    },
+    {
+      "name": "Manhattan",
+      "slug": "manhattan",
+      "description": "The Manhattan stirred up its popularity with its mix of savory sweet vermouth, whiskey, and aromatic bitters with a hint of cherry.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/manhattan.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/manhattan-cocktails?variant=39353828737223",
+      "help_url": "https://bartesian.gorgias.help/en-US/manhattan-39058",
+      "image": "images/cocktails/manhattan.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Manhattan.txt"
+    },
+    {
+      "name": "Maple Pecan Pie",
+      "slug": "maple-pecan-pie",
+      "description": "This decadent, dessert-inspired cocktail is the perfect complement to cooler temperatures. The combination of sweet maple, nutty pecan, and buttery shortbread crust flavors pairs with whiskey and vodka for an indulgent delight.",
+      "spirits": [
+        "Whiskey",
+        "Vodka"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Maple Leaf or Pecan",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/maple-pecan-pie.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/maple-pecan-pie-2567775",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "MaplePecanPie.txt"
+    },
+    {
+      "name": "Margarita",
+      "slug": "margarita",
+      "description": "The Margarita is a classic, refreshing blend of tequila, lemon, and lime for a sweet and sour citrus experience. A salted rim perfectly complements the citrus of the fruits.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Lime",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/margarita-cocktails?variant=15685650022449",
+      "help_url": "https://bartesian.gorgias.help/en-US/margarita-39059",
+      "image": "images/cocktails/margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
       "case_qty": 8,
       "_file": "Margarita.txt"
     },
     {
-      "name": "Mojito",
-      "slug": "mojito",
-      "description": "Mint and rum capsule cocktail — placeholder catalog entry for scaffold.",
+      "name": "Mezcalita",
+      "slug": "mezcalita",
+      "description": "Escape to Tulum with the smoky allure of the Mezcalita, crafted in collaboration with Mezcalum. This sophisticated cocktail blends the bright tang of fresh orange and lime juices with flavors of smoky mezcal, a hint of campfire wood, and a touch of sweetness.",
       "spirits": [
-        "Rum"
+        "Tequila"
       ],
-      "glassware": "Highball",
-      "garnish": "Mint sprig, lime",
-      "pairs_with": "Grilled seafood",
-      "nutrition_json": "{\"calories\":145,\"sugar_g\":14}",
-      "alcohol_json": "{\"abv_pct\":11,\"volume_ml\":240}",
-      "bartesian_url": "https://www.bartesian.com/",
+      "glassware": "Lowball Glass",
+      "garnish": "Fresh Citrus Wheels and Spicy Salt Rim",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/mezcalita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/mezcalita-1120804",
       "image": "",
+      "seasonal": 0,
       "favorite": 0,
-      "quantity": 1,
-      "capsule_barcode": "850000000004",
-      "case_barcode": "850000000104",
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
       "case_qty": 8,
-      "_file": "Mojito.txt"
+      "_file": "Mezcalita.txt"
+    },
+    {
+      "name": "Midnight Passion Martini",
+      "slug": "midnight-passion-martini",
+      "description": "An alluring twist on the classic Pornstar Martini, this vodka cocktail dazzles with juicy passion fruit, zesty lime, and a hint of vanilla flavor. Sweet and tart in perfect harmony, it’s a smooth martini designed to be savored whenever you want to make the night feel a little more electric. Shake and serve in a martini glass garnished with a lemon peel.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with a lemon peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/midnight-passion-martini.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/midnight-passion-martini-6792810",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "MidnightPassionMartini.txt"
+    },
+    {
+      "name": "Mint Julep",
+      "slug": "mint-julep",
+      "description": "The signature derby crown is not handed out to just any cocktail - and the Mint Julep has most definitely earned its seat on the throne. Sweet and balanced with mint and whiskey barrel flavors. If you enjoy the minty refreshment of a Mojito, the Mint Julep is a sure bet.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Mint Sprig",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/mint-julep.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/mint-julep-468827",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "MintJulep.txt"
+    },
+    {
+      "name": "Mistletoe Margarita",
+      "slug": "mistletoe-margarita",
+      "description": "A holiday smooch for the senses, the Mistletoe Margarita will have you head over heels. This holly, jolly margarita with jammy pomegranate and holiday baking spice flavors is the perfect present for any tequila lover. Best served in a margarita glass garnished with a Cranberry Cheer Sugar rim.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "ed with a Cranberry Cheer Sugar rim",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/mistletoe-margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/mistletoe-margarita-3388359",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "MistletoeMargarita.txt"
+    },
+    {
+      "name": "Negroni",
+      "slug": "negroni",
+      "description": "Bitters, sweet vermouth, and an orange garnish provide a sweet, savory, and floral profile which make the Negroni the perfect summertime gin drink.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "provide a sweet, savory, and floral profile which make the Negroni the perfect summertime gin drink",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/negroni.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/negroni-39064",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Negroni.txt"
+    },
+    {
+      "name": "Northside",
+      "slug": "northside",
+      "description": "With Moscow Mule-inspired flavors, this smooth, sweet and tart lime vodka libation, the Northside is like a cool breeze on a hot day.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Lime",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/northside.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/northside-cocktails?variant=32387413606449",
+      "help_url": "https://bartesian.gorgias.help/en-US/northside-39066",
+      "image": "images/cocktails/northside.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Northside.txt"
     },
     {
       "name": "Old Fashioned",
       "slug": "old-fashioned",
-      "description": "Classic whiskey cocktail capsule — placeholder catalog entry for scaffold.",
+      "description": "The Old Fashioned is a spirit-forward whiskey cocktail that provides a perfect balance between bitter and sweet, with notes of oak and orange citrus.",
       "spirits": [
         "Whiskey"
       ],
-      "glassware": "Rocks",
-      "garnish": "Orange peel",
-      "pairs_with": "Steak",
-      "nutrition_json": "{\"calories\":140,\"sugar_g\":6}",
-      "alcohol_json": "{\"abv_pct\":18,\"volume_ml\":180}",
-      "bartesian_url": "https://www.bartesian.com/",
-      "image": "",
+      "glassware": "Lowball Glass",
+      "garnish": "Orange Peel & Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/old-fashioned.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/old-fashioned-cocktails?variant=15687215546417",
+      "help_url": "https://bartesian.gorgias.help/en-US/old-fashioned-39072",
+      "image": "images/cocktails/old-fashioned.jpg",
+      "seasonal": 0,
       "favorite": 0,
       "quantity": 0,
-      "capsule_barcode": "850000000002",
-      "case_barcode": "850000000102",
+      "capsule_barcode": "",
+      "case_barcode": "",
       "case_qty": 8,
       "_file": "OldFashioned.txt"
+    },
+    {
+      "name": "Painkiller",
+      "slug": "painkiller",
+      "description": "If you're in need of an escape to a tropical island, try this sweet and fruity blend of pineapple, orange, and coconut - think piña colada flavors with an orange juice twist. Best served on ice and garnished with nutmeg and a pineapple wedge, the Painkiller cocktail will transport you to a vacation mindset.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Hurricane Glass",
+      "garnish": "ed with nutmeg and a pineapple wedge, the Painkiller cocktail will transport you to a vacation mindset",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/painkiller-capsules?variant=42475717460167",
+      "help_url": "https://bartesian.gorgias.help/en-US/painkiller-196624",
+      "image": "images/cocktails/painkiller.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Painkiller.txt"
+    },
+    {
+      "name": "Paper Plane",
+      "slug": "paper-plane",
+      "description": "The Paper Plane expertly blends bitter, herbal, and sour notes with elegant symmetry. The flavor profile of this whiskey cocktail is finished with a touch of lemon citrus and sweetness.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "Alcohol Volume: Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/paper-plane.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/paper-plane-cocktails?variant=15874850848817",
+      "help_url": "https://bartesian.gorgias.help/en-US/paper-plane-39073",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PaperPlane.txt"
+    },
+    {
+      "name": "Passion Fruit Margarita",
+      "slug": "passion-fruit-margarita",
+      "description": "Sweet, tropical, and tangy, the Passion Fruit Margarita is fruit-forward with tart and sour notes from passion fruit combined with citrus notes from triple sec and lime juice.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Lime",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/passion-fruit-margarita.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/passion-fruit-margarita-cocktails?variant=40477896671431",
+      "help_url": "https://bartesian.gorgias.help/en-US/passion-fruit-margarita-39074",
+      "image": "images/cocktails/passion-fruit-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PassionFruitMargarita.txt"
+    },
+    {
+      "name": "Peach Lychee Refresher (US Only)",
+      "slug": "peach-lychee-refresher",
+      "description": "With juicy peach and delicate lychee flavors, this caffeinated Refresher is a gentle nudge in the right direction. It's light, refreshing and effortlessly sippable. Proof that a little boost can feel like a breeze. Shake and serve over ice in a highball glass, garnished with peach slices. Contains ~56 mg of caffeine. Base spirit: Vodka. Try it as a mocktail!",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "ed with peach slices",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/peach-lychee-refresher.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.1,\"regular_oz\":0.2,\"strong_oz\":0.3,\"raw\":\"Mocktail = 0 oz., Light = 0.1 oz., Regular = 0.2 oz., Strong = 0.3 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/peach-lychee-capsules?variant=46118514360519",
+      "help_url": "https://bartesian.gorgias.help/en-US/peach-lychee-refresher-(us-only)-4332577",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PeachLycheeRefresher.txt"
+    },
+    {
+      "name": "Peanut Butter Cup",
+      "slug": "peanut-butter-cup",
+      "description": "No need to trick or treat with this cocktail. A decadent delight of smooth whiskey with creamy peanut butter and rich milk chocolate flavors. An irresistible blend of sweet and savory. Shake with ice and serve in a martini glass garnished with peanut butter cups.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with peanut butter cups",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/peanut-butter-cup.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail =0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/peanut-butter-cup-809946",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PeanutButterCup.txt"
+    },
+    {
+      "name": "Peary Christmas",
+      "slug": "peary-christmas",
+      "description": "You'll have a very \"peary\" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond flavors.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Sugar Rim and Pear Slice",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/peary-christmas.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.7,\"regular_oz\":1,\"strong_oz\":1.7,\"raw\":\"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1.0 oz., Strong = 1.7 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/peary-christmas-3074903",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PearyChristmas.txt"
+    },
+    {
+      "name": "Pineapple Margarita",
+      "slug": "pineapple-margarita",
+      "description": "Pineapple Margarita, bursting with notes of juicy tart pineapple and sweet coconut, balanced with lime and notes of orange triple sec.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Pineapple",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/pineapple-margarita.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/pineapple-margarita-capsules?variant=41965982613703",
+      "help_url": "https://bartesian.gorgias.help/en-US/pineapple-margarita-45861",
+      "image": "images/cocktails/pineapple-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PineappleMargarita.txt"
+    },
+    {
+      "name": "Pineapple Sage Vodka Still",
+      "slug": "pineapple-sage-vodka-still",
+      "description": "Named for the still, an instrument used to distill vodka, our deliciously flavorful Pineapple Sage Vodka Still is the perfect blend of sweet coconut and tart pineapple. Infused with botanical sage, this refreshing cocktail is best suited for any pineapple vodka lover looking for a new favorite with a tropical twist.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Lime",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/pineapple-sage-vodka-still.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/pineapple-sage-vodka-still-105537",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PineappleSageVodkaStill.txt"
+    },
+    {
+      "name": "Pomegranate Margarita",
+      "slug": "pomegranate-margarita",
+      "description": "A tart, refreshing addition to the collection of Bartesian Margaritas, the pomegranate margarita is a perfect pick for any tequila lover. Bursting with pomegranate flavor, a splash of lime, and notes of triple sec, the Pomegranate Margarita is a bold alternative to our Classic Margarita.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Lime Wedge",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/pomegranate-margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/pomegranate-margarita-cocktails?variant=42475700224199",
+      "help_url": "https://bartesian.gorgias.help/en-US/pomegranate-margarita-109602",
+      "image": "images/cocktails/pomegranate-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "PomegranateMargarita.txt"
+    },
+    {
+      "name": "Raspberry Ginger Gimlet",
+      "slug": "raspberry-ginger-gimlet",
+      "description": "A refreshing reimagining of the classic Gimlet, the Raspberry Ginger Gimlet is the perfect blend of sweet raspberry notes and tangy ginger zing! Enjoy this well-balanced cocktail with a lime and raspberry garnish.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/raspberry-ginger-gimlet.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/raspberry-ginger-gimlet-capsules?variant=42087716651207",
+      "help_url": "https://bartesian.gorgias.help/en-US/raspberry-ginger-gimlet-67035",
+      "image": "images/cocktails/raspberry-ginger-gimlet.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "RaspberryGingerGimlet.txt"
+    },
+    {
+      "name": "Rum Breeze",
+      "slug": "rum-breeze",
+      "description": "The Rum Breeze features a sweet, tropical blend of pineapple, lime, and strawberry juices, light rum, and a hint of coconut. Fresh and flavorful, with a slight tang from the pineapple juice and coconut undertones.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Orange & Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/rum-breeze.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/rum-breeze-cocktails?variant=15685657034801",
+      "help_url": "https://bartesian.gorgias.help/en-US/rum-breeze-39076",
+      "image": "images/cocktails/rum-breeze.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "RumBreeze.txt"
+    },
+    {
+      "name": "Rum Runner",
+      "slug": "rum-runner",
+      "description": "Packed with tropical pineapple, banana, blackberry, orange, and a splash of grenadine, the Rum Runner is the definition of fruity and sweet.",
+      "spirits": [
+        "Rum",
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Pineapple & Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/rum-runner.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":2,\"regular_oz\":3,\"strong_oz\":5.1,\"raw\":\"Mocktail = 0 oz., Light = 2.0 oz., Regular = 3.0 oz., Strong = 5.1 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/rum-runner-cocktails?variant=32387450175537",
+      "help_url": "https://bartesian.gorgias.help/en-US/rum-runner-39077",
+      "image": "images/cocktails/rum-runner.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "RumRunner.txt"
+    },
+    {
+      "name": "Rum Swizzle",
+      "slug": "rum-swizzle",
+      "description": "You'll be transported to the Caribbean with this sweet, fruity rum cocktail with pineapple, citrus, and notes of triple sec and bitters. Shake and serve over crushed ice in a highball, garnished with a pineapple wedge and maraschino cherry.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "ed with a pineapple wedge and maraschino cherry",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/rum-swizzle-capsules?variant=43168682672327",
+      "help_url": "https://bartesian.gorgias.help/en-US/rum-swizzle-248614",
+      "image": "images/cocktails/rum-swizzle.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "RumSwizzle.txt"
+    },
+    {
+      "name": "Sex on the Beach",
+      "slug": "sex-on-the-beach",
+      "description": "Enjoy the fruity Sex on the Beach, with juicy peach, pineapple, banana, cranberry, and hint of lemon flavor for a sweet and tropical experience and citrus orange make a winning combination for this classic vodka cocktail.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/sex-on-the-beach.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/sex-on-the-beach-vodka-cocktails?variant=15685661982769",
+      "help_url": "https://bartesian.gorgias.help/en-US/sex-on-the-beach-39082",
+      "image": "images/cocktails/sex-on-the-beach.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "SexOnTheBeach.txt"
+    },
+    {
+      "name": "Sidecar",
+      "slug": "sidecar",
+      "description": "Hop on in, the Sidecar is here! The Sidecar is a cognac-based cocktail with sour notes imparted from lemon juice, balanced with sweet notes of triple sec. Serve shaken with a sugar rim and garnish with a lemon twist.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "with a lemon twist",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/sidecar.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/sidecar-capsules?variant=41853978050759",
+      "help_url": "https://bartesian.gorgias.help/en-US/sidecar-65193",
+      "image": "images/cocktails/sidecar.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Sidecar.txt"
+    },
+    {
+      "name": "Sour Spell",
+      "slug": "sour-spell",
+      "description": "Sour Spell is a sweet vodka cocktail with a mischievous glow and a burst of sour rainbow candy flavor. With every swirl, the iridescent shimmer brings a touch of magic to the glass, making it as mesmerizing as it is delicious. Shake and serve in a martini glass garnished with sour candy strips.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with sour candy strips",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/sour-spell.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/sour-spell-capsules?variant=46632563802311",
+      "help_url": "https://bartesian.gorgias.help/en-US/sour-spell-8043821",
+      "image": "images/cocktails/sour-spell.jpg",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "SourSpell.txt"
+    },
+    {
+      "name": "Southern Blossom",
+      "slug": "southern-blossom",
+      "description": "Sweet and fruity, this refreshing vodka cocktail combines juicy pineapple, zesty lemonade, and grenadine flavors. Each sip is like a stroll down a lush fairway bordered with blossoming flowers. Whether enjoyed on the green or off, the Southern Blossom will have you raising your glass to birdies, bogeys, and everything in between.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "Lemon Wheel and Maraschino Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/southern-blossom.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/southern-blossom-1201767",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "SouthernBlossom.txt"
+    },
+    {
+      "name": "Southside",
+      "slug": "southside",
+      "description": "Named for Chicago's South Side, this refreshing, slightly sweet, blend of tart lime, mint, and gin is rumored to have been the preferred drink of Al Capone and his gang during Prohibition. Shake with ice and serve this gin cocktail in our premium Coupe Glassware garnished with mint",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "ed with mint",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/southside-238794",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Southside.txt"
+    },
+    {
+      "name": "Spicy Margarita",
+      "slug": "spicy-margarita",
+      "description": "Ready to spice things up? This margarita is for you. Savor the classic combination of lemon and lime with a fiery twist of jalapeño and cayenne flavor.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Lime",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/spicy-margarita.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/spicy-margarita-cocktails?variant=38174540234951",
+      "help_url": "https://bartesian.gorgias.help/en-US/spicy-margarita-39502",
+      "image": "images/cocktails/spicy-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "SpicyMargarita.txt"
+    },
+    {
+      "name": "Starry Night",
+      "slug": "starry-night",
+      "description": "Celebrate the season with a sip of starlight. This refreshing tequila cocktail blends flavors of starfruit, grapefruit, guanabana, and citrus. One sip, and you'll be wrapped in the magic of a clear winter night—crisp, bright, and enchanting. Best served over ice in a highball glass with a lime star garnish and Hot Honey Sugar rim.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "and Hot Honey Sugar rim",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/starry-night.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/starry-night-3388353",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "StarryNight.txt"
+    },
+    {
+      "name": "Strawberry Acai Refresher (US Only)",
+      "slug": "strawberry-acai-refresher",
+      "description": "When you need refreshment, look no further. Flavors of lush strawberry and tangy acai blend in a perfect balance of sweet and tart. Lightly caffeinated to give you a gentle boost, this Refresher lets you sip back, relax, and brighten your day with every vibrant drop. Shake and serve over ice in a highball glass, garnished with strawberry slices. Contains ~56 mg of caffeine. Base spirit: Vodka. Try it as a mocktail!",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "ed with strawberry slices",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/strawberry-acai-refresher.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":0.1,\"regular_oz\":0.2,\"strong_oz\":0.3,\"raw\":\"Mocktail = 0 oz., Light = 0.1 oz., Regular = 0.2 oz., Strong = 0.3 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/strawberry-acai-capsules?variant=46118504988871",
+      "help_url": "https://bartesian.gorgias.help/en-US/strawberry-acai-refresher-(us-only)-4332574",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "StrawberryAcaiRefresher.txt"
+    },
+    {
+      "name": "Strawberry Coconut Daiquiri",
+      "slug": "strawberry-coconut-daiquiri",
+      "description": "The Strawberry Coconut Daiquiri is the perfect poolside rum cocktail with flavors of juicy strawberry, sweet coconut, and tart lime. Enjoy this tropical libation over ice garnished with lime and a strawberry.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "ed with lime and a strawberry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/strawberry-coconut-daiquiri.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.0 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/strawberry-coconut-daiquiri-capsules?variant=43894262333639",
+      "help_url": "https://bartesian.gorgias.help/en-US/strawberry-coconut-daiquiri-574704",
+      "image": "images/cocktails/strawberry-coconut-daiquiri.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "StrawberryCoconutDaiquiri.txt"
+    },
+    {
+      "name": "Strawberry Guava Margarita",
+      "slug": "strawberry-guava-margarita",
+      "description": "Sweet and refreshing, the Strawberry Guava Margarita is a fruit-forward cocktail with tropical guava combined with flavors of strawberry, triple sec, and lime. Serve in a margarita glass garnished with Pink Himalayan salt and a strawberry.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glassware",
+      "garnish": "ed with Pink Himalayan salt and a strawberry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/strawberry-guava-margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail =0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/strawberry-guava-margarita-capsules?variant=43255546446023",
+      "help_url": "https://bartesian.gorgias.help/en-US/strawberry-guava-margarita-300193",
+      "image": "images/cocktails/strawberry-guava-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "StrawberryGuavaMargarita.txt"
+    },
+    {
+      "name": "Strawberry Lemon Drop",
+      "slug": "strawberry-lemon-drop",
+      "description": "This sweet and tart vodka cocktail blends the bright and juicy flavors of fresh-picked strawberries and tangy candied lemon. Shake and serve in a martini glass garnished with a sugar rim, lemon wheel, and a strawberry.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with a sugar rim, lemon wheel, and a strawberry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/strawberry-lemon-drop.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/strawberry-lemon-drop-1661999",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "StrawberryLemonDrop.txt"
+    },
+    {
+      "name": "Tequila Sunrise",
+      "slug": "tequila-sunrise",
+      "description": "This classic brunch tequila cocktail mixes orange juice with sweet grenadine cherry notes. Serve over ice in a lowball garnished with an orange wedge and maraschino cherry.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Lowball",
+      "garnish": "ed with an orange wedge and maraschino cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/tequila-sunrise.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/tequila-sunrise-capsules?variant=43044245176519",
+      "help_url": "https://bartesian.gorgias.help/en-US/tequila-sunrise-217642",
+      "image": "images/cocktails/tequila-sunrise.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "TequilaSunrise.txt"
+    },
+    {
+      "name": "The Grinch Appletini",
+      "slug": "the-grinch-appletini",
+      "description": "Holidays have you feeling like a humbug? Sweet and tart, The Grinch Appletini is sure to raise spirits with its green apple flavors. Shake over ice and serve in a martini glass with a sugar rim and apple wheel.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "Apple Wheel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/the-grinch-appletini.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/the-grinch-appletini-1059897",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "TheGrinchAppletini.txt"
+    },
+    {
+      "name": "Uptown Rocks",
+      "slug": "uptown-rocks",
+      "description": "An elegant floral and sweet gin drink featuring a mix of peach, white grape, and lemon juices with a graceful cilantro kick. Made best with an herbal gin for a smooth finish for this refreshing cocktail.",
+      "spirits": [
+        "Gin"
+      ],
+      "glassware": "Coupe Glass",
+      "garnish": "Lemon Peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/uptown-rocks.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/gin-cocktails-uptown-rocks?variant=15685652480049",
+      "help_url": "https://bartesian.gorgias.help/en-US/uptown-rocks-39504",
+      "image": "images/cocktails/uptown-rocks.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "UptownRocks.txt"
+    },
+    {
+      "name": "Vampire's Kiss",
+      "slug": "vampires-kiss",
+      "description": "Vampire's Kiss is a deep crimson vodka cocktail built around the unmistakable sweetness of red licorice flavor, layered with juicy strawberry and fruit punch flavor. Smooth and fruit-forward, it delivers a candy-like sip. Shake and serve in a martini glass garnished with licorice or a blood-red drizzle.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "ed with licorice or a blood-red drizzle",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/vampires-kiss.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/vampires-kiss-capsules?variant=46632567832775",
+      "help_url": "https://bartesian.gorgias.help/en-US/vampires-kiss-8043822",
+      "image": "images/cocktails/vampires-kiss.jpg",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "VampiresKiss.txt"
+    },
+    {
+      "name": "Vesper (EU/UK)",
+      "slug": "vesper",
+      "description": "This proofy martini is an elegant blend of gin and vodka, balancing bitter, sweet, and herbal flavours. Inspired by the infamous cocktail from a classic spy novel, it's best served with an herbal gin for a smooth, elevated finish.",
+      "spirits": [
+        "Gin",
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "Lemon Peel",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/vesper.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.9,\"regular_oz\":2.8,\"strong_oz\":4.6,\"raw\":\"Mocktail = 0 oz., Light = 1.9 oz., Regular = 2.8 oz., Strong = 4.6 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/vesper-(euuk)-2567781",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Vesper.txt"
+    },
+    {
+      "name": "Watermelon Margarita",
+      "slug": "watermelon-margarita",
+      "description": "Like summertime in a glass, the Watermelon Margarita is a refreshing sweet and salty tequila cocktail blending watermelon with notes of citrus and triple sec. Serve in a margarita glass with a Zesty Lime Salt rim. Get this limited seasonal release while it lasts.",
+      "spirits": [
+        "Tequila"
+      ],
+      "glassware": "Margarita Glass",
+      "garnish": "Watermelon wedge and Zesty Lime Salt",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/watermelon-margarita.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/watermelon-margarita-capsules?variant=43188394819783",
+      "help_url": "https://bartesian.gorgias.help/en-US/watermelon-margarita-260338",
+      "image": "images/cocktails/watermelon-margarita.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "WatermelonMargarita.txt"
+    },
+    {
+      "name": "Westside",
+      "slug": "westside",
+      "description": "A sweet and smooth combination of lemon and mint, the Westside is a refreshing, easy drinking vodka cocktail. Serve over ice in a low ball garnished with a mint sprig.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "ed with a mint sprig",
+      "pairs_with": "",
+      "nutrition_json": "{}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/westside-238788",
+      "image": "",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "Westside.txt"
+    },
+    {
+      "name": "Whiskey Smash",
+      "slug": "whiskey-smash",
+      "description": "This classic cocktail appeals to both whiskey lovers and whiskey skeptics alike. Think minty like a Mojito but with lemon and Whiskey instead of lime and Rum. The Whiskey Smash provides whiskey barrel sweetness balanced with refreshing mint, but with a lemon citrus twist.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Lemon & Mint",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/whiskey-smash.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/whiskey-smash-cocktails?variant=31660702269489",
+      "help_url": "https://bartesian.gorgias.help/en-US/whiskey-smash-39505",
+      "image": "images/cocktails/whiskey-smash.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "WhiskeySmash.txt"
+    },
+    {
+      "name": "Whiskey Sour",
+      "slug": "whiskey-sour",
+      "description": "The Whiskey Sour provides a smooth balance of sweet and sour. Notes of vanilla, lemon, and orange round out the flavor profile, and make for a classic whiskey citrus cocktail.",
+      "spirits": [
+        "Whiskey"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Cherry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/whiskey-sour.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/whiskey-sour-cocktails?variant=16352868401201",
+      "help_url": "https://bartesian.gorgias.help/en-US/whiskey-sour-76297",
+      "image": "images/cocktails/whiskey-sour.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "WhiskeySour.txt"
+    },
+    {
+      "name": "White Sangria",
+      "slug": "white-sangria",
+      "description": "Sangria is a lively, wine-based punch traditionally sweetened with fruit and fortified with additional liquor or liqueurs. Bartesian's take on sangria is an easy-sipping rum cocktail with tasting notes of buttery white wine, sweet peach, and triple sec.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Lowball Glass",
+      "garnish": "Frozen Berries and Sliced Peaches",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/white-sangria.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1,\"regular_oz\":1.5,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/white-sangria-capsules?variant=43250186944711",
+      "help_url": "https://bartesian.gorgias.help/en-US/white-sangria-275636",
+      "image": "images/cocktails/white-sangria.jpg",
+      "seasonal": 0,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "WhiteSangria.txt"
+    },
+    {
+      "name": "Witch's Heart",
+      "slug": "witchs-heart",
+      "description": "The perfect Halloween cocktail, Witch's Heart is a blend of berry, green apple, lemon juice, and white grape juice. With edible shimmer for added luminosity, this vodka cocktail will put guests at your Halloween gatherings under a magical spell.",
+      "spirits": [
+        "Vodka"
+      ],
+      "glassware": "Martini Glass",
+      "garnish": "Blackberry and Raspberry",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/witchs-heart.png\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":2.5,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 2.5 oz\"}",
+      "bartesian_url": "https://bartesian.com/products/witchs-heart-cocktails?variant=32387485466673",
+      "help_url": "https://bartesian.gorgias.help/en-US/witchs-heart-120126",
+      "image": "images/cocktails/witchs-heart.jpg",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "WitchsHeart.txt"
+    },
+    {
+      "name": "Yuletide Hurricane",
+      "slug": "yuletide-hurricane",
+      "description": "When the weather outside is frightful, choose the Yuletide Hurricane to keep your glass delightful. It's the fruity, tropical flavor you happily expect, with a shimmery, festive twist. Serve over ice and garnish with a cherry and orange wedge.",
+      "spirits": [
+        "Rum"
+      ],
+      "glassware": "Highball Glass",
+      "garnish": "with a cherry and orange wedge",
+      "pairs_with": "",
+      "nutrition_json": "{\"label_image\":\"images/nutrition/yuletide-hurricane.jpg\"}",
+      "alcohol_json": "{\"mocktail_oz\":0,\"light_oz\":1.4,\"regular_oz\":2,\"strong_oz\":3.4,\"raw\":\"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz\"}",
+      "bartesian_url": "",
+      "help_url": "https://bartesian.gorgias.help/en-US/yuletide-hurricane-1059915",
+      "image": "",
+      "seasonal": 1,
+      "favorite": 0,
+      "quantity": 0,
+      "capsule_barcode": "",
+      "case_barcode": "",
+      "case_qty": 8,
+      "_file": "YuletideHurricane.txt"
     }
   ],
   "packs": [
     {
-      "name": "Classics Variety",
-      "slug": "classics-variety",
-      "barcode": "850000009001",
-      "notes": "Scaffold sample variety pack (8 capsules).",
+      "name": "Advent Calendar 2026",
+      "slug": "advent-calendar-2026",
+      "barcode": "",
+      "notes": "The 2026 Bartesian Cocktail Advent Calendar today! With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. How pre-order redemption works: - Retrieve your code: Check your pre-sale order confirmation or reminder email and copy your unique code. - Add your calendar(s): Above, select the num",
+      "image": "images/packs/advent-calendar-2026.jpg",
+      "bartesian_url": "https://bartesian.com/products/advent-calendar?variant=47520593445063",
+      "items": [
+        {
+          "cocktail_slug": "how-pre-order-redemption-works",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "add-your-calendar-s",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "apply-your-code",
+          "qty": 1
+        }
+      ],
+      "_file": "AdventCalendar2026.txt"
+    },
+    {
+      "name": "Berry in Love Collection",
+      "slug": "berry-in-love-collection",
+      "barcode": "",
+      "notes": "The most charming way to sip, savor, and celebrate love this season? The bright and fruity Bartesian Berry in Love Collection. This limited-edition variety pack contains 4 each of 2 playful pours: - Cupid's Arrow: the sweet, fruity flavors of strawberry, guava and lime will make your heart skip a beat. - Love Potion: sweet and tart, this enchanting blend includes juicy blueberry, zesty lemon, and delicate lavender flavors.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "2-playful-pours-cupids-arrow-the-sweet",
+          "qty": 4
+        },
+        {
+          "cocktail_slug": "fruity-flavors-of-strawberry",
+          "qty": 4
+        },
+        {
+          "cocktail_slug": "guava",
+          "qty": 4
+        },
+        {
+          "cocktail_slug": "lime-will-make-your-heart-skip-a-beat",
+          "qty": 4
+        }
+      ],
+      "_file": "BerryInLoveCollection.txt"
+    },
+    {
+      "name": "Classic Collection Favorites",
+      "slug": "classic-collection-favorites",
+      "barcode": "",
+      "notes": "All of our classics are together in one collection. The Classic Collection Favorites Variety Pack contains 1 each of: - Cosmopolitan: a classic vodka cocktail with tart cranberry, sweet orange, and lime. - Old Fashioned: a spirit-forward whiskey cocktail balancing bitter and sweet with flavors of oak and orange citrus. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and stra",
+      "image": "images/packs/classic-collection-favorites.jpg",
+      "bartesian_url": "https://bartesian.com/products/classic-cocktails-favorites?variant=44303522562247",
+      "items": [
+        {
+          "cocktail_slug": "cosmopolitan",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "sweet-orange",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "lime",
+          "qty": 1
+        }
+      ],
+      "_file": "ClassicCollectionFavorites.txt"
+    },
+    {
+      "name": "Cocktail Sampler",
+      "slug": "cocktail-sampler",
+      "barcode": "",
+      "notes": "Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of: - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint",
+      "image": "images/packs/cocktail-sampler.jpg",
+      "bartesian_url": "https://bartesian.com/products/cocktail-sampler?variant=44436485046471",
+      "items": [
+        {
+          "cocktail_slug": "lemon-drop",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "tart",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "lemon-candy-inspired-vodka-martini",
+          "qty": 1
+        }
+      ],
+      "_file": "CocktailSampler.txt"
+    },
+    {
+      "name": "Cocktail Sampler Variety Pack",
+      "slug": "cocktail-sampler-variety-pack",
+      "barcode": "",
+      "notes": "Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of: - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange flavors.",
+      "image": "",
+      "bartesian_url": "https://bartesian.com/products/cocktail-sampler?variant=44436485046471",
+      "items": [
+        {
+          "cocktail_slug": "lemon-drop",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "tart",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "lemon-candy-inspired-vodka-martini",
+          "qty": 1
+        }
+      ],
+      "_file": "CocktailSamplerVarietyPack.txt"
+    },
+    {
+      "name": "Festive Collection 2025",
+      "slug": "festive-collection-2025",
+      "barcode": "",
+      "notes": "Get in the festive spirit with this year’s Bartesian Festive Collection. This limited-edition variety pack features merry cocktails across two-spirit types, especially convenient for the Duet Cocktail Maker. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Starry Night: a refreshing tequila cocktail with flavors of starfruit, grapefruit, guanabana, and citrus. - Peary Christmas: an elegant tequila cocktail with sweet pear, citrus, and delicate almond flavors. - The Grinch Appletini: a shimmering sweet and tart vodka cocktail with green apple flavors. - Frosted Orchard: a crisp vodka cocktail blending juicy apple and tangy lemonade, infused with flavors of cinnamon and cardamom.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-seasonal-cocktails-starry-night-a-refreshing-tequila-cocktail-with-flavors-of-starfruit",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "grapefruit",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "guanabana",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "citrus",
+          "qty": 2
+        }
+      ],
+      "_file": "FestiveCollection2025.txt"
+    },
+    {
+      "name": "Gin Lovers (EU/UK)",
+      "slug": "gin-lovers",
+      "barcode": "",
+      "notes": "Four of Bartesian’s most-loved gin cocktails, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Uptown Rocks: an elegant gin cocktail featuring peach and lemon with a graceful kick of cilantro flavour. - Bramble: sweet yet tart, blending blackberry, lemon, and floral flavours for a refreshing classic. - Vesper: a sophisticated gin-and-vodka martini with a smooth balance of bitter, sweet, and herbal flavours. - Aviation: a violet-hued favourite, combining floral Crème de Violette and Maraschino liqueur flavours with a squeeze of lemon.",
+      "image": "images/packs/gin-lovers.jpg",
+      "bartesian_url": "https://bartesian.com/products/gin-lovers-collection?variant=39601114775751",
+      "items": [
+        {
+          "cocktail_slug": "4-cocktails-uptown-rocks-an-elegant-gin-cocktail-featuring-peach",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lemon-with-a-graceful-kick-of-cilantro-flavour",
+          "qty": 2
+        }
+      ],
+      "_file": "GinLovers.txt"
+    },
+    {
+      "name": "Gin Lovers Variety Pack",
+      "slug": "gin-lovers-variety-pack",
+      "barcode": "",
+      "notes": "Calling all gin lovers! Try this refreshing and unique spirit with some of the most beloved gin cocktails in our collection. Our 8-pack contains 2 each of: - Aviation: a floral and sweet classic with flavors of violet, maraschino liqueur, and lemon. - Bee's Knees: a sweet, citrus cocktail blending lemon with delicate and floral honey flavors. - Raspberry Ginger Gimlet: a bright, raspberry and ginger flavored twist on the classic lime and gin cocktail. - Uptown Rocks: an elegant lemon and peach cocktail with a graceful, cilantro flavored kick.",
+      "image": "",
+      "bartesian_url": "https://bartesian.com/products/gin-lovers-collection?variant=39601114775751",
+      "items": [
+        {
+          "cocktail_slug": "aviation",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "sweet-classic-with-flavors-of-violet",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "maraschino-liqueur",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lemon-drop",
+          "qty": 2
+        }
+      ],
+      "_file": "GinLoversVarietyPack.txt"
+    },
+    {
+      "name": "Halloween Collection",
+      "slug": "halloween-collection",
+      "barcode": "",
+      "notes": "The best way for you and your ghoulish guests to raise spirits this season? The spine-chillingly delicious Bartesian Halloween Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Witch's Heart: a magical martini swirling berry and green apple flavors with edible shimmer. - Caramel Appletini: a wickedly smooth cocktail with tart green apple and rich, velvety caramel flavors. - Sour Spell: a sweet cocktail with a mischievous glow and a burst of sour rainbow candy flavor. - Vampire's Kiss: a deep crimson cocktail evoking the unmistakable flavor of strawberry licorice. Enjoy this spooky seasonal release while it lasts.",
+      "image": "images/packs/halloween-collection.jpg",
+      "bartesian_url": "https://bartesian.com/products/halloween-collection?variant=46632550432967",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-seasonal-cocktails",
+          "qty": 2
+        }
+      ],
+      "_file": "HalloweenCollection.txt"
+    },
+    {
+      "name": "Holiday Collection 2025",
+      "slug": "holiday-collection-2025",
+      "barcode": "",
+      "notes": "The best way for you and your holiday guests to get into the spirit of the season is with this year’s Bartesian Holiday Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Holiday Spiced Old Fashioned: a spirit-forward whiskey cocktail with flavors of orange, bitters, cinnamon and brown sugar. - Clausmopolitan: a shimmering version of the classic cranberry, lime, and orange flavored vodka cocktail. - Peary Christmas: an elegant tequila cocktail with sweet pear, citrus, and delicate almond flavors. - Yuletide Hurricane: a fruity, tropical rum cocktail with added shimmer.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-seasonal-cocktails-holiday-spiced-old-fashioned-a-spirit-forward-whiskey-cocktail-with-flavors-of-orange",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "bitters",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "cinnamon",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "brown-sugar",
+          "qty": 2
+        }
+      ],
+      "_file": "HolidayCollection2025.txt"
+    },
+    {
+      "name": "Lemon Drop Variety Pack",
+      "slug": "lemon-drop-variety-pack",
+      "barcode": "",
+      "notes": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini, including a NEW Blue Raspberry Lemon Drop cocktail. For an added burst of sweet and sour, we recommend serving in a martini glass rimmed with a Sour Candy Sugar rimmer. Our 8-pack contains 2 each of: - Strawberry Lemon Drop: sweet and tart with flavors of juicy strawberry and candied lemon. - Blueberry Lemon Drop: jammy blueberry balanced with bright citrus flavor. - Apple Cayenne Lemon Drop: crisp apple and zesty citrus, with a subtly spicy kick of cayenne flavor. - Blue Raspberry Lemon Drop: tangy and sweet with blue raspberry and lemon candy-inspired flavors.",
+      "image": "images/packs/lemon-drop-variety-pack.jpg",
+      "bartesian_url": "https://bartesian.com/products/lemon-drop-variety-pack?variant=46107183710407",
+      "items": [
+        {
+          "cocktail_slug": "strawberry-lemon-drop",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tart-with-flavors-of-juicy-strawberry",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "candied-lemon",
+          "qty": 2
+        }
+      ],
+      "_file": "LemonDropVarietyPack.txt"
+    },
+    {
+      "name": "Lemon Drop Variety Pack (New)",
+      "slug": "lemon-drop-variety-pack-new",
+      "barcode": "",
+      "notes": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini. Shake with ice, serve in a martini glass, rim with lemon sugar, and garnish with lemon.",
+      "image": "images/packs/lemon-drop-variety-pack-new.jpg",
+      "bartesian_url": "https://bartesian.com/products/lemon-drop-variety-pack?variant=46107183710407",
+      "items": [
+        {
+          "cocktail_slug": "strawberry-lemon-drop",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tart-with-flavors-of-juicy-strawberry",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "candied-lemon",
+          "qty": 2
+        }
+      ],
+      "_file": "LemonDropVarietyPackNew.txt"
+    },
+    {
+      "name": "Long Island Collection",
+      "slug": "long-island-collection",
+      "barcode": "",
+      "notes": "* Please note: Not compatible with the Bartesian Duet Cocktail Maker. Crafted for those who appreciate a bolder pour, the Long Island Collection features spirit-forward takes on the classic cocktail, delivering flavor and timeless appeal in every sip. Compatibility note: These multi-spirit cocktails are crafted with multiple",
+      "image": "images/packs/long-island-collection.jpg",
+      "bartesian_url": "https://bartesian.com/products/long-island-collection?variant=46631778386119",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-cocktails",
+          "qty": 2
+        }
+      ],
+      "_file": "LongIslandCollection.txt"
+    },
+    {
+      "name": "Low-Cal Variety Pack",
+      "slug": "low-cal-variety-pack",
+      "barcode": "",
+      "notes": "Bartesian's Low-Cal Variety Pack features the same great taste of four of our classic cocktail offerings with no added sugar.",
+      "image": "images/packs/low-cal-variety-pack.jpg",
+      "bartesian_url": "https://bartesian.com/products/low-cal-variety-pack?variant=43436826165447",
+      "items": [
+        {
+          "cocktail_slug": "low-cal-margarita",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "refreshing-tequila-cocktail-with-lemon",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lime",
+          "qty": 2
+        }
+      ],
+      "_file": "LowCalVarietyPack.txt"
+    },
+    {
+      "name": "Margarita Lovers (EU/UK)",
+      "slug": "margarita-lovers",
+      "barcode": "",
+      "notes": "Four of Bartesian's best-selling margaritas, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Blackberry Margarita: a rich and juicy blend of blackberry and lime with flavours of honeyed fig. - Pineapple Margarita: bursting with tropical pineapple and tart lime, balanced with sweet coconut and orange triple sec flavours. - Pomegranate Margarita: sweet, jammy pomegranate with a splash of lime,and triple sec flavour. - Margarita: a refreshing mix of lemon and lime for the perfect timeless serve.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "4-cocktails-blackberry-margarita-a-rich",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "juicy-blend-of-blackberry",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lime-with-flavours-of-honeyed-fig",
+          "qty": 2
+        }
+      ],
+      "_file": "MargaritaLovers.txt"
+    },
+    {
+      "name": "Naughty Collection 2025",
+      "slug": "naughty-collection-2025",
+      "barcode": "",
+      "notes": "This kind of naughty will get you on everyone's nice list. Get in the holiday spirit with this year’s Bartesian Naughty Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Jollypeño Margarita: a margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño. - Yuletide Hurricane: a fruity, tropical rum cocktail with added shimmer. - Ginger Pear Noel: a tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor. - The Grinch Appletini: a shimmering sweet and tart vodka cocktail with green apple flavors.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-seasonal-cocktails-jollype-o-margarita-a-margarita-bursting-with-flavors-of-vibrant-pineapple",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "zesty-lime",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "a-kick-of-jalape-o",
+          "qty": 2
+        }
+      ],
+      "_file": "NaughtyCollection2025.txt"
+    },
+    {
+      "name": "Nice Collection 2025",
+      "slug": "nice-collection-2025",
+      "barcode": "",
+      "notes": "The Bartesian Nice Collection is the gift that keeps on giving all holiday season long... but nobody said being nice means you have to share. This limited-edition variety pack contains 2 each of 4 curated holiday cocktails: - Brown Butter Old Fashioned: a rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange. - Winter Pear-adise: a sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime. - Frosty Navel: a vibrant vodka cocktail with tangy orange and juicy peach flavors. - Mistletoe Margarita: a blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-holiday-cocktails-brown-butter-old-fashioned-a-rich",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "spirit-forward-sipper-infused-with-flavors-of-indulgent-browned-butter",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "bitters",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "a-hint-of-orange",
+          "qty": 2
+        }
+      ],
+      "_file": "NiceCollection2025.txt"
+    },
+    {
+      "name": "Poolside Vibes",
+      "slug": "poolside-vibes",
+      "barcode": "",
+      "notes": "Four deliciously curated cocktails to keep summer alive. Our 8-pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Northside: a smooth, sweet, and sippable lime and vodka cocktail. - Ginger Peach Iced Tea: a refreshing vodka co",
+      "image": "images/packs/poolside-vibes.jpg",
+      "bartesian_url": "https://bartesian.com/products/poolside-vibes-collection-variety-pack?variant=43436952092871",
+      "items": [
+        {
+          "cocktail_slug": "rum-breeze",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tropical-rum-cocktail-blending-pineapple",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lime",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "strawberry-juices",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "with-a-hint-of-coconut-flavor",
+          "qty": 2
+        }
+      ],
+      "_file": "PoolsideVibes.txt"
+    },
+    {
+      "name": "Refreshers Collection (US Only)",
+      "slug": "refreshers-collection",
+      "barcode": "",
+      "notes": "Refreshers are your anytime pick-me-up: crafted to be enjoyed primarily as mocktails, lightly caffeinated and bursting with vibrant, juicy fruit flavors. With an intentionally lower alcohol level than our other offerings, they deliver a lighter, effortlessly refreshing sip. Just shake, pour over ice in a highball glass, and top with fresh fruit.",
+      "image": "images/packs/refreshers-collection.jpg",
+      "bartesian_url": "https://bartesian.com/products/refreshers-collection?variant=45626534265031",
+      "items": [
+        {
+          "cocktail_slug": "strawberry-acai-lush-strawberry",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tangy-acai-flavors-blend-in-a-perfect-balance-of-sweet",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tart",
+          "qty": 2
+        }
+      ],
+      "_file": "RefreshersCollection.txt"
+    },
+    {
+      "name": "Rum Lovers",
+      "slug": "rum-lovers",
+      "barcode": "",
+      "notes": "Four deliciously curated cocktails to transport you to the beach. Our 8-count pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet al",
+      "image": "images/packs/rum-lovers.jpg",
+      "bartesian_url": "https://bartesian.com/products/rum-lovers-collection?variant=39601127981255",
+      "items": [
+        {
+          "cocktail_slug": "rum-breeze",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tropical-rum-cocktail-blending-pineapple",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lime",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "strawberry-juices",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "with-a-hint-of-coconut-flavor",
+          "qty": 2
+        }
+      ],
+      "_file": "RumLovers.txt"
+    },
+    {
+      "name": "Rum Lovers Variety Pack",
+      "slug": "rum-lovers-variety-pack",
+      "barcode": "",
+      "notes": "Four deliciously curated cocktails to transport you to the beach. Our 8-pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet almond syrup, and pineapple flavors. - Painkiller: a sweet blend of pineapple and orange juices with creamy coconut flavor.",
+      "image": "",
+      "bartesian_url": "https://bartesian.com/products/rum-lovers-collection?variant=39601127981255",
+      "items": [
+        {
+          "cocktail_slug": "rum-breeze",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tropical-rum-cocktail-blending-pineapple",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lime",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "strawberry-juices",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "with-a-hint-of-coconut-flavor",
+          "qty": 2
+        }
+      ],
+      "_file": "RumLoversVarietyPack.txt"
+    },
+    {
+      "name": "Staff Picks Collection",
+      "slug": "staff-picks-collection",
+      "barcode": "",
+      "notes": "Handpicked by our team, the Staff Picks Collection is an easy crowd-pleaser for any gathering.",
+      "image": "images/packs/staff-picks-collection.jpg",
+      "bartesian_url": "https://bartesian.com/products/staff-picks-collection?variant=46171816493255",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-cocktails",
+          "qty": 2
+        }
+      ],
+      "_file": "StaffPicksCollection.txt"
+    },
+    {
+      "name": "Tropical Margarita",
+      "slug": "tropical-margarita",
+      "barcode": "",
+      "notes": "Calling all margarita lovers! Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our eight-pack contains two of each of the following: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors an",
+      "image": "images/packs/tropical-margarita.jpg",
+      "bartesian_url": "https://bartesian.com/products/tropical-margarita-collection?variant=43136777289927",
+      "items": [
+        {
+          "cocktail_slug": "blackberry-margarita",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "mango-margarita",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "passion-fruit-margarita",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "pineapple-margarita",
+          "qty": 2
+        }
+      ],
+      "_file": "TropicalMargarita.txt"
+    },
+    {
+      "name": "Tropical Margarita Collection Variety Pack",
+      "slug": "tropical-margarita-collection-variety-pack",
+      "barcode": "",
+      "notes": "Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our 8-pack contains 2 each of: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors and undertones of honeyed fig. - Passion Fruit Margarita: a sweet, tropical and tangy blend with passion fruit and citrus flavors. - Mango Margarita: a fruity, juicy blend with mango and lime flavors. - Pineapple Margarita: a refreshing blend of tart pineapple, sweet coconut and lime flavors.",
+      "image": "",
+      "bartesian_url": "https://bartesian.com/products/tropical-margarita-collection?variant=43136777289927",
+      "items": [
+        {
+          "cocktail_slug": "blackberry-margarita",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "jammy-blend-with-slightly-tart-berry-flavors",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "undertones-of-honeyed-fig",
+          "qty": 2
+        }
+      ],
+      "_file": "TropicalMargaritaCollectionVarietyPack.txt"
+    },
+    {
+      "name": "Vodka Lovers (EU/UK)",
+      "slug": "vodka-lovers",
+      "barcode": "",
+      "notes": "Four of Bartesian’s most-loved vodka cocktails, crafted by expert mixologists for bar-quality taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Lemon Drop: a sweet and tart, lemon candy-inspired martini. - Espresso Martini: a smooth, sippable cocktail with flavours of rich espresso and bold coffee liqueur. - Amaretto Sour: nutty almond and orange citrus flavours pair to create the perfect dessert cocktail. - Cosmopolitan: tart cranberry is lifted by hints of lime and sweet orange flavour in this sophisticated classic.",
+      "image": "images/packs/vodka-lovers.jpg",
+      "bartesian_url": "https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303",
+      "items": [
+        {
+          "cocktail_slug": "4-cocktails-lemon-drop-a-sweet",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tart",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lemon-candy-inspired-martini",
+          "qty": 2
+        }
+      ],
+      "_file": "VodkaLovers.txt"
+    },
+    {
+      "name": "Vodka Lovers Variety Pack",
+      "slug": "vodka-lovers-variety-pack",
+      "barcode": "",
+      "notes": "Calling all vodka lovers!",
+      "image": "images/packs/vodka-lovers-variety-pack.jpg",
+      "bartesian_url": "https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303",
       "items": [
         {
           "cocktail_slug": "espresso-martini",
           "qty": 2
         },
         {
-          "cocktail_slug": "old-fashioned",
+          "cocktail_slug": "sippable-cocktail-with-flavors-of-rich",
           "qty": 2
         },
         {
-          "cocktail_slug": "margarita",
+          "cocktail_slug": "creamy-espresso",
           "qty": 2
         },
         {
-          "cocktail_slug": "mojito",
+          "cocktail_slug": "bold-coffee-liqueur",
           "qty": 2
         }
       ],
-      "_file": "ClassicsVariety.txt"
+      "_file": "VodkaLoversVarietyPack.txt"
+    },
+    {
+      "name": "Whiskey Lovers (EU/UK)",
+      "slug": "whiskey-lovers",
+      "barcode": "",
+      "notes": "Four of Bartesian's best-selling whiskey cocktail varieties, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Whiskey Sour: a refreshing classic with bright lemon, vanilla, and orange flavours. - Sidecar: a traditional whiskey cocktail favorite balancing tart lemon juice with sweet triple sec flavour. - Old Fashioned: a timeless serve, marrying flavours of oak, bitters, and orange citrus. - Manhattan: bold yet smooth, with the rich flavours of sweet vermouth and bitters.",
+      "image": "images/packs/whiskey-lovers.jpg",
+      "bartesian_url": "https://bartesian.com/products/whiskey-lovers-collection?variant=32387435167793",
+      "items": [
+        {
+          "cocktail_slug": "4-cocktails-whiskey-sour-a-refreshing-classic-with-bright-lemon",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "vanilla",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "orange-flavours",
+          "qty": 2
+        }
+      ],
+      "_file": "WhiskeyLovers.txt"
+    },
+    {
+      "name": "Whiskey Lovers Variety Pack",
+      "slug": "whiskey-lovers-variety-pack",
+      "barcode": "",
+      "notes": "For the whiskey lover in your life. Our 8-count pack contains 2 each of: - Manhattan: a mix of savory, sweet vermouth and aromatic bitters flavors with a hint of cherry. - Old Fashioned: a spirit-forward cocktail balancing bitter and sweet with notes of oak and orange citrus. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange notes. - Sidecar: a balanced sour and sweet cocktail with lemon and notes of triple sec.",
+      "image": "",
+      "bartesian_url": "https://bartesian.com/products/whiskey-lovers-collection?variant=32387435167793",
+      "items": [
+        {
+          "cocktail_slug": "manhattan",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "sweet-vermouth",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "aromatic-bitters-flavors-with-a-hint-of-cherry",
+          "qty": 2
+        }
+      ],
+      "_file": "WhiskeyLoversVarietyPack.txt"
+    },
+    {
+      "name": "Winter Tequila Collection 2025",
+      "slug": "winter-tequila-collection-2025",
+      "barcode": "",
+      "notes": "Embrace the magic of the season with Bartesian's Winter Tequila Collection, designed to bring warmth and cheer to your winter festivities. This limited-edition variety pack contains 2 each of 4 curated seasonal tequila cocktails: - Jollypeño Margarita: a margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño. - Starry Night: a refreshing tequila cocktail with flavors of starfruit, grapefruit, guanabana and citrus. - Peary Christmas: an elegant tequila cocktail with sweet pear, citrus and delicate almond flavors. - Mistletoe Margarita: a blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-seasonal-tequila-cocktails-jollype-o-margarita-a-margarita-bursting-with-flavors-of-vibrant-pineapple",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "zesty-lime",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "a-kick-of-jalape-o",
+          "qty": 2
+        }
+      ],
+      "_file": "WinterTequilaCollection2025.txt"
+    },
+    {
+      "name": "Winter Vodka Collection 2025",
+      "slug": "winter-vodka-collection-2025",
+      "barcode": "",
+      "notes": "Discover the crisp elegance of Bartesian's Winter Vodka Collection, designed to bring a touch of sophistication to the frosty season. This limited-edition variety pack contains 2 each of 4 curated seasonal vodka cocktails: - Frosted Orchard: a crisp vodka cocktail blending juicy apple and tangy lemonade, infused with flavors of cinnamon and cardamom. - Clausmopolitan: a shimmering version of the classic cranberry, lime, and orange flavored vodka cocktail. - Frosty Navel: a vibrant vodka cocktail with tangy orange and juicy peach flavors. - The Grinch Appletini: a shimmering sweet and tart vodka cocktail with green apple flavors.",
+      "image": "",
+      "bartesian_url": "",
+      "items": [
+        {
+          "cocktail_slug": "4-curated-seasonal-vodka-cocktails-frosted-orchard-a-crisp-vodka-cocktail-blending-juicy-apple",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "tangy-lemonade",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "infused-with-flavors-of-cinnamon",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "cardamom",
+          "qty": 2
+        }
+      ],
+      "_file": "WinterVodkaCollection2025.txt"
+    }
+  ],
+  "rimmers": [
+    {
+      "name": "Candy Cane Sugar Rimmer",
+      "slug": "candy-cane-sugar-rimmer",
+      "description": "Brighten up your holiday cocktails with a candy cane inspired rimming sugar with sweet peppermint notes.",
+      "kind": "sugar",
+      "pairs_with": "Espresso Martini, Holly Hibiscus Sour, and Clausmopolitan",
+      "cocktail_slugs": [
+        "espresso-martini",
+        "clausmopolitan"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "CandyCaneSugarRimmer.txt"
+    },
+    {
+      "name": "Citrus Popping Sugar Rimmer",
+      "slug": "citrus-popping-sugar-rimmer",
+      "description": "A citrus-forward popping sugar that brings a lively burst of flavor and playful fizz to every sip.",
+      "kind": "sugar",
+      "pairs_with": "Sour Spell, Witch's Heart, Candyman Margarita, and all types of Cosmopolitans, Lemon Drops, and Margarita",
+      "cocktail_slugs": [
+        "sour-spell",
+        "witchs-heart",
+        "candyman-margarita",
+        "margarita"
+      ],
+      "bartesian_url": "https://bartesian.com/products/citrus-popping-sugar-rimmer?variant=46672826302663",
+      "help_url": "https://bartesian.gorgias.help/en-US/citrus-popping-sugar-rimmer-8043829",
+      "image": "images/rimmers/citrus-popping-sugar-rimmer.jpg",
+      "nutrition_image": "images/nutrition/rimmer-citrus-popping-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "CitrusPoppingSugarRimmer.txt"
+    },
+    {
+      "name": "Cranberry Cheer Sugar Rimmer",
+      "slug": "cranberry-cheer-sugar-rimmer",
+      "description": "Bring a hint of festive cheer to your favorite cocktails. The Cranberry Cheer Sugar Rimmer has flavors of sweet cranberry and warm baking spices.",
+      "kind": "sugar",
+      "pairs_with": "Bee Merry, Mistletoe Margarita, Lemon Drop, and all types of Cosmopolitans",
+      "cocktail_slugs": [
+        "mistletoe-margarita",
+        "lemon-drop"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "CranberryCheerSugarRimmer.txt"
+    },
+    {
+      "name": "Golden Demerara Sugar",
+      "slug": "golden-demerara-sugar",
+      "description": "Course and golden brown, Demerara brightens up a cocktail with a delightful texture and subtle sweetness.",
+      "kind": "sugar",
+      "pairs_with": "Apple Pie, Sidecar, Great Gatsby, & other dessert cocktails",
+      "cocktail_slugs": [
+        "apple-pie",
+        "sidecar",
+        "great-gatsby"
+      ],
+      "bartesian_url": "https://bartesian.com/products/golden-demerara-rimming-sugar?variant=42058993238215",
+      "help_url": "https://bartesian.gorgias.help/en-US/golden-demerara-sugar-39019",
+      "image": "images/rimmers/golden-demerara-sugar.jpg",
+      "nutrition_image": "",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "GoldenDemeraraSugar.txt"
+    },
+    {
+      "name": "Hot Honey Sugar Rimmer",
+      "slug": "hot-honey-sugar-rimmer",
+      "description": "The Hot Honey Sugar Rimmer is a delicate dance of warm honey and subtle spice flavors. It's the perfect blend of sweet and heat.",
+      "kind": "sugar",
+      "pairs_with": "Ginger Pear Noel, Holiday Spiced Old Fashioned, Jollypeño Margarita, Winter Pear-adise, Spicy Margarita, Bee's Knees, and Lemon Drop",
+      "cocktail_slugs": [
+        "holiday-spiced-old-fashioned",
+        "jollype-o-margarita",
+        "spicy-margarita",
+        "bees-knees",
+        "lemon-drop"
+      ],
+      "bartesian_url": "https://bartesian.com/products/hot-honey-sugar-rimmer?variant=45098457465031",
+      "help_url": "https://bartesian.gorgias.help/en-US/hot-honey-sugar-rimmer-3066569",
+      "image": "images/rimmers/hot-honey-sugar-rimmer.jpg",
+      "nutrition_image": "images/nutrition/rimmer-hot-honey-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "HotHoneySugarRimmer.txt"
+    },
+    {
+      "name": "Lemon Sugar Rimmer",
+      "slug": "lemon-sugar-rimmer",
+      "description": "Inspired by the bright punch of lemon candy, this rimmer balances tangy zest with just the right touch of sweetness. One dip is all it takes to transform your cocktail into something extra zesty, extra fun, and totally irresistible. Lemon Sugar pairs with sweet, sour, and citrus cocktails.",
+      "kind": "sugar",
+      "pairs_with": "Bee's Knees, Cosmopolitan, Sidecar, and all types of Lemon Drops and Margaritas",
+      "cocktail_slugs": [
+        "bees-knees",
+        "cosmopolitan",
+        "sidecar"
+      ],
+      "bartesian_url": "https://bartesian.com/products/lemon-sugar-rimmer?variant=46099540017351",
+      "help_url": "https://bartesian.gorgias.help/en-US/lemon-sugar-rimmer-5776146",
+      "image": "images/rimmers/lemon-sugar-rimmer.jpg",
+      "nutrition_image": "images/nutrition/rimmer-lemon-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "LemonSugarRimmer.txt"
+    },
+    {
+      "name": "Maple Sugar Rimmer",
+      "slug": "maple-sugar-rimmer",
+      "description": "The sweet, rich flavor of maple sugar with a hint of salt creates a delightful contrast to complement your cocktail.",
+      "kind": "sugar",
+      "pairs_with": "Old Fashioned, Maple Pecan Pie, Apple Pie, Sweater Weather, and other whiskey cocktails",
+      "cocktail_slugs": [
+        "old-fashioned",
+        "maple-pecan-pie",
+        "apple-pie"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "images/nutrition/rimmer-maple-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "MapleSugarRimmer.txt"
+    },
+    {
+      "name": "Paloma Grapefruit Salt Rimmer",
+      "slug": "paloma-grapefruit-salt-rimmer",
+      "description": "Give your cocktails a citrus twist and bright, sour grapefruit notes with this sweet and sour salt rimmer.",
+      "kind": "salt",
+      "pairs_with": "Mrs. Claus's Nightcap, Clausmopolitan, and all types of Margaritas",
+      "cocktail_slugs": [
+        "clausmopolitan"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "images/nutrition/rimmer-paloma-grapefruit-salt-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "PalomaGrapefruitSaltRimmer.txt"
+    },
+    {
+      "name": "Pink Himalayan Margarita Salt Rimmer",
+      "slug": "pink-himalayan-margarita-salt-rimmer",
+      "description": "Pink Himalayan salt will take your cocktails to the next level. The pink hue and coarse texture are welcome additions to all types of cocktails including citrus, fruity, and spicy.",
+      "kind": "salt",
+      "pairs_with": "All types of Margaritas",
+      "cocktail_slugs": [],
+      "bartesian_url": "https://bartesian.com/products/pink-himalayan-margarita-salt-rimmer?variant=41668494950599",
+      "help_url": "https://bartesian.gorgias.help/en-US/pink-himalayan-margarita-salt-rimmer-39075",
+      "image": "images/rimmers/pink-himalayan-margarita-salt-rimmer.jpg",
+      "nutrition_image": "",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "PinkHimalayanMargaritaSaltRimmer.txt"
+    },
+    {
+      "name": "Pumpkin Spice Sugar Rimmer",
+      "slug": "pumpkin-spice-sugar-rimmer",
+      "description": "Like crisp leaves and cozy sweaters, Pumpkin Spice brings a hint of fall to your favorite cocktails, with notes of zesty pumpkin and warm baking spices.",
+      "kind": "sugar",
+      "pairs_with": "Apple Pie, Old Fashioned, and other dessert cocktails",
+      "cocktail_slugs": [
+        "apple-pie",
+        "old-fashioned"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "images/nutrition/rimmer-pumpkin-spice-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "PumpkinSpiceSugarRimmer.txt"
+    },
+    {
+      "name": "Sizzling Spicy Salt Rimmer",
+      "slug": "sizzling-spicy-salt-rimmer",
+      "description": "Kick your cocktails up a notch with this spicy salt blend that will add the perfect amount of heat to any cocktail.",
+      "kind": "salt",
+      "pairs_with": "All types of Margaritas and Jalapeño Lime Shrub",
+      "cocktail_slugs": [
+        "jalape-o-lime-shrub"
+      ],
+      "bartesian_url": "https://bartesian.com/products/sizzling-spicy-salt-rimmer?variant=42058992156871",
+      "help_url": "https://bartesian.gorgias.help/en-US/sizzling-spicy-salt-rimmer-338295",
+      "image": "images/rimmers/sizzling-spicy-salt-rimmer.jpg",
+      "nutrition_image": "images/nutrition/rimmer-sizzling-spicy-salt-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "SizzlingSpicySaltRimmer.txt"
+    },
+    {
+      "name": "Sour Apple Sugar Rimmer",
+      "slug": "sour-apple-sugar-rimmer",
+      "description": "One swipe of Bartesian's Sour Apple Sugar Rimmer and your cocktail goes from sweet to spellbinding. With a candy-inspired kick, it’s the ultimate potion topper for your Halloween sips. Sour Apple Sugar pairs well with sweet, sour, and citrus cocktails.",
+      "kind": "sugar",
+      "pairs_with": "Witch's Heart, Candyman Margarita, Caramel Appletini, Lemon Drop, Cosmopolitan, and Margarita",
+      "cocktail_slugs": [
+        "witchs-heart",
+        "candyman-margarita",
+        "caramel-appletini",
+        "lemon-drop",
+        "cosmopolitan",
+        "margarita"
+      ],
+      "bartesian_url": "https://bartesian.com/products/sour-apple-sugar-rimmer?variant=45074497208519",
+      "help_url": "https://bartesian.gorgias.help/en-US/sour-apple-sugar-rimmer-2387858",
+      "image": "images/rimmers/sour-apple-sugar-rimmer.jpg",
+      "nutrition_image": "images/nutrition/rimmer-sour-apple-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "SourAppleSugarRimmer.txt"
+    },
+    {
+      "name": "Sour Candy Sugar Rimmer",
+      "slug": "sour-candy-sugar-rimmer",
+      "description": "Inspired by our favorite sour candies, this rimming sugar combines sweetness with a tantalizing burst of tartness for a unique, mouth-puckering cocktail experience. Sour Candy Sugar pairs well with sweet, sour, and citrus cocktails.",
+      "kind": "sugar",
+      "pairs_with": "Cosmopolitan, Sidecar, Bee's Knees, Lemon Drops, Margaritas, and Gimlets",
+      "cocktail_slugs": [
+        "cosmopolitan",
+        "sidecar",
+        "bees-knees"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "images/nutrition/rimmer-sour-candy-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "SourCandySugarRimmer.txt"
+    },
+    {
+      "name": "Spiced Tamarind Salt Rimmer",
+      "slug": "spiced-tamarind-salt-rimmer",
+      "description": "Tamarind, an exotic fruit known for its sweet and spicy flavor, provides a blended balance for an unforgettable salt experience.",
+      "kind": "salt",
+      "pairs_with": "Jalapeño Lime Shrub, Kamikaze, all types of Margaritas",
+      "cocktail_slugs": [
+        "jalape-o-lime-shrub"
+      ],
+      "bartesian_url": "https://bartesian.com/products/spiced-tamarind-salt-rimmer?variant=42058989895879",
+      "help_url": "https://bartesian.gorgias.help/en-US/spiced-tamarind-salt-rimmer-39084",
+      "image": "images/rimmers/spiced-tamarind-salt-rimmer.jpg",
+      "nutrition_image": "",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "SpicedTamarindSaltRimmer.txt"
+    },
+    {
+      "name": "Sweet Cinamon Vanilla Sugar Rimmer",
+      "slug": "sweet-cinamon-vanilla-sugar-rimmer",
+      "description": "Your cocktail just got a whole lot sweeter. Our cinnamon sugar blend provides a hint of warm sweetness.",
+      "kind": "sugar",
+      "pairs_with": "Apple Pie, Sidecar, Espresso Martini, Painkiller, Rum Swizzle, and other dessert cocktails to perfection",
+      "cocktail_slugs": [
+        "apple-pie",
+        "sidecar",
+        "espresso-martini",
+        "painkiller",
+        "rum-swizzle"
+      ],
+      "bartesian_url": "https://bartesian.com/products/sweet-cinnamon-vanilla-sugar-rimmer?variant=42058994680007",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "SweetCinamonVanillaSugarRimmer.txt"
+    },
+    {
+      "name": "Tangy Hibiscus Sugar Rimmer",
+      "slug": "tangy-hibiscus-sugar-rimmer",
+      "description": "Sweet and sour, this vibrant purple rimming sugar delights with a unique floral tartness.",
+      "kind": "sugar",
+      "pairs_with": "Cosmopolitan, Lemon Drop, Holly Hibiscus Sour, Sugar Plum Fairy, and all fruit-forward margaritas",
+      "cocktail_slugs": [
+        "cosmopolitan",
+        "lemon-drop"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "images/nutrition/rimmer-tangy-hibiscus-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "TangyHibiscusSugarRimmer.txt"
+    },
+    {
+      "name": "Triple Berry Sugar Rimmer",
+      "slug": "triple-berry-sugar-rimmer",
+      "description": "With notes of strawberry, blueberry, and raspberry, this sugar elevates any cocktail to a sweet and indulgent experience.",
+      "kind": "sugar",
+      "pairs_with": "Lemon Drop, all types of Margaritas, Raspberry Ginger Gimlet, & Cosmopolitan",
+      "cocktail_slugs": [
+        "lemon-drop",
+        "raspberry-ginger-gimlet"
+      ],
+      "bartesian_url": "https://bartesian.com/products/triple-berry-sugar-rimmer?variant=41668489674951",
+      "help_url": "https://bartesian.gorgias.help/en-US/triple-berry-sugar-rimmer-39503",
+      "image": "images/rimmers/triple-berry-sugar-rimmer.jpg",
+      "nutrition_image": "",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "TripleBerrySugarRimmer.txt"
+    },
+    {
+      "name": "Vanilla Bean Sugar Rimmer",
+      "slug": "vanilla-bean-sugar-rimmer",
+      "description": "This indulgent flavor of warm and creamy vanilla bean adds a touch of elegance to your favorite cocktails. Perfect for enhancing sweet and spiced cocktails.",
+      "kind": "sugar",
+      "pairs_with": "Espresso Martini, Apple Pie, Frosty's Bananas Foster, and all types of Old Fashioneds",
+      "cocktail_slugs": [
+        "espresso-martini",
+        "apple-pie"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "images/nutrition/rimmer-vanilla-bean-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "VanillaBeanSugarRimmer.txt"
+    },
+    {
+      "name": "Zesty Lime Salt Rimmer",
+      "slug": "zesty-lime-salt-rimmer",
+      "description": "Zesty Lime Salt is the perfect finishing touch to a refreshing, summertime cocktail. The vivid green hue and bright lime flavor will enhance all citrusy, fruity, and spicy cocktails.",
+      "kind": "salt",
+      "pairs_with": "Watermelon Margarita, Kamikaze, and all other types of Margaritas",
+      "cocktail_slugs": [
+        "watermelon-margarita"
+      ],
+      "bartesian_url": "https://bartesian.com/products/zesty-lime-salt-rimmer?variant=43161656099015",
+      "help_url": "https://bartesian.gorgias.help/en-US/zesty-lime-salt-rimmer-261256",
+      "image": "images/rimmers/zesty-lime-salt-rimmer.jpg",
+      "nutrition_image": "images/nutrition/rimmer-zesty-lime-salt-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "ZestyLimeSaltRimmer.txt"
+    },
+    {
+      "name": "Zesty Orange Sugar Rimmer",
+      "slug": "zesty-orange-sugar-rimmer",
+      "description": "Add a pop of citrus to your holiday sips with our Zesty Orange Sugar Rimmer, a sweet and tangy blend that turns any cocktail into a celebration.",
+      "kind": "sugar",
+      "pairs_with": "Jollypeño Margarita, Starry Night, Yuletide Hurricane, Clausmopolitan, Frosty Navel, Holiday Spiced Old Fashioned, Tequila Sunrise, and Hurricane",
+      "cocktail_slugs": [
+        "jollype-o-margarita",
+        "starry-night",
+        "yuletide-hurricane",
+        "clausmopolitan",
+        "frosty-navel",
+        "holiday-spiced-old-fashioned",
+        "tequila-sunrise",
+        "hurricane"
+      ],
+      "bartesian_url": "",
+      "help_url": "",
+      "image": "",
+      "nutrition_image": "images/nutrition/rimmer-zesty-orange-sugar-rimmer.png",
+      "barcode": "",
+      "quantity": 0,
+      "favorite": 0,
+      "_file": "ZestyOrangeSugarRimmer.txt"
     }
   ]
 };

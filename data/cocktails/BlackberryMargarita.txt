@@ -1,0 +1,18 @@
+Name: Blackberry Margarita
+Slug: blackberry-margarita
+Description: The Blackberry Margarita provides sweet and slightly tart berry notes with undertones of honeyed fig to create a juicy and jammy combination.
+Spirits: Tequila
+Glassware: Margarita Glass
+Garnish: Blackberries
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/blackberry-margarita.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/blackberry-margarita-cocktails?variant=40477928751303
+Help URL: https://bartesian.gorgias.help/en-US/blackberry-margarita-36521
+Image: images/cocktails/blackberry-margarita.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

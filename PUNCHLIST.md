@@ -23,10 +23,15 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 
 ### Catalog & admin
 
+- [x] Real Bartesian catalog scrape (Gorgias nutrition articles + Shopify products) into `data/` + `images/`
+- [x] Seasonal flag on cocktails + list filter
+- [x] Rimmers table/page (`#/rimmers`) with pairings + inventory ±
+- [x] Alcohol volume (Mocktail/Light/Regular/Strong) + nutrition label images
+- [x] Product URLs with Shopify `?variant=` where the item is still sold online
 - [ ] **Cocktail admin page** — create / edit / disable cocktails (name, image, spirits, description, nutrition, alcohol, glassware, garnish, pairs-with, Bartesian URL, barcodes, case qty)
 - [ ] Variety-pack admin (create/edit packs and item quantities)
-- [ ] Real Bartesian catalog + photos under `images/`
 - [ ] Richer metadata editors (structured nutrition / alcohol fields)
+- [ ] Fill remaining empty Bartesian URLs for discontinued/seasonal SKUs if product pages reappear
 
 ### Cookies (mahjong-tools pattern)
 

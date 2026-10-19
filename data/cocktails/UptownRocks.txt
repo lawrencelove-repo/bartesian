@@ -1,0 +1,18 @@
+Name: Uptown Rocks
+Slug: uptown-rocks
+Description: An elegant floral and sweet gin drink featuring a mix of peach, white grape, and lemon juices with a graceful cilantro kick. Made best with an herbal gin for a smooth finish for this refreshing cocktail.
+Spirits: Gin
+Glassware: Coupe Glass
+Garnish: Lemon Peel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/uptown-rocks.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/gin-cocktails-uptown-rocks?variant=15685652480049
+Help URL: https://bartesian.gorgias.help/en-US/uptown-rocks-39504
+Image: images/cocktails/uptown-rocks.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

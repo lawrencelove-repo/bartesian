@@ -1,0 +1,12 @@
+Name: Golden Demerara Sugar
+Slug: golden-demerara-sugar
+Description: Course and golden brown, Demerara brightens up a cocktail with a delightful texture and subtle sweetness.
+Kind: sugar
+Pairs With: Apple Pie, Sidecar, Great Gatsby, & other dessert cocktails
+Cocktail Slugs: apple-pie, sidecar, great-gatsby
+Bartesian URL: https://bartesian.com/products/golden-demerara-rimming-sugar?variant=42058993238215
+Help URL: https://bartesian.gorgias.help/en-US/golden-demerara-sugar-39019
+Image: images/rimmers/golden-demerara-sugar.jpg
+Nutrition Image: 
+Barcode: 
+Quantity: 0

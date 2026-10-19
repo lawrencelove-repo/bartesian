@@ -6,6 +6,9 @@
     spirit: "",
     favoritesOnly: false,
     availableOnly: false,
+    seasonalOnly: false,
+    rimmerSearch: "",
+    rimmerKind: "",
     flash: "",
     randomSpirit: "",
     randomFavoritesOnly: false,
@@ -26,6 +29,10 @@
     if (parts[0] === "cocktail" && parts[1]) {
       return { view: "detail", id: Number(parts[1]) };
     }
+    if (parts[0] === "rimmer" && parts[1]) {
+      return { view: "rimmer-detail", id: Number(parts[1]) };
+    }
+    if (parts[0] === "rimmers") return { view: "rimmers" };
     if (parts[0] === "scan") return { view: "scan" };
     if (parts[0] === "random") return { view: "random" };
     if (parts[0] === "people") return { view: "people" };
@@ -55,6 +62,7 @@
   function shell(active, body) {
     const nav = [
       ["list", "#/", "Cocktails"],
+      ["rimmers", "#/rimmers", "Rimmers"],
       ["scan", "#/scan", "Scan"],
       ["random", "#/random", "Random"],
       ["people", "#/people", "People"],
@@ -93,6 +101,7 @@
       spirit: state.spirit,
       favoritesOnly: state.favoritesOnly,
       availableOnly: state.availableOnly,
+      seasonalOnly: state.seasonalOnly,
     });
     const spirits = BartesianDB.listSpirits();
 
@@ -105,7 +114,7 @@
               ${c.image ? `<img src="${esc(c.image)}" alt="">` : ""}
             </div>
             <div class="row-body">
-              <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}</div>
+              <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}${c.seasonal ? ' <span class="pill">Seasonal</span>' : ""}</div>
               <div class="row-meta">${esc(spiritsText || "—")} · ${starsLabel(c.avg_rating)}</div>
             </div>
             <div class="row-qty">${c.quantity}</div>
@@ -141,12 +150,54 @@
           </select>
           <label class="check"><input type="checkbox" name="available" ${state.availableOnly ? "checked" : ""}/> In stock</label>
           <label class="check"><input type="checkbox" name="favorites" ${state.favoritesOnly ? "checked" : ""}/> Favorites</label>
+          <label class="check"><input type="checkbox" name="seasonal" ${state.seasonalOnly ? "checked" : ""}/> Seasonal</label>
         </form>
         <p class="count">${cocktails.length} cocktail${cocktails.length === 1 ? "" : "s"}</p>
         <div class="list">${rows || `<p class="empty">No cocktails match.</p>`}</div>
       </section>
     `
     );
+  }
+
+  function alcoholBlock(alcohol, rawFallback) {
+    if (!alcohol && !rawFallback) return "";
+    if (alcohol && (alcohol.light_oz != null || alcohol.regular_oz != null)) {
+      const rows = [
+        ["Mocktail", alcohol.mocktail_oz],
+        ["Light", alcohol.light_oz],
+        ["Regular", alcohol.regular_oz],
+        ["Strong", alcohol.strong_oz],
+      ]
+        .filter(([, v]) => v != null)
+        .map(([label, v]) => `<li><strong>${label}</strong> — ${v} oz</li>`)
+        .join("");
+      return `<p class="section-label">Alcohol volume</p><ul class="plain">${rows}</ul>`;
+    }
+    const text = alcohol
+      ? Object.entries(alcohol)
+          .filter(([k]) => k !== "raw")
+          .map(([k, v]) => k + ": " + v)
+          .join(", ")
+      : rawFallback;
+    return text ? `<p class="section-label">Alcohol</p><p class="detail-copy">${esc(text)}</p>` : "";
+  }
+
+  function nutritionBlock(nutrition, rawFallback) {
+    const labelImage = nutrition && nutrition.label_image;
+    if (labelImage) {
+      return `<p class="section-label">Nutrition</p>
+        <p class="detail-copy muted">Case label (nutrition, ingredients, UPC)</p>
+        <a class="nutrition-label" href="${esc(labelImage)}" target="_blank" rel="noopener">
+          <img src="${esc(labelImage)}" alt="Nutrition label">
+        </a>`;
+    }
+    if (!nutrition && !rawFallback) return "";
+    const text = nutrition
+      ? Object.entries(nutrition)
+          .map(([k, v]) => k + ": " + v)
+          .join(", ")
+      : rawFallback;
+    return text ? `<p class="section-label">Nutrition</p><p class="detail-copy">${esc(text)}</p>` : "";
   }
 
   function metaRow(label, value) {
@@ -166,6 +217,7 @@
       return shell("list", `<section class="panel"><p>Cocktail not found.</p></section>`);
     }
     const packs = BartesianDB.packsForCocktail(id);
+    const rimmers = BartesianDB.rimmersForCocktail(id);
     const ratings = BartesianDB.listRatings(id);
     const people = BartesianDB.listPeople();
     const nutrition = parseJsonField(c.nutrition_json);
@@ -181,6 +233,15 @@
           .join("")}</ul>`
       : `<p class="muted">Not in any variety packs (yet).</p>`;
 
+    const rimmerList = rimmers.length
+      ? `<ul class="plain">${rimmers
+          .map(
+            (r) =>
+              `<li><a href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">${esc(r.name)}</a></li>`
+          )
+          .join("")}</ul>`
+      : "";
+
     const ratingRows = ratings.length
       ? ratings
           .map(
@@ -192,17 +253,6 @@
           .join("")
       : `<li class="muted">No ratings yet.</li>`;
 
-    const nutritionText = nutrition
-      ? Object.entries(nutrition)
-          .map(([k, v]) => k + ": " + v)
-          .join(", ")
-      : c.nutrition_json;
-    const alcoholText = alcohol
-      ? Object.entries(alcohol)
-          .map(([k, v]) => k + ": " + v)
-          .join(", ")
-      : c.alcohol_json;
-
     return shell(
       "list",
       `
@@ -213,13 +263,18 @@
             ${c.image ? `<img src="${esc(c.image)}" alt="">` : ""}
           </div>
           <div>
-            <p class="detail-kicker">Cocktail</p>
+            <p class="detail-kicker">Cocktail${c.seasonal ? " · Seasonal" : ""}</p>
             <h1 class="detail-title">${esc(c.name)}${c.favorite ? " ★" : ""}</h1>
             <p class="spirits">${esc(spiritsText)}</p>
             <p class="detail-copy">${esc(c.description || "")}</p>
             ${
               c.bartesian_url
                 ? `<p><a href="${esc(c.bartesian_url)}" target="_blank" rel="noopener">View on Bartesian ↗</a></p>`
+                : ""
+            }
+            ${
+              c.help_url
+                ? `<p class="muted"><a href="${esc(c.help_url)}" target="_blank" rel="noopener">Nutrition / help article ↗</a></p>`
                 : ""
             }
           </div>
@@ -229,8 +284,8 @@
           <div>
             <p class="section-label">Description</p>
             <p class="detail-copy">${esc(c.description || "No description yet.")}</p>
-            ${nutritionText ? `<p class="section-label">Nutrition</p><p class="detail-copy">${esc(nutritionText)}</p>` : ""}
-            ${alcoholText ? `<p class="section-label">Alcohol</p><p class="detail-copy">${esc(alcoholText)}</p>` : ""}
+            ${alcoholBlock(alcohol, c.alcohol_json)}
+            ${nutritionBlock(nutrition, c.nutrition_json)}
           </div>
           <div>
             <p class="section-label">Best served with</p>
@@ -270,6 +325,12 @@
           ${packList}
         </section>
 
+        ${
+          rimmerList
+            ? `<section><h2>Recommended rimmers</h2>${rimmerList}</section>`
+            : ""
+        }
+
         <section>
           <h2>Ratings &amp; comments</h2>
           <ul class="plain">${ratingRows}</ul>
@@ -290,6 +351,108 @@
             <input name="comment" type="text" placeholder="Comment (optional)" />
             <button type="submit">Save rating</button>
           </form>
+        </section>
+      </section>
+    `
+    );
+  }
+
+  function renderRimmers() {
+    const rimmers = BartesianDB.listRimmers({
+      search: state.rimmerSearch,
+      kind: state.rimmerKind,
+    });
+    const rows = rimmers
+      .map(
+        (r) => `
+          <a class="cocktail-row" href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">
+            <div class="thumb ${r.image ? "" : "thumb-empty"}">
+              ${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}
+            </div>
+            <div class="row-body">
+              <div class="row-title">${esc(r.name)}</div>
+              <div class="row-meta">${esc((r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase()))}</div>
+            </div>
+            <div class="row-qty">${r.quantity}</div>
+          </a>`
+      )
+      .join("");
+
+    return shell(
+      "rimmers",
+      `
+      <section class="panel">
+        <p class="section-label">Barware</p>
+        <h1>Rimmers</h1>
+        <form class="toolbar" data-rimmer-filters>
+          <input type="search" name="search" placeholder="Search" value="${esc(state.rimmerSearch)}" />
+          <select name="kind">
+            <option value="" ${!state.rimmerKind ? "selected" : ""}>All kinds</option>
+            <option value="sugar" ${state.rimmerKind === "sugar" ? "selected" : ""}>Sugar</option>
+            <option value="salt" ${state.rimmerKind === "salt" ? "selected" : ""}>Salt</option>
+          </select>
+        </form>
+        <p class="count">${rimmers.length} rimmer${rimmers.length === 1 ? "" : "s"}</p>
+        <div class="list">${rows || `<p class="empty">No rimmers match.</p>`}</div>
+      </section>
+    `
+    );
+  }
+
+  function renderRimmerDetail(id) {
+    const r = BartesianDB.getRimmer(id);
+    if (!r) {
+      return shell("rimmers", `<section class="panel"><p>Rimmer not found.</p></section>`);
+    }
+    const cocktails = BartesianDB.cocktailsForRimmer(id);
+    const cocktailList = cocktails.length
+      ? `<ul class="plain">${cocktails
+          .map(
+            (c) =>
+              `<li><a href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">${esc(c.name)}</a></li>`
+          )
+          .join("")}</ul>`
+      : `<p class="muted">${esc(r.pairs_with || "No linked cocktails yet.")}</p>`;
+
+    return shell(
+      "rimmers",
+      `
+      <section class="panel detail">
+        <a class="back" href="#/rimmers" data-go="#/rimmers">← All rimmers</a>
+        <div class="detail-hero">
+          <div class="thumb large ${r.image ? "" : "thumb-empty"}">
+            ${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}
+          </div>
+          <div>
+            <p class="detail-kicker">${esc((r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase()))} rimmer</p>
+            <h1 class="detail-title">${esc(r.name)}</h1>
+            <p class="detail-copy">${esc(r.description || "")}</p>
+            ${
+              r.bartesian_url
+                ? `<p><a href="${esc(r.bartesian_url)}" target="_blank" rel="noopener">View on Bartesian ↗</a></p>`
+                : ""
+            }
+          </div>
+        </div>
+        ${
+          r.nutrition_image
+            ? `<p class="section-label">Nutrition</p>
+               <a class="nutrition-label" href="${esc(r.nutrition_image)}" target="_blank" rel="noopener">
+                 <img src="${esc(r.nutrition_image)}" alt="Nutrition label">
+               </a>`
+            : ""
+        }
+        <section class="inventory-box">
+          <p class="section-label">Inventory</p>
+          <p class="qty-display"><span data-qty>${r.quantity}</span> on hand</p>
+          <div class="qty-actions">
+            <button type="button" data-rimmer-qty-delta="-1" data-id="${r.id}">−</button>
+            <button type="button" data-rimmer-qty-delta="1" data-id="${r.id}">+</button>
+          </div>
+        </section>
+        <section>
+          <h2>Cocktail pairings</h2>
+          ${cocktailList}
         </section>
       </section>
     `
@@ -377,7 +540,7 @@
         <p class="section-label">Admin</p>
         <h1>Settings</h1>
         <h2>Export for GitHub</h2>
-        <p>Writes cocktail/pack <code>.txt</code> files (and ratings/people JSON in the zip). Copy into <code>data/</code>, run <code>node scripts/import-data.js</code>, then commit.</p>
+        <p>Writes cocktail/pack/rimmer <code>.txt</code> files (and ratings/people JSON in the zip). Copy into <code>data/</code>, run <code>node scripts/import-data.js</code>, then commit.</p>
         <button type="button" data-export>Export data</button>
         <p class="hint" data-export-status></p>
         <h2>Local database</h2>
@@ -406,6 +569,8 @@
   function render() {
     const route = parseHash();
     if (route.view === "detail") root.innerHTML = renderDetail(route.id);
+    else if (route.view === "rimmers") root.innerHTML = renderRimmers();
+    else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
     else if (route.view === "scan") root.innerHTML = renderScan();
     else if (route.view === "random") root.innerHTML = renderRandom();
     else if (route.view === "people") root.innerHTML = renderPeople();
@@ -428,6 +593,19 @@
       const id = Number(deltaBtn.getAttribute("data-id"));
       const delta = Number(deltaBtn.getAttribute("data-qty-delta"));
       await BartesianDB.adjustQuantity(id, delta, delta > 0 ? "manual_add" : "manual_remove");
+      render();
+      return;
+    }
+
+    const rimmerDeltaBtn = e.target.closest("[data-rimmer-qty-delta]");
+    if (rimmerDeltaBtn) {
+      const id = Number(rimmerDeltaBtn.getAttribute("data-id"));
+      const delta = Number(rimmerDeltaBtn.getAttribute("data-rimmer-qty-delta"));
+      await BartesianDB.adjustRimmerQuantity(
+        id,
+        delta,
+        delta > 0 ? "manual_add" : "manual_remove"
+      );
       render();
       return;
     }
@@ -484,6 +662,17 @@
       state.sort = String(fd.get("sort") || "name");
       state.availableOnly = listForm.available.checked;
       state.favoritesOnly = listForm.favorites.checked;
+      state.seasonalOnly = listForm.seasonal ? listForm.seasonal.checked : false;
+      render();
+      return;
+    }
+
+    const rimmerForm = e.target.closest("[data-rimmer-filters]");
+    if (rimmerForm) {
+      e.preventDefault();
+      const fd = new FormData(rimmerForm);
+      state.rimmerSearch = String(fd.get("search") || "");
+      state.rimmerKind = String(fd.get("kind") || "");
       render();
       return;
     }
@@ -566,16 +755,15 @@
 
   function onInput(e) {
     const listForm = e.target.closest("[data-list-filters]");
-    if (!listForm) return;
-    if (e.target.name === "search") {
+    if (listForm && e.target.name === "search") {
       state.search = e.target.value;
-      // Re-render would steal focus; filter live via a light refresh of list only.
       const cocktails = BartesianDB.listCocktails({
         search: state.search,
         sort: state.sort,
         spirit: state.spirit,
         favoritesOnly: state.favoritesOnly,
         availableOnly: state.availableOnly,
+        seasonalOnly: state.seasonalOnly,
       });
       const list = root.querySelector(".list");
       const count = root.querySelector(".count");
@@ -591,7 +779,7 @@
                   ${c.image ? `<img src="${esc(c.image)}" alt="">` : ""}
                 </div>
                 <div class="row-body">
-                  <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}</div>
+                  <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}${c.seasonal ? ' <span class="pill">Seasonal</span>' : ""}</div>
                   <div class="row-meta">${esc(spiritsText || "—")} · ${starsLabel(c.avg_rating)}</div>
                 </div>
                 <div class="row-qty">${c.quantity}</div>
@@ -599,19 +787,32 @@
             })
             .join("") || `<p class="empty">No cocktails match.</p>`;
       }
+      return;
+    }
+
+    const rimmerForm = e.target.closest("[data-rimmer-filters]");
+    if (rimmerForm && e.target.name === "search") {
+      state.rimmerSearch = e.target.value;
+      render();
     }
   }
 
   function onChange(e) {
     const listForm = e.target.closest("[data-list-filters]");
-    if (!listForm) return;
-    if (["spirit", "sort", "available", "favorites"].includes(e.target.name)) {
+    if (listForm && ["spirit", "sort", "available", "favorites", "seasonal"].includes(e.target.name)) {
       state.spirit = listForm.spirit.value;
       state.sort = listForm.sort.value;
       state.availableOnly = listForm.available.checked;
       state.favoritesOnly = listForm.favorites.checked;
+      state.seasonalOnly = listForm.seasonal ? listForm.seasonal.checked : false;
       render();
-      // restore focus-ish not needed
+      return;
+    }
+
+    const rimmerForm = e.target.closest("[data-rimmer-filters]");
+    if (rimmerForm && e.target.name === "kind") {
+      state.rimmerKind = rimmerForm.kind.value;
+      render();
     }
   }
 

@@ -1,0 +1,18 @@
+Name: Frosty Navel
+Slug: frosty-navel
+Description: This snowman-approved vodka cocktail brings a burst of holiday cheer with its bright blend of tangy orange and juicy peach schnapps flavors, delivering a sweet and citrusy sip that tastes like sunshine on a snowy day. Enjoy Frosty Navel over ice in a highball glass with fresh fruit and a Zesty Orange Sugar rim.
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: Fresh fruit
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/frosty-navel.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/frosty-navel-3388360
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

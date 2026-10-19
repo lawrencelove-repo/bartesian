@@ -1,0 +1,18 @@
+Name: The Grinch Appletini
+Slug: the-grinch-appletini
+Description: Holidays have you feeling like a humbug? Sweet and tart, The Grinch Appletini is sure to raise spirits with its green apple flavors. Shake over ice and serve in a martini glass with a sugar rim and apple wheel.
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: Apple Wheel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/the-grinch-appletini.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/the-grinch-appletini-1059897
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

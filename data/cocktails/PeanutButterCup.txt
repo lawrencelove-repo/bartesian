@@ -1,0 +1,18 @@
+Name: Peanut Butter Cup
+Slug: peanut-butter-cup
+Description: No need to trick or treat with this cocktail. A decadent delight of smooth whiskey with creamy peanut butter and rich milk chocolate flavors. An irresistible blend of sweet and savory. Shake with ice and serve in a martini glass garnished with peanut butter cups.
+Spirits: Whiskey
+Glassware: Martini Glass
+Garnish: ed with peanut butter cups
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/peanut-butter-cup.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail =0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/peanut-butter-cup-809946
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

@@ -11,12 +11,33 @@
       "Nutrition: " + (c.nutrition_json || ""),
       "Alcohol: " + (c.alcohol_json || ""),
       "Bartesian URL: " + (c.bartesian_url || ""),
+      "Help URL: " + (c.help_url || ""),
       "Image: " + (c.image || ""),
+      "Seasonal: " + (c.seasonal ? "1" : "0"),
       "Favorite: " + (c.favorite ? "1" : "0"),
       "Quantity: " + (Number(c.quantity) || 0),
       "Capsule Barcode: " + (c.capsule_barcode || ""),
       "Case Barcode: " + (c.case_barcode || ""),
       "Case Qty: " + (c.case_qty != null ? c.case_qty : 8),
+      "",
+    ];
+    return lines.join("\n");
+  }
+
+  function rimmerToText(r) {
+    const lines = [
+      "Name: " + (r.name || ""),
+      "Slug: " + (r.slug || ""),
+      "Description: " + (r.description || ""),
+      "Kind: " + (r.kind || ""),
+      "Pairs With: " + (r.pairs_with || ""),
+      "Cocktail Slugs: " + ((r.cocktail_slugs || []).join(", ") || ""),
+      "Bartesian URL: " + (r.bartesian_url || ""),
+      "Help URL: " + (r.help_url || ""),
+      "Image: " + (r.image || ""),
+      "Nutrition Image: " + (r.nutrition_image || ""),
+      "Barcode: " + (r.barcode || ""),
+      "Quantity: " + (Number(r.quantity) || 0),
       "",
     ];
     return lines.join("\n");
@@ -56,6 +77,10 @@
     }
     for (const p of snapshot.packs || []) {
       packs.file(fileStem(p.name, p.slug) + ".txt", packToText(p));
+    }
+    const rimmers = zip.folder("rimmers");
+    for (const r of snapshot.rimmers || []) {
+      rimmers.file(fileStem(r.name, r.slug) + ".txt", rimmerToText(r));
     }
     zip.file("ratings.json", JSON.stringify(snapshot.ratings || [], null, 2));
     zip.file("people.json", JSON.stringify(snapshot.people || [], null, 2));
@@ -119,6 +144,7 @@
   global.BartesianExport = {
     cocktailToText,
     packToText,
+    rimmerToText,
     exportAll,
     downloadZip,
   };

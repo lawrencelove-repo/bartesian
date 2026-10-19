@@ -1,0 +1,18 @@
+Name: Jalapeño Lime Shrub
+Slug: jalape-o-lime-shrub
+Description: Equal parts refreshing, sour lime, citrusy, and jalapeno-level spicy, this unique tequila cocktail contains apple cider vinegar to provide balanced acidity.
+Spirits: Tequila
+Glassware: Lowball Glass
+Garnish: Jalapeño
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/jalape-o-lime-shrub.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/jalapeno-lime-shrub-cocktails?variant=31660700696625
+Help URL: https://bartesian.gorgias.help/en-US/jalapeno-lime-shrub-39041
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

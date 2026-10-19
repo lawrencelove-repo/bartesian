@@ -1,0 +1,18 @@
+Name: Whiskey Sour
+Slug: whiskey-sour
+Description: The Whiskey Sour provides a smooth balance of sweet and sour. Notes of vanilla, lemon, and orange round out the flavor profile, and make for a classic whiskey citrus cocktail.
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/whiskey-sour.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/whiskey-sour-cocktails?variant=16352868401201
+Help URL: https://bartesian.gorgias.help/en-US/whiskey-sour-76297
+Image: images/cocktails/whiskey-sour.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

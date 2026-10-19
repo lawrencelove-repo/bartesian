@@ -1,0 +1,18 @@
+Name: Mint Julep
+Slug: mint-julep
+Description: The signature derby crown is not handed out to just any cocktail - and the Mint Julep has most definitely earned its seat on the throne. Sweet and balanced with mint and whiskey barrel flavors. If you enjoy the minty refreshment of a Mojito, the Mint Julep is a sure bet.
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: Mint Sprig
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/mint-julep.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/mint-julep-468827
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

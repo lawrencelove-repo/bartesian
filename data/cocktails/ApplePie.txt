@@ -1,0 +1,18 @@
+Name: Apple Pie
+Slug: apple-pie
+Description: Your favorite dessert is served as a cocktail. The sweet combination of baked apple and fall spices is perfectly balanced with hints of lemon and cayenne in this whiskey and vodka cocktail. Wonderfully reminiscent of a slice of grandma's apple pie.
+Spirits: Vodka, Whiskey
+Glassware: Lowball Glass
+Garnish: Apple
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/apple-pie.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/apple-pie?variant=32387502047281
+Help URL: https://bartesian.gorgias.help/en-US/apple-pie-36517
+Image: images/cocktails/apple-pie.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

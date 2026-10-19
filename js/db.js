@@ -2,7 +2,7 @@
   const IDB_NAME = "bartesian-sqlite";
   const IDB_STORE = "kv";
   const DB_KEY = "database";
-  const SCHEMA_VERSION = 1;
+  const SCHEMA_VERSION = 2;
 
   const SEED_SQL = `
     CREATE TABLE IF NOT EXISTS meta (
@@ -33,6 +33,8 @@
       nutrition_json TEXT NOT NULL DEFAULT '',
       alcohol_json TEXT NOT NULL DEFAULT '',
       bartesian_url TEXT NOT NULL DEFAULT '',
+      help_url TEXT NOT NULL DEFAULT '',
+      seasonal INTEGER NOT NULL DEFAULT 0,
       favorite INTEGER NOT NULL DEFAULT 0,
       enabled INTEGER NOT NULL DEFAULT 1,
       quantity INTEGER NOT NULL DEFAULT 0,
@@ -49,11 +51,39 @@
       FOREIGN KEY (spirit_id) REFERENCES spirits(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS rimmers (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      slug TEXT NOT NULL UNIQUE,
+      name TEXT NOT NULL,
+      description TEXT NOT NULL DEFAULT '',
+      image TEXT NOT NULL DEFAULT '',
+      kind TEXT NOT NULL DEFAULT '',
+      pairs_with TEXT NOT NULL DEFAULT '',
+      nutrition_image TEXT NOT NULL DEFAULT '',
+      bartesian_url TEXT NOT NULL DEFAULT '',
+      help_url TEXT NOT NULL DEFAULT '',
+      favorite INTEGER NOT NULL DEFAULT 0,
+      enabled INTEGER NOT NULL DEFAULT 1,
+      quantity INTEGER NOT NULL DEFAULT 0,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS cocktail_rimmers (
+      cocktail_id INTEGER NOT NULL,
+      rimmer_id INTEGER NOT NULL,
+      PRIMARY KEY (cocktail_id, rimmer_id),
+      FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE,
+      FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE
+    );
+
     CREATE TABLE IF NOT EXISTS packs (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       slug TEXT NOT NULL UNIQUE,
       name TEXT NOT NULL,
       notes TEXT NOT NULL DEFAULT '',
+      image TEXT NOT NULL DEFAULT '',
+      bartesian_url TEXT NOT NULL DEFAULT '',
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
     );
@@ -73,9 +103,11 @@
       kind TEXT NOT NULL,
       cocktail_id INTEGER,
       pack_id INTEGER,
+      rimmer_id INTEGER,
       case_qty INTEGER NOT NULL DEFAULT 8,
       FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE,
-      FOREIGN KEY (pack_id) REFERENCES packs(id) ON DELETE CASCADE
+      FOREIGN KEY (pack_id) REFERENCES packs(id) ON DELETE CASCADE,
+      FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE
     );
 
     CREATE TABLE IF NOT EXISTS ratings (
@@ -93,12 +125,14 @@
 
     CREATE TABLE IF NOT EXISTS inventory_log (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      cocktail_id INTEGER NOT NULL,
+      cocktail_id INTEGER,
+      rimmer_id INTEGER,
       delta INTEGER NOT NULL,
       reason TEXT NOT NULL DEFAULT '',
       barcode TEXT NOT NULL DEFAULT '',
       created_at TEXT NOT NULL,
-      FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE
+      FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE,
+      FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE
     );
 
     INSERT INTO meta (key, value) VALUES ('schema_version', '${SCHEMA_VERSION}');
@@ -196,14 +230,24 @@
     });
   }
 
+  function jsonField(v) {
+    if (v == null || v === "") return "";
+    if (typeof v === "string") return v;
+    try {
+      return JSON.stringify(v);
+    } catch (_) {
+      return "";
+    }
+  }
+
   function insertCocktail(c) {
     const ts = nowIso();
     exec(
       `INSERT INTO cocktails (
         slug, name, description, image, glassware, garnish, pairs_with,
-        nutrition_json, alcohol_json, bartesian_url, favorite, enabled, quantity,
-        created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        nutrition_json, alcohol_json, bartesian_url, help_url, seasonal,
+        favorite, enabled, quantity, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         c.slug,
         c.name,
@@ -212,9 +256,11 @@
         c.glassware || "",
         c.garnish || "",
         c.pairs_with || "",
-        c.nutrition_json || "",
-        c.alcohol_json || "",
+        jsonField(c.nutrition_json),
+        jsonField(c.alcohol_json),
         c.bartesian_url || "",
+        c.help_url || "",
+        c.seasonal ? 1 : 0,
         c.favorite ? 1 : 0,
         c.enabled === 0 || c.enabled === false ? 0 : 1,
         Number(c.quantity) || 0,
@@ -240,11 +286,56 @@
     return id;
   }
 
+  function insertRimmer(r, cocktailSlugToId) {
+    const ts = nowIso();
+    exec(
+      `INSERT INTO rimmers (
+        slug, name, description, image, kind, pairs_with, nutrition_image,
+        bartesian_url, help_url, favorite, enabled, quantity, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [
+        r.slug,
+        r.name,
+        r.description || "",
+        r.image || "",
+        r.kind || "",
+        r.pairs_with || "",
+        r.nutrition_image || "",
+        r.bartesian_url || "",
+        r.help_url || "",
+        r.favorite ? 1 : 0,
+        r.enabled === 0 || r.enabled === false ? 0 : 1,
+        Number(r.quantity) || 0,
+        ts,
+        ts,
+      ]
+    );
+    const id = queryOne("SELECT last_insert_rowid() AS id").id;
+    const slugs = r.cocktail_slugs || r.pair_slugs || [];
+    (Array.isArray(slugs) ? slugs : String(slugs).split(",").map((s) => s.trim()).filter(Boolean)).forEach(
+      (slug) => {
+        const cid = cocktailSlugToId[slug];
+        if (!cid) return;
+        exec("INSERT OR IGNORE INTO cocktail_rimmers (cocktail_id, rimmer_id) VALUES (?, ?)", [
+          cid,
+          id,
+        ]);
+      }
+    );
+    if (r.barcode) {
+      exec(
+        "INSERT OR IGNORE INTO barcodes (code, kind, rimmer_id, case_qty) VALUES (?, 'rimmer', ?, 1)",
+        [String(r.barcode), id]
+      );
+    }
+    return id;
+  }
+
   function insertPack(p, slugToId) {
     const ts = nowIso();
     exec(
-      "INSERT INTO packs (slug, name, notes, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
-      [p.slug, p.name, p.notes || "", ts, ts]
+      "INSERT INTO packs (slug, name, notes, image, bartesian_url, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      [p.slug, p.name, p.notes || "", p.image || "", p.bartesian_url || "", ts, ts]
     );
     const packId = queryOne("SELECT last_insert_rowid() AS id").id;
     (p.items || []).forEach((item) => {
@@ -265,7 +356,7 @@
   }
 
   function seedAll() {
-    const seed = global.BARTESIAN_SEED || { people: [], cocktails: [], packs: [] };
+    const seed = global.BARTESIAN_SEED || { people: [], cocktails: [], packs: [], rimmers: [] };
     for (const person of seed.people || []) {
       if (!person.name) continue;
       exec("INSERT OR IGNORE INTO people (name, created_at) VALUES (?, ?)", [
@@ -277,6 +368,10 @@
     for (const c of seed.cocktails || []) {
       if (!c.slug || !c.name) continue;
       slugToId[c.slug] = insertCocktail(c);
+    }
+    for (const r of seed.rimmers || []) {
+      if (!r.slug || !r.name) continue;
+      insertRimmer(r, slugToId);
     }
     for (const p of seed.packs || []) {
       if (!p.slug || !p.name) continue;
@@ -296,6 +391,7 @@
     return {
       ...row,
       favorite: !!row.favorite,
+      seasonal: !!row.seasonal,
       enabled: row.enabled === undefined || row.enabled === null ? true : !!row.enabled,
       quantity: Number(row.quantity) || 0,
       avg_rating: row.avg_rating != null ? Number(row.avg_rating) : null,
@@ -306,6 +402,16 @@
             .split("|")
             .filter(Boolean)
         : undefined,
+    };
+  }
+
+  function rowToRimmer(row) {
+    if (!row) return null;
+    return {
+      ...row,
+      favorite: !!row.favorite,
+      enabled: row.enabled === undefined || row.enabled === null ? true : !!row.enabled,
+      quantity: Number(row.quantity) || 0,
     };
   }
 
@@ -374,12 +480,14 @@
       sort = "name",
       favoritesOnly = false,
       availableOnly = false,
+      seasonalOnly = false,
       spirit = "",
     } = {}) {
       let sql = listSelect + " WHERE c.enabled = 1";
       const params = [];
       if (favoritesOnly) sql += " AND c.favorite = 1";
       if (availableOnly) sql += " AND c.quantity >= 1";
+      if (seasonalOnly) sql += " AND c.seasonal = 1";
       if (spirit.trim()) {
         sql += ` AND EXISTS (
           SELECT 1 FROM cocktail_spirits cs
@@ -440,6 +548,65 @@
          ORDER BY p.name COLLATE NOCASE`,
         [cocktailId]
       );
+    },
+
+    listRimmers({ search = "", kind = "" } = {}) {
+      let sql = "SELECT * FROM rimmers WHERE enabled = 1";
+      const params = [];
+      if (kind.trim()) {
+        sql += " AND kind = ? COLLATE NOCASE";
+        params.push(kind.trim());
+      }
+      if (search.trim()) {
+        sql += " AND (name LIKE ? OR description LIKE ? OR pairs_with LIKE ?)";
+        const q = "%" + search.trim() + "%";
+        params.push(q, q, q);
+      }
+      sql += " ORDER BY name COLLATE NOCASE";
+      return query(sql, params).map(rowToRimmer);
+    },
+
+    getRimmer(id) {
+      return rowToRimmer(queryOne("SELECT * FROM rimmers WHERE id = ?", [id]));
+    },
+
+    rimmersForCocktail(cocktailId) {
+      return query(
+        `SELECT r.*
+         FROM rimmers r
+         JOIN cocktail_rimmers cr ON cr.rimmer_id = r.id
+         WHERE cr.cocktail_id = ?
+         ORDER BY r.name COLLATE NOCASE`,
+        [cocktailId]
+      ).map(rowToRimmer);
+    },
+
+    cocktailsForRimmer(rimmerId) {
+      return query(
+        `SELECT c.id, c.name, c.slug, c.image
+         FROM cocktails c
+         JOIN cocktail_rimmers cr ON cr.cocktail_id = c.id
+         WHERE cr.rimmer_id = ?
+         ORDER BY c.name COLLATE NOCASE`,
+        [rimmerId]
+      );
+    },
+
+    async adjustRimmerQuantity(rimmerId, delta, reason, barcode) {
+      const row = queryOne("SELECT quantity FROM rimmers WHERE id = ?", [rimmerId]);
+      if (!row) throw new Error("Rimmer not found");
+      const next = Math.max(0, (Number(row.quantity) || 0) + Number(delta));
+      exec("UPDATE rimmers SET quantity = ?, updated_at = ? WHERE id = ?", [
+        next,
+        nowIso(),
+        rimmerId,
+      ]);
+      exec(
+        "INSERT INTO inventory_log (rimmer_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
+        [rimmerId, Number(delta), reason || "", barcode || "", nowIso()]
+      );
+      await persist();
+      return next;
     },
 
     getPackItems(packId) {
@@ -595,10 +762,22 @@
           })),
         };
       });
+      const rimmers = this.listRimmers({}).map((r) => {
+        const barcode = queryOne(
+          "SELECT code FROM barcodes WHERE rimmer_id = ? AND kind = 'rimmer'",
+          [r.id]
+        );
+        return {
+          ...r,
+          barcode: barcode ? barcode.code : "",
+          cocktail_slugs: this.cocktailsForRimmer(r.id).map((c) => c.slug),
+        };
+      });
       return {
         people: this.listPeople(),
         cocktails,
         packs,
+        rimmers,
         ratings: query(
           `SELECT r.*, p.name AS person_name, c.slug AS cocktail_slug
            FROM ratings r

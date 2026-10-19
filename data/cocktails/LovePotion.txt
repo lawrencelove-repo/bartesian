@@ -1,0 +1,18 @@
+Name: Love Potion
+Slug: love-potion
+Description: Sweet and tart, this enchanting gin cocktail combines juicy blueberry, zesty lemon, and delicate lavender flavors. Experience the magic of Love Potion and let its enchanting blend transport you to a world of serenity and floral bliss.
+Spirits: Gin
+Glassware: Highball Glass
+Garnish: Lemon Peel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/love-potion.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/love-potion-1051826
+Image: 
+Seasonal: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

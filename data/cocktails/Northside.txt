@@ -1,0 +1,18 @@
+Name: Northside
+Slug: northside
+Description: With Moscow Mule-inspired flavors, this smooth, sweet and tart lime vodka libation, the Northside is like a cool breeze on a hot day.
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: Lime
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/northside.png"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/northside-cocktails?variant=32387413606449
+Help URL: https://bartesian.gorgias.help/en-US/northside-39066
+Image: images/cocktails/northside.jpg
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

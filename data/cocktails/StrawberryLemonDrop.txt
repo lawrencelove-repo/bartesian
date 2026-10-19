@@ -1,0 +1,18 @@
+Name: Strawberry Lemon Drop
+Slug: strawberry-lemon-drop
+Description: This sweet and tart vodka cocktail blends the bright and juicy flavors of fresh-picked strawberries and tangy candied lemon. Shake and serve in a martini glass garnished with a sugar rim, lemon wheel, and a strawberry.
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: ed with a sugar rim, lemon wheel, and a strawberry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/strawberry-lemon-drop.jpg"}
+Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/strawberry-lemon-drop-1661999
+Image: 
+Seasonal: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8
