@@ -36,6 +36,69 @@
     }
   }
 
+  function upcAChecksumOk(digits12) {
+    if (!digits12 || digits12.length !== 12) return false;
+    let sum = 0;
+    for (let i = 0; i < 11; i++) {
+      sum += digits12[i] * (i % 2 === 0 ? 3 : 1);
+    }
+    return (10 - (sum % 10)) % 10 === digits12[11];
+  }
+
+  function ean13ChecksumOk(digits13) {
+    if (!digits13 || digits13.length !== 13) return false;
+    let sum = 0;
+    for (let i = 0; i < 12; i++) {
+      sum += digits13[i] * (i % 2 === 0 ? 1 : 3);
+    }
+    return (10 - (sum % 10)) % 10 === digits13[12];
+  }
+
+  /**
+   * Distinguish retail UPC-A/EAN-13 from Bartesian capsule payloads.
+   * New UPC → suggest Kind "case" (variety pack still needs a manual pick).
+   */
+  function classifyCode(code) {
+    const normalized = normalizeCode(code);
+    if (!normalized) {
+      return { format: "unknown", suggestedKind: null, label: "Unknown" };
+    }
+
+    if (/^\d{12}$/.test(normalized)) {
+      const digits = normalized.split("").map(Number);
+      if (upcAChecksumOk(digits)) {
+        return {
+          format: "upc_a",
+          suggestedKind: "case",
+          label: "UPC-A (retail)",
+        };
+      }
+    }
+    if (/^\d{13}$/.test(normalized)) {
+      const digits = normalized.split("").map(Number);
+      if (ean13ChecksumOk(digits)) {
+        return {
+          format: "ean_13",
+          suggestedKind: "case",
+          label: "EAN-13 (retail)",
+        };
+      }
+    }
+
+    // Bartesian Code128-C payload is ≤10 digits; decodeCapsule validates range.
+    const decoded = decodeCapsule(normalized);
+    if (decoded) {
+      return {
+        format: "bartesian_capsule",
+        suggestedKind: "capsule",
+        label: "Bartesian capsule (Code128)",
+        decoded,
+      };
+    }
+
+    return { format: "unknown", suggestedKind: null, label: "Unknown" };
+  }
+
   /**
    * Decode a Bartesian capsule numeric payload (bits per BARCODES.md).
    * @param {string|number} code
@@ -92,12 +155,21 @@
       return { ok: false, error: "Enter a barcode." };
     }
 
-    const decoded = decodeCapsule(normalized);
+    const classified = classifyCode(normalized);
+    const decoded =
+      classified.decoded ||
+      (classified.format === "bartesian_capsule" ? decodeCapsule(normalized) : null) ||
+      decodeCapsule(normalized);
     const bc = db.findBarcode(normalized);
 
     // 1) Explicit DB mapping wins (covers case / pack / rimmer / overrides)
     if (bc) {
-      return resolveMapped(db, bc, normalized, decoded, capsuleDelta, rimmerDelta);
+      const mapped = resolveMapped(db, bc, normalized, decoded, capsuleDelta, rimmerDelta);
+      if (mapped && typeof mapped === "object") {
+        mapped.format = classified.format;
+        mapped.formatLabel = classified.label;
+      }
+      return mapped;
     }
 
     // 2) Capsule via romkal drink map
@@ -114,6 +186,9 @@
           adjustable: true,
           delta,
           source: "romkal",
+          format: "bartesian_capsule",
+          formatLabel: classified.label,
+          suggestedKind: "capsule",
           decoded,
           proposed: [
             {
@@ -132,12 +207,15 @@
     }
 
     // 3) Decodable but unknown drink — help admin associate
-    if (decoded) {
+    if (decoded && classified.format === "bartesian_capsule") {
       return {
         ok: false,
         unknown: true,
         code: normalized,
         decoded,
+        format: classified.format,
+        formatLabel: classified.label,
+        suggestedKind: "capsule",
         error: decoded.romkalName
           ? `Known pod “${decoded.romkalName}” is not in the local catalog yet.`
           : "Unknown capsule code — associate it in Admin → Barcodes (Drink ID " +
@@ -146,10 +224,28 @@
       };
     }
 
+    if (classified.format === "upc_a" || classified.format === "ean_13") {
+      return {
+        ok: false,
+        unknown: true,
+        code: normalized,
+        format: classified.format,
+        formatLabel: classified.label,
+        suggestedKind: "case",
+        error:
+          "Unknown " +
+          classified.label +
+          " — likely a case label. Associate it in Admin → Barcodes (Kind defaults to Case; switch to Variety pack if needed).",
+      };
+    }
+
     return {
       ok: false,
       unknown: true,
       code: normalized,
+      format: classified.format,
+      formatLabel: classified.label,
+      suggestedKind: classified.suggestedKind,
       error: "Unknown barcode — associate it in Admin → Barcodes.",
     };
   }
@@ -280,6 +376,7 @@
     normalizeCode,
     kindLabel,
     decodeCapsule,
+    classifyCode,
     resolve,
   };
 })(window);

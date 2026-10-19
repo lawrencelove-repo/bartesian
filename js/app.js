@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v14";
+  const APP_VERSION = "bartesian-v15";
 
   const root = document.getElementById("app");
   let cameraScanner = null;
@@ -38,38 +38,75 @@
     state.cameraStatus = "";
   }
 
+  function applyAdminLookup(code) {
+    const normalized = BartesianBarcodes.normalizeCode(code);
+    state.adminCode = normalized;
+    state.adminLookupNote = "";
+    state.adminCocktailId = "";
+    if (!normalized) {
+      state.adminLookupNote = "Enter a barcode first.";
+      return;
+    }
+    const classified = BartesianBarcodes.classifyCode(normalized);
+    const decoded = classified.decoded || BartesianBarcodes.decodeCapsule(normalized);
+    const existing = BartesianDB.findBarcode(normalized);
+    if (existing) {
+      state.adminKind = existing.kind;
+      if (existing.cocktail_id) state.adminCocktailId = String(existing.cocktail_id);
+      state.adminLookupNote =
+        "Already saved as " + BartesianBarcodes.kindLabel(existing.kind) + ".";
+      return;
+    }
+    if (classified.suggestedKind) {
+      state.adminKind = classified.suggestedKind;
+    }
+    if (decoded && decoded.slug) {
+      const c = BartesianDB.findCocktailBySlug(decoded.slug);
+      state.adminKind = "capsule";
+      if (c) {
+        state.adminCocktailId = String(c.id);
+        state.adminLookupNote =
+          classified.label +
+          ": romkal match " +
+          decoded.romkalName +
+          " → " +
+          c.name +
+          ". Save to link.";
+      } else {
+        state.adminLookupNote =
+          classified.label +
+          ": “" +
+          decoded.romkalName +
+          "” not in catalog. Pick cocktail, then Save.";
+      }
+      return;
+    }
+    if (decoded && classified.format === "bartesian_capsule") {
+      state.adminKind = "capsule";
+      state.adminLookupNote =
+        classified.label +
+        " (Drink ID " +
+        decoded.drinkId +
+        "). Pick cocktail, then Save.";
+      return;
+    }
+    if (classified.format === "upc_a" || classified.format === "ean_13") {
+      state.adminKind = "case";
+      state.adminLookupNote =
+        "Detected " +
+        classified.label +
+        ". Kind set to Case (single flavor) — switch to Variety pack if this is a multi-flavor box, then pick target and Save.";
+      return;
+    }
+    state.adminLookupNote =
+      "Could not classify barcode. Choose Kind + target, then Save.";
+  }
+
   function applyScannedCode(code, target) {
     const normalized = BartesianBarcodes.normalizeCode(code);
     if (!normalized) return;
     if (target === "admin") {
-      state.adminCode = normalized;
-      state.adminLookupNote = "";
-      // Reuse lookup logic by synthesizing a click path
-      const decoded = BartesianBarcodes.decodeCapsule(normalized);
-      const existing = BartesianDB.findBarcode(normalized);
-      if (existing) {
-        state.adminKind = existing.kind;
-        if (existing.cocktail_id) state.adminCocktailId = String(existing.cocktail_id);
-        state.adminLookupNote =
-          "Scanned — already saved as " + BartesianBarcodes.kindLabel(existing.kind) + ".";
-      } else if (decoded && decoded.slug) {
-        const c = BartesianDB.findCocktailBySlug(decoded.slug);
-        state.adminKind = "capsule";
-        if (c) {
-          state.adminCocktailId = String(c.id);
-          state.adminLookupNote =
-            "Scanned romkal match: " + decoded.romkalName + " → " + c.name + ". Save to link.";
-        } else {
-          state.adminLookupNote =
-            "Scanned: “" + decoded.romkalName + "” not in catalog. Pick cocktail, then Save.";
-        }
-      } else if (decoded) {
-        state.adminKind = "capsule";
-        state.adminLookupNote =
-          "Scanned capsule (Drink ID " + decoded.drinkId + "). Pick cocktail, then Save.";
-      } else {
-        state.adminLookupNote = "Scanned retail/other code. Choose Kind + target, then Save.";
-      }
+      applyAdminLookup(normalized);
       stopCamera();
       render();
       return;
@@ -662,8 +699,17 @@
           <p class="error">${esc(preview.error)}</p>
           ${decodedMetaHtml(preview.decoded)}
           ${
+            preview.formatLabel
+              ? `<p class="hint">Detected format: ${esc(preview.formatLabel)}${
+                  preview.suggestedKind
+                    ? " → Kind will default to " + esc(BartesianBarcodes.kindLabel(preview.suggestedKind))
+                    : ""
+                }</p>`
+              : ""
+          }
+          ${
             preview.unknown
-              ? `<p><a href="#/admin/barcodes" data-go="#/admin/barcodes" data-admin-prefill="${esc(preview.code)}">Associate this code →</a></p>`
+              ? `<p><a href="#/admin/barcodes" data-go="#/admin/barcodes" data-admin-prefill="${esc(preview.code)}" data-admin-prefill-kind="${esc(preview.suggestedKind || "")}">Associate this code →</a></p>`
               : ""
           }
         </div>`;
@@ -1110,8 +1156,12 @@
 
     const prefill = e.target.closest("[data-admin-prefill]");
     if (prefill) {
-      state.adminCode = prefill.getAttribute("data-admin-prefill") || "";
-      state.adminKind = "capsule";
+      const code = prefill.getAttribute("data-admin-prefill") || "";
+      const kindHint = prefill.getAttribute("data-admin-prefill-kind") || "";
+      applyAdminLookup(code);
+      if (kindHint && !BartesianDB.findBarcode(BartesianBarcodes.normalizeCode(code))) {
+        state.adminKind = kindHint;
+      }
     }
 
     const camStart = e.target.closest("[data-camera-start]");
@@ -1141,40 +1191,7 @@
 
     if (e.target.closest("[data-admin-lookup]")) {
       const input = root.querySelector("[data-admin-code]");
-      const code = BartesianBarcodes.normalizeCode(input ? input.value : state.adminCode);
-      state.adminCode = code;
-      state.adminLookupNote = "";
-      state.adminCocktailId = "";
-      if (!code) {
-        state.adminLookupNote = "Enter a barcode first.";
-        render();
-        return;
-      }
-      const decoded = BartesianBarcodes.decodeCapsule(code);
-      const existing = BartesianDB.findBarcode(code);
-      if (existing) {
-        state.adminKind = existing.kind;
-        if (existing.cocktail_id) state.adminCocktailId = String(existing.cocktail_id);
-        state.adminLookupNote = "Already saved locally as " + BartesianBarcodes.kindLabel(existing.kind) + ".";
-      } else if (decoded && decoded.slug) {
-        const c = BartesianDB.findCocktailBySlug(decoded.slug);
-        state.adminKind = "capsule";
-        if (c) {
-          state.adminCocktailId = String(c.id);
-          state.adminLookupNote =
-            "Romkal match: " + decoded.romkalName + " → " + c.name + ". Review Kind/Cocktail, then Save.";
-        } else {
-          state.adminLookupNote =
-            "Romkal name “" + decoded.romkalName + "” is not in the catalog. Pick a cocktail manually.";
-        }
-      } else if (decoded) {
-        state.adminKind = "capsule";
-        state.adminLookupNote =
-          "Decodable capsule (Drink ID " + decoded.drinkId + ") but not in the drink map. Pick cocktail, then Save.";
-      } else {
-        state.adminLookupNote =
-          "Not a capsule payload (or unreadable). Choose Kind (case / pack / rimmer) and target, then Save.";
-      }
+      applyAdminLookup(input ? input.value : state.adminCode);
       render();
       return;
     }
