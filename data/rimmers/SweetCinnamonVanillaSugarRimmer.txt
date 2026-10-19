@@ -1,5 +1,5 @@
-Name: Sweet Cinamon Vanilla Sugar Rimmer
-Slug: sweet-cinamon-vanilla-sugar-rimmer
+Name: Sweet Cinnamon Vanilla Sugar Rimmer
+Slug: sweet-cinnamon-vanilla-sugar-rimmer
 Description: Your cocktail just got a whole lot sweeter. Our cinnamon sugar blend provides a hint of warm sweetness.
 Kind: sugar
 Pairs With: Apple Pie, Sidecar, Espresso Martini, Painkiller, Rum Swizzle, and other dessert cocktails to perfection
@@ -10,7 +10,7 @@ Shopify Product ID: 6725160304839
 Shopify Variant ID: 42058994680007
 Shopify Handle: sweet-cinnamon-vanilla-sugar-rimmer
 Gorgias Article ID: 
-Image: 
+Image: images/rimmers/sweet-cinnamon-vanilla-sugar-rimmer.jpg
 Nutrition Image: 
 Barcode: 
 Quantity: 0

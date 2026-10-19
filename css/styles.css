@@ -45,8 +45,6 @@ a {
 }
 
 .topbar {
-  display: grid;
-  gap: 1rem;
   margin-bottom: 1.75rem;
   padding-bottom: 1.1rem;
   border-bottom: 1px solid var(--line);
@@ -57,6 +55,7 @@ a {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .brand {
@@ -85,6 +84,53 @@ a {
   display: flex;
   flex-wrap: wrap;
   gap: 0.35rem 1.1rem;
+  margin-left: auto;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.admin-menu {
+  position: relative;
+}
+
+.admin-summary {
+  cursor: pointer;
+  list-style: none;
+}
+
+.admin-summary::-webkit-details-marker {
+  display: none;
+}
+
+.admin-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.35rem);
+  min-width: 11rem;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-photo);
+  padding: 0.35rem;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-dropdown-link {
+  color: var(--ink-2);
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 500;
+  padding: 0.5rem 0.65rem;
+  border-radius: 6px;
+  text-align: left;
+}
+
+.admin-dropdown-link.on,
+.admin-dropdown-link:hover {
+  color: var(--ink);
+  background: var(--bg-soft);
 }
 
 .topnav-link {
@@ -302,10 +348,80 @@ button.danger {
 }
 
 .qty-badge.is-zero {
-  background: #444;
-  border-color: #444;
+  background: #8a8f98;
+  border-color: #8a8f98;
   color: #fff;
   opacity: 1;
+}
+
+.qty-badge.is-low,
+.qty-badge.is-restock {
+  background: var(--err);
+  border-color: var(--err);
+  color: #fff;
+}
+
+.action-row {
+  display: grid;
+  grid-template-columns: 2rem 64px 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.85rem 0.15rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.history-row {
+  grid-template-columns: 0.6rem 1fr;
+}
+
+.history-dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+
+.row-actions {
+  display: inline-flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.icon-link {
+  font-size: 1.1rem;
+  text-decoration: none;
+  line-height: 1;
+  padding: 0.35rem;
+}
+
+.wish-qty {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
+button.small {
+  min-height: 32px;
+  padding: 0.25rem 0.55rem;
+}
+
+.pill-restock {
+  color: var(--err);
+  border-color: var(--err);
+}
+
+@media (max-width: 720px) {
+  .action-row {
+    grid-template-columns: 1.85rem 56px 1fr;
+  }
+  .action-row .row-actions {
+    grid-column: 3;
+    justify-content: flex-start;
+  }
 }
 
 /* A–Z# rail uses the page scrollbar (no nested list scroller). */
@@ -363,6 +479,67 @@ button.danger {
 
 .cocktail-row:hover .row-title {
   color: var(--accent-ink);
+}
+
+.cocktail-row > .thumb {
+  flex: none;
+}
+
+.cocktail-row .row-body {
+  min-width: 0;
+}
+
+.cocktail-row .row-title {
+  overflow-wrap: break-word;
+}
+
+.row-body-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.fav-toggle {
+  margin-top: 0.4rem;
+}
+
+.admin-actions {
+  justify-content: flex-start;
+  margin-top: 0.45rem;
+}
+
+.admin-rimmer-edit {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: end;
+  margin-top: 0.45rem;
+}
+
+.admin-rimmer-edit label {
+  display: grid;
+  gap: 0.25rem;
+  flex: 1 1 170px;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.admin-rimmer-edit label.kind-field {
+  flex: 0 1 150px;
+}
+
+.admin-rimmer-edit input {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+  padding: 0.4rem 0.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  min-width: 0;
 }
 
 .pill {
@@ -815,6 +992,28 @@ button.danger {
   text-transform: none;
   color: var(--ink);
   font-weight: 700;
+}
+
+.random-title {
+  margin-top: 0;
+}
+
+a.thumb {
+  display: block;
+}
+
+.random-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.random-title-link:hover {
+  color: var(--accent-ink);
+}
+
+.history-head {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .ok {

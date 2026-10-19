@@ -25,6 +25,7 @@
       "Enabled: " + (c.enabled === 0 || c.enabled === false ? "0" : "1"),
       "Favorite: " + (c.favorite ? "1" : "0"),
       "Quantity: " + (Number(c.quantity) || 0),
+      "Restock: " + (c.restock ? "1" : "0"),
       "Capsule Barcode: " + (c.capsule_barcode || ""),
       "Case Barcode: " + (c.case_barcode || ""),
       "Case Qty: " + (c.case_qty != null ? c.case_qty : 8),
@@ -51,6 +52,8 @@
       "Nutrition Image: " + (r.nutrition_image || ""),
       "Barcode: " + (r.barcode || ""),
       "Quantity: " + (Number(r.quantity) || 0),
+      "Restock: " + (r.restock ? "1" : "0"),
+      "Favorite: " + (r.favorite ? "1" : "0"),
       "Enabled: " + (r.enabled === 0 || r.enabled === false ? "0" : "1"),
       "",
     ];
@@ -99,6 +102,8 @@
     zip.file("ratings.json", JSON.stringify(snapshot.ratings || [], null, 2));
     zip.file("people.json", JSON.stringify(snapshot.people || [], null, 2));
     zip.file("barcodes.json", JSON.stringify(snapshot.barcodes || [], null, 2));
+    zip.file("activity.json", JSON.stringify(snapshot.activity || [], null, 2));
+    zip.file("wishlist.json", JSON.stringify(snapshot.wishlist || [], null, 2));
     const blob = await zip.generateAsync({ type: "blob" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);

@@ -1,10 +1,15 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v22";
+  const APP_VERSION = "bartesian-v33";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
+  const ADMIN_COOKIE = "bartesian_admin";
+  const USER_COOKIE = "bartesian_user";
+  const CURRENT_USER = "Lawrence";
   const ALPHA_INDEX_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
 
   const root = document.getElementById("app");
+  let currentRouteKey = "";
+  const routeScrollPositions = new Map();
   let cameraScanner = null;
   let cameraTarget = null; // "scan" | "admin" | null
   let alphaScrubbing = false;
@@ -16,9 +21,10 @@
     spirit: "",
     favoritesOnly: false,
     availableOnly: false,
-    seasonalOnly: false,
     rimmerSearch: "",
     rimmerKind: "",
+    rimmerFavoritesOnly: false,
+    rimmerAvailableOnly: false,
     flash: "",
     randomSpirit: "",
     randomFavoritesOnly: false,
@@ -30,6 +36,7 @@
     adminLookupNote: "",
     cameraOn: false,
     cameraStatus: "",
+    isAdmin: false,
   };
 
   function getCookie(name) {
@@ -58,7 +65,8 @@
       if (typeof p.spirit === "string") state.spirit = p.spirit;
       if (typeof p.favoritesOnly === "boolean") state.favoritesOnly = p.favoritesOnly;
       if (typeof p.availableOnly === "boolean") state.availableOnly = p.availableOnly;
-      if (typeof p.seasonalOnly === "boolean") state.seasonalOnly = p.seasonalOnly;
+      // Migrate old Seasonal checkbox pref → Sort = Seasonal
+      if (p.seasonalOnly === true && state.sort !== "seasonal") state.sort = "seasonal";
     } catch (_) {
       /* ignore bad cookie */
     }
@@ -73,12 +81,52 @@
         spirit: state.spirit,
         favoritesOnly: state.favoritesOnly,
         availableOnly: state.availableOnly,
-        seasonalOnly: state.seasonalOnly,
       })
     );
   }
 
+  /** Seasonal lives in the Sort dropdown; translate it to a filter + A–Z order. */
+  function listQuery() {
+    const seasonal = state.sort === "seasonal";
+    return {
+      search: state.search,
+      sort: seasonal ? "name" : state.sort,
+      spirit: state.spirit,
+      favoritesOnly: state.favoritesOnly,
+      availableOnly: state.availableOnly,
+      seasonalOnly: seasonal,
+    };
+  }
+
   loadListPrefs();
+
+  function loadAdminFlag() {
+    try {
+      state.isAdmin = getCookie(ADMIN_COOKIE) === "1";
+    } catch (_) {
+      state.isAdmin = false;
+    }
+  }
+
+  function saveAdminFlag() {
+    setCookie(ADMIN_COOKIE, state.isAdmin ? "1" : "0");
+    setCookie(USER_COOKIE, CURRENT_USER);
+  }
+
+  /** Admin is gated to Lawrence: cookie mirrors Lawrence's People is_admin flag. */
+  function syncAdminFromDb() {
+    try {
+      const me = BartesianDB.findPersonByName(CURRENT_USER);
+      if (me) {
+        state.isAdmin = !!me.is_admin;
+        saveAdminFlag();
+      }
+    } catch (_) {
+      /* DB not ready */
+    }
+  }
+
+  loadAdminFlag();
 
   function stopCamera() {
     if (cameraScanner) {
@@ -235,11 +283,22 @@
       return { view: "rimmer-detail", id: Number(parts[1]) };
     }
     if (parts[0] === "rimmers") return { view: "rimmers" };
+    if (parts[0] === "history" && (parts[1] === "cocktail" || parts[1] === "rimmer") && parts[2]) {
+      return { view: "item-history", itemType: parts[1], id: Number(parts[2]) };
+    }
+    if (parts[0] === "history") return { view: "list" };
+    if (parts[0] === "wishlist") return { view: "wishlist" };
+    if (parts[0] === "restock") return { view: "restock" };
     if (parts[0] === "scan") return { view: "scan" };
     if (parts[0] === "random") return { view: "random" };
     if (parts[0] === "people") return { view: "people" };
     if (parts[0] === "settings") return { view: "settings" };
     if (parts[0] === "admin" && parts[1] === "barcodes") return { view: "admin-barcodes" };
+    if (parts[0] === "admin" && parts[1] === "cocktails") return { view: "admin-cocktails" };
+    if (parts[0] === "admin" && parts[1] === "rimmers") return { view: "admin-rimmers" };
+    if (parts[0] === "admin" && parts[1] === "packs") return { view: "admin-packs" };
+    if (parts[0] === "admin" && parts[1] === "people") return { view: "admin-people" };
+    if (parts[0] === "admin" && parts[1] === "scan") return { view: "scan" };
     if (parts[0] === "admin") return { view: "admin-barcodes" };
     if (parts[0] === "disclaimer") return { view: "disclaimer" };
     return { view: "list" };
@@ -263,31 +322,57 @@
     }
   }
 
+  const ADMIN_VIEWS = [
+    "scan", "admin-barcodes", "admin-cocktails", "admin-rimmers",
+    "admin-packs", "admin-people", "people",
+  ];
+
   function shell(active, body) {
     const nav = [
       ["list", "#/", "Cocktails"],
       ["rimmers", "#/rimmers", "Rimmers"],
-      ["scan", "#/scan", "Scan"],
+      ["restock", "#/restock", "Restock"],
+      ["wishlist", "#/wishlist", "Wishlist"],
       ["random", "#/random", "Random"],
-      ["people", "#/people", "People"],
-      ["admin-barcodes", "#/admin/barcodes", "Barcodes"],
       ["settings", "#/settings", "Settings"],
     ];
+    const adminLinks = [
+      ["scan", "#/admin/scan", "Scan"],
+      ["admin-barcodes", "#/admin/barcodes", "Barcodes"],
+      ["admin-cocktails", "#/admin/cocktails", "Cocktails"],
+      ["admin-rimmers", "#/admin/rimmers", "Rimmers"],
+      ["admin-packs", "#/admin/packs", "Packs"],
+      ["admin-people", "#/admin/people", "People"],
+    ];
+    const adminActive = ADMIN_VIEWS.includes(active);
+    const adminMenu = state.isAdmin
+      ? `<details class="admin-menu">
+          <summary class="topnav-link admin-summary ${adminActive ? "on" : ""}">Admin ▾</summary>
+          <div class="admin-dropdown">
+            ${adminLinks
+              .map(
+                ([key, href, label]) =>
+                  `<a class="admin-dropdown-link ${active === key ? "on" : ""}" href="${href}" data-go="${href}">${label}</a>`
+              )
+              .join("")}
+          </div>
+        </details>`
+      : "";
     return `
       <div class="app-shell">
         <header class="topbar">
           <div class="brand-row">
             <a class="brand" href="#/" data-go="#/">Bartesian</a>
-            <p class="tagline">Private inventory</p>
+            <nav class="topnav" aria-label="Primary">
+              ${nav
+                .map(
+                  ([key, href, label]) =>
+                    `<a class="topnav-link ${active === key ? "on" : ""}" href="${href}" data-go="${href}">${label}</a>`
+                )
+                .join("")}
+              ${adminMenu}
+            </nav>
           </div>
-          <nav class="topnav" aria-label="Primary">
-            ${nav
-              .map(
-                ([key, href, label]) =>
-                  `<a class="topnav-link ${active === key ? "on" : ""}" href="${href}" data-go="${href}">${label}</a>`
-              )
-              .join("")}
-          </nav>
         </header>
         ${state.flash ? `<div class="flash" role="status">${esc(state.flash)}</div>` : ""}
         <main class="main">${body}</main>
@@ -322,13 +407,30 @@
     </nav>`;
   }
 
+  function qtyBadgeClass(qty, restock) {
+    const q = Number(qty) || 0;
+    // Missing/null restock defaults to 0 (false)
+    const flag = restock === true || restock === 1 || restock === "1";
+    if (q <= 0) return flag ? "is-restock" : "is-zero";
+    if (q === 1) return "is-low";
+    return "";
+  }
+
+  /** Rimmers aren't consumed quickly: qty 1 stays black; red only at 0 + restock. */
+  function rimmerQtyBadgeClass(qty, restock) {
+    const q = Number(qty) || 0;
+    const flag = restock === true || restock === 1 || restock === "1";
+    if (q <= 0) return flag ? "is-restock" : "is-zero";
+    return "";
+  }
+
   function cocktailRowHtml(c, extraAttrs) {
     const spiritsText = (c.spirits_csv || "").split("|").filter(Boolean).join(", ");
     const thumb = primaryImage(c);
     const qty = Number(c.quantity) || 0;
     return `
       <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}" ${extraAttrs || ""}>
-        <span class="qty-badge ${qty === 0 ? "is-zero" : ""}" aria-label="Quantity ${qty}">${qty}</span>
+        <span class="qty-badge ${qtyBadgeClass(qty, c.restock)}" aria-label="Quantity ${qty}${qty === 0 && c.restock ? ", restock needed" : ""}">${qty}</span>
         <div class="thumb ${thumb ? "" : "thumb-empty"}">
           ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
         </div>
@@ -341,7 +443,7 @@
   }
 
   function orderCocktailsForIndex(cocktails) {
-    if (state.sort === "name") {
+    if (state.sort === "name" || state.sort === "seasonal") {
       const letters = cocktails.filter((c) => listIndexKey(c.name) !== "#");
       const other = cocktails.filter((c) => listIndexKey(c.name) === "#");
       return letters.concat(other);
@@ -358,7 +460,8 @@
     if (!cocktails.length) {
       return { html: `<p class="empty">No cocktails match.</p>`, present: new Set() };
     }
-    const alphabetical = state.sort === "name" || state.sort === "name-desc";
+    const alphabetical =
+      state.sort === "name" || state.sort === "name-desc" || state.sort === "seasonal";
     const ordered = alphabetical ? orderCocktailsForIndex(cocktails) : cocktails;
     const present = new Set();
     const seenAnchor = new Set();
@@ -453,14 +556,7 @@
   }
 
   function renderList() {
-    const cocktails = BartesianDB.listCocktails({
-      search: state.search,
-      sort: state.sort,
-      spirit: state.spirit,
-      favoritesOnly: state.favoritesOnly,
-      availableOnly: state.availableOnly,
-      seasonalOnly: state.seasonalOnly,
-    });
+    const cocktails = BartesianDB.listCocktails(listQuery());
     const spirits = BartesianDB.listSpirits();
 
     return shell(
@@ -488,12 +584,12 @@
               <option value="quantity-asc" ${state.sort === "quantity-asc" ? "selected" : ""}>Quantity ↑</option>
               <option value="rating" ${state.sort === "rating" ? "selected" : ""}>Rating</option>
               <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
+              <option value="seasonal" ${state.sort === "seasonal" ? "selected" : ""}>Seasonal</option>
             </select>
           </div>
           <div class="toolbar-checks">
             <label class="check"><input type="checkbox" name="available" ${state.availableOnly ? "checked" : ""}/> In stock</label>
             <label class="check"><input type="checkbox" name="favorites" ${state.favoritesOnly ? "checked" : ""}/> Favorites</label>
-            <label class="check"><input type="checkbox" name="seasonal" ${state.seasonalOnly ? "checked" : ""}/> Seasonal</label>
           </div>
         </form>
         <p class="count">${cocktails.length} cocktail${cocktails.length === 1 ? "" : "s"}</p>
@@ -612,11 +708,12 @@
             const kind = (r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase());
             return `
               <a class="cocktail-row" href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">
+                <span class="qty-badge ${rimmerQtyBadgeClass(Number(r.quantity) || 0, r.restock)}" aria-label="Quantity ${r.quantity}">${r.quantity}</span>
                 <div class="thumb ${r.image ? "" : "thumb-empty"}">
                   ${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}
                 </div>
                 <div class="row-body">
-                  <div class="row-title">${esc(r.name)}</div>
+                  <div class="row-title">${esc(r.name)}${r.favorite ? " ★" : ""}</div>
                   <div class="row-meta">${esc(kind)}</div>
                 </div>
               </a>`;
@@ -665,6 +762,7 @@
                 ? `<p class="muted"><a href="${esc(c.help_url)}" target="_blank" rel="noopener">Nutrition / help article ↗</a></p>`
                 : ""
             }
+            <p><a href="#/history/cocktail/${c.id}" data-go="#/history/cocktail/${c.id}">History →</a></p>
           </div>
         </div>
 
@@ -715,8 +813,10 @@
             <button type="button" data-use-one data-id="${c.id}">Use 1</button>
             <button type="button" data-qty-delta="1" data-id="${c.id}">+</button>
             <button type="button" class="ghost" data-toggle-fav data-id="${c.id}" data-on="${c.favorite ? 1 : 0}">
-              ${c.favorite ? "Unfavorite" : "Favorite"}
+              ${c.favorite ? "Remove from Favorites" : "Add to Favorites"}
             </button>
+            <button type="button" class="ghost" data-wishlist-add-cocktail="${c.id}">Add to Wishlist</button>
+            ${c.restock && c.quantity === 0 ? '<span class="pill pill-restock">Restock needed</span>' : ""}
           </div>
         </section>
 
@@ -763,20 +863,27 @@
     const rimmers = BartesianDB.listRimmers({
       search: state.rimmerSearch,
       kind: state.rimmerKind,
+      favoritesOnly: state.rimmerFavoritesOnly,
+      availableOnly: state.rimmerAvailableOnly,
     });
     const rows = rimmers
       .map(
         (r) => `
-          <a class="cocktail-row" href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">
+          <div class="cocktail-row">
+            <span class="qty-badge ${rimmerQtyBadgeClass(Number(r.quantity) || 0, r.restock)}" aria-label="Quantity ${r.quantity}">${r.quantity}</span>
             <div class="thumb ${r.image ? "" : "thumb-empty"}">
               ${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}
             </div>
             <div class="row-body">
-              <div class="row-title">${esc(r.name)}</div>
-              <div class="row-meta">${esc((r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase()))}</div>
+              <a class="row-body-link" href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">
+                <div class="row-title">${esc(r.name)}${r.favorite ? " ★" : ""}</div>
+                <div class="row-meta">${esc((r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase()))}</div>
+              </a>
+              <button type="button" class="ghost small fav-toggle" data-rimmer-toggle-fav data-id="${r.id}" data-on="${r.favorite ? 1 : 0}">
+                ${r.favorite ? "Remove from Favorites" : "Add to Favorites"}
+              </button>
             </div>
-            <div class="row-qty">${r.quantity}</div>
-          </a>`
+          </div>`
       )
       .join("");
 
@@ -793,6 +900,8 @@
             <option value="sugar" ${state.rimmerKind === "sugar" ? "selected" : ""}>Sugar</option>
             <option value="salt" ${state.rimmerKind === "salt" ? "selected" : ""}>Salt</option>
           </select>
+          <label class="check"><input type="checkbox" name="available" ${state.rimmerAvailableOnly ? "checked" : ""}/> In stock</label>
+          <label class="check"><input type="checkbox" name="favorites" ${state.rimmerFavoritesOnly ? "checked" : ""}/> Favorites</label>
         </form>
         <p class="count">${rimmers.length} rimmer${rimmers.length === 1 ? "" : "s"}</p>
         <div class="list">${rows || `<p class="empty">No rimmers match.</p>`}</div>
@@ -813,6 +922,7 @@
             const thumb = c.image || "";
             return `
               <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">
+                <span class="qty-badge ${qtyBadgeClass(Number(c.quantity) || 0, c.restock)}" aria-label="Quantity ${c.quantity || 0}">${c.quantity || 0}</span>
                 <div class="thumb ${thumb ? "" : "thumb-empty"}">
                   ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
                 </div>
@@ -835,13 +945,14 @@
           </div>
           <div>
             <p class="detail-kicker">${esc((r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase()))} rimmer</p>
-            <h1 class="detail-title">${esc(r.name)}</h1>
+            <h1 class="detail-title">${esc(r.name)}${r.favorite ? " ★" : ""}</h1>
             <p class="detail-copy">${esc(r.description || "")}</p>
             ${
               r.bartesian_url
                 ? `<p><a href="${esc(r.bartesian_url)}" target="_blank" rel="noopener">View on Bartesian ↗</a></p>`
                 : ""
             }
+            <p><a href="#/history/rimmer/${r.id}" data-go="#/history/rimmer/${r.id}">History →</a></p>
           </div>
         </div>
         ${
@@ -858,6 +969,11 @@
           <div class="qty-actions">
             <button type="button" data-rimmer-qty-delta="-1" data-id="${r.id}">−</button>
             <button type="button" data-rimmer-qty-delta="1" data-id="${r.id}">+</button>
+            <button type="button" class="ghost" data-rimmer-toggle-fav data-id="${r.id}" data-on="${r.favorite ? 1 : 0}">
+              ${r.favorite ? "Remove from Favorites" : "Add to Favorites"}
+            </button>
+            <button type="button" class="ghost" data-wishlist-add-rimmer="${r.id}">Add to Wishlist</button>
+            ${r.restock && r.quantity === 0 ? '<span class="pill pill-restock">Restock needed</span>' : ""}
           </div>
         </section>
         <section>
@@ -867,6 +983,152 @@
       </section>
     `
     );
+  }
+
+  function formatWhen(iso) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    return d.toLocaleString(undefined, {
+      month: "short", day: "numeric", year: "numeric",
+      hour: "numeric", minute: "2-digit",
+    });
+  }
+
+  function activityLabel(a) {
+    const name = a.cocktail_name || a.rimmer_name || a.pack_name || "";
+    switch (a.kind) {
+      case "use":
+        return (a.delta != null ? "Used " + Math.abs(Number(a.delta)) + " · " : "Used · ") + name;
+      case "restock":
+        return (a.delta != null ? "Added +" + Number(a.delta) + " · " : "Added · ") + name;
+      case "rating":
+        return "Feedback · " + name + (a.person_name ? " — " + a.person_name : "") +
+          (a.stars ? " " + a.stars + "★" : "") + (a.detail ? ": " + a.detail : "");
+      case "favorite":
+        return (a.detail === "unfavorited" ? "Unfavorited · " : "Favorited · ") + name;
+      case "barcode":
+        return "Barcode linked · " + name + (a.barcode ? " (" + a.barcode + ")" : "");
+      case "wishlist_add":
+        return "Added to Wishlist · " + name;
+      case "wishlist_remove":
+        return "Removed from Wishlist · " + name;
+      case "restock_clear":
+        return "Removed from Restock · " + name;
+      default:
+        return (a.kind || "Event") + (name ? " · " + name : "");
+    }
+  }
+
+  function activityRowsHtml(rows, emptyText) {
+    if (!rows.length) return `<p class="empty">${esc(emptyText)}</p>`;
+    return rows.map((a) => {
+      const inner = `
+        <div class="row-body">
+          <div class="row-title">${esc(activityLabel(a))}</div>
+          <div class="row-meta">${esc(formatWhen(a.created_at))}${a.barcode && a.kind !== "barcode" ? " · " + esc(a.barcode) : ""}${a.detail && a.kind !== "rating" && a.kind !== "favorite" ? " · " + esc(a.detail) : ""}</div>
+        </div>`;
+      return `<div class="cocktail-row history-row"><span class="history-dot" aria-hidden="true"></span>${inner}</div>`;
+    }).join("");
+  }
+
+  function renderItemHistory(itemType, id) {
+    const isCocktail = itemType === "cocktail";
+    const item = isCocktail ? BartesianDB.getCocktail(id) : BartesianDB.getRimmer(id);
+    if (!item) {
+      return shell(isCocktail ? "list" : "rimmers", `<section class="panel"><p>Item not found.</p></section>`);
+    }
+    const rows = BartesianDB.listActivity(
+      isCocktail ? { limit: 300, cocktailId: id } : { limit: 300, rimmerId: id }
+    );
+    const backHref = isCocktail ? "#/cocktail/" + id : "#/rimmer/" + id;
+    const img = isCocktail ? primaryImage(item) : item.image || "";
+    return shell(isCocktail ? "list" : "rimmers", `
+      <section class="panel">
+        <a class="back" href="${backHref}" data-go="${backHref}">← Back to ${esc(item.name)}</a>
+        <div class="detail-hero history-head">
+          <div class="thumb large ${img ? "" : "thumb-empty"}">${img ? `<img src="${esc(img)}" alt="">` : ""}</div>
+          <div>
+            <p class="detail-kicker">${isCocktail ? "Cocktail" : "Rimmer"} history</p>
+            <h1 class="detail-title">${esc(item.name)}</h1>
+            <p class="count">${rows.length} event${rows.length === 1 ? "" : "s"}</p>
+          </div>
+        </div>
+        <div class="list">${activityRowsHtml(rows, "No history for this item yet.")}</div>
+      </section>`);
+  }
+
+  function bartesianArrow(url) {
+    if (!url) return "";
+    return `<a class="icon-link" href="${esc(url)}" target="_blank" rel="noopener" aria-label="View on Bartesian" title="View on Bartesian">↗</a>`;
+  }
+
+  function renderWishlist() {
+    const items = BartesianDB.listWishlist();
+    const rows = items.length
+      ? items.map((w) => {
+          const detailHref = w.type === "cocktail" ? "#/cocktail/" + w.cocktail_id : "#/rimmer/" + w.rimmer_id;
+          return `
+          <div class="action-row">
+            <span class="qty-badge ${w.type === "rimmer" ? rimmerQtyBadgeClass(Number(w.quantity) || 0, false) : qtyBadgeClass(Number(w.quantity) || 0, false)}" aria-label="On hand ${w.quantity}">${w.quantity}</span>
+            <div class="thumb ${w.image ? "" : "thumb-empty"}">${w.image ? `<img src="${esc(w.image)}" alt="">` : ""}</div>
+            <div class="row-body">
+              <div class="row-title"><a href="${detailHref}" data-go="${detailHref}">${esc(w.name)}</a></div>
+              <div class="row-meta">${w.type === "cocktail" ? "Cocktail" : "Rimmer"} · on hand ${w.quantity}</div>
+              <div class="wish-qty">
+                <span class="muted">Want</span>
+                <button type="button" class="ghost small" data-wishlist-qty="-1" data-id="${w.id}">−</button>
+                <strong>${w.qty_wanted}</strong>
+                <button type="button" class="ghost small" data-wishlist-qty="1" data-id="${w.id}">+</button>
+              </div>
+            </div>
+            <div class="row-actions">
+              ${bartesianArrow(w.bartesian_url)}
+              <button type="button" class="ghost danger" data-wishlist-remove="${w.id}">Remove</button>
+            </div>
+          </div>`;
+        }).join("")
+      : `<p class="empty">Wishlist is empty. Add items from a cocktail/rimmer detail page or the Restock screen.</p>`;
+    return shell("wishlist", `
+      <section class="panel">
+        <p class="section-label">Shopping</p>
+        <h1>Wishlist</h1>
+        <p class="count">${items.length} item${items.length === 1 ? "" : "s"}</p>
+        <div class="list">${rows}</div>
+      </section>`);
+  }
+
+  function renderRestock() {
+    const items = BartesianDB.listRestock();
+    const rows = items.length
+      ? items.map((it) => {
+          const isC = it.type === "cocktail";
+          const detailHref = isC ? "#/cocktail/" + it.id : "#/rimmer/" + it.id;
+          const img = isC ? primaryImage(it) : it.image || "";
+          return `
+          <div class="action-row">
+            <span class="qty-badge is-restock" aria-label="Quantity 0, restock needed">0</span>
+            <div class="thumb ${img ? "" : "thumb-empty"}">${img ? `<img src="${esc(img)}" alt="">` : ""}</div>
+            <div class="row-body">
+              <div class="row-title"><a href="${detailHref}" data-go="${detailHref}">${esc(it.name)}</a></div>
+              <div class="row-meta">${isC ? "Cocktail" : "Rimmer"} · out of stock</div>
+            </div>
+            <div class="row-actions">
+              ${bartesianArrow(it.bartesian_url)}
+              <button type="button" class="ghost" data-restock-wishlist="${it.type}:${it.id}">Add to Wishlist</button>
+              <button type="button" class="ghost danger" data-restock-clear="${it.type}:${it.id}">Remove</button>
+            </div>
+          </div>`;
+        }).join("")
+      : `<p class="empty">Nothing to restock. Items appear here when their last capsule/rimmer is used (1 → 0).</p>`;
+    return shell("restock", `
+      <section class="panel">
+        <p class="section-label">Inventory</p>
+        <h1>Restock</h1>
+        <p class="lede">Items that ran out (1 → 0). Restocking clears them; Remove only clears the flag.</p>
+        <p class="count">${items.length} item${items.length === 1 ? "" : "s"}</p>
+        <div class="list">${rows}</div>
+      </section>`);
   }
 
   function decodedMetaHtml(decoded) {
@@ -1122,18 +1384,128 @@
     );
   }
 
+  function adminToggleBtn(attrs, on, labelOn, labelOff) {
+    return `<button type="button" class="ghost small" ${attrs} data-on="${on ? 1 : 0}">${on ? labelOn : labelOff}</button>`;
+  }
+
+  function renderAdminCocktails() {
+    const cocktails = BartesianDB.listAllCocktails();
+    const rows = cocktails.map((c) => `
+      <div class="action-row admin-row">
+        <span class="qty-badge ${qtyBadgeClass(Number(c.quantity) || 0, c.restock)}">${c.quantity}</span>
+        <div class="thumb ${primaryImage(c) ? "" : "thumb-empty"}">${primaryImage(c) ? `<img src="${esc(primaryImage(c))}" alt="">` : ""}</div>
+        <div class="row-body">
+          <div class="row-title"><a class="row-body-link" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">${esc(c.name)}${c.enabled ? "" : ' <span class="pill">Disabled</span>'}</a></div>
+          <div class="row-meta">${esc((c.spirits_csv || "").split("|").filter(Boolean).join(", ") || "—")}</div>
+          <div class="row-actions admin-actions">
+            <button type="button" class="ghost small" data-qty-delta="-1" data-id="${c.id}">−</button>
+            <button type="button" class="ghost small" data-qty-delta="1" data-id="${c.id}">+</button>
+            ${adminToggleBtn(`data-admin-cocktail-fav data-id="${c.id}"`, c.favorite, "Favorited ★", "Favorite")}
+            ${adminToggleBtn(`data-admin-cocktail-seasonal data-id="${c.id}"`, c.seasonal, "Seasonal ✓", "Seasonal")}
+            ${adminToggleBtn(`data-admin-cocktail-enabled data-id="${c.id}"`, c.enabled, "Enabled ✓", "Disabled")}
+          </div>
+        </div>
+      </div>`).join("");
+    return shell("admin-cocktails", `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Cocktails</h1>
+        <p class="lede">Quick toggles for every cocktail (including disabled). Open a name for the full detail page.</p>
+        <p class="count">${cocktails.length} cocktails</p>
+        <div class="list">${rows || `<p class="empty">None.</p>`}</div>
+      </section>`);
+  }
+
+  function renderAdminRimmers() {
+    const rimmers = BartesianDB.listAllRimmersAdmin();
+    const rows = rimmers.map((r) => `
+      <div class="action-row admin-row">
+        <span class="qty-badge ${rimmerQtyBadgeClass(Number(r.quantity) || 0, r.restock)}">${r.quantity}</span>
+        <div class="thumb ${r.image ? "" : "thumb-empty"}">${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}</div>
+        <div class="row-body">
+          <div class="row-title"><a class="row-body-link" href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">${esc(r.name)}${r.enabled ? "" : ' <span class="pill">Disabled</span>'}</a></div>
+          <form class="admin-rimmer-edit" data-admin-rimmer-edit data-id="${r.id}">
+            <label>Name
+              <input name="name" type="text" value="${esc(r.name)}" required />
+            </label>
+            <label class="kind-field">Type
+              <input name="kind" type="text" list="rimmer-kind-options" placeholder="sugar, salt, candy…" value="${esc(r.kind || "")}" />
+            </label>
+            <button type="submit" class="ghost small">Save</button>
+          </form>
+          <div class="row-actions admin-actions">
+            <button type="button" class="ghost small" data-rimmer-qty-delta="-1" data-id="${r.id}">−</button>
+            <button type="button" class="ghost small" data-rimmer-qty-delta="1" data-id="${r.id}">+</button>
+            ${adminToggleBtn(`data-rimmer-toggle-fav data-id="${r.id}"`, r.favorite, "Favorited ★", "Favorite")}
+            ${adminToggleBtn(`data-admin-rimmer-enabled data-id="${r.id}"`, r.enabled, "Enabled ✓", "Disabled")}
+          </div>
+        </div>
+      </div>`).join("");
+    return shell("admin-rimmers", `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Rimmers</h1>
+        <p class="lede">Edit name and type (free text — sugar, salt, candy, …), then Save. Export from Settings to write changes back to <code>data/rimmers/*.txt</code>.</p>
+        <p class="count">${rimmers.length} rimmers</p>
+        <datalist id="rimmer-kind-options">
+          <option value="sugar"></option>
+          <option value="salt"></option>
+        </datalist>
+        <div class="list">${rows || `<p class="empty">None.</p>`}</div>
+      </section>`);
+  }
+
+  function renderAdminPacks() {
+    const packs = BartesianDB.listAllPacksAdmin();
+    const barcodes = BartesianDB.listBarcodes();
+    const rows = packs.map((p) => {
+      const items = BartesianDB.getPackItems(p.id);
+      const bc = barcodes.find((b) => b.pack_id === p.id);
+      return `
+      <div class="action-row admin-row">
+        <span aria-hidden="true"></span>
+        <div class="thumb ${p.image ? "" : "thumb-empty"}">${p.image ? `<img src="${esc(p.image)}" alt="">` : ""}</div>
+        <div class="row-body">
+          <div class="row-title">${esc(p.name)}${p.enabled ? "" : ' <span class="pill">Disabled</span>'}</div>
+          <div class="row-meta">${items.length} item${items.length === 1 ? "" : "s"}${bc ? " · " + esc(bc.code) : ""}</div>
+          <div class="row-meta">${esc(items.map((i) => i.name + " ×" + i.qty).join(", ") || "—")}</div>
+          <div class="row-actions admin-actions">
+            ${adminToggleBtn(`data-admin-pack-enabled data-id="${p.id}"`, p.enabled, "Enabled ✓", "Disabled")}
+          </div>
+        </div>
+      </div>`;
+    }).join("");
+    return shell("admin-packs", `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Packs</h1>
+        <p class="count">${packs.length} packs</p>
+        <div class="list">${rows || `<p class="empty">None.</p>`}</div>
+      </section>`);
+  }
+
   function renderPeople() {
     const people = BartesianDB.listPeople();
     return shell(
-      "people",
+      "admin-people",
       `
       <section class="panel">
-        <p class="section-label">Household</p>
+        <p class="section-label">Admin</p>
         <h1>People</h1>
-        <p class="lede">Raters for cocktail comments. Add household members or guests.</p>
-        <ul class="plain">
-          ${people.map((p) => `<li>${esc(p.name)}</li>`).join("") || `<li class="muted">None yet.</li>`}
-        </ul>
+        <p class="lede">Raters for cocktail comments. Admins see the Admin menu (saved in the <code>${esc(ADMIN_COOKIE)}</code> cookie for ${esc(CURRENT_USER)}).</p>
+        <div class="list">
+          ${people.map((p) => `
+            <div class="action-row admin-row">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <div class="row-body">
+                <div class="row-title">${esc(p.name)}${p.is_admin ? ' <span class="pill">Admin</span>' : ""}</div>
+              </div>
+              <div class="row-actions">
+                ${adminToggleBtn(`data-person-admin data-id="${p.id}" data-name="${esc(p.name)}"`, p.is_admin, "Admin ✓", "Make admin")}
+              </div>
+            </div>`).join("") || `<p class="empty">None yet.</p>`}
+        </div>
         <form class="inline-form" data-add-person>
           <input name="name" type="text" placeholder="Name" required />
           <button type="submit">Add person</button>
@@ -1162,7 +1534,7 @@
         <p class="muted">Current build: <code>${esc(APP_VERSION)}</code></p>
         <button type="button" data-force-refresh>Force refresh</button>
         <h2>Local database</h2>
-        <p>Clear IndexedDB and re-seed from <code>js/seed-data.js</code>.</p>
+        <p>Clear IndexedDB and re-seed from <code>js/seed-data.js</code>. History, Wishlist, ratings, and Restock flags are only restored if they were exported and re-imported first.</p>
         <button type="button" class="danger" data-reset>Reset local DB</button>
       </section>
     `
@@ -1211,8 +1583,20 @@
     );
   }
 
+  function routeKeyFor(route) {
+    return [route.view, route.itemType || "", route.id || ""].join(":");
+  }
+
   function render() {
     const route = parseHash();
+    const nextRouteKey = routeKeyFor(route);
+    const isFirstRender = currentRouteKey === "";
+    const isRouteChange = !isFirstRender && currentRouteKey !== nextRouteKey;
+    if (isRouteChange) {
+      // Remember where we left this screen so Back restores it (e.g. list scroll).
+      routeScrollPositions.set(currentRouteKey, window.scrollY);
+    }
+    currentRouteKey = nextRouteKey;
     // Stop camera when leaving scan/admin
     if (
       state.cameraOn &&
@@ -1221,17 +1605,41 @@
     ) {
       stopCamera();
     }
+    if (ADMIN_VIEWS.includes(route.view) && !state.isAdmin) {
+      root.innerHTML = shell("list", `
+        <section class="panel">
+          <p class="section-label">Admin</p>
+          <h1>Admin only</h1>
+          <p class="lede">This area is for ${esc(CURRENT_USER)} (admin). The Admin menu appears when the admin cookie is set.</p>
+          <p><a href="#/" data-go="#/">← Back to Cocktails</a></p>
+        </section>`);
+      state.flash = "";
+      if (isFirstRender || isRouteChange) window.scrollTo(0, 0);
+      return;
+    }
     if (route.view === "detail") root.innerHTML = renderDetail(route.id);
     else if (route.view === "rimmers") root.innerHTML = renderRimmers();
     else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
     else if (route.view === "scan") root.innerHTML = renderScan();
+    else if (route.view === "item-history") root.innerHTML = renderItemHistory(route.itemType, route.id);
+    else if (route.view === "wishlist") root.innerHTML = renderWishlist();
+    else if (route.view === "restock") root.innerHTML = renderRestock();
     else if (route.view === "admin-barcodes") root.innerHTML = renderAdminBarcodes();
+    else if (route.view === "admin-cocktails") root.innerHTML = renderAdminCocktails();
+    else if (route.view === "admin-rimmers") root.innerHTML = renderAdminRimmers();
+    else if (route.view === "admin-packs") root.innerHTML = renderAdminPacks();
+    else if (route.view === "admin-people" || route.view === "people") root.innerHTML = renderPeople();
     else if (route.view === "random") root.innerHTML = renderRandom();
-    else if (route.view === "people") root.innerHTML = renderPeople();
     else if (route.view === "settings") root.innerHTML = renderSettings();
     else if (route.view === "disclaimer") root.innerHTML = renderDisclaimer();
     else root.innerHTML = renderList();
     state.flash = "";
+    if (isFirstRender || isRouteChange) {
+      // New screens always start at the top; returning to a screen restores
+      // its previous scroll spot (so Back to the list keeps your place).
+      const saved = routeScrollPositions.get(nextRouteKey);
+      window.scrollTo(0, saved != null ? saved : 0);
+    }
     scheduleAlphaIndexSync();
   }
 
@@ -1248,6 +1656,53 @@
     if (goEl) {
       e.preventDefault();
       go(goEl.getAttribute("data-go"));
+      return;
+    }
+
+    const wishC = e.target.closest("[data-wishlist-add-cocktail]");
+    if (wishC) {
+      await BartesianDB.addToWishlist({ cocktailId: Number(wishC.getAttribute("data-wishlist-add-cocktail")) });
+      state.flash = "Added to Wishlist.";
+      render();
+      return;
+    }
+    const wishR = e.target.closest("[data-wishlist-add-rimmer]");
+    if (wishR) {
+      await BartesianDB.addToWishlist({ rimmerId: Number(wishR.getAttribute("data-wishlist-add-rimmer")) });
+      state.flash = "Added to Wishlist.";
+      render();
+      return;
+    }
+    const wishQty = e.target.closest("[data-wishlist-qty]");
+    if (wishQty) {
+      await BartesianDB.adjustWishlistQty(
+        Number(wishQty.getAttribute("data-id")),
+        Number(wishQty.getAttribute("data-wishlist-qty"))
+      );
+      render();
+      return;
+    }
+    const wishRemove = e.target.closest("[data-wishlist-remove]");
+    if (wishRemove) {
+      await BartesianDB.removeFromWishlist(Number(wishRemove.getAttribute("data-wishlist-remove")));
+      render();
+      return;
+    }
+    const restockWish = e.target.closest("[data-restock-wishlist]");
+    if (restockWish) {
+      const [type, idStr] = String(restockWish.getAttribute("data-restock-wishlist")).split(":");
+      if (type === "cocktail") await BartesianDB.addToWishlist({ cocktailId: Number(idStr) });
+      else await BartesianDB.addToWishlist({ rimmerId: Number(idStr) });
+      state.flash = "Added to Wishlist.";
+      render();
+      return;
+    }
+    const restockClear = e.target.closest("[data-restock-clear]");
+    if (restockClear) {
+      const [type, idStr] = String(restockClear.getAttribute("data-restock-clear")).split(":");
+      if (type === "cocktail") await BartesianDB.clearRestock({ cocktailId: Number(idStr) });
+      else await BartesianDB.clearRestock({ rimmerId: Number(idStr) });
+      render();
       return;
     }
 
@@ -1288,6 +1743,56 @@
       await BartesianDB.setFavorite(id, !on);
       render();
       return;
+    }
+
+    const rimmerFavBtn = e.target.closest("[data-rimmer-toggle-fav]");
+    if (rimmerFavBtn) {
+      const id = Number(rimmerFavBtn.getAttribute("data-id"));
+      const on = rimmerFavBtn.getAttribute("data-on") === "1";
+      await BartesianDB.setRimmerFavorite(id, !on);
+      render();
+      return;
+    }
+
+    const personAdminBtn = e.target.closest("[data-person-admin]");
+    if (personAdminBtn) {
+      const id = Number(personAdminBtn.getAttribute("data-id"));
+      const name = personAdminBtn.getAttribute("data-name") || "";
+      const on = personAdminBtn.getAttribute("data-on") === "1";
+      if (on && name.toLowerCase() === CURRENT_USER.toLowerCase()) {
+        if (!confirm("Remove your own admin flag? The Admin menu will disappear (cookie cleared). You can restore it by Reset local DB.")) return;
+      }
+      await BartesianDB.setPersonAdmin(id, !on);
+      syncAdminFromDb();
+      // If Lawrence was just granted/revoked sync already handled; for other people keep cookie
+      render();
+      return;
+    }
+
+    const adminCocktailFav = e.target.closest("[data-admin-cocktail-fav]");
+    if (adminCocktailFav) {
+      await BartesianDB.setFavorite(Number(adminCocktailFav.getAttribute("data-id")), adminCocktailFav.getAttribute("data-on") !== "1");
+      render(); return;
+    }
+    const adminCocktailSeasonal = e.target.closest("[data-admin-cocktail-seasonal]");
+    if (adminCocktailSeasonal) {
+      await BartesianDB.setCocktailSeasonal(Number(adminCocktailSeasonal.getAttribute("data-id")), adminCocktailSeasonal.getAttribute("data-on") !== "1");
+      render(); return;
+    }
+    const adminCocktailEnabled = e.target.closest("[data-admin-cocktail-enabled]");
+    if (adminCocktailEnabled) {
+      await BartesianDB.setCocktailEnabled(Number(adminCocktailEnabled.getAttribute("data-id")), adminCocktailEnabled.getAttribute("data-on") !== "1");
+      render(); return;
+    }
+    const adminRimmerEnabled = e.target.closest("[data-admin-rimmer-enabled]");
+    if (adminRimmerEnabled) {
+      await BartesianDB.setRimmerEnabled(Number(adminRimmerEnabled.getAttribute("data-id")), adminRimmerEnabled.getAttribute("data-on") !== "1");
+      render(); return;
+    }
+    const adminPackEnabled = e.target.closest("[data-admin-pack-enabled]");
+    if (adminPackEnabled) {
+      await BartesianDB.setPackEnabled(Number(adminPackEnabled.getAttribute("data-id")), adminPackEnabled.getAttribute("data-on") !== "1");
+      render(); return;
     }
 
     const scanDeltaBtn = e.target.closest("[data-scan-delta]");
@@ -1431,7 +1936,6 @@
       state.sort = String(fd.get("sort") || "name");
       state.availableOnly = listForm.available.checked;
       state.favoritesOnly = listForm.favorites.checked;
-      state.seasonalOnly = listForm.seasonal ? listForm.seasonal.checked : false;
       saveListPrefs();
       render();
       return;
@@ -1443,6 +1947,27 @@
       const fd = new FormData(rimmerForm);
       state.rimmerSearch = String(fd.get("search") || "");
       state.rimmerKind = String(fd.get("kind") || "");
+      state.rimmerFavoritesOnly = rimmerForm.favorites ? rimmerForm.favorites.checked : false;
+      state.rimmerAvailableOnly = rimmerForm.available ? rimmerForm.available.checked : false;
+      render();
+      return;
+    }
+
+    const rimmerEditForm = e.target.closest("[data-admin-rimmer-edit]");
+    if (rimmerEditForm) {
+      e.preventDefault();
+      const fd = new FormData(rimmerEditForm);
+      const updated = await BartesianDB.updateRimmerDetails(
+        Number(rimmerEditForm.getAttribute("data-id")),
+        {
+          name: String(fd.get("name") || ""),
+          kind: String(fd.get("kind") || ""),
+        }
+      );
+      state.flash =
+        "Saved " +
+        (updated ? updated.name : "rimmer") +
+        ". Export from Settings to write it back to data/rimmers/*.txt for git.";
       render();
       return;
     }
@@ -1509,11 +2034,22 @@
         box.innerHTML = `<p class="error">No matching in-stock cocktails.</p>`;
         return;
       }
+      const pickImg = primaryImage(pick);
+      const pickSpirits = (pick.spirits_csv || "").split("|").filter(Boolean).join(", ");
       box.innerHTML = `
-        <div class="random-card">
-          <h2>${esc(pick.name)}</h2>
-          <p>${esc((pick.spirits_csv || "").split("|").filter(Boolean).join(", "))} · qty ${pick.quantity}</p>
-          <a href="#/cocktail/${pick.id}" data-go="#/cocktail/${pick.id}">Open cocktail</a>
+        <div class="random-card detail-hero">
+          <a class="thumb large ${pickImg ? "" : "thumb-empty"}" href="#/cocktail/${pick.id}" data-go="#/cocktail/${pick.id}" aria-label="${esc(pick.name)}">
+            ${pickImg ? `<img src="${esc(pickImg)}" alt="">` : ""}
+          </a>
+          <div>
+            <p class="detail-kicker">Cocktail${pick.seasonal ? " · Seasonal" : ""}</p>
+            <h2 class="detail-title random-title">
+              <a class="random-title-link" href="#/cocktail/${pick.id}" data-go="#/cocktail/${pick.id}">${esc(pick.name)}${pick.favorite ? " ★" : ""}</a>
+            </h2>
+            ${pickSpirits ? `<p class="spirits">${esc(pickSpirits)}</p>` : ""}
+            <p class="detail-copy">${esc(pick.description || "")}</p>
+            <p class="muted">Qty ${pick.quantity} · ${starsLabel(pick.avg_rating)}${pick.glassware ? " · " + esc(pick.glassware) : ""}</p>
+          </div>
         </div>
       `;
       return;
@@ -1575,14 +2111,7 @@
     if (listForm && e.target.name === "search") {
       state.search = e.target.value;
       saveListPrefs();
-      const cocktails = BartesianDB.listCocktails({
-        search: state.search,
-        sort: state.sort,
-        spirit: state.spirit,
-        favoritesOnly: state.favoritesOnly,
-        availableOnly: state.availableOnly,
-        seasonalOnly: state.seasonalOnly,
-      });
+      const cocktails = BartesianDB.listCocktails(listQuery());
       const count = root.querySelector(".count");
       if (count) count.textContent = `${cocktails.length} cocktail${cocktails.length === 1 ? "" : "s"}`;
       const shellEl = root.querySelector(".list-shell");
@@ -1605,20 +2134,21 @@
 
   function onChange(e) {
     const listForm = e.target.closest("[data-list-filters]");
-    if (listForm && ["spirit", "sort", "available", "favorites", "seasonal"].includes(e.target.name)) {
+    if (listForm && ["spirit", "sort", "available", "favorites"].includes(e.target.name)) {
       state.spirit = listForm.spirit.value;
       state.sort = listForm.sort.value;
       state.availableOnly = listForm.available.checked;
       state.favoritesOnly = listForm.favorites.checked;
-      state.seasonalOnly = listForm.seasonal ? listForm.seasonal.checked : false;
       saveListPrefs();
       render();
       return;
     }
 
     const rimmerForm = e.target.closest("[data-rimmer-filters]");
-    if (rimmerForm && e.target.name === "kind") {
+    if (rimmerForm && (e.target.name === "kind" || e.target.name === "favorites" || e.target.name === "available")) {
       state.rimmerKind = rimmerForm.kind.value;
+      state.rimmerFavoritesOnly = rimmerForm.favorites ? rimmerForm.favorites.checked : false;
+      state.rimmerAvailableOnly = rimmerForm.available ? rimmerForm.available.checked : false;
       render();
       return;
     }
@@ -1635,6 +2165,7 @@
     root.innerHTML = `<div class="boot">Loading Bartesian…</div>`;
     try {
       await BartesianDB.init();
+      syncAdminFromDb();
       render();
     } catch (err) {
       root.innerHTML = `<div class="boot error">Failed to start: ${esc(err.message)}</div>`;

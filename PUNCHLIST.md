@@ -8,7 +8,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 
 - [x] Stack mirrored from recipes: HTML/JS, sql.js SQLite, IndexedDB, seed `data/` → `js/seed-data.js`, export for manual GitHub update
 - [x] Folder layout (`css/`, `js/`, `data/cocktails/`, `data/packs/`, `images/`, `assets/`, `exports/`, `scripts/`)
-- [x] Cocktail list (search, filter in-stock / favorites / spirit, sort name / quantity / rating / spirit)
+- [x] Cocktail list (search, filter in-stock / favorites / spirit, sort name / quantity / rating / spirit / seasonal)
 - [x] Cocktail detail (metadata placeholders, inventory ± / Use 1, variety packs, ratings by person)
 - [x] Barcode apply: capsule −1, case +N, variety pack restock (manual entry UI)
 - [x] Randomizer (in-stock; optional spirit / favorites)
@@ -26,6 +26,8 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Real Bartesian catalog scrape (Gorgias nutrition articles + Shopify products) into `data/` + `images/`
 - [x] Seasonal flag on cocktails + list filter
 - [x] Rimmers table/page (`#/rimmers`) with pairings + inventory ±
+- [x] Rimmer favorites (Add/Remove from Favorites on list + detail, ★ indicator) + Favorites filter on Rimmers list
+- [x] Rimmers list In stock filter; rimmer qty badge: 1 = black (red only at 0 + restock flag)
 - [x] Alcohol volume (Mocktail/Light/Regular/Strong) + nutrition label images
 - [x] Product URLs with Shopify `?variant=` where the item is still sold online
 - [x] Nutrition Facts label images from Gorgias (US + EU when present)
@@ -35,8 +37,10 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Shopify long-form `Details` (Read More / how-to copy) on cocktail records
 - [x] Reverse rimmer→cocktail pairings into `cocktail_rimmers` join (cocktail detail “Recommended rimmers”)
 - [x] Fix variety pack `Items` parsing (bullet cocktail names, not flavor blurbs)
-- [ ] **Cocktail admin page** — create / edit / disable cocktails (name, image, spirits, description, nutrition, alcohol, glassware, garnish, pairs-with, Bartesian URL, barcodes, case qty)
-- [ ] Variety-pack admin (create/edit packs and item quantities)
+- [x] Admin submenu (gated): Scan, Barcodes, Cocktails, Rimmers, Packs, People — Admin cookie `bartesian_admin` mirrors Lawrence's `people.is_admin`
+- [x] Admin screens: Cocktails (qty/favorite/seasonal/enable toggles), Rimmers (qty/fav/enable + name & free-text type edit), Packs (enable + items), People (add + Admin flag toggle)
+- [ ] **Full cocktail create/edit form** — name, image, spirits, description, nutrition, alcohol, glassware, garnish, pairs-with, URLs, barcodes, case qty
+- [ ] Variety-pack create/edit (packs and item quantities)
 - [ ] Richer metadata editors (structured nutrition / alcohol fields)
 - [ ] Optional OCR of nutrition labels → calories/ingredients/case UPC into structured fields
 - [ ] UI toggle to show disabled stubs; flip `Enabled` when SKUs return
@@ -45,7 +49,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 ### Cookies (mahjong-tools pattern)
 
 - [x] Cookie helpers (`path=/`, `SameSite=Lax`, long `max-age`) for list prefs
-- [x] Persist cocktail list prefs in cookie `bartesian_list_prefs` (search, sort, spirit, in-stock / favorites / seasonal)
+- [x] Persist cocktail list prefs in cookie `bartesian_list_prefs` (search, sort incl. Seasonal, spirit, in-stock / favorites)
 - [ ] Cookie-backed settings module like [mahjong-tools `js/settings.js`](https://github.com/lawrencelove-repo/mahjong-tools/blob/main/js/settings.js) (shared read/write helpers)
 - [ ] Persist more UI prefs (selected person for ratings, UI scale / theme if added)
 - [ ] Soft site access gate cookie (optional; recipes-style password hash + cookie) if you want a deterrent on public Pages
@@ -68,34 +72,76 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Custom UPC-A/EAN-13 decoder for case/pack labels (iPad; no BarcodeDetector)
 - [x] Merge seed Case/Capsule barcodes into existing IndexedDB on launch
 - [ ] Pack/case restock undo
-- [x] Cocktail list: qty badge (left), A–Z# jump rail, wrapping filter checkboxes, cookie-backed filters/sort
+- [x] Cocktail list: qty badge (left; red when qty = 1), A–Z# jump rail, wrapping filter checkboxes, cookie-backed filters/sort
+- [x] List filters: In-stock AND Favorites checked = union (in-stock OR favorite); Seasonal moved to Sort dropdown
+
+### Wishlist
+
+Shopping/want list for cocktails and rimmers you do not currently own (or want more of).
+
+**Data:**
+- [x] `wishlist_items`: `id`, `cocktail_id` nullable, `rimmer_id` nullable, `qty_wanted` (editable, default 1), `created_at`; dedupe per item (Add increments want qty)
+- [x] Add-to-wishlist action on cocktail detail, rimmer detail, and Restock screen
+- [x] Remove from wishlist (does not affect inventory/catalog rows)
+
+**Wishlist screen `#/wishlist`:**
+- [x] List wishlist cocktails + rimmers with thumbnail/name
+- [x] Per item: qty stepper for `qty_wanted`, Remove button
+- [x] Per item: Bartesian link as a simple arrow (↗) using `bartesian_url` (hidden if no URL)
+- [x] Nav/menu entry for Wishlist
+- [x] Empty state with hint to add from detail or Restock
+
+**Import / export:**
+- [x] Include wishlist in export zip (`wishlist.json`)
+- [x] Import/seed path restores wishlist (dedupe by slug/item); seed-rev merge updates want qty
+
+### Restock
+
+Auto-flag cocktails and rimmers that just ran out so they show on a dedicated buying list. (Formerly “Reorder”.)
+
+**Flag rules:**
+- [x] `restock` flag on cocktails AND rimmers (`restock INTEGER DEFAULT 0`, migrated in-place)
+- [x] Set `restock = 1` ONLY on 1 → 0 transition (Use 1, capsule −1 scan, manual −1); do NOT backfill items already at 0. List badge: qty 0 + flag = red/white, qty 0 no flag = grey/white
+- [x] Clear flag on restock (any transition 0 → >0: case/pack/manual +)
+- [x] Clearing is separate from disable/delete — Remove on Restock screen only sets flag = 0; catalog row stays enabled
+
+**Restock screen `#/restock`:**
+- [x] Nav/menu entry “Restock”
+- [x] List flagged cocktails + rimmers (name/thumb)
+- [x] Per item: **Remove** (clear restock flag), **Add to Wishlist** button
+- [x] Bartesian arrow link like Wishlist
+- [x] Empty state (“Nothing to restock”)
+
+**Import / export / seed:**
+- [x] Persist `restock` flag through export (`.txt` `Restock: 0/1`) and `import-data.js` → seed
+- [x] Seed-rev apply syncs `restock` flag like quantities
 
 ### Activity history (chronological)
 
-Unified timeline of household cocktail activity — not just raw `inventory_log` rows. History screen shows newest→oldest (or reverse) across all event types.
+Unified timeline of household cocktail activity — not just raw `inventory_log` rows. Per-item History page shows newest→oldest for that cocktail/rimmer.
 
 **Events to capture (at write time):**
-- [ ] Capsule / rimmer used (qty −1 from scan confirm or Use 1)
-- [ ] Capsules / packs / cases added (restock +N, variety pack expand, manual ±)
-- [ ] Feedback added or updated (rating stars + optional comment, by person)
-- [ ] Favorited / unfavorited
-- [ ] (Nice) Barcode associations saved; cocktail enabled/disabled if admin lands
+- [x] Capsule / rimmer used (qty −1 from scan confirm or Use 1)
+- [x] Capsules / packs / cases added (restock +N, variety pack expand, manual ±)
+- [x] Feedback added or updated (rating stars + optional comment, by person)
+- [x] Favorited / unfavorited
+- [x] Barcode associations saved (kind + code logged)
 
 **Storage (exportable):**
-- [ ] Extend beyond today’s `inventory_log` (qty-only) — e.g. `activity_log` (or equivalent) with: `id`, `created_at` (ISO), `kind` (`use` | `restock` | `rating` | `favorite` | …), `cocktail_id` / `rimmer_id` / `pack_id` nullable, `person_id` nullable, `delta` nullable, `stars` nullable, `detail` text/JSON (reason, barcode, comment, favorite on/off)
-- [ ] Write an activity row whenever the corresponding action succeeds (same transaction / persist as the inventory or rating change)
-- [ ] Query API: `listActivity({ limit, before, cocktailId })` ordered by `created_at DESC, id DESC` for the History screen
+- [x] `activity_log`: `id`, `created_at` (ISO), `kind` (`use` | `restock` | `rating` | `favorite` | `barcode` | `wishlist_*` | `restock_clear`), `cocktail_id` / `rimmer_id` / `pack_id` / `person_id` nullable, `delta`, `stars`, `detail`, `barcode`
+- [x] Write an activity row whenever the corresponding action succeeds (with the inventory/rating persist)
+- [x] Query API: `listActivity({ limit, cocktailId, rimmerId })` ordered by `created_at DESC, id DESC`
 
 **UI:**
-- [ ] `#/history` (or Settings → History) — chronological feed with cocktail/rimmer name, event label, relative or local datetime
-- [ ] Tap row → cocktail/rimmer detail when applicable
-- [ ] Empty state when no events yet
+- [x] Per-item history only (no global menu entry): History link on cocktail/rimmer detail → `#/history/cocktail/:id` / `#/history/rimmer/:id` chronological feed, local datetime
+- [x] Back link from item History → item detail
+- [x] Empty state when no events yet
 
 **Import / export:**
-- [ ] Include `activity.json` (or fold into export zip alongside `ratings.json` / `barcodes.json`)
-- [ ] `exportSnapshot()` + Settings export write full activity history
-- [ ] `import-data.js` / zip merge: restore activity into DB on import (and seed-rev apply if needed) without wiping unrelated local rows incorrectly
-- [ ] Document that Reset local DB clears activity unless it was exported and re-imported
+- [x] Include `activity.json` in export zip
+- [x] `exportSnapshot()` + Settings export write full activity history
+- [x] `import-data.js` / zip merge: restore activity into DB on import (seed + seed-rev merge, deduped by timestamp/kind/item/detail)
+- [x] Reset local DB clears activity unless it was exported and re-imported (Settings copy / history data is seed-restored)
 
 ### Polish
 

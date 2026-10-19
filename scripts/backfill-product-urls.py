@@ -157,7 +157,7 @@ def best_match(slug: str, name: str, idx: dict[str, dict], kind: str) -> dict | 
         ("cocktail", "low-cal-whiskey-sour"): "low-calorie-whiskey-sour-cocktails",
         ("cocktail", "witchs-heart"): "witchs-heart-cocktails",
         ("cocktail", "cosmopolitan"): "cosmopolitan-martini-cocktails",
-        ("rimmer", "sweet-cinamon-vanilla-sugar-rimmer"): "sweet-cinnamon-vanilla-sugar-rimmer",
+        ("rimmer", "sweet-cinnamon-vanilla-sugar-rimmer"): "sweet-cinnamon-vanilla-sugar-rimmer",
         ("rimmer", "golden-demerara-sugar"): "golden-demerara-rimming-sugar",
         ("pack", "classic-collection-favorites"): "classic-cocktails-favorites",
         ("pack", "poolside-vibes"): "poolside-vibes-collection-variety-pack",

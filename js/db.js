@@ -15,6 +15,7 @@
     CREATE TABLE IF NOT EXISTS people (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL UNIQUE,
+      is_admin INTEGER NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL
     );
 
@@ -48,6 +49,7 @@
       favorite INTEGER NOT NULL DEFAULT 0,
       enabled INTEGER NOT NULL DEFAULT 1,
       quantity INTEGER NOT NULL DEFAULT 0,
+      restock INTEGER NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
     );
@@ -79,6 +81,7 @@
       favorite INTEGER NOT NULL DEFAULT 0,
       enabled INTEGER NOT NULL DEFAULT 1,
       quantity INTEGER NOT NULL DEFAULT 0,
+      restock INTEGER NOT NULL DEFAULT 0,
       created_at TEXT NOT NULL,
       updated_at TEXT NOT NULL
     );
@@ -156,6 +159,35 @@
       FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS activity_log (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      created_at TEXT NOT NULL,
+      kind TEXT NOT NULL,
+      cocktail_id INTEGER,
+      rimmer_id INTEGER,
+      pack_id INTEGER,
+      person_id INTEGER,
+      delta INTEGER,
+      stars INTEGER,
+      detail TEXT NOT NULL DEFAULT '',
+      barcode TEXT NOT NULL DEFAULT '',
+      FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE,
+      FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE,
+      FOREIGN KEY (pack_id) REFERENCES packs(id) ON DELETE CASCADE,
+      FOREIGN KEY (person_id) REFERENCES people(id) ON DELETE SET NULL
+    );
+
+    CREATE TABLE IF NOT EXISTS wishlist_items (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      cocktail_id INTEGER,
+      rimmer_id INTEGER,
+      qty_wanted INTEGER NOT NULL DEFAULT 1,
+      created_at TEXT NOT NULL,
+      updated_at TEXT NOT NULL,
+      FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE,
+      FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE
+    );
+
     INSERT INTO meta (key, value) VALUES ('schema_version', '${SCHEMA_VERSION}');
   `;
 
@@ -229,6 +261,132 @@
     await idbSet(DB_KEY, data);
   }
 
+  function logActivity(a) {
+    if (!db) return;
+    try {
+      exec(
+        `INSERT INTO activity_log
+           (created_at, kind, cocktail_id, rimmer_id, pack_id, person_id, delta, stars, detail, barcode)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          a.created_at || nowIso(),
+          a.kind || "event",
+          a.cocktailId || null,
+          a.rimmerId || null,
+          a.packId || null,
+          a.personId || null,
+          a.delta != null ? Number(a.delta) : null,
+          a.stars != null ? Number(a.stars) : null,
+          a.detail || "",
+          a.barcode || "",
+        ]
+      );
+    } catch (_) {
+      /* activity table missing on very old DB before migration */
+    }
+  }
+
+  function tableColumns(table) {
+    try {
+      return query("PRAGMA table_info(" + table + ")").map((r) => r.name);
+    } catch (_) {
+      return [];
+    }
+  }
+
+  /** Non-destructive migration for existing IndexedDBs (no schema wipe). */
+  function ensureExtensions() {
+    let changed = 0;
+    const createSql = [
+      `CREATE TABLE IF NOT EXISTS activity_log (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        created_at TEXT NOT NULL,
+        kind TEXT NOT NULL,
+        cocktail_id INTEGER,
+        rimmer_id INTEGER,
+        pack_id INTEGER,
+        person_id INTEGER,
+        delta INTEGER,
+        stars INTEGER,
+        detail TEXT NOT NULL DEFAULT '',
+        barcode TEXT NOT NULL DEFAULT ''
+      )`,
+      `CREATE TABLE IF NOT EXISTS wishlist_items (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        cocktail_id INTEGER,
+        rimmer_id INTEGER,
+        qty_wanted INTEGER NOT NULL DEFAULT 1,
+        created_at TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      )`,
+    ];
+    for (const sql of createSql) {
+      try { exec(sql); changed++; } catch (_) {}
+    }
+    // People: is_admin column + rename seed "Me" → "Lawrence" (once)
+    try {
+      const pcols = tableColumns("people");
+      if (pcols.length && !pcols.includes("is_admin")) {
+        exec("ALTER TABLE people ADD COLUMN is_admin INTEGER NOT NULL DEFAULT 0");
+        changed++;
+      }
+      const seeded = queryOne("SELECT value FROM meta WHERE key = 'lawrence_seeded'");
+      if (!seeded || seeded.value !== "1") {
+        const lawrence = queryOne("SELECT id FROM people WHERE name = 'Lawrence' COLLATE NOCASE");
+        if (!lawrence) {
+          exec("UPDATE people SET name = 'Lawrence' WHERE name = 'Me' COLLATE NOCASE");
+        }
+        exec("UPDATE people SET is_admin = 1 WHERE name = 'Lawrence' COLLATE NOCASE");
+        exec("INSERT OR REPLACE INTO meta (key, value) VALUES ('lawrence_seeded', '1')");
+        changed++;
+      }
+    } catch (_) {}
+    // Rimmer spelling: "Cinamon" → "Cinnamon" (rename in place so id/links survive)
+    try {
+      const oldRimmer = queryOne(
+        "SELECT id FROM rimmers WHERE slug = 'sweet-cinamon-vanilla-sugar-rimmer'"
+      );
+      const newRimmer = queryOne(
+        "SELECT id FROM rimmers WHERE slug = 'sweet-cinnamon-vanilla-sugar-rimmer'"
+      );
+      if (oldRimmer && !newRimmer) {
+        exec(
+          "UPDATE rimmers SET slug = 'sweet-cinnamon-vanilla-sugar-rimmer', name = 'Sweet Cinnamon Vanilla Sugar Rimmer', image = 'images/rimmers/sweet-cinnamon-vanilla-sugar-rimmer.jpg' WHERE id = ?",
+          [oldRimmer.id]
+        );
+        changed++;
+      } else if (newRimmer) {
+        exec(
+          "UPDATE rimmers SET name = 'Sweet Cinnamon Vanilla Sugar Rimmer', image = CASE WHEN image IS NULL OR image = '' THEN 'images/rimmers/sweet-cinnamon-vanilla-sugar-rimmer.jpg' ELSE image END WHERE id = ? AND (name = 'Sweet Cinamon Vanilla Sugar Rimmer' OR image IS NULL OR image = '')",
+          [newRimmer.id]
+        );
+      }
+    } catch (_) {}
+    for (const table of ["cocktails", "rimmers"]) {
+      const cols = tableColumns(table);
+      if (cols.length && !cols.includes("restock")) {
+        try {
+          exec("ALTER TABLE " + table + " ADD COLUMN restock INTEGER NOT NULL DEFAULT 0");
+          changed++;
+        } catch (_) {}
+      }
+      // Normalize missing/odd restock values to 0/1 (null → 0)
+      try {
+        exec(
+          "UPDATE " + table + " SET restock = CASE WHEN restock = 1 THEN 1 ELSE 0 END WHERE restock IS NULL OR restock NOT IN (0, 1)"
+        );
+        changed++;
+      } catch (_) {}
+    }
+    return changed;
+  }
+
+  function restockForTransition(prev, next, current) {
+    if (prev === 1 && next === 0) return 1;
+    if (prev === 0 && next > 0) return 0;
+    return Number(current) === 1 ? 1 : 0;
+  }
+
   function ensureSpirit(name) {
     const trimmed = String(name || "").trim();
     if (!trimmed) return null;
@@ -272,8 +430,8 @@
         glassware, garnish, pairs_with, nutrition_json, alcohol_json,
         bartesian_url, help_url, shopify_product_id, shopify_variant_id,
         shopify_handle, shopify_sku, gorgias_article_id, seasonal, favorite,
-        enabled, quantity, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        enabled, quantity, restock, created_at, updated_at
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         c.slug,
         c.name,
@@ -298,6 +456,7 @@
         c.favorite ? 1 : 0,
         c.enabled === 0 || c.enabled === false ? 0 : 1,
         Number(c.quantity) || 0,
+        c.restock ? 1 : 0,
         ts,
         ts,
       ]
@@ -326,9 +485,9 @@
       `INSERT INTO rimmers (
         slug, name, description, image, kind, pairs_with, nutrition_image,
         bartesian_url, help_url, shopify_product_id, shopify_variant_id,
-        shopify_handle, gorgias_article_id, favorite, enabled, quantity,
+        shopify_handle, gorgias_article_id, favorite, enabled, quantity, restock,
         created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         r.slug,
         r.name,
@@ -346,6 +505,7 @@
         r.favorite ? 1 : 0,
         r.enabled === 0 || r.enabled === false ? 0 : 1,
         Number(r.quantity) || 0,
+        r.restock ? 1 : 0,
         ts,
         ts,
       ]
@@ -418,8 +578,9 @@
     const seed = global.BARTESIAN_SEED || { people: [], cocktails: [], packs: [], rimmers: [] };
     for (const person of seed.people || []) {
       if (!person.name) continue;
-      exec("INSERT OR IGNORE INTO people (name, created_at) VALUES (?, ?)", [
+      exec("INSERT OR IGNORE INTO people (name, is_admin, created_at) VALUES (?, ?, ?)", [
         person.name,
+        person.is_admin ? 1 : 0,
         nowIso(),
       ]);
     }
@@ -428,14 +589,110 @@
       if (!c.slug || !c.name) continue;
       slugToId[c.slug] = insertCocktail(c);
     }
+    const rimmerSlugToId = {};
     for (const r of seed.rimmers || []) {
       if (!r.slug || !r.name) continue;
-      insertRimmer(r, slugToId);
+      rimmerSlugToId[r.slug] = insertRimmer(r, slugToId);
     }
+    const packSlugToId = {};
     for (const p of seed.packs || []) {
       if (!p.slug || !p.name) continue;
-      insertPack(p, slugToId);
+      packSlugToId[p.slug] = insertPack(p, slugToId);
     }
+    seedWishlistAndActivity(slugToId, rimmerSlugToId, packSlugToId);
+  }
+
+  function seedWishlistAndActivity(cocktailSlugToId, rimmerSlugToId, packSlugToId) {
+    const seed = global.BARTESIAN_SEED || {};
+    const ts = nowIso();
+    for (const w of seed.wishlist || []) {
+      const cid = w.cocktail_slug ? cocktailSlugToId[w.cocktail_slug] : null;
+      const rid = w.rimmer_slug ? rimmerSlugToId[w.rimmer_slug] : null;
+      if (!cid && !rid) continue;
+      exec(
+        "INSERT INTO wishlist_items (cocktail_id, rimmer_id, qty_wanted, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
+        [cid || null, rid || null, Math.max(1, Number(w.qty_wanted) || 1), w.created_at || ts, w.updated_at || w.created_at || ts]
+      );
+    }
+    // People for activity person_name resolution
+    const personByName = {};
+    for (const p of query("SELECT id, name FROM people")) personByName[p.name] = p.id;
+    for (const a of seed.activity || []) {
+      exec(
+        `INSERT INTO activity_log
+           (created_at, kind, cocktail_id, rimmer_id, pack_id, person_id, delta, stars, detail, barcode)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+          a.created_at || ts,
+          a.kind || "event",
+          a.cocktail_slug ? cocktailSlugToId[a.cocktail_slug] || null : null,
+          a.rimmer_slug ? rimmerSlugToId[a.rimmer_slug] || null : null,
+          a.pack_slug ? packSlugToId[a.pack_slug] || null : null,
+          a.person_name ? personByName[a.person_name] || null : a.person_id || null,
+          a.delta != null ? Number(a.delta) : null,
+          a.stars != null ? Number(a.stars) : null,
+          a.detail || "",
+          a.barcode || "",
+        ]
+      );
+    }
+  }
+
+  /** Merge seed wishlist/activity (from import) into an existing DB; dedupe activity. */
+  function mergeSeedWishlistAndActivity() {
+    const seed = global.BARTESIAN_SEED || {};
+    let changed = 0;
+    const cocktailBySlug = {};
+    for (const r of query("SELECT id, slug FROM cocktails")) cocktailBySlug[r.slug] = r.id;
+    const rimmerBySlug = {};
+    for (const r of query("SELECT id, slug FROM rimmers")) rimmerBySlug[r.slug] = r.id;
+    const packBySlug = {};
+    for (const r of query("SELECT id, slug FROM packs")) packBySlug[r.slug] = r.id;
+    const personByName = {};
+    for (const p of query("SELECT id, name FROM people")) personByName[p.name] = p.id;
+
+    for (const w of seed.wishlist || []) {
+      const cid = w.cocktail_slug ? cocktailBySlug[w.cocktail_slug] : null;
+      const rid = w.rimmer_slug ? rimmerBySlug[w.rimmer_slug] : null;
+      if (!cid && !rid) continue;
+      const existing = cid
+        ? queryOne("SELECT id FROM wishlist_items WHERE cocktail_id = ?", [cid])
+        : queryOne("SELECT id FROM wishlist_items WHERE rimmer_id = ?", [rid]);
+      const qty = Math.max(1, Number(w.qty_wanted) || 1);
+      if (existing) {
+        exec("UPDATE wishlist_items SET qty_wanted = ?, updated_at = ? WHERE id = ?", [qty, nowIso(), existing.id]);
+      } else {
+        exec(
+          "INSERT INTO wishlist_items (cocktail_id, rimmer_id, qty_wanted, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
+          [cid || null, rid || null, qty, w.created_at || nowIso(), nowIso()]
+        );
+      }
+      changed++;
+    }
+
+    for (const a of seed.activity || []) {
+      const cid = a.cocktail_slug ? cocktailBySlug[a.cocktail_slug] || null : null;
+      const rid = a.rimmer_slug ? rimmerBySlug[a.rimmer_slug] || null : null;
+      const pid = a.pack_slug ? packBySlug[a.pack_slug] || null : null;
+      const personId = a.person_name ? personByName[a.person_name] || null : null;
+      const created = a.created_at || "";
+      if (!created) continue;
+      const dup = queryOne(
+        `SELECT id FROM activity_log WHERE created_at = ? AND kind = ?
+           AND IFNULL(cocktail_id,0)=IFNULL(?,0) AND IFNULL(rimmer_id,0)=IFNULL(?,0)
+           AND IFNULL(detail,'')=IFNULL(?, '') AND IFNULL(delta,0)=IFNULL(?,0)`,
+        [created, a.kind || "event", cid, rid, a.detail || "", a.delta != null ? Number(a.delta) : null]
+      );
+      if (dup) continue;
+      logActivity({
+        created_at: created,
+        kind: a.kind || "event",
+        cocktailId: cid, rimmerId: rid, packId: pid, personId,
+        delta: a.delta, stars: a.stars, detail: a.detail || "", barcode: a.barcode || "",
+      });
+      changed++;
+    }
+    return changed;
   }
 
   function createFreshDb() {
@@ -447,6 +704,7 @@
       "INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_barcode_rev', ?)",
       [String(SEED_BARCODE_REV)]
     );
+    exec("INSERT OR REPLACE INTO meta (key, value) VALUES ('lawrence_seeded', '1')");
     if (global.BARTESIAN_SEED_REV) {
       exec(
         "INSERT OR REPLACE INTO meta (key, value) VALUES ('applied_seed_rev', ?)",
@@ -455,35 +713,33 @@
     }
   }
 
-  /** Copy cocktail/rimmer quantities from seed into the live DB. */
+  /** Copy cocktail/rimmer quantities + restock flags from seed into the live DB. */
   function applySeedInventory() {
     const seed = global.BARTESIAN_SEED || {};
     let changed = 0;
     const ts = nowIso();
     for (const c of seed.cocktails || []) {
       if (!c.slug) continue;
-      const row = queryOne("SELECT id, quantity FROM cocktails WHERE slug = ?", [c.slug]);
+      const row = queryOne("SELECT id, quantity, restock FROM cocktails WHERE slug = ?", [c.slug]);
       if (!row) continue;
       const q = Number(c.quantity) || 0;
-      if (Number(row.quantity) !== q) {
-        exec("UPDATE cocktails SET quantity = ?, updated_at = ? WHERE id = ?", [
-          q,
-          ts,
-          row.id,
+      const restock = c.restock ? 1 : 0;
+      if (Number(row.quantity) !== q || Number(row.restock || 0) !== restock) {
+        exec("UPDATE cocktails SET quantity = ?, restock = ?, updated_at = ? WHERE id = ?", [
+          q, restock, ts, row.id,
         ]);
         changed++;
       }
     }
     for (const r of seed.rimmers || []) {
       if (!r.slug) continue;
-      const row = queryOne("SELECT id, quantity FROM rimmers WHERE slug = ?", [r.slug]);
+      const row = queryOne("SELECT id, quantity, restock FROM rimmers WHERE slug = ?", [r.slug]);
       if (!row) continue;
       const q = Number(r.quantity) || 0;
-      if (Number(row.quantity) !== q) {
-        exec("UPDATE rimmers SET quantity = ?, updated_at = ? WHERE id = ?", [
-          q,
-          ts,
-          row.id,
+      const restock = r.restock ? 1 : 0;
+      if (Number(row.quantity) !== q || Number(row.restock || 0) !== restock) {
+        exec("UPDATE rimmers SET quantity = ?, restock = ?, updated_at = ? WHERE id = ?", [
+          q, restock, ts, row.id,
         ]);
         changed++;
       }
@@ -501,6 +757,7 @@
     let changed = 0;
     if (seedRev && (!applied || applied.value !== seedRev)) {
       changed += applySeedInventory();
+      try { changed += mergeSeedWishlistAndActivity(); } catch (_) {}
       exec(
         "INSERT OR REPLACE INTO meta (key, value) VALUES ('applied_seed_rev', ?)",
         [seedRev]
@@ -617,6 +874,7 @@
       seasonal: !!row.seasonal,
       enabled: row.enabled === undefined || row.enabled === null ? true : !!row.enabled,
       quantity: Number(row.quantity) || 0,
+      restock: Number(row.restock || 0) === 1,
       avg_rating: row.avg_rating != null ? Number(row.avg_rating) : null,
       rating_count: Number(row.rating_count) || 0,
       primary_spirit: row.primary_spirit || "",
@@ -635,6 +893,7 @@
       favorite: !!row.favorite,
       enabled: row.enabled === undefined || row.enabled === null ? true : !!row.enabled,
       quantity: Number(row.quantity) || 0,
+      restock: Number(row.restock || 0) === 1,
     };
   }
 
@@ -666,8 +925,10 @@
           db.close();
           createFreshDb();
           await persist();
-        } else if (maybeApplySeedRev() > 0) {
-          await persist();
+        } else {
+          ensureExtensions();
+          if (maybeApplySeedRev() > 0) await persist();
+          else await persist();
         }
       } else {
         createFreshDb();
@@ -686,7 +947,10 @@
     },
 
     listPeople() {
-      return query("SELECT * FROM people ORDER BY name COLLATE NOCASE");
+      return query("SELECT * FROM people ORDER BY name COLLATE NOCASE").map((p) => ({
+        ...p,
+        is_admin: Number(p.is_admin || 0) === 1,
+      }));
     },
 
     async addPerson(name) {
@@ -700,6 +964,61 @@
       return queryOne("SELECT * FROM people WHERE name = ? COLLATE NOCASE", [trimmed]);
     },
 
+    async setPersonAdmin(personId, isAdmin) {
+      exec("UPDATE people SET is_admin = ? WHERE id = ?", [isAdmin ? 1 : 0, personId]);
+      await persist();
+      const p = queryOne("SELECT * FROM people WHERE id = ?", [personId]);
+      return p ? { ...p, is_admin: Number(p.is_admin || 0) === 1 } : null;
+    },
+
+    findPersonByName(name) {
+      const p = queryOne("SELECT * FROM people WHERE name = ? COLLATE NOCASE", [String(name || "")]);
+      return p ? { ...p, is_admin: Number(p.is_admin || 0) === 1 } : null;
+    },
+
+    async setCocktailEnabled(id, enabled) {
+      exec("UPDATE cocktails SET enabled = ?, updated_at = ? WHERE id = ?", [enabled ? 1 : 0, nowIso(), id]);
+      await persist();
+    },
+
+    async setCocktailSeasonal(id, seasonal) {
+      exec("UPDATE cocktails SET seasonal = ?, updated_at = ? WHERE id = ?", [seasonal ? 1 : 0, nowIso(), id]);
+      await persist();
+    },
+
+    async setRimmerEnabled(id, enabled) {
+      exec("UPDATE rimmers SET enabled = ?, updated_at = ? WHERE id = ?", [enabled ? 1 : 0, nowIso(), id]);
+      await persist();
+    },
+
+    /** Admin edit: name + free-text type (kind column; slug/id stay put). */
+    async updateRimmerDetails(id, { name, kind } = {}) {
+      const trimmedName = String(name || "").trim();
+      if (!trimmedName) throw new Error("Rimmer name is required.");
+      const trimmedKind = String(kind || "").trim();
+      exec("UPDATE rimmers SET name = ?, kind = ?, updated_at = ? WHERE id = ?", [
+        trimmedName,
+        trimmedKind,
+        nowIso(),
+        id,
+      ]);
+      await persist();
+      return rowToRimmer(queryOne("SELECT * FROM rimmers WHERE id = ?", [id]));
+    },
+
+    async setPackEnabled(id, enabled) {
+      exec("UPDATE packs SET enabled = ?, updated_at = ? WHERE id = ?", [enabled ? 1 : 0, nowIso(), id]);
+      await persist();
+    },
+
+    listAllRimmersAdmin() {
+      return query("SELECT * FROM rimmers ORDER BY name COLLATE NOCASE").map(rowToRimmer);
+    },
+
+    listAllPacksAdmin() {
+      return query("SELECT * FROM packs ORDER BY name COLLATE NOCASE");
+    },
+
     listCocktails({
       search = "",
       sort = "name",
@@ -710,8 +1029,10 @@
     } = {}) {
       let sql = listSelect + " WHERE c.enabled = 1";
       const params = [];
-      if (favoritesOnly) sql += " AND c.favorite = 1";
-      if (availableOnly) sql += " AND c.quantity >= 1";
+      // Both checked = union (in-stock OR favorite); single check = that filter alone.
+      if (favoritesOnly && availableOnly) sql += " AND (c.favorite = 1 OR c.quantity >= 1)";
+      else if (favoritesOnly) sql += " AND c.favorite = 1";
+      else if (availableOnly) sql += " AND c.quantity >= 1";
       if (seasonalOnly) sql += " AND c.seasonal = 1";
       if (spirit.trim()) {
         sql += ` AND EXISTS (
@@ -775,9 +1096,13 @@
       );
     },
 
-    listRimmers({ search = "", kind = "" } = {}) {
+    listRimmers({ search = "", kind = "", favoritesOnly = false, availableOnly = false } = {}) {
       let sql = "SELECT * FROM rimmers WHERE enabled = 1";
       const params = [];
+      // Match cocktails: In stock + Favorites together = union, either alone = that filter.
+      if (favoritesOnly && availableOnly) sql += " AND (favorite = 1 OR quantity >= 1)";
+      else if (favoritesOnly) sql += " AND favorite = 1";
+      else if (availableOnly) sql += " AND quantity >= 1";
       if (kind.trim()) {
         sql += " AND kind = ? COLLATE NOCASE";
         params.push(kind.trim());
@@ -808,7 +1133,7 @@
 
     cocktailsForRimmer(rimmerId) {
       return query(
-        `SELECT c.id, c.name, c.slug, c.image
+        `SELECT c.id, c.name, c.slug, c.image, c.quantity, c.restock
          FROM cocktails c
          JOIN cocktail_rimmers cr ON cr.cocktail_id = c.id
          WHERE cr.rimmer_id = ?
@@ -818,18 +1143,25 @@
     },
 
     async adjustRimmerQuantity(rimmerId, delta, reason, barcode) {
-      const row = queryOne("SELECT quantity FROM rimmers WHERE id = ?", [rimmerId]);
+      const row = queryOne("SELECT quantity, restock FROM rimmers WHERE id = ?", [rimmerId]);
       if (!row) throw new Error("Rimmer not found");
-      const next = Math.max(0, (Number(row.quantity) || 0) + Number(delta));
-      exec("UPDATE rimmers SET quantity = ?, updated_at = ? WHERE id = ?", [
-        next,
-        nowIso(),
-        rimmerId,
+      const prev = Number(row.quantity) || 0;
+      const next = Math.max(0, prev + Number(delta));
+      const actual = next - prev;
+      const restock = restockForTransition(prev, next, row.restock);
+      exec("UPDATE rimmers SET quantity = ?, restock = ?, updated_at = ? WHERE id = ?", [
+        next, restock, nowIso(), rimmerId,
       ]);
-      exec(
-        "INSERT INTO inventory_log (rimmer_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
-        [rimmerId, Number(delta), reason || "", barcode || "", nowIso()]
-      );
+      if (actual !== 0) {
+        exec(
+          "INSERT INTO inventory_log (rimmer_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
+          [rimmerId, actual, reason || "", barcode || "", nowIso()]
+        );
+        logActivity({
+          kind: actual < 0 ? "use" : "restock",
+          rimmerId, delta: actual, detail: reason || "", barcode: barcode || "",
+        });
+      }
       await persist();
       return next;
     },
@@ -874,6 +1206,10 @@
           [cocktailId, personId, s, comment || "", ts, ts]
         );
       }
+      logActivity({
+        kind: "rating", cocktailId, personId, stars: s,
+        detail: comment || "", created_at: ts,
+      });
       await persist();
     },
 
@@ -883,22 +1219,179 @@
         nowIso(),
         id,
       ]);
+      logActivity({
+        kind: "favorite", cocktailId: id,
+        detail: favorite ? "favorited" : "unfavorited",
+      });
+      await persist();
+    },
+
+    async setRimmerFavorite(id, favorite) {
+      exec("UPDATE rimmers SET favorite = ?, updated_at = ? WHERE id = ?", [
+        favorite ? 1 : 0, nowIso(), id,
+      ]);
+      logActivity({
+        kind: "favorite", rimmerId: id,
+        detail: favorite ? "favorited" : "unfavorited",
+      });
+      await persist();
+    },
+
+    listActivity({ limit = 200, cocktailId = null, rimmerId = null } = {}) {
+      let sql = `SELECT a.*,
+          c.name AS cocktail_name, c.slug AS cocktail_slug,
+          r.name AS rimmer_name, r.slug AS rimmer_slug,
+          p.name AS pack_name, p.slug AS pack_slug,
+          pe.name AS person_name
+        FROM activity_log a
+        LEFT JOIN cocktails c ON c.id = a.cocktail_id
+        LEFT JOIN rimmers r ON r.id = a.rimmer_id
+        LEFT JOIN packs p ON p.id = a.pack_id
+        LEFT JOIN people pe ON pe.id = a.person_id
+        WHERE 1=1`;
+      const params = [];
+      if (cocktailId) { sql += " AND a.cocktail_id = ?"; params.push(cocktailId); }
+      if (rimmerId) { sql += " AND a.rimmer_id = ?"; params.push(rimmerId); }
+      sql += " ORDER BY a.created_at DESC, a.id DESC LIMIT ?";
+      params.push(Math.max(1, Math.min(1000, Number(limit) || 200)));
+      try { return query(sql, params); } catch (_) { return []; }
+    },
+
+    listWishlist() {
+      try {
+        return query(
+          `SELECT w.id, w.qty_wanted, w.created_at, w.updated_at,
+             w.cocktail_id, w.rimmer_id,
+             c.name AS cocktail_name, c.slug AS cocktail_slug,
+             c.hero_image AS cocktail_hero, c.image AS cocktail_image,
+             c.bartesian_url AS cocktail_url, c.quantity AS cocktail_qty,
+             r.name AS rimmer_name, r.slug AS rimmer_slug, r.image AS rimmer_image,
+             r.bartesian_url AS rimmer_url, r.quantity AS rimmer_qty
+           FROM wishlist_items w
+           LEFT JOIN cocktails c ON c.id = w.cocktail_id
+           LEFT JOIN rimmers r ON r.id = w.rimmer_id
+           ORDER BY COALESCE(c.name, r.name) COLLATE NOCASE`
+        ).map((row) => ({
+          ...row,
+          qty_wanted: Number(row.qty_wanted) || 1,
+          type: row.cocktail_id ? "cocktail" : "rimmer",
+          name: row.cocktail_name || row.rimmer_name || "—",
+          slug: row.cocktail_slug || row.rimmer_slug || "",
+          image: row.cocktail_id
+            ? row.cocktail_hero || row.cocktail_image || ""
+            : row.rimmer_image || "",
+          bartesian_url: row.cocktail_id ? row.cocktail_url || "" : row.rimmer_url || "",
+          quantity: Number(row.cocktail_id ? row.cocktail_qty : row.rimmer_qty) || 0,
+        }));
+      } catch (_) { return []; }
+    },
+
+    async addToWishlist({ cocktailId = null, rimmerId = null, qty = 1 } = {}) {
+      if (!cocktailId && !rimmerId) throw new Error("Item required");
+      const existing = cocktailId
+        ? queryOne("SELECT * FROM wishlist_items WHERE cocktail_id = ?", [cocktailId])
+        : queryOne("SELECT * FROM wishlist_items WHERE rimmer_id = ?", [rimmerId]);
+      const addQty = Math.max(1, Number(qty) || 1);
+      let row;
+      if (existing) {
+        const nextQty = (Number(existing.qty_wanted) || 1) + addQty;
+        exec("UPDATE wishlist_items SET qty_wanted = ?, updated_at = ? WHERE id = ?", [
+          nextQty, nowIso(), existing.id,
+        ]);
+        row = queryOne("SELECT * FROM wishlist_items WHERE id = ?", [existing.id]);
+      } else {
+        exec(
+          "INSERT INTO wishlist_items (cocktail_id, rimmer_id, qty_wanted, created_at, updated_at) VALUES (?, ?, ?, ?, ?)",
+          [cocktailId || null, rimmerId || null, addQty, nowIso(), nowIso()]
+        );
+        row = queryOne("SELECT * FROM wishlist_items WHERE id = ?", [
+          queryOne("SELECT last_insert_rowid() AS id").id,
+        ]);
+      }
+      logActivity({
+        kind: "wishlist_add", cocktailId, rimmerId,
+        delta: addQty, detail: "qty_wanted " + (row ? row.qty_wanted : addQty),
+      });
+      await persist();
+      return row;
+    },
+
+    async updateWishlistQty(wishlistId, qty) {
+      const q = Math.max(1, Number(qty) || 1);
+      exec("UPDATE wishlist_items SET qty_wanted = ?, updated_at = ? WHERE id = ?", [
+        q, nowIso(), wishlistId,
+      ]);
+      await persist();
+      return q;
+    },
+
+    async adjustWishlistQty(wishlistId, delta) {
+      const row = queryOne("SELECT qty_wanted FROM wishlist_items WHERE id = ?", [wishlistId]);
+      if (!row) return null;
+      return this.updateWishlistQty(wishlistId, (Number(row.qty_wanted) || 1) + Number(delta));
+    },
+
+    async removeFromWishlist(wishlistId) {
+      const row = queryOne("SELECT * FROM wishlist_items WHERE id = ?", [wishlistId]);
+      exec("DELETE FROM wishlist_items WHERE id = ?", [wishlistId]);
+      if (row) {
+        logActivity({
+          kind: "wishlist_remove",
+          cocktailId: row.cocktail_id, rimmerId: row.rimmer_id, detail: "",
+        });
+      }
+      await persist();
+    },
+
+    isOnWishlist({ cocktailId = null, rimmerId = null } = {}) {
+      try {
+        if (cocktailId) return !!queryOne("SELECT id FROM wishlist_items WHERE cocktail_id = ?", [cocktailId]);
+        if (rimmerId) return !!queryOne("SELECT id FROM wishlist_items WHERE rimmer_id = ?", [rimmerId]);
+      } catch (_) {}
+      return false;
+    },
+
+    listRestock() {
+      const cocktails = query(
+        "SELECT * FROM cocktails WHERE restock = 1 AND enabled = 1 ORDER BY name COLLATE NOCASE"
+      ).map(rowToCocktail).map((c) => ({ ...c, type: "cocktail" }));
+      const rimmers = query(
+        "SELECT * FROM rimmers WHERE restock = 1 AND enabled = 1 ORDER BY name COLLATE NOCASE"
+      ).map(rowToRimmer).map((r) => ({ ...r, type: "rimmer" }));
+      return cocktails.concat(rimmers).sort((a, b) => a.name.localeCompare(b.name));
+    },
+
+    async clearRestock({ cocktailId = null, rimmerId = null } = {}) {
+      if (cocktailId) {
+        exec("UPDATE cocktails SET restock = 0, updated_at = ? WHERE id = ?", [nowIso(), cocktailId]);
+        logActivity({ kind: "restock_clear", cocktailId, detail: "removed from Restock" });
+      } else if (rimmerId) {
+        exec("UPDATE rimmers SET restock = 0, updated_at = ? WHERE id = ?", [nowIso(), rimmerId]);
+        logActivity({ kind: "restock_clear", rimmerId, detail: "removed from Restock" });
+      }
       await persist();
     },
 
     async adjustQuantity(cocktailId, delta, reason, barcode) {
-      const row = queryOne("SELECT quantity FROM cocktails WHERE id = ?", [cocktailId]);
+      const row = queryOne("SELECT quantity, restock FROM cocktails WHERE id = ?", [cocktailId]);
       if (!row) throw new Error("Cocktail not found");
-      const next = Math.max(0, (Number(row.quantity) || 0) + Number(delta));
-      exec("UPDATE cocktails SET quantity = ?, updated_at = ? WHERE id = ?", [
-        next,
-        nowIso(),
-        cocktailId,
+      const prev = Number(row.quantity) || 0;
+      const next = Math.max(0, prev + Number(delta));
+      const actual = next - prev;
+      const restock = restockForTransition(prev, next, row.restock);
+      exec("UPDATE cocktails SET quantity = ?, restock = ?, updated_at = ? WHERE id = ?", [
+        next, restock, nowIso(), cocktailId,
       ]);
-      exec(
-        "INSERT INTO inventory_log (cocktail_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
-        [cocktailId, Number(delta), reason || "", barcode || "", nowIso()]
-      );
+      if (actual !== 0) {
+        exec(
+          "INSERT INTO inventory_log (cocktail_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
+          [cocktailId, actual, reason || "", barcode || "", nowIso()]
+        );
+        logActivity({
+          kind: actual < 0 ? "use" : "restock",
+          cocktailId, delta: actual, detail: reason || "", barcode: barcode || "",
+        });
+      }
       await persist();
       return next;
     },
@@ -990,6 +1483,10 @@
           ]
         );
       }
+      logActivity({
+        kind: "barcode", cocktailId, packId, rimmerId,
+        detail: kind, barcode: trimmed,
+      });
       await persist();
       return this.findBarcode(trimmed);
     },
@@ -1131,6 +1628,14 @@
         packs,
         rimmers,
         barcodes: this.listBarcodes(),
+        activity: this.listActivity({ limit: 1000 }),
+        wishlist: this.listWishlist().map((w) => ({
+          cocktail_slug: w.cocktail_slug || "",
+          rimmer_slug: w.rimmer_slug || "",
+          qty_wanted: w.qty_wanted,
+          created_at: w.created_at,
+          updated_at: w.updated_at,
+        })),
         ratings: query(
           `SELECT r.*, p.name AS person_name, c.slug AS cocktail_slug
            FROM ratings r
