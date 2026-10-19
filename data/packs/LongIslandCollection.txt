@@ -1,7 +1,7 @@
 Name: Long Island Collection
 Slug: long-island-collection
 Barcode: 
-Notes: * Please note: Not compatible with the Bartesian Duet Cocktail Maker. Crafted for those who appreciate a bolder pour, the Long Island Collection features spirit-forward takes on the classic cocktail, delivering flavor and timeless appeal in every sip. Compatibility note: These multi-spirit cocktails are crafted with multiple
+Notes: *
 Bartesian URL: https://bartesian.com/products/long-island-collection?variant=46631778386119
 Shopify Product ID: 8726160474311
 Shopify Variant ID: 46631778386119
@@ -13,5 +13,7 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 1
 Items:
-	4-curated-cocktails: 2
-	Gorgias Article ID:
+	tennessee-iced-tea: 2
+	hawaiian-iced-tea: 2
+	georgia-peach-iced-tea: 2
+	long-beach-iced-tea: 2

@@ -14,7 +14,6 @@ Nutrition Image EU:
 Enabled: 1
 Items:
 	aviation: 2
-	sweet-classic-with-flavors-of-violet: 2
-	maraschino-liqueur: 2
-	lemon-drop: 2
-	Gorgias Article ID:
+	bees-knees: 2
+	raspberry-ginger-gimlet: 2
+	uptown-rocks: 2

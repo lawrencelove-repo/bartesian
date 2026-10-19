@@ -34,6 +34,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Cocktail hero vs marketing images (`images/hero/`, `images/marketing/`) + nutrition at end of detail
 - [x] Shopify long-form `Details` (Read More / how-to copy) on cocktail records
 - [x] Reverse rimmer→cocktail pairings into `cocktail_rimmers` join (cocktail detail “Recommended rimmers”)
+- [x] Fix variety pack `Items` parsing (bullet cocktail names, not flavor blurbs)
 - [ ] **Cocktail admin page** — create / edit / disable cocktails (name, image, spirits, description, nutrition, alcohol, glassware, garnish, pairs-with, Bartesian URL, barcodes, case qty)
 - [ ] Variety-pack admin (create/edit packs and item quantities)
 - [ ] Richer metadata editors (structured nutrition / alcohol fields)

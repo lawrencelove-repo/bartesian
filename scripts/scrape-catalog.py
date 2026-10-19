@@ -313,41 +313,60 @@ def write_kv(path: Path, rows: list[tuple[str, str]]) -> None:
 
 
 def parse_pack_items(text: str, cocktail_slugs: set[str]) -> list[dict]:
-    """Extract cocktail items from pack description text."""
-    items = []
-    # Lines like "- Lemon Drop: description" or "Lemon Drop: ..."
-    candidates = []
+    """
+    Extract cocktail items from pack description text.
+
+    Prefer "- Cocktail Name: blurb" bullets. Never treat flavor blurbs
+    (text after the colon) as cocktail names. Soft-match only longer prefixes.
+    """
+    items: list[dict] = []
+    normalized = (text or "").replace(" - ", "\n- ")
+
+    qty_each = None
+    m_qty = re.search(r"(\d+)\s+each\b", normalized, re.I)
+    if m_qty:
+        qty_each = int(m_qty.group(1))
+
+    names: list[str] = []
     for m in re.finditer(
-        r"(?:^|\n)\s*-?\s*([A-Z][^:\n]{1,60}?):\s+",
-        text,
+        r"(?:^|\n)\s*[-•*]\s*([A-Z][^:\n]{1,80}?)\s*:",
+        normalized,
     ):
         name = m.group(1).strip()
-        if name.lower() in ("base spirit", "please note", "subscribe", "compatibility note"):
+        low = name.lower()
+        if low.startswith(
+            ("please note", "subscribe", "base spirit", "compatibility", "contains", "retrieve", "add your", "apply your")
+        ):
             continue
-        if "contains" in name.lower() or "pack" in name.lower():
+        if "pack" in low and "cocktail" not in low:
             continue
-        candidates.append(name)
+        names.append(name)
 
-    # Also "2 each of: A, B, C, and D"
-    m = re.search(
-        r"(\d+)\s+each\s+of[:\s]+(.+?)(?:\.|\n\n|$)",
-        text,
-        re.I | re.S,
-    )
-    qty_each = None
-    names_from_each = []
-    if m:
-        qty_each = int(m.group(1))
-        blob = re.sub(r"\s+", " ", m.group(2))
-        names_from_each = [n.strip() for n in re.split(r",| and ", blob) if n.strip()]
+    # Simple "2 each of: A, B, C, and D" without bullet descriptions
+    if not names:
+        m = re.search(
+            r"(\d+)\s+each\s+of[:\s]+(.+?)(?:\.|\n\n|Please note|Base spirit|$)",
+            normalized,
+            re.I | re.S,
+        )
+        if m:
+            qty_each = int(m.group(1))
+            blob = m.group(2).strip()
+            if ":" not in blob and " - " not in blob:
+                names = [
+                    n.strip(" .")
+                    for n in re.split(r",|\band\b", blob)
+                    if n.strip(" .")
+                    and len(n.strip()) < 50
+                    and not re.search(r"\b(flavor|with|juice)\b", n, re.I)
+                ]
 
-    names = names_from_each or candidates
-    # Deduplicate preserving order
-    seen = set()
-    uniq = []
+    # Deduplicate
+    seen: set[str] = set()
+    uniq: list[str] = []
     for n in names:
         key = slugify(clean_name(n))
-        if key in seen:
+        if not key or key in seen:
             continue
         seen.add(key)
         uniq.append(n)
@@ -355,29 +374,28 @@ def parse_pack_items(text: str, cocktail_slugs: set[str]) -> list[dict]:
     if not uniq:
         return items
 
-    # Default qty: if 8 capsules and 4 flavors => 2 each (user rule)
     if qty_each is None:
-        qty_each = 2 if len(uniq) in (4, 2) else 1
-        if len(uniq) == 8:
+        if re.search(r"\b1\s+each\b", normalized, re.I) or len(uniq) == 8:
             qty_each = 1
-        if len(uniq) == 1:
-            qty_each = 8
+        elif len(uniq) in (2, 4):
+            qty_each = 2
+        else:
+            qty_each = 1
 
     for n in uniq:
         slug = slugify(clean_name(n))
-        # try resolve against known cocktails
         if slug not in cocktail_slugs:
-            # try softer match
             alt = None
-            for cs in cocktail_slugs:
-                if cs.startswith(slug) or slug.startswith(cs):
+            # Prefer longer prefix matches only (avoid lime→lemon-drop style)
+            for cs in sorted(cocktail_slugs, key=len, reverse=True):
+                if len(slug) >= 8 and (cs.startswith(slug) or slug.startswith(cs)):
+                    alt = cs
+                    break
+                if len(slug) >= 8 and cs.startswith(slug + "-"):
                     alt = cs
                     break
             if alt:
                 slug = alt
-            else:
-                # keep slug anyway; import will skip unknown
-                pass
         items.append({"cocktail_slug": slug, "qty": qty_each})
     return items
 

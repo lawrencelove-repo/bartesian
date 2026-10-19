@@ -14,6 +14,6 @@ Nutrition Image EU:
 Enabled: 1
 Items:
 	manhattan: 2
-	sweet-vermouth: 2
-	aromatic-bitters-flavors-with-a-hint-of-cherry: 2
-	Gorgias Article ID:
+	old-fashioned: 2
+	whiskey-sour: 2
+	sidecar: 2

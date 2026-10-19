@@ -13,6 +13,7 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 1
 Items:
-	4-cocktails-uptown-rocks-an-elegant-gin-cocktail-featuring-peach: 2
-	lemon-with-a-graceful-kick-of-cilantro-flavour: 2
-	Gorgias Article ID:
+	uptown-rocks: 2
+	bramble: 2
+	vesper: 2
+	aviation: 2

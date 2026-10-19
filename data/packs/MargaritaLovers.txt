@@ -13,9 +13,7 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 0
 Items:
-	Shopify Variant ID:
-	4-cocktails-blackberry-margarita-a-rich: 2
-	Shopify Handle:
-	juicy-blend-of-blackberry: 2
-	lime-with-flavours-of-honeyed-fig: 2
-	Gorgias Article ID:
+	blackberry-margarita: 2
+	pineapple-margarita: 2
+	pomegranate-margarita: 2
+	margarita: 2

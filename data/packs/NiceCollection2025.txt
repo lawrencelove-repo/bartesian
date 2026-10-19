@@ -13,10 +13,7 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 0
 Items:
-	Shopify Variant ID:
-	4-curated-holiday-cocktails-brown-butter-old-fashioned-a-rich: 2
-	Shopify Handle:
-	spirit-forward-sipper-infused-with-flavors-of-indulgent-browned-butter: 2
-	bitters: 2
-	a-hint-of-orange: 2
-	Gorgias Article ID:
+	brown-butter-old-fashioned: 2
+	winter-pear-adise: 2
+	frosty-navel: 2
+	mistletoe-margarita: 2

@@ -13,10 +13,7 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 0
 Items:
-	Shopify Variant ID:
-	4-curated-seasonal-cocktails-holiday-spiced-old-fashioned-a-spirit-forward-whiskey-cocktail-with-flavors-of-orange: 2
-	Shopify Handle:
-	bitters: 2
-	cinnamon: 2
-	brown-sugar: 2
-	Gorgias Article ID:
+	holiday-spiced-old-fashioned: 2
+	clausmopolitan: 2
+	peary-christmas: 2
+	yuletide-hurricane: 2

@@ -13,10 +13,7 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 0
 Items:
-	Shopify Variant ID:
-	4-curated-seasonal-vodka-cocktails-frosted-orchard-a-crisp-vodka-cocktail-blending-juicy-apple: 2
-	Shopify Handle:
-	tangy-lemonade: 2
-	infused-with-flavors-of-cinnamon: 2
-	cardamom: 2
-	Gorgias Article ID:
+	frosted-orchard: 2
+	clausmopolitan: 2
+	frosty-navel: 2
+	the-grinch-appletini: 2

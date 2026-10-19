@@ -2897,7 +2897,7 @@ window.BARTESIAN_SEED = {
       "name": "Advent Calendar 2026",
       "slug": "advent-calendar-2026",
       "barcode": "",
-      "notes": "The 2026 Bartesian Cocktail Advent Calendar today! With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. How pre-order redemption works: - Retrieve your code: Check your pre-sale order confirmation or reminder email and copy your unique code. - Add your calendar(s): Above, select the num",
+      "notes": "The 2026 Bartesian Cocktail Advent Calendar today! With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. How pre-order redemption works: - Retrieve your code: Check your pre-sale order confirmation or reminder email and copy your unique code. - Add your calendar(s): Above, select the number of calendars you pre-ordered and click \"Add to Cart\". - Apply your code: At checkout, enter your code in the \"Discount code or gift card\" box and click \"Apply\". Limit four (4) Advent Calendars per customer.",
       "image": "images/packs/advent-calendar-2026.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/advent-calendar?variant=47520593445063",
@@ -2907,20 +2907,7 @@ window.BARTESIAN_SEED = {
       "shopify_handle": "advent-calendar",
       "gorgias_article_id": "",
       "enabled": 1,
-      "items": [
-        {
-          "cocktail_slug": "how-pre-order-redemption-works",
-          "qty": 1
-        },
-        {
-          "cocktail_slug": "add-your-calendar-s",
-          "qty": 1
-        },
-        {
-          "cocktail_slug": "apply-your-code",
-          "qty": 1
-        }
-      ],
+      "items": [],
       "_file": "AdventCalendar2026.txt"
     },
     {
@@ -2939,19 +2926,11 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "2-playful-pours-cupids-arrow-the-sweet",
+          "cocktail_slug": "cupids-arrow",
           "qty": 4
         },
         {
-          "cocktail_slug": "fruity-flavors-of-strawberry",
-          "qty": 4
-        },
-        {
-          "cocktail_slug": "guava",
-          "qty": 4
-        },
-        {
-          "cocktail_slug": "lime-will-make-your-heart-skip-a-beat",
+          "cocktail_slug": "love-potion",
           "qty": 4
         }
       ],
@@ -2961,7 +2940,7 @@ window.BARTESIAN_SEED = {
       "name": "Classic Collection Favorites",
       "slug": "classic-collection-favorites",
       "barcode": "",
-      "notes": "All of our classics are together in one collection. The Classic Collection Favorites Variety Pack contains 1 each of: - Cosmopolitan: a classic vodka cocktail with tart cranberry, sweet orange, and lime. - Old Fashioned: a spirit-forward whiskey cocktail balancing bitter and sweet with flavors of oak and orange citrus. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and stra",
+      "notes": "All of our classics are together in one collection. The Classic Collection Favorites Variety Pack contains 1 each of: - Cosmopolitan: a classic vodka cocktail with tart cranberry, sweet orange, and lime. - Old Fashioned: a spirit-forward whiskey cocktail balancing bitter and sweet with flavors of oak and orange citrus. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Espresso Martini: a smooth, sippable vodka cocktail with flavors of rich and creamy espresso and bold coffee liqueur. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange flavors. -",
       "image": "images/packs/classic-collection-favorites.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/classic-cocktails-favorites?variant=44303522562247",
@@ -2977,11 +2956,31 @@ window.BARTESIAN_SEED = {
           "qty": 1
         },
         {
-          "cocktail_slug": "sweet-orange",
+          "cocktail_slug": "old-fashioned",
           "qty": 1
         },
         {
-          "cocktail_slug": "lime",
+          "cocktail_slug": "rum-breeze",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "lemon-drop",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "espresso-martini",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "margarita",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "whiskey-sour",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "uptown-rocks",
           "qty": 1
         }
       ],
@@ -2991,7 +2990,7 @@ window.BARTESIAN_SEED = {
       "name": "Cocktail Sampler",
       "slug": "cocktail-sampler",
       "barcode": "",
-      "notes": "Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of: - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint",
+      "notes": "Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of: - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange flavors.",
       "image": "images/packs/cocktail-sampler.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/cocktail-sampler?variant=44436485046471",
@@ -3007,11 +3006,15 @@ window.BARTESIAN_SEED = {
           "qty": 1
         },
         {
-          "cocktail_slug": "tart",
+          "cocktail_slug": "rum-breeze",
           "qty": 1
         },
         {
-          "cocktail_slug": "lemon-candy-inspired-vodka-martini",
+          "cocktail_slug": "margarita",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "whiskey-sour",
           "qty": 1
         }
       ],
@@ -3037,11 +3040,15 @@ window.BARTESIAN_SEED = {
           "qty": 1
         },
         {
-          "cocktail_slug": "tart",
+          "cocktail_slug": "rum-breeze",
           "qty": 1
         },
         {
-          "cocktail_slug": "lemon-candy-inspired-vodka-martini",
+          "cocktail_slug": "margarita",
+          "qty": 1
+        },
+        {
+          "cocktail_slug": "whiskey-sour",
           "qty": 1
         }
       ],
@@ -3063,19 +3070,19 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "4-curated-seasonal-cocktails-starry-night-a-refreshing-tequila-cocktail-with-flavors-of-starfruit",
+          "cocktail_slug": "starry-night",
           "qty": 2
         },
         {
-          "cocktail_slug": "grapefruit",
+          "cocktail_slug": "peary-christmas",
           "qty": 2
         },
         {
-          "cocktail_slug": "guanabana",
+          "cocktail_slug": "the-grinch-appletini",
           "qty": 2
         },
         {
-          "cocktail_slug": "citrus",
+          "cocktail_slug": "frosted-orchard",
           "qty": 2
         }
       ],
@@ -3097,11 +3104,19 @@ window.BARTESIAN_SEED = {
       "enabled": 1,
       "items": [
         {
-          "cocktail_slug": "4-cocktails-uptown-rocks-an-elegant-gin-cocktail-featuring-peach",
+          "cocktail_slug": "uptown-rocks",
           "qty": 2
         },
         {
-          "cocktail_slug": "lemon-with-a-graceful-kick-of-cilantro-flavour",
+          "cocktail_slug": "bramble",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "vesper",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "aviation",
           "qty": 2
         }
       ],
@@ -3127,15 +3142,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "sweet-classic-with-flavors-of-violet",
+          "cocktail_slug": "bees-knees",
           "qty": 2
         },
         {
-          "cocktail_slug": "maraschino-liqueur",
+          "cocktail_slug": "raspberry-ginger-gimlet",
           "qty": 2
         },
         {
-          "cocktail_slug": "lemon-drop",
+          "cocktail_slug": "uptown-rocks",
           "qty": 2
         }
       ],
@@ -3145,7 +3160,7 @@ window.BARTESIAN_SEED = {
       "name": "Halloween Collection",
       "slug": "halloween-collection",
       "barcode": "",
-      "notes": "The best way for you and your ghoulish guests to raise spirits this season? The spine-chillingly delicious Bartesian Halloween Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Witch's Heart: a magical martini swirling berry and green apple flavors with edible shimmer. - Caramel Appletini: a wickedly smooth cocktail with tart green apple and rich, velvety caramel flavors. - Sour Spell: a sweet cocktail with a mischievous glow and a burst of sour rainbow candy flavor. - Vampire's Kiss: a deep crimson cocktail evoking the unmistakable flavor of strawberry licorice. Enjoy this spooky seasonal release while it lasts.",
+      "notes": "The best way for you and your ghoulish guests to raise spirits this season? The spine-chillingly delicious Bartesian Halloween Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Witch's Heart: a magical martini swirling berry and green apple flavors with edible shimmer. - Caramel Appletini: a wickedly smooth cocktail with tart green apple and rich, velvety caramel flavors. - Sour Spell: a sweet cocktail with a mischievous glow and a burst of sour rainbow candy flavor. - Vampire's Kiss: a deep crimson cocktail evoking the unmistakable flavor of strawberry licorice. Enjoy this spooky seasonal release while it lasts. Base spirit: Vodka",
       "image": "images/packs/halloween-collection.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/halloween-collection?variant=46632550432967",
@@ -3157,7 +3172,19 @@ window.BARTESIAN_SEED = {
       "enabled": 1,
       "items": [
         {
-          "cocktail_slug": "4-curated-seasonal-cocktails",
+          "cocktail_slug": "witchs-heart",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "caramel-appletini",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "sour-spell",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "vampires-kiss",
           "qty": 2
         }
       ],
@@ -3179,19 +3206,19 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "4-curated-seasonal-cocktails-holiday-spiced-old-fashioned-a-spirit-forward-whiskey-cocktail-with-flavors-of-orange",
+          "cocktail_slug": "holiday-spiced-old-fashioned",
           "qty": 2
         },
         {
-          "cocktail_slug": "bitters",
+          "cocktail_slug": "clausmopolitan",
           "qty": 2
         },
         {
-          "cocktail_slug": "cinnamon",
+          "cocktail_slug": "peary-christmas",
           "qty": 2
         },
         {
-          "cocktail_slug": "brown-sugar",
+          "cocktail_slug": "yuletide-hurricane",
           "qty": 2
         }
       ],
@@ -3201,7 +3228,7 @@ window.BARTESIAN_SEED = {
       "name": "Lemon Drop Variety Pack",
       "slug": "lemon-drop-variety-pack",
       "barcode": "",
-      "notes": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini, including a NEW Blue Raspberry Lemon Drop cocktail. For an added burst of sweet and sour, we recommend serving in a martini glass rimmed with a Sour Candy Sugar rimmer. Our 8-pack contains 2 each of: - Strawberry Lemon Drop: sweet and tart with flavors of juicy strawberry and candied lemon. - Blueberry Lemon Drop: jammy blueberry balanced with bright citrus flavor. - Apple Cayenne Lemon Drop: crisp apple and zesty citrus, with a subtly spicy kick of cayenne flavor. - Blue Raspberry Lemon Drop: tangy and sweet with blue raspberry and lemon candy-inspired flavors.",
+      "notes": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini. Shake with ice, serve in a martini glass, rim with lemon sugar, and garnish with lemon. Our 8-pack contains 2 each of: - Strawberry Lemon Drop: sweet and tart with flavors of juicy strawberry and candied lemon. - Blueberry Lemon Drop: jammy blueberry balanced with bright citrus flavor. - Prickly Pear Lemon Drop: prickly pear and zesty lemon, with a hint of hibiscus flavor. - Blue Raspberry Lemon Drop: tangy and sweet with blue raspberry and lemon candy-inspired flavors. Base spirit: Vodka.",
       "image": "images/packs/lemon-drop-variety-pack.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/lemon-drop-variety-pack?variant=46107183710407",
@@ -3217,11 +3244,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "tart-with-flavors-of-juicy-strawberry",
+          "cocktail_slug": "blueberry-lemon-drop",
           "qty": 2
         },
         {
-          "cocktail_slug": "candied-lemon",
+          "cocktail_slug": "prickly-pear-lemon-drop",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "blue-raspberry-lemon-drop",
           "qty": 2
         }
       ],
@@ -3231,7 +3262,7 @@ window.BARTESIAN_SEED = {
       "name": "Lemon Drop Variety Pack (New)",
       "slug": "lemon-drop-variety-pack-new",
       "barcode": "",
-      "notes": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini. Shake with ice, serve in a martini glass, rim with lemon sugar, and garnish with lemon.",
+      "notes": "Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini. Shake with ice, serve in a martini glass, rim with lemon sugar, and garnish with lemon. Our 8-pack contains 2 each of: - Strawberry Lemon Drop: sweet and tart with flavors of juicy strawberry and candied lemon. - Blueberry Lemon Drop: jammy blueberry balanced with bright citrus flavor. - Prickly Pear Lemon Drop: prickly pear and zesty lemon, with a hint of hibiscus flavor. - Blue Raspberry Lemon Drop: tangy and sweet with blue raspberry and lemon candy-inspired flavors. Base spirit: Vodka.",
       "image": "images/packs/lemon-drop-variety-pack-new.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/lemon-drop-variety-pack?variant=46107183710407",
@@ -3247,11 +3278,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "tart-with-flavors-of-juicy-strawberry",
+          "cocktail_slug": "blueberry-lemon-drop",
           "qty": 2
         },
         {
-          "cocktail_slug": "candied-lemon",
+          "cocktail_slug": "prickly-pear-lemon-drop",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "blue-raspberry-lemon-drop",
           "qty": 2
         }
       ],
@@ -3261,7 +3296,7 @@ window.BARTESIAN_SEED = {
       "name": "Long Island Collection",
       "slug": "long-island-collection",
       "barcode": "",
-      "notes": "* Please note: Not compatible with the Bartesian Duet Cocktail Maker. Crafted for those who appreciate a bolder pour, the Long Island Collection features spirit-forward takes on the classic cocktail, delivering flavor and timeless appeal in every sip. Compatibility note: These multi-spirit cocktails are crafted with multiple",
+      "notes": "*",
       "image": "images/packs/long-island-collection.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/long-island-collection?variant=46631778386119",
@@ -3273,7 +3308,19 @@ window.BARTESIAN_SEED = {
       "enabled": 1,
       "items": [
         {
-          "cocktail_slug": "4-curated-cocktails",
+          "cocktail_slug": "tennessee-iced-tea",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "hawaiian-iced-tea",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "georgia-peach-iced-tea",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "long-beach-iced-tea",
           "qty": 2
         }
       ],
@@ -3283,7 +3330,7 @@ window.BARTESIAN_SEED = {
       "name": "Low-Cal Variety Pack",
       "slug": "low-cal-variety-pack",
       "barcode": "",
-      "notes": "Bartesian's Low-Cal Variety Pack features the same great taste of four of our classic cocktail offerings with no added sugar.",
+      "notes": "Bartesian's Low-Cal Variety Pack features the same great taste of four of our classic cocktail offerings with no added sugar. Our 8-pack contains 2 each of: - Low-Cal Margarita: a classic, refreshing tequila cocktail with lemon and lime. 10 calories per capsule. - Low-Cal Cosmopolitan: a classic vodka cocktail with tart cranberry, sweet orange, and lime. 15 calories per capsule. - Low-Cal Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange notes. 5 calories per capsule. - Low-Cal Old Fashioned: a spirit-forward whiskey cocktail balancing bitter and sweet with notes of oak and orange citrus. 5 calories per capsule.",
       "image": "images/packs/low-cal-variety-pack.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/low-cal-variety-pack?variant=43436826165447",
@@ -3299,11 +3346,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "refreshing-tequila-cocktail-with-lemon",
+          "cocktail_slug": "low-cal-cosmopolitan",
           "qty": 2
         },
         {
-          "cocktail_slug": "lime",
+          "cocktail_slug": "low-cal-whiskey-sour",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "low-cal-old-fashioned",
           "qty": 2
         }
       ],
@@ -3325,15 +3376,19 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "4-cocktails-blackberry-margarita-a-rich",
+          "cocktail_slug": "blackberry-margarita",
           "qty": 2
         },
         {
-          "cocktail_slug": "juicy-blend-of-blackberry",
+          "cocktail_slug": "pineapple-margarita",
           "qty": 2
         },
         {
-          "cocktail_slug": "lime-with-flavours-of-honeyed-fig",
+          "cocktail_slug": "pomegranate-margarita",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "margarita",
           "qty": 2
         }
       ],
@@ -3355,15 +3410,19 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "4-curated-seasonal-cocktails-jollype-o-margarita-a-margarita-bursting-with-flavors-of-vibrant-pineapple",
+          "cocktail_slug": "jollype-o-margarita",
           "qty": 2
         },
         {
-          "cocktail_slug": "zesty-lime",
+          "cocktail_slug": "yuletide-hurricane",
           "qty": 2
         },
         {
-          "cocktail_slug": "a-kick-of-jalape-o",
+          "cocktail_slug": "ginger-pear-noel",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "the-grinch-appletini",
           "qty": 2
         }
       ],
@@ -3385,19 +3444,19 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "4-curated-holiday-cocktails-brown-butter-old-fashioned-a-rich",
+          "cocktail_slug": "brown-butter-old-fashioned",
           "qty": 2
         },
         {
-          "cocktail_slug": "spirit-forward-sipper-infused-with-flavors-of-indulgent-browned-butter",
+          "cocktail_slug": "winter-pear-adise",
           "qty": 2
         },
         {
-          "cocktail_slug": "bitters",
+          "cocktail_slug": "frosty-navel",
           "qty": 2
         },
         {
-          "cocktail_slug": "a-hint-of-orange",
+          "cocktail_slug": "mistletoe-margarita",
           "qty": 2
         }
       ],
@@ -3407,7 +3466,7 @@ window.BARTESIAN_SEED = {
       "name": "Poolside Vibes",
       "slug": "poolside-vibes",
       "barcode": "",
-      "notes": "Four deliciously curated cocktails to keep summer alive. Our 8-pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Northside: a smooth, sweet, and sippable lime and vodka cocktail. - Ginger Peach Iced Tea: a refreshing vodka co",
+      "notes": "Four deliciously curated cocktails to keep summer alive. Our 8-pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Northside: a smooth, sweet, and sippable lime and vodka cocktail. - Ginger Peach Iced Tea: a refreshing vodka cocktail balancing iced tea with a zip of ginger and sweet peach.",
       "image": "images/packs/poolside-vibes.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/poolside-vibes-collection-variety-pack?variant=43436952092871",
@@ -3423,19 +3482,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "tropical-rum-cocktail-blending-pineapple",
+          "cocktail_slug": "margarita",
           "qty": 2
         },
         {
-          "cocktail_slug": "lime",
+          "cocktail_slug": "northside",
           "qty": 2
         },
         {
-          "cocktail_slug": "strawberry-juices",
-          "qty": 2
-        },
-        {
-          "cocktail_slug": "with-a-hint-of-coconut-flavor",
+          "cocktail_slug": "ginger-peach-iced-tea",
           "qty": 2
         }
       ],
@@ -3445,7 +3500,7 @@ window.BARTESIAN_SEED = {
       "name": "Refreshers Collection (US Only)",
       "slug": "refreshers-collection",
       "barcode": "",
-      "notes": "Refreshers are your anytime pick-me-up: crafted to be enjoyed primarily as mocktails, lightly caffeinated and bursting with vibrant, juicy fruit flavors. With an intentionally lower alcohol level than our other offerings, they deliver a lighter, effortlessly refreshing sip. Just shake, pour over ice in a highball glass, and top with fresh fruit.",
+      "notes": "Refreshers are your anytime pick-me-up: crafted to be enjoyed primarily as mocktails, lightly caffeinated and bursting with vibrant, juicy fruit flavors. With an intentionally lower alcohol level than our other offerings, they deliver a lighter, effortlessly refreshing sip. Just shake, pour over ice in a highball glass, and top with fresh fruit. Our 8-pack contains 2 each of: - Strawberry Acai: lush strawberry and tangy acai flavors blend in a perfect balance of sweet and tart. - Pineapple Passion Fruit: juicy pineapple and passion fruit come together in a drink that's pure tropical bliss. - Blackberry Mango: ripe blackberry meets sweet mango in a smooth, fruit-forward blend that's as vibrant as it is satisfying. - Peach Lychee: juicy peach and delicate lychee flavors unite in a drink that",
       "image": "images/packs/refreshers-collection.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/refreshers-collection?variant=45626534265031",
@@ -3457,15 +3512,19 @@ window.BARTESIAN_SEED = {
       "enabled": 1,
       "items": [
         {
-          "cocktail_slug": "strawberry-acai-lush-strawberry",
+          "cocktail_slug": "strawberry-acai-refresher",
           "qty": 2
         },
         {
-          "cocktail_slug": "tangy-acai-flavors-blend-in-a-perfect-balance-of-sweet",
+          "cocktail_slug": "pineapple-passion-fruit",
           "qty": 2
         },
         {
-          "cocktail_slug": "tart",
+          "cocktail_slug": "blackberry-mango-refresher",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "peach-lychee-refresher",
           "qty": 2
         }
       ],
@@ -3475,7 +3534,7 @@ window.BARTESIAN_SEED = {
       "name": "Rum Lovers",
       "slug": "rum-lovers",
       "barcode": "",
-      "notes": "Four deliciously curated cocktails to transport you to the beach. Our 8-count pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet al",
+      "notes": "Four deliciously curated cocktails to transport you to the beach. Our 8-count pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet almond syrup, and pineapple flavors. - Painkiller: a sweet blend of pineapple and orange juices with creamy coconut flavor.",
       "image": "images/packs/rum-lovers.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/rum-lovers-collection?variant=39601127981255",
@@ -3491,19 +3550,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "tropical-rum-cocktail-blending-pineapple",
+          "cocktail_slug": "hurricane",
           "qty": 2
         },
         {
-          "cocktail_slug": "lime",
+          "cocktail_slug": "mai-tai",
           "qty": 2
         },
         {
-          "cocktail_slug": "strawberry-juices",
-          "qty": 2
-        },
-        {
-          "cocktail_slug": "with-a-hint-of-coconut-flavor",
+          "cocktail_slug": "painkiller",
           "qty": 2
         }
       ],
@@ -3513,7 +3568,7 @@ window.BARTESIAN_SEED = {
       "name": "Rum Lovers Variety Pack",
       "slug": "rum-lovers-variety-pack",
       "barcode": "",
-      "notes": "Four deliciously curated cocktails to transport you to the beach. Our 8-pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet almond syrup, and pineapple flavors. - Painkiller: a sweet blend of pineapple and orange juices with creamy coconut flavor.",
+      "notes": "Four deliciously curated cocktails to transport you to the beach. Our 8-count pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet almond syrup, and pineapple flavors. - Painkiller: a sweet blend of pineapple and orange juices with creamy coconut flavor.",
       "image": "",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/rum-lovers-collection?variant=39601127981255",
@@ -3529,19 +3584,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "tropical-rum-cocktail-blending-pineapple",
+          "cocktail_slug": "hurricane",
           "qty": 2
         },
         {
-          "cocktail_slug": "lime",
+          "cocktail_slug": "mai-tai",
           "qty": 2
         },
         {
-          "cocktail_slug": "strawberry-juices",
-          "qty": 2
-        },
-        {
-          "cocktail_slug": "with-a-hint-of-coconut-flavor",
+          "cocktail_slug": "painkiller",
           "qty": 2
         }
       ],
@@ -3551,7 +3602,7 @@ window.BARTESIAN_SEED = {
       "name": "Staff Picks Collection",
       "slug": "staff-picks-collection",
       "barcode": "",
-      "notes": "Handpicked by our team, the Staff Picks Collection is an easy crowd-pleaser for any gathering.",
+      "notes": "Handpicked by our team, the Staff Picks Collection is an easy crowd-pleaser for any gathering. This variety pack contains 2 each of 4 curated cocktails: - Raspberry Ginger Gimlet: a classic gin cocktail gets a twist with flavors of sweet raspberry and a tangy ginger zing. - Jalapeño Lime Shrub: a refreshing and sour tequila cocktail, with lime, apple cider vinegar, and jalapeño flavors. - Lychee Martini: delicately fruity and lightly floral, this vodka martini is inspired by the tropical, Southeast Asian fruit. - White Sangria: a lively rum-based cocktail with flavors of sweet peach, triple sec, and buttery white wine. Base spirit(s): Gin, Tequila, Vodka, Rum.",
       "image": "images/packs/staff-picks-collection.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/staff-picks-collection?variant=46171816493255",
@@ -3563,7 +3614,19 @@ window.BARTESIAN_SEED = {
       "enabled": 1,
       "items": [
         {
-          "cocktail_slug": "4-curated-cocktails",
+          "cocktail_slug": "raspberry-ginger-gimlet",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "jalape-o-lime-shrub",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "lychee-martini",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "white-sangria",
           "qty": 2
         }
       ],
@@ -3573,7 +3636,7 @@ window.BARTESIAN_SEED = {
       "name": "Tropical Margarita",
       "slug": "tropical-margarita",
       "barcode": "",
-      "notes": "Calling all margarita lovers! Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our eight-pack contains two of each of the following: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors an",
+      "notes": "Calling all margarita lovers! Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our eight-pack contains two of each of the following: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors and undertones of honeyed fig. - Mango Margarita: a fruity, juicy blend with mango and lime flavors. - Passion Fruit Margarita: a sweet, tropical and tangy blend with passion fruit and citrus flavors. - Pineapple Margarita: a refreshing blend of tart pineapple, sweet coconut and lime flavors.",
       "image": "images/packs/tropical-margarita.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/tropical-margarita-collection?variant=43136777289927",
@@ -3607,7 +3670,7 @@ window.BARTESIAN_SEED = {
       "name": "Tropical Margarita Collection Variety Pack",
       "slug": "tropical-margarita-collection-variety-pack",
       "barcode": "",
-      "notes": "Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our 8-pack contains 2 each of: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors and undertones of honeyed fig. - Passion Fruit Margarita: a sweet, tropical and tangy blend with passion fruit and citrus flavors. - Mango Margarita: a fruity, juicy blend with mango and lime flavors. - Pineapple Margarita: a refreshing blend of tart pineapple, sweet coconut and lime flavors.",
+      "notes": "Calling all margarita lovers! Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our eight-pack contains two of each of the following: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors and undertones of honeyed fig. - Mango Margarita: a fruity, juicy blend with mango and lime flavors. - Passion Fruit Margarita: a sweet, tropical and tangy blend with passion fruit and citrus flavors. - Pineapple Margarita: a refreshing blend of tart pineapple, sweet coconut and lime flavors.",
       "image": "",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/tropical-margarita-collection?variant=43136777289927",
@@ -3623,11 +3686,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "jammy-blend-with-slightly-tart-berry-flavors",
+          "cocktail_slug": "mango-margarita",
           "qty": 2
         },
         {
-          "cocktail_slug": "undertones-of-honeyed-fig",
+          "cocktail_slug": "passion-fruit-margarita",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "pineapple-margarita",
           "qty": 2
         }
       ],
@@ -3637,7 +3704,7 @@ window.BARTESIAN_SEED = {
       "name": "Vodka Lovers (EU/UK)",
       "slug": "vodka-lovers",
       "barcode": "",
-      "notes": "Four of Bartesian’s most-loved vodka cocktails, crafted by expert mixologists for bar-quality taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Lemon Drop: a sweet and tart, lemon candy-inspired martini. - Espresso Martini: a smooth, sippable cocktail with flavours of rich espresso and bold coffee liqueur. - Amaretto Sour: nutty almond and orange citrus flavours pair to create the perfect dessert cocktail. - Cosmopolitan: tart cranberry is lifted by hints of lime and sweet orange flavour in this sophisticated classic.",
+      "notes": "Calling all vodka lovers! Our 8-pack contains 2 each of: - Espresso Martini: a smooth, sippable cocktail with flavors of rich and creamy espresso and bold coffee liqueur. - Lemon Drop: a sweet and tart, lemon candy-inspired martini. - Sex on the Beach: an iconic fruity blend of peach, pineapple, banana, cranberry and lemon flavors. - Cosmopolitan: a classic cocktail with tart cranberry, sweet orange, and lime.",
       "image": "images/packs/vodka-lovers.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303",
@@ -3649,15 +3716,19 @@ window.BARTESIAN_SEED = {
       "enabled": 1,
       "items": [
         {
-          "cocktail_slug": "4-cocktails-lemon-drop-a-sweet",
+          "cocktail_slug": "espresso-martini",
           "qty": 2
         },
         {
-          "cocktail_slug": "tart",
+          "cocktail_slug": "lemon-drop",
           "qty": 2
         },
         {
-          "cocktail_slug": "lemon-candy-inspired-martini",
+          "cocktail_slug": "sex-on-the-beach",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "cosmopolitan",
           "qty": 2
         }
       ],
@@ -3667,7 +3738,7 @@ window.BARTESIAN_SEED = {
       "name": "Vodka Lovers Variety Pack",
       "slug": "vodka-lovers-variety-pack",
       "barcode": "",
-      "notes": "Calling all vodka lovers!",
+      "notes": "Calling all vodka lovers! Our 8-pack contains 2 each of: - Espresso Martini: a smooth, sippable cocktail with flavors of rich and creamy espresso and bold coffee liqueur. - Lemon Drop: a sweet and tart, lemon candy-inspired martini. - Sex on the Beach: an iconic fruity blend of peach, pineapple, banana, cranberry and lemon flavors. - Cosmopolitan: a classic cocktail with tart cranberry, sweet orange, and lime.",
       "image": "images/packs/vodka-lovers-variety-pack.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303",
@@ -3683,15 +3754,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "sippable-cocktail-with-flavors-of-rich",
+          "cocktail_slug": "lemon-drop",
           "qty": 2
         },
         {
-          "cocktail_slug": "creamy-espresso",
+          "cocktail_slug": "sex-on-the-beach",
           "qty": 2
         },
         {
-          "cocktail_slug": "bold-coffee-liqueur",
+          "cocktail_slug": "cosmopolitan",
           "qty": 2
         }
       ],
@@ -3701,7 +3772,7 @@ window.BARTESIAN_SEED = {
       "name": "Whiskey Lovers (EU/UK)",
       "slug": "whiskey-lovers",
       "barcode": "",
-      "notes": "Four of Bartesian's best-selling whiskey cocktail varieties, crafted by expert mixologists for exceptional taste. Each capsule is made with real juices, extracts, bitters and no artificial colours or ingredients. This variety pack contains 2 each of 4 cocktails: - Whiskey Sour: a refreshing classic with bright lemon, vanilla, and orange flavours. - Sidecar: a traditional whiskey cocktail favorite balancing tart lemon juice with sweet triple sec flavour. - Old Fashioned: a timeless serve, marrying flavours of oak, bitters, and orange citrus. - Manhattan: bold yet smooth, with the rich flavours of sweet vermouth and bitters.",
+      "notes": "For the whiskey lover in your life. Our 8-count pack contains 2 each of: - Manhattan: a mix of savory, sweet vermouth and aromatic bitters flavors with a hint of cherry. - Old Fashioned: a spirit-forward cocktail balancing bitter and sweet with notes of oak and orange citrus. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange notes. - Sidecar: a balanced sour and sweet cocktail with lemon and notes of triple sec.",
       "image": "images/packs/whiskey-lovers.jpg",
       "nutrition_image": "",
       "bartesian_url": "https://bartesian.com/products/whiskey-lovers-collection?variant=32387435167793",
@@ -3713,15 +3784,19 @@ window.BARTESIAN_SEED = {
       "enabled": 1,
       "items": [
         {
-          "cocktail_slug": "4-cocktails-whiskey-sour-a-refreshing-classic-with-bright-lemon",
+          "cocktail_slug": "manhattan",
           "qty": 2
         },
         {
-          "cocktail_slug": "vanilla",
+          "cocktail_slug": "old-fashioned",
           "qty": 2
         },
         {
-          "cocktail_slug": "orange-flavours",
+          "cocktail_slug": "whiskey-sour",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "sidecar",
           "qty": 2
         }
       ],
@@ -3747,11 +3822,15 @@ window.BARTESIAN_SEED = {
           "qty": 2
         },
         {
-          "cocktail_slug": "sweet-vermouth",
+          "cocktail_slug": "old-fashioned",
           "qty": 2
         },
         {
-          "cocktail_slug": "aromatic-bitters-flavors-with-a-hint-of-cherry",
+          "cocktail_slug": "whiskey-sour",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "sidecar",
           "qty": 2
         }
       ],
@@ -3773,15 +3852,19 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "4-curated-seasonal-tequila-cocktails-jollype-o-margarita-a-margarita-bursting-with-flavors-of-vibrant-pineapple",
+          "cocktail_slug": "jollype-o-margarita",
           "qty": 2
         },
         {
-          "cocktail_slug": "zesty-lime",
+          "cocktail_slug": "starry-night",
           "qty": 2
         },
         {
-          "cocktail_slug": "a-kick-of-jalape-o",
+          "cocktail_slug": "peary-christmas",
+          "qty": 2
+        },
+        {
+          "cocktail_slug": "mistletoe-margarita",
           "qty": 2
         }
       ],
@@ -3803,19 +3886,19 @@ window.BARTESIAN_SEED = {
       "enabled": 0,
       "items": [
         {
-          "cocktail_slug": "4-curated-seasonal-vodka-cocktails-frosted-orchard-a-crisp-vodka-cocktail-blending-juicy-apple",
+          "cocktail_slug": "frosted-orchard",
           "qty": 2
         },
         {
-          "cocktail_slug": "tangy-lemonade",
+          "cocktail_slug": "clausmopolitan",
           "qty": 2
         },
         {
-          "cocktail_slug": "infused-with-flavors-of-cinnamon",
+          "cocktail_slug": "frosty-navel",
           "qty": 2
         },
         {
-          "cocktail_slug": "cardamom",
+          "cocktail_slug": "the-grinch-appletini",
           "qty": 2
         }
       ],

@@ -1,7 +1,7 @@
 Name: Rum Lovers Variety Pack
 Slug: rum-lovers-variety-pack
 Barcode: 
-Notes: Four deliciously curated cocktails to transport you to the beach. Our 8-pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet almond syrup, and pineapple flavors. - Painkiller: a sweet blend of pineapple and orange juices with creamy coconut flavor.
+Notes: Four deliciously curated cocktails to transport you to the beach. Our 8-count pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Hurricane: a fruity blend with a mix of passion fruit, orange, lime, and cherry grenadine flavors. - Mai Tai: a smooth mix of light and dark rum, orange curaçao, sweet almond syrup, and pineapple flavors. - Painkiller: a sweet blend of pineapple and orange juices with creamy coconut flavor.
 Bartesian URL: https://bartesian.com/products/rum-lovers-collection?variant=39601127981255
 Shopify Product ID: 6631994163399
 Shopify Variant ID: 39601127981255
@@ -14,8 +14,6 @@ Nutrition Image EU:
 Enabled: 1
 Items:
 	rum-breeze: 2
-	tropical-rum-cocktail-blending-pineapple: 2
-	lime: 2
-	strawberry-juices: 2
-	with-a-hint-of-coconut-flavor: 2
-	Gorgias Article ID:
+	hurricane: 2
+	mai-tai: 2
+	painkiller: 2

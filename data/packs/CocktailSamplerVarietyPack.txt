@@ -14,6 +14,6 @@ Nutrition Image EU:
 Enabled: 1
 Items:
 	lemon-drop: 1
-	tart: 1
-	lemon-candy-inspired-vodka-martini: 1
-	Gorgias Article ID:
+	rum-breeze: 1
+	margarita: 1
+	whiskey-sour: 1

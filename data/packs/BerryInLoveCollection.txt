@@ -13,10 +13,5 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 0
 Items:
-	Shopify Variant ID:
-	2-playful-pours-cupids-arrow-the-sweet: 4
-	Shopify Handle:
-	fruity-flavors-of-strawberry: 4
-	guava: 4
-	lime-will-make-your-heart-skip-a-beat: 4
-	Gorgias Article ID:
+	cupids-arrow: 4
+	love-potion: 4

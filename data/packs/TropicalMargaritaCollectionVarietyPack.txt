@@ -1,7 +1,7 @@
 Name: Tropical Margarita Collection Variety Pack
 Slug: tropical-margarita-collection-variety-pack
 Barcode: 
-Notes: Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our 8-pack contains 2 each of: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors and undertones of honeyed fig. - Passion Fruit Margarita: a sweet, tropical and tangy blend with passion fruit and citrus flavors. - Mango Margarita: a fruity, juicy blend with mango and lime flavors. - Pineapple Margarita: a refreshing blend of tart pineapple, sweet coconut and lime flavors.
+Notes: Calling all margarita lovers! Enjoy a variety of your favorite tequila cocktails with Bartesian’s Tropical Collection. Grab some ice, salt, and lime for garnish, and you’ll be instantly transported to sunshine and a beach chair with a refreshing drink in your hand. Our eight-pack contains two of each of the following: - Blackberry Margarita: a juicy, jammy blend with slightly tart berry flavors and undertones of honeyed fig. - Mango Margarita: a fruity, juicy blend with mango and lime flavors. - Passion Fruit Margarita: a sweet, tropical and tangy blend with passion fruit and citrus flavors. - Pineapple Margarita: a refreshing blend of tart pineapple, sweet coconut and lime flavors.
 Bartesian URL: https://bartesian.com/products/tropical-margarita-collection?variant=43136777289927
 Shopify Product ID: 7646682644679
 Shopify Variant ID: 43136777289927
@@ -14,6 +14,6 @@ Nutrition Image EU:
 Enabled: 1
 Items:
 	blackberry-margarita: 2
-	jammy-blend-with-slightly-tart-berry-flavors: 2
-	undertones-of-honeyed-fig: 2
-	Gorgias Article ID:
+	mango-margarita: 2
+	passion-fruit-margarita: 2
+	pineapple-margarita: 2

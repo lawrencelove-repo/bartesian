@@ -13,9 +13,7 @@ Nutrition Image:
 Nutrition Image EU: 
 Enabled: 0
 Items:
-	Shopify Variant ID:
-	4-curated-seasonal-tequila-cocktails-jollype-o-margarita-a-margarita-bursting-with-flavors-of-vibrant-pineapple: 2
-	Shopify Handle:
-	zesty-lime: 2
-	a-kick-of-jalape-o: 2
-	Gorgias Article ID:
+	jollype-o-margarita: 2
+	starry-night: 2
+	peary-christmas: 2
+	mistletoe-margarita: 2

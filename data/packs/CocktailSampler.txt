@@ -1,7 +1,7 @@
 Name: Cocktail Sampler
 Slug: cocktail-sampler
 Barcode: 
-Notes: Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of: - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint
+Notes: Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of: - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange flavors.
 Bartesian URL: https://bartesian.com/products/cocktail-sampler?variant=44436485046471
 Shopify Product ID: 8166638452935
 Shopify Variant ID: 44436485046471
@@ -14,6 +14,6 @@ Nutrition Image EU:
 Enabled: 1
 Items:
 	lemon-drop: 1
-	tart: 1
-	lemon-candy-inspired-vodka-martini: 1
-	Gorgias Article ID:
+	rum-breeze: 1
+	margarita: 1
+	whiskey-sour: 1
