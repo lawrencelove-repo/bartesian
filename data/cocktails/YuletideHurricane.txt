@@ -7,13 +7,13 @@ Glassware: Highball Glass
 Garnish: with a cherry and orange wedge
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/yuletide-hurricane.png","label_image_eu":"images/nutrition/yuletide-hurricane-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/yuletide-hurricane-1059915
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/yuletide-hurricane-1059915
 Gorgias Article ID: 1059915
 Hero Image: images/hero/yuletide-hurricane.jpg
 Marketing Image: 

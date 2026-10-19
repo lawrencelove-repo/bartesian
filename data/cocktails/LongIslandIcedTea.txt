@@ -7,13 +7,13 @@ Glassware: Highball Glass
 Garnish: Lemon
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/long-island-iced-tea.png","label_image_eu":"images/nutrition/long-island-iced-tea-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":2.2,"regular_oz":3.0,"strong_oz":4.6,"raw":"Mocktail = 0 oz., Light = 2.2 oz., Regular = 3 oz., Strong = 4.6 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":2.2,"regular_oz":3,"strong_oz":4.6,"raw":"Mocktail = 0 oz., Light = 2.2 oz., Regular = 3 oz., Strong = 4.6 oz"}
 Bartesian URL: https://bartesian.com/products/long-island-iced-tea-cocktails?variant=32123330428977
+Help URL: https://bartesian.gorgias.help/en-US/long-island-iced-tea-39050
 Shopify Product ID: 2032492085297
 Shopify Variant ID: 32123330428977
 Shopify Handle: long-island-iced-tea-cocktails
 Shopify SKU: 55370
-Help URL: https://bartesian.gorgias.help/en-US/long-island-iced-tea-39050
 Gorgias Article ID: 39050
 Hero Image: images/hero/long-island-iced-tea.jpg
 Marketing Image: images/marketing/long-island-iced-tea.jpg

@@ -7,13 +7,13 @@ Glassware: Mai Tai Glass
 Garnish: Pineapple & Cherry
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/mai-tai.png","label_image_eu":"images/nutrition/mai-tai-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/mai-tai-cocktails?variant=31660700860465
+Help URL: https://bartesian.gorgias.help/en-US/mai-tai-39053
 Shopify Product ID: 4515870703665
 Shopify Variant ID: 31660700860465
 Shopify Handle: mai-tai-cocktails
 Shopify SKU: 55375
-Help URL: https://bartesian.gorgias.help/en-US/mai-tai-39053
 Gorgias Article ID: 39053
 Hero Image: images/hero/mai-tai.jpg
 Marketing Image: images/marketing/mai-tai.jpg

@@ -7,13 +7,13 @@ Glassware: Lowball
 Garnish: ed with an orange wedge and maraschino cherry
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/tequila-sunrise.png","label_image_eu":"images/nutrition/tequila-sunrise-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/tequila-sunrise-capsules?variant=43044245176519
+Help URL: https://bartesian.gorgias.help/en-US/tequila-sunrise-217642
 Shopify Product ID: 7612569387207
 Shopify Variant ID: 43044245176519
 Shopify Handle: tequila-sunrise-capsules
 Shopify SKU: 55477
-Help URL: https://bartesian.gorgias.help/en-US/tequila-sunrise-217642
 Gorgias Article ID: 217642
 Hero Image: images/hero/tequila-sunrise.jpg
 Marketing Image: images/marketing/tequila-sunrise.jpg

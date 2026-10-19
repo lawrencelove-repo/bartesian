@@ -1,0 +1,27 @@
+Name: Strawberry Acai Refresher (US Only)
+Slug: strawberry-acai-refresher
+Description: When you need refreshment, look no further. Flavors of lush strawberry and tangy acai blend in a perfect balance of sweet and tart. Lightly caffeinated to give you a gentle boost and with an intentionally lower alcohol level than our other offerings, this Refresher lets you sip back, relax, and brighten your day with every vibrant drop. Shake and serve over ice in a highball glass, garnished with strawberry slices.
+Details: Contains ~56 mg of caffeine. Base spirit: Vodka. Try it as a mocktail!
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: ed with strawberry slices
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/strawberry-acai-refresher.png","label_image_eu":"images/nutrition/strawberry-acai-refresher-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":0.1,"regular_oz":0.2,"strong_oz":0.3,"raw":"Mocktail = 0 oz., Light = 0.1 oz., Regular = 0.2 oz., Strong = 0.3 oz"}
+Bartesian URL: https://bartesian.com/products/strawberry-acai-capsules?variant=46118504988871
+Help URL: https://bartesian.gorgias.help/en-US/strawberry-acai-refresher-(us-only)-4332574
+Shopify Product ID: 8602165870791
+Shopify Variant ID: 46118504988871
+Shopify Handle: strawberry-acai-capsules
+Shopify SKU: 75681
+Gorgias Article ID: 4332574
+Hero Image: 
+Marketing Image: images/marketing/strawberry-acai-refresher.jpg
+Image: images/marketing/strawberry-acai-refresher.jpg
+Seasonal: 1
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 633341149
+Case Barcode: 
+Case Qty: 8

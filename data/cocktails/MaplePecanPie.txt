@@ -7,13 +7,13 @@ Glassware: Lowball Glass
 Garnish: Maple Leaf or Pecan
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/maple-pecan-pie.png","label_image_eu":"images/nutrition/maple-pecan-pie-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/maple-pecan-pie-2567775
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/maple-pecan-pie-2567775
 Gorgias Article ID: 2567775
 Hero Image: images/hero/maple-pecan-pie.jpg
 Marketing Image: 

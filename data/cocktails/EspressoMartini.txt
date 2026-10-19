@@ -7,13 +7,13 @@ Glassware: Shaker + Martini
 Garnish: Coffee Beans
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/espresso-martini.png","label_image_eu":"images/nutrition/espresso-martini-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/espresso-martini-capsules?variant=42144722419911
+Help URL: https://bartesian.gorgias.help/en-US/espresso-martini-98045
 Shopify Product ID: 7329671807175
 Shopify Variant ID: 42144722419911
 Shopify Handle: espresso-martini-capsules
 Shopify SKU: 55506
-Help URL: https://bartesian.gorgias.help/en-US/espresso-martini-98045
 Gorgias Article ID: 98045
 Hero Image: images/hero/espresso-martini.jpg
 Marketing Image: images/marketing/espresso-martini.jpg
@@ -21,7 +21,7 @@ Image: images/hero/espresso-martini.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 8
 Capsule Barcode: 406905877
-Case Barcode: 
+Case Barcode: 850054919410
 Case Qty: 8

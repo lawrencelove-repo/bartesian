@@ -1,0 +1,27 @@
+Name: 2026 Advent Calendar (spoiler alert!)
+Slug: 2026-advent-calendar-spoiler-alert
+Description: Spoiler Alert: If you wish to keep each day a festive surprise — the information below discloses the capsule selections. With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year.
+Details: Berry & Bright (NEW)\nA shimmering tequila cocktail combining juicy blueberry, zesty lemon, and a hint of cozy cardamom flavor. The result is a vibrant cocktail that sparkles with the magic of the season.\nBase spirit: Tequila\n\nBrown Butter Old Fashioned\nA rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange.\nBase spirit: Whiskey\n\nFrosted Ambrosia (NEW)\nA nostalgic vodka cocktail with flavors of juicy orange, pineapple, coconut, cherry, and a soft marshmallow finish. Sweet, creamy, and fruit-forward, it's a playful holiday dessert cocktail.\nBase spirit: Vodka\n\nGinger Pear Noel\nA tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor.\nBase spirit: Whiskey\n\nHoliday Spiced Old Fashioned\nA spirit-forward cocktail with flavors of orange, bitters, cinnamon and brown sugar.\nBase spirit: Whiskey\n\nJollypeño Margarita\nA margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño.\nBase spirit: Tequila\n\nMistletoe Margarita\nA blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita.\nBase spirit: Tequila\n\nPeary Christmas\nYou'll have a very "peary" Christmas with this elegant tequila cocktail with sweet pear, citrus, and delicate almond notes.\nBase spirit: Tequila\n\nSalted Caramel Espresso Martini (NEW)\nFlavors of rich coffee, buttery caramel, and a hint of sea salt come together in this smooth, velvety espresso martini. Decadent yet refined, it's a luxurious twist on a cocktail favorite.\nBase spirit: Vodka\n\nThe Grinch Appletini\nA shimmering sweet and tart vodka cocktail with green apple flavors.\nBase spirit: Vodka\n\nWinter Pear-adise\nA sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime.\nBase spirit: Gin\n\nYuletide Hurricane\nA fruity, tropical rum cocktail with added shimmer.\nBase spirit: Rum
+Spirits: Tequila, Whiskey, Vodka, Gin, Rum
+Glassware: 
+Garnish: 
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/2026-advent-calendar-spoiler-alert.png","label_image_eu":"images/nutrition/2026-advent-calendar-spoiler-alert-eu.jpg"}
+Alcohol: {}
+Bartesian URL: https://bartesian.com/products/advent-calendar?variant=47520593445063
+Help URL: https://bartesian.gorgias.help/en-US/2026-advent-calendar-(spoiler-alert)-7886629
+Shopify Product ID: 8913630003399
+Shopify Variant ID: 47520593445063
+Shopify Handle: advent-calendar
+Shopify SKU: 
+Gorgias Article ID: 7886629
+Hero Image: 
+Marketing Image: images/packs/advent-calendar-2026.jpg
+Image: images/packs/advent-calendar-2026.jpg
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

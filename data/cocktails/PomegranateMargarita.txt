@@ -7,13 +7,13 @@ Glassware: Margarita Glass
 Garnish: Lime Wedge
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/pomegranate-margarita.png","label_image_eu":"images/nutrition/pomegranate-margarita-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/pomegranate-margarita-cocktails?variant=42475700224199
+Help URL: https://bartesian.gorgias.help/en-US/pomegranate-margarita-109602
 Shopify Product ID: 7412099252423
 Shopify Variant ID: 42475700224199
 Shopify Handle: pomegranate-margarita-cocktails
 Shopify SKU: 55495
-Help URL: https://bartesian.gorgias.help/en-US/pomegranate-margarita-109602
 Gorgias Article ID: 109602
 Hero Image: images/hero/pomegranate-margarita.jpg
 Marketing Image: images/marketing/pomegranate-margarita.jpg

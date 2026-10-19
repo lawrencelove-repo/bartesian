@@ -7,13 +7,13 @@ Glassware: Coupe Glass
 Garnish: Orange Peel Twist
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/hemingway-daiquiri.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.7,"regular_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.7 oz., Regular = 2.5 oz., Strong: 4.2 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.7,"regular_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.7 oz., Regular = 2.5 oz., Strong: 4.2 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/hemingway-daiquiri-39027
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/hemingway-daiquiri-39027
 Gorgias Article ID: 39027
 Hero Image: images/hero/hemingway-daiquiri.jpg
 Marketing Image: images/marketing/hemingway-daiquiri.jpg

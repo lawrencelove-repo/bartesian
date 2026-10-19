@@ -7,13 +7,13 @@ Glassware: Martini Glass
 Garnish: ed with a Cranberry Cheer Sugar rim. Leave this out instead of milk and cookies for any guests arriving by sleigh and you’ll be sure to get presents, no matter which list you're on
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/clausmopolitan.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/clausmopolitan-3388358
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/clausmopolitan-3388358
 Gorgias Article ID: 3388358
 Hero Image: images/hero/clausmopolitan.jpg
 Marketing Image: 

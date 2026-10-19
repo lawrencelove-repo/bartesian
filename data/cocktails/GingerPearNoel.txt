@@ -9,11 +9,11 @@ Pairs With:
 Nutrition: {}
 Alcohol: {}
 Bartesian URL: 
+Help URL: 
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: 
 Gorgias Article ID: 
 Hero Image: 
 Marketing Image: 

@@ -7,13 +7,13 @@ Glassware: Lowball Glass
 Garnish: Lemon
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/lemon-drop.png","label_image_eu":"images/nutrition/lemon-drop-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/vodka-martini-lemon-drop-cocktails?variant=31660702203953
+Help URL: https://bartesian.gorgias.help/en-US/lemon-drop-39052
 Shopify Product ID: 4515871391793
 Shopify Variant ID: 31660702203953
 Shopify Handle: vodka-martini-lemon-drop-cocktails
 Shopify SKU: 55390
-Help URL: https://bartesian.gorgias.help/en-US/lemon-drop-39052
 Gorgias Article ID: 39052
 Hero Image: images/hero/lemon-drop.jpg
 Marketing Image: images/marketing/lemon-drop.jpg

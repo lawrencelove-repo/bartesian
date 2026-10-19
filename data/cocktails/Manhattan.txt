@@ -7,13 +7,13 @@ Glassware: Coupe Glass
 Garnish: Cherry
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/manhattan.png","label_image_eu":"images/nutrition/manhattan-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/manhattan-cocktails?variant=39353828737223
+Help URL: https://bartesian.gorgias.help/en-US/manhattan-39058
 Shopify Product ID: 2067131695153
 Shopify Variant ID: 39353828737223
 Shopify Handle: manhattan-cocktails
 Shopify SKU: 55374
-Help URL: https://bartesian.gorgias.help/en-US/manhattan-39058
 Gorgias Article ID: 39058
 Hero Image: images/hero/manhattan.jpg
 Marketing Image: images/marketing/manhattan.jpg

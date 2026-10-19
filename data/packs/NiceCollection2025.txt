@@ -2,18 +2,8 @@ Name: Nice Collection 2025
 Slug: nice-collection-2025
 Barcode: 
 Notes: The Bartesian Nice Collection is the gift that keeps on giving all holiday season long... but nobody said being nice means you have to share. This limited-edition variety pack contains 2 each of 4 curated holiday cocktails: - Brown Butter Old Fashioned: a rich, spirit-forward sipper infused with flavors of indulgent browned butter, bitters and a hint of orange. - Winter Pear-adise: a sweet and tart gin cocktail, blending flavors of juicy pear, earthy sage and a twist of lime. - Frosty Navel: a vibrant vodka cocktail with tangy orange and juicy peach flavors. - Mistletoe Margarita: a blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita.
-Bartesian URL: 
-Shopify Product ID: 
-Shopify Variant ID: 
-Shopify Handle: 
-Help URL: 
-Gorgias Article ID: 
-Image: 
-Nutrition Image: 
-Nutrition Image EU: 
-Enabled: 0
 Items:
 	brown-butter-old-fashioned: 2
-	winter-pear-adise: 2
 	frosty-navel: 2
 	mistletoe-margarita: 2
+	winter-pear-adise: 2

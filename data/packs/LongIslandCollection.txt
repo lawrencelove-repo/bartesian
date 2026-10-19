@@ -2,18 +2,4 @@ Name: Long Island Collection
 Slug: long-island-collection
 Barcode: 
 Notes: *
-Bartesian URL: https://bartesian.com/products/long-island-collection?variant=46631778386119
-Shopify Product ID: 8726160474311
-Shopify Variant ID: 46631778386119
-Shopify Handle: long-island-collection
-Help URL: 
-Gorgias Article ID: 
-Image: images/packs/long-island-collection.jpg
-Nutrition Image: 
-Nutrition Image EU: 
-Enabled: 1
 Items:
-	tennessee-iced-tea: 2
-	hawaiian-iced-tea: 2
-	georgia-peach-iced-tea: 2
-	long-beach-iced-tea: 2

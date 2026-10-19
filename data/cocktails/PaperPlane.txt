@@ -7,13 +7,13 @@ Glassware: Coupe Glass
 Garnish: Alcohol Volume: Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/paper-plane.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/paper-plane-cocktails?variant=15874850848817
+Help URL: https://bartesian.gorgias.help/en-US/paper-plane-39073
 Shopify Product ID: 2067666337841
 Shopify Variant ID: 15874850848817
 Shopify Handle: paper-plane-cocktails
 Shopify SKU: 55373
-Help URL: https://bartesian.gorgias.help/en-US/paper-plane-39073
 Gorgias Article ID: 39073
 Hero Image: images/hero/paper-plane.jpg
 Marketing Image: images/marketing/paper-plane.jpg

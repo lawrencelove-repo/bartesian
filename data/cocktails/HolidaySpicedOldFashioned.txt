@@ -7,13 +7,13 @@ Glassware: Lowball Glass
 Garnish: Orange Peel and Spiced Rim
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/holiday-spiced-old-fashioned.png","label_image_eu":"images/nutrition/holiday-spiced-old-fashioned-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/holiday-spiced-old-fashioned-3074904
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/holiday-spiced-old-fashioned-3074904
 Gorgias Article ID: 3074904
 Hero Image: images/hero/holiday-spiced-old-fashioned.jpg
 Marketing Image: 

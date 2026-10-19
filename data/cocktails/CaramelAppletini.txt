@@ -7,13 +7,13 @@ Glassware: Martini Glass
 Garnish: Apple Slices, a caramel drizzle or Sour Apple Sugar rim
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/caramel-appletini.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/caramel-appletini?variant=45074472534215
+Help URL: https://bartesian.gorgias.help/en-US/caramel-appletini-2387476
 Shopify Product ID: 8363107549383
 Shopify Variant ID: 45074472534215
 Shopify Handle: caramel-appletini
 Shopify SKU: 75644
-Help URL: https://bartesian.gorgias.help/en-US/caramel-appletini-2387476
 Gorgias Article ID: 2387476
 Hero Image: images/hero/caramel-appletini.jpg
 Marketing Image: images/marketing/caramel-appletini.jpg

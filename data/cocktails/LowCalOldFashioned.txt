@@ -7,13 +7,13 @@ Glassware: Lowball Glass
 Garnish: with an orange peel or a brandied cherry and enjoy this classic whiskey cocktail with no sugar added
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/low-cal-old-fashioned.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/low-cal-old-fashioned-capsules?variant=43584092307655
+Help URL: https://bartesian.gorgias.help/en-US/low-cal-old-fashioned-383427
 Shopify Product ID: 7843726426311
 Shopify Variant ID: 43584092307655
 Shopify Handle: low-cal-old-fashioned-capsules
 Shopify SKU: 55412
-Help URL: https://bartesian.gorgias.help/en-US/low-cal-old-fashioned-383427
 Gorgias Article ID: 383427
 Hero Image: images/hero/low-cal-old-fashioned.jpg
 Marketing Image: images/marketing/low-cal-old-fashioned.jpg

@@ -7,13 +7,13 @@ Glassware: Martini Glass
 Garnish: ed with a sugar rim, lemon peel, and blueberries
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/blueberry-lemon-drop.png","label_image_eu":"images/nutrition/blueberry-lemon-drop-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/blueberry-lemon-drop-1661998
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/blueberry-lemon-drop-1661998
 Gorgias Article ID: 1661998
 Hero Image: images/hero/blueberry-lemon-drop.jpg
 Marketing Image: 

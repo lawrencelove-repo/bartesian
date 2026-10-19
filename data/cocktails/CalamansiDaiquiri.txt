@@ -7,13 +7,13 @@ Glassware: Coupe Glass
 Garnish: with a lime peel
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/calamansi-daiquiri.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/calamansi-daiquiri-capsules?variant=45649560764615
+Help URL: https://bartesian.gorgias.help/en-US/calamansi-daiquiri-5096344
 Shopify Product ID: 8520342405319
 Shopify Variant ID: 45649560764615
 Shopify Handle: calamansi-daiquiri-capsules
 Shopify SKU: 75671
-Help URL: https://bartesian.gorgias.help/en-US/calamansi-daiquiri-5096344
 Gorgias Article ID: 5096344
 Hero Image: images/hero/calamansi-daiquiri.jpg
 Marketing Image: images/marketing/calamansi-daiquiri.jpg

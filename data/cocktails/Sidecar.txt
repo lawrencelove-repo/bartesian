@@ -7,13 +7,13 @@ Glassware: Coupe Glass
 Garnish: with a lemon twist
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/sidecar.png","label_image_eu":"images/nutrition/sidecar-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/sidecar-capsules?variant=41853978050759
+Help URL: https://bartesian.gorgias.help/en-US/sidecar-65193
 Shopify Product ID: 7262903435463
 Shopify Variant ID: 41853978050759
 Shopify Handle: sidecar-capsules
 Shopify SKU: 55459
-Help URL: https://bartesian.gorgias.help/en-US/sidecar-65193
 Gorgias Article ID: 65193
 Hero Image: images/hero/sidecar.jpg
 Marketing Image: images/marketing/sidecar.jpg
@@ -21,7 +21,7 @@ Image: images/hero/sidecar.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 8
 Capsule Barcode: 213962797
-Case Barcode: 
+Case Barcode: 850054919595
 Case Qty: 8

@@ -7,13 +7,13 @@ Glassware: Margarita Glassware
 Garnish: ed with Pink Himalayan salt and a strawberry
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/strawberry-guava-margarita.png","label_image_eu":"images/nutrition/strawberry-guava-margarita-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail =0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail =0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/strawberry-guava-margarita-capsules?variant=43255546446023
+Help URL: https://bartesian.gorgias.help/en-US/strawberry-guava-margarita-300193
 Shopify Product ID: 7699696976071
 Shopify Variant ID: 43255546446023
 Shopify Handle: strawberry-guava-margarita-capsules
 Shopify SKU: 55465
-Help URL: https://bartesian.gorgias.help/en-US/strawberry-guava-margarita-300193
 Gorgias Article ID: 300193
 Hero Image: 
 Marketing Image: images/marketing/strawberry-guava-margarita.jpg

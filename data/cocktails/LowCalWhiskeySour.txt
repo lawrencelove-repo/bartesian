@@ -7,13 +7,13 @@ Glassware: Lowball Glass
 Garnish: Cherry
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/low-cal-whiskey-sour.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/low-calorie-whiskey-sour-cocktails?variant=32387404431409
+Help URL: https://bartesian.gorgias.help/en-US/low-cal-whiskey-sour-39049
 Shopify Product ID: 4515873259569
 Shopify Variant ID: 32387404431409
 Shopify Handle: low-calorie-whiskey-sour-cocktails
 Shopify SKU: 55443
-Help URL: https://bartesian.gorgias.help/en-US/low-cal-whiskey-sour-39049
 Gorgias Article ID: 39049
 Hero Image: images/hero/low-cal-whiskey-sour.jpg
 Marketing Image: images/marketing/low-cal-whiskey-sour.jpg

@@ -7,13 +7,13 @@ Glassware: Martini Glass
 Garnish: ed with sour candy strips
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/sour-spell.png","label_image_eu":"images/nutrition/sour-spell-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/sour-spell-capsules?variant=46632563802311
+Help URL: https://bartesian.gorgias.help/en-US/sour-spell-8043821
 Shopify Product ID: 8726365405383
 Shopify Variant ID: 46632563802311
 Shopify Handle: sour-spell-capsules
 Shopify SKU: 75713
-Help URL: https://bartesian.gorgias.help/en-US/sour-spell-8043821
 Gorgias Article ID: 8043821
 Hero Image: 
 Marketing Image: images/marketing/sour-spell.jpg

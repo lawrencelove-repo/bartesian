@@ -2,18 +2,8 @@ Name: Halloween Collection
 Slug: halloween-collection
 Barcode: 
 Notes: The best way for you and your ghoulish guests to raise spirits this season? The spine-chillingly delicious Bartesian Halloween Collection. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Witch's Heart: a magical martini swirling berry and green apple flavors with edible shimmer. - Caramel Appletini: a wickedly smooth cocktail with tart green apple and rich, velvety caramel flavors. - Sour Spell: a sweet cocktail with a mischievous glow and a burst of sour rainbow candy flavor. - Vampire's Kiss: a deep crimson cocktail evoking the unmistakable flavor of strawberry licorice. Enjoy this spooky seasonal release while it lasts. Base spirit: Vodka
-Bartesian URL: https://bartesian.com/products/halloween-collection?variant=46632550432967
-Shopify Product ID: 8726360719559
-Shopify Variant ID: 46632550432967
-Shopify Handle: halloween-collection
-Help URL: 
-Gorgias Article ID: 
-Image: images/packs/halloween-collection.jpg
-Nutrition Image: 
-Nutrition Image EU: 
-Enabled: 1
 Items:
-	witchs-heart: 2
 	caramel-appletini: 2
 	sour-spell: 2
 	vampires-kiss: 2
+	witchs-heart: 2

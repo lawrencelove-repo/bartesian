@@ -7,13 +7,13 @@ Glassware: Martini Glass
 Garnish: Orange peel
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/low-cal-cosmopolitan.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":0.9,"regular_oz":1.35,"strong_oz":2.3,"raw":"Mocktail = 0 oz., Light = 0.9 oz., Regular = 1.35 oz., Strong = 2.3 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":0.9,"regular_oz":1.35,"strong_oz":2.3,"raw":"Mocktail = 0 oz., Light = 0.9 oz., Regular = 1.35 oz., Strong = 2.3 oz"}
 Bartesian URL: https://bartesian.com/products/low-calorie-cosmopolitan-martini-cocktails?variant=32387401547825
+Help URL: https://bartesian.gorgias.help/en-US/low-cal-cosmopolitan-39047
 Shopify Product ID: 4515872964657
 Shopify Variant ID: 32387401547825
 Shopify Handle: low-calorie-cosmopolitan-martini-cocktails
 Shopify SKU: 55442
-Help URL: https://bartesian.gorgias.help/en-US/low-cal-cosmopolitan-39047
 Gorgias Article ID: 39047
 Hero Image: images/hero/low-cal-cosmopolitan.jpg
 Marketing Image: images/marketing/low-cal-cosmopolitan.jpg

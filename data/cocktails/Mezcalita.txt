@@ -7,13 +7,13 @@ Glassware: Lowball Glass
 Garnish: Fresh Citrus Wheels and Spicy Salt Rim
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/mezcalita.png","label_image_eu":"images/nutrition/mezcalita-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/mezcalita-1120804
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/mezcalita-1120804
 Gorgias Article ID: 1120804
 Hero Image: images/hero/mezcalita.jpg
 Marketing Image: 

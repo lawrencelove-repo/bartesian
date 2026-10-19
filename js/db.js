@@ -447,6 +447,68 @@
       "INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_barcode_rev', ?)",
       [String(SEED_BARCODE_REV)]
     );
+    if (global.BARTESIAN_SEED_REV) {
+      exec(
+        "INSERT OR REPLACE INTO meta (key, value) VALUES ('applied_seed_rev', ?)",
+        [String(global.BARTESIAN_SEED_REV)]
+      );
+    }
+  }
+
+  /** Copy cocktail/rimmer quantities from seed into the live DB. */
+  function applySeedInventory() {
+    const seed = global.BARTESIAN_SEED || {};
+    let changed = 0;
+    const ts = nowIso();
+    for (const c of seed.cocktails || []) {
+      if (!c.slug) continue;
+      const row = queryOne("SELECT id, quantity FROM cocktails WHERE slug = ?", [c.slug]);
+      if (!row) continue;
+      const q = Number(c.quantity) || 0;
+      if (Number(row.quantity) !== q) {
+        exec("UPDATE cocktails SET quantity = ?, updated_at = ? WHERE id = ?", [
+          q,
+          ts,
+          row.id,
+        ]);
+        changed++;
+      }
+    }
+    for (const r of seed.rimmers || []) {
+      if (!r.slug) continue;
+      const row = queryOne("SELECT id, quantity FROM rimmers WHERE slug = ?", [r.slug]);
+      if (!row) continue;
+      const q = Number(r.quantity) || 0;
+      if (Number(row.quantity) !== q) {
+        exec("UPDATE rimmers SET quantity = ?, updated_at = ? WHERE id = ?", [
+          q,
+          ts,
+          row.id,
+        ]);
+        changed++;
+      }
+    }
+    return changed;
+  }
+
+  /**
+   * When import-data.js bumps BARTESIAN_SEED_REV, pull inventory (and barcodes)
+   * from the new seed into IndexedDB without a full wipe.
+   */
+  function maybeApplySeedRev() {
+    const seedRev = global.BARTESIAN_SEED_REV != null ? String(global.BARTESIAN_SEED_REV) : "";
+    const applied = queryOne("SELECT value FROM meta WHERE key = 'applied_seed_rev'");
+    let changed = 0;
+    if (seedRev && (!applied || applied.value !== seedRev)) {
+      changed += applySeedInventory();
+      exec(
+        "INSERT OR REPLACE INTO meta (key, value) VALUES ('applied_seed_rev', ?)",
+        [seedRev]
+      );
+      changed += 1;
+    }
+    changed += maybeMergeSeedBarcodes();
+    return changed;
   }
 
   /**
@@ -604,7 +666,7 @@
           db.close();
           createFreshDb();
           await persist();
-        } else if (maybeMergeSeedBarcodes() > 0) {
+        } else if (maybeApplySeedRev() > 0) {
           await persist();
         }
       } else {

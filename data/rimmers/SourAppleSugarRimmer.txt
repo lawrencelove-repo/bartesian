@@ -3,17 +3,15 @@ Slug: sour-apple-sugar-rimmer
 Description: One swipe of Bartesian's Sour Apple Sugar Rimmer and your cocktail goes from sweet to spellbinding. With a candy-inspired kick, it’s the ultimate potion topper for your Halloween sips. Sour Apple Sugar pairs well with sweet, sour, and citrus cocktails.
 Kind: sugar
 Pairs With: Witch's Heart, Candyman Margarita, Caramel Appletini, Lemon Drop, Cosmopolitan, and Margarita
-Cocktail Slugs: witchs-heart, candyman-margarita, caramel-appletini, lemon-drop, cosmopolitan, margarita
+Cocktail Slugs: candyman-margarita, caramel-appletini, cosmopolitan, lemon-drop, margarita, witchs-heart
 Bartesian URL: https://bartesian.com/products/sour-apple-sugar-rimmer?variant=45074497208519
+Help URL: https://bartesian.gorgias.help/en-US/sour-apple-sugar-rimmer-2387858
 Shopify Product ID: 8363112136903
 Shopify Variant ID: 45074497208519
 Shopify Handle: sour-apple-sugar-rimmer
-Help URL: https://bartesian.gorgias.help/en-US/sour-apple-sugar-rimmer-2387858
 Gorgias Article ID: 2387858
 Image: images/rimmers/sour-apple-sugar-rimmer.jpg
 Nutrition Image: images/nutrition/sour-apple-sugar-rimmer.png
-Nutrition Image EU: images/nutrition/sour-apple-sugar-rimmer-eu.jpg
 Barcode: 
 Quantity: 0
 Enabled: 1
-Favorite: 0

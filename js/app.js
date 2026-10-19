@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v15";
+  const APP_VERSION = "bartesian-v16";
 
   const root = document.getElementById("app");
   let cameraScanner = null;
@@ -961,7 +961,8 @@
         <p class="section-label">Admin</p>
         <h1>Settings</h1>
         <h2>Export for GitHub</h2>
-        <p>Downloads <code>bartesian-exports.zip</code>. Copy it to <code>exports/bartesian-exports.zip</code>, then run <code>node scripts/import-data.js</code> (or the Import debug task) — that merges into <code>data/</code> and rebuilds the seed. Commit when ready.</p>
+        <p>Downloads <code>bartesian-exports.zip</code>. Copy it to <code>exports/bartesian-exports.zip</code>, then run <code>node scripts/import-data.js</code> (or the Import debug task). That updates <code>data/</code> + seed; on next load the app applies seed quantities into local IndexedDB. Commit when ready.</p>
+        <p class="hint">A normal reload keeps your browser DB. After an import, Force refresh (or hard reload) so the new seed rev is picked up — inventory counts then sync from seed.</p>
         <button type="button" data-export>Export data</button>
         <p class="hint" data-export-status></p>
         <h2>Barcodes</h2>

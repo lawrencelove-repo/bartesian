@@ -7,13 +7,13 @@ Glassware: Martini Glass
 Garnish: Apple Wheel
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/the-grinch-appletini.png"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/the-grinch-appletini-1059897
 Shopify Product ID: 
 Shopify Variant ID: 
 Shopify Handle: 
 Shopify SKU: 
-Help URL: https://bartesian.gorgias.help/en-US/the-grinch-appletini-1059897
 Gorgias Article ID: 1059897
 Hero Image: images/hero/the-grinch-appletini.jpg
 Marketing Image: 

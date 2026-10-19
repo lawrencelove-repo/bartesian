@@ -7,13 +7,13 @@ Glassware: Lowball Glass
 Garnish: Lime
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/passion-fruit-margarita.png","label_image_eu":"images/nutrition/passion-fruit-margarita-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.0,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/passion-fruit-margarita-cocktails?variant=40477896671431
+Help URL: https://bartesian.gorgias.help/en-US/passion-fruit-margarita-39074
 Shopify Product ID: 6865273848007
 Shopify Variant ID: 40477896671431
 Shopify Handle: passion-fruit-margarita-cocktails
 Shopify SKU: 55464
-Help URL: https://bartesian.gorgias.help/en-US/passion-fruit-margarita-39074
 Gorgias Article ID: 39074
 Hero Image: 
 Marketing Image: images/marketing/passion-fruit-margarita.jpg

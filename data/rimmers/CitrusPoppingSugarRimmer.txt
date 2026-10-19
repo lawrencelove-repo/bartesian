@@ -3,17 +3,15 @@ Slug: citrus-popping-sugar-rimmer
 Description: A citrus-forward popping sugar that brings a lively burst of flavor and playful fizz to every sip.
 Kind: sugar
 Pairs With: Sour Spell, Witch's Heart, Candyman Margarita, and all types of Cosmopolitans, Lemon Drops, and Margarita
-Cocktail Slugs: sour-spell, witchs-heart, candyman-margarita, cosmopolitan, low-cal-cosmopolitan, blueberry-lemon-drop, lemon-drop, strawberry-lemon-drop, margarita
+Cocktail Slugs: blueberry-lemon-drop, candyman-margarita, cosmopolitan, lemon-drop, low-cal-cosmopolitan, margarita, sour-spell, strawberry-lemon-drop, witchs-heart
 Bartesian URL: https://bartesian.com/products/citrus-popping-sugar-rimmer?variant=46672826302663
+Help URL: https://bartesian.gorgias.help/en-US/citrus-popping-sugar-rimmer-8043829
 Shopify Product ID: 8736405160135
 Shopify Variant ID: 46672826302663
 Shopify Handle: citrus-popping-sugar-rimmer
-Help URL: https://bartesian.gorgias.help/en-US/citrus-popping-sugar-rimmer-8043829
 Gorgias Article ID: 8043829
 Image: images/rimmers/citrus-popping-sugar-rimmer.jpg
 Nutrition Image: images/nutrition/citrus-popping-sugar-rimmer.png
-Nutrition Image EU: images/nutrition/citrus-popping-sugar-rimmer-eu.jpg
 Barcode: 
 Quantity: 0
 Enabled: 1
-Favorite: 0

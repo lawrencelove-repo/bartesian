@@ -2,16 +2,6 @@ Name: Berry in Love Collection
 Slug: berry-in-love-collection
 Barcode: 
 Notes: The most charming way to sip, savor, and celebrate love this season? The bright and fruity Bartesian Berry in Love Collection. This limited-edition variety pack contains 4 each of 2 playful pours: - Cupid's Arrow: the sweet, fruity flavors of strawberry, guava and lime will make your heart skip a beat. - Love Potion: sweet and tart, this enchanting blend includes juicy blueberry, zesty lemon, and delicate lavender flavors.
-Bartesian URL: 
-Shopify Product ID: 
-Shopify Variant ID: 
-Shopify Handle: 
-Help URL: 
-Gorgias Article ID: 
-Image: 
-Nutrition Image: 
-Nutrition Image EU: 
-Enabled: 0
 Items:
 	cupids-arrow: 4
 	love-potion: 4

@@ -1,0 +1,8 @@
+Name: Refreshers Collection (US Only)
+Slug: refreshers-collection
+Barcode: 
+Notes: Refreshers are your anytime pick-me-up: crafted to be enjoyed primarily as mocktails, lightly caffeinated and bursting with vibrant, juicy fruit flavors. With an intentionally lower alcohol level than our other offerings, they deliver a lighter, effortlessly refreshing sip. Just shake, pour over ice in a highball glass, and top with fresh fruit. Our 8-pack contains 2 each of: - Strawberry Acai: lush strawberry and tangy acai flavors blend in a perfect balance of sweet and tart. - Pineapple Passion Fruit: juicy pineapple and passion fruit come together in a drink that's pure tropical bliss. - Blackberry Mango: ripe blackberry meets sweet mango in a smooth, fruit-forward blend that's as vibrant as it is satisfying. - Peach Lychee: juicy peach and delicate lychee flavors unite in a drink that
+Items:
+	blackberry-mango-refresher: 2
+	peach-lychee-refresher: 2
+	strawberry-acai-refresher: 2

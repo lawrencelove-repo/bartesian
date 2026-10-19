@@ -1,0 +1,27 @@
+Name: Vesper (EU/UK)
+Slug: vesper
+Description: This proofy martini is an elegant blend of gin and vodka, balancing bitter, sweet, and herbal flavours. Inspired by the infamous cocktail from a classic spy novel, it's best served with an herbal gin for a smooth, elevated finish.
+Details: 
+Spirits: Gin, Vodka
+Glassware: Martini Glass
+Garnish: Lemon Peel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/vesper.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.9,"regular_oz":2.8,"strong_oz":4.6,"raw":"Mocktail = 0 oz., Light = 1.9 oz., Regular = 2.8 oz., Strong = 4.6 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/vesper-(euuk)-2567781
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 2567781
+Hero Image: images/hero/vesper.jpg
+Marketing Image: images/marketing/vesper.jpg
+Image: images/hero/vesper.jpg
+Seasonal: 0
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

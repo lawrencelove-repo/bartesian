@@ -7,13 +7,13 @@ Glassware: Hurricane Glass
 Garnish: ed with nutmeg and a pineapple wedge, the Painkiller cocktail will transport you to a vacation mindset
 Pairs With: 
 Nutrition: {"label_image":"images/nutrition/painkiller.png","label_image_eu":"images/nutrition/painkiller-eu.jpg"}
-Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/painkiller-capsules?variant=42475717460167
+Help URL: https://bartesian.gorgias.help/en-US/painkiller-196624
 Shopify Product ID: 7412104265927
 Shopify Variant ID: 42475717460167
 Shopify Handle: painkiller-capsules
 Shopify SKU: 55491
-Help URL: https://bartesian.gorgias.help/en-US/painkiller-196624
 Gorgias Article ID: 196624
 Hero Image: 
 Marketing Image: images/marketing/painkiller.jpg
