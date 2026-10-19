@@ -1,0 +1,9 @@
+Name: Classics Variety
+Slug: classics-variety
+Barcode: 850000009001
+Notes: Scaffold sample variety pack (8 capsules).
+Items:
+	espresso-martini: 2
+	old-fashioned: 2
+	margarita: 2
+	mojito: 2
