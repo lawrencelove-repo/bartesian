@@ -1,5 +1,5 @@
 /* Bartesian app shell service worker — offline-friendly cache for static assets. */
-const CACHE_VERSION = "bartesian-v1";
+const CACHE_VERSION = "bartesian-v2";
 const PRECACHE = [
   "./",
   "./index.html",

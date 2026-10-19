@@ -15,8 +15,9 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] People management (add raters)
 - [x] Settings: export zip/folder + reset local DB
 - [x] Sample seed: 4 cocktails + 1 variety pack
-- [x] Disclaimer + non-affiliation note
+- [x] Disclaimer + non-affiliation note (private use)
 - [x] Service worker shell + favicons / webmanifest stubs
+- [x] Light / clean visual direction (white UI, Bartesian-like teal accents, book-style detail sections)
 
 ## Next
 
@@ -51,7 +52,13 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 
 - [ ] Favorites UX polish
 - [ ] Full export parity (ratings/people round-trip into seed if desired)
-- [ ] Enable GitHub Pages from repo root and smoke on a real `*.github.io` URL
+- [ ] Cocktail detail iconography for garnish / pairs-with (book-style circular marks)
+- [ ] Keep site private (no public marketing; access gate / robots as desired)
+- [ ] Enable GitHub Pages from repo root and smoke on a real `*.github.io` URL (private household use)
+
+### Design notes
+
+Visual direction: white background, black type, teal accent (`#00a8c5`), boxed brand mark, uppercase section labels, generous whitespace — inspired by cocktail-book spreads and bartesian.com product pages. Not dark mode.
 
 ## Hosting notes
 

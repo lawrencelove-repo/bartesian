@@ -1,6 +1,6 @@
 # Bartesian
 
-Personal Bartesian capsule **inventory** + cocktail menu site: static HTML/JS for GitHub Pages, with SQLite (`sql.js`) in the browser.
+Private household Bartesian capsule **inventory** + cocktail menu site: static HTML/JS for GitHub Pages, with SQLite (`sql.js`) in the browser. Not a public product.
 
 See [PLAN.md](PLAN.md) for architecture and [PUNCHLIST.md](PUNCHLIST.md) for the living checklist.
 

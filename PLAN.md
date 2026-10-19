@@ -159,6 +159,14 @@ Prefer the [mahjong-tools](https://github.com/lawrencelove-repo/mahjong-tools) s
 
 Treat Safari and iPad as first-class targets: safe-area insets, touch-sized controls, no hover-only actions, and verified sql.js/IndexedDB behavior on iPadOS Safari (including Add to Home Screen).
 
+### Private use
+
+The site is for **private household use only** (not a public product). Hosting may still use GitHub Pages, but copy/disclaimer should stay private-use oriented; optional access gate can follow.
+
+### Visual direction
+
+White, clean, modern UI (not dark): book-like cocktail detail sections + Bartesian.com accents (teal CTA, boxed brand wordmark, generous whitespace).
+
 ## Defaults (assumed unless you change them)
 
 - Quantity lives on the cocktail row (simple inventory); history in `inventory_log`.

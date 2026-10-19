@@ -63,8 +63,10 @@
     return `
       <div class="app-shell">
         <header class="topbar">
-          <a class="brand" href="#/" data-go="#/">Bartesian</a>
-          <p class="tagline">Capsule inventory &amp; cocktail menu</p>
+          <div class="brand-row">
+            <a class="brand" href="#/" data-go="#/">Bartesian</a>
+            <p class="tagline">Private inventory</p>
+          </div>
           <nav class="topnav" aria-label="Primary">
             ${nav
               .map(
@@ -78,7 +80,7 @@
         <main class="main">${body}</main>
         <footer class="footer">
           <a href="#/disclaimer" data-go="#/disclaimer">Disclaimer</a>
-          <span>Personal use · data in git, edits local until export</span>
+          <span>Private use only · data in git, edits local until export</span>
         </footer>
       </div>
     `;
@@ -104,8 +106,9 @@
             </div>
             <div class="row-body">
               <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}</div>
-              <div class="row-meta">${esc(spiritsText || "—")} · qty ${c.quantity} · ${starsLabel(c.avg_rating)}</div>
+              <div class="row-meta">${esc(spiritsText || "—")} · ${starsLabel(c.avg_rating)}</div>
             </div>
+            <div class="row-qty">${c.quantity}</div>
           </a>
         `;
       })
@@ -115,6 +118,7 @@
       "list",
       `
       <section class="panel">
+        <p class="section-label">Menu</p>
         <h1>Cocktails</h1>
         <form class="toolbar" data-list-filters>
           <input type="search" name="search" placeholder="Search" value="${esc(state.search)}" />
@@ -145,9 +149,15 @@
     );
   }
 
-  function metaBlock(label, value) {
+  function metaRow(label, value) {
     if (value == null || value === "") return "";
-    return `<div class="meta-item"><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`;
+    return `<div class="meta-row">
+      <span class="meta-mark" aria-hidden="true"></span>
+      <div>
+        <span class="label">${esc(label)}</span>
+        <span class="value">${esc(value)}</span>
+      </div>
+    </div>`;
   }
 
   function renderDetail(id) {
@@ -160,6 +170,7 @@
     const people = BartesianDB.listPeople();
     const nutrition = parseJsonField(c.nutrition_json);
     const alcohol = parseJsonField(c.alcohol_json);
+    const spiritsText = (c.spirits || []).join(", ") || "—";
 
     const packList = packs.length
       ? `<ul class="plain">${packs
@@ -181,6 +192,17 @@
           .join("")
       : `<li class="muted">No ratings yet.</li>`;
 
+    const nutritionText = nutrition
+      ? Object.entries(nutrition)
+          .map(([k, v]) => k + ": " + v)
+          .join(", ")
+      : c.nutrition_json;
+    const alcoholText = alcohol
+      ? Object.entries(alcohol)
+          .map(([k, v]) => k + ": " + v)
+          .join(", ")
+      : c.alcohol_json;
+
     return shell(
       "list",
       `
@@ -191,19 +213,39 @@
             ${c.image ? `<img src="${esc(c.image)}" alt="">` : ""}
           </div>
           <div>
-            <h1>${esc(c.name)}${c.favorite ? " ★" : ""}</h1>
-            <p class="spirits">${esc((c.spirits || []).join(", ") || "—")}</p>
-            <p>${esc(c.description || "")}</p>
+            <p class="detail-kicker">Cocktail</p>
+            <h1 class="detail-title">${esc(c.name)}${c.favorite ? " ★" : ""}</h1>
+            <p class="spirits">${esc(spiritsText)}</p>
+            <p class="detail-copy">${esc(c.description || "")}</p>
             ${
               c.bartesian_url
-                ? `<p><a href="${esc(c.bartesian_url)}" target="_blank" rel="noopener">Bartesian page ↗</a></p>`
+                ? `<p><a href="${esc(c.bartesian_url)}" target="_blank" rel="noopener">View on Bartesian ↗</a></p>`
                 : ""
             }
           </div>
         </div>
 
+        <div class="detail-layout">
+          <div>
+            <p class="section-label">Description</p>
+            <p class="detail-copy">${esc(c.description || "No description yet.")}</p>
+            ${nutritionText ? `<p class="section-label">Nutrition</p><p class="detail-copy">${esc(nutritionText)}</p>` : ""}
+            ${alcoholText ? `<p class="section-label">Alcohol</p><p class="detail-copy">${esc(alcoholText)}</p>` : ""}
+          </div>
+          <div>
+            <p class="section-label">Best served with</p>
+            <div class="meta-stack">
+              ${metaRow("Base spirit", spiritsText)}
+              ${metaRow("Glassware", c.glassware)}
+              ${metaRow("Garnish", c.garnish)}
+              ${metaRow("Pairs with", c.pairs_with)}
+              ${metaRow("Avg rating", starsLabel(c.avg_rating) + (c.rating_count ? ` (${c.rating_count})` : ""))}
+            </div>
+          </div>
+        </div>
+
         <section class="inventory-box">
-          <h2>Inventory</h2>
+          <p class="section-label">Inventory</p>
           <p class="qty-display"><span data-qty>${c.quantity}</span> capsule${c.quantity === 1 ? "" : "s"}</p>
           <div class="qty-actions">
             <button type="button" data-qty-delta="-1" data-id="${c.id}">−</button>
@@ -214,29 +256,6 @@
             </button>
           </div>
         </section>
-
-        <dl class="meta-grid">
-          ${metaBlock("Glassware", c.glassware)}
-          ${metaBlock("Garnish", c.garnish)}
-          ${metaBlock("Pairs with", c.pairs_with)}
-          ${metaBlock(
-            "Nutrition",
-            nutrition
-              ? Object.entries(nutrition)
-                  .map(([k, v]) => k + ": " + v)
-                  .join(", ")
-              : c.nutrition_json
-          )}
-          ${metaBlock(
-            "Alcohol",
-            alcohol
-              ? Object.entries(alcohol)
-                  .map(([k, v]) => k + ": " + v)
-                  .join(", ")
-              : c.alcohol_json
-          )}
-          ${metaBlock("Avg rating", starsLabel(c.avg_rating) + (c.rating_count ? ` (${c.rating_count})` : ""))}
-        </dl>
 
         <section>
           <h2>Variety packs</h2>
@@ -274,6 +293,7 @@
       "scan",
       `
       <section class="panel">
+        <p class="section-label">Inventory</p>
         <h1>Scan barcode</h1>
         <p class="lede">Scaffold: type or paste a barcode. Camera scanning can come later.</p>
         <ul class="plain muted">
@@ -298,6 +318,7 @@
       "random",
       `
       <section class="panel">
+        <p class="section-label">Surprise</p>
         <h1>Randomizer</h1>
         <p class="lede">Pick an in-stock cocktail. Optionally narrow by spirit or favorites.</p>
         <form class="toolbar" data-random-form>
@@ -325,6 +346,7 @@
       "people",
       `
       <section class="panel">
+        <p class="section-label">Household</p>
         <h1>People</h1>
         <p class="lede">Raters for cocktail comments. Add household members or guests.</p>
         <ul class="plain">
@@ -344,6 +366,7 @@
       "settings",
       `
       <section class="panel">
+        <p class="section-label">Admin</p>
         <h1>Settings</h1>
         <h2>Export for GitHub</h2>
         <p>Writes cocktail/pack <code>.txt</code> files (and ratings/people JSON in the zip). Copy into <code>data/</code>, run <code>node scripts/import-data.js</code>, then commit.</p>
@@ -362,8 +385,9 @@
       "list",
       `
       <section class="panel">
+        <p class="section-label">Legal</p>
         <h1>Disclaimer</h1>
-        <p>This site is an unofficial personal inventory and cocktail reference for private, non-commercial use.</p>
+        <p>This site is a <strong>private</strong> household inventory and cocktail reference. It is not a public product or service.</p>
         <p>It is <strong>not affiliated with, endorsed by, or connected to Bartesian</strong> (or any related company).</p>
         <p>See <code>DISCLAIMER.md</code> in the repository for the full notice.</p>
       </section>
@@ -560,8 +584,9 @@
                 </div>
                 <div class="row-body">
                   <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}</div>
-                  <div class="row-meta">${esc(spiritsText || "—")} · qty ${c.quantity} · ${starsLabel(c.avg_rating)}</div>
+                  <div class="row-meta">${esc(spiritsText || "—")} · ${starsLabel(c.avg_rating)}</div>
                 </div>
+                <div class="row-qty">${c.quantity}</div>
               </a>`;
             })
             .join("") || `<p class="empty">No cocktails match.</p>`;
