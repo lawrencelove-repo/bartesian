@@ -1,0 +1,58 @@
+# Punch list
+
+Status for the Bartesian inventory + cocktail menu site (static HTML/JS on GitHub Pages, SQLite in the browser).
+
+See [PLAN.md](PLAN.md) for architecture and data model.
+
+## Done in this pass (scaffold)
+
+- [x] Stack mirrored from recipes: HTML/JS, sql.js SQLite, IndexedDB, seed `data/` → `js/seed-data.js`, export for manual GitHub update
+- [x] Folder layout (`css/`, `js/`, `data/cocktails/`, `data/packs/`, `images/`, `assets/`, `exports/`, `scripts/`)
+- [x] Cocktail list (search, filter in-stock / favorites / spirit, sort name / quantity / rating / spirit)
+- [x] Cocktail detail (metadata placeholders, inventory ± / Use 1, variety packs, ratings by person)
+- [x] Barcode apply: capsule −1, case +N, variety pack restock (manual entry UI)
+- [x] Randomizer (in-stock; optional spirit / favorites)
+- [x] People management (add raters)
+- [x] Settings: export zip/folder + reset local DB
+- [x] Sample seed: 4 cocktails + 1 variety pack
+- [x] Disclaimer + non-affiliation note
+- [x] Service worker shell + favicons / webmanifest stubs
+
+## Next
+
+### Catalog & admin
+
+- [ ] **Cocktail admin page** — create / edit / disable cocktails (name, image, spirits, description, nutrition, alcohol, glassware, garnish, pairs-with, Bartesian URL, barcodes, case qty)
+- [ ] Variety-pack admin (create/edit packs and item quantities)
+- [ ] Real Bartesian catalog + photos under `images/`
+- [ ] Richer metadata editors (structured nutrition / alcohol fields)
+
+### Cookies (mahjong-tools pattern)
+
+- [ ] Cookie-backed settings module like [mahjong-tools `js/settings.js`](https://github.com/lawrencelove-repo/mahjong-tools/blob/main/js/settings.js): `path=/`, `SameSite=Lax`, long `max-age`, read/write helpers
+- [ ] Persist UI prefs in cookies (e.g. last filters/sort, favorites-only default, selected person for ratings, UI scale / theme if added)
+- [ ] Soft site access gate cookie (optional; recipes-style password hash + cookie) if you want a deterrent on public Pages
+
+### Safari & iPad
+
+- [ ] Safari / iPadOS pass: layout, touch targets, safe-area insets (`viewport-fit=cover`, `env(safe-area-inset-*)`)
+- [ ] Verify sql.js + IndexedDB persistence on Safari (private mode caveats documented)
+- [ ] iPad-friendly nav and forms (no hover-only controls; large tap targets)
+- [ ] PWA / Add to Home Screen polish on iPad Safari (manifest, apple-touch-icon already stubbed)
+- [ ] Camera barcode scan that works on Safari when that feature lands (`getUserMedia` + fallbacks)
+
+### Inventory & scan
+
+- [ ] Camera barcode scanning (beyond manual entry)
+- [ ] Inventory history UI (from `inventory_log`)
+- [ ] Pack/case restock confirmations and undo
+
+### Polish
+
+- [ ] Favorites UX polish
+- [ ] Full export parity (ratings/people round-trip into seed if desired)
+- [ ] Enable GitHub Pages from repo root and smoke on a real `*.github.io` URL
+
+## Hosting notes
+
+GitHub Pages cannot write a shared SQLite file for all visitors. Canonical data stays in git; each browser keeps a local IndexedDB copy until an admin exports and pushes.

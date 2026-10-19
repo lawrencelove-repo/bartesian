@@ -2,7 +2,7 @@
 
 Personal Bartesian capsule **inventory** + cocktail menu site: static HTML/JS for GitHub Pages, with SQLite (`sql.js`) in the browser.
 
-See [PLAN.md](PLAN.md) for architecture and data model.
+See [PLAN.md](PLAN.md) for architecture and [PUNCHLIST.md](PUNCHLIST.md) for the living checklist.
 
 ## Quick start
 

@@ -136,13 +136,28 @@ Items:
 | `#/random` | Randomizer with spirit / favorites / in-stock |
 | `#/people` | Manage people for ratings |
 | `#/settings` | Export data for GitHub update; reset local DB |
+| `#/admin` *(planned)* | Cocktail (and pack) admin — create/edit catalog |
 | `#/disclaimer` | Non-affiliation notice |
+
+## Checklist
+
+Living punch list: **[PUNCHLIST.md](PUNCHLIST.md)** (includes cocktail admin, cookies, Safari/iPad).
 
 ## Scaffold vs later
 
 **In this PR (scaffold):** schema, seed pipeline, list/detail/scan/random/settings shells, inventory ± and barcode apply, sample cocktails + one variety pack, GitHub Pages-ready static site.
 
-**Next passes:** richer cocktail metadata UI, camera scan, polish filters/sort, favorites, full export parity, real catalog + images, password gate if desired.
+**Next passes (see PUNCHLIST):** cocktail admin page, mahjong-tools–style cookie settings, Safari/iPad optimization, camera scan, real catalog + images, optional soft access gate.
+
+## Cross-cutting requirements (added)
+
+### Cookies (like mahjong-tools)
+
+Prefer the [mahjong-tools](https://github.com/lawrencelove-repo/mahjong-tools) settings cookie pattern (`js/settings.js`): dedicated cookies with `path=/`, `SameSite=Lax`, long `max-age`, plus read/write helpers. Use for UI prefs (filters, selected person, scale/theme). Optional recipes-style soft password cookie can sit alongside if desired.
+
+### Safari / iPad
+
+Treat Safari and iPad as first-class targets: safe-area insets, touch-sized controls, no hover-only actions, and verified sql.js/IndexedDB behavior on iPadOS Safari (including Add to Home Screen).
 
 ## Defaults (assumed unless you change them)
 
@@ -150,5 +165,6 @@ Items:
 - Ratings are 1–5 stars + optional comment, keyed by person.
 - Sort-by-spirit uses primary spirit name (first linked spirit).
 - “Available” filter = `quantity >= 1`.
-- Soft site password deferred (easy to add like recipes).
+- Cookie settings module + Safari/iPad polish are planned (not in scaffold yet).
+- Soft site password optional (recipes-style), deferred.
 - Public Pages from `main` / root (enable in repo Settings → Pages).
