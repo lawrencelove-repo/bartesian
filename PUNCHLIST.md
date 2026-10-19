@@ -136,6 +136,7 @@ Unified timeline of household cocktail activity — not just raw `inventory_log`
 **UI:**
 - [x] Per-item history only (no global menu entry): History button in detail Inventory box → `#/history/cocktail/:id` / `#/history/rimmer/:id` chronological feed, local datetime
 - [x] Admin history editing: Edit modal (timestamp + used-by free-text name → creates Person, stored as `person_id`; blank = none) and Delete with confirmation modal (quantities unchanged)
+- [x] One-time scratch reset (2026-10-19, no UI): data/seed zeroed + meta-guarded `scratch_reset_v1` purge clears quantities/favorites/restock/wishlist/history once per existing DB
 - [x] Back link from item History → item detail
 - [x] Empty state when no events yet
 

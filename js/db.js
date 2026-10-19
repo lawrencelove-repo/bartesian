@@ -323,6 +323,26 @@
     for (const sql of createSql) {
       try { exec(sql); changed++; } catch (_) {}
     }
+    // One-time scratch reset (2026-10-19): zero quantities, clear favorites,
+    // restock flags, wishlist, and all history. Guarded by a meta flag so it
+    // runs exactly once per existing DB; the zeroed seed keeps fresh DBs clean.
+    try {
+      const purged = queryOne("SELECT value FROM meta WHERE key = 'scratch_reset_v1'");
+      if (!purged || purged.value !== "1") {
+        const wipe = [
+          "DELETE FROM activity_log",
+          "DELETE FROM inventory_log",
+          "DELETE FROM wishlist_items",
+          "UPDATE cocktails SET quantity = 0, restock = 0, favorite = 0",
+          "UPDATE rimmers SET quantity = 0, restock = 0, favorite = 0",
+        ];
+        for (const sql of wipe) {
+          try { exec(sql); } catch (_) {}
+        }
+        exec("INSERT OR REPLACE INTO meta (key, value) VALUES ('scratch_reset_v1', '1')");
+        changed++;
+      }
+    } catch (_) {}
     // People: is_admin column + rename seed "Me" → "Lawrence" (once)
     try {
       const pcols = tableColumns("people");
@@ -705,6 +725,7 @@
       [String(SEED_BARCODE_REV)]
     );
     exec("INSERT OR REPLACE INTO meta (key, value) VALUES ('lawrence_seeded', '1')");
+    exec("INSERT OR REPLACE INTO meta (key, value) VALUES ('scratch_reset_v1', '1')");
     if (global.BARTESIAN_SEED_REV) {
       exec(
         "INSERT OR REPLACE INTO meta (key, value) VALUES ('applied_seed_rev', ?)",

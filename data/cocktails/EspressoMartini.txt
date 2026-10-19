@@ -21,7 +21,7 @@ Image: images/hero/espresso-martini.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 8
+Quantity: 0
 Capsule Barcode: 406905877
 Case Barcode: 850054919410
 Case Qty: 8

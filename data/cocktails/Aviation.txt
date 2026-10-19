@@ -21,7 +21,7 @@ Image: images/hero/aviation.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 8
+Quantity: 0
 Capsule Barcode: 57645
 Case Barcode: 850054919359
 Case Qty: 8
