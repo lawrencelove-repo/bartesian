@@ -23,5 +23,5 @@ Enabled: 1
 Favorite: 0
 Quantity: 0
 Capsule Barcode: 394324049
-Case Barcode: 
+Case Barcode: 850050482635
 Case Qty: 8

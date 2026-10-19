@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v13";
+  const APP_VERSION = "bartesian-v14";
 
   const root = document.getElementById("app");
   let cameraScanner = null;
@@ -758,7 +758,7 @@
           <input name="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Barcode" required ${state.cameraOn ? "" : "autofocus"} />
           <button type="submit">Look up</button>
         </form>
-        <p class="hint">USB scanners type into the field (Enter = look up). Capsule lids use the custom Bartesian decoder; retail case/pack codes use the browser BarcodeDetector when available.</p>
+        <p class="hint">USB scanners type into the field (Enter = look up). Capsule lids use the Bartesian decoder; case/pack labels use a built-in UPC/EAN decoder (works on iPad).</p>
         <div data-scan-result>${previewHtml}</div>
       </section>
     `

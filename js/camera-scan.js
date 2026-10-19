@@ -42,6 +42,13 @@
         }
       }
 
+      if (global.BartesianRetailBarcode) {
+        const retail = global.BartesianRetailBarcode.scanImageData(imageData);
+        if (retail) {
+          return { code: String(retail), source: "upc-ean" };
+        }
+      }
+
       const detector = await initDetector();
       if (detector) {
         try {
@@ -145,7 +152,18 @@
             }
           }
 
-          // 2) Retail barcodes (case / pack) via BarcodeDetector
+          // 2) Retail UPC-A / EAN-13 (works on iPad; no BarcodeDetector needed)
+          if (global.BartesianRetailBarcode) {
+            const retail = global.BartesianRetailBarcode.scanImageData(imageData);
+            if (retail) {
+              onStatus("Retail barcode " + retail);
+              emitStable(retail);
+              raf = requestAnimationFrame(tick);
+              return;
+            }
+          }
+
+          // 3) Optional native BarcodeDetector (Chrome etc.)
           if (detector) {
             try {
               const codes = await detector.detect(canvas);
@@ -191,11 +209,7 @@
       running = true;
       lastCandidate = "";
       lastCount = 0;
-      onStatus(
-        detector
-          ? "Point at a capsule lid or case barcode…"
-          : "Point at a capsule lid (retail detector unavailable)…"
-      );
+      onStatus("Point at a capsule lid or case UPC…");
       raf = requestAnimationFrame(tick);
     }
 

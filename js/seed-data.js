@@ -1638,7 +1638,7 @@ window.BARTESIAN_SEED = {
       "favorite": 0,
       "quantity": 0,
       "capsule_barcode": "394324049",
-      "case_barcode": "",
+      "case_barcode": "850050482635",
       "case_qty": 8,
       "shopify_product_id": "2029028048945",
       "shopify_variant_id": "15685650022449",

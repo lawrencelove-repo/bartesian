@@ -63,6 +63,8 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Admin `#/admin/barcodes` to associate codes; export includes `barcodes.json` + Capsule/Case fields
 - [x] Camera scanning: custom Bartesian Code128 C line scan + optional BarcodeDetector for retail GTINs
 - [x] iPadOS Take photo / Choose image / Files via `<input type="file" accept="image/*">` (+ optional live scan)
+- [x] Custom UPC-A/EAN-13 decoder for case/pack labels (iPad; no BarcodeDetector)
+- [x] Merge seed Case/Capsule barcodes into existing IndexedDB on launch
 - [ ] Inventory history UI (from `inventory_log`)
 - [ ] Pack/case restock undo
 

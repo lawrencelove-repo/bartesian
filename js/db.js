@@ -3,6 +3,8 @@
   const IDB_STORE = "kv";
   const DB_KEY = "database";
   const SCHEMA_VERSION = 8;
+  /** Bump when seed barcodes should be re-merged into an existing local DB. */
+  const SEED_BARCODE_REV = 1;
 
   const SEED_SQL = `
     CREATE TABLE IF NOT EXISTS meta (
@@ -441,6 +443,108 @@
     db.run("PRAGMA foreign_keys = ON");
     db.run(SEED_SQL);
     seedAll();
+    exec(
+      "INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_barcode_rev', ?)",
+      [String(SEED_BARCODE_REV)]
+    );
+  }
+
+  /**
+   * Upsert capsule/case/pack barcodes from seed without wiping inventory.
+   * Needed when .txt / seed-data.js gain Case Barcode values after first install.
+   */
+  function mergeSeedBarcodes() {
+    const seed = global.BARTESIAN_SEED || {};
+    let changed = 0;
+
+    for (const c of seed.cocktails || []) {
+      if (!c.slug) continue;
+      const row = queryOne("SELECT id FROM cocktails WHERE slug = ?", [c.slug]);
+      if (!row) continue;
+      const cocktailId = row.id;
+      if (c.capsule_barcode) {
+        const code = String(c.capsule_barcode).trim();
+        if (code) {
+          const existing = queryOne("SELECT id FROM barcodes WHERE code = ?", [code]);
+          if (!existing) {
+            exec(
+              "INSERT INTO barcodes (code, kind, cocktail_id, case_qty) VALUES (?, 'capsule', ?, 1)",
+              [code, cocktailId]
+            );
+            changed++;
+          }
+        }
+      }
+      if (c.case_barcode) {
+        const code = String(c.case_barcode).trim();
+        if (code) {
+          const existing = queryOne("SELECT id, kind, cocktail_id FROM barcodes WHERE code = ?", [
+            code,
+          ]);
+          if (!existing) {
+            exec(
+              "INSERT INTO barcodes (code, kind, cocktail_id, case_qty) VALUES (?, 'case', ?, ?)",
+              [code, cocktailId, Number(c.case_qty) || 8]
+            );
+            changed++;
+          } else if (existing.kind !== "case" || existing.cocktail_id !== cocktailId) {
+            exec(
+              `UPDATE barcodes SET kind = 'case', cocktail_id = ?, pack_id = NULL, rimmer_id = NULL,
+               case_qty = ? WHERE code = ?`,
+              [cocktailId, Number(c.case_qty) || 8, code]
+            );
+            changed++;
+          }
+        }
+      }
+    }
+
+    for (const p of seed.packs || []) {
+      if (!p.slug || !p.barcode) continue;
+      const code = String(p.barcode).trim();
+      if (!code) continue;
+      const pack = queryOne("SELECT id FROM packs WHERE slug = ?", [p.slug]);
+      if (!pack) continue;
+      const existing = queryOne("SELECT id FROM barcodes WHERE code = ?", [code]);
+      if (!existing) {
+        exec(
+          "INSERT INTO barcodes (code, kind, pack_id, case_qty) VALUES (?, 'variety_pack', ?, 0)",
+          [code, pack.id]
+        );
+        changed++;
+      }
+    }
+
+    for (const r of seed.rimmers || []) {
+      if (!r.slug || !r.barcode) continue;
+      const code = String(r.barcode).trim();
+      if (!code) continue;
+      const rim = queryOne("SELECT id FROM rimmers WHERE slug = ?", [r.slug]);
+      if (!rim) continue;
+      const existing = queryOne("SELECT id FROM barcodes WHERE code = ?", [code]);
+      if (!existing) {
+        exec(
+          "INSERT INTO barcodes (code, kind, rimmer_id, case_qty) VALUES (?, 'rimmer', ?, 1)",
+          [code, rim.id]
+        );
+        changed++;
+      }
+    }
+
+    return changed;
+  }
+
+  function maybeMergeSeedBarcodes() {
+    const ver = queryOne("SELECT value FROM meta WHERE key = 'seed_barcode_rev'");
+    const revStale = !ver || Number(ver.value) !== SEED_BARCODE_REV;
+    const changed = mergeSeedBarcodes();
+    if (changed || revStale) {
+      exec(
+        "INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_barcode_rev', ?)",
+        [String(SEED_BARCODE_REV)]
+      );
+    }
+    return changed + (revStale ? 1 : 0);
   }
 
   function rowToCocktail(row) {
@@ -499,6 +603,8 @@
         if (!ver || Number(ver.value) !== SCHEMA_VERSION) {
           db.close();
           createFreshDb();
+          await persist();
+        } else if (maybeMergeSeedBarcodes() > 0) {
           await persist();
         }
       } else {
@@ -736,9 +842,21 @@
     },
 
     findBarcode(code) {
-      const trimmed = String(code || "").trim();
+      const trimmed = String(code || "")
+        .trim()
+        .replace(/\s+/g, "");
       if (!trimmed) return null;
-      return queryOne("SELECT * FROM barcodes WHERE code = ?", [trimmed]);
+      let row = queryOne("SELECT * FROM barcodes WHERE code = ?", [trimmed]);
+      if (row) return row;
+      // UPC-A ↔ EAN-13 (leading zero)
+      if (/^\d{12}$/.test(trimmed)) {
+        row = queryOne("SELECT * FROM barcodes WHERE code = ?", ["0" + trimmed]);
+        if (row) return row;
+      } else if (/^0\d{12}$/.test(trimmed)) {
+        row = queryOne("SELECT * FROM barcodes WHERE code = ?", [trimmed.slice(1)]);
+        if (row) return row;
+      }
+      return null;
     },
 
     findCocktailBySlug(slug) {
