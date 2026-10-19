@@ -741,39 +741,153 @@
       return queryOne("SELECT * FROM barcodes WHERE code = ?", [trimmed]);
     },
 
+    findCocktailBySlug(slug) {
+      if (!slug) return null;
+      const row = queryOne("SELECT id FROM cocktails WHERE slug = ?", [slug]);
+      return row ? this.getCocktail(row.id) : null;
+    },
+
+    listAllCocktails() {
+      return query(listSelect + " ORDER BY c.name COLLATE NOCASE").map(rowToCocktail);
+    },
+
+    listPacks() {
+      return query("SELECT * FROM packs ORDER BY name COLLATE NOCASE");
+    },
+
+    getPack(id) {
+      return queryOne("SELECT * FROM packs WHERE id = ?", [id]);
+    },
+
+    listBarcodes() {
+      return query(
+        `SELECT b.*,
+           c.name AS cocktail_name, c.slug AS cocktail_slug,
+           p.name AS pack_name, p.slug AS pack_slug,
+           r.name AS rimmer_name, r.slug AS rimmer_slug
+         FROM barcodes b
+         LEFT JOIN cocktails c ON c.id = b.cocktail_id
+         LEFT JOIN packs p ON p.id = b.pack_id
+         LEFT JOIN rimmers r ON r.id = b.rimmer_id
+         ORDER BY b.kind, b.code`
+      );
+    },
+
     /**
-     * Apply a barcode scan.
-     * capsule → −1; case → +case_qty; variety_pack → + each pack item qty
+     * Upsert a barcode association (admin).
+     * kind: capsule | case | variety_pack | rimmer
      */
-    async applyBarcode(code) {
-      const bc = this.findBarcode(code);
-      if (!bc) {
-        return { ok: false, error: "Unknown barcode: " + code };
+    async upsertBarcode({ code, kind, cocktailId, packId, rimmerId, caseQty }) {
+      const trimmed = String(code || "").trim();
+      if (!trimmed) throw new Error("Barcode required");
+      if (!kind) throw new Error("Kind required");
+      const existing = queryOne("SELECT id FROM barcodes WHERE code = ?", [trimmed]);
+      const qty = Number(caseQty) || 8;
+      if (existing) {
+        exec(
+          `UPDATE barcodes SET kind = ?, cocktail_id = ?, pack_id = ?, rimmer_id = ?, case_qty = ?
+           WHERE code = ?`,
+          [
+            kind,
+            cocktailId || null,
+            packId || null,
+            rimmerId || null,
+            kind === "case" ? qty : kind === "capsule" || kind === "rimmer" ? 1 : 0,
+            trimmed,
+          ]
+        );
+      } else {
+        exec(
+          `INSERT INTO barcodes (code, kind, cocktail_id, pack_id, rimmer_id, case_qty)
+           VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            trimmed,
+            kind,
+            cocktailId || null,
+            packId || null,
+            rimmerId || null,
+            kind === "case" ? qty : kind === "capsule" || kind === "rimmer" ? 1 : 0,
+          ]
+        );
       }
+      await persist();
+      return this.findBarcode(trimmed);
+    },
+
+    async deleteBarcode(code) {
+      exec("DELETE FROM barcodes WHERE code = ?", [String(code || "").trim()]);
+      await persist();
+    },
+
+    /**
+     * Apply a resolved scan preview (confirm step).
+     * Capsule/rimmer default −1; pass delta +1 to restock one.
+     */
+    async applyResolved(preview) {
+      if (!preview || !preview.ok || !preview.proposed || !preview.proposed.length) {
+        return { ok: false, error: (preview && preview.error) || "Nothing to apply." };
+      }
+      const code = preview.code || "";
       const changes = [];
-      if (bc.kind === "capsule") {
-        const next = await this.adjustQuantity(bc.cocktail_id, -1, "use_capsule", bc.code);
-        const c = this.getCocktail(bc.cocktail_id);
-        changes.push({ cocktail: c, delta: -1, quantity: next });
-      } else if (bc.kind === "case") {
-        const qty = Number(bc.case_qty) || 8;
-        const next = await this.adjustQuantity(bc.cocktail_id, qty, "restock_case", bc.code);
-        const c = this.getCocktail(bc.cocktail_id);
-        changes.push({ cocktail: c, delta: qty, quantity: next });
-      } else if (bc.kind === "variety_pack") {
-        const items = this.getPackItems(bc.pack_id);
-        for (const item of items) {
-          const next = await this.adjustQuantity(item.id, item.qty, "restock_pack", bc.code);
+
+      // Persist romkal-discovered capsule link so export can capture it
+      if (preview.kind === "capsule" && preview.source === "romkal" && preview.proposed[0]) {
+        const id = preview.proposed[0].id;
+        if (!this.findBarcode(code)) {
+          await this.upsertBarcode({
+            code,
+            kind: "capsule",
+            cocktailId: id,
+          });
+        }
+      }
+
+      for (const row of preview.proposed) {
+        if (row.type === "rimmer") {
+          const next = await this.adjustRimmerQuantity(
+            row.id,
+            row.delta,
+            row.delta < 0 ? "use_rimmer" : "restock_rimmer",
+            code
+          );
           changes.push({
-            cocktail: this.getCocktail(item.id),
-            delta: item.qty,
+            name: row.name,
+            type: "rimmer",
+            delta: row.delta,
+            quantity: next,
+          });
+        } else {
+          const reason =
+            preview.kind === "case"
+              ? "restock_case"
+              : preview.kind === "variety_pack"
+                ? "restock_pack"
+                : row.delta < 0
+                  ? "use_capsule"
+                  : "restock_capsule";
+          const next = await this.adjustQuantity(row.id, row.delta, reason, code);
+          changes.push({
+            name: row.name,
+            type: "cocktail",
+            delta: row.delta,
             quantity: next,
           });
         }
-      } else {
-        return { ok: false, error: "Unsupported barcode kind: " + bc.kind };
       }
-      return { ok: true, kind: bc.kind, changes };
+      return { ok: true, kind: preview.kind, changes };
+    },
+
+    /**
+     * Apply a barcode scan immediately (legacy helper).
+     * Prefer resolve + applyResolved for confirm UX.
+     */
+    async applyBarcode(code, opts) {
+      const barcodes = global.BartesianBarcodes;
+      if (!barcodes) {
+        return { ok: false, error: "Barcode module not loaded." };
+      }
+      const preview = barcodes.resolve(this, code, opts || {});
+      return this.applyResolved(preview);
     },
 
     pickRandom({ spirit = "", favoritesOnly = false, availableOnly = true } = {}) {
@@ -788,7 +902,8 @@
     },
 
     exportSnapshot() {
-      const cocktails = this.listCocktails({ sort: "name" }).map((c) => {
+      // Include disabled cocktails so barcode associations export fully
+      const cocktails = this.listAllCocktails().map((c) => {
         const full = this.getCocktail(c.id);
         const capsule = queryOne(
           "SELECT code FROM barcodes WHERE cocktail_id = ? AND kind = 'capsule'",
@@ -802,10 +917,10 @@
           ...full,
           capsule_barcode: capsule ? capsule.code : "",
           case_barcode: caseRow ? caseRow.code : "",
-          case_qty: caseRow ? caseRow.case_qty : 8,
+          case_qty: caseRow ? caseRow.case_qty : full.case_qty != null ? full.case_qty : 8,
         };
       });
-      const packs = query("SELECT * FROM packs ORDER BY name COLLATE NOCASE").map((p) => {
+      const packs = this.listPacks().map((p) => {
         const barcode = queryOne(
           "SELECT code FROM barcodes WHERE pack_id = ? AND kind = 'variety_pack'",
           [p.id]
@@ -835,6 +950,7 @@
         cocktails,
         packs,
         rimmers,
+        barcodes: this.listBarcodes(),
         ratings: query(
           `SELECT r.*, p.name AS person_name, c.slug AS cocktail_slug
            FROM ratings r

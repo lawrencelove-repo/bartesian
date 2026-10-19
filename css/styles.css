@@ -492,6 +492,116 @@ button.danger {
   flex: 1 1 200px;
 }
 
+.scan-card {
+  margin-top: 1rem;
+  padding: 1.1rem 1.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+}
+
+.scan-lines {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.scan-line {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.scan-line .thumb {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.scan-delta,
+.scan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.scan-delta .ghost.on {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  background: #e8f7fa;
+}
+
+.scan-decoded {
+  margin-top: 0.5rem;
+  font-size: 0.92rem;
+}
+
+.admin-barcode-form {
+  display: grid;
+  gap: 0.65rem;
+  margin: 1rem 0 1.25rem;
+  max-width: 28rem;
+}
+
+.admin-barcode-form label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.admin-barcode-form label.is-hidden {
+  display: none;
+}
+
+.admin-barcode-form input,
+.admin-barcode-form select {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 0.45rem 0.4rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.data-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.pill {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  background: #e8f7fa;
+  color: var(--accent-ink);
+}
+
 .random-card {
   margin-top: 1rem;
   padding: 1.15rem 1.2rem;

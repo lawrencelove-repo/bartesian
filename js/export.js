@@ -98,6 +98,7 @@
     }
     zip.file("ratings.json", JSON.stringify(snapshot.ratings || [], null, 2));
     zip.file("people.json", JSON.stringify(snapshot.people || [], null, 2));
+    zip.file("barcodes.json", JSON.stringify(snapshot.barcodes || [], null, 2));
     const blob = await zip.generateAsync({ type: "blob" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);

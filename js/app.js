@@ -12,6 +12,10 @@
     flash: "",
     randomSpirit: "",
     randomFavoritesOnly: false,
+    scanPreview: null,
+    scanDelta: -1,
+    adminCode: "",
+    adminKind: "capsule",
   };
 
   function esc(s) {
@@ -37,6 +41,8 @@
     if (parts[0] === "random") return { view: "random" };
     if (parts[0] === "people") return { view: "people" };
     if (parts[0] === "settings") return { view: "settings" };
+    if (parts[0] === "admin" && parts[1] === "barcodes") return { view: "admin-barcodes" };
+    if (parts[0] === "admin") return { view: "admin-barcodes" };
     if (parts[0] === "disclaimer") return { view: "disclaimer" };
     return { view: "list" };
   }
@@ -66,6 +72,7 @@
       ["scan", "#/scan", "Scan"],
       ["random", "#/random", "Random"],
       ["people", "#/people", "People"],
+      ["admin-barcodes", "#/admin/barcodes", "Barcodes"],
       ["settings", "#/settings", "Settings"],
     ];
     return `
@@ -525,25 +532,168 @@
     );
   }
 
+  function decodedMetaHtml(decoded) {
+    if (!decoded) return "";
+    return `<div class="scan-decoded muted">
+      <p>Decoded capsule · Drink ID <strong>${esc(decoded.drinkId)}</strong>
+        · ${esc(decoded.glass)}
+        ${decoded.spirits && decoded.spirits.length ? " · " + esc(decoded.spirits.join(", ")) : ""}
+        ${decoded.romkalName ? " · map: " + esc(decoded.romkalName) : ""}
+      </p>
+      <p class="hint">Format: <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal/bartesian_barcode</a></p>
+    </div>`;
+  }
+
+  function scanPreviewHtml(preview) {
+    if (!preview) return "";
+    if (!preview.ok) {
+      return `
+        <div class="scan-card">
+          <p class="error">${esc(preview.error)}</p>
+          ${decodedMetaHtml(preview.decoded)}
+          ${
+            preview.unknown
+              ? `<p><a href="#/admin/barcodes" data-go="#/admin/barcodes" data-admin-prefill="${esc(preview.code)}">Associate this code →</a></p>`
+              : ""
+          }
+        </div>`;
+    }
+
+    const rows = (preview.proposed || [])
+      .map(
+        (p) => `
+        <li class="scan-line">
+          <div class="thumb ${p.image ? "" : "thumb-empty"}">${p.image ? `<img src="${esc(p.image)}" alt="">` : ""}</div>
+          <div>
+            <strong>${esc(p.name)}</strong>
+            <span class="muted"> ${p.delta >= 0 ? "+" : ""}${p.delta} → ${p.next}</span>
+          </div>
+        </li>`
+      )
+      .join("");
+
+    const adjust =
+      preview.adjustable
+        ? `<div class="scan-delta" role="group" aria-label="Quantity change">
+            <button type="button" class="ghost ${state.scanDelta < 0 ? "on" : ""}" data-scan-delta="-1">Use (−1)</button>
+            <button type="button" class="ghost ${state.scanDelta > 0 ? "on" : ""}" data-scan-delta="1">Restock (+1)</button>
+          </div>`
+        : `<p class="muted">Restock from case / pack (confirm to apply).</p>`;
+
+    return `
+      <div class="scan-card" data-scan-preview>
+        <p class="ok"><strong>${esc(preview.kindLabel)}</strong> · ${esc(preview.targetName)}
+          ${preview.source === "romkal" ? '<span class="pill">auto-matched</span>' : ""}
+        </p>
+        ${decodedMetaHtml(preview.decoded)}
+        ${adjust}
+        <ul class="scan-lines">${rows}</ul>
+        <div class="scan-actions">
+          <button type="button" data-scan-confirm>Confirm</button>
+          <button type="button" class="ghost" data-scan-cancel>Cancel</button>
+        </div>
+      </div>`;
+  }
+
   function renderScan() {
+    const previewHtml = scanPreviewHtml(state.scanPreview);
     return shell(
       "scan",
       `
       <section class="panel">
         <p class="section-label">Inventory</p>
         <h1>Scan barcode</h1>
-        <p class="lede">Scaffold: type or paste a barcode. Camera scanning can come later.</p>
+        <p class="lede">Scan or type a capsule, rimmer, single-flavor case, or variety-pack barcode. Nothing changes until you confirm.</p>
         <ul class="plain muted">
-          <li>Capsule → subtract 1</li>
-          <li>Case → add case qty (usually 8)</li>
-          <li>Variety pack → add each included cocktail</li>
+          <li>Capsule / rimmer → default <strong>−1</strong> (flip to +1 before confirm)</li>
+          <li>Case → +case qty for that cocktail</li>
+          <li>Variety pack → + each included cocktail</li>
         </ul>
-        <form class="scan-form" data-scan-form>
+        <form class="scan-form" data-scan-lookup>
           <input name="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Barcode" required autofocus />
-          <button type="submit">Apply</button>
+          <button type="submit">Look up</button>
         </form>
-        <p class="hint">Sample capsule: <code>850000000001</code> · case: <code>850000000101</code> · variety: <code>850000009001</code></p>
-        <div data-scan-result></div>
+        <p class="hint">USB scanners work as keyboard input (press Enter to look up). Capsule codes decode via the <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal bit map</a> + drink list.</p>
+        <div data-scan-result>${previewHtml}</div>
+      </section>
+    `
+    );
+  }
+
+  function renderAdminBarcodes() {
+    const cocktails = BartesianDB.listAllCocktails();
+    const packs = BartesianDB.listPacks();
+    const rimmers = BartesianDB.listRimmers({});
+    const barcodes = BartesianDB.listBarcodes();
+    const decoded = state.adminCode ? BartesianBarcodes.decodeCapsule(state.adminCode) : null;
+    const preselectSlug = decoded && decoded.slug ? decoded.slug : "";
+
+    const cocktailOpts = cocktails
+      .map(
+        (c) =>
+          `<option value="${c.id}" ${preselectSlug && c.slug === preselectSlug ? "selected" : ""}>${esc(c.name)}${c.enabled ? "" : " (disabled)"}</option>`
+      )
+      .join("");
+    const packOpts = packs.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("");
+    const rimmerOpts = rimmers.map((r) => `<option value="${r.id}">${esc(r.name)}</option>`).join("");
+
+    const table = barcodes.length
+      ? `<table class="data-table">
+          <thead><tr><th>Code</th><th>Kind</th><th>Target</th><th></th></tr></thead>
+          <tbody>
+            ${barcodes
+              .map((b) => {
+                const target =
+                  b.cocktail_name || b.pack_name || b.rimmer_name || "—";
+                return `<tr>
+                  <td><code>${esc(b.code)}</code></td>
+                  <td>${esc(BartesianBarcodes.kindLabel(b.kind))}</td>
+                  <td>${esc(target)}</td>
+                  <td><button type="button" class="ghost danger" data-barcode-delete="${esc(b.code)}">Remove</button></td>
+                </tr>`;
+              })
+              .join("")}
+          </tbody>
+        </table>`
+      : `<p class="muted">No local barcode associations yet. Capsule scans can still auto-match via the romkal drink map.</p>`;
+
+    return shell(
+      "admin-barcodes",
+      `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Barcode associations</h1>
+        <p class="lede">Link a scanned code to a cocktail, case, variety pack, or rimmer. Capsule lid numbers are decoded with <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal’s format</a>; known pods auto-suggest a cocktail. Export from Settings writes codes into <code>data/</code> + <code>barcodes.json</code> for git.</p>
+
+        <form class="admin-barcode-form" data-admin-barcode>
+          <label>Barcode
+            <input name="code" type="text" inputmode="numeric" autocomplete="off" required value="${esc(state.adminCode)}" data-admin-code />
+          </label>
+          <label>Kind
+            <select name="kind" data-admin-kind>
+              <option value="capsule" ${state.adminKind === "capsule" ? "selected" : ""}>Capsule</option>
+              <option value="case" ${state.adminKind === "case" ? "selected" : ""}>Case (single flavor)</option>
+              <option value="variety_pack" ${state.adminKind === "variety_pack" ? "selected" : ""}>Variety pack</option>
+              <option value="rimmer" ${state.adminKind === "rimmer" ? "selected" : ""}>Rimmer</option>
+            </select>
+          </label>
+          <label class="${state.adminKind === "variety_pack" || state.adminKind === "rimmer" ? "is-hidden" : ""}" data-admin-cocktail-wrap>Cocktail
+            <select name="cocktail_id">${cocktailOpts}</select>
+          </label>
+          <label class="${state.adminKind === "variety_pack" ? "" : "is-hidden"}" data-admin-pack-wrap>Pack
+            <select name="pack_id">${packOpts}</select>
+          </label>
+          <label class="${state.adminKind === "rimmer" ? "" : "is-hidden"}" data-admin-rimmer-wrap>Rimmer
+            <select name="rimmer_id">${rimmerOpts}</select>
+          </label>
+          <label class="${state.adminKind === "case" ? "" : "is-hidden"}" data-admin-qty-wrap>Case qty
+            <input name="case_qty" type="number" min="1" max="48" value="8" />
+          </label>
+          <button type="submit">Save association</button>
+        </form>
+        ${decodedMetaHtml(decoded)}
+        <h2>Saved mappings</h2>
+        ${table}
       </section>
     `
     );
@@ -606,9 +756,11 @@
         <p class="section-label">Admin</p>
         <h1>Settings</h1>
         <h2>Export for GitHub</h2>
-        <p>Writes cocktail/pack/rimmer <code>.txt</code> files (and ratings/people JSON in the zip). Copy into <code>data/</code>, run <code>node scripts/import-data.js</code>, then commit.</p>
+        <p>Writes cocktail/pack/rimmer <code>.txt</code> files (including capsule/case barcodes), plus <code>barcodes.json</code>, ratings, and people. Copy into <code>data/</code>, run <code>node scripts/import-data.js</code>, then commit.</p>
         <button type="button" data-export>Export data</button>
         <p class="hint" data-export-status></p>
+        <h2>Barcodes</h2>
+        <p><a href="#/admin/barcodes" data-go="#/admin/barcodes">Associate scanned codes</a> with cocktails, cases, packs, or rimmers. Capsule lid numbers auto-match when present in the romkal drink map.</p>
         <h2>Local database</h2>
         <p>Clear IndexedDB and re-seed from <code>js/seed-data.js</code>.</p>
         <button type="button" class="danger" data-reset>Reset local DB</button>
@@ -638,6 +790,7 @@
     else if (route.view === "rimmers") root.innerHTML = renderRimmers();
     else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
     else if (route.view === "scan") root.innerHTML = renderScan();
+    else if (route.view === "admin-barcodes") root.innerHTML = renderAdminBarcodes();
     else if (route.view === "random") root.innerHTML = renderRandom();
     else if (route.view === "people") root.innerHTML = renderPeople();
     else if (route.view === "settings") root.innerHTML = renderSettings();
@@ -693,6 +846,76 @@
       return;
     }
 
+    const scanDeltaBtn = e.target.closest("[data-scan-delta]");
+    if (scanDeltaBtn) {
+      state.scanDelta = Number(scanDeltaBtn.getAttribute("data-scan-delta"));
+      if (state.scanPreview && state.scanPreview.code) {
+        state.scanPreview = BartesianBarcodes.resolve(BartesianDB, state.scanPreview.code, {
+          capsuleDelta: state.scanDelta,
+          rimmerDelta: state.scanDelta,
+        });
+      }
+      const box = root.querySelector("[data-scan-result]");
+      if (box) box.innerHTML = scanPreviewHtml(state.scanPreview);
+      return;
+    }
+
+    if (e.target.closest("[data-scan-cancel]")) {
+      state.scanPreview = null;
+      state.scanDelta = -1;
+      const box = root.querySelector("[data-scan-result]");
+      if (box) box.innerHTML = "";
+      const input = root.querySelector("[data-scan-lookup] input[name=code]");
+      if (input) {
+        input.value = "";
+        input.focus();
+      }
+      return;
+    }
+
+    if (e.target.closest("[data-scan-confirm]")) {
+      if (!state.scanPreview || !state.scanPreview.ok) return;
+      const result = await BartesianDB.applyResolved(state.scanPreview);
+      const box = root.querySelector("[data-scan-result]");
+      if (!box) return;
+      if (!result.ok) {
+        box.innerHTML = `<p class="error">${esc(result.error)}</p>`;
+        return;
+      }
+      box.innerHTML = `
+        <p class="ok">Applied <strong>${esc(BartesianBarcodes.kindLabel(result.kind))}</strong>:</p>
+        <ul class="plain">
+          ${result.changes
+            .map(
+              (ch) =>
+                `<li>${esc(ch.name)}: ${ch.delta >= 0 ? "+" : ""}${ch.delta} → ${ch.quantity}</li>`
+            )
+            .join("")}
+        </ul>`;
+      state.scanPreview = null;
+      state.scanDelta = -1;
+      const form = root.querySelector("[data-scan-lookup]");
+      if (form) form.reset();
+      const input = root.querySelector("[data-scan-lookup] input[name=code]");
+      if (input) input.focus();
+      return;
+    }
+
+    const delBc = e.target.closest("[data-barcode-delete]");
+    if (delBc) {
+      const code = delBc.getAttribute("data-barcode-delete");
+      if (!confirm("Remove barcode " + code + "?")) return;
+      await BartesianDB.deleteBarcode(code);
+      render();
+      return;
+    }
+
+    const prefill = e.target.closest("[data-admin-prefill]");
+    if (prefill) {
+      state.adminCode = prefill.getAttribute("data-admin-prefill") || "";
+      state.adminKind = "capsule";
+    }
+
     if (e.target.closest("[data-export]")) {
       const status = root.querySelector("[data-export-status]");
       try {
@@ -743,29 +966,43 @@
       return;
     }
 
-    const scanForm = e.target.closest("[data-scan-form]");
-    if (scanForm) {
+    const scanLookup = e.target.closest("[data-scan-lookup]");
+    if (scanLookup) {
       e.preventDefault();
-      const code = new FormData(scanForm).get("code");
-      const result = await BartesianDB.applyBarcode(code);
+      const code = new FormData(scanLookup).get("code");
+      state.scanDelta = -1;
+      state.scanPreview = BartesianBarcodes.resolve(BartesianDB, code, {
+        capsuleDelta: state.scanDelta,
+        rimmerDelta: state.scanDelta,
+      });
       const box = root.querySelector("[data-scan-result]");
-      if (!box) return;
-      if (!result.ok) {
-        box.innerHTML = `<p class="error">${esc(result.error)}</p>`;
-        return;
+      if (box) box.innerHTML = scanPreviewHtml(state.scanPreview);
+      return;
+    }
+
+    const adminForm = e.target.closest("[data-admin-barcode]");
+    if (adminForm) {
+      e.preventDefault();
+      const fd = new FormData(adminForm);
+      const kind = String(fd.get("kind") || "capsule");
+      const code = String(fd.get("code") || "").trim();
+      try {
+        await BartesianDB.upsertBarcode({
+          code,
+          kind,
+          cocktailId:
+            kind === "capsule" || kind === "case" ? Number(fd.get("cocktail_id")) : null,
+          packId: kind === "variety_pack" ? Number(fd.get("pack_id")) : null,
+          rimmerId: kind === "rimmer" ? Number(fd.get("rimmer_id")) : null,
+          caseQty: Number(fd.get("case_qty")) || 8,
+        });
+        state.flash = "Saved barcode " + code;
+        state.adminCode = "";
+        render();
+      } catch (err) {
+        state.flash = "Save failed: " + err.message;
+        render();
       }
-      box.innerHTML = `
-        <p class="ok">Applied <strong>${esc(result.kind)}</strong>:</p>
-        <ul class="plain">
-          ${result.changes
-            .map(
-              (ch) =>
-                `<li>${esc(ch.cocktail.name)}: ${ch.delta >= 0 ? "+" : ""}${ch.delta} → ${ch.quantity}</li>`
-            )
-            .join("")}
-        </ul>
-      `;
-      scanForm.reset();
       return;
     }
 
@@ -820,6 +1057,11 @@
   }
 
   function onInput(e) {
+    if (e.target.matches("[data-admin-code]")) {
+      state.adminCode = e.target.value;
+      return;
+    }
+
     const listForm = e.target.closest("[data-list-filters]");
     if (listForm && e.target.name === "search") {
       state.search = e.target.value;
@@ -879,6 +1121,13 @@
     const rimmerForm = e.target.closest("[data-rimmer-filters]");
     if (rimmerForm && e.target.name === "kind") {
       state.rimmerKind = rimmerForm.kind.value;
+      render();
+      return;
+    }
+
+    const adminKind = e.target.closest("[data-admin-kind]");
+    if (adminKind) {
+      state.adminKind = adminKind.value;
       render();
     }
   }

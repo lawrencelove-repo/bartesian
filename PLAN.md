@@ -145,7 +145,8 @@ Items:
 | `#/cocktail/:id` | Detail + inventory ± / use one + ratings + packs + rimmers |
 | `#/rimmers` | Salt/sugar rimmer catalog |
 | `#/rimmer/:id` | Rimmer detail + pairings + inventory ± |
-| `#/scan` | Barcode entry (camera later) |
+| `#/scan` | Barcode lookup → confirm (capsule decode via romkal map; camera later) |
+| `#/admin/barcodes` | Associate codes with cocktail / case / pack / rimmer |
 | `#/random` | Randomizer with spirit / favorites / in-stock |
 | `#/people` | Manage people for ratings |
 | `#/settings` | Export data for GitHub update; reset local DB |

@@ -58,9 +58,12 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 
 ### Inventory & scan
 
-- [ ] Camera barcode scanning (beyond manual entry)
+- [x] Capsule barcode decode via [romkal/bartesian_barcode](https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md) + `pods_data.csv` drink map
+- [x] Scan lookup → confirm (capsule/rimmer default −1, optional +1; case/pack restock preview)
+- [x] Admin `#/admin/barcodes` to associate codes; export includes `barcodes.json` + Capsule/Case fields
+- [ ] Camera barcode scanning (beyond manual / USB wedge entry)
 - [ ] Inventory history UI (from `inventory_log`)
-- [ ] Pack/case restock confirmations and undo
+- [ ] Pack/case restock undo
 
 ### Polish
 
