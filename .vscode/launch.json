@@ -7,6 +7,20 @@
       "request": "launch",
       "command": "python -m http.server 8099",
       "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Import: rebuild seed from data/",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "node scripts/import-data.js",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Import: merge Downloads zip",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "node scripts/import-data.js \"$env:USERPROFILE\\Downloads\\bartesian-exports.zip\"",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

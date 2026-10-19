@@ -961,7 +961,7 @@
         <p class="section-label">Admin</p>
         <h1>Settings</h1>
         <h2>Export for GitHub</h2>
-        <p>Writes cocktail/pack/rimmer <code>.txt</code> files (including capsule/case barcodes), plus <code>barcodes.json</code>, ratings, and people. Copy into <code>data/</code>, run <code>node scripts/import-data.js</code>, then commit.</p>
+        <p>Downloads <code>bartesian-exports.zip</code>. Then run <code>node scripts/import-data.js path/to/bartesian-exports.zip</code> — that merges into <code>data/</code> and rebuilds the seed. Commit when ready.</p>
         <button type="button" data-export>Export data</button>
         <p class="hint" data-export-status></p>
         <h2>Barcodes</h2>
