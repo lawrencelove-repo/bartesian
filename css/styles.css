@@ -308,13 +308,14 @@ button.danger {
   opacity: 1;
 }
 
-/* A–Z# rail (Contacts-style) — always on so desktop + iPad landscape keep the jumper */
+/* A–Z# rail uses the page scrollbar (no nested list scroller). */
 .list-shell .list {
-  max-height: calc(100dvh - 14rem);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  padding-right: 1.5rem;
-  overscroll-behavior: contain;
+  padding-right: 2.75rem;
+}
+
+.cocktail-row,
+.list-section {
+  max-width: calc(100% - 0.25rem);
 }
 
 .alpha-index {
@@ -322,13 +323,16 @@ button.danger {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  gap: 3px;
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 12;
-  width: 1.5rem;
-  padding: 4px 0;
+  width: 1.75rem;
+  max-height: min(80dvh, 36rem);
+  overflow: hidden;
+  padding: 6px 0;
   pointer-events: auto;
   touch-action: none;
   user-select: none;
@@ -339,16 +343,22 @@ button.danger {
   width: 100%;
   border: none;
   background: none;
-  padding: 0;
+  padding: 2px 0;
   margin: 0;
   min-height: 0;
   font-size: 13px;
-  line-height: 1.2;
+  line-height: 1.35;
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
   color: var(--accent-ink);
   cursor: pointer;
+  border-radius: 4px;
+}
+
+.alpha-index-letter.is-active {
+  background: #111;
+  color: #fff;
 }
 
 .cocktail-row:hover .row-title {
@@ -874,13 +884,20 @@ code {
     font-size: 0.75rem;
   }
 
+  .list-shell .list {
+    padding-right: 3rem;
+  }
+
   .alpha-index {
-    width: 1.65rem;
+    width: 1.85rem;
+    gap: 4px;
+    right: max(10px, env(safe-area-inset-right, 0px));
   }
 
   .alpha-index-letter {
     font-size: 14px;
-    line-height: 1.22;
+    line-height: 1.4;
+    padding: 3px 0;
   }
 
   .thumb {

@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v18";
+  const APP_VERSION = "bartesian-v22";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ALPHA_INDEX_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
 
@@ -8,6 +8,7 @@
   let cameraScanner = null;
   let cameraTarget = null; // "scan" | "admin" | null
   let alphaScrubbing = false;
+  let alphaScrollRaf = 0;
 
   const state = {
     search: "",
@@ -392,6 +393,14 @@
     </div>`;
   }
 
+  function setActiveIndexLetter(letter) {
+    const nav = root.querySelector("[data-alpha-index]");
+    if (!nav || !letter) return;
+    nav.querySelectorAll(".alpha-index-letter").forEach((btn) => {
+      btn.classList.toggle("is-active", btn.getAttribute("data-letter") === letter);
+    });
+  }
+
   function jumpToIndexLetter(letter) {
     const id = letter === "#" ? "list-index-num" : "list-index-" + letter;
     const el =
@@ -399,12 +408,10 @@
         "#" + (typeof CSS !== "undefined" && CSS.escape ? CSS.escape(id) : id)
       ) || root.querySelector('[data-index-key="' + letter + '"]');
     if (!el) return;
-    const scroller = root.querySelector(".list-shell .list");
-    if (scroller && scroller.contains(el)) {
-      scroller.scrollTo({ top: el.offsetTop - scroller.offsetTop, behavior: "auto" });
-      return;
-    }
-    el.scrollIntoView({ block: "start", behavior: "auto" });
+    // Page scroll only — no nested list scrollbar
+    const top = el.getBoundingClientRect().top + window.scrollY - 12;
+    window.scrollTo({ top: Math.max(0, top), behavior: "auto" });
+    setActiveIndexLetter(letter);
   }
 
   function letterFromIndexPointer(nav, clientY) {
@@ -415,6 +422,34 @@
     const ratio = (clientY - rect.top) / rect.height;
     const idx = Math.max(0, Math.min(buttons.length - 1, Math.floor(ratio * buttons.length)));
     return buttons[idx].getAttribute("data-letter") || "";
+  }
+
+  /** Highlight the rail letter for the section currently near the top of the viewport. */
+  function syncAlphaIndexFromScroll() {
+    const nav = root.querySelector("[data-alpha-index]");
+    if (!nav) return;
+    const markers = root.querySelectorAll("[data-index-key]");
+    if (!markers.length) return;
+    const probe = 96;
+    let current = markers[0].getAttribute("data-index-key") || "";
+    for (let i = 0; i < markers.length; i++) {
+      const el = markers[i];
+      if (el.getBoundingClientRect().top <= probe) {
+        current = el.getAttribute("data-index-key") || current;
+      } else {
+        break;
+      }
+    }
+    setActiveIndexLetter(current);
+  }
+
+  function scheduleAlphaIndexSync() {
+    if (alphaScrubbing) return;
+    if (alphaScrollRaf) return;
+    alphaScrollRaf = requestAnimationFrame(() => {
+      alphaScrollRaf = 0;
+      syncAlphaIndexFromScroll();
+    });
   }
 
   function renderList() {
@@ -1197,6 +1232,7 @@
     else if (route.view === "disclaimer") root.innerHTML = renderDisclaimer();
     else root.innerHTML = renderList();
     state.flash = "";
+    scheduleAlphaIndexSync();
   }
 
   async function onClick(e) {
@@ -1556,6 +1592,7 @@
         const next = wrap.firstElementChild;
         if (next) shellEl.replaceWith(next);
       }
+      scheduleAlphaIndexSync();
       return;
     }
 
@@ -1660,9 +1697,12 @@
   );
   function endAlphaScrub() {
     alphaScrubbing = false;
+    scheduleAlphaIndexSync();
   }
   document.addEventListener("pointerup", endAlphaScrub);
   document.addEventListener("pointercancel", endAlphaScrub);
+  window.addEventListener("scroll", scheduleAlphaIndexSync, { passive: true });
+  window.addEventListener("resize", scheduleAlphaIndexSync, { passive: true });
 
   boot();
 })();
