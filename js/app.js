@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v33";
+  const APP_VERSION = "bartesian-v34";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -25,6 +25,7 @@
     rimmerKind: "",
     rimmerFavoritesOnly: false,
     rimmerAvailableOnly: false,
+    qtyOpenKey: "",
     flash: "",
     randomSpirit: "",
     randomFavoritesOnly: false,
@@ -424,13 +425,36 @@
     return "";
   }
 
+  function qtyKey(type, id) {
+    return type + ":" + id;
+  }
+
+  function isQtyOpen(type, id) {
+    return state.qtyOpenKey === qtyKey(type, id);
+  }
+
+  /** List-screen badge: tap to reveal −/+ steppers (only + when at 0). */
+  function qtyControlsHtml(type, id, qty, restock, badgeClassFn) {
+    const q = Number(qty) || 0;
+    const cls = badgeClassFn(q, restock);
+    const name = type === "rimmer" ? "rimmer" : "cocktail";
+    if (!isQtyOpen(type, id)) {
+      return `<button type="button" class="qty-badge ${cls}" data-qty-open="${qtyKey(type, id)}" aria-label="Quantity ${q}. Tap to adjust quantity">${q}</button>`;
+    }
+    return `<span class="qty-controls" data-qty-controls>
+      ${q > 0 ? `<button type="button" class="qty-step" data-qty-step data-qty-type="${type}" data-id="${id}" data-delta="-1" aria-label="Decrease ${name} quantity by 1">−</button>` : ""}
+      <span class="qty-badge ${cls}" aria-label="Quantity ${q}">${q}</span>
+      <button type="button" class="qty-step" data-qty-step data-qty-type="${type}" data-id="${id}" data-delta="1" aria-label="Increase ${name} quantity by 1">+</button>
+    </span>`;
+  }
+
   function cocktailRowHtml(c, extraAttrs) {
     const spiritsText = (c.spirits_csv || "").split("|").filter(Boolean).join(", ");
     const thumb = primaryImage(c);
     const qty = Number(c.quantity) || 0;
     return `
-      <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}" ${extraAttrs || ""}>
-        <span class="qty-badge ${qtyBadgeClass(qty, c.restock)}" aria-label="Quantity ${qty}${qty === 0 && c.restock ? ", restock needed" : ""}">${qty}</span>
+      <a class="cocktail-row ${isQtyOpen("cocktail", c.id) ? "has-qty-open" : ""}" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}" ${extraAttrs || ""}>
+        ${qtyControlsHtml("cocktail", c.id, qty, c.restock, qtyBadgeClass)}
         <div class="thumb ${thumb ? "" : "thumb-empty"}">
           ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
         </div>
@@ -869,8 +893,8 @@
     const rows = rimmers
       .map(
         (r) => `
-          <div class="cocktail-row">
-            <span class="qty-badge ${rimmerQtyBadgeClass(Number(r.quantity) || 0, r.restock)}" aria-label="Quantity ${r.quantity}">${r.quantity}</span>
+          <div class="cocktail-row ${isQtyOpen("rimmer", r.id) ? "has-qty-open" : ""}">
+            ${qtyControlsHtml("rimmer", r.id, r.quantity, r.restock, rimmerQtyBadgeClass)}
             <div class="thumb ${r.image ? "" : "thumb-empty"}">
               ${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}
             </div>
@@ -1644,6 +1668,45 @@
   }
 
   async function onClick(e) {
+    // Quantity badge steppers (list screens) — before [data-go] row navigation
+    const qtyStep = e.target.closest("[data-qty-step]");
+    if (qtyStep) {
+      e.preventDefault();
+      const id = Number(qtyStep.getAttribute("data-id"));
+      const delta = Number(qtyStep.getAttribute("data-delta"));
+      if (qtyStep.getAttribute("data-qty-type") === "rimmer") {
+        await BartesianDB.adjustRimmerQuantity(id, delta, delta > 0 ? "manual_add" : "manual_remove");
+      } else {
+        await BartesianDB.adjustQuantity(id, delta, delta > 0 ? "manual_add" : "manual_remove");
+      }
+      // Stay expanded (controls adapt: 0 → + only, ≥1 → −/+)
+      render();
+      return;
+    }
+
+    const qtyOpen = e.target.closest("[data-qty-open]");
+    if (qtyOpen) {
+      e.preventDefault();
+      state.qtyOpenKey = qtyOpen.getAttribute("data-qty-open") || "";
+      render();
+      return;
+    }
+
+    if (e.target.closest("[data-qty-controls]")) {
+      // Tapping the open badge itself: stay expanded, don't navigate the row
+      e.preventDefault();
+      return;
+    }
+
+    if (state.qtyOpenKey) {
+      // Clicking elsewhere collapses the badge; interactive targets continue below
+      state.qtyOpenKey = "";
+      if (!e.target.closest("a, button, input, select, textarea, label")) {
+        render();
+        return;
+      }
+    }
+
     const jump = e.target.closest('[data-act="jump-index"]');
     if (jump) {
       e.preventDefault();

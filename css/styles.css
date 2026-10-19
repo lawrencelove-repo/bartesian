@@ -361,6 +361,46 @@ button.danger {
   color: #fff;
 }
 
+button.qty-badge {
+  padding: 0;
+  min-height: 0;
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
+  flex: none;
+}
+
+.qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.qty-step {
+  width: 1.75rem;
+  height: 1.75rem;
+  min-height: 0;
+  padding: 0;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  cursor: pointer;
+  flex: none;
+}
+
+.cocktail-row.has-qty-open {
+  grid-template-columns: auto 64px 1fr;
+}
+
 .action-row {
   display: grid;
   grid-template-columns: 2rem 64px 1fr auto;

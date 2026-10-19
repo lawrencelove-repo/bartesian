@@ -73,6 +73,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Merge seed Case/Capsule barcodes into existing IndexedDB on launch
 - [ ] Pack/case restock undo
 - [x] Cocktail list: qty badge (left; red when qty = 1), A–Z# jump rail, wrapping filter checkboxes, cookie-backed filters/sort
+- [x] List qty badges (Cocktails + Rimmers) are tappable: tap badge → −/+ steppers (+ only at 0); tap elsewhere collapses
 - [x] List filters: In-stock AND Favorites checked = union (in-stock OR favorite); Seasonal moved to Sort dropdown
 
 ### Wishlist
