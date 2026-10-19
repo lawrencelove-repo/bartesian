@@ -372,11 +372,116 @@
     return { ok: false, error: "Unsupported barcode kind: " + bc.kind };
   }
 
+  /**
+   * Build the same preview shape as a barcode resolve, but from a picked
+   * item (Scan page name search). Cocktails behave like a capsule (±1),
+   * rimmers ±1, packs add their contents.
+   */
+  function resolveItem(db, type, id, opts) {
+    const capsuleDelta = opts && opts.capsuleDelta != null ? Number(opts.capsuleDelta) : -1;
+    const rimmerDelta = opts && opts.rimmerDelta != null ? Number(opts.rimmerDelta) : -1;
+
+    if (type === "cocktail") {
+      const c = db.getCocktail(id);
+      if (!c) return { ok: false, error: "Cocktail not found." };
+      const delta = capsuleDelta >= 0 ? 1 : -1;
+      return {
+        ok: true,
+        code: "",
+        kind: "capsule",
+        kindLabel: kindLabel("capsule"),
+        targetName: c.name,
+        adjustable: true,
+        delta,
+        source: "name",
+        itemType: "cocktail",
+        itemId: c.id,
+        proposed: [
+          {
+            type: "cocktail",
+            id: c.id,
+            name: c.name,
+            slug: c.slug,
+            image: c.hero_image || c.image || "",
+            current: c.quantity,
+            delta,
+            next: Math.max(0, c.quantity + delta),
+          },
+        ],
+      };
+    }
+
+    if (type === "rimmer") {
+      const r = db.getRimmer(id);
+      if (!r) return { ok: false, error: "Rimmer not found." };
+      const delta = rimmerDelta >= 0 ? 1 : -1;
+      return {
+        ok: true,
+        code: "",
+        kind: "rimmer",
+        kindLabel: kindLabel("rimmer"),
+        targetName: r.name,
+        adjustable: true,
+        delta,
+        source: "name",
+        itemType: "rimmer",
+        itemId: r.id,
+        proposed: [
+          {
+            type: "rimmer",
+            id: r.id,
+            name: r.name,
+            slug: r.slug,
+            image: r.image || "",
+            current: r.quantity,
+            delta,
+            next: Math.max(0, r.quantity + delta),
+          },
+        ],
+      };
+    }
+
+    if (type === "pack") {
+      const pack = db.getPack(id);
+      if (!pack) return { ok: false, error: "Pack not found." };
+      const items = db.getPackItems(id);
+      if (!items.length) return { ok: false, error: "Pack has no cocktail items configured." };
+      const proposed = items.map((item) => {
+        const full = db.getCocktail(item.id);
+        return {
+          type: "cocktail",
+          id: item.id,
+          name: item.name,
+          slug: item.slug,
+          image: (full && (full.hero_image || full.image)) || "",
+          current: full ? full.quantity : 0,
+          delta: item.qty,
+          next: (full ? full.quantity : 0) + item.qty,
+        };
+      });
+      return {
+        ok: true,
+        code: "",
+        kind: "variety_pack",
+        kindLabel: kindLabel("variety_pack"),
+        targetName: pack.name,
+        adjustable: false,
+        source: "name",
+        itemType: "pack",
+        itemId: pack.id,
+        proposed,
+      };
+    }
+
+    return { ok: false, error: "Unsupported item type: " + type };
+  }
+
   global.BartesianBarcodes = {
     normalizeCode,
     kindLabel,
     decodeCapsule,
     classifyCode,
     resolve,
+    resolveItem,
   };
 })(window);

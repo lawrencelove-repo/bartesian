@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v37";
+  const APP_VERSION = "bartesian-v38";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -32,6 +32,7 @@
     randomFavoritesOnly: false,
     scanPreview: null,
     scanDelta: -1,
+    scanNameQuery: "",
     adminCode: "",
     adminKind: "capsule",
     adminCocktailId: "",
@@ -1330,6 +1331,50 @@
       </div>`;
   }
 
+  function scanNameResultsHtml() {
+    const q = state.scanNameQuery.trim().toLowerCase();
+    if (!q) return "";
+    const matches = (items) =>
+      items.filter((x) => String(x.name || "").toLowerCase().includes(q)).slice(0, 8);
+    const cocktails = matches(BartesianDB.listAllCocktails());
+    const rimmers = matches(BartesianDB.listAllRimmersAdmin());
+    const packs = matches(BartesianDB.listAllPacksAdmin());
+    if (!cocktails.length && !rimmers.length && !packs.length) {
+      return `<p class="empty">No cocktails, rimmers, or packs match “${esc(state.scanNameQuery.trim())}”.</p>`;
+    }
+    const cocktailRows = cocktails.map((c) => `
+      <div class="cocktail-row scan-pick" data-scan-pick="cocktail:${c.id}" role="button" tabindex="0">
+        <span class="qty-badge ${qtyBadgeClass(Number(c.quantity) || 0, c.restock)}">${c.quantity}</span>
+        <div class="thumb ${primaryImage(c) ? "" : "thumb-empty"}">${primaryImage(c) ? `<img src="${esc(primaryImage(c))}" alt="">` : ""}</div>
+        <div class="row-body">
+          <div class="row-title">${esc(c.name)}${c.enabled ? "" : ' <span class="pill">Disabled</span>'}</div>
+          <div class="row-meta">Cocktail · qty ${c.quantity}</div>
+        </div>
+      </div>`).join("");
+    const rimmerRows = rimmers.map((r) => `
+      <div class="cocktail-row scan-pick" data-scan-pick="rimmer:${r.id}" role="button" tabindex="0">
+        <span class="qty-badge ${rimmerQtyBadgeClass(Number(r.quantity) || 0, r.restock)}">${r.quantity}</span>
+        <div class="thumb ${r.image ? "" : "thumb-empty"}">${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}</div>
+        <div class="row-body">
+          <div class="row-title">${esc(r.name)}${r.enabled ? "" : ' <span class="pill">Disabled</span>'}</div>
+          <div class="row-meta">Rimmer · qty ${r.quantity}</div>
+        </div>
+      </div>`).join("");
+    const packRows = packs.map((p) => {
+      const count = BartesianDB.getPackItems(p.id).length;
+      return `
+      <div class="cocktail-row scan-pick" data-scan-pick="pack:${p.id}" role="button" tabindex="0">
+        <span aria-hidden="true"></span>
+        <div class="thumb ${p.image ? "" : "thumb-empty"}">${p.image ? `<img src="${esc(p.image)}" alt="">` : ""}</div>
+        <div class="row-body">
+          <div class="row-title">${esc(p.name)}${p.enabled ? "" : ' <span class="pill">Disabled</span>'}</div>
+          <div class="row-meta">Variety pack · ${count} item${count === 1 ? "" : "s"}</div>
+        </div>
+      </div>`;
+    }).join("");
+    return `<div class="list scan-name-results">${cocktailRows}${rimmerRows}${packRows}</div>`;
+  }
+
   function renderScan() {
     const previewHtml = scanPreviewHtml(state.scanPreview);
     return shell(
@@ -1338,13 +1383,18 @@
       <section class="panel">
         <p class="section-label">Inventory</p>
         <h1>Scan barcode</h1>
-        <p class="lede">Use the camera, a USB wedge scanner, or type a code. Nothing changes until you confirm.</p>
+        <p class="lede">Use the camera, a USB wedge scanner, type a code, or search by name. Nothing changes until you confirm.</p>
         <ul class="plain muted">
           <li>Capsule / rimmer → default <strong>−1</strong> (flip to +1 before confirm)</li>
           <li>Case → +case qty for that cocktail</li>
           <li>Variety pack → + each included cocktail</li>
         </ul>
         ${cameraPanelHtml("scan")}
+        <form class="scan-form" data-scan-name-search>
+          <input name="query" type="search" autocomplete="off" placeholder="Search by name (cocktail, rimmer, pack)" value="${esc(state.scanNameQuery)}" />
+          <button type="submit">Search</button>
+        </form>
+        <div data-scan-name-results>${scanNameResultsHtml()}</div>
         <form class="scan-form" data-scan-lookup>
           <input name="code" type="text" inputmode="numeric" autocomplete="off" placeholder="Barcode" required ${state.cameraOn ? "" : "autofocus"} />
           <button type="submit">Look up</button>
@@ -1982,10 +2032,32 @@
       render(); return;
     }
 
+    const scanPick = e.target.closest("[data-scan-pick]");
+    if (scanPick) {
+      const [type, idStr] = String(scanPick.getAttribute("data-scan-pick") || "").split(":");
+      state.scanDelta = -1;
+      state.scanPreview = BartesianBarcodes.resolveItem(BartesianDB, type, Number(idStr), {
+        capsuleDelta: state.scanDelta,
+        rimmerDelta: state.scanDelta,
+      });
+      render();
+      return;
+    }
+
     const scanDeltaBtn = e.target.closest("[data-scan-delta]");
     if (scanDeltaBtn) {
       state.scanDelta = Number(scanDeltaBtn.getAttribute("data-scan-delta"));
-      if (state.scanPreview && state.scanPreview.code) {
+      if (state.scanPreview && state.scanPreview.source === "name" && state.scanPreview.itemType) {
+        state.scanPreview = BartesianBarcodes.resolveItem(
+          BartesianDB,
+          state.scanPreview.itemType,
+          state.scanPreview.itemId,
+          {
+            capsuleDelta: state.scanDelta,
+            rimmerDelta: state.scanDelta,
+          }
+        );
+      } else if (state.scanPreview && state.scanPreview.code) {
         state.scanPreview = BartesianBarcodes.resolve(BartesianDB, state.scanPreview.code, {
           capsuleDelta: state.scanDelta,
           rimmerDelta: state.scanDelta,
@@ -2155,6 +2227,14 @@
         "Saved " +
         (updated ? updated.name : "rimmer") +
         ". Export from Settings to write it back to data/rimmers/*.txt for git.";
+      render();
+      return;
+    }
+
+    const scanNameForm = e.target.closest("[data-scan-name-search]");
+    if (scanNameForm) {
+      e.preventDefault();
+      state.scanNameQuery = String(new FormData(scanNameForm).get("query") || "");
       render();
       return;
     }
