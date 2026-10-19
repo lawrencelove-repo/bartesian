@@ -73,8 +73,8 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [ ] Favorites UX polish
 - [ ] Full export parity (ratings/people round-trip into seed if desired)
 - [x] Cocktail detail iconography for garnish / pairs-with (book-style circular marks)
-- [ ] Keep site private (no public marketing; access gate / robots as desired)
-- [ ] Enable GitHub Pages from repo root and smoke on a real `*.github.io` URL (private household use)
+- [x] Keep site private (no public marketing; access gate / robots as desired)
+- [x] Enable GitHub Pages from repo root and smoke on a real `*.github.io` URL (private household use)
 
 ### Design notes
 

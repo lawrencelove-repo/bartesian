@@ -1,10 +1,13 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v16";
+  const APP_VERSION = "bartesian-v17";
+  const LIST_PREFS_COOKIE = "bartesian_list_prefs";
+  const ALPHA_INDEX_LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ#".split("");
 
   const root = document.getElementById("app");
   let cameraScanner = null;
   let cameraTarget = null; // "scan" | "admin" | null
+  let alphaScrubbing = false;
 
   const state = {
     search: "",
@@ -27,6 +30,54 @@
     cameraOn: false,
     cameraStatus: "",
   };
+
+  function getCookie(name) {
+    const parts = document.cookie.split(";").map((p) => p.trim());
+    for (const part of parts) {
+      const i = part.indexOf("=");
+      if (i === -1) continue;
+      if (part.slice(0, i) === name) return decodeURIComponent(part.slice(i + 1));
+    }
+    return "";
+  }
+
+  function setCookie(name, value, maxAgeSec) {
+    const age = maxAgeSec != null ? maxAgeSec : 60 * 60 * 24 * 365;
+    document.cookie =
+      name + "=" + encodeURIComponent(value) + "; path=/; max-age=" + age + "; SameSite=Lax";
+  }
+
+  function loadListPrefs() {
+    try {
+      const raw = getCookie(LIST_PREFS_COOKIE);
+      if (!raw) return;
+      const p = JSON.parse(raw);
+      if (typeof p.search === "string") state.search = p.search;
+      if (typeof p.sort === "string") state.sort = p.sort;
+      if (typeof p.spirit === "string") state.spirit = p.spirit;
+      if (typeof p.favoritesOnly === "boolean") state.favoritesOnly = p.favoritesOnly;
+      if (typeof p.availableOnly === "boolean") state.availableOnly = p.availableOnly;
+      if (typeof p.seasonalOnly === "boolean") state.seasonalOnly = p.seasonalOnly;
+    } catch (_) {
+      /* ignore bad cookie */
+    }
+  }
+
+  function saveListPrefs() {
+    setCookie(
+      LIST_PREFS_COOKIE,
+      JSON.stringify({
+        search: state.search,
+        sort: state.sort,
+        spirit: state.spirit,
+        favoritesOnly: state.favoritesOnly,
+        availableOnly: state.availableOnly,
+        seasonalOnly: state.seasonalOnly,
+      })
+    );
+  }
+
+  loadListPrefs();
 
   function stopCamera() {
     if (cameraScanner) {
@@ -248,6 +299,124 @@
     `;
   }
 
+  function listIndexKey(title) {
+    const ch = String(title || "")
+      .trim()
+      .charAt(0)
+      .toLocaleUpperCase();
+    if (ch >= "A" && ch <= "Z") return ch;
+    return "#";
+  }
+
+  function alphaIndexHtml(presentKeys) {
+    const letters = ALPHA_INDEX_LETTERS.filter((letter) => presentKeys.has(letter));
+    if (!letters.length) return "";
+    return `<nav class="alpha-index" aria-label="Alphabetical index" data-alpha-index>
+      ${letters
+        .map(
+          (letter) =>
+            `<button type="button" class="alpha-index-letter has" data-act="jump-index" data-letter="${esc(letter)}">${esc(letter)}</button>`
+        )
+        .join("")}
+    </nav>`;
+  }
+
+  function cocktailRowHtml(c, extraAttrs) {
+    const spiritsText = (c.spirits_csv || "").split("|").filter(Boolean).join(", ");
+    const thumb = primaryImage(c);
+    const qty = Number(c.quantity) || 0;
+    return `
+      <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}" ${extraAttrs || ""}>
+        <span class="qty-badge ${qty === 0 ? "is-zero" : ""}" aria-label="Quantity ${qty}">${qty}</span>
+        <div class="thumb ${thumb ? "" : "thumb-empty"}">
+          ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
+        </div>
+        <div class="row-body">
+          <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}${c.seasonal ? ' <span class="pill">Seasonal</span>' : ""}</div>
+          <div class="row-meta">${esc(spiritsText || "—")} · ${starsLabel(c.avg_rating)}</div>
+        </div>
+      </a>
+    `;
+  }
+
+  function orderCocktailsForIndex(cocktails) {
+    if (state.sort === "name") {
+      const letters = cocktails.filter((c) => listIndexKey(c.name) !== "#");
+      const other = cocktails.filter((c) => listIndexKey(c.name) === "#");
+      return letters.concat(other);
+    }
+    if (state.sort === "name-desc") {
+      const letters = cocktails.filter((c) => listIndexKey(c.name) !== "#");
+      const other = cocktails.filter((c) => listIndexKey(c.name) === "#");
+      return other.concat(letters);
+    }
+    return cocktails;
+  }
+
+  function renderIndexedCocktailList(cocktails) {
+    if (!cocktails.length) {
+      return { html: `<p class="empty">No cocktails match.</p>`, present: new Set() };
+    }
+    const alphabetical = state.sort === "name" || state.sort === "name-desc";
+    const ordered = alphabetical ? orderCocktailsForIndex(cocktails) : cocktails;
+    const present = new Set();
+    const seenAnchor = new Set();
+    let lastKey = null;
+    let html = "";
+
+    for (const c of ordered) {
+      const key = listIndexKey(c.name);
+      present.add(key);
+      if (alphabetical) {
+        if (key !== lastKey) {
+          html += `<div class="list-section" id="list-index-${key === "#" ? "num" : key}" data-index-key="${esc(key)}">${esc(key)}</div>`;
+          lastKey = key;
+        }
+        html += cocktailRowHtml(c);
+      } else {
+        const attrs = !seenAnchor.has(key)
+          ? `id="list-index-${key === "#" ? "num" : key}" data-index-key="${esc(key)}"`
+          : "";
+        seenAnchor.add(key);
+        html += cocktailRowHtml(c, attrs);
+      }
+    }
+    return { html, present };
+  }
+
+  function cocktailListShellHtml(cocktails) {
+    const indexed = renderIndexedCocktailList(cocktails);
+    return `<div class="list-shell">
+      <div class="list">${indexed.html}</div>
+      ${alphaIndexHtml(indexed.present)}
+    </div>`;
+  }
+
+  function jumpToIndexLetter(letter) {
+    const id = letter === "#" ? "list-index-num" : "list-index-" + letter;
+    const el =
+      root.querySelector(
+        "#" + (typeof CSS !== "undefined" && CSS.escape ? CSS.escape(id) : id)
+      ) || root.querySelector('[data-index-key="' + letter + '"]');
+    if (!el) return;
+    const scroller = root.querySelector(".list-shell .list");
+    if (scroller && scroller.contains(el)) {
+      scroller.scrollTo({ top: el.offsetTop - scroller.offsetTop, behavior: "auto" });
+      return;
+    }
+    el.scrollIntoView({ block: "start", behavior: "auto" });
+  }
+
+  function letterFromIndexPointer(nav, clientY) {
+    const buttons = [...nav.querySelectorAll(".alpha-index-letter")];
+    if (!buttons.length) return "";
+    const rect = nav.getBoundingClientRect();
+    if (rect.height <= 0) return "";
+    const ratio = (clientY - rect.top) / rect.height;
+    const idx = Math.max(0, Math.min(buttons.length - 1, Math.floor(ratio * buttons.length)));
+    return buttons[idx].getAttribute("data-letter") || "";
+  }
+
   function renderList() {
     const cocktails = BartesianDB.listCocktails({
       search: state.search,
@@ -259,55 +428,41 @@
     });
     const spirits = BartesianDB.listSpirits();
 
-    const rows = cocktails
-      .map((c) => {
-        const spiritsText = (c.spirits_csv || "").split("|").filter(Boolean).join(", ");
-        return `
-          <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">
-            <div class="thumb ${primaryImage(c) ? "" : "thumb-empty"}">
-              ${primaryImage(c) ? `<img src="${esc(primaryImage(c))}" alt="">` : ""}
-            </div>
-            <div class="row-body">
-              <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}${c.seasonal ? ' <span class="pill">Seasonal</span>' : ""}</div>
-              <div class="row-meta">${esc(spiritsText || "—")} · ${starsLabel(c.avg_rating)}</div>
-            </div>
-            <div class="row-qty">${c.quantity}</div>
-          </a>
-        `;
-      })
-      .join("");
-
     return shell(
       "list",
       `
-      <section class="panel">
+      <section class="panel panel-list">
         <p class="section-label">Menu</p>
         <h1>Cocktails</h1>
         <form class="toolbar" data-list-filters>
-          <input type="search" name="search" placeholder="Search" value="${esc(state.search)}" />
-          <select name="spirit">
-            <option value="">All spirits</option>
-            ${spirits
-              .map(
-                (s) =>
-                  `<option value="${esc(s.name)}" ${state.spirit === s.name ? "selected" : ""}>${esc(s.name)}</option>`
-              )
-              .join("")}
-          </select>
-          <select name="sort">
-            <option value="name" ${state.sort === "name" ? "selected" : ""}>Name</option>
-            <option value="name-desc" ${state.sort === "name-desc" ? "selected" : ""}>Name Z–A</option>
-            <option value="quantity" ${state.sort === "quantity" ? "selected" : ""}>Quantity ↓</option>
-            <option value="quantity-asc" ${state.sort === "quantity-asc" ? "selected" : ""}>Quantity ↑</option>
-            <option value="rating" ${state.sort === "rating" ? "selected" : ""}>Rating</option>
-            <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
-          </select>
-          <label class="check"><input type="checkbox" name="available" ${state.availableOnly ? "checked" : ""}/> In stock</label>
-          <label class="check"><input type="checkbox" name="favorites" ${state.favoritesOnly ? "checked" : ""}/> Favorites</label>
-          <label class="check"><input type="checkbox" name="seasonal" ${state.seasonalOnly ? "checked" : ""}/> Seasonal</label>
+          <div class="toolbar-controls">
+            <input type="search" name="search" placeholder="Search" value="${esc(state.search)}" />
+            <select name="spirit">
+              <option value="">All spirits</option>
+              ${spirits
+                .map(
+                  (s) =>
+                    `<option value="${esc(s.name)}" ${state.spirit === s.name ? "selected" : ""}>${esc(s.name)}</option>`
+                )
+                .join("")}
+            </select>
+            <select name="sort">
+              <option value="name" ${state.sort === "name" ? "selected" : ""}>Name</option>
+              <option value="name-desc" ${state.sort === "name-desc" ? "selected" : ""}>Name Z–A</option>
+              <option value="quantity" ${state.sort === "quantity" ? "selected" : ""}>Quantity ↓</option>
+              <option value="quantity-asc" ${state.sort === "quantity-asc" ? "selected" : ""}>Quantity ↑</option>
+              <option value="rating" ${state.sort === "rating" ? "selected" : ""}>Rating</option>
+              <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
+            </select>
+          </div>
+          <div class="toolbar-checks">
+            <label class="check"><input type="checkbox" name="available" ${state.availableOnly ? "checked" : ""}/> In stock</label>
+            <label class="check"><input type="checkbox" name="favorites" ${state.favoritesOnly ? "checked" : ""}/> Favorites</label>
+            <label class="check"><input type="checkbox" name="seasonal" ${state.seasonalOnly ? "checked" : ""}/> Seasonal</label>
+          </div>
         </form>
         <p class="count">${cocktails.length} cocktail${cocktails.length === 1 ? "" : "s"}</p>
-        <div class="list">${rows || `<p class="empty">No cocktails match.</p>`}</div>
+        ${cocktailListShellHtml(cocktails)}
       </section>
     `
     );
@@ -1045,6 +1200,14 @@
   }
 
   async function onClick(e) {
+    const jump = e.target.closest('[data-act="jump-index"]');
+    if (jump) {
+      e.preventDefault();
+      const letter = jump.getAttribute("data-letter");
+      if (letter) jumpToIndexLetter(letter);
+      return;
+    }
+
     const goEl = e.target.closest("[data-go]");
     if (goEl) {
       e.preventDefault();
@@ -1233,6 +1396,7 @@
       state.availableOnly = listForm.available.checked;
       state.favoritesOnly = listForm.favorites.checked;
       state.seasonalOnly = listForm.seasonal ? listForm.seasonal.checked : false;
+      saveListPrefs();
       render();
       return;
     }
@@ -1374,6 +1538,7 @@
     const listForm = e.target.closest("[data-list-filters]");
     if (listForm && e.target.name === "search") {
       state.search = e.target.value;
+      saveListPrefs();
       const cocktails = BartesianDB.listCocktails({
         search: state.search,
         sort: state.sort,
@@ -1382,28 +1547,14 @@
         availableOnly: state.availableOnly,
         seasonalOnly: state.seasonalOnly,
       });
-      const list = root.querySelector(".list");
       const count = root.querySelector(".count");
       if (count) count.textContent = `${cocktails.length} cocktail${cocktails.length === 1 ? "" : "s"}`;
-      if (list) {
-        list.innerHTML =
-          cocktails
-            .map((c) => {
-              const spiritsText = (c.spirits_csv || "").split("|").filter(Boolean).join(", ");
-              const thumb = primaryImage(c);
-              return `
-              <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">
-                <div class="thumb ${thumb ? "" : "thumb-empty"}">
-                  ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
-                </div>
-                <div class="row-body">
-                  <div class="row-title">${esc(c.name)}${c.favorite ? " ★" : ""}${c.seasonal ? ' <span class="pill">Seasonal</span>' : ""}</div>
-                  <div class="row-meta">${esc(spiritsText || "—")} · ${starsLabel(c.avg_rating)}</div>
-                </div>
-                <div class="row-qty">${c.quantity}</div>
-              </a>`;
-            })
-            .join("") || `<p class="empty">No cocktails match.</p>`;
+      const shellEl = root.querySelector(".list-shell");
+      if (shellEl) {
+        const wrap = document.createElement("div");
+        wrap.innerHTML = cocktailListShellHtml(cocktails);
+        const next = wrap.firstElementChild;
+        if (next) shellEl.replaceWith(next);
       }
       return;
     }
@@ -1423,6 +1574,7 @@
       state.availableOnly = listForm.available.checked;
       state.favoritesOnly = listForm.favorites.checked;
       state.seasonalOnly = listForm.seasonal ? listForm.seasonal.checked : false;
+      saveListPrefs();
       render();
       return;
     }
@@ -1477,6 +1629,40 @@
     }
     onChange(e);
   });
+
+  document.addEventListener(
+    "pointerdown",
+    (e) => {
+      const nav = e.target.closest("[data-alpha-index]");
+      if (!nav) return;
+      alphaScrubbing = true;
+      try {
+        nav.setPointerCapture(e.pointerId);
+      } catch (_) {
+        /* ignore */
+      }
+      const letter = letterFromIndexPointer(nav, e.clientY);
+      if (letter) jumpToIndexLetter(letter);
+    },
+    { passive: true }
+  );
+  document.addEventListener(
+    "pointermove",
+    (e) => {
+      if (!alphaScrubbing) return;
+      const nav =
+        e.target.closest("[data-alpha-index]") || root.querySelector("[data-alpha-index]");
+      if (!nav) return;
+      const letter = letterFromIndexPointer(nav, e.clientY);
+      if (letter) jumpToIndexLetter(letter);
+    },
+    { passive: true }
+  );
+  function endAlphaScrub() {
+    alphaScrubbing = false;
+  }
+  document.addEventListener("pointerup", endAlphaScrub);
+  document.addEventListener("pointercancel", endAlphaScrub);
 
   boot();
 })();
