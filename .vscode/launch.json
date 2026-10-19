@@ -9,17 +9,17 @@
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Import: rebuild seed from data/",
+      "name": "Import: merge exports/bartesian-exports.zip",
       "type": "node-terminal",
       "request": "launch",
       "command": "node scripts/import-data.js",
       "cwd": "${workspaceFolder}"
     },
     {
-      "name": "Import: merge Downloads zip",
+      "name": "Import: rebuild seed from data/ only",
       "type": "node-terminal",
       "request": "launch",
-      "command": "node scripts/import-data.js \"$env:USERPROFILE\\Downloads\\bartesian-exports.zip\"",
+      "command": "node scripts/import-data.js --from-data",
       "cwd": "${workspaceFolder}"
     }
   ]

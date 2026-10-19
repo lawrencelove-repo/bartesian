@@ -3,10 +3,13 @@
  *
  * Usage:
  *   node scripts/import-data.js
- *       Rebuild seed from whatever is already in data/.
+ *       Merge exports/bartesian-exports.zip into data/, then rebuild seed.
  *
- *   node scripts/import-data.js path/to/bartesian-exports.zip
- *       Extract the export zip into data/, then rebuild seed.
+ *   node scripts/import-data.js --from-data
+ *       Rebuild seed from data/ only (skip zip).
+ *
+ *   node scripts/import-data.js path/to/other.zip
+ *       Merge a different zip, then rebuild seed.
  */
 const fs = require("fs");
 const path = require("path");
@@ -18,6 +21,7 @@ const DATA_DIR = path.join(ROOT, "data");
 const COCKTAILS_DIR = path.join(DATA_DIR, "cocktails");
 const PACKS_DIR = path.join(DATA_DIR, "packs");
 const RIMMERS_DIR = path.join(DATA_DIR, "rimmers");
+const DEFAULT_ZIP = path.join(ROOT, "exports", "bartesian-exports.zip");
 const OUT = path.join(ROOT, "js", "seed-data.js");
 
 const COCKTAIL_KEYS = {
@@ -403,20 +407,36 @@ function main() {
   if (arg === "--help" || arg === "-h") {
     console.log(`Usage:
   node scripts/import-data.js
-  node scripts/import-data.js path/to/bartesian-exports.zip`);
+      Merge exports/bartesian-exports.zip → data/, then rebuild seed.
+  node scripts/import-data.js --from-data
+      Rebuild seed from data/ only.
+  node scripts/import-data.js path/to/other.zip
+      Merge a different zip, then rebuild seed.
+
+Copy the app export zip to:
+  ${path.relative(ROOT, DEFAULT_ZIP)}`);
     return;
   }
-  if (arg) {
-    if (!/\.zip$/i.test(arg)) {
-      console.error("Pass a .zip export (or no args to rebuild from data/). Got:", arg);
-      process.exit(1);
-    }
-    if (!fs.existsSync(arg)) {
-      console.error("Not found:", path.resolve(arg));
-      process.exit(1);
-    }
-    mergeZipIntoData(arg);
+
+  if (arg === "--from-data") {
+    writeSeed();
+    return;
   }
+
+  const zipPath = arg ? path.resolve(arg) : DEFAULT_ZIP;
+  if (arg && !/\.zip$/i.test(arg)) {
+    console.error("Pass a .zip file, --from-data, or no args. Got:", arg);
+    process.exit(1);
+  }
+  if (!fs.existsSync(zipPath)) {
+    console.error(
+      "Zip not found:",
+      path.relative(ROOT, zipPath) || zipPath,
+      "\nCopy bartesian-exports.zip into exports/ then re-run."
+    );
+    process.exit(1);
+  }
+  mergeZipIntoData(zipPath);
   writeSeed();
 }
 

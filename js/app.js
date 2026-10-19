@@ -961,7 +961,7 @@
         <p class="section-label">Admin</p>
         <h1>Settings</h1>
         <h2>Export for GitHub</h2>
-        <p>Downloads <code>bartesian-exports.zip</code>. Then run <code>node scripts/import-data.js path/to/bartesian-exports.zip</code> — that merges into <code>data/</code> and rebuilds the seed. Commit when ready.</p>
+        <p>Downloads <code>bartesian-exports.zip</code>. Copy it to <code>exports/bartesian-exports.zip</code>, then run <code>node scripts/import-data.js</code> (or the Import debug task) — that merges into <code>data/</code> and rebuilds the seed. Commit when ready.</p>
         <button type="button" data-export>Export data</button>
         <p class="hint" data-export-status></p>
         <h2>Barcodes</h2>

@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Import: rebuild seed from data/",
+      "label": "Import: merge exports/bartesian-exports.zip",
       "type": "shell",
       "command": "node scripts/import-data.js",
       "options": {
@@ -20,9 +20,9 @@
       "problemMatcher": []
     },
     {
-      "label": "Import: merge export zip into data/",
+      "label": "Import: rebuild seed from data/ only",
       "type": "shell",
-      "command": "node scripts/import-data.js \"${input:exportZip}\"",
+      "command": "node scripts/import-data.js --from-data",
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -33,38 +33,6 @@
         "focus": true
       },
       "problemMatcher": []
-    },
-    {
-      "label": "Import: merge Downloads/bartesian-exports.zip",
-      "type": "shell",
-      "command": "node scripts/import-data.js \"$env:USERPROFILE\\Downloads\\bartesian-exports.zip\"",
-      "windows": {
-        "command": "node scripts/import-data.js \"$env:USERPROFILE\\Downloads\\bartesian-exports.zip\""
-      },
-      "osx": {
-        "command": "node scripts/import-data.js \"$HOME/Downloads/bartesian-exports.zip\""
-      },
-      "linux": {
-        "command": "node scripts/import-data.js \"$HOME/Downloads/bartesian-exports.zip\""
-      },
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
-      "group": "build",
-      "presentation": {
-        "reveal": "always",
-        "panel": "shared",
-        "focus": true
-      },
-      "problemMatcher": []
-    }
-  ],
-  "inputs": [
-    {
-      "id": "exportZip",
-      "type": "promptString",
-      "description": "Path to bartesian-exports.zip",
-      "default": "${env:USERPROFILE}/Downloads/bartesian-exports.zip"
     }
   ]
 }
