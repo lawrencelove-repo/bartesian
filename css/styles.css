@@ -542,7 +542,17 @@ button.danger {
   display: grid;
   gap: 0.65rem;
   margin: 1rem 0 1.25rem;
-  max-width: 28rem;
+  max-width: 32rem;
+}
+
+.admin-code-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.admin-code-row input {
+  flex: 1 1 160px;
 }
 
 .admin-barcode-form label {

@@ -22,6 +22,6 @@ Seasonal: 1
 Enabled: 0
 Favorite: 0
 Quantity: 0
-Capsule Barcode: 
+Capsule Barcode: 373354497
 Case Barcode: 
 Case Qty: 8

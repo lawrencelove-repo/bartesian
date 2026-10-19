@@ -1,4 +1,7 @@
 (function () {
+  /** Keep in sync with sw.js CACHE_VERSION */
+  const APP_VERSION = "bartesian-v11";
+
   const root = document.getElementById("app");
   const state = {
     search: "",
@@ -16,6 +19,8 @@
     scanDelta: -1,
     adminCode: "",
     adminKind: "capsule",
+    adminCocktailId: "",
+    adminLookupNote: "",
   };
 
   function esc(s) {
@@ -95,6 +100,7 @@
         <main class="main">${body}</main>
         <footer class="footer">
           <a href="#/disclaimer" data-go="#/disclaimer">Disclaimer</a>
+          <span>${esc(APP_VERSION)}</span>
           <span>Private use only · data in git, edits local until export</span>
         </footer>
       </div>
@@ -603,7 +609,7 @@
       <section class="panel">
         <p class="section-label">Inventory</p>
         <h1>Scan barcode</h1>
-        <p class="lede">Scan or type a capsule, rimmer, single-flavor case, or variety-pack barcode. Nothing changes until you confirm.</p>
+        <p class="lede">Scan or type a capsule, rimmer, single-flavor case, or variety-pack barcode. Nothing changes until you confirm. Confirming a romkal-matched capsule also saves the Capsule Barcode mapping (export to write it into git).</p>
         <ul class="plain muted">
           <li>Capsule / rimmer → default <strong>−1</strong> (flip to +1 before confirm)</li>
           <li>Case → +case qty for that cocktail</li>
@@ -626,12 +632,17 @@
     const rimmers = BartesianDB.listRimmers({});
     const barcodes = BartesianDB.listBarcodes();
     const decoded = state.adminCode ? BartesianBarcodes.decodeCapsule(state.adminCode) : null;
-    const preselectSlug = decoded && decoded.slug ? decoded.slug : "";
+
+    let selectedCocktailId = state.adminCocktailId;
+    if (!selectedCocktailId && decoded && decoded.slug) {
+      const hit = cocktails.find((c) => c.slug === decoded.slug);
+      if (hit) selectedCocktailId = String(hit.id);
+    }
 
     const cocktailOpts = cocktails
       .map(
         (c) =>
-          `<option value="${c.id}" ${preselectSlug && c.slug === preselectSlug ? "selected" : ""}>${esc(c.name)}${c.enabled ? "" : " (disabled)"}</option>`
+          `<option value="${c.id}" ${String(c.id) === String(selectedCocktailId) ? "selected" : ""}>${esc(c.name)}${c.enabled ? "" : " (disabled)"}</option>`
       )
       .join("");
     const packOpts = packs.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("");
@@ -655,7 +666,7 @@
               .join("")}
           </tbody>
         </table>`
-      : `<p class="muted">No local barcode associations yet. Capsule scans can still auto-match via the romkal drink map.</p>`;
+      : `<p class="muted">No local barcode associations yet. Use Look up + Save, or confirm a Scan (romkal match auto-saves).</p>`;
 
     return shell(
       "admin-barcodes",
@@ -663,12 +674,21 @@
       <section class="panel">
         <p class="section-label">Admin</p>
         <h1>Barcode associations</h1>
-        <p class="lede">Link a scanned code to a cocktail, case, variety pack, or rimmer. Capsule lid numbers are decoded with <a href="https://github.com/romkal/bartesian_barcode/blob/main/BARCODES.md" target="_blank" rel="noopener">romkal’s format</a>; known pods auto-suggest a cocktail. Export from Settings writes codes into <code>data/</code> + <code>barcodes.json</code> for git.</p>
+        <p class="lede">Enter a barcode, <strong>Look up</strong> (romkal capsule decode), then set Kind / Cocktail (or pack / rimmer) and <strong>Save</strong>. That writes the local mapping used by Scan and, after Export, the <code>Capsule Barcode:</code> field in cocktail <code>.txt</code> files.</p>
 
         <form class="admin-barcode-form" data-admin-barcode>
           <label>Barcode
-            <input name="code" type="text" inputmode="numeric" autocomplete="off" required value="${esc(state.adminCode)}" data-admin-code />
+            <div class="admin-code-row">
+              <input name="code" type="text" inputmode="numeric" autocomplete="off" required value="${esc(state.adminCode)}" data-admin-code />
+              <button type="button" class="ghost" data-admin-lookup>Look up</button>
+            </div>
           </label>
+          ${
+            state.adminLookupNote
+              ? `<p class="ok">${esc(state.adminLookupNote)}</p>`
+              : ""
+          }
+          ${decodedMetaHtml(decoded)}
           <label>Kind
             <select name="kind" data-admin-kind>
               <option value="capsule" ${state.adminKind === "capsule" ? "selected" : ""}>Capsule</option>
@@ -678,7 +698,7 @@
             </select>
           </label>
           <label class="${state.adminKind === "variety_pack" || state.adminKind === "rimmer" ? "is-hidden" : ""}" data-admin-cocktail-wrap>Cocktail
-            <select name="cocktail_id">${cocktailOpts}</select>
+            <select name="cocktail_id" data-admin-cocktail>${cocktailOpts}</select>
           </label>
           <label class="${state.adminKind === "variety_pack" ? "" : "is-hidden"}" data-admin-pack-wrap>Pack
             <select name="pack_id">${packOpts}</select>
@@ -691,7 +711,6 @@
           </label>
           <button type="submit">Save association</button>
         </form>
-        ${decodedMetaHtml(decoded)}
         <h2>Saved mappings</h2>
         ${table}
       </section>
@@ -761,12 +780,43 @@
         <p class="hint" data-export-status></p>
         <h2>Barcodes</h2>
         <p><a href="#/admin/barcodes" data-go="#/admin/barcodes">Associate scanned codes</a> with cocktails, cases, packs, or rimmers. Capsule lid numbers auto-match when present in the romkal drink map.</p>
+        <h2>Force refresh</h2>
+        <p>For iPad / PWA: unregister the service worker, clear caches, and reload. Keeps your local inventory database.</p>
+        <p class="muted">Current build: <code>${esc(APP_VERSION)}</code></p>
+        <button type="button" data-force-refresh>Force refresh</button>
         <h2>Local database</h2>
         <p>Clear IndexedDB and re-seed from <code>js/seed-data.js</code>.</p>
         <button type="button" class="danger" data-reset>Reset local DB</button>
       </section>
     `
     );
+  }
+
+  async function forceRefreshApp() {
+    try {
+      if ("serviceWorker" in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(regs.map((reg) => reg.unregister()));
+      }
+    } catch (_) {
+      /* continue */
+    }
+    try {
+      if (typeof caches !== "undefined") {
+        const keys = await caches.keys();
+        await Promise.all(keys.map((key) => caches.delete(key)));
+      }
+    } catch (_) {
+      /* continue */
+    }
+    try {
+      localStorage.removeItem("bartesian-sw-migrated");
+    } catch (_) {
+      /* continue */
+    }
+    const url = new URL(window.location.href);
+    url.searchParams.set("_refresh", String(Date.now()));
+    window.location.replace(url.toString());
   }
 
   function renderDisclaimer() {
@@ -916,6 +966,58 @@
       state.adminKind = "capsule";
     }
 
+    if (e.target.closest("[data-force-refresh]")) {
+      if (
+        !confirm(
+          "Force refresh? This clears the service worker cache and reloads. Local inventory is kept."
+        )
+      ) {
+        return;
+      }
+      await forceRefreshApp();
+      return;
+    }
+
+    if (e.target.closest("[data-admin-lookup]")) {
+      const input = root.querySelector("[data-admin-code]");
+      const code = BartesianBarcodes.normalizeCode(input ? input.value : state.adminCode);
+      state.adminCode = code;
+      state.adminLookupNote = "";
+      state.adminCocktailId = "";
+      if (!code) {
+        state.adminLookupNote = "Enter a barcode first.";
+        render();
+        return;
+      }
+      const decoded = BartesianBarcodes.decodeCapsule(code);
+      const existing = BartesianDB.findBarcode(code);
+      if (existing) {
+        state.adminKind = existing.kind;
+        if (existing.cocktail_id) state.adminCocktailId = String(existing.cocktail_id);
+        state.adminLookupNote = "Already saved locally as " + BartesianBarcodes.kindLabel(existing.kind) + ".";
+      } else if (decoded && decoded.slug) {
+        const c = BartesianDB.findCocktailBySlug(decoded.slug);
+        state.adminKind = "capsule";
+        if (c) {
+          state.adminCocktailId = String(c.id);
+          state.adminLookupNote =
+            "Romkal match: " + decoded.romkalName + " → " + c.name + ". Review Kind/Cocktail, then Save.";
+        } else {
+          state.adminLookupNote =
+            "Romkal name “" + decoded.romkalName + "” is not in the catalog. Pick a cocktail manually.";
+        }
+      } else if (decoded) {
+        state.adminKind = "capsule";
+        state.adminLookupNote =
+          "Decodable capsule (Drink ID " + decoded.drinkId + ") but not in the drink map. Pick cocktail, then Save.";
+      } else {
+        state.adminLookupNote =
+          "Not a capsule payload (or unreadable). Choose Kind (case / pack / rimmer) and target, then Save.";
+      }
+      render();
+      return;
+    }
+
     if (e.target.closest("[data-export]")) {
       const status = root.querySelector("[data-export-status]");
       try {
@@ -996,8 +1098,13 @@
           rimmerId: kind === "rimmer" ? Number(fd.get("rimmer_id")) : null,
           caseQty: Number(fd.get("case_qty")) || 8,
         });
-        state.flash = "Saved barcode " + code;
+        state.flash =
+          "Saved " +
+          code +
+          ". Export from Settings to write Capsule/Case Barcode into data/*.txt for git.";
         state.adminCode = "";
+        state.adminCocktailId = "";
+        state.adminLookupNote = "";
         render();
       } catch (err) {
         state.flash = "Save failed: " + err.message;
