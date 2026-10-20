@@ -32,55 +32,44 @@ html.book-active body {
   box-sizing: border-box;
 }
 
+/* No photo panel: the hero is a full-viewport layer behind the text.
+   The text section is always 50% of the screen and is never resized by
+   the image; the image may overlap it (photo z-index 0, copy z-index 2). */
 .book-spread {
   position: absolute;
   inset: 0;
-  display: grid;
-  /* Photo panel width is tunable (Book Tune panel); copy takes the rest.
-     For .image-right the rtl direction puts this first track on the right,
-     so the photo panel keeps the tuned width on both sides. */
-  grid-template-columns: var(--book-panel-w, 50%) minmax(0, 1fr);
   width: 100%;
   height: 100%;
-  padding:
-    env(safe-area-inset-top, 0px)
-    env(safe-area-inset-right, 0px)
-    env(safe-area-inset-bottom, 0px)
-    env(safe-area-inset-left, 0px);
-}
-
-.book-spread.image-right {
-  direction: rtl;
-}
-
-.book-spread.image-right > * {
-  direction: ltr;
+  overflow: hidden;
 }
 
 .book-photo {
-  position: relative;
-  min-width: 0;
-  min-height: 0;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   overflow: hidden;
-  background: #f3f3f3;
+  background: #fff;
 }
 
 .book-photo img {
   position: absolute;
   inset: 0;
-  /* Element is 133.333% wide and the photo column clips the overflow,
-     so 75% of the image shows (100 / 133.333). */
-  width: 133.333%;
+  /* The image element fills the viewport; Size (Book Tune) scales it
+     relative to the viewport from its anchored side, Shift/Move Y
+     translate it relative to the viewport. Only the screen edge clips. */
+  width: 100%;
   height: 100%;
   max-width: none;
-  object-fit: cover;
+  /* contain, not cover: the whole hero is always visible — the image is
+     never cropped to the element box, at any Size. Letterboxing blends
+     into the white photo layer behind it. */
+  object-fit: contain;
   pointer-events: none;
   /* Temporary hero fine-tuning (Book Tune panel; vars set inline on
      .book-mode). Independent translate/scale so the Image Cut flip
      (transform: scaleX(-1)) still composes on top. */
   translate: var(--book-tune-x, 0%) var(--book-tune-y, 0%);
   scale: var(--book-tune-scale, 1);
-  transform-origin: center;
 }
 
 /* Image Cut flip (Book mode): mirror the photo horizontally */
@@ -89,15 +78,13 @@ html.book-active body {
 }
 
 .book-spread.image-left .book-photo img {
-  left: auto;
-  right: 0;
   object-position: 70% center;
+  transform-origin: left center;
 }
 
 .book-spread.image-right .book-photo img {
-  left: 0;
-  right: auto;
   object-position: 30% center;
+  transform-origin: right center;
 }
 
 .book-photo-empty {
@@ -113,14 +100,31 @@ html.book-active body {
 }
 
 .book-copy {
-  min-width: 0;
-  min-height: 0;
+  /* Fixed 50% text section, transparent, above the photo; the image
+     is never allowed to resize it and may slide underneath it. */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  z-index: 2;
+  background: transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: clamp(1.25rem, 4vw, 3rem) clamp(1.1rem, 4.5vw, 3.5rem);
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+}
+
+.book-spread.image-left .book-copy {
+  right: 0;
+  left: auto;
+}
+
+.book-spread.image-right .book-copy {
+  left: 0;
+  right: auto;
 }
 
 .book-spirit-chapter {
@@ -314,8 +318,28 @@ html.book-active body {
   border: 1px solid #e0e0e0;
   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
   padding: 0.85rem 0.95rem 0.95rem;
-  user-select: none;
-  -webkit-user-select: none;
+  /* The readout must be selectable/copyable even though Book mode
+     otherwise disables text selection. */
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+.book-tune-readout-field {
+  display: block;
+  width: 100%;
+  margin: 0.65rem 0 0.15rem;
+  padding: 0.3rem 0.4rem;
+  border: 1px solid #e6e6e6;
+  background: rgba(255, 255, 255, 0.7);
+  font: inherit;
+  font-size: 0.98rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #111;
+  font-variant-numeric: tabular-nums;
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
 }
 
 .book-tune-head {
@@ -516,75 +540,25 @@ html.book-active body {
   z-index: 2;
 }
 
-/*
- * Portrait (iPad + phones): cap the hero pane to ~50% of display height.
- * Side-by-side still shows ~75% of the photo width (133.333%), but a shorter
- * viewport means less vertical crop — glass tops/bases no longer hit the edges.
- */
-@media (orientation: portrait) {
-  .book-spread {
-    align-items: center;
-  }
-
-  .book-photo {
-    /* Panel height tunable via Book Tune panel (50% is just the default) */
-    height: var(--book-panel-h, 50%);
-    max-height: var(--book-panel-h, 50%);
-    align-self: center;
-  }
-}
-
-/* Narrow phones: stack copy under a 50vh bleed image */
+/* Portrait phones: text is the bottom 50% of the screen, photo behind it */
 @media (max-width: 720px) and (orientation: portrait) {
-  .book-spread,
-  .book-spread.image-right {
-    direction: ltr;
-    align-items: stretch;
-    grid-template-columns: 1fr;
-    /* Photo panel height tunable via Book Tune panel */
-    grid-template-rows: var(--book-panel-h, 50%) minmax(0, 1fr);
-  }
-
-  .book-spread.image-right .book-photo {
-    order: 0;
-  }
-
+  .book-spread.image-left .book-copy,
   .book-spread.image-right .book-copy {
-    order: 1;
-  }
-
-  .book-photo {
-    /* Row already carries the tuned height; fill it (no double-apply) */
-    height: 100%;
-    max-height: 100%;
-    align-self: stretch;
-  }
-
-  .book-photo img {
-    width: 100%;
-    /* 133.333% tall with the row clipping overflow → 75% of the image shows */
-    height: 133.333%;
-  }
-
-  .book-spread.image-left .book-photo img {
     top: auto;
+    left: 0;
+    right: 0;
     bottom: 0;
-    left: 0;
-    right: 0;
-    object-position: center 40%;
-  }
-
-  .book-spread.image-right .book-photo img {
-    top: 0;
-    bottom: auto;
-    left: 0;
-    right: 0;
-    object-position: center 60%;
-  }
-
-  .book-copy {
+    width: auto;
+    height: 50%;
     justify-content: flex-start;
     padding-top: 1.1rem;
+  }
+
+  /* Size/Shift grow the image from the top of the viewport in portrait */
+  .book-spread.image-left .book-photo img,
+  .book-spread.image-right .book-photo img {
+    object-position: center;
+    transform-origin: center top;
   }
 
   .book-menu-btn {
@@ -605,6 +579,23 @@ html.book-active body {
   .book-page-num {
     left: calc(0.85rem + env(safe-area-inset-left, 0px)) !important;
     right: auto !important;
+  }
+}
+
+/* Desktop (mouse/trackpad): baked hero tuning recorded by Lawrence
+   2026-10-20 — Shift -78% · Move Y +20% · Size 145%.
+   Stored Shift moves toward the center, so a -78% (toward the outer
+   edge) applies as -78% on left pages and mirrored +78% on right pages.
+   These override the Tune vars on desktop; touch devices still tune live. */
+@media (hover: hover) and (pointer: fine) {
+  .book-spread.image-left .book-photo img {
+    translate: -78% 20%;
+    scale: 1.45;
+  }
+
+  .book-spread.image-right .book-photo img {
+    translate: 78% 20%;
+    scale: 1.45;
   }
 }
 

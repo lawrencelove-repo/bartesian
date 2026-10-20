@@ -1,8 +1,11 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v55";
+  const APP_VERSION = "bartesian-v60";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
-  const BOOK_TUNE_COOKIE = "bartesian_book_tune";
+  // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
+  // in the viewport model and made images zoom/crop unexpectedly, so the
+  // old cookie is ignored and tuning starts fresh at Shift 0 / Y 0 / 100%.
+  const BOOK_TUNE_COOKIE = "bartesian_book_tune_v2";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
   const CURRENT_USER = "Lawrence";
@@ -48,9 +51,9 @@
     // photo panel dimensions). Persisted so settings survive paging;
     // Lawrence records the winners per device/orientation and they get
     // baked into book-mode.css.
-    // panelW = photo column % of the spread (landscape/tablet/desktop);
-    // panelH = photo row % of the page (portrait phones).
-    bookTune: { x: 0, y: 0, scale: 1, panelW: 50, panelH: 50 },
+    // The hero is a full-viewport layer behind the fixed 50% text section,
+    // so Shift/Y/Size position and size it relative to the viewport.
+    bookTune: { x: 0, y: 0, scale: 1 },
   };
 
   let bookTouchStartX = 0;
@@ -124,11 +127,9 @@
       const clamp = (v, lo, hi, fallback) =>
         Number.isFinite(Number(v)) ? Math.min(hi, Math.max(lo, Number(v))) : fallback;
       state.bookTune = {
-        x: clamp(p.x, -50, 50, 0),
-        y: clamp(p.y, -50, 50, 0),
+        x: clamp(p.x, -100, 100, 0),
+        y: clamp(p.y, -100, 100, 0),
         scale: clamp(p.scale, 0.5, 2, 1),
-        panelW: clamp(p.panelW, 1, 100, 50),
-        panelH: clamp(p.panelH, 1, 100, 50),
       };
     } catch (_) {
       /* ignore bad cookie */
@@ -154,18 +155,12 @@
     else if (action === "down") t.y += STEP;
     else if (action === "bigger") t.scale = Math.round((t.scale + 0.05) * 100) / 100;
     else if (action === "smaller") t.scale = Math.round((t.scale - 0.05) * 100) / 100;
-    else if (action === "panel-wider") t.panelW += STEP;
-    else if (action === "panel-narrower") t.panelW -= STEP;
-    else if (action === "panel-taller") t.panelH += STEP;
-    else if (action === "panel-shorter") t.panelH -= STEP;
-    else if (action === "reset") { t.x = 0; t.y = 0; t.scale = 1; t.panelW = 50; t.panelH = 50; }
-    t.x = Math.min(50, Math.max(-50, t.x));
-    t.y = Math.min(50, Math.max(-50, t.y));
+    else if (action === "reset") { t.x = 0; t.y = 0; t.scale = 1; }
+    // Full-viewport range: the image may slide completely off either edge,
+    // so any on-screen portion (75%, 50%, less) can be explored.
+    t.x = Math.min(100, Math.max(-100, t.x));
+    t.y = Math.min(100, Math.max(-100, t.y));
     t.scale = Math.min(2, Math.max(0.5, t.scale));
-    // Panel dimensions have no artificial cap: the full 1–100% of the
-    // page is explorable (only the physical page size bounds them).
-    t.panelW = Math.min(100, Math.max(1, t.panelW));
-    t.panelH = Math.min(100, Math.max(1, t.panelH));
     state.bookTune = t;
     saveBookTune();
     render();
@@ -2084,7 +2079,7 @@
     const t = state.bookTune;
     // Stored X shifts toward the center spine, so mirror it on right pages.
     const appliedX = imageLeft ? t.x : -t.x;
-    return `--book-tune-x:${appliedX}%;--book-tune-y:${t.y}%;--book-tune-scale:${t.scale};--book-panel-w:${t.panelW}%;--book-panel-h:${t.panelH}%`;
+    return `--book-tune-x:${appliedX}%;--book-tune-y:${t.y}%;--book-tune-scale:${t.scale}`;
   }
 
   function renderBookTune() {
@@ -2094,15 +2089,19 @@
     const w = window.innerWidth || 0;
     const h = window.innerHeight || 0;
     const orient = w >= h ? "landscape" : "portrait";
+    const desktopBaked =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     return `<div class="book-tune-panel" data-book-tune-panel>
       <div class="book-tune-head">
         <span>Hero tuning</span>
         <button type="button" data-book-tune-close>Close</button>
       </div>
-      <p class="book-tune-readout">Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%</p>
-      <p class="book-tune-readout">Panel W ${t.panelW}% · Panel H ${t.panelH}%</p>
-      <p class="book-tune-viewport">${w}×${h} · ${orient}</p>
+      <input class="book-tune-readout-field" type="text" readonly aria-label="Current tuning settings (selectable)"
+        value="Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%" />
+      <p class="book-tune-viewport">${w}×${h} · ${orient} · Size is relative to the viewport</p>
       <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge.</p>
+      ${desktopBaked ? `<p class="book-tune-viewport">Desktop hero values are baked into the CSS, so Tune buttons won't move this display (they still update the copyable settings text).</p>` : ""}
       <div class="book-tune-row">
         <span class="book-tune-label">Move</span>
         <button type="button" data-book-tune="left" aria-label="Move image left">←</button>
@@ -2116,14 +2115,6 @@
         <button type="button" data-book-tune="bigger" aria-label="Make image bigger">+</button>
         <button type="button" class="book-tune-reset" data-book-tune="reset">Reset</button>
       </div>
-      <div class="book-tune-row">
-        <span class="book-tune-label">Panel</span>
-        <button type="button" data-book-tune="panel-narrower" aria-label="Make photo panel narrower">W−</button>
-        <button type="button" data-book-tune="panel-wider" aria-label="Make photo panel wider">W+</button>
-        <button type="button" data-book-tune="panel-shorter" aria-label="Make photo panel shorter">H−</button>
-        <button type="button" data-book-tune="panel-taller" aria-label="Make photo panel taller">H+</button>
-      </div>
-      <p class="book-tune-viewport">Panel W = photo column width (side-by-side layouts); Panel H = photo height in portrait.</p>
     </div>`;
   }
 
@@ -2145,7 +2136,6 @@
     let index = list.findIndex((c) => c.id === id);
     if (index < 0) index = 0;
     const c = list[index];
-    const prev = index > 0 ? list[index - 1] : null;
     const imageLeft = index % 2 === 0;
     const photoSrc = primaryImage(c);
     // Image Cut: flip horizontally only when the cut side matches the
@@ -2155,14 +2145,6 @@
     const flipPhoto =
       (imageLeft && imageCut === "Left") || (!imageLeft && imageCut === "Right");
     const spiritsText = (c.spirits || []).join(", ") || c.primary_spirit || "";
-    const showSpiritChapter =
-      !prev ||
-      String(prev.primary_spirit || "").toLowerCase() !== String(c.primary_spirit || "").toLowerCase();
-
-    const tasting =
-      (c.details && String(c.details).trim().split(/\n/)[0]) ||
-      c.description ||
-      "";
 
     return `<div class="book-mode" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
       <button type="button" class="book-menu-btn" data-book-menu-open>Menu</button>
@@ -2172,20 +2154,13 @@
           ${photoSrc ? `<img src="${esc(photoSrc)}" alt="" draggable="false" ${flipPhoto ? `class="book-flip"` : ""}>` : ""}
         </div>
         <div class="book-copy">
-          ${
-            showSpiritChapter && (c.primary_spirit || spiritsText)
-              ? `<p class="book-spirit-chapter">${esc(c.primary_spirit || spiritsText)}</p>`
-              : ""
-          }
           <h1 class="book-title">${esc(c.name)}</h1>
           <hr class="book-rule" />
-          ${c.description ? `<p class="book-blurb">${esc(c.description)}</p>` : ""}
           <div class="book-meta">
-            ${bookMetaPipe("Tasting notes", tasting && tasting !== c.description ? tasting : "")}
-            ${bookMetaPipe("Base spirit", spiritsText)}
-            ${bookMetaPipe("Recommended glassware", c.glassware)}
+            ${bookMetaPipe("Tasting Notes", c.description)}
+            ${bookMetaPipe("Base Spirit", spiritsText)}
+            ${bookMetaPipe("Recommended Glassware", c.glassware)}
             ${bookChipSection("Garnish", c.garnish)}
-            ${bookChipSection("Pairs well with", c.pairs_with)}
           </div>
         </div>
         <span class="book-page-num">${index + 1}</span>
