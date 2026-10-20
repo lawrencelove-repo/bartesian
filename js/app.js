@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v39";
+  const APP_VERSION = "bartesian-v40";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -2164,12 +2164,10 @@
     if (e.target.closest("[data-export]")) {
       const status = root.querySelector("[data-export-status]");
       try {
-        const result = await BartesianExport.exportAll(BartesianDB.exportSnapshot());
+        await BartesianExport.exportAll(BartesianDB.exportSnapshot());
         if (status) {
           status.textContent =
-            result.mode === "directory"
-              ? "Exported via folder picker."
-              : "Downloaded bartesian-exports.zip (folder picker unavailable).";
+            "Downloaded bartesian-exports.zip — check your Downloads folder, then copy it to exports/ and run the import.";
         }
       } catch (err) {
         if (status) status.textContent = "Export failed: " + err.message;

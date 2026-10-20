@@ -13,7 +13,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Barcode apply: capsule −1, case +N, variety pack restock (manual entry UI)
 - [x] Randomizer (in-stock; optional spirit / favorites)
 - [x] People management (add raters)
-- [x] Settings: export zip/folder + reset local DB
+- [x] Settings: export zip (always downloads `bartesian-exports.zip`; folder-picker path removed) + reset local DB
 - [x] Sample seed: 4 cocktails + 1 variety pack
 - [x] Disclaimer + non-affiliation note (private use)
 - [x] Service worker shell + favicons / webmanifest stubs

@@ -105,60 +105,23 @@
     zip.file("activity.json", JSON.stringify(snapshot.activity || [], null, 2));
     zip.file("wishlist.json", JSON.stringify(snapshot.wishlist || [], null, 2));
     const blob = await zip.generateAsync({ type: "blob" });
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
+    a.href = url;
     a.download = "bartesian-exports.zip";
+    document.body.appendChild(a);
     a.click();
-    URL.revokeObjectURL(a.href);
-  }
-
-  async function writeWithDirectoryPicker(snapshot) {
-    if (!window.showDirectoryPicker) {
-      throw new Error("Directory picker is not supported in this browser.");
-    }
-    const dir = await window.showDirectoryPicker({ mode: "readwrite" });
-    let cocktailsDir = dir;
-    let packsDir = dir;
-    try {
-      if (dir.name !== "exports") {
-        const exportsDir = await dir.getDirectoryHandle("exports", { create: true });
-        cocktailsDir = await exportsDir.getDirectoryHandle("cocktails", { create: true });
-        packsDir = await exportsDir.getDirectoryHandle("packs", { create: true });
-      } else {
-        cocktailsDir = await dir.getDirectoryHandle("cocktails", { create: true });
-        packsDir = await dir.getDirectoryHandle("packs", { create: true });
-      }
-    } catch (_) {
-      cocktailsDir = dir;
-      packsDir = dir;
-    }
-
-    for (const c of snapshot.cocktails || []) {
-      const handle = await cocktailsDir.getFileHandle(fileStem(c.name, c.slug) + ".txt", {
-        create: true,
-      });
-      const writable = await handle.createWritable();
-      await writable.write(cocktailToText(c));
-      await writable.close();
-    }
-    for (const p of snapshot.packs || []) {
-      const handle = await packsDir.getFileHandle(fileStem(p.name, p.slug) + ".txt", {
-        create: true,
-      });
-      const writable = await handle.createWritable();
-      await writable.write(packToText(p));
-      await writable.close();
-    }
+    a.remove();
+    // Delay revoke — revoking immediately can cancel the download in some browsers
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
   }
 
   async function exportAll(snapshot) {
-    try {
-      await writeWithDirectoryPicker(snapshot);
-      return { mode: "directory" };
-    } catch (err) {
-      await downloadZip(snapshot);
-      return { mode: "zip", error: String(err && err.message ? err.message : err) };
-    }
+    // Always download the zip: the import script expects bartesian-exports.zip,
+    // and the old folder-picker path silently wrote only cocktails/packs
+    // .txt files (no rimmers / JSON) into a subfolder.
+    await downloadZip(snapshot);
+    return { mode: "zip" };
   }
 
   global.BartesianExport = {
