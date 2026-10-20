@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v53";
+  const APP_VERSION = "bartesian-v54";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const BOOK_TUNE_COOKIE = "bartesian_book_tune";
   const ADMIN_COOKIE = "bartesian_admin";
@@ -44,10 +44,13 @@
     isAdmin: false,
     bookMenuOpen: false,
     bookTuneOpen: false,
-    // Temporary Book hero fine-tuning (percent offsets + size multiplier).
-    // Persisted so settings survive paging; Lawrence records the winners
-    // per device/orientation and they get baked into book-mode.css.
-    bookTune: { x: 0, y: 0, scale: 1 },
+    // Temporary Book hero fine-tuning (percent offsets + size multiplier +
+    // photo panel dimensions). Persisted so settings survive paging;
+    // Lawrence records the winners per device/orientation and they get
+    // baked into book-mode.css.
+    // panelW = photo column % of the spread (landscape/tablet/desktop);
+    // panelH = photo row % of the page (portrait phones).
+    bookTune: { x: 0, y: 0, scale: 1, panelW: 50, panelH: 50 },
   };
 
   let bookTouchStartX = 0;
@@ -124,6 +127,8 @@
         x: clamp(p.x, -50, 50, 0),
         y: clamp(p.y, -50, 50, 0),
         scale: clamp(p.scale, 0.5, 2, 1),
+        panelW: clamp(p.panelW, 30, 75, 50),
+        panelH: clamp(p.panelH, 25, 65, 50),
       };
     } catch (_) {
       /* ignore bad cookie */
@@ -149,10 +154,16 @@
     else if (action === "down") t.y += STEP;
     else if (action === "bigger") t.scale = Math.round((t.scale + 0.05) * 100) / 100;
     else if (action === "smaller") t.scale = Math.round((t.scale - 0.05) * 100) / 100;
-    else if (action === "reset") { t.x = 0; t.y = 0; t.scale = 1; }
+    else if (action === "panel-wider") t.panelW += STEP;
+    else if (action === "panel-narrower") t.panelW -= STEP;
+    else if (action === "panel-taller") t.panelH += STEP;
+    else if (action === "panel-shorter") t.panelH -= STEP;
+    else if (action === "reset") { t.x = 0; t.y = 0; t.scale = 1; t.panelW = 50; t.panelH = 50; }
     t.x = Math.min(50, Math.max(-50, t.x));
     t.y = Math.min(50, Math.max(-50, t.y));
     t.scale = Math.min(2, Math.max(0.5, t.scale));
+    t.panelW = Math.min(75, Math.max(30, t.panelW));
+    t.panelH = Math.min(65, Math.max(25, t.panelH));
     state.bookTune = t;
     saveBookTune();
     render();
@@ -2071,7 +2082,7 @@
     const t = state.bookTune;
     // Stored X shifts toward the center spine, so mirror it on right pages.
     const appliedX = imageLeft ? t.x : -t.x;
-    return `--book-tune-x:${appliedX}%;--book-tune-y:${t.y}%;--book-tune-scale:${t.scale}`;
+    return `--book-tune-x:${appliedX}%;--book-tune-y:${t.y}%;--book-tune-scale:${t.scale};--book-panel-w:${t.panelW}%;--book-panel-h:${t.panelH}%`;
   }
 
   function renderBookTune() {
@@ -2087,6 +2098,7 @@
         <button type="button" data-book-tune-close>Close</button>
       </div>
       <p class="book-tune-readout">Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%</p>
+      <p class="book-tune-readout">Panel W ${t.panelW}% · Panel H ${t.panelH}%</p>
       <p class="book-tune-viewport">${w}×${h} · ${orient}</p>
       <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge.</p>
       <div class="book-tune-row">
@@ -2102,6 +2114,14 @@
         <button type="button" data-book-tune="bigger" aria-label="Make image bigger">+</button>
         <button type="button" class="book-tune-reset" data-book-tune="reset">Reset</button>
       </div>
+      <div class="book-tune-row">
+        <span class="book-tune-label">Panel</span>
+        <button type="button" data-book-tune="panel-narrower" aria-label="Make photo panel narrower">W−</button>
+        <button type="button" data-book-tune="panel-wider" aria-label="Make photo panel wider">W+</button>
+        <button type="button" data-book-tune="panel-shorter" aria-label="Make photo panel shorter">H−</button>
+        <button type="button" data-book-tune="panel-taller" aria-label="Make photo panel taller">H+</button>
+      </div>
+      <p class="book-tune-viewport">Panel W = photo column width (side-by-side layouts); Panel H = photo height in portrait.</p>
     </div>`;
   }
 
