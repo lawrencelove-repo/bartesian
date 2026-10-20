@@ -17,6 +17,7 @@ Shopify SKU: 55419
 Gorgias Article ID: 38999
 Hero Image: images/hero/cosmopolitan.jpg
 Marketing Image: images/marketing/cosmopolitan.jpg
+Image Cut: NA
 Image: images/hero/cosmopolitan.jpg
 Seasonal: 0
 Enabled: 1

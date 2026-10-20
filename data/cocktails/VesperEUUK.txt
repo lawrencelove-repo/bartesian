@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 2567781
 Hero Image: images/hero/vesper.jpg
 Marketing Image: images/marketing/vesper.jpg
+Image Cut: NA
 Image: images/hero/vesper.jpg
 Seasonal: 0
 Enabled: 0

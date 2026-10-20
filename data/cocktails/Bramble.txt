@@ -17,6 +17,7 @@ Help URL: https://bartesian.gorgias.help/en-US/bramble-(euuk)-2559242
 Gorgias Article ID: 2559242
 Hero Image: images/hero/bramble.jpg
 Marketing Image: images/marketing/bramble.jpg
+Image Cut: NA
 Image: images/hero/bramble.jpg
 Seasonal: 0
 Enabled: 0

@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 502336
 Hero Image: images/hero/19th-hole.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/19th-hole.jpg
 Seasonal: 0
 Enabled: 0

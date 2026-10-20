@@ -17,6 +17,7 @@ Shopify SKU: 55495
 Gorgias Article ID: 109602
 Hero Image: images/hero/pomegranate-margarita.jpg
 Marketing Image: images/marketing/pomegranate-margarita.jpg
+Image Cut: NA
 Image: images/hero/pomegranate-margarita.jpg
 Seasonal: 0
 Enabled: 1

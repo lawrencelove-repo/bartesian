@@ -17,6 +17,7 @@ Shopify SKU: 55457
 Gorgias Article ID: 45861
 Hero Image: images/hero/pineapple-margarita.jpg
 Marketing Image: images/marketing/pineapple-margarita.jpg
+Image Cut: NA
 Image: images/hero/pineapple-margarita.jpg
 Seasonal: 0
 Enabled: 1

@@ -17,6 +17,7 @@ Shopify SKU: 75681
 Gorgias Article ID: 4332574
 Hero Image: 
 Marketing Image: images/marketing/strawberry-acai-refresher.jpg
+Image Cut: NA
 Image: images/marketing/strawberry-acai-refresher.jpg
 Seasonal: 1
 Enabled: 1

@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 3388358
 Hero Image: images/hero/clausmopolitan.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/clausmopolitan.jpg
 Seasonal: 1
 Enabled: 0

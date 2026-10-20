@@ -17,6 +17,7 @@ Shopify SKU: 55415
 Gorgias Article ID: 36517
 Hero Image: images/hero/apple-pie.jpg
 Marketing Image: images/marketing/apple-pie.jpg
+Image Cut: NA
 Image: images/hero/apple-pie.jpg
 Seasonal: 0
 Enabled: 1

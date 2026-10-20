@@ -17,6 +17,7 @@ Help URL: https://bartesian.gorgias.help/en-US/cafecito-churro-4476621
 Gorgias Article ID: 4476621
 Hero Image: 
 Marketing Image: 
+Image Cut: NA
 Image: 
 Seasonal: 0
 Enabled: 0

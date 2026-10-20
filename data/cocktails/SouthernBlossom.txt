@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 1201767
 Hero Image: images/hero/southern-blossom.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/southern-blossom.jpg
 Seasonal: 0
 Enabled: 0

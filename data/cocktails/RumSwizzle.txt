@@ -17,6 +17,7 @@ Shopify SKU: 55511
 Gorgias Article ID: 248614
 Hero Image: images/hero/rum-swizzle.jpg
 Marketing Image: images/marketing/rum-swizzle.jpg
+Image Cut: NA
 Image: images/marketing/rum-swizzle.jpg
 Seasonal: 0
 Enabled: 1

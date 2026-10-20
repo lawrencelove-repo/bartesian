@@ -17,6 +17,7 @@ Shopify SKU: 55354
 Gorgias Article ID: 39076
 Hero Image: images/hero/rum-breeze.jpg
 Marketing Image: images/marketing/rum-breeze.jpg
+Image Cut: NA
 Image: images/marketing/rum-breeze.jpg
 Seasonal: 0
 Enabled: 1

@@ -17,6 +17,7 @@ Shopify SKU: 55375
 Gorgias Article ID: 39053
 Hero Image: images/hero/mai-tai.jpg
 Marketing Image: images/marketing/mai-tai.jpg
+Image Cut: NA
 Image: images/hero/mai-tai.jpg
 Seasonal: 0
 Enabled: 1

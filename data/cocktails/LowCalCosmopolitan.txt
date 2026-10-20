@@ -17,6 +17,7 @@ Shopify SKU: 55442
 Gorgias Article ID: 39047
 Hero Image: images/hero/low-cal-cosmopolitan.jpg
 Marketing Image: images/marketing/low-cal-cosmopolitan.jpg
+Image Cut: NA
 Image: images/hero/low-cal-cosmopolitan.jpg
 Seasonal: 0
 Enabled: 1

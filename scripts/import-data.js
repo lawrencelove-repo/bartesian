@@ -45,6 +45,7 @@ const COCKTAIL_KEYS = {
   Image: "image",
   "Hero Image": "hero_image",
   "Marketing Image": "marketing_image",
+  "Image Cut": "image_cut",
   Seasonal: "seasonal",
   Enabled: "enabled",
   Favorite: "favorite",
@@ -134,6 +135,7 @@ function parseCocktailText(raw, filename) {
     image: "",
     hero_image: "",
     marketing_image: "",
+    image_cut: "NA",
     seasonal: 0,
     enabled: 1,
     favorite: 0,
@@ -170,6 +172,9 @@ function parseCocktailText(raw, filename) {
       cocktail[mapped] = parseMaybeJson(rest);
     } else if (mapped === "details") {
       cocktail.details = rest.replace(/\\n/g, "\n").replace(/\\\\/g, "\\");
+    } else if (mapped === "image_cut") {
+      const cut = rest.trim().toLowerCase();
+      cocktail.image_cut = cut === "left" ? "Left" : cut === "right" ? "Right" : "NA";
     } else {
       cocktail[mapped] = rest;
     }

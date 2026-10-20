@@ -613,6 +613,29 @@ button.small {
   margin-top: 0.45rem;
 }
 
+.admin-image-cut {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.admin-image-cut select {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  min-height: 32px;
+  padding: 0.25rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  color: var(--ink);
+}
+
 .btn-link {
   display: inline-flex;
   align-items: center;

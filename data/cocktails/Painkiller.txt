@@ -17,6 +17,7 @@ Shopify SKU: 55491
 Gorgias Article ID: 196624
 Hero Image: images/hero/painkiller.jpg
 Marketing Image: images/marketing/painkiller.jpg
+Image Cut: NA
 Image: images/marketing/painkiller.jpg
 Seasonal: 0
 Enabled: 1

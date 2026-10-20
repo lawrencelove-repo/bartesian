@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 39064
 Hero Image: images/hero/negroni.jpg
 Marketing Image: images/marketing/negroni.jpg
+Image Cut: NA
 Image: images/hero/negroni.jpg
 Seasonal: 0
 Enabled: 0

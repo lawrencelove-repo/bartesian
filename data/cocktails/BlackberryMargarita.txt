@@ -17,6 +17,7 @@ Shopify SKU: 55456
 Gorgias Article ID: 36521
 Hero Image: images/hero/blackberry-margarita.jpg
 Marketing Image: images/marketing/blackberry-margarita.jpg
+Image Cut: NA
 Image: images/hero/blackberry-margarita.jpg
 Seasonal: 0
 Enabled: 1

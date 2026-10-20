@@ -17,6 +17,7 @@ Shopify SKU: 55474
 Gorgias Article ID: 275636
 Hero Image: images/hero/white-sangria.jpg
 Marketing Image: images/marketing/white-sangria.jpg
+Image Cut: NA
 Image: images/marketing/white-sangria.jpg
 Seasonal: 0
 Enabled: 1

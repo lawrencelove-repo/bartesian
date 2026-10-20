@@ -17,6 +17,7 @@ Shopify SKU: 55506
 Gorgias Article ID: 98045
 Hero Image: images/hero/espresso-martini.jpg
 Marketing Image: images/marketing/espresso-martini.jpg
+Image Cut: NA
 Image: images/hero/espresso-martini.jpg
 Seasonal: 0
 Enabled: 1

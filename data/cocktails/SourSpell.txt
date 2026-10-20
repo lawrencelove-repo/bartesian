@@ -17,6 +17,7 @@ Shopify SKU: 75713
 Gorgias Article ID: 8043821
 Hero Image: 
 Marketing Image: images/marketing/sour-spell.jpg
+Image Cut: NA
 Image: images/marketing/sour-spell.jpg
 Seasonal: 1
 Enabled: 1

@@ -65,11 +65,18 @@ html.book-active body {
 .book-photo img {
   position: absolute;
   inset: 0;
-  width: 140%;
+  /* Element is 133.333% wide and the photo column clips the overflow,
+     so 75% of the image shows (100 / 133.333). */
+  width: 133.333%;
   height: 100%;
   max-width: none;
   object-fit: cover;
   pointer-events: none;
+}
+
+/* Image Cut flip (Book mode): mirror the photo horizontally */
+.book-photo img.book-flip {
+  transform: scaleX(-1);
 }
 
 .book-spread.image-left .book-photo img {
@@ -401,7 +408,8 @@ html.book-active body {
 
   .book-photo img {
     width: 100%;
-    height: 130%;
+    /* 133.333% tall with the row clipping overflow → 75% of the image shows */
+    height: 133.333%;
   }
 
   .book-spread.image-left .book-photo img {

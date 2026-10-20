@@ -17,6 +17,7 @@ Shopify SKU: 75714
 Gorgias Article ID: 8043822
 Hero Image: 
 Marketing Image: images/marketing/vampires-kiss.jpg
+Image Cut: NA
 Image: images/marketing/vampires-kiss.jpg
 Seasonal: 1
 Enabled: 1

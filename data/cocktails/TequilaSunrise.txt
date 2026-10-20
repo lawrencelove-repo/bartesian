@@ -17,6 +17,7 @@ Shopify SKU: 55477
 Gorgias Article ID: 217642
 Hero Image: images/hero/tequila-sunrise.jpg
 Marketing Image: images/marketing/tequila-sunrise.jpg
+Image Cut: NA
 Image: images/hero/tequila-sunrise.jpg
 Seasonal: 0
 Enabled: 1

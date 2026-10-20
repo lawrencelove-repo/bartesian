@@ -33,6 +33,7 @@
       image TEXT NOT NULL DEFAULT '',
       hero_image TEXT NOT NULL DEFAULT '',
       marketing_image TEXT NOT NULL DEFAULT '',
+      image_cut TEXT NOT NULL DEFAULT 'NA',
       glassware TEXT NOT NULL DEFAULT '',
       garnish TEXT NOT NULL DEFAULT '',
       pairs_with TEXT NOT NULL DEFAULT '',
@@ -382,6 +383,17 @@
         );
       }
     } catch (_) {}
+    // Cocktails: image_cut column ("NA" | "Left" | "Right"), default "NA"
+    try {
+      const ccols = tableColumns("cocktails");
+      if (ccols.length && !ccols.includes("image_cut")) {
+        exec("ALTER TABLE cocktails ADD COLUMN image_cut TEXT NOT NULL DEFAULT 'NA'");
+        changed++;
+      }
+      exec(
+        "UPDATE cocktails SET image_cut = CASE WHEN LOWER(TRIM(image_cut)) = 'left' THEN 'Left' WHEN LOWER(TRIM(image_cut)) = 'right' THEN 'Right' ELSE 'NA' END WHERE image_cut IS NULL OR LOWER(TRIM(image_cut)) NOT IN ('na', 'left', 'right') OR image_cut NOT IN ('NA', 'Left', 'Right')"
+      );
+    } catch (_) {}
     for (const table of ["cocktails", "rimmers"]) {
       const cols = tableColumns(table);
       if (cols.length && !cols.includes("restock")) {
@@ -462,6 +474,14 @@
     }
   }
 
+  /** Canonical Image Cut flag: "NA" (default), "Left", or "Right". */
+  function normalizeImageCut(v) {
+    const s = String(v || "").trim().toLowerCase();
+    if (s === "left") return "Left";
+    if (s === "right") return "Right";
+    return "NA";
+  }
+
   function jsonField(v) {
     if (v == null || v === "") return "";
     if (typeof v === "string") return v;
@@ -479,12 +499,12 @@
     const primary = c.image || hero || marketing || "";
     exec(
       `INSERT INTO cocktails (
-        slug, name, description, details, image, hero_image, marketing_image,
+        slug, name, description, details, image, hero_image, marketing_image, image_cut,
         glassware, garnish, pairs_with, nutrition_json, alcohol_json,
         bartesian_url, help_url, shopify_product_id, shopify_variant_id,
         shopify_handle, shopify_sku, gorgias_article_id, seasonal, favorite,
         enabled, quantity, restock, created_at, updated_at
-      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         c.slug,
         c.name,
@@ -493,6 +513,7 @@
         primary,
         hero,
         marketing,
+        normalizeImageCut(c.image_cut),
         c.glassware || "",
         c.garnish || "",
         c.pairs_with || "",
@@ -780,7 +801,7 @@
     for (const c of seed.cocktails || []) {
       if (!c.slug) continue;
       const row = queryOne(
-        "SELECT id, quantity, restock, image, hero_image, marketing_image FROM cocktails WHERE slug = ?",
+        "SELECT id, quantity, restock, image, hero_image, marketing_image, image_cut FROM cocktails WHERE slug = ?",
         [c.slug]
       );
       if (!row) continue;
@@ -789,16 +810,18 @@
       const image = String(c.image || "");
       const hero = String(c.hero_image || "");
       const marketing = String(c.marketing_image || "");
+      const imageCut = normalizeImageCut(c.image_cut);
       const inventoryChanged =
         Number(row.quantity) !== q || Number(row.restock || 0) !== restock;
       const imagesChanged =
         String(row.image || "") !== image ||
         String(row.hero_image || "") !== hero ||
-        String(row.marketing_image || "") !== marketing;
+        String(row.marketing_image || "") !== marketing ||
+        normalizeImageCut(row.image_cut) !== imageCut;
       if (inventoryChanged || imagesChanged) {
         exec(
-          "UPDATE cocktails SET quantity = ?, restock = ?, image = ?, hero_image = ?, marketing_image = ?, updated_at = ? WHERE id = ?",
-          [q, restock, image, hero, marketing, ts, row.id]
+          "UPDATE cocktails SET quantity = ?, restock = ?, image = ?, hero_image = ?, marketing_image = ?, image_cut = ?, updated_at = ? WHERE id = ?",
+          [q, restock, image, hero, marketing, imageCut, ts, row.id]
         );
         changed++;
       }
@@ -962,6 +985,7 @@
     if (!row) return null;
     return {
       ...row,
+      image_cut: normalizeImageCut(row.image_cut),
       favorite: !!row.favorite,
       seasonal: !!row.seasonal,
       enabled: row.enabled === undefined || row.enabled === null ? true : !!row.enabled,
@@ -1078,6 +1102,11 @@
       await persist();
     },
 
+    async setCocktailImageCut(id, imageCut) {
+      exec("UPDATE cocktails SET image_cut = ?, updated_at = ? WHERE id = ?", [normalizeImageCut(imageCut), nowIso(), id]);
+      await persist();
+    },
+
     async setRimmerEnabled(id, enabled) {
       exec("UPDATE rimmers SET enabled = ?, updated_at = ? WHERE id = ?", [enabled ? 1 : 0, nowIso(), id]);
       await persist();
@@ -1148,7 +1177,7 @@
       const marketing = String(d.marketing_image || "");
       const values = [
         slug, name, String(d.description || ""), String(d.details || ""),
-        String(d.image || "") || hero || marketing, hero, marketing,
+        String(d.image || "") || hero || marketing, hero, marketing, normalizeImageCut(d.image_cut),
         String(d.glassware || ""), String(d.garnish || ""), String(d.pairs_with || ""),
         jsonField(d.nutrition_json), jsonField(d.alcohol_json),
         String(d.bartesian_url || ""), String(d.help_url || ""),
@@ -1161,7 +1190,7 @@
       if (cid) {
         if (!queryOne("SELECT id FROM cocktails WHERE id = ?", [cid])) throw new Error("Cocktail not found.");
         exec(
-          `UPDATE cocktails SET slug=?, name=?, description=?, details=?, image=?, hero_image=?, marketing_image=?,
+          `UPDATE cocktails SET slug=?, name=?, description=?, details=?, image=?, hero_image=?, marketing_image=?, image_cut=?,
              glassware=?, garnish=?, pairs_with=?, nutrition_json=?, alcohol_json=?, bartesian_url=?, help_url=?,
              shopify_product_id=?, shopify_variant_id=?, shopify_handle=?, shopify_sku=?, gorgias_article_id=?,
              seasonal=?, favorite=?, enabled=?, quantity=?, restock=?, updated_at=? WHERE id=?`,
@@ -1169,11 +1198,11 @@
         );
       } else {
         exec(
-          `INSERT INTO cocktails (slug, name, description, details, image, hero_image, marketing_image,
+          `INSERT INTO cocktails (slug, name, description, details, image, hero_image, marketing_image, image_cut,
              glassware, garnish, pairs_with, nutrition_json, alcohol_json, bartesian_url, help_url,
              shopify_product_id, shopify_variant_id, shopify_handle, shopify_sku, gorgias_article_id,
              seasonal, favorite, enabled, quantity, restock, created_at, updated_at)
-           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
           [...values, ts, ts]
         );
         cid = queryOne("SELECT last_insert_rowid() AS id").id;

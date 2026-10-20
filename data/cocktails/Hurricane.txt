@@ -17,6 +17,7 @@ Shopify SKU: 55455
 Gorgias Article ID: 39034
 Hero Image: images/hero/hurricane.jpg
 Marketing Image: images/marketing/hurricane.jpg
+Image Cut: NA
 Image: images/hero/hurricane.jpg
 Seasonal: 0
 Enabled: 1

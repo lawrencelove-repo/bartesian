@@ -17,6 +17,7 @@ Shopify SKU: 55373
 Gorgias Article ID: 39073
 Hero Image: images/hero/paper-plane.jpg
 Marketing Image: images/marketing/paper-plane.jpg
+Image Cut: NA
 Image: images/hero/paper-plane.jpg
 Seasonal: 0
 Enabled: 1

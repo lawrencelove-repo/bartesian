@@ -17,6 +17,7 @@ Help URL:
 Gorgias Article ID: 
 Hero Image: 
 Marketing Image: 
+Image Cut: NA
 Image: 
 Seasonal: 1
 Enabled: 0

@@ -20,6 +20,7 @@
       "Gorgias Article ID: " + (c.gorgias_article_id || ""),
       "Hero Image: " + (c.hero_image || ""),
       "Marketing Image: " + (c.marketing_image || ""),
+      "Image Cut: " + (c.image_cut || "NA"),
       "Image: " + (c.image || c.hero_image || c.marketing_image || ""),
       "Seasonal: " + (c.seasonal ? "1" : "0"),
       "Enabled: " + (c.enabled === 0 || c.enabled === false ? "0" : "1"),

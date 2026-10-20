@@ -17,6 +17,7 @@ Help URL: https://bartesian.gorgias.help/en-US/gin-basil-smash-(uk-only)-8043833
 Gorgias Article ID: 8043833
 Hero Image: images/hero/gin-basil-smash.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/gin-basil-smash.jpg
 Seasonal: 0
 Enabled: 0

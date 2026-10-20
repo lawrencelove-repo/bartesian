@@ -17,6 +17,7 @@ Shopify SKU: 75571
 Gorgias Article ID: 646841
 Hero Image: images/hero/golden-ace.jpg
 Marketing Image: images/marketing/golden-ace.jpg
+Image Cut: NA
 Image: images/hero/golden-ace.jpg
 Seasonal: 0
 Enabled: 1

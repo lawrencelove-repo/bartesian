@@ -17,6 +17,7 @@ Shopify SKU: 55523
 Gorgias Article ID: 260338
 Hero Image: images/hero/watermelon-margarita.jpg
 Marketing Image: images/marketing/watermelon-margarita.jpg
+Image Cut: NA
 Image: images/marketing/watermelon-margarita.jpg
 Seasonal: 0
 Enabled: 1

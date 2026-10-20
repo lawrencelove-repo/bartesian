@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 1059897
 Hero Image: images/hero/the-grinch-appletini.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/the-grinch-appletini.jpg
 Seasonal: 1
 Enabled: 0

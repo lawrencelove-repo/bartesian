@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 1661999
 Hero Image: images/hero/strawberry-lemon-drop.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/strawberry-lemon-drop.jpg
 Seasonal: 0
 Enabled: 0

@@ -17,6 +17,7 @@ Shopify SKU: 75683
 Gorgias Article ID: 4332578
 Hero Image: 
 Marketing Image: images/marketing/blackberry-mango-refresher.jpg
+Image Cut: NA
 Image: images/marketing/blackberry-mango-refresher.jpg
 Seasonal: 1
 Enabled: 1

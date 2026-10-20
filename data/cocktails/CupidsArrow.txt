@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 182164
 Hero Image: 
 Marketing Image: 
+Image Cut: NA
 Image: 
 Seasonal: 1
 Enabled: 0

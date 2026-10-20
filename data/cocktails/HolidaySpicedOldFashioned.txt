@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 3074904
 Hero Image: images/hero/holiday-spiced-old-fashioned.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/holiday-spiced-old-fashioned.jpg
 Seasonal: 1
 Enabled: 0

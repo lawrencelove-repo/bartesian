@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 2027470
 Hero Image: images/hero/fuzzy-navel.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/fuzzy-navel.jpg
 Seasonal: 0
 Enabled: 0

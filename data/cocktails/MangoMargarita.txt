@@ -17,6 +17,7 @@ Shopify SKU: 55428
 Gorgias Article ID: 39056
 Hero Image: images/hero/mango-margarita.jpg
 Marketing Image: images/marketing/mango-margarita.jpg
+Image Cut: NA
 Image: images/hero/mango-margarita.jpg
 Seasonal: 0
 Enabled: 1

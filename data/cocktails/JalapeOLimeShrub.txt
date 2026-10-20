@@ -17,6 +17,7 @@ Help URL: https://bartesian.gorgias.help/en-US/jalapeno-lime-shrub-39041
 Gorgias Article ID: 39041
 Hero Image: images/hero/jalape-o-lime-shrub.jpg
 Marketing Image: images/marketing/jalape-o-lime-shrub.jpg
+Image Cut: NA
 Image: images/hero/jalape-o-lime-shrub.jpg
 Seasonal: 0
 Enabled: 1

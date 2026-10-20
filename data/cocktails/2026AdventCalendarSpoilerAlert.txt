@@ -17,6 +17,7 @@ Help URL: https://bartesian.gorgias.help/en-US/2026-advent-calendar-(spoiler-ale
 Gorgias Article ID: 7886629
 Hero Image: 
 Marketing Image: images/packs/advent-calendar-2026.jpg
+Image Cut: NA
 Image: images/packs/advent-calendar-2026.jpg
 Seasonal: 1
 Enabled: 0

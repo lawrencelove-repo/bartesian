@@ -17,6 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 1051826
 Hero Image: images/hero/love-potion.jpg
 Marketing Image: 
+Image Cut: NA
 Image: images/hero/love-potion.jpg
 Seasonal: 1
 Enabled: 0

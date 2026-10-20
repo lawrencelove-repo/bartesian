@@ -17,6 +17,7 @@ Shopify SKU: 75682
 Gorgias Article ID: 4332577
 Hero Image: 
 Marketing Image: images/marketing/peach-lychee-refresher.jpg
+Image Cut: NA
 Image: images/marketing/peach-lychee-refresher.jpg
 Seasonal: 1
 Enabled: 1

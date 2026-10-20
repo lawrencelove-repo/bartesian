@@ -17,6 +17,7 @@ Shopify SKU: 55450
 Gorgias Article ID: 39066
 Hero Image: images/hero/northside.jpg
 Marketing Image: images/marketing/northside.jpg
+Image Cut: NA
 Image: images/hero/northside.jpg
 Seasonal: 0
 Enabled: 1

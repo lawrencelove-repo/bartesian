@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v47";
+  const APP_VERSION = "bartesian-v49";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -1556,6 +1556,16 @@
     return `<button type="button" class="ghost small" ${attrs} data-on="${on ? 1 : 0}">${on ? labelOn : labelOff}</button>`;
   }
 
+  function adminImageCutSelect(c) {
+    const current = ["Left", "Right"].includes(c.image_cut) ? c.image_cut : "NA";
+    const options = ["NA", "Left", "Right"]
+      .map((opt) => `<option value="${opt}" ${opt === current ? "selected" : ""}>${opt}</option>`)
+      .join("");
+    return `<label class="admin-image-cut">Image Cut
+      <select data-admin-cocktail-image-cut data-id="${c.id}" aria-label="Image Cut for ${esc(c.name)}">${options}</select>
+    </label>`;
+  }
+
   function renderAdminCocktails() {
     const cocktails = BartesianDB.listAllCocktails();
     const rows = cocktails.map((c) => `
@@ -1571,6 +1581,7 @@
             ${adminToggleBtn(`data-admin-cocktail-fav data-id="${c.id}"`, c.favorite, "Favorited ★", "Favorite")}
             ${adminToggleBtn(`data-admin-cocktail-seasonal data-id="${c.id}"`, c.seasonal, "Seasonal ✓", "Seasonal")}
             ${adminToggleBtn(`data-admin-cocktail-enabled data-id="${c.id}"`, c.enabled, "Enabled ✓", "Disabled")}
+            ${adminImageCutSelect(c)}
             <a class="btn-link small" href="#/admin/cocktails/edit/${c.id}" data-go="#/admin/cocktails/edit/${c.id}">Edit</a>
           </div>
         </div>
@@ -1671,6 +1682,11 @@
     if (o.type === "checkbox") {
       return `<label class="check form-check"><input type="checkbox" name="${name}" ${val ? "checked" : ""}/> ${esc(label)}</label>`;
     }
+    if (o.type === "select") {
+      const options = o.options || [];
+      const current = val === "" || val == null ? options[0] : val;
+      return `<label>${esc(label)}<select name="${name}">${options.map((opt) => `<option value="${esc(opt)}" ${String(opt) === String(current) ? "selected" : ""}>${esc(opt)}</option>`).join("")}</select></label>`;
+    }
     return `<label>${esc(label)}<input name="${name}" type="${o.type || "text"}" value="${esc(val)}" ${o.required ? "required" : ""} ${o.list ? `list="${o.list}"` : ""} placeholder="${esc(o.placeholder || "")}" ${o.min != null ? `min="${o.min}"` : ""} ${o.step != null ? `step="${o.step}"` : ""}/></label>`;
   }
 
@@ -1733,6 +1749,7 @@
           ${itemField(v, "image", "Image", {})}
           ${itemField(v, "hero_image", "Hero image", {})}
           ${itemField(v, "marketing_image", "Marketing image", {})}
+          ${itemField(v, "image_cut", "Image Cut", { type: "select", options: ["NA", "Left", "Right"] })}
           ${itemField(v, "bartesian_url", "Bartesian URL", {})}
           ${itemField(v, "help_url", "Help URL", {})}
         </div>
@@ -2019,6 +2036,11 @@
     const prev = index > 0 ? list[index - 1] : null;
     const imageLeft = index % 2 === 0;
     const photoSrc = primaryImage(c);
+    // Image Cut: flip horizontally when the cut side is opposite the
+    // side the photo sits on (left photo + Right cut, or right photo + Left cut).
+    const imageCut = String(c.image_cut || "NA");
+    const flipPhoto =
+      (imageLeft && imageCut === "Right") || (!imageLeft && imageCut === "Left");
     const spiritsText = (c.spirits || []).join(", ") || c.primary_spirit || "";
     const showSpiritChapter =
       !prev ||
@@ -2033,7 +2055,7 @@
       <button type="button" class="book-menu-btn" data-book-menu-open>Menu</button>
       <article class="book-spread ${imageLeft ? "image-left" : "image-right"}" data-book-spread>
         <div class="book-photo ${photoSrc ? "" : "book-photo-empty"}">
-          ${photoSrc ? `<img src="${esc(photoSrc)}" alt="" draggable="false">` : ""}
+          ${photoSrc ? `<img src="${esc(photoSrc)}" alt="" draggable="false" ${flipPhoto ? `class="book-flip"` : ""}>` : ""}
         </div>
         <div class="book-copy">
           ${
@@ -2825,6 +2847,7 @@
           glassware: text("glassware"), garnish: text("garnish"), pairs_with: text("pairs_with"),
           description: text("description"), details: text("details"),
           image: text("image"), hero_image: text("hero_image"), marketing_image: text("marketing_image"),
+          image_cut: text("image_cut") || "NA",
           bartesian_url: text("bartesian_url"), help_url: text("help_url"),
           shopify_product_id: text("shopify_product_id"), shopify_variant_id: text("shopify_variant_id"),
           shopify_handle: text("shopify_handle"), shopify_sku: text("shopify_sku"),
@@ -2984,6 +3007,18 @@
       state.rimmerFavoritesOnly = rimmerForm.favorites ? rimmerForm.favorites.checked : false;
       state.rimmerAvailableOnly = rimmerForm.available ? rimmerForm.available.checked : false;
       render();
+      return;
+    }
+
+    const imageCutSelect = e.target.closest("[data-admin-cocktail-image-cut]");
+    if (imageCutSelect) {
+      BartesianDB.setCocktailImageCut(
+        Number(imageCutSelect.getAttribute("data-id")),
+        imageCutSelect.value
+      ).catch((err) => {
+        state.flash = err.message;
+        render();
+      });
       return;
     }
 

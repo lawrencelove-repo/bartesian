@@ -17,6 +17,7 @@ Shopify SKU: 55357
 Gorgias Article ID: 39072
 Hero Image: images/hero/old-fashioned.jpg
 Marketing Image: images/marketing/old-fashioned.jpg
+Image Cut: NA
 Image: images/hero/old-fashioned.jpg
 Seasonal: 0
 Enabled: 1
