@@ -655,6 +655,14 @@ html.book-active body {
   }
 }
 
+/* While the Tune panel is open, live Tune vars override any baked
+   form-factor values above (higher specificity, so it wins in every
+   media query), letting baked devices be re-tuned. */
+.book-mode.book-tuning .book-spread .book-photo {
+  translate: var(--book-tune-x, 0%) var(--book-tune-y, 0%);
+  scale: var(--book-tune-scale, 1);
+}
+
 @media (orientation: landscape) and (max-height: 480px) {
   .book-copy {
     padding: 0.75rem 1rem;

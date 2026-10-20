@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v63";
+  const APP_VERSION = "bartesian-v64";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -2075,6 +2075,21 @@
     </div>`;
   }
 
+  /** Baked hero preset for this device/orientation, if one exists in CSS. */
+  function bakedBookTune() {
+    const mq = (q) => typeof window.matchMedia === "function" && window.matchMedia(q).matches;
+    if (mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)")) {
+      return { x: -64, y: 12, scale: 1.3 }; // iPad landscape
+    }
+    if (mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)")) {
+      return { x: -52, y: 4, scale: 1.35 }; // iPad portrait
+    }
+    if (mq("(hover: hover) and (pointer: fine)")) {
+      return { x: -78, y: 20, scale: 1.45 }; // desktop
+    }
+    return null;
+  }
+
   function bookTuneStyle(imageLeft) {
     const t = state.bookTune;
     // Stored X shifts toward the center spine, so mirror it on right pages.
@@ -2105,7 +2120,7 @@
         value="Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%" />
       <p class="book-tune-viewport">${w}×${h} · ${orient} · Size is relative to the viewport</p>
       <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge.</p>
-      ${bakedHere ? `<p class="book-tune-viewport">This device/orientation's hero values are baked into the CSS, so Tune buttons won't move this display (they still update the copyable settings text).</p>` : ""}
+      ${bakedHere ? `<p class="book-tune-viewport">This device/orientation has baked CSS values; Tune is live while this panel is open (starting from the baked values). Closing the panel returns to the baked display — send any new values to have them baked in.</p>` : ""}
       <div class="book-tune-row">
         <span class="book-tune-label">Move</span>
         <button type="button" data-book-tune="left" aria-label="Move image left">←</button>
@@ -2150,7 +2165,7 @@
       (imageLeft && imageCut === "Left") || (!imageLeft && imageCut === "Right");
     const spiritsText = (c.spirits || []).join(", ") || c.primary_spirit || "";
 
-    return `<div class="book-mode" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
+    return `<div class="book-mode ${state.bookTuneOpen ? "book-tuning" : ""}" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
       <button type="button" class="book-menu-btn" data-book-menu-open>Menu</button>
       <button type="button" class="book-tune-btn" data-book-tune-open>Tune</button>
       <article class="book-spread ${imageLeft ? "image-left" : "image-right"}" data-book-spread>
@@ -2334,6 +2349,10 @@
     }
     if (e.target.closest("[data-book-tune-open]")) {
       e.preventDefault();
+      // Start tuning from the baked values for this form factor (if any)
+      // so the display doesn't jump when Tune takes over from the bake.
+      const preset = bakedBookTune();
+      if (preset) state.bookTune = preset;
       state.bookTuneOpen = true;
       render();
       return;
