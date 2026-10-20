@@ -642,22 +642,22 @@ html.book-active body {
 }
 
 /* iPad portrait: baked hero tuning recorded by Lawrence 2026-10-20 —
-   Shift -52% · Move Y +4% · Size 135% (mirrored on right pages). */
+   Shift -66% · Move Y +4% · Size 135% (mirrored on right pages). */
 @media (pointer: coarse) and (orientation: portrait) and (min-width: 600px) {
   .book-spread.image-left .book-photo {
-    translate: -52% 4%;
+    translate: -66% 4%;
     scale: 1.35;
   }
 
   .book-spread.image-right .book-photo {
-    translate: 52% 4%;
+    translate: 66% 4%;
     scale: 1.35;
   }
 }
 
-/* While the Tune panel is open, live Tune vars override any baked
-   form-factor values above (higher specificity, so it wins in every
-   media query), letting baked devices be re-tuned. */
+/* During a tuning session (panel open, or tuned values not yet baked),
+   live Tune vars override any baked form-factor values above (higher
+   specificity, so it wins in every media query). */
 .book-mode.book-tuning .book-spread .book-photo {
   translate: var(--book-tune-x, 0%) var(--book-tune-y, 0%);
   scale: var(--book-tune-scale, 1);

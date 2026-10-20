@@ -1,11 +1,12 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v64";
+  const APP_VERSION = "bartesian-v65";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
   // old cookie is ignored and tuning starts fresh at Shift 0 / Y 0 / 100%.
   const BOOK_TUNE_COOKIE = "bartesian_book_tune_v2";
+  const UI_PREFS_COOKIE = "bartesian_ui_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
   const CURRENT_USER = "Lawrence";
@@ -54,6 +55,14 @@
     // The hero is a full-viewport layer behind the fixed 50% text section,
     // so Shift/Y/Size position and size it relative to the viewport.
     bookTune: { x: 0, y: 0, scale: 1 },
+    // True once the user has actually tuned on this device: tuned values
+    // then stay live after the Tune panel closes (until baked into CSS).
+    // Scoped by bookTuneForm so e.g. portrait values don't leak to landscape.
+    bookTuneLive: false,
+    bookTuneForm: "",
+    // Admin display toggles (Settings; cookie bartesian_ui_prefs)
+    showBookTuneBtn: true,
+    showAdminImageCut: true,
   };
 
   let bookTouchStartX = 0;
@@ -119,6 +128,15 @@
     };
   }
 
+  /** Which form-factor bucket the current viewport belongs to. */
+  function bookFormKey() {
+    const mq = (q) => typeof window.matchMedia === "function" && window.matchMedia(q).matches;
+    if (mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)")) return "ipad-landscape";
+    if (mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)")) return "ipad-portrait";
+    if (mq("(hover: hover) and (pointer: fine)")) return "desktop";
+    return (window.innerWidth || 0) >= (window.innerHeight || 0) ? "landscape" : "portrait";
+  }
+
   function loadBookTune() {
     try {
       const raw = getCookie(BOOK_TUNE_COOKIE);
@@ -131,13 +149,16 @@
         y: clamp(p.y, -100, 100, 0),
         scale: clamp(p.scale, 0.5, 2, 1),
       };
+      state.bookTuneLive = true;
+      // Older cookies have no form stamp; assume they were tuned here.
+      state.bookTuneForm = typeof p.form === "string" && p.form ? p.form : bookFormKey();
     } catch (_) {
       /* ignore bad cookie */
     }
   }
 
   function saveBookTune() {
-    setCookie(BOOK_TUNE_COOKIE, JSON.stringify(state.bookTune));
+    setCookie(BOOK_TUNE_COOKIE, JSON.stringify({ ...state.bookTune, form: state.bookTuneForm }));
   }
 
   function adjustBookTune(action) {
@@ -162,12 +183,38 @@
     t.y = Math.min(100, Math.max(-100, t.y));
     t.scale = Math.min(2, Math.max(0.5, t.scale));
     state.bookTune = t;
+    // Tuned settings persist after the panel closes, for this form factor.
+    state.bookTuneLive = true;
+    state.bookTuneForm = bookFormKey();
     saveBookTune();
     render();
   }
 
+  function loadUiPrefs() {
+    try {
+      const raw = getCookie(UI_PREFS_COOKIE);
+      if (!raw) return;
+      const p = JSON.parse(raw);
+      if (typeof p.showBookTuneBtn === "boolean") state.showBookTuneBtn = p.showBookTuneBtn;
+      if (typeof p.showAdminImageCut === "boolean") state.showAdminImageCut = p.showAdminImageCut;
+    } catch (_) {
+      /* ignore bad cookie */
+    }
+  }
+
+  function saveUiPrefs() {
+    setCookie(
+      UI_PREFS_COOKIE,
+      JSON.stringify({
+        showBookTuneBtn: state.showBookTuneBtn,
+        showAdminImageCut: state.showAdminImageCut,
+      })
+    );
+  }
+
   loadListPrefs();
   loadBookTune();
+  loadUiPrefs();
 
   function loadAdminFlag() {
     try {
@@ -1641,7 +1688,7 @@
             ${adminToggleBtn(`data-admin-cocktail-fav data-id="${c.id}"`, c.favorite, "Favorited ★", "Favorite")}
             ${adminToggleBtn(`data-admin-cocktail-seasonal data-id="${c.id}"`, c.seasonal, "Seasonal ✓", "Seasonal")}
             ${adminToggleBtn(`data-admin-cocktail-enabled data-id="${c.id}"`, c.enabled, "Enabled ✓", "Disabled")}
-            ${adminImageCutSelect(c)}
+            ${state.showAdminImageCut ? adminImageCutSelect(c) : ""}
             <a class="btn-link small" href="#/admin/cocktails/edit/${c.id}" data-go="#/admin/cocktails/edit/${c.id}">Edit</a>
           </div>
         </div>
@@ -1968,12 +2015,20 @@
   }
 
   function renderSettings() {
+    const adminDisplay = state.isAdmin
+      ? `
+        <h2>Admin display options</h2>
+        <p class="hint">Only visible to admins. Saved in a cookie on this device.</p>
+        <p><label class="check"><input type="checkbox" data-ui-pref="showBookTuneBtn" ${state.showBookTuneBtn ? "checked" : ""}/> Show Tune button in Book mode</label></p>
+        <p><label class="check"><input type="checkbox" data-ui-pref="showAdminImageCut" ${state.showAdminImageCut ? "checked" : ""}/> Show Image Cut in Cocktails Admin page</label></p>`
+      : "";
     return shell(
       "settings",
       `
       <section class="panel">
         <p class="section-label">Admin</p>
         <h1>Settings</h1>
+        ${adminDisplay}
         <h2>Export for GitHub</h2>
         <p>Downloads <code>bartesian-exports.zip</code>. Copy it to <code>exports/bartesian-exports.zip</code>, then run <code>node scripts/import-data.js</code> (or the Import debug task). That updates <code>data/</code> + seed; on next load the app applies seed quantities into local IndexedDB. Commit when ready.</p>
         <p class="hint">A normal reload keeps your browser DB. After an import, Force refresh (or hard reload) so the new seed rev is picked up — inventory counts then sync from seed.</p>
@@ -2082,7 +2137,7 @@
       return { x: -64, y: 12, scale: 1.3 }; // iPad landscape
     }
     if (mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)")) {
-      return { x: -52, y: 4, scale: 1.35 }; // iPad portrait
+      return { x: -66, y: 4, scale: 1.35 }; // iPad portrait
     }
     if (mq("(hover: hover) and (pointer: fine)")) {
       return { x: -78, y: 20, scale: 1.45 }; // desktop
@@ -2120,7 +2175,7 @@
         value="Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%" />
       <p class="book-tune-viewport">${w}×${h} · ${orient} · Size is relative to the viewport</p>
       <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge.</p>
-      ${bakedHere ? `<p class="book-tune-viewport">This device/orientation has baked CSS values; Tune is live while this panel is open (starting from the baked values). Closing the panel returns to the baked display — send any new values to have them baked in.</p>` : ""}
+      ${bakedHere ? `<p class="book-tune-viewport">This device/orientation has baked CSS values; Tune starts from them, and once you change anything your tuned values stay in effect after closing (for this form factor) until they're baked in.</p>` : ""}
       <div class="book-tune-row">
         <span class="book-tune-label">Move</span>
         <button type="button" data-book-tune="left" aria-label="Move image left">←</button>
@@ -2165,9 +2220,11 @@
       (imageLeft && imageCut === "Left") || (!imageLeft && imageCut === "Right");
     const spiritsText = (c.spirits || []).join(", ") || c.primary_spirit || "";
 
-    return `<div class="book-mode ${state.bookTuneOpen ? "book-tuning" : ""}" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
+    const tuneLive =
+      state.bookTuneOpen || (state.bookTuneLive && state.bookTuneForm === bookFormKey());
+    return `<div class="book-mode ${tuneLive ? "book-tuning" : ""}" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
       <button type="button" class="book-menu-btn" data-book-menu-open>Menu</button>
-      <button type="button" class="book-tune-btn" data-book-tune-open>Tune</button>
+      ${state.showBookTuneBtn ? `<button type="button" class="book-tune-btn" data-book-tune-open>Tune</button>` : ""}
       <article class="book-spread ${imageLeft ? "image-left" : "image-right"}" data-book-spread>
         <div class="book-photo ${photoSrc ? "" : "book-photo-empty"}">
           ${photoSrc ? `<img src="${esc(photoSrc)}" alt="" draggable="false" ${flipPhoto ? `class="book-flip"` : ""}>` : ""}
@@ -3121,6 +3178,16 @@
   }
 
   function onChange(e) {
+    const uiPref = e.target.closest("[data-ui-pref]");
+    if (uiPref) {
+      const key = uiPref.getAttribute("data-ui-pref");
+      if (key === "showBookTuneBtn" || key === "showAdminImageCut") {
+        state[key] = !!uiPref.checked;
+        saveUiPrefs();
+      }
+      return;
+    }
+
     const listForm = e.target.closest("[data-list-filters]");
     if (listForm && ["spirit", "sort", "available", "favorites"].includes(e.target.name)) {
       state.spirit = listForm.spirit.value;
