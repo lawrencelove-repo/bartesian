@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v67";
+  const APP_VERSION = "bartesian-v68";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -133,6 +133,7 @@
     const mq = (q) => typeof window.matchMedia === "function" && window.matchMedia(q).matches;
     if (mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)")) return "ipad-landscape";
     if (mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)")) return "ipad-portrait";
+    if (mq("(pointer: coarse) and (orientation: portrait) and (max-width: 599px)")) return "iphone-portrait";
     if (mq("(hover: hover) and (pointer: fine)")) return "desktop";
     return (window.innerWidth || 0) >= (window.innerHeight || 0) ? "landscape" : "portrait";
   }
@@ -2151,6 +2152,9 @@
     if (mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)")) {
       return { x: -66, y: 4, scale: 1.35 }; // iPad portrait
     }
+    if (mq("(pointer: coarse) and (orientation: portrait) and (max-width: 599px)")) {
+      return { x: -8, y: -32, scale: 1.35 }; // iPhone portrait
+    }
     if (mq("(hover: hover) and (pointer: fine)")) {
       return { x: -78, y: 20, scale: 1.45 }; // desktop
     }
@@ -2171,13 +2175,7 @@
     const w = window.innerWidth || 0;
     const h = window.innerHeight || 0;
     const orient = w >= h ? "landscape" : "portrait";
-    // Form factors whose hero values are already baked into book-mode.css
-    // (keep these queries in sync with the stylesheet).
-    const mq = (q) => typeof window.matchMedia === "function" && window.matchMedia(q).matches;
-    const bakedHere =
-      mq("(hover: hover) and (pointer: fine)") ||
-      mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)") ||
-      mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)");
+    const bakedHere = bakedBookTune() !== null;
     return `<div class="book-tune-panel" data-book-tune-panel>
       <div class="book-tune-head">
         <span>Hero tuning</span>

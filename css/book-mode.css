@@ -663,6 +663,42 @@ html.book-active body {
   scale: var(--book-tune-scale, 1);
 }
 
+/* iPhone portrait: baked hero tuning recorded by Lawrence 2026-10-20 —
+   Shift -8% · Move Y -32% · Size 135% (mirrored on right pages), plus a
+   feathered white fade: the hero melts into white above the cocktail
+   name so the image never shows through the text section (the fade
+   layer sits above the photo, below the copy). */
+@media (pointer: coarse) and (orientation: portrait) and (max-width: 599px) {
+  .book-spread.image-left .book-photo {
+    translate: -8% -32%;
+    scale: 1.35;
+  }
+
+  .book-spread.image-right .book-photo {
+    translate: 8% -32%;
+    scale: 1.35;
+  }
+
+  .book-spread::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 32%;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.75) 30%,
+      rgba(255, 255, 255, 0.97) 38%,
+      #fff 48%,
+      #fff 100%
+    );
+  }
+}
+
 @media (orientation: landscape) and (max-height: 480px) {
   .book-copy {
     padding: 0.75rem 1rem;
