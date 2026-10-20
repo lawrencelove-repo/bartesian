@@ -389,13 +389,31 @@ html.book-active body {
   z-index: 2;
 }
 
-/* Portrait phones: stacked page, image still bleeds to an edge */
+/*
+ * Portrait (iPad + phones): cap the hero pane to ~50% of display height.
+ * Side-by-side still shows ~75% of the photo width (133.333%), but a shorter
+ * viewport means less vertical crop — glass tops/bases no longer hit the edges.
+ */
+@media (orientation: portrait) {
+  .book-spread {
+    align-items: center;
+  }
+
+  .book-photo {
+    height: 50dvh;
+    max-height: 50dvh;
+    align-self: center;
+  }
+}
+
+/* Narrow phones: stack copy under a 50vh bleed image */
 @media (max-width: 720px) and (orientation: portrait) {
   .book-spread,
   .book-spread.image-right {
     direction: ltr;
+    align-items: stretch;
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(38vh, 46vh) minmax(0, 1fr);
+    grid-template-rows: 50dvh minmax(0, 1fr);
   }
 
   .book-spread.image-right .book-photo {
@@ -404,6 +422,12 @@ html.book-active body {
 
   .book-spread.image-right .book-copy {
     order: 1;
+  }
+
+  .book-photo {
+    height: 50dvh;
+    max-height: 50dvh;
+    align-self: stretch;
   }
 
   .book-photo img {
@@ -415,13 +439,17 @@ html.book-active body {
   .book-spread.image-left .book-photo img {
     top: auto;
     bottom: 0;
-    object-position: center 35%;
+    left: 0;
+    right: 0;
+    object-position: center 40%;
   }
 
   .book-spread.image-right .book-photo img {
     top: 0;
     bottom: auto;
-    object-position: center 65%;
+    left: 0;
+    right: 0;
+    object-position: center 60%;
   }
 
   .book-copy {
