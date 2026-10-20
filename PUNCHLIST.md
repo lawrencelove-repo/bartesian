@@ -51,6 +51,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 
 - [x] Cookie helpers (`path=/`, `SameSite=Lax`, long `max-age`) for list prefs
 - [x] Persist cocktail list prefs in cookie `bartesian_list_prefs` (search, sort incl. Seasonal, spirit, in-stock / favorites)
+- [x] Admin-only Settings display toggles persisted in cookie `bartesian_ui_prefs`: "Show Tune button in Book mode" (hides/shows the Book Tune button) and "Show Image Cut in Cocktails Admin page" (hides/shows the Image Cut quick-edit dropdown on the Admin Cocktails list); both default on, checkboxes render only for admins
 - [ ] Cookie-backed settings module like [mahjong-tools `js/settings.js`](https://github.com/lawrencelove-repo/mahjong-tools/blob/main/js/settings.js) (shared read/write helpers)
 - [ ] Persist more UI prefs (selected person for ratings, UI scale / theme if added)
 - [ ] Soft site access gate cookie (optional; recipes-style password hash + cookie) if you want a deterrent on public Pages
