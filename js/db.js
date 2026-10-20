@@ -429,6 +429,39 @@
     });
   }
 
+  function slugifyText(s) {
+    return String(s || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  /** Point a barcode kind at an item (or clear it when code is blank). */
+  function syncItemBarcode(kind, code, refs) {
+    const col = refs.cocktailId ? "cocktail_id" : refs.packId ? "pack_id" : "rimmer_id";
+    const itemId = refs.cocktailId || refs.packId || refs.rimmerId;
+    const trimmed = String(code || "").trim();
+    const existing = query("SELECT code FROM barcodes WHERE kind = ? AND " + col + " = ?", [kind, itemId]);
+    for (const row of existing) {
+      if (row.code !== trimmed) exec("DELETE FROM barcodes WHERE code = ?", [row.code]);
+    }
+    if (!trimmed) return;
+    const byCode = queryOne("SELECT id FROM barcodes WHERE code = ?", [trimmed]);
+    const caseQty = kind === "case" ? Number(refs.caseQty) || 8 : kind === "variety_pack" ? 0 : 1;
+    if (byCode) {
+      exec(
+        "UPDATE barcodes SET kind = ?, cocktail_id = ?, pack_id = ?, rimmer_id = ?, case_qty = ? WHERE code = ?",
+        [kind, refs.cocktailId || null, refs.packId || null, refs.rimmerId || null, caseQty, trimmed]
+      );
+    } else {
+      exec(
+        "INSERT INTO barcodes (code, kind, cocktail_id, pack_id, rimmer_id, case_qty) VALUES (?, ?, ?, ?, ?, ?)",
+        [trimmed, kind, refs.cocktailId || null, refs.packId || null, refs.rimmerId || null, caseQty]
+      );
+    }
+  }
+
   function jsonField(v) {
     if (v == null || v === "") return "";
     if (typeof v === "string") return v;
@@ -1040,6 +1073,191 @@
       ]);
       await persist();
       return rowToRimmer(queryOne("SELECT * FROM rimmers WHERE id = ?", [id]));
+    },
+
+    /** Form data for the full admin Add/Edit screens (all DB fields + links). */
+    getCocktailForEdit(id) {
+      const c = this.getCocktail(id);
+      if (!c) return null;
+      const cap = queryOne("SELECT code FROM barcodes WHERE cocktail_id = ? AND kind = 'capsule'", [id]);
+      const caseRow = queryOne("SELECT code, case_qty FROM barcodes WHERE cocktail_id = ? AND kind = 'case'", [id]);
+      return {
+        ...c,
+        capsule_barcode: cap ? cap.code : "",
+        case_barcode: caseRow ? caseRow.code : "",
+        case_qty: caseRow ? caseRow.case_qty : 8,
+        rimmer_ids: this.rimmersForCocktail(id).map((r) => r.id),
+      };
+    },
+
+    getRimmerForEdit(id) {
+      const r = this.getRimmer(id);
+      if (!r) return null;
+      const bc = queryOne("SELECT code FROM barcodes WHERE rimmer_id = ? AND kind = 'rimmer'", [id]);
+      return {
+        ...r,
+        barcode: bc ? bc.code : "",
+        cocktail_ids: this.cocktailsForRimmer(id).map((c) => c.id),
+      };
+    },
+
+    getPackForEdit(id) {
+      const p = this.getPack(id);
+      if (!p) return null;
+      const bc = queryOne("SELECT code FROM barcodes WHERE pack_id = ? AND kind = 'variety_pack'", [id]);
+      return {
+        ...p,
+        barcode: bc ? bc.code : "",
+        items: this.getPackItems(id).map((i) => ({ cocktail_id: i.id, qty: i.qty })),
+      };
+    },
+
+    /** Create (id null) or fully update a cocktail — every DB field. */
+    async saveCocktail(id, d) {
+      const name = String(d.name || "").trim();
+      if (!name) throw new Error("Cocktail name is required.");
+      const slug = slugifyText(d.slug) || slugifyText(name);
+      if (!slug) throw new Error("Cocktail slug is required.");
+      const clash = queryOne("SELECT id FROM cocktails WHERE slug = ?", [slug]);
+      if (clash && Number(clash.id) !== Number(id)) throw new Error("Slug “" + slug + "” is already in use.");
+      const ts = nowIso();
+      const hero = String(d.hero_image || "");
+      const marketing = String(d.marketing_image || "");
+      const values = [
+        slug, name, String(d.description || ""), String(d.details || ""),
+        String(d.image || "") || hero || marketing, hero, marketing,
+        String(d.glassware || ""), String(d.garnish || ""), String(d.pairs_with || ""),
+        jsonField(d.nutrition_json), jsonField(d.alcohol_json),
+        String(d.bartesian_url || ""), String(d.help_url || ""),
+        String(d.shopify_product_id || ""), String(d.shopify_variant_id || ""),
+        String(d.shopify_handle || ""), String(d.shopify_sku || ""), String(d.gorgias_article_id || ""),
+        d.seasonal ? 1 : 0, d.favorite ? 1 : 0, d.enabled ? 1 : 0,
+        Math.max(0, Number(d.quantity) || 0), d.restock ? 1 : 0,
+      ];
+      let cid = id ? Number(id) : null;
+      if (cid) {
+        if (!queryOne("SELECT id FROM cocktails WHERE id = ?", [cid])) throw new Error("Cocktail not found.");
+        exec(
+          `UPDATE cocktails SET slug=?, name=?, description=?, details=?, image=?, hero_image=?, marketing_image=?,
+             glassware=?, garnish=?, pairs_with=?, nutrition_json=?, alcohol_json=?, bartesian_url=?, help_url=?,
+             shopify_product_id=?, shopify_variant_id=?, shopify_handle=?, shopify_sku=?, gorgias_article_id=?,
+             seasonal=?, favorite=?, enabled=?, quantity=?, restock=?, updated_at=? WHERE id=?`,
+          [...values, ts, cid]
+        );
+      } else {
+        exec(
+          `INSERT INTO cocktails (slug, name, description, details, image, hero_image, marketing_image,
+             glassware, garnish, pairs_with, nutrition_json, alcohol_json, bartesian_url, help_url,
+             shopify_product_id, shopify_variant_id, shopify_handle, shopify_sku, gorgias_article_id,
+             seasonal, favorite, enabled, quantity, restock, created_at, updated_at)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+          [...values, ts, ts]
+        );
+        cid = queryOne("SELECT last_insert_rowid() AS id").id;
+      }
+      setCocktailSpirits(cid, Array.isArray(d.spirits) ? d.spirits : String(d.spirits || "").split(","));
+      exec("DELETE FROM cocktail_rimmers WHERE cocktail_id = ?", [cid]);
+      for (const rid of d.rimmer_ids || []) {
+        exec("INSERT OR IGNORE INTO cocktail_rimmers (cocktail_id, rimmer_id) VALUES (?, ?)", [cid, Number(rid)]);
+      }
+      syncItemBarcode("capsule", d.capsule_barcode, { cocktailId: cid });
+      syncItemBarcode("case", d.case_barcode, { cocktailId: cid, caseQty: d.case_qty });
+      await persist();
+      return this.getCocktail(cid);
+    },
+
+    /** Create (id null) or fully update a rimmer — every DB field. */
+    async saveRimmer(id, d) {
+      const name = String(d.name || "").trim();
+      if (!name) throw new Error("Rimmer name is required.");
+      const slug = slugifyText(d.slug) || slugifyText(name);
+      if (!slug) throw new Error("Rimmer slug is required.");
+      const clash = queryOne("SELECT id FROM rimmers WHERE slug = ?", [slug]);
+      if (clash && Number(clash.id) !== Number(id)) throw new Error("Slug “" + slug + "” is already in use.");
+      const ts = nowIso();
+      const values = [
+        slug, name, String(d.description || ""), String(d.image || ""), String(d.kind || ""),
+        String(d.pairs_with || ""), String(d.nutrition_image || ""),
+        String(d.bartesian_url || ""), String(d.help_url || ""),
+        String(d.shopify_product_id || ""), String(d.shopify_variant_id || ""),
+        String(d.shopify_handle || ""), String(d.gorgias_article_id || ""),
+        d.favorite ? 1 : 0, d.enabled ? 1 : 0,
+        Math.max(0, Number(d.quantity) || 0), d.restock ? 1 : 0,
+      ];
+      let rid = id ? Number(id) : null;
+      if (rid) {
+        if (!queryOne("SELECT id FROM rimmers WHERE id = ?", [rid])) throw new Error("Rimmer not found.");
+        exec(
+          `UPDATE rimmers SET slug=?, name=?, description=?, image=?, kind=?, pairs_with=?, nutrition_image=?,
+             bartesian_url=?, help_url=?, shopify_product_id=?, shopify_variant_id=?, shopify_handle=?,
+             gorgias_article_id=?, favorite=?, enabled=?, quantity=?, restock=?, updated_at=? WHERE id=?`,
+          [...values, ts, rid]
+        );
+      } else {
+        exec(
+          `INSERT INTO rimmers (slug, name, description, image, kind, pairs_with, nutrition_image,
+             bartesian_url, help_url, shopify_product_id, shopify_variant_id, shopify_handle,
+             gorgias_article_id, favorite, enabled, quantity, restock, created_at, updated_at)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+          [...values, ts, ts]
+        );
+        rid = queryOne("SELECT last_insert_rowid() AS id").id;
+      }
+      exec("DELETE FROM cocktail_rimmers WHERE rimmer_id = ?", [rid]);
+      for (const cid of d.cocktail_ids || []) {
+        exec("INSERT OR IGNORE INTO cocktail_rimmers (cocktail_id, rimmer_id) VALUES (?, ?)", [Number(cid), rid]);
+      }
+      syncItemBarcode("rimmer", d.barcode, { rimmerId: rid });
+      await persist();
+      return this.getRimmer(rid);
+    },
+
+    /** Create (id null) or fully update a variety pack — every DB field. */
+    async savePack(id, d) {
+      const name = String(d.name || "").trim();
+      if (!name) throw new Error("Pack name is required.");
+      const slug = slugifyText(d.slug) || slugifyText(name);
+      if (!slug) throw new Error("Pack slug is required.");
+      const clash = queryOne("SELECT id FROM packs WHERE slug = ?", [slug]);
+      if (clash && Number(clash.id) !== Number(id)) throw new Error("Slug “" + slug + "” is already in use.");
+      const ts = nowIso();
+      const values = [
+        slug, name, String(d.notes || ""), String(d.image || ""), String(d.nutrition_image || ""),
+        String(d.bartesian_url || ""), String(d.help_url || ""),
+        String(d.shopify_product_id || ""), String(d.shopify_variant_id || ""),
+        String(d.shopify_handle || ""), String(d.gorgias_article_id || ""),
+        d.enabled ? 1 : 0,
+      ];
+      let pid = id ? Number(id) : null;
+      if (pid) {
+        if (!queryOne("SELECT id FROM packs WHERE id = ?", [pid])) throw new Error("Pack not found.");
+        exec(
+          `UPDATE packs SET slug=?, name=?, notes=?, image=?, nutrition_image=?, bartesian_url=?, help_url=?,
+             shopify_product_id=?, shopify_variant_id=?, shopify_handle=?, gorgias_article_id=?,
+             enabled=?, updated_at=? WHERE id=?`,
+          [...values, ts, pid]
+        );
+      } else {
+        exec(
+          `INSERT INTO packs (slug, name, notes, image, nutrition_image, bartesian_url, help_url,
+             shopify_product_id, shopify_variant_id, shopify_handle, gorgias_article_id,
+             enabled, created_at, updated_at)
+           VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+          [...values, ts, ts]
+        );
+        pid = queryOne("SELECT last_insert_rowid() AS id").id;
+      }
+      exec("DELETE FROM pack_items WHERE pack_id = ?", [pid]);
+      for (const item of d.items || []) {
+        const qty = Math.max(0, Number(item.qty) || 0);
+        if (!qty) continue;
+        exec("INSERT OR IGNORE INTO pack_items (pack_id, cocktail_id, qty) VALUES (?, ?, ?)", [
+          pid, Number(item.cocktail_id), qty,
+        ]);
+      }
+      syncItemBarcode("variety_pack", d.barcode, { packId: pid });
+      await persist();
+      return this.getPack(pid);
     },
 
     async setPackEnabled(id, enabled) {

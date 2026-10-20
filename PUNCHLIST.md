@@ -39,8 +39,8 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Fix variety pack `Items` parsing (bullet cocktail names, not flavor blurbs)
 - [x] Admin submenu (gated): Scan, Barcodes, Cocktails, Rimmers, Packs, People — Admin cookie `bartesian_admin` mirrors Lawrence's `people.is_admin`
 - [x] Admin screens: Cocktails (qty/favorite/seasonal/enable toggles), Rimmers (qty/fav/enable + name & free-text type edit), Packs (enable + items), People (add + Admin flag toggle)
-- [ ] **Full cocktail create/edit form** — name, image, spirits, description, nutrition, alcohol, glassware, garnish, pairs-with, URLs, barcodes, case qty
-- [ ] Variety-pack create/edit (packs and item quantities)
+- [x] **Full cocktail create/edit form** (`#/admin/cocktails/new`, `…/edit/:id`) — every DB field: name/slug, spirits, description/details, images, glassware/garnish/pairs-with, nutrition/alcohol, URLs, Shopify/Gorgias IDs, qty/restock, capsule+case barcodes, case qty, seasonal/favorite/enabled, paired rimmers
+- [x] Variety-pack create/edit (`#/admin/packs/new`, `…/edit/:id`) — all pack fields + per-cocktail item quantities + pack barcode; rimmer create/edit (`#/admin/rimmers/new`, `…/edit/:id`) likewise with cocktail pairings; pack export now writes all pack fields
 - [ ] Richer metadata editors (structured nutrition / alcohol fields)
 - [ ] Optional OCR of nutrition labels → calories/ingredients/case UPC into structured fields
 - [ ] UI toggle to show disabled stubs; flip `Enabled` when SKUs return

@@ -613,6 +613,121 @@ button.small {
   margin-top: 0.45rem;
 }
 
+.btn-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  min-height: 42px;
+}
+
+.btn-link.small {
+  min-height: 32px;
+  padding: 0.25rem 0.55rem;
+}
+
+.admin-item-form {
+  display: grid;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  max-width: 44rem;
+}
+
+.admin-item-form h2 {
+  margin-bottom: 0;
+}
+
+.admin-item-form label {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.admin-item-form input,
+.admin-item-form textarea,
+.admin-item-form select {
+  font: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--ink);
+  padding: 0.45rem 0.55rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.admin-item-form input:disabled {
+  background: var(--bg-soft);
+  color: var(--muted);
+}
+
+.admin-item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.65rem;
+}
+
+.admin-item-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-item-form label.form-check {
+  display: inline-flex;
+}
+
+.check-list {
+  display: grid;
+  gap: 0.3rem;
+  max-height: 16rem;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.6rem 0.75rem;
+}
+
+.admin-item-form label.check,
+.check-list .check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-transform: none;
+  letter-spacing: normal;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.pack-item-row {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  color: var(--ink) !important;
+  font-size: 0.95rem !important;
+}
+
+.pack-item-row input {
+  width: 5.5rem;
+  flex: none;
+}
+
 .admin-rimmer-edit {
   display: flex;
   flex-wrap: wrap;

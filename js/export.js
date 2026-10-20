@@ -66,6 +66,15 @@
       "Slug: " + (p.slug || ""),
       "Barcode: " + (p.barcode || ""),
       "Notes: " + (p.notes || ""),
+      "Bartesian URL: " + (p.bartesian_url || ""),
+      "Help URL: " + (p.help_url || ""),
+      "Shopify Product ID: " + (p.shopify_product_id || ""),
+      "Shopify Variant ID: " + (p.shopify_variant_id || ""),
+      "Shopify Handle: " + (p.shopify_handle || ""),
+      "Gorgias Article ID: " + (p.gorgias_article_id || ""),
+      "Image: " + (p.image || ""),
+      "Nutrition Image: " + (p.nutrition_image || ""),
+      "Enabled: " + ((p.enabled === 0 || p.enabled === false) ? "0" : "1"),
       "Items:",
     ];
     (p.items || []).forEach((item) => {

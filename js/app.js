@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v43";
+  const APP_VERSION = "bartesian-v44";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -27,6 +27,7 @@
     rimmerAvailableOnly: false,
     qtyOpenKey: "",
     historyModal: null,
+    adminItemDraft: null,
     flash: "",
     randomSpirit: "",
     randomFavoritesOnly: false,
@@ -297,6 +298,11 @@
     if (parts[0] === "people") return { view: "people" };
     if (parts[0] === "settings") return { view: "settings" };
     if (parts[0] === "admin" && parts[1] === "barcodes") return { view: "admin-barcodes" };
+    if (parts[0] === "admin" && ["cocktails", "rimmers", "packs"].includes(parts[1])) {
+      const singular = parts[1] === "cocktails" ? "cocktail" : parts[1] === "rimmers" ? "rimmer" : "pack";
+      if (parts[2] === "new") return { view: "admin-item-edit", itemType: singular, id: null };
+      if (parts[2] === "edit" && parts[3]) return { view: "admin-item-edit", itemType: singular, id: Number(parts[3]) };
+    }
     if (parts[0] === "admin" && parts[1] === "cocktails") return { view: "admin-cocktails" };
     if (parts[0] === "admin" && parts[1] === "rimmers") return { view: "admin-rimmers" };
     if (parts[0] === "admin" && parts[1] === "packs") return { view: "admin-packs" };
@@ -327,7 +333,7 @@
 
   const ADMIN_VIEWS = [
     "scan", "admin-barcodes", "admin-cocktails", "admin-rimmers",
-    "admin-packs", "admin-people", "people",
+    "admin-packs", "admin-people", "people", "admin-item-edit",
   ];
 
   function shell(active, body) {
@@ -1555,6 +1561,7 @@
             ${adminToggleBtn(`data-admin-cocktail-fav data-id="${c.id}"`, c.favorite, "Favorited ★", "Favorite")}
             ${adminToggleBtn(`data-admin-cocktail-seasonal data-id="${c.id}"`, c.seasonal, "Seasonal ✓", "Seasonal")}
             ${adminToggleBtn(`data-admin-cocktail-enabled data-id="${c.id}"`, c.enabled, "Enabled ✓", "Disabled")}
+            <a class="btn-link small" href="#/admin/cocktails/edit/${c.id}" data-go="#/admin/cocktails/edit/${c.id}">Edit</a>
           </div>
         </div>
       </div>`).join("");
@@ -1563,6 +1570,7 @@
         <p class="section-label">Admin</p>
         <h1>Cocktails</h1>
         <p class="lede">Quick toggles for every cocktail (including disabled). Open a name for the full detail page.</p>
+        <p><a class="btn-link" href="#/admin/cocktails/new" data-go="#/admin/cocktails/new">+ Add Cocktail</a></p>
         <p class="count">${cocktails.length} cocktails</p>
         <div class="list">${rows || `<p class="empty">None.</p>`}</div>
       </section>`);
@@ -1590,6 +1598,7 @@
             <button type="button" class="ghost small" data-rimmer-qty-delta="1" data-id="${r.id}">+</button>
             ${adminToggleBtn(`data-rimmer-toggle-fav data-id="${r.id}"`, r.favorite, "Favorited ★", "Favorite")}
             ${adminToggleBtn(`data-admin-rimmer-enabled data-id="${r.id}"`, r.enabled, "Enabled ✓", "Disabled")}
+            <a class="btn-link small" href="#/admin/rimmers/edit/${r.id}" data-go="#/admin/rimmers/edit/${r.id}">Edit</a>
           </div>
         </div>
       </div>`).join("");
@@ -1598,6 +1607,7 @@
         <p class="section-label">Admin</p>
         <h1>Rimmers</h1>
         <p class="lede">Edit name and type (free text — sugar, salt, candy, …), then Save. Export from Settings to write changes back to <code>data/rimmers/*.txt</code>.</p>
+        <p><a class="btn-link" href="#/admin/rimmers/new" data-go="#/admin/rimmers/new">+ Add Rimmer</a></p>
         <p class="count">${rimmers.length} rimmers</p>
         <datalist id="rimmer-kind-options">
           <option value="sugar"></option>
@@ -1623,6 +1633,7 @@
           <div class="row-meta">${esc(items.map((i) => i.name + " ×" + i.qty).join(", ") || "—")}</div>
           <div class="row-actions admin-actions">
             ${adminToggleBtn(`data-admin-pack-enabled data-id="${p.id}"`, p.enabled, "Enabled ✓", "Disabled")}
+            <a class="btn-link small" href="#/admin/packs/edit/${p.id}" data-go="#/admin/packs/edit/${p.id}">Edit</a>
           </div>
         </div>
       </div>`;
@@ -1631,8 +1642,210 @@
       <section class="panel">
         <p class="section-label">Admin</p>
         <h1>Packs</h1>
+        <p><a class="btn-link" href="#/admin/packs/new" data-go="#/admin/packs/new">+ Add Pack</a></p>
         <p class="count">${packs.length} packs</p>
         <div class="list">${rows || `<p class="empty">None.</p>`}</div>
+      </section>`);
+  }
+
+  const ITEM_LABELS = { cocktail: "Cocktail", rimmer: "Rimmer", pack: "Pack" };
+  const ITEM_LIST_HREF = { cocktail: "#/admin/cocktails", rimmer: "#/admin/rimmers", pack: "#/admin/packs" };
+  const ITEM_LIST_SHELL = { cocktail: "admin-cocktails", rimmer: "admin-rimmers", pack: "admin-packs" };
+
+  function itemField(v, name, label, opts) {
+    const o = opts || {};
+    const val = v[name] == null ? "" : v[name];
+    if (o.type === "textarea") {
+      return `<label>${esc(label)}<textarea name="${name}" rows="${o.rows || 3}" placeholder="${esc(o.placeholder || "")}">${esc(val)}</textarea></label>`;
+    }
+    if (o.type === "checkbox") {
+      return `<label class="check form-check"><input type="checkbox" name="${name}" ${val ? "checked" : ""}/> ${esc(label)}</label>`;
+    }
+    return `<label>${esc(label)}<input name="${name}" type="${o.type || "text"}" value="${esc(val)}" ${o.required ? "required" : ""} ${o.list ? `list="${o.list}"` : ""} placeholder="${esc(o.placeholder || "")}" ${o.min != null ? `min="${o.min}"` : ""} ${o.step != null ? `step="${o.step}"` : ""}/></label>`;
+  }
+
+  function renderAdminItemEdit(itemType, id) {
+    const label = ITEM_LABELS[itemType] || "Item";
+    const isNew = id == null;
+    let item = null;
+    if (!isNew) {
+      item =
+        itemType === "cocktail" ? BartesianDB.getCocktailForEdit(id)
+        : itemType === "rimmer" ? BartesianDB.getRimmerForEdit(id)
+        : BartesianDB.getPackForEdit(id);
+      if (!item) {
+        return shell(ITEM_LIST_SHELL[itemType], `<section class="panel"><p>${label} not found.</p></section>`);
+      }
+    }
+    const draftKey = itemType + ":" + (isNew ? "new" : id);
+    const draft =
+      state.adminItemDraft && state.adminItemDraft.key === draftKey ? state.adminItemDraft.values : null;
+    const v = draft || item || { enabled: 1, quantity: 0, case_qty: 8 };
+    const allCocktails = BartesianDB.listAllCocktails();
+    const allRimmers = BartesianDB.listAllRimmersAdmin();
+    const spirits = BartesianDB.listSpirits().map((s) => s.name);
+
+    const systemRows = isNew
+      ? ""
+      : `<h2>System</h2>
+         <div class="admin-item-grid">
+           ${itemField(v, "id", "ID", {})}
+           ${itemField(v, "created_at", "Created", {})}
+           ${itemField(v, "updated_at", "Updated", {})}
+         </div>
+         <p class="hint">ID / timestamps are read-only (shown for reference; disabled inputs aren't saved).</p>`;
+
+    // Make system inputs disabled after render via attribute in markup is simpler:
+    const systemHtml = systemRows
+      .replace('name="id"', 'name="id" disabled')
+      .replace('name="created_at"', 'name="created_at" disabled')
+      .replace('name="updated_at"', 'name="updated_at" disabled');
+
+    let body = "";
+    if (itemType === "cocktail") {
+      const spiritVal = Array.isArray(v.spirits) ? v.spirits.join(", ") : v.spirits || v.spirits_csv?.split("|").join(", ") || "";
+      const paired = new Set((v.rimmer_ids || []).map(Number));
+      body = `
+        <h2>Basics</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "name", "Name", { required: true })}
+          ${itemField(v, "slug", "Slug (blank = from name)", {})}
+          ${itemField({ spirits_text: spiritVal }, "spirits_text", "Spirits (comma-separated)", { list: "spirit-options" })}
+          ${itemField(v, "glassware", "Glassware", {})}
+          ${itemField(v, "garnish", "Garnish", {})}
+          ${itemField(v, "pairs_with", "Pairs with", {})}
+        </div>
+        <datalist id="spirit-options">${spirits.map((s) => `<option value="${esc(s)}"></option>`).join("")}</datalist>
+        ${itemField(v, "description", "Description", { type: "textarea" })}
+        ${itemField(v, "details", "Details", { type: "textarea", rows: 5 })}
+        <h2>Images &amp; links</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "image", "Image", {})}
+          ${itemField(v, "hero_image", "Hero image", {})}
+          ${itemField(v, "marketing_image", "Marketing image", {})}
+          ${itemField(v, "bartesian_url", "Bartesian URL", {})}
+          ${itemField(v, "help_url", "Help URL", {})}
+        </div>
+        <h2>Shopify / IDs</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "shopify_product_id", "Shopify product ID", {})}
+          ${itemField(v, "shopify_variant_id", "Shopify variant ID", {})}
+          ${itemField(v, "shopify_handle", "Shopify handle", {})}
+          ${itemField(v, "shopify_sku", "Shopify SKU", {})}
+          ${itemField(v, "gorgias_article_id", "Gorgias article ID", {})}
+        </div>
+        <h2>Structured data</h2>
+        ${itemField(v, "nutrition_json", "Nutrition (JSON / text)", { type: "textarea" })}
+        ${itemField(v, "alcohol_json", "Alcohol (JSON / text)", { type: "textarea" })}
+        <h2>Inventory &amp; flags</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "quantity", "Quantity", { type: "number", min: 0 })}
+          ${itemField(v, "capsule_barcode", "Capsule barcode", {})}
+          ${itemField(v, "case_barcode", "Case barcode", {})}
+          ${itemField(v, "case_qty", "Case qty", { type: "number", min: 1 })}
+        </div>
+        <div class="admin-item-checks">
+          ${itemField(v, "seasonal", "Seasonal", { type: "checkbox" })}
+          ${itemField(v, "favorite", "Favorite", { type: "checkbox" })}
+          ${itemField(v, "restock", "Restock needed", { type: "checkbox" })}
+          ${itemField(v, "enabled", "Enabled", { type: "checkbox" })}
+        </div>
+        <h2>Recommended rimmers</h2>
+        <div class="check-list">
+          ${allRimmers.map((r) => `<label class="check"><input type="checkbox" name="rimmer_ids" value="${r.id}" ${paired.has(Number(r.id)) ? "checked" : ""}/> ${esc(r.name)}</label>`).join("") || `<p class="muted">No rimmers yet.</p>`}
+        </div>`;
+    } else if (itemType === "rimmer") {
+      const paired = new Set((v.cocktail_ids || []).map(Number));
+      body = `
+        <h2>Basics</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "name", "Name", { required: true })}
+          ${itemField(v, "slug", "Slug (blank = from name)", {})}
+          ${itemField(v, "kind", "Type (free text)", { list: "rimmer-kind-options" })}
+          ${itemField(v, "pairs_with", "Pairs with", {})}
+        </div>
+        <datalist id="rimmer-kind-options"><option value="sugar"></option><option value="salt"></option></datalist>
+        ${itemField(v, "description", "Description", { type: "textarea" })}
+        <h2>Images &amp; links</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "image", "Image", {})}
+          ${itemField(v, "nutrition_image", "Nutrition image", {})}
+          ${itemField(v, "bartesian_url", "Bartesian URL", {})}
+          ${itemField(v, "help_url", "Help URL", {})}
+        </div>
+        <h2>Shopify / IDs</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "shopify_product_id", "Shopify product ID", {})}
+          ${itemField(v, "shopify_variant_id", "Shopify variant ID", {})}
+          ${itemField(v, "shopify_handle", "Shopify handle", {})}
+          ${itemField(v, "gorgias_article_id", "Gorgias article ID", {})}
+        </div>
+        <h2>Inventory &amp; flags</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "quantity", "Quantity", { type: "number", min: 0 })}
+          ${itemField(v, "barcode", "Barcode", {})}
+        </div>
+        <div class="admin-item-checks">
+          ${itemField(v, "favorite", "Favorite", { type: "checkbox" })}
+          ${itemField(v, "restock", "Restock needed", { type: "checkbox" })}
+          ${itemField(v, "enabled", "Enabled", { type: "checkbox" })}
+        </div>
+        <h2>Cocktail pairings</h2>
+        <div class="check-list">
+          ${allCocktails.map((c) => `<label class="check"><input type="checkbox" name="cocktail_ids" value="${c.id}" ${paired.has(Number(c.id)) ? "checked" : ""}/> ${esc(c.name)}</label>`).join("") || `<p class="muted">No cocktails yet.</p>`}
+        </div>`;
+    } else {
+      const qtyById = new Map((v.items || []).map((i) => [Number(i.cocktail_id), i.qty]));
+      body = `
+        <h2>Basics</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "name", "Name", { required: true })}
+          ${itemField(v, "slug", "Slug (blank = from name)", {})}
+          ${itemField(v, "barcode", "Pack barcode", {})}
+        </div>
+        ${itemField(v, "notes", "Notes", { type: "textarea", rows: 5 })}
+        <h2>Images &amp; links</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "image", "Image", {})}
+          ${itemField(v, "nutrition_image", "Nutrition image", {})}
+          ${itemField(v, "bartesian_url", "Bartesian URL", {})}
+          ${itemField(v, "help_url", "Help URL", {})}
+        </div>
+        <h2>Shopify / IDs</h2>
+        <div class="admin-item-grid">
+          ${itemField(v, "shopify_product_id", "Shopify product ID", {})}
+          ${itemField(v, "shopify_variant_id", "Shopify variant ID", {})}
+          ${itemField(v, "shopify_handle", "Shopify handle", {})}
+          ${itemField(v, "gorgias_article_id", "Gorgias article ID", {})}
+        </div>
+        <div class="admin-item-checks">
+          ${itemField(v, "enabled", "Enabled", { type: "checkbox" })}
+        </div>
+        <h2>Pack items</h2>
+        <p class="hint">Quantity per cocktail in this pack (leave 0 / blank to exclude).</p>
+        <div class="check-list pack-items-list">
+          ${allCocktails.map((c) => `
+            <label class="pack-item-row">
+              <span>${esc(c.name)}</span>
+              <input name="item_qty_${c.id}" type="number" min="0" step="1" value="${qtyById.has(Number(c.id)) ? qtyById.get(Number(c.id)) : ""}" placeholder="0" />
+            </label>`).join("") || `<p class="muted">No cocktails yet.</p>`}
+        </div>`;
+    }
+
+    return shell(ITEM_LIST_SHELL[itemType], `
+      <section class="panel">
+        <a class="back" href="${ITEM_LIST_HREF[itemType]}" data-go="${ITEM_LIST_HREF[itemType]}">← Admin ${label}s</a>
+        <p class="section-label">Admin</p>
+        <h1>${isNew ? "Add" : "Edit"} ${label}${isNew ? "" : ": " + esc(item.name)}</h1>
+        <p class="lede">Every database field is included. Export from Settings to write changes back to <code>data/</code> for git.</p>
+        <form class="admin-item-form" data-admin-item-form data-item-type="${itemType}" data-id="${isNew ? "" : id}">
+          ${body}
+          ${systemHtml}
+          <div class="modal-actions">
+            <a class="btn-link" href="${ITEM_LIST_HREF[itemType]}" data-go="${ITEM_LIST_HREF[itemType]}">Cancel</a>
+            <button type="submit">${isNew ? "Add " + label : "Save " + label}</button>
+          </div>
+        </form>
       </section>`);
   }
 
@@ -1781,6 +1994,7 @@
     else if (route.view === "admin-cocktails") root.innerHTML = renderAdminCocktails();
     else if (route.view === "admin-rimmers") root.innerHTML = renderAdminRimmers();
     else if (route.view === "admin-packs") root.innerHTML = renderAdminPacks();
+    else if (route.view === "admin-item-edit") root.innerHTML = renderAdminItemEdit(route.itemType, route.id);
     else if (route.view === "admin-people" || route.view === "people") root.innerHTML = renderPeople();
     else if (route.view === "random") root.innerHTML = renderRandom();
     else if (route.view === "settings") root.innerHTML = renderSettings();
@@ -2349,6 +2563,88 @@
       state.historyModal = null;
       state.flash = "History updated.";
       render();
+      return;
+    }
+
+    const itemFormEl = e.target.closest("[data-admin-item-form]");
+    if (itemFormEl) {
+      e.preventDefault();
+      const itemType = itemFormEl.getAttribute("data-item-type");
+      const idAttr = itemFormEl.getAttribute("data-id");
+      const editId = idAttr ? Number(idAttr) : null;
+      const fd = new FormData(itemFormEl);
+      const text = (n) => String(fd.get(n) || "");
+      const num = (n) => Number(fd.get(n)) || 0;
+      const on = (n) => fd.get(n) != null;
+      let payload;
+      if (itemType === "cocktail") {
+        payload = {
+          name: text("name"), slug: text("slug"),
+          spirits: text("spirits_text").split(",").map((s) => s.trim()).filter(Boolean),
+          glassware: text("glassware"), garnish: text("garnish"), pairs_with: text("pairs_with"),
+          description: text("description"), details: text("details"),
+          image: text("image"), hero_image: text("hero_image"), marketing_image: text("marketing_image"),
+          bartesian_url: text("bartesian_url"), help_url: text("help_url"),
+          shopify_product_id: text("shopify_product_id"), shopify_variant_id: text("shopify_variant_id"),
+          shopify_handle: text("shopify_handle"), shopify_sku: text("shopify_sku"),
+          gorgias_article_id: text("gorgias_article_id"),
+          nutrition_json: text("nutrition_json"), alcohol_json: text("alcohol_json"),
+          quantity: num("quantity"), capsule_barcode: text("capsule_barcode"),
+          case_barcode: text("case_barcode"), case_qty: Number(fd.get("case_qty")) || 8,
+          seasonal: on("seasonal"), favorite: on("favorite"), restock: on("restock"), enabled: on("enabled"),
+          rimmer_ids: fd.getAll("rimmer_ids").map(Number),
+        };
+      } else if (itemType === "rimmer") {
+        payload = {
+          name: text("name"), slug: text("slug"), kind: text("kind"), pairs_with: text("pairs_with"),
+          description: text("description"),
+          image: text("image"), nutrition_image: text("nutrition_image"),
+          bartesian_url: text("bartesian_url"), help_url: text("help_url"),
+          shopify_product_id: text("shopify_product_id"), shopify_variant_id: text("shopify_variant_id"),
+          shopify_handle: text("shopify_handle"), gorgias_article_id: text("gorgias_article_id"),
+          quantity: num("quantity"), barcode: text("barcode"),
+          favorite: on("favorite"), restock: on("restock"), enabled: on("enabled"),
+          cocktail_ids: fd.getAll("cocktail_ids").map(Number),
+        };
+      } else {
+        const items = [];
+        for (const c of BartesianDB.listAllCocktails()) {
+          const qty = Number(fd.get("item_qty_" + c.id)) || 0;
+          if (qty > 0) items.push({ cocktail_id: c.id, qty });
+        }
+        payload = {
+          name: text("name"), slug: text("slug"), barcode: text("barcode"), notes: text("notes"),
+          image: text("image"), nutrition_image: text("nutrition_image"),
+          bartesian_url: text("bartesian_url"), help_url: text("help_url"),
+          shopify_product_id: text("shopify_product_id"), shopify_variant_id: text("shopify_variant_id"),
+          shopify_handle: text("shopify_handle"), gorgias_article_id: text("gorgias_article_id"),
+          enabled: on("enabled"),
+          items,
+        };
+      }
+      try {
+        const saved =
+          itemType === "cocktail" ? await BartesianDB.saveCocktail(editId, payload)
+          : itemType === "rimmer" ? await BartesianDB.saveRimmer(editId, payload)
+          : await BartesianDB.savePack(editId, payload);
+        state.adminItemDraft = null;
+        state.flash =
+          (editId ? "Saved " : "Added ") + (saved && saved.name ? saved.name : ITEM_LABELS[itemType]) +
+          ". Export from Settings to write it back to data/ for git.";
+        go(ITEM_LIST_HREF[itemType]);
+        render();
+      } catch (err) {
+        // Keep the entered values so a validation error doesn't wipe the form
+        state.adminItemDraft = {
+          key: itemType + ":" + (editId == null ? "new" : editId),
+          values: {
+            ...payload,
+            spirits_text: Array.isArray(payload.spirits) ? payload.spirits.join(", ") : payload.spirits,
+          },
+        };
+        state.flash = "Save failed: " + err.message;
+        render();
+      }
       return;
     }
 
