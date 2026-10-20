@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v71";
+  const APP_VERSION = "bartesian-v72";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -2261,11 +2261,27 @@
     </div>`;
   }
 
+  /** Turn Apply blue only while the menu form differs from applied filters. */
+  function syncBookApplyState(form) {
+    if (!form) return;
+    const applyBtn = form.querySelector("[data-book-apply]");
+    if (!applyBtn) return;
+    const fd = new FormData(form);
+    const dirty =
+      String(fd.get("search") || "") !== String(state.search || "") ||
+      String(fd.get("spirit") || "") !== String(state.spirit || "") ||
+      String(fd.get("sort") || "name") !== String(state.sort || "name") ||
+      !!(form.available && form.available.checked) !== !!state.availableOnly ||
+      !!(form.favorites && form.favorites.checked) !== !!state.favoritesOnly;
+    applyBtn.classList.toggle("is-dirty", dirty);
+  }
+
   function renderBookMenu(currentId) {
     const spirits = BartesianDB.listSpirits();
     const exitHref = currentId ? `#/cocktail/${currentId}` : "#/";
     return `<div class="book-modal-backdrop" data-book-menu>
       <div class="book-modal" role="dialog" aria-modal="true" aria-label="Book menu">
+        <button type="button" class="book-modal-close" data-book-menu-close aria-label="Close menu" title="Close"><span aria-hidden="true">×</span></button>
         <h2>Menu</h2>
         <form class="book-modal-form" data-book-filters>
           <label class="field">Search
@@ -2298,8 +2314,7 @@
             <label><input type="checkbox" name="favorites" ${state.favoritesOnly ? "checked" : ""}/> Favorites</label>
           </div>
           <div class="book-modal-actions">
-            <button type="submit">Apply</button>
-            <button type="button" class="ghost" data-book-menu-close>Close</button>
+            <button type="submit" data-book-apply>Apply</button>
             <button type="button" class="ghost" data-book-exit data-go="${exitHref}">Exit book mode</button>
           </div>
         </form>
@@ -3166,6 +3181,12 @@
       return;
     }
 
+    const bookForm = e.target.closest("[data-book-filters]");
+    if (bookForm) {
+      syncBookApplyState(bookForm);
+      return;
+    }
+
     const listForm = e.target.closest("[data-list-filters]");
     if (listForm && e.target.name === "search") {
       state.search = e.target.value;
@@ -3192,6 +3213,12 @@
   }
 
   function onChange(e) {
+    const bookForm = e.target.closest("[data-book-filters]");
+    if (bookForm) {
+      syncBookApplyState(bookForm);
+      return;
+    }
+
     const uiPref = e.target.closest("[data-ui-pref]");
     if (uiPref) {
       const key = uiPref.getAttribute("data-ui-pref");
