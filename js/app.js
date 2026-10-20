@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v54";
+  const APP_VERSION = "bartesian-v55";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const BOOK_TUNE_COOKIE = "bartesian_book_tune";
   const ADMIN_COOKIE = "bartesian_admin";
@@ -127,8 +127,8 @@
         x: clamp(p.x, -50, 50, 0),
         y: clamp(p.y, -50, 50, 0),
         scale: clamp(p.scale, 0.5, 2, 1),
-        panelW: clamp(p.panelW, 30, 75, 50),
-        panelH: clamp(p.panelH, 25, 65, 50),
+        panelW: clamp(p.panelW, 1, 100, 50),
+        panelH: clamp(p.panelH, 1, 100, 50),
       };
     } catch (_) {
       /* ignore bad cookie */
@@ -162,8 +162,10 @@
     t.x = Math.min(50, Math.max(-50, t.x));
     t.y = Math.min(50, Math.max(-50, t.y));
     t.scale = Math.min(2, Math.max(0.5, t.scale));
-    t.panelW = Math.min(75, Math.max(30, t.panelW));
-    t.panelH = Math.min(65, Math.max(25, t.panelH));
+    // Panel dimensions have no artificial cap: the full 1–100% of the
+    // page is explorable (only the physical page size bounds them).
+    t.panelW = Math.min(100, Math.max(1, t.panelW));
+    t.panelH = Math.min(100, Math.max(1, t.panelH));
     state.bookTune = t;
     saveBookTune();
     render();

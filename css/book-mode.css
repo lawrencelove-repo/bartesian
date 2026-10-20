@@ -527,7 +527,7 @@ html.book-active body {
   }
 
   .book-photo {
-    /* Panel height tunable via Book Tune panel (default matches 50dvh cap) */
+    /* Panel height tunable via Book Tune panel (50% is just the default) */
     height: var(--book-panel-h, 50%);
     max-height: var(--book-panel-h, 50%);
     align-self: center;
