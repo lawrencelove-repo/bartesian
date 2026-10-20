@@ -21,7 +21,8 @@ Image: images/marketing/watermelon-margarita.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 7
+Restock: 0
 Capsule Barcode: 
 Case Barcode: 
 Case Qty: 8

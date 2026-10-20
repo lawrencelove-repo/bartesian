@@ -21,7 +21,8 @@ Image: images/marketing/rum-breeze.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 4
+Restock: 0
 Capsule Barcode: 58770043
 Case Barcode: 
 Case Qty: 8

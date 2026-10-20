@@ -21,7 +21,8 @@ Image: images/hero/lemon-drop.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 3
+Restock: 0
 Capsule Barcode: 163628077
 Case Barcode: 
 Case Qty: 8

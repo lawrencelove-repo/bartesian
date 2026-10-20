@@ -21,7 +21,8 @@ Image: images/hero/cosmopolitan.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 2
+Restock: 0
 Capsule Barcode: 364962861
 Case Barcode: 
 Case Qty: 8

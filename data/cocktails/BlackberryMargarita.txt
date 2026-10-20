@@ -21,7 +21,8 @@ Image: images/hero/blackberry-margarita.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 9
+Restock: 0
 Capsule Barcode: 201377873
 Case Barcode: 850054919397
 Case Qty: 8

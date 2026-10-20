@@ -21,7 +21,8 @@ Image: images/hero/mai-tai.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 1
+Restock: 0
 Capsule Barcode: 104907297
 Case Barcode: 
 Case Qty: 8

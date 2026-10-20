@@ -21,7 +21,8 @@ Image: images/hero/whiskey-sour.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 3
+Restock: 0
 Capsule Barcode: 54579233
 Case Barcode: 
 Case Qty: 8

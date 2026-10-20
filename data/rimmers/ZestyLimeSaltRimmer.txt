@@ -13,5 +13,7 @@ Gorgias Article ID: 261256
 Image: images/rimmers/zesty-lime-salt-rimmer.jpg
 Nutrition Image: images/nutrition/zesty-lime-salt-rimmer.png
 Barcode: 
-Quantity: 0
+Quantity: 1
+Restock: 0
+Favorite: 0
 Enabled: 1

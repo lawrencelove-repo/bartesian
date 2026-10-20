@@ -21,7 +21,8 @@ Image: images/hero/strawberry-coconut-daiquiri.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 5
+Restock: 0
 Capsule Barcode: 545309229
 Case Barcode: 
 Case Qty: 8

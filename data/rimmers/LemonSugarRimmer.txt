@@ -14,4 +14,6 @@ Image: images/rimmers/lemon-sugar-rimmer.jpg
 Nutrition Image: images/nutrition/lemon-sugar-rimmer.png
 Barcode: 
 Quantity: 0
+Restock: 0
+Favorite: 0
 Enabled: 1

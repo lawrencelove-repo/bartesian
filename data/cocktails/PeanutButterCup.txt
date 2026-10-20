@@ -22,6 +22,7 @@ Seasonal: 0
 Enabled: 0
 Favorite: 0
 Quantity: 0
+Restock: 0
 Capsule Barcode: 553709573
 Case Barcode: 
 Case Qty: 8

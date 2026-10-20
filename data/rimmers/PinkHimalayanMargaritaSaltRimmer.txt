@@ -13,5 +13,7 @@ Gorgias Article ID: 39075
 Image: images/rimmers/pink-himalayan-margarita-salt-rimmer.jpg
 Nutrition Image: images/nutrition/pink-himalayan-margarita-salt-rimmer.png
 Barcode: 
-Quantity: 0
+Quantity: 1
+Restock: 0
+Favorite: 0
 Enabled: 1

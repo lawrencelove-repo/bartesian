@@ -13,5 +13,7 @@ Gorgias Article ID:
 Image: images/rimmers/sweet-cinnamon-vanilla-sugar-rimmer.jpg
 Nutrition Image: 
 Barcode: 
-Quantity: 0
+Quantity: 1
+Restock: 0
+Favorite: 0
 Enabled: 1

@@ -13,5 +13,7 @@ Gorgias Article ID: 8043829
 Image: images/rimmers/citrus-popping-sugar-rimmer.jpg
 Nutrition Image: images/nutrition/citrus-popping-sugar-rimmer.png
 Barcode: 
-Quantity: 0
+Quantity: 1
+Restock: 0
+Favorite: 0
 Enabled: 1

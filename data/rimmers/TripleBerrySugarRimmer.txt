@@ -13,5 +13,7 @@ Gorgias Article ID: 39503
 Image: images/rimmers/triple-berry-sugar-rimmer.jpg
 Nutrition Image: images/nutrition/triple-berry-sugar-rimmer.png
 Barcode: 
-Quantity: 0
+Quantity: 1
+Restock: 0
+Favorite: 0
 Enabled: 1

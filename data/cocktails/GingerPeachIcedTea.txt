@@ -21,7 +21,8 @@ Image: images/hero/ginger-peach-iced-tea.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 2
+Restock: 0
 Capsule Barcode: 117499051
 Case Barcode: 
 Case Qty: 8

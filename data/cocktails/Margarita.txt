@@ -21,7 +21,8 @@ Image: images/hero/margarita.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 9
+Restock: 0
 Capsule Barcode: 394324049
 Case Barcode: 850050482635
 Case Qty: 8
