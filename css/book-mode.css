@@ -271,30 +271,25 @@ html.book-active body {
   right: calc(0.9rem + env(safe-area-inset-right, 0px));
 }
 
+/* Menu (hamburger) is always top-right; Tune is top-left.
+   (Portrait phones already had this arrangement via their own rules.) */
 .book-menu-btn {
   position: absolute;
   top: calc(0.7rem + env(safe-area-inset-top, 0px));
+  right: calc(0.55rem + env(safe-area-inset-right, 0px));
+  left: auto;
   z-index: 3;
   appearance: none;
   border: 0;
   background: transparent;
   color: var(--book-ink);
   font: inherit;
-  font-size: 0.72rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font-size: 1.35rem;
+  line-height: 1;
   padding: 0.55rem 0.65rem;
+  min-width: 44px;
   min-height: 44px;
   cursor: pointer;
-}
-
-.book-spread.image-left .book-menu-btn {
-  right: calc(0.55rem + env(safe-area-inset-right, 0px));
-}
-
-.book-spread.image-right .book-menu-btn {
-  left: calc(0.55rem + env(safe-area-inset-left, 0px));
 }
 
 .book-menu-btn:focus-visible {
@@ -306,7 +301,8 @@ html.book-active body {
 .book-tune-btn {
   position: absolute;
   top: calc(0.7rem + env(safe-area-inset-top, 0px));
-  right: calc(0.55rem + env(safe-area-inset-right, 0px));
+  left: calc(0.55rem + env(safe-area-inset-left, 0px));
+  right: auto;
   z-index: 4;
   appearance: none;
   border: 0;

@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v69";
+  const APP_VERSION = "bartesian-v70";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -2210,7 +2210,7 @@
     const list = bookCocktailList();
     if (!list.length) {
       return `<div class="book-mode" data-book-root>
-        <button type="button" class="book-menu-btn" data-book-menu-open style="right:0.75rem;left:auto">Menu</button>
+        <button type="button" class="book-menu-btn" data-book-menu-open style="right:0.75rem;left:auto" aria-label="Open menu" title="Menu"><span aria-hidden="true">☰</span></button>
         <div class="book-copy" style="padding:2rem">
           <p class="book-spirit-chapter">Book Mode</p>
           <h1 class="book-title">No cocktails</h1>
@@ -2237,7 +2237,7 @@
     const tuneLive =
       state.bookTuneOpen || (state.bookTuneLive && state.bookTuneForm === bookFormKey());
     return `<div class="book-mode ${tuneLive ? "book-tuning" : ""}" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
-      <button type="button" class="book-menu-btn" data-book-menu-open>Menu</button>
+      <button type="button" class="book-menu-btn" data-book-menu-open aria-label="Open menu" title="Menu"><span aria-hidden="true">☰</span></button>
       ${state.showBookTuneBtn ? `<button type="button" class="book-tune-btn" data-book-tune-open>Tune</button>` : ""}
       <article class="book-spread ${imageLeft ? "image-left" : "image-right"}" data-book-spread>
         <div class="book-photo ${photoSrc ? "" : "book-photo-empty"}">
