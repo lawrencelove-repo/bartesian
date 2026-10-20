@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v66";
+  const APP_VERSION = "bartesian-v67";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -176,7 +176,19 @@
     else if (action === "down") t.y += STEP;
     else if (action === "bigger") t.scale = Math.round((t.scale + 0.05) * 100) / 100;
     else if (action === "smaller") t.scale = Math.round((t.scale - 0.05) * 100) / 100;
-    else if (action === "reset") { t.x = 0; t.y = 0; t.scale = 1; }
+    else if (action === "reset") {
+      // Reset = erase this form factor's tuned session and go back to the
+      // server (baked CSS) settings — NOT neutral 0/0/100. Clear the live
+      // flag and the cookie so the bake takes over again on close, and
+      // show the baked preset (or neutral defaults where nothing is
+      // baked yet) in the readout while the panel is open.
+      state.bookTune = bakedBookTune() || { x: 0, y: 0, scale: 1 };
+      state.bookTuneLive = false;
+      state.bookTuneForm = "";
+      setCookie(BOOK_TUNE_COOKIE, "", 0);
+      render();
+      return;
+    }
     // Full-viewport range: the image may slide completely off either edge,
     // so any on-screen portion (75%, 50%, less) can be explored.
     t.x = Math.min(100, Math.max(-100, t.x));
@@ -2187,7 +2199,7 @@
         <span class="book-tune-label">Size</span>
         <button type="button" data-book-tune="smaller" aria-label="Make image smaller">−</button>
         <button type="button" data-book-tune="bigger" aria-label="Make image bigger">+</button>
-        <button type="button" class="book-tune-reset" data-book-tune="reset">Reset</button>
+        <button type="button" class="book-tune-reset" data-book-tune="reset" title="Erase tuned changes and reload the server (baked) settings">Reset</button>
       </div>
     </div>`;
   }
