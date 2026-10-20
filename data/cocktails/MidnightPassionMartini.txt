@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 6792810
 Hero Image: images/hero/midnight-passion-martini.jpg
 Marketing Image: images/marketing/midnight-passion-martini.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/midnight-passion-martini.jpg
 Seasonal: 0
 Enabled: 0

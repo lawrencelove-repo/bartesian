@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 39027
 Hero Image: images/hero/hemingway-daiquiri.jpg
 Marketing Image: images/marketing/hemingway-daiquiri.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/hemingway-daiquiri.jpg
 Seasonal: 0
 Enabled: 0

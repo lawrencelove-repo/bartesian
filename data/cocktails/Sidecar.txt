@@ -17,7 +17,7 @@ Shopify SKU: 55459
 Gorgias Article ID: 65193
 Hero Image: images/hero/sidecar.jpg
 Marketing Image: images/marketing/sidecar.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/sidecar.jpg
 Seasonal: 0
 Enabled: 1

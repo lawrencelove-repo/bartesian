@@ -17,7 +17,7 @@ Shopify SKU: 55355
 Gorgias Article ID: 39082
 Hero Image: images/hero/sex-on-the-beach.jpg
 Marketing Image: images/marketing/sex-on-the-beach.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/marketing/sex-on-the-beach.jpg
 Seasonal: 0
 Enabled: 1

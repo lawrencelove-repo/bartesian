@@ -17,7 +17,7 @@ Shopify SKU: 55414
 Gorgias Article ID: 35050
 Hero Image: images/hero/amaretto-sour.jpg
 Marketing Image: images/marketing/amaretto-sour.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/amaretto-sour.jpg
 Seasonal: 0
 Enabled: 1

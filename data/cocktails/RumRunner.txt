@@ -17,7 +17,7 @@ Shopify SKU: 55408
 Gorgias Article ID: 39077
 Hero Image: images/hero/rum-runner.jpg
 Marketing Image: images/marketing/rum-runner.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/rum-runner.jpg
 Seasonal: 0
 Enabled: 1

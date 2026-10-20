@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 809946
 Hero Image: images/hero/peanut-butter-cup.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/peanut-butter-cup.jpg
 Seasonal: 0
 Enabled: 0

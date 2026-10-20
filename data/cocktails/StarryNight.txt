@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 3388353
 Hero Image: images/hero/starry-night.jpg
 Marketing Image: images/marketing/starry-night.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/starry-night.jpg
 Seasonal: 1
 Enabled: 0

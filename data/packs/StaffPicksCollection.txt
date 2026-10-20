@@ -2,6 +2,15 @@ Name: Staff Picks Collection
 Slug: staff-picks-collection
 Barcode: 
 Notes: Handpicked by our team, the Staff Picks Collection is an easy crowd-pleaser for any gathering. This variety pack contains 2 each of 4 curated cocktails: - Raspberry Ginger Gimlet: a classic gin cocktail gets a twist with flavors of sweet raspberry and a tangy ginger zing. - Jalapeño Lime Shrub: a refreshing and sour tequila cocktail, with lime, apple cider vinegar, and jalapeño flavors. - Lychee Martini: delicately fruity and lightly floral, this vodka martini is inspired by the tropical, Southeast Asian fruit. - White Sangria: a lively rum-based cocktail with flavors of sweet peach, triple sec, and buttery white wine. Base spirit(s): Gin, Tequila, Vodka, Rum.
+Bartesian URL: https://bartesian.com/products/staff-picks-collection?variant=46171816493255
+Help URL: 
+Shopify Product ID: 8616008286407
+Shopify Variant ID: 46171816493255
+Shopify Handle: staff-picks-collection
+Gorgias Article ID: 
+Image: 
+Nutrition Image: 
+Enabled: 1
 Items:
 	jalape-o-lime-shrub: 2
 	lychee-martini: 2

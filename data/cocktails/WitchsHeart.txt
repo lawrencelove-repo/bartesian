@@ -17,7 +17,7 @@ Shopify SKU: 55410
 Gorgias Article ID: 120126
 Hero Image: images/hero/witchs-heart.jpg
 Marketing Image: images/marketing/witchs-heart.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/witchs-heart.jpg
 Seasonal: 1
 Enabled: 1

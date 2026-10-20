@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 1120804
 Hero Image: images/hero/mezcalita.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/mezcalita.jpg
 Seasonal: 0
 Enabled: 0

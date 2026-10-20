@@ -17,7 +17,7 @@ Shopify SKU: 55356
 Gorgias Article ID: 39504
 Hero Image: images/hero/uptown-rocks.jpg
 Marketing Image: images/marketing/uptown-rocks.jpg
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/uptown-rocks.jpg
 Seasonal: 0
 Enabled: 1

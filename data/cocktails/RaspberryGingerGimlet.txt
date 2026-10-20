@@ -17,7 +17,7 @@ Shopify SKU: 55463
 Gorgias Article ID: 67035
 Hero Image: images/hero/raspberry-ginger-gimlet.jpg
 Marketing Image: images/marketing/raspberry-ginger-gimlet.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/raspberry-ginger-gimlet.jpg
 Seasonal: 0
 Enabled: 1

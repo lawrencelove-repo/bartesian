@@ -17,7 +17,7 @@ Shopify SKU: 55382
 Gorgias Article ID: 39502
 Hero Image: images/hero/spicy-margarita.jpg
 Marketing Image: images/marketing/spicy-margarita.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/spicy-margarita.jpg
 Seasonal: 0
 Enabled: 1

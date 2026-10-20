@@ -2,4 +2,13 @@ Name: Long Island Collection
 Slug: long-island-collection
 Barcode: 
 Notes: *
+Bartesian URL: https://bartesian.com/products/long-island-collection?variant=46631778386119
+Help URL: 
+Shopify Product ID: 8726160474311
+Shopify Variant ID: 46631778386119
+Shopify Handle: long-island-collection
+Gorgias Article ID: 
+Image: 
+Nutrition Image: 
+Enabled: 1
 Items:

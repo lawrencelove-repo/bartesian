@@ -17,7 +17,7 @@ Shopify SKU: 75684
 Gorgias Article ID: 6360703
 Hero Image: images/hero/mango-habanero-margarita.jpg
 Marketing Image: images/marketing/mango-habanero-margarita.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/mango-habanero-margarita.jpg
 Seasonal: 0
 Enabled: 1

@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 3388354
 Hero Image: images/hero/frosted-orchard.jpg
 Marketing Image: images/marketing/frosted-orchard.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/frosted-orchard.jpg
 Seasonal: 1
 Enabled: 0

@@ -17,7 +17,7 @@ Shopify SKU: 75563
 Gorgias Article ID: 445992
 Hero Image: images/hero/lychee-martini.jpg
 Marketing Image: images/marketing/lychee-martini.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/lychee-martini.jpg
 Seasonal: 0
 Enabled: 1

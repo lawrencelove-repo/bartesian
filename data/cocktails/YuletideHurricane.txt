@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 1059915
 Hero Image: images/hero/yuletide-hurricane.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/yuletide-hurricane.jpg
 Seasonal: 1
 Enabled: 0

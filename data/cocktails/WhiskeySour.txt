@@ -17,7 +17,7 @@ Shopify SKU: 55353
 Gorgias Article ID: 76297
 Hero Image: images/hero/whiskey-sour.jpg
 Marketing Image: images/marketing/whiskey-sour.jpg
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/whiskey-sour.jpg
 Seasonal: 0
 Enabled: 1

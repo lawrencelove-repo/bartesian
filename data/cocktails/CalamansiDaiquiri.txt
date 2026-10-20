@@ -17,7 +17,7 @@ Shopify SKU: 75671
 Gorgias Article ID: 5096344
 Hero Image: images/hero/calamansi-daiquiri.jpg
 Marketing Image: images/marketing/calamansi-daiquiri.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/calamansi-daiquiri.jpg
 Seasonal: 0
 Enabled: 1

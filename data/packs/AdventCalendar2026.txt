@@ -2,6 +2,15 @@ Name: Advent Calendar 2026
 Slug: advent-calendar-2026
 Barcode: 
 Notes: With 3 NEW holiday cocktails and 9 returning festive favorites, you can enjoy a delicious cocktail surprise for 12 nights during the most wonderful time of the year. NEW for 2026: Berry & Bright, Frosted Ambrosia, Salted Caramel Espresso Martini. See the spoiler article for full capsule descriptions.
+Bartesian URL: https://bartesian.com/products/advent-calendar?variant=47520593445063
+Help URL: https://bartesian.gorgias.help/en-US/2026-advent-calendar-(spoiler-alert)-7886629
+Shopify Product ID: 8913630003399
+Shopify Variant ID: 47520593445063
+Shopify Handle: advent-calendar
+Gorgias Article ID: 7886629
+Image: 
+Nutrition Image: 
+Enabled: 1
 Items:
 	berry-and-bright: 1
 	brown-butter-old-fashioned: 1

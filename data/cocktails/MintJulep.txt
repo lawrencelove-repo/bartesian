@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 468827
 Hero Image: images/hero/mint-julep.jpg
 Marketing Image: images/marketing/mint-julep.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/mint-julep.jpg
 Seasonal: 0
 Enabled: 0

@@ -2,7 +2,15 @@ Name: Whiskey Lovers Variety Pack
 Slug: whiskey-lovers-variety-pack
 Barcode: 
 Notes: For the whiskey lover in your life. Our 8-count pack contains 2 each of: - Manhattan: a mix of savory, sweet vermouth and aromatic bitters flavors with a hint of cherry. - Old Fashioned: a spirit-forward cocktail balancing bitter and sweet with notes of oak and orange citrus. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange notes. - Sidecar: a balanced sour and sweet cocktail with lemon and notes of triple sec.
+Bartesian URL: https://bartesian.com/products/whiskey-lovers-collection?variant=32387435167793
+Help URL: 
+Shopify Product ID: 4756368326705
+Shopify Variant ID: 32387435167793
+Shopify Handle: whiskey-lovers-collection
+Gorgias Article ID: 
 Image: images/packs/whiskey-lovers.jpg
+Nutrition Image: 
+Enabled: 1
 Items:
 	manhattan: 2
 	old-fashioned: 2

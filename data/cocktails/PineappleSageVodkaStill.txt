@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 105537
 Hero Image: images/hero/pineapple-sage-vodka-still.jpg
 Marketing Image: images/marketing/pineapple-sage-vodka-still.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/pineapple-sage-vodka-still.jpg
 Seasonal: 0
 Enabled: 0

@@ -17,7 +17,7 @@ Shopify SKU: 75570
 Gorgias Article ID: 574704
 Hero Image: images/hero/strawberry-coconut-daiquiri.jpg
 Marketing Image: images/marketing/strawberry-coconut-daiquiri.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/strawberry-coconut-daiquiri.jpg
 Seasonal: 0
 Enabled: 1

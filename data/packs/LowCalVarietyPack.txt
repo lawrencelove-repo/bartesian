@@ -2,7 +2,15 @@ Name: Low-Cal Variety Pack
 Slug: low-cal-variety-pack
 Barcode: 
 Notes: Bartesian's Low-Cal Variety Pack features the same great taste of four of our classic cocktail offerings with no added sugar. Our 8-pack contains 2 each of: - Low-Cal Margarita: a classic, refreshing tequila cocktail with lemon and lime. 10 calories per capsule. - Low-Cal Cosmopolitan: a classic vodka cocktail with tart cranberry, sweet orange, and lime. 15 calories per capsule. - Low-Cal Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange notes. 5 calories per capsule. - Low-Cal Old Fashioned: a spirit-forward whiskey cocktail balancing bitter and sweet with notes of oak and orange citrus. 5 calories per capsule.
+Bartesian URL: https://bartesian.com/products/low-cal-variety-pack?variant=43436826165447
+Help URL: 
+Shopify Product ID: 7779393568967
+Shopify Variant ID: 43436826165447
+Shopify Handle: low-cal-variety-pack
+Gorgias Article ID: 
 Image: images/packs/low-cal-variety-pack.jpg
+Nutrition Image: 
+Enabled: 1
 Items:
 	low-cal-cosmopolitan: 2
 	low-cal-margarita: 2

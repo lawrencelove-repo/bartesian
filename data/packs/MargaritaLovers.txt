@@ -8,7 +8,7 @@ Shopify Variant ID:
 Shopify Handle: 
 Help URL: 
 Gorgias Article ID: 
-Image: 
+Image: images/packs/gin-lovers.jpg
 Nutrition Image: 
 Nutrition Image EU: 
 Enabled: 0

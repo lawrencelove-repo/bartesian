@@ -17,7 +17,7 @@ Shopify SKU: 55374
 Gorgias Article ID: 39058
 Hero Image: images/hero/manhattan.jpg
 Marketing Image: images/marketing/manhattan.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/manhattan.jpg
 Seasonal: 0
 Enabled: 1

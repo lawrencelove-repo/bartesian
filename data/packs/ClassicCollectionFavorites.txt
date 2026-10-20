@@ -2,6 +2,15 @@ Name: Classic Collection Favorites
 Slug: classic-collection-favorites
 Barcode: 
 Notes: All of our classics are together in one collection. The Classic Collection Favorites Variety Pack contains 1 each of: - Cosmopolitan: a classic vodka cocktail with tart cranberry, sweet orange, and lime. - Old Fashioned: a spirit-forward whiskey cocktail balancing bitter and sweet with flavors of oak and orange citrus. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Espresso Martini: a smooth, sippable vodka cocktail with flavors of rich and creamy espresso and bold coffee liqueur. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange flavors. -
+Bartesian URL: https://bartesian.com/products/classic-cocktails-favorites?variant=44303522562247
+Help URL: 
+Shopify Product ID: 8119625941191
+Shopify Variant ID: 44303522562247
+Shopify Handle: classic-cocktails-favorites
+Gorgias Article ID: 
+Image: 
+Nutrition Image: 
+Enabled: 1
 Items:
 	cosmopolitan: 1
 	espresso-martini: 1

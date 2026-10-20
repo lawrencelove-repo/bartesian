@@ -17,7 +17,7 @@ Shopify SKU: 55485
 Gorgias Article ID: 36519
 Hero Image: images/hero/bees-knees.jpg
 Marketing Image: images/marketing/bees-knees.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/bees-knees.jpg
 Seasonal: 0
 Enabled: 1

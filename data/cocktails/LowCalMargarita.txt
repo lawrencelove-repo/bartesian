@@ -17,7 +17,7 @@ Shopify SKU: 55413
 Gorgias Article ID: 39048
 Hero Image: images/hero/low-cal-margarita.jpg
 Marketing Image: images/marketing/low-cal-margarita.jpg
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/low-cal-margarita.jpg
 Seasonal: 0
 Enabled: 1

@@ -17,7 +17,7 @@ Shopify SKU: 55370
 Gorgias Article ID: 39050
 Hero Image: images/hero/long-island-iced-tea.jpg
 Marketing Image: images/marketing/long-island-iced-tea.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/long-island-iced-tea.jpg
 Seasonal: 0
 Enabled: 1

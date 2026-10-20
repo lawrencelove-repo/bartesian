@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 3388359
 Hero Image: images/hero/mistletoe-margarita.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/mistletoe-margarita.jpg
 Seasonal: 1
 Enabled: 0

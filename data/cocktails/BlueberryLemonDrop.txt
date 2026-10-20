@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 1661998
 Hero Image: images/hero/blueberry-lemon-drop.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/blueberry-lemon-drop.jpg
 Seasonal: 0
 Enabled: 0

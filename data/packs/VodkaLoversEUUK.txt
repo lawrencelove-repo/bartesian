@@ -2,6 +2,14 @@ Name: Vodka Lovers (EU/UK)
 Slug: vodka-lovers
 Barcode: 
 Notes: Calling all vodka lovers! Our 8-pack contains 2 each of: - Espresso Martini: a smooth, sippable cocktail with flavors of rich and creamy espresso and bold coffee liqueur. - Lemon Drop: a sweet and tart, lemon candy-inspired martini. - Sex on the Beach: an iconic fruity blend of peach, pineapple, banana, cranberry and lemon flavors. - Cosmopolitan: a classic cocktail with tart cranberry, sweet orange, and lime.
+Bartesian URL: https://bartesian.com/products/vodka-lovers-variety-pack?variant=43332779311303
+Help URL: 
+Shopify Product ID: 7735029399751
+Shopify Variant ID: 43332779311303
+Shopify Handle: vodka-lovers-variety-pack
+Gorgias Article ID: 
+Image: images/packs/vodka-lovers.jpg
+Nutrition Image: 
 Enabled: 0
 Items:
 	cosmopolitan: 2

@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 2567775
 Hero Image: images/hero/maple-pecan-pie.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/maple-pecan-pie.jpg
 Seasonal: 0
 Enabled: 0

@@ -17,7 +17,7 @@ Shopify SKU: 55378
 Gorgias Article ID: 36518
 Hero Image: images/hero/aviation.jpg
 Marketing Image: images/marketing/aviation.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/aviation.jpg
 Seasonal: 0
 Enabled: 1

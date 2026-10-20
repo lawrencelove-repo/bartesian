@@ -17,7 +17,7 @@ Shopify SKU: 55388
 Gorgias Article ID: 39505
 Hero Image: images/hero/whiskey-smash.jpg
 Marketing Image: images/marketing/whiskey-smash.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/whiskey-smash.jpg
 Seasonal: 0
 Enabled: 1

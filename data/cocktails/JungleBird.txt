@@ -17,7 +17,7 @@ Shopify SKU: 55478
 Gorgias Article ID: 70414
 Hero Image: images/hero/jungle-bird.jpg
 Marketing Image: images/marketing/jungle-bird.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/jungle-bird.jpg
 Seasonal: 0
 Enabled: 1

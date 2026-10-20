@@ -2,6 +2,15 @@ Name: Festive Collection 2025
 Slug: festive-collection-2025
 Barcode: 
 Notes: Get in the festive spirit with this year’s Bartesian Festive Collection. This limited-edition variety pack features merry cocktails across two-spirit types, especially convenient for the Duet Cocktail Maker. This limited-edition variety pack contains 2 each of 4 curated seasonal cocktails: - Starry Night: a refreshing tequila cocktail with flavors of starfruit, grapefruit, guanabana, and citrus. - Peary Christmas: an elegant tequila cocktail with sweet pear, citrus, and delicate almond flavors. - The Grinch Appletini: a shimmering sweet and tart vodka cocktail with green apple flavors. - Frosted Orchard: a crisp vodka cocktail blending juicy apple and tangy lemonade, infused with flavors of cinnamon and cardamom.
+Bartesian URL: 
+Help URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Gorgias Article ID: 
+Image: 
+Nutrition Image: 
+Enabled: 1
 Items:
 	frosted-orchard: 2
 	peary-christmas: 2

@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 5452537
 Hero Image: images/hero/blackberry-mint-julep.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/blackberry-mint-julep.jpg
 Seasonal: 0
 Enabled: 0

@@ -17,7 +17,7 @@ Shopify SKU: 55443
 Gorgias Article ID: 39049
 Hero Image: images/hero/low-cal-whiskey-sour.jpg
 Marketing Image: images/marketing/low-cal-whiskey-sour.jpg
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/low-cal-whiskey-sour.jpg
 Seasonal: 0
 Enabled: 1

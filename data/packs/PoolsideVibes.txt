@@ -2,6 +2,15 @@ Name: Poolside Vibes
 Slug: poolside-vibes
 Barcode: 
 Notes: Four deliciously curated cocktails to keep summer alive. Our 8-pack contains 2 each of: - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Northside: a smooth, sweet, and sippable lime and vodka cocktail. - Ginger Peach Iced Tea: a refreshing vodka cocktail balancing iced tea with a zip of ginger and sweet peach.
+Bartesian URL: https://bartesian.com/products/poolside-vibes-collection-variety-pack?variant=43436952092871
+Help URL: 
+Shopify Product ID: 7779492200647
+Shopify Variant ID: 43436952092871
+Shopify Handle: poolside-vibes-collection-variety-pack
+Gorgias Article ID: 
+Image: 
+Nutrition Image: 
+Enabled: 1
 Items:
 	ginger-peach-iced-tea: 2
 	margarita: 2

@@ -17,7 +17,7 @@ Shopify SKU: 55464
 Gorgias Article ID: 39074
 Hero Image: images/hero/passion-fruit-margarita.jpg
 Marketing Image: images/marketing/passion-fruit-margarita.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/marketing/passion-fruit-margarita.jpg
 Seasonal: 0
 Enabled: 1

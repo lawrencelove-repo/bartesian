@@ -17,7 +17,7 @@ Shopify SKU: 55390
 Gorgias Article ID: 39052
 Hero Image: images/hero/lemon-drop.jpg
 Marketing Image: images/marketing/lemon-drop.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/lemon-drop.jpg
 Seasonal: 0
 Enabled: 1

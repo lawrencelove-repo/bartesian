@@ -17,7 +17,7 @@ Shopify SKU: 55412
 Gorgias Article ID: 383427
 Hero Image: images/hero/low-cal-old-fashioned.jpg
 Marketing Image: images/marketing/low-cal-old-fashioned.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/low-cal-old-fashioned.jpg
 Seasonal: 0
 Enabled: 1

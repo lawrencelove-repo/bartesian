@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 3388348
 Hero Image: images/hero/jollype-o-margarita.jpg
 Marketing Image: images/marketing/jollype-o-margarita.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/jollype-o-margarita.jpg
 Seasonal: 1
 Enabled: 0

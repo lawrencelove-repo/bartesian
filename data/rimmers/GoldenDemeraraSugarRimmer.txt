@@ -13,7 +13,7 @@ Gorgias Article ID: 39019
 Image: images/rimmers/golden-demerara-sugar.jpg
 Nutrition Image: images/nutrition/golden-demerara-sugar.png
 Barcode: 
-Quantity: 1
+Quantity: 0
 Restock: 0
 Favorite: 0
 Enabled: 1

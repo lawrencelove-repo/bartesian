@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 129411
 Hero Image: 
 Marketing Image: images/marketing/candyman-margarita.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/marketing/candyman-margarita.jpg
 Seasonal: 1
 Enabled: 0

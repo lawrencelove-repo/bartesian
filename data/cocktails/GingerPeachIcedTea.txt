@@ -17,7 +17,7 @@ Shopify SKU: 55435
 Gorgias Article ID: 39011
 Hero Image: images/hero/ginger-peach-iced-tea.jpg
 Marketing Image: images/marketing/ginger-peach-iced-tea.jpg
-Image Cut: NA
+Image Cut: Left
 Image: images/hero/ginger-peach-iced-tea.jpg
 Seasonal: 0
 Enabled: 1

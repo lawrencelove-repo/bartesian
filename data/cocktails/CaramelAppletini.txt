@@ -17,7 +17,7 @@ Shopify SKU: 75644
 Gorgias Article ID: 2387476
 Hero Image: images/hero/caramel-appletini.jpg
 Marketing Image: images/marketing/caramel-appletini.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/caramel-appletini.jpg
 Seasonal: 1
 Enabled: 1

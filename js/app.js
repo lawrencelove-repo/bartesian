@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v49";
+  const APP_VERSION = "bartesian-v50";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -2036,11 +2036,12 @@
     const prev = index > 0 ? list[index - 1] : null;
     const imageLeft = index % 2 === 0;
     const photoSrc = primaryImage(c);
-    // Image Cut: flip horizontally when the cut side is opposite the
-    // side the photo sits on (left photo + Right cut, or right photo + Left cut).
+    // Image Cut: flip horizontally only when the cut side matches the
+    // side the photo sits on (left photo + Left cut, or right photo + Right
+    // cut). NA, or a cut on the opposite side, displays normally.
     const imageCut = String(c.image_cut || "NA");
     const flipPhoto =
-      (imageLeft && imageCut === "Right") || (!imageLeft && imageCut === "Left");
+      (imageLeft && imageCut === "Left") || (!imageLeft && imageCut === "Right");
     const spiritsText = (c.spirits || []).join(", ") || c.primary_spirit || "";
     const showSpiritChapter =
       !prev ||

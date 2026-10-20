@@ -17,7 +17,7 @@ Shopify SKU: 55465
 Gorgias Article ID: 300193
 Hero Image: images/hero/strawberry-guava-margarita.jpg
 Marketing Image: images/marketing/strawberry-guava-margarita.jpg
-Image Cut: NA
+Image Cut: Right
 Image: images/marketing/strawberry-guava-margarita.jpg
 Seasonal: 0
 Enabled: 1

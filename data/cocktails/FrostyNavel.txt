@@ -17,7 +17,7 @@ Shopify SKU:
 Gorgias Article ID: 3388360
 Hero Image: images/hero/frosty-navel.jpg
 Marketing Image: 
-Image Cut: NA
+Image Cut: Right
 Image: images/hero/frosty-navel.jpg
 Seasonal: 1
 Enabled: 0
