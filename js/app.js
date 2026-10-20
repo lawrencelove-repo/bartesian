@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v46";
+  const APP_VERSION = "bartesian-v47";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
