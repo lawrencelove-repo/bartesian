@@ -2,6 +2,7 @@ Name: Cocktail Sampler Variety Pack
 Slug: cocktail-sampler-variety-pack
 Barcode: 
 Notes: Four of Bartesian's best-selling cocktail capsule varieties. Each capsule is mixologist-designed for taste with real juices, extracts, and bitters and no artificial colors or ingredients. Our 4-pack sampler contains 1 each of: - Lemon Drop: a sweet and tart, lemon candy-inspired vodka martini. - Rum Breeze: a sweet, tropical rum cocktail blending pineapple, lime, and strawberry juices, with a hint of coconut flavor. - Margarita: a classic, refreshing tequila cocktail with lemon and lime. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange flavors.
+Image: images/packs/cocktail-sampler.jpg
 Items:
 	lemon-drop: 1
 	margarita: 1

@@ -765,6 +765,21 @@
         changed++;
       }
     }
+    // Packs: sync enabled + image so seed edits (e.g. disabling EU/UK packs,
+    // adding US pack thumbnails) reach existing DBs without a reset.
+    for (const p of seed.packs || []) {
+      if (!p.slug) continue;
+      const row = queryOne("SELECT id, enabled, image FROM packs WHERE slug = ?", [p.slug]);
+      if (!row) continue;
+      const enabled = p.enabled === 0 || p.enabled === false ? 0 : 1;
+      const image = p.image || "";
+      if (Number(row.enabled) !== enabled || String(row.image || "") !== image) {
+        exec("UPDATE packs SET enabled = ?, image = ?, updated_at = ? WHERE id = ?", [
+          enabled, image, ts, row.id,
+        ]);
+        changed++;
+      }
+    }
     return changed;
   }
 

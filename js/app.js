@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v40";
+  const APP_VERSION = "bartesian-v43";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -384,8 +384,15 @@
           <span>${esc(APP_VERSION)}</span>
           <span>Private use only · data in git, edits local until export</span>
         </footer>
+        <button type="button" class="back-to-top" data-back-to-top aria-label="Back to top">↑ Back to Top</button>
       </div>
     `;
+  }
+
+  function syncBackToTop() {
+    const btn = root.querySelector("[data-back-to-top]");
+    if (!btn) return;
+    btn.classList.toggle("is-visible", window.scrollY > 240);
   }
 
   function listIndexKey(title) {
@@ -1339,7 +1346,8 @@
       items.filter((x) => String(x.name || "").toLowerCase().includes(q)).slice(0, 8);
     const cocktails = matches(BartesianDB.listAllCocktails());
     const rimmers = matches(BartesianDB.listAllRimmersAdmin());
-    const packs = matches(BartesianDB.listAllPacksAdmin());
+    // Disabled packs (e.g. EU/UK) don't show in scan name search
+    const packs = matches(BartesianDB.listAllPacksAdmin()).filter((p) => p.enabled);
     if (!cocktails.length && !rimmers.length && !packs.length) {
       return `<p class="empty">No cocktails, rimmers, or packs match “${esc(state.scanNameQuery.trim())}”.</p>`;
     }
@@ -1786,9 +1794,17 @@
       window.scrollTo(0, saved != null ? saved : 0);
     }
     scheduleAlphaIndexSync();
+    syncBackToTop();
   }
 
   async function onClick(e) {
+    if (e.target.closest("[data-back-to-top]")) {
+      // Instant jump (no smooth scrolling)
+      window.scrollTo(0, 0);
+      syncBackToTop();
+      return;
+    }
+
     // Quantity badge steppers (list screens) — before [data-go] row navigation
     const qtyStep = e.target.closest("[data-qty-step]");
     if (qtyStep) {
@@ -2519,7 +2535,10 @@
   }
   document.addEventListener("pointerup", endAlphaScrub);
   document.addEventListener("pointercancel", endAlphaScrub);
-  window.addEventListener("scroll", scheduleAlphaIndexSync, { passive: true });
+  window.addEventListener("scroll", () => {
+    scheduleAlphaIndexSync();
+    syncBackToTop();
+  }, { passive: true });
   window.addEventListener("resize", scheduleAlphaIndexSync, { passive: true });
 
   boot();

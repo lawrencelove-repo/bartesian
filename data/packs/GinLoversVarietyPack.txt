@@ -2,6 +2,7 @@ Name: Gin Lovers Variety Pack
 Slug: gin-lovers-variety-pack
 Barcode: 
 Notes: Calling all gin lovers! Try this refreshing and unique spirit with some of the most beloved gin cocktails in our collection. Our 8-pack contains 2 each of: - Aviation: a floral and sweet classic with flavors of violet, maraschino liqueur, and lemon. - Bee's Knees: a sweet, citrus cocktail blending lemon with delicate and floral honey flavors. - Raspberry Ginger Gimlet: a bright, raspberry and ginger flavored twist on the classic lime and gin cocktail. - Uptown Rocks: an elegant lemon and peach cocktail with a graceful, cilantro flavored kick.
+Image: images/packs/gin-lovers.jpg
 Items:
 	aviation: 2
 	bees-knees: 2

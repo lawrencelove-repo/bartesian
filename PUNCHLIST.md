@@ -68,6 +68,8 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Scan lookup → confirm (capsule/rimmer default −1, optional +1; case/pack restock preview)
 - [x] Scan page name search (cocktail/rimmer/pack) → same confirm preview (`resolveItem`)
 - [x] Scan preview Pack (Add +8) toggle for capsules; history reads “Added +8 · …” with `Pack (+8)` detail
+- [x] EU/UK Lovers packs disabled; US Lovers Variety Packs use the EU/UK thumbnails; scan name search hides disabled packs; pack enabled/image sync on seed rev
+- [x] Floating Back to Top button (appears after scrolling, instant jump)
 - [x] Admin `#/admin/barcodes` to associate codes; export includes `barcodes.json` + Capsule/Case fields
 - [x] Camera scanning: custom Bartesian Code128 C line scan + optional BarcodeDetector for retail GTINs
 - [x] iPadOS Take photo / Choose image / Files via `<input type="file" accept="image/*">` (+ optional live scan)

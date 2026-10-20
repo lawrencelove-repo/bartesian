@@ -2,6 +2,7 @@ Name: Whiskey Lovers (EU/UK)
 Slug: whiskey-lovers
 Barcode: 
 Notes: For the whiskey lover in your life. Our 8-count pack contains 2 each of: - Manhattan: a mix of savory, sweet vermouth and aromatic bitters flavors with a hint of cherry. - Old Fashioned: a spirit-forward cocktail balancing bitter and sweet with notes of oak and orange citrus. - Whiskey Sour: a smooth, citrusy whiskey cocktail with vanilla, lemon, and orange notes. - Sidecar: a balanced sour and sweet cocktail with lemon and notes of triple sec.
+Enabled: 0
 Items:
 	manhattan: 2
 	old-fashioned: 2

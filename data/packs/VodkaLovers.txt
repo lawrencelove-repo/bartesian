@@ -11,7 +11,7 @@ Gorgias Article ID:
 Image: images/packs/vodka-lovers.jpg
 Nutrition Image: 
 Nutrition Image EU: 
-Enabled: 1
+Enabled: 0
 Items:
 	espresso-martini: 2
 	lemon-drop: 2

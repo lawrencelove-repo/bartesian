@@ -11,7 +11,7 @@ Gorgias Article ID:
 Image: images/packs/whiskey-lovers.jpg
 Nutrition Image: 
 Nutrition Image EU: 
-Enabled: 1
+Enabled: 0
 Items:
 	manhattan: 2
 	old-fashioned: 2

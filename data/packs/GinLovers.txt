@@ -11,7 +11,7 @@ Gorgias Article ID:
 Image: images/packs/gin-lovers.jpg
 Nutrition Image: 
 Nutrition Image EU: 
-Enabled: 1
+Enabled: 0
 Items:
 	uptown-rocks: 2
 	bramble: 2
