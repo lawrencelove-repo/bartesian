@@ -15,7 +15,7 @@ Shopify Variant ID: 15685657034801
 Shopify Handle: rum-breeze-cocktails
 Shopify SKU: 55354
 Gorgias Article ID: 39076
-Hero Image: 
+Hero Image: images/hero/rum-breeze.jpg
 Marketing Image: images/marketing/rum-breeze.jpg
 Image: images/marketing/rum-breeze.jpg
 Seasonal: 0

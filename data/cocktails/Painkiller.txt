@@ -15,7 +15,7 @@ Shopify Variant ID: 42475717460167
 Shopify Handle: painkiller-capsules
 Shopify SKU: 55491
 Gorgias Article ID: 196624
-Hero Image: 
+Hero Image: images/hero/painkiller.jpg
 Marketing Image: images/marketing/painkiller.jpg
 Image: images/marketing/painkiller.jpg
 Seasonal: 0

@@ -15,7 +15,7 @@ Shopify Variant ID: 43250186944711
 Shopify Handle: white-sangria-capsules
 Shopify SKU: 55474
 Gorgias Article ID: 275636
-Hero Image: 
+Hero Image: images/hero/white-sangria.jpg
 Marketing Image: images/marketing/white-sangria.jpg
 Image: images/marketing/white-sangria.jpg
 Seasonal: 0

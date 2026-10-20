@@ -772,33 +772,51 @@
     }
   }
 
-  /** Copy cocktail/rimmer quantities + restock flags from seed into the live DB. */
+  /** Copy cocktail/rimmer quantities, restock flags + images from seed into the live DB. */
   function applySeedInventory() {
     const seed = global.BARTESIAN_SEED || {};
     let changed = 0;
     const ts = nowIso();
     for (const c of seed.cocktails || []) {
       if (!c.slug) continue;
-      const row = queryOne("SELECT id, quantity, restock FROM cocktails WHERE slug = ?", [c.slug]);
+      const row = queryOne(
+        "SELECT id, quantity, restock, image, hero_image, marketing_image FROM cocktails WHERE slug = ?",
+        [c.slug]
+      );
       if (!row) continue;
       const q = Number(c.quantity) || 0;
       const restock = c.restock ? 1 : 0;
-      if (Number(row.quantity) !== q || Number(row.restock || 0) !== restock) {
-        exec("UPDATE cocktails SET quantity = ?, restock = ?, updated_at = ? WHERE id = ?", [
-          q, restock, ts, row.id,
-        ]);
+      const image = String(c.image || "");
+      const hero = String(c.hero_image || "");
+      const marketing = String(c.marketing_image || "");
+      const inventoryChanged =
+        Number(row.quantity) !== q || Number(row.restock || 0) !== restock;
+      const imagesChanged =
+        String(row.image || "") !== image ||
+        String(row.hero_image || "") !== hero ||
+        String(row.marketing_image || "") !== marketing;
+      if (inventoryChanged || imagesChanged) {
+        exec(
+          "UPDATE cocktails SET quantity = ?, restock = ?, image = ?, hero_image = ?, marketing_image = ?, updated_at = ? WHERE id = ?",
+          [q, restock, image, hero, marketing, ts, row.id]
+        );
         changed++;
       }
     }
     for (const r of seed.rimmers || []) {
       if (!r.slug) continue;
-      const row = queryOne("SELECT id, quantity, restock FROM rimmers WHERE slug = ?", [r.slug]);
+      const row = queryOne("SELECT id, quantity, restock, image FROM rimmers WHERE slug = ?", [r.slug]);
       if (!row) continue;
       const q = Number(r.quantity) || 0;
       const restock = r.restock ? 1 : 0;
-      if (Number(row.quantity) !== q || Number(row.restock || 0) !== restock) {
-        exec("UPDATE rimmers SET quantity = ?, restock = ?, updated_at = ? WHERE id = ?", [
-          q, restock, ts, row.id,
+      const image = String(r.image || "");
+      if (
+        Number(row.quantity) !== q ||
+        Number(row.restock || 0) !== restock ||
+        String(row.image || "") !== image
+      ) {
+        exec("UPDATE rimmers SET quantity = ?, restock = ?, image = ?, updated_at = ? WHERE id = ?", [
+          q, restock, image, ts, row.id,
         ]);
         changed++;
       }

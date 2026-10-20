@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v46";
+  const APP_VERSION = "bartesian-v47";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -348,11 +348,11 @@
   function shell(active, body) {
     const nav = [
       ["list", "#/", "Cocktails"],
-      ["book", "#/book", "Book Mode"],
       ["rimmers", "#/rimmers", "Rimmers"],
       ["restock", "#/restock", "Restock"],
       ["wishlist", "#/wishlist", "Wishlist"],
       ["random", "#/random", "Random"],
+      ["book", "#/book", "Book"],
       ["settings", "#/settings", "Settings"],
     ];
     const adminLinks = [
@@ -1958,9 +1958,11 @@
     );
   }
 
-  /** Book Mode order: spirit chapters (A–Z) then name, unless sorting by qty/rating. */
+  /** Book Mode order: spirit chapters (A–Z) then name, unless sorting by qty/rating. Seasonal cocktails and refreshers are excluded from the book. */
   function bookCocktailList() {
-    const list = BartesianDB.listCocktails(listQuery());
+    const list = BartesianDB.listCocktails(listQuery()).filter(
+      (c) => !c.seasonal && !/refresher/i.test(String(c.name || "") + " " + String(c.slug || ""))
+    );
     const flatSort = state.sort === "quantity" || state.sort === "quantity-asc" || state.sort === "rating";
     if (flatSort) return list;
     const nameDesc = state.sort === "name-desc";
