@@ -395,15 +395,40 @@ function readJsonIfExists(file) {
   }
 }
 
+/** Duplicate .txt files share slugs (EU/UK, US-only variants); first file wins. */
+function dedupeBySlug(items, kind) {
+  const seen = new Set();
+  const out = [];
+  for (const item of items) {
+    if (!item.slug) continue;
+    if (seen.has(item.slug)) {
+      console.warn(`Skipping duplicate ${kind} slug "${item.slug}" from ${item._file} (kept first)`);
+      continue;
+    }
+    seen.add(item.slug);
+    out.push(item);
+  }
+  return out;
+}
+
 function writeSeed() {
-  const cocktails = readDirTxt(COCKTAILS_DIR).map((f) =>
-    parseCocktailText(fs.readFileSync(path.join(COCKTAILS_DIR, f), "utf8"), f)
+  const cocktails = dedupeBySlug(
+    readDirTxt(COCKTAILS_DIR).map((f) =>
+      parseCocktailText(fs.readFileSync(path.join(COCKTAILS_DIR, f), "utf8"), f)
+    ),
+    "cocktail"
   );
-  const packs = readDirTxt(PACKS_DIR).map((f) =>
-    parsePackText(fs.readFileSync(path.join(PACKS_DIR, f), "utf8"), f)
+  const packs = dedupeBySlug(
+    readDirTxt(PACKS_DIR).map((f) =>
+      parsePackText(fs.readFileSync(path.join(PACKS_DIR, f), "utf8"), f)
+    ),
+    "pack"
   );
-  const rimmers = readDirTxt(RIMMERS_DIR).map((f) =>
-    parseRimmerText(fs.readFileSync(path.join(RIMMERS_DIR, f), "utf8"), f)
+  const rimmers = dedupeBySlug(
+    readDirTxt(RIMMERS_DIR).map((f) =>
+      parseRimmerText(fs.readFileSync(path.join(RIMMERS_DIR, f), "utf8"), f)
+    ),
+    "rimmer"
   );
   const peopleJson = readJsonIfExists(path.join(DATA_DIR, "people.json"));
   const people = peopleJson.length

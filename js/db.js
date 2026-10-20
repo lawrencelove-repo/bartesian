@@ -637,19 +637,24 @@
         nowIso(),
       ]);
     }
+    // Defensive: duplicate slugs in seed (EU/UK variants) must not crash a
+    // fresh DB with a UNIQUE constraint error — first entry wins.
     const slugToId = {};
     for (const c of seed.cocktails || []) {
       if (!c.slug || !c.name) continue;
+      if (slugToId[c.slug]) continue;
       slugToId[c.slug] = insertCocktail(c);
     }
     const rimmerSlugToId = {};
     for (const r of seed.rimmers || []) {
       if (!r.slug || !r.name) continue;
+      if (rimmerSlugToId[r.slug]) continue;
       rimmerSlugToId[r.slug] = insertRimmer(r, slugToId);
     }
     const packSlugToId = {};
     for (const p of seed.packs || []) {
       if (!p.slug || !p.name) continue;
+      if (packSlugToId[p.slug]) continue;
       packSlugToId[p.slug] = insertPack(p, slugToId);
     }
     seedWishlistAndActivity(slugToId, rimmerSlugToId, packSlugToId);
