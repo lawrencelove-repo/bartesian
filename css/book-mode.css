@@ -710,6 +710,16 @@ html.book-active body {
     height: auto;
   }
 
+  /* Keep the name/meta clear of the Tune (top-left) and Menu (top-right)
+     buttons: start the copy below them instead of vertically centering
+     it into their row. The button row ends ~3.45rem below the top of
+     .book-mode (0.7rem offset + 44px height), so 4rem clears it. */
+  .book-spread.image-left .book-copy,
+  .book-spread.image-right .book-copy {
+    justify-content: flex-start;
+    padding-top: calc(4rem + env(safe-area-inset-top, 0px));
+  }
+
   .book-spread.image-left .book-photo {
     translate: -68% 26%;
     scale: 1.5;
