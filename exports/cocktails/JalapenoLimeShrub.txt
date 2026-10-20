@@ -1,0 +1,28 @@
+Name: Jalapeño Lime Shrub
+Slug: jalape-o-lime-shrub
+Description: Bartesian's Jalapeño Lime Shrub cocktail capsules create a cocktail that's like a lively dance of flavors on your tongue! Equal parts refreshing, sour lime, citrusy, and jalapeño-level spicy, this is a Bartesian original tequila cocktail that contains apple cider vinegar to provide balanced acidity.
+Details: Excitingly Sour and Spicy\n\nThis cocktail strikes a delightful balance with notes of refreshing lime juice and the daring spiciness of jalapeño slices. It's an adventure in a glass, offering a tangy and spicy journey ideal for tequila lovers who love a bit of heat in their drinks.\n\nThe apple cider vinegar in our Jalapeño Lime Shrub cocktail ensures a well-rounded taste, harmonizing the lime and jalapeño. These all combine to create a one-of-a-kind cocktail, making it a standout choice for your dinner parties or a celebration for one.\n\nCreate Perfect Cocktails Every Time with Bartesian\n\nDon’t have the time to shop for ingredients or mix your own drink? Just pop our Jalapeño Shrub Cocktail capsule into the Bartesian cocktail maker, add your favorite tequila, choose your desired strength, and press “Mix”! Pour your perfect cocktail into an ice-filled glass, and garnish with a jalapeño slice for that extra flair. Bottoms up!\n\nBase spirit: Tequila.
+Spirits: Tequila
+Glassware: Lowball Glass
+Garnish: Jalapeño
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/jalape-o-lime-shrub.png","label_image_eu":"images/nutrition/jalape-o-lime-shrub-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/jalapeno-lime-shrub-cocktails?variant=31660700696625
+Help URL: https://bartesian.gorgias.help/en-US/jalapeno-lime-shrub-39041
+Shopify Product ID: 4515875815473
+Shopify Variant ID: 31660700696625
+Shopify Handle: jalapeno-lime-shrub-cocktails
+Shopify SKU: 55392
+Gorgias Article ID: 39041
+Hero Image: images/hero/jalape-o-lime-shrub.jpg
+Marketing Image: images/marketing/jalape-o-lime-shrub.jpg
+Image: images/hero/jalape-o-lime-shrub.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 1
+Restock: 0
+Capsule Barcode: 172017697
+Case Barcode: 
+Case Qty: 8

@@ -1,0 +1,7 @@
+Name: Lemon Drop Variety Pack
+Slug: lemon-drop-variety-pack
+Barcode: 
+Notes: Calling all Lemon Drop fans! Our popular Lemon Drop variety pack is back with four fruit-forward twists on the candy-inspired vodka martini. Shake with ice, serve in a martini glass, rim with lemon sugar, and garnish with lemon. Our 8-pack contains 2 each of: - Strawberry Lemon Drop: sweet and tart with flavors of juicy strawberry and candied lemon. - Blueberry Lemon Drop: jammy blueberry balanced with bright citrus flavor. - Prickly Pear Lemon Drop: prickly pear and zesty lemon, with a hint of hibiscus flavor. - Blue Raspberry Lemon Drop: tangy and sweet with blue raspberry and lemon candy-inspired flavors. Base spirit: Vodka.
+Items:
+	blueberry-lemon-drop: 2
+	strawberry-lemon-drop: 2

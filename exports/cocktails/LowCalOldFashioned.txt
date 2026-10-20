@@ -1,0 +1,28 @@
+Name: Low-Cal Old Fashioned
+Slug: low-cal-old-fashioned
+Description: The Low-Cal Old Fashioned is a spirit-forward whiskey cocktail that perfectly balances bitter and sweet, with notes of oak and orange citrus. Garnish with an orange peel or a brandied cherry and enjoy this classic whiskey cocktail with no sugar added.
+Details: 5 calories per capsule.
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: with an orange peel or a brandied cherry and enjoy this classic whiskey cocktail with no sugar added
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/low-cal-old-fashioned.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/low-cal-old-fashioned-capsules?variant=43584092307655
+Help URL: https://bartesian.gorgias.help/en-US/low-cal-old-fashioned-383427
+Shopify Product ID: 7843726426311
+Shopify Variant ID: 43584092307655
+Shopify Handle: low-cal-old-fashioned-capsules
+Shopify SKU: 55412
+Gorgias Article ID: 383427
+Hero Image: images/hero/low-cal-old-fashioned.jpg
+Marketing Image: images/marketing/low-cal-old-fashioned.jpg
+Image: images/hero/low-cal-old-fashioned.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 29413377
+Case Barcode: 
+Case Qty: 8

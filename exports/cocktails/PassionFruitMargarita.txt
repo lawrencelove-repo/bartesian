@@ -1,0 +1,28 @@
+Name: Passion Fruit Margarita
+Slug: passion-fruit-margarita
+Description: Embrace the aromatic flavors of Passion Fruit Margaritas at home whenever you please with the Bartesian cocktail maker and cocktail capsules. Fresh passion fruits evoke fruity and floral notes and will transport you to a place of relaxation and sunshine.
+Details: Craft fresh Passion Fruit Margaritas at home with Bartesian’s cocktail capsules. You can enjoy an ice-cold margarita with friends in just a few seconds! Sweet, tropical, and tangy, the Passion Fruit Margarita is fruit-forward with tart and sour notes from passion fruit combined with citrus notes from triple sec and fresh lime juice.\n\nMaking Margaritas at Home with Bartesian\n\nSkip the blender and having to mix all the ingredients yourself with Bartesian’s easy-to-use cocktail maker! All you have to do is pop a margarita capsule into the maker, select your desired strength, and press “Mix.” Our cocktail maker does the hard work so you can entertain your guests or simply enjoy a happy hour at home. You’ll be sipping on the sweet notes of passion fruit and tequila in no time.\n\nOur Passion Fruit Margarita recipe pairs perfectly with our stemless margarita glassware. Garnish with a lime wedge and a salt rim for the ultimate refreshing experience.\n\nBase Spirit: Tequila\n\nBring the Tropics Home with Passion Fruit Margaritas from Bartesian\n\nReady for a tropical escape? Try our Passion Fruit Margarita cocktail capsules today.
+Spirits: Tequila
+Glassware: Lowball Glass
+Garnish: Lime
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/passion-fruit-margarita.png","label_image_eu":"images/nutrition/passion-fruit-margarita-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/passion-fruit-margarita-cocktails?variant=40477896671431
+Help URL: https://bartesian.gorgias.help/en-US/passion-fruit-margarita-39074
+Shopify Product ID: 6865273848007
+Shopify Variant ID: 40477896671431
+Shopify Handle: passion-fruit-margarita-cocktails
+Shopify SKU: 55464
+Gorgias Article ID: 39074
+Hero Image: 
+Marketing Image: images/marketing/passion-fruit-margarita.jpg
+Image: images/marketing/passion-fruit-margarita.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 2
+Restock: 0
+Capsule Barcode: 234932305
+Case Barcode: 
+Case Qty: 8

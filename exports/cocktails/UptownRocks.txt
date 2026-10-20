@@ -1,0 +1,28 @@
+Name: Uptown Rocks
+Slug: uptown-rocks
+Description: An elegant gin cocktail featuring peach and lemon with a graceful kick of cilantro flavor. Take gin drinks to the next level with an herbal gin for a smooth finish for this refreshing cocktail.
+Details: 
+Spirits: Gin
+Glassware: Coupe Glass
+Garnish: Lemon Peel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/uptown-rocks.png","label_image_eu":"images/nutrition/uptown-rocks-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/gin-cocktails-uptown-rocks?variant=15685652480049
+Help URL: https://bartesian.gorgias.help/en-US/uptown-rocks-39504
+Shopify Product ID: 2029029392433
+Shopify Variant ID: 15685652480049
+Shopify Handle: gin-cocktails-uptown-rocks
+Shopify SKU: 55356
+Gorgias Article ID: 39504
+Hero Image: images/hero/uptown-rocks.jpg
+Marketing Image: images/marketing/uptown-rocks.jpg
+Image: images/hero/uptown-rocks.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 3
+Restock: 0
+Capsule Barcode: 67158377
+Case Barcode: 
+Case Qty: 8

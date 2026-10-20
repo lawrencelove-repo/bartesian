@@ -1,0 +1,28 @@
+Name: Jollypeño Margarita
+Slug: jollype-o-margarita
+Description: Bring the heat to your holiday cheer with a festive twist on a classic that’s anything but ordinary. Bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño, this cocktail strikes the perfect balance of sweetness, tang, and just the right amount of fire. One sip, and you'll be feeling jollier than having your name on the nice list.
+Details: 
+Spirits: Tequila
+Glassware: Lowball Glass
+Garnish: Pineapple slice and jalapeños
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/jollype-o-margarita.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/jollypeno-margarita-3388348
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 3388348
+Hero Image: images/hero/jollype-o-margarita.jpg
+Marketing Image: images/marketing/jollype-o-margarita.jpg
+Image: images/hero/jollype-o-margarita.jpg
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 620808273
+Case Barcode: 
+Case Qty: 8

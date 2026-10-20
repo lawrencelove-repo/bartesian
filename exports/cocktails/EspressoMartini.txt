@@ -1,0 +1,28 @@
+Name: Espresso Martini
+Slug: espresso-martini
+Description: A crowd-pleaser for even the most refined palates, the Espresso Martini is a smooth, sippable cocktail with notes of rich and creamy espresso and bold coffee liqueur. Best served shaken and on ice, this Martini is the perfect elegant addition to your at-home bar selection.
+Details: Bring the Party with Espresso Martini Cocktail Capsules\n\nA rich, bold flavor profile with hints of bitter and sweet flavors, this classic cocktail appeals to both coffee lovers and the masses. You don’t have to be a professional mixologist to craft an incredible coffee-flavored cocktail. With Bartesian in your at-home bar, you’ll be mixing up these full-bodied beverages in no time!\n\nCrafting Bold Espresso Martinis at Home with Bartesian\n\nGrab a martini glass and pop an Espresso Martini capsule into your Bartesian cocktail maker. Select your desired strength, then press Mix! In seconds, you’ll be indulging in a rich and creamy beverage that evokes an air of sophistication and simplicity all in one. It’s a coffee lover’s dream come true!\n\nCreate perfect pours in 30 seconds with Bartesian’s espresso martini capsules at home! With minimal effort, you can create and serve premium cocktails for guests or simply pour one out for yourself after a long day. Whether you love coffee or are craving a slight coffee buzz from your beverages, this capsule is for you. No cocktail shaker is necessary! Shop today.
+Spirits: Vodka
+Glassware: Shaker + Martini
+Garnish: Coffee Beans
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/espresso-martini.png","label_image_eu":"images/nutrition/espresso-martini-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/espresso-martini-capsules?variant=42144722419911
+Help URL: https://bartesian.gorgias.help/en-US/espresso-martini-98045
+Shopify Product ID: 7329671807175
+Shopify Variant ID: 42144722419911
+Shopify Handle: espresso-martini-capsules
+Shopify SKU: 55506
+Gorgias Article ID: 98045
+Hero Image: images/hero/espresso-martini.jpg
+Marketing Image: images/marketing/espresso-martini.jpg
+Image: images/hero/espresso-martini.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 14
+Restock: 0
+Capsule Barcode: 406905877
+Case Barcode: 850054919410
+Case Qty: 8

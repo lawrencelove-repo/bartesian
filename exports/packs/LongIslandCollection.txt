@@ -1,0 +1,5 @@
+Name: Long Island Collection
+Slug: long-island-collection
+Barcode: 
+Notes: *
+Items:

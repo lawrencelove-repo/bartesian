@@ -1,0 +1,28 @@
+Name: Dirty Vodka Martini
+Slug: dirty-vodka-martini
+Description: A savory riff on a classic vodka cocktail, the Dirty Vodka Martini remixes the traditional pairing of vodka and dry vermouth with a splash of olive brine. Shake with ice and serve in a martini glass garnished with olives.
+Details: 
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: ed with olives
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/dirty-vodka-martini.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/dirty-vodka-martini-285761
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 285761
+Hero Image: 
+Marketing Image: 
+Image: 
+Seasonal: 0
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

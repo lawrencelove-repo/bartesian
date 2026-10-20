@@ -1,0 +1,28 @@
+Name: Golden Ace
+Slug: golden-ace
+Description: This grand slam of a vodka cocktail refreshingly blends the flavors of tart lemonade, fruity raspberry liqueur, and sweet honeydew melon. A crowd pleaser whether you're on the sidelines or sipping at home, the Golden Ace is a visually stunning drink that's as delightful to behold as it is to sip. Serve over ice and garnish with a trio of honeydew melon balls for the perfect late summer sipper.
+Details: 
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: with a trio of honeydew melon balls for the perfect late summer sipper
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/golden-ace.png","label_image_eu":"images/nutrition/golden-ace-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/golden-ace-capsules?variant=43895115153607
+Help URL: https://bartesian.gorgias.help/en-US/golden-ace-646841
+Shopify Product ID: 7948552863943
+Shopify Variant ID: 43895115153607
+Shopify Handle: golden-ace-capsules
+Shopify SKU: 75571
+Gorgias Article ID: 646841
+Hero Image: images/hero/golden-ace.jpg
+Marketing Image: images/marketing/golden-ace.jpg
+Image: images/hero/golden-ace.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

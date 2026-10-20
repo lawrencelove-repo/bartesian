@@ -1,0 +1,28 @@
+Name: Lemon Drop
+Slug: lemon-drop
+Description: The Lemon Drop vodka martini is as tasty as its candy namesake but with the added bonus of vodka. Our martini recipe makes for a sweet and sour lemon cocktail, which is perfectly complemented with a sugar rim and lemon for one of the most delicious dessert vodka cocktails.
+Details: Using the Bartesian Cocktail Maker\n\nWith Bartesian, you don’t have to worry about finding and perfecting a lemon drop martini recipe. Forgo the cocktail shaker and ingredients, sit back, and relax while our cocktail maker does the work for you. Simply pop a lemon drop martini capsule into your cocktail maker, select your desired strength and press Mix!\n\nBase spirit: Vodka\n\nThe Perfect Balance of Vodka and Lemon Juice\n\nThe lemon drop martini is a bright, zingy cocktail that brings the party anywhere it goes. For a festive, fun cocktail, the lemon martini hits it out of the park. Smooth vodka blends nicely with the lemon juice to create a crisp, clean flavor.\n\nTraditionally served in a chilled martini glass with a lemon wedge, you’ll love sipping on this sophisticated cocktail with friends and family after a long day at the office.\n\nReady for a refreshing cocktail? Bartesian is here to serve! In 30 seconds, you’ll be indulging in the sweet and sour flavor profile of vodka and a lemon twist. From hosting parties to serving a fancy drink at dinner, Bartesian is here to make your cocktails taste incredible every time.
+Spirits: Vodka
+Glassware: Lowball Glass
+Garnish: Lemon
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/lemon-drop.png","label_image_eu":"images/nutrition/lemon-drop-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/vodka-martini-lemon-drop-cocktails?variant=31660702203953
+Help URL: https://bartesian.gorgias.help/en-US/lemon-drop-39052
+Shopify Product ID: 4515871391793
+Shopify Variant ID: 31660702203953
+Shopify Handle: vodka-martini-lemon-drop-cocktails
+Shopify SKU: 55390
+Gorgias Article ID: 39052
+Hero Image: images/hero/lemon-drop.jpg
+Marketing Image: images/marketing/lemon-drop.jpg
+Image: images/hero/lemon-drop.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 3
+Restock: 0
+Capsule Barcode: 163628077
+Case Barcode: 
+Case Qty: 8

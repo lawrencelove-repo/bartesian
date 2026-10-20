@@ -1,0 +1,28 @@
+Name: Blackberry Mango Refresher (US Only)
+Slug: blackberry-mango-refresher
+Description: Some days call for a little extra lift - and this lightly caffeinated Refresher delivers. Juicy, ripe blackberry meets sweet mango in a smooth, fruit-forward blend that’s as vibrant as it is satisfying. With an intentionally lower alcohol level than our other offerings, it’s the kind of drink that keeps things mellow but moving, perfect for powering through the rest of your day without breaking a sweat. Shake and serve over ice in a highball glass, garnished with blackberries.
+Details: Contains ~55 mg of caffeine. Base spirit: Vodka. Try it as a mocktail!
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: ed with blackberries
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/blackberry-mango-refresher.png","label_image_eu":"images/nutrition/blackberry-mango-refresher-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":0.1,"regular_oz":0.2,"strong_oz":0.3,"raw":"Mocktail = 0 oz., Light = 0.1 oz., Regular = 0.2 oz., Strong = 0.3 oz"}
+Bartesian URL: https://bartesian.com/products/blackberry-mango-capsules?variant=46120106295495
+Help URL: https://bartesian.gorgias.help/en-US/blackberry-mango-refresher-(us-only)-4332578
+Shopify Product ID: 8602390331591
+Shopify Variant ID: 46120106295495
+Shopify Handle: blackberry-mango-capsules
+Shopify SKU: 75683
+Gorgias Article ID: 4332578
+Hero Image: 
+Marketing Image: images/marketing/blackberry-mango-refresher.jpg
+Image: images/marketing/blackberry-mango-refresher.jpg
+Seasonal: 1
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 641729757
+Case Barcode: 
+Case Qty: 8

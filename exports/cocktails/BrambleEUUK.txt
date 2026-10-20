@@ -1,0 +1,28 @@
+Name: Bramble (EU/UK)
+Slug: bramble
+Description: Bright citrus and blackberries mingle with delicate floral flavours, creating a perfectly balanced sip - sweet, tart, and proofy. Best enjoyed with a herbal gin, which adds a smooth, refreshing finish.
+Details: 
+Spirits: Gin
+Glassware: Lowball Glass
+Garnish: Blackberries & Lemon Wheel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/bramble.png","label_image_eu":"images/nutrition/bramble-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/bramble-(euuk)-2559242
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 2559242
+Hero Image: images/hero/bramble.jpg
+Marketing Image: images/marketing/bramble.jpg
+Image: images/hero/bramble.jpg
+Seasonal: 0
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

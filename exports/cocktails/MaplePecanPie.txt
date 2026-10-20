@@ -1,0 +1,28 @@
+Name: Maple Pecan Pie
+Slug: maple-pecan-pie
+Description: This decadent, dessert-inspired cocktail is the perfect complement to cooler temperatures. The combination of sweet maple, nutty pecan, and buttery shortbread crust flavors pairs with whiskey and vodka for an indulgent delight.
+Details: 
+Spirits: Whiskey, Vodka
+Glassware: Lowball Glass
+Garnish: Maple Leaf or Pecan
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/maple-pecan-pie.png","label_image_eu":"images/nutrition/maple-pecan-pie-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/maple-pecan-pie-2567775
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 2567775
+Hero Image: images/hero/maple-pecan-pie.jpg
+Marketing Image: 
+Image: images/hero/maple-pecan-pie.jpg
+Seasonal: 0
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 537285633
+Case Barcode: 
+Case Qty: 8

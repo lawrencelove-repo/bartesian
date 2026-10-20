@@ -1,0 +1,28 @@
+Name: Berry & Bright
+Slug: berry-and-bright
+Description: A shimmering tequila cocktail combining juicy blueberry, zesty lemon, and a hint of cozy cardamom flavor. The result is a vibrant cocktail that sparkles with the magic of the season.
+Details: 
+Spirits: Tequila
+Glassware: 
+Garnish: 
+Pairs With: 
+Nutrition: {}
+Alcohol: {}
+Bartesian URL: 
+Help URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 
+Hero Image: 
+Marketing Image: 
+Image: 
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

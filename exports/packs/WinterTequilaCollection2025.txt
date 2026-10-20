@@ -1,0 +1,9 @@
+Name: Winter Tequila Collection 2025
+Slug: winter-tequila-collection-2025
+Barcode: 
+Notes: Embrace the magic of the season with Bartesian's Winter Tequila Collection, designed to bring warmth and cheer to your winter festivities. This limited-edition variety pack contains 2 each of 4 curated seasonal tequila cocktails: - Jollypeño Margarita: a margarita bursting with flavors of vibrant pineapple, zesty lime, and a kick of jalapeño. - Starry Night: a refreshing tequila cocktail with flavors of starfruit, grapefruit, guanabana and citrus. - Peary Christmas: an elegant tequila cocktail with sweet pear, citrus and delicate almond flavors. - Mistletoe Margarita: a blend of jammy pomegranate and baking spice flavors for the perfect seasonal margarita.
+Items:
+	jollype-o-margarita: 2
+	mistletoe-margarita: 2
+	peary-christmas: 2
+	starry-night: 2

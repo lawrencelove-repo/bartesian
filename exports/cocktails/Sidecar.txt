@@ -1,0 +1,28 @@
+Name: Sidecar
+Slug: sidecar
+Description: The Sidecar is a cocktail that transports you straight to the roaring ’20s: smoky jazz clubs, glittering chandeliers, and effortless style. Tart lemon meets sweet orange liqueur flavor for a drink that’s both refreshing and indulgent. Best shaken and served with a sugared rim and garnished with a lemon twist, this classic is the very definition of timeless glamor.
+Details: Craft Tasty Sidecar Premium Cocktails at Home\n\nWith the premium Bartesian cocktail maker, crafting bar-quality cocktails on demand is a breeze. Simply pop the Sidecar capsule into your cocktail maker, select the desired strength and press Mix! In 30 seconds, you’ll be enjoying the bright, tart beverage at home. Forgo the cocktail shaker and pouring all the ingredients; let Bartesian do the work for you.\n\nEnjoy the Rich Taste of Cognac in Every Sip\n\nIf the flavor combination of cognac is your go-to, a Sidecar cocktail is right up your alley. The tartness of lemon juice mixed with the sweet essence of tiple sec creates a bold, rich cocktail. Many recipes call for equal parts cognac, triple sec, and lemon juice, but with the Bartesian cocktail maker, you can choose the strength of your cocktail to fit your liking.\n\nShop Bartesian Sidecar Capsules\n\nWith a Bartesian cocktail maker in your bar at home, you’ll be crafting expert-level cocktails whenever a craving hits. Impress your friends and family with the ability to create tasty beverages with the press of a button. Add the Sidecar capsules to your collection today. Shop now!
+Spirits: Whiskey
+Glassware: Coupe Glass
+Garnish: with a lemon twist
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/sidecar.png","label_image_eu":"images/nutrition/sidecar-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/sidecar-capsules?variant=41853978050759
+Help URL: https://bartesian.gorgias.help/en-US/sidecar-65193
+Shopify Product ID: 7262903435463
+Shopify Variant ID: 41853978050759
+Shopify Handle: sidecar-capsules
+Shopify SKU: 55459
+Gorgias Article ID: 65193
+Hero Image: images/hero/sidecar.jpg
+Marketing Image: images/marketing/sidecar.jpg
+Image: images/hero/sidecar.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 7
+Restock: 0
+Capsule Barcode: 213962797
+Case Barcode: 850054919595
+Case Qty: 8

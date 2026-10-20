@@ -1,0 +1,28 @@
+Name: Salted Caramel Espresso Martini
+Slug: salted-caramel-espresso-martini
+Description: Flavors of rich coffee, buttery caramel, and a hint of sea salt come together in this smooth, velvety espresso martini. Decadent yet refined, it's a luxurious twist on a cocktail favorite.
+Details: 
+Spirits: Vodka
+Glassware: 
+Garnish: 
+Pairs With: 
+Nutrition: {}
+Alcohol: {}
+Bartesian URL: 
+Help URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 
+Hero Image: 
+Marketing Image: 
+Image: 
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

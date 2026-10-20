@@ -1,0 +1,28 @@
+Name: Painkiller
+Slug: painkiller
+Description: Embrace the vacation mindset and put your troubles behind you. If you're in need of an escape to a tropical island, try this sweet and fruity blend of pineapple, orange, and coconut - think piña colada flavors with an orange juice and spiced rum twist. Best served on ice garnished with a pineapple wedge and nutmeg, the Painkiller cocktail will transport you to a vacation mindset.
+Details: Making the Perfect Painkiller Cocktail at Home with Bartesian\n\nWith Bartesian cocktail capsules, you’ll enjoy hints of rum, coconut, and fruity juices in just a few seconds.\n\nSkip complex recipes and make the revered painkiller drink at home with the Bartesian cocktail maker and easy-to-use capsules whenever you’re in the mood for a pick-me-up.\n\nPop a Painkiller cocktail capsule into your Bartesian cocktail maker, select your desired strength, and press “Mix”!\n\nBest served on ice garnished with a pineapple wedge and freshly grated nutmeg.\n\nCraft Premium On-Demand Cocktails with Bartesian\n\nThe Painkiller drink will transport you to a vacation mindset, and Bartesian makes it easier than ever to host happy hours and make drinks on demand. Experience the tropical Painkiller with Bartesian today!
+Spirits: Rum
+Glassware: Hurricane Glass
+Garnish: ed with nutmeg and a pineapple wedge, the Painkiller cocktail will transport you to a vacation mindset
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/painkiller.png","label_image_eu":"images/nutrition/painkiller-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/painkiller-capsules?variant=42475717460167
+Help URL: https://bartesian.gorgias.help/en-US/painkiller-196624
+Shopify Product ID: 7412104265927
+Shopify Variant ID: 42475717460167
+Shopify Handle: painkiller-capsules
+Shopify SKU: 55491
+Gorgias Article ID: 196624
+Hero Image: 
+Marketing Image: images/marketing/painkiller.jpg
+Image: images/marketing/painkiller.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 1
+Restock: 0
+Capsule Barcode: 339796603
+Case Barcode: 
+Case Qty: 8

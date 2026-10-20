@@ -1,0 +1,28 @@
+Name: Sex on the Beach
+Slug: sex-on-the-beach
+Description: The most iconic beach cocktail of all time is undoubtedly the Sex on the Beach. Made with vodka, juicy peach, pineapple, cranberry juice, and other fruit juices, this cocktail turns heads for its bold name and maintains its fan base for the perfect blend of sweet fruit juices and smooth spirits.
+Details: What’s in a Sex on the Beach Capsule from Bartesian?\n\nThis vodka cocktail blends fruity flavors with one of the most customizable spirits. Bartenders worldwide mix their unique fruit juice and extract preferences to make their own version of a “Sex on the Beach” recipe. But we’ve perfected the cocktail recipe by adding banana, pineapple, cranberry, and lemon juice to make our cocktail capsule extra flavorful and tropical.\n\nMaking Sex on the Beach Drinks at Home\n\nWith the Bartesian cocktail maker, you’ll be sipping your Sex on the Beach and sharing memories with family and friends in just a few seconds. Add a capsule to the cocktail maker, choose your desired strength, and press “Mix.” Cheers!\n\nLove a Fruity Cocktail? Shop our Sex on the Beach Capsules\n\nLooking for the perfect beach drink to enjoy at home? Discover the tropical flavors of our Sex on the Beach cocktail capsules. Shop now!
+Spirits: Vodka
+Glassware: Highball Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/sex-on-the-beach.png","label_image_eu":"images/nutrition/sex-on-the-beach-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/sex-on-the-beach-vodka-cocktails?variant=15685661982769
+Help URL: https://bartesian.gorgias.help/en-US/sex-on-the-beach-39082
+Shopify Product ID: 2029032702001
+Shopify Variant ID: 15685661982769
+Shopify Handle: sex-on-the-beach-vodka-cocktails
+Shopify SKU: 55355
+Gorgias Article ID: 39082
+Hero Image: 
+Marketing Image: images/marketing/sex-on-the-beach.jpg
+Image: images/marketing/sex-on-the-beach.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 2
+Restock: 0
+Capsule Barcode: 62973035
+Case Barcode: 
+Case Qty: 8

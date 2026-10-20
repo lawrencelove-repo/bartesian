@@ -1,0 +1,28 @@
+Name: Cupid's Arrow
+Slug: cupids-arrow
+Description: The Cupid's Arrow is a sweet, fruity combination of guava with notes of strawberry and lime that will make your heart skip a beat!
+Details: 
+Spirits: Gin
+Glassware: Coupe
+Garnish: Strawberry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/cupids-arrow.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/cupids-arrow-182164
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 182164
+Hero Image: 
+Marketing Image: 
+Image: 
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 239124821
+Case Barcode: 
+Case Qty: 8

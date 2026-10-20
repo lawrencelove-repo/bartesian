@@ -1,0 +1,9 @@
+Name: Winter Vodka Collection 2025
+Slug: winter-vodka-collection-2025
+Barcode: 
+Notes: Discover the crisp elegance of Bartesian's Winter Vodka Collection, designed to bring a touch of sophistication to the frosty season. This limited-edition variety pack contains 2 each of 4 curated seasonal vodka cocktails: - Frosted Orchard: a crisp vodka cocktail blending juicy apple and tangy lemonade, infused with flavors of cinnamon and cardamom. - Clausmopolitan: a shimmering version of the classic cranberry, lime, and orange flavored vodka cocktail. - Frosty Navel: a vibrant vodka cocktail with tangy orange and juicy peach flavors. - The Grinch Appletini: a shimmering sweet and tart vodka cocktail with green apple flavors.
+Items:
+	clausmopolitan: 2
+	frosted-orchard: 2
+	frosty-navel: 2
+	the-grinch-appletini: 2

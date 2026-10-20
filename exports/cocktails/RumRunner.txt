@@ -1,0 +1,28 @@
+Name: Rum Runner
+Slug: rum-runner
+Description: Whether you’re embarking on a Caribbean getaway or mixing up the popular rum cocktail for guests in your home, the Rum Runner Cocktail is a popular choice for its smooth flavors and vivid aesthetic in your glass. Packed with tropical pineapple, banana, blackberry, orange, and a splash of grenadine, the Rum Runner is paradise in a glass. Base spirits: Rum and Vodka.
+Details: Bartesian’s Rum Runner Capsules for the Perfect Cocktail\n\nRather than working to perfect your own Rum Runner cocktail recipe, we’ve done the heavy lifting for you so you can sit back and enjoy some sunshine in a glass.\n\nPrepare Rum Runners at Home with Bartesian\n\nChoose your favorite light rum and vodka, then pop a Rum Runner capsule into your cocktail maker. Select your desired strength, then press “Mix.” Garnish with a pineapple wedge, and cheers to the good life!\n\nMake Your Own Rum Runner Cocktails at Home\n\nReady for a tropical escape? Our rum runner recipe does not disappoint! Try our Rum Runner cocktail today and transport yourself to the beach.
+Spirits: Rum, Vodka
+Glassware: Highball Glass
+Garnish: Pineapple & Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/rum-runner.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":2,"regular_oz":3,"strong_oz":5.1,"raw":"Mocktail = 0 oz., Light = 2.0 oz., Regular = 3.0 oz., Strong = 5.1 oz"}
+Bartesian URL: https://bartesian.com/products/rum-runner-cocktails?variant=32387450175537
+Help URL: https://bartesian.gorgias.help/en-US/rum-runner-39077
+Shopify Product ID: 4756370260017
+Shopify Variant ID: 32387450175537
+Shopify Handle: rum-runner-cocktails
+Shopify SKU: 55408
+Gorgias Article ID: 39077
+Hero Image: images/hero/rum-runner.jpg
+Marketing Image: images/marketing/rum-runner.jpg
+Image: images/hero/rum-runner.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 415680051
+Case Barcode: 
+Case Qty: 8

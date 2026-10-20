@@ -1,0 +1,28 @@
+Name: Paper Plane
+Slug: paper-plane
+Description: The Paper Plane expertly blends bitter, herbal, and sour notes with elegant symmetry. The flavor profile of this whiskey cocktail is finished with a touch of lemon citrus and sweetness.
+Details: 
+Spirits: Whiskey
+Glassware: Coupe Glass
+Garnish: Alcohol Volume: Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/paper-plane.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/paper-plane-cocktails?variant=15874850848817
+Help URL: https://bartesian.gorgias.help/en-US/paper-plane-39073
+Shopify Product ID: 2067666337841
+Shopify Variant ID: 15874850848817
+Shopify Handle: paper-plane-cocktails
+Shopify SKU: 55373
+Gorgias Article ID: 39073
+Hero Image: images/hero/paper-plane.jpg
+Marketing Image: images/marketing/paper-plane.jpg
+Image: images/hero/paper-plane.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

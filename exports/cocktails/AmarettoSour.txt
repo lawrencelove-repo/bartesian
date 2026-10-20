@@ -1,0 +1,28 @@
+Name: Amaretto Sour
+Slug: amaretto-sour
+Description: The Amaretto Sour pairs nutty almond and orange citrus notes to make for the perfect vodka dessert cocktail. Whether you’re enjoying it for dessert, brunch, or any other time of day, this cocktail is sophisticated and refreshing all at once.
+Details: Bartesian’s cocktail capsules are a convenient way to make craft cocktails at home with the push of a button. Bartesian’s Amaretto Sour recipe creates a unique flavor profile that is citrusy, nutty, and sweet.\n\nUsing your Bartesian cocktail maker, pop a classic Amaretto Sour capsule into the machine. Select your desired strength, and press “Mix.”\n\nEvery Bartesian cocktail capsule contains the perfect balance of real juices, bitters, and extracts to ensure you’ll enjoy a premium cocktail from the comfort of your home.
+Spirits: Vodka
+Glassware: Lowball Glass
+Garnish: Orange & Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/amaretto-sour.png","label_image_eu":"images/nutrition/amaretto-sour-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":0.7,"regular_oz":1,"strong_oz":1.7,"raw":"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1 oz., Strong = 1.7 oz"}
+Bartesian URL: https://bartesian.com/products/amaretto-sour-cocktails?variant=32387499491377
+Help URL: https://bartesian.gorgias.help/en-US/amaretto-sour-35050
+Shopify Product ID: 4756374159409
+Shopify Variant ID: 32387499491377
+Shopify Handle: amaretto-sour-cocktails
+Shopify SKU: 55414
+Gorgias Article ID: 35050
+Hero Image: images/hero/amaretto-sour.jpg
+Marketing Image: images/marketing/amaretto-sour.jpg
+Image: images/hero/amaretto-sour.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 37782585
+Case Barcode: 
+Case Qty: 8

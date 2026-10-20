@@ -1,0 +1,28 @@
+Name: Holiday Spiced Old Fashioned
+Slug: holiday-spiced-old-fashioned
+Description: A festive twist on a cocktail classic, the Holiday Spiced Old Fashioned is a spirit-forward whiskey cocktail with flavors of orange, bitters, and cinnamon.
+Details: 
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: Orange Peel and Spiced Rim
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/holiday-spiced-old-fashioned.png","label_image_eu":"images/nutrition/holiday-spiced-old-fashioned-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/holiday-spiced-old-fashioned-3074904
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 3074904
+Hero Image: images/hero/holiday-spiced-old-fashioned.jpg
+Marketing Image: 
+Image: images/hero/holiday-spiced-old-fashioned.jpg
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 373354497
+Case Barcode: 
+Case Qty: 8

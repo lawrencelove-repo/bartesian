@@ -1,0 +1,28 @@
+Name: Spicy Margarita
+Slug: spicy-margarita
+Description: Ready to spice things up? This margarita is for you. Savor the classic combination of lemon and lime with a fiery twist of jalapeño and cayenne flavor. Pairs perfectly with our Stemless Margarita glassware.
+Details: 
+Spirits: Tequila
+Glassware: Margarita Glass
+Garnish: Lime
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/spicy-margarita.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/spicy-margarita-cocktails?variant=38174540234951
+Help URL: https://bartesian.gorgias.help/en-US/spicy-margarita-39502
+Shopify Product ID: 2067649658929
+Shopify Variant ID: 38174540234951
+Shopify Handle: spicy-margarita-cocktails
+Shopify SKU: 55382
+Gorgias Article ID: 39502
+Hero Image: images/hero/spicy-margarita.jpg
+Marketing Image: images/marketing/spicy-margarita.jpg
+Image: images/hero/spicy-margarita.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 59473
+Case Barcode: 
+Case Qty: 8

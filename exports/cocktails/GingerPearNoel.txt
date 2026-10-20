@@ -1,0 +1,28 @@
+Name: Ginger Pear Noel
+Slug: ginger-pear-noel
+Description: A tantalizing whiskey cocktail with ripe pear and lime juice, plus a kick of fiery ginger flavor.
+Details: 
+Spirits: Whiskey
+Glassware: 
+Garnish: 
+Pairs With: 
+Nutrition: {}
+Alcohol: {}
+Bartesian URL: 
+Help URL: 
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 
+Hero Image: 
+Marketing Image: 
+Image: 
+Seasonal: 1
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 557895713
+Case Barcode: 
+Case Qty: 8

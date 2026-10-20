@@ -1,0 +1,28 @@
+Name: Low-Cal Whiskey Sour
+Slug: low-cal-whiskey-sour
+Description: Ready for a guilt-free whiskey delight? Bartesian’s Low-Calorie Whiskey Sour capsules are here to shake up your cocktail game! These capsules whip up a beautifully balanced whiskey sour, blending sweet and sour with notes of delicious vanilla, fresh lemon, and zesty orange. It's a classic whiskey citrus cocktail with a delightful low-calorie twist.
+Details: Savor the Classics Without the Calories\n\nIndulge in the rich flavors of a traditional whiskey sour without worrying about your calorie intake! This five-calorie version maintains all the robust taste you love but with a lighter feel. So whether you're unwinding after a long day or hosting a get-together, our Low-Calorie Whiskey Sour is sure to impress!\n\nEffortless Cocktail Creation with Bartesian\n\nNo need to grab lemon juice and other ingredients from the grocery and forget the fuss of mixing and measuring! Simply pop a Low-Calorie Whiskey Sour capsule into your Bartesian cocktail maker, pour your favorite whiskey into the reservoir, select your strength, press “Mix,” and voila!\n\nIn mere moments, you're sipping on a bar-quality Whiskey Sour that’s perfect for any occasion. For an even better cocktail experience, chill the cocktail with our cocktail shaker, use our low ball glass with ice, and make sure to garnish with a Maraschino cherry. Cheers!\n\nBase spirit: Whiskey.\n\n5 calories per capsule.
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/low-cal-whiskey-sour.png"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/low-calorie-whiskey-sour-cocktails?variant=32387404431409
+Help URL: https://bartesian.gorgias.help/en-US/low-cal-whiskey-sour-39049
+Shopify Product ID: 4515873259569
+Shopify Variant ID: 32387404431409
+Shopify Handle: low-calorie-whiskey-sour-cocktails
+Shopify SKU: 55443
+Gorgias Article ID: 39049
+Hero Image: images/hero/low-cal-whiskey-sour.jpg
+Marketing Image: images/marketing/low-cal-whiskey-sour.jpg
+Image: images/hero/low-cal-whiskey-sour.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 151048225
+Case Barcode: 
+Case Qty: 8

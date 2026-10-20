@@ -1,0 +1,28 @@
+Name: Whiskey Sour
+Slug: whiskey-sour
+Description: The Whiskey Sour provides a smooth balance of sweet and sour. Notes of vanilla, lemon, and orange round out the flavor profile and make for a classic whiskey citrus cocktail.
+Details: Best served with premium Bartesian Clear Ice.\n\nEmbark on a Flavor Journey with a Whiskey Sour\n\nSailors drank whiskey sours for years before the beverage became official in the 1860s. A classic whiskey sour recipe calls for fresh lemon juice, bourbon, and simple syrup for a touch of sweetness. Over time, its sweet and sour flavor profile made it one of the most popular cocktails known to man.\n\nMake Your Own Whiskey Sours At Home with Bartesian Capsules\n\nThe Bartesian cocktail maker takes the guesswork out of creating and mixing cocktails, allowing you to focus on the part you love — drinking your favorite beverage! Simply pop a cocktail capsule into your cocktail maker, select your desired strength and press Mix.\n\nGone are the days of blindly mixing ingredients in a cocktail shaker and hoping for the best. With our cocktail capsules, you’ll get the perfect cocktail every time.\n\nAdd Whiskey Sour Cocktail Capsules to Your At-Home Bar\n\nReady to elevate the at-home bar experience and impress your guests? Bartesian can help with that! One taste of a cocktail, and everyone will be asking for your whiskey sour recipe. Our capsules are so authentic and high-quality that your guests will never believe the beverages came from a cocktail maker. Get yours today!
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/whiskey-sour.png","label_image_eu":"images/nutrition/whiskey-sour-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/whiskey-sour-cocktails?variant=16352868401201
+Help URL: https://bartesian.gorgias.help/en-US/whiskey-sour-76297
+Shopify Product ID: 2188937003057
+Shopify Variant ID: 16352868401201
+Shopify Handle: whiskey-sour-cocktails
+Shopify SKU: 55353
+Gorgias Article ID: 76297
+Hero Image: images/hero/whiskey-sour.jpg
+Marketing Image: images/marketing/whiskey-sour.jpg
+Image: images/hero/whiskey-sour.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 3
+Restock: 0
+Capsule Barcode: 54579233
+Case Barcode: 
+Case Qty: 8

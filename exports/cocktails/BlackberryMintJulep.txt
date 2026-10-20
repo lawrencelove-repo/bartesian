@@ -1,0 +1,28 @@
+Name: Blackberry Mint Julep
+Slug: blackberry-mint-julep
+Description: A regal twist on a timeless favorite. This whiskey cocktail blends sweet, jammy blackberry and fresh mint flavors for a cooling, berry-forward sip. Serve in a Mint Julep Cup with crushed ice and garnish with blackberries and a mint sprig.
+Details: 
+Spirits: Whiskey
+Glassware: Lowball Glass
+Garnish: with blackberries and a mint sprig
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/blackberry-mint-julep.png","label_image_eu":"images/nutrition/blackberry-mint-julep-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/blackberry-mint-julep-5452537
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 5452537
+Hero Image: images/hero/blackberry-mint-julep.jpg
+Marketing Image: 
+Image: images/hero/blackberry-mint-julep.jpg
+Seasonal: 0
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

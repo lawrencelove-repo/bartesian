@@ -1,0 +1,28 @@
+Name: Long Island Iced Tea
+Slug: long-island-iced-tea
+Description: * Please note: Not compatible with the Bartesian Duet Cocktail Maker.
+Details: The Long Island Iced Tea combines just the right amount of vodka, tequila, and rum. Rounded out with cola notes, and liqueurs made from bitter and sweet citrus peels. Base spirits: Vodka, Tequila, and Rum.\n\nCompatibility note: This multi-spirit cocktail is crafted with multiple base spirits and is only compatible with 4-bottle Bartesian systems.\n\nBartesian's Long Island Iced Tea Cocktail Capsules\n\nOur Long Island Iced Tea capsules are made with real juices, bitters, and extracts to craft the savory sweetness of the perfect Long Island iced tea.\n\nThe Bartesian cocktail maker does all the mixing for you. Simply place a glass on the machine, insert a Long Island Iced Tea capsule, select the desired strength, and enjoy in 30 seconds. Garnish with a lemon wedge.\n\nBase Spirit: Vodka, tequila, rum\n\nThe Bartesian Cocktail Experience\n\nWhen making cocktails at home can fall short on quality and convenience, Bartesian offers a premium experience for cocktail enthusiasts.\n\nWe're raising the bar by using only real juices, bitters, and extracts in our cocktails. Our capsules are fully recyclable and contain zero artificial colors or ingredients.\n\nElevate Your Cocktails with Bartesian\n\nWith the Bartesian cocktail maker, you can enjoy bar-quality cocktails on demand without ever leaving your home. From a refreshing Long Island iced tea to many other popular adult beverages, Bartesian offers a premium taste that you only expect from high-end restaurants and bars. Order the Long Island ice tea capsules on subscription and save up to 20%, plus enjoy free shipping on all orders. Try the Long Island iced tea today!
+Spirits: Vodka, Tequila, Rum
+Glassware: Highball Glass
+Garnish: Lemon
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/long-island-iced-tea.png","label_image_eu":"images/nutrition/long-island-iced-tea-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":2.2,"regular_oz":3,"strong_oz":4.6,"raw":"Mocktail = 0 oz., Light = 2.2 oz., Regular = 3 oz., Strong = 4.6 oz"}
+Bartesian URL: https://bartesian.com/products/long-island-iced-tea-cocktails?variant=32123330428977
+Help URL: https://bartesian.gorgias.help/en-US/long-island-iced-tea-39050
+Shopify Product ID: 2032492085297
+Shopify Variant ID: 32123330428977
+Shopify Handle: long-island-iced-tea-cocktails
+Shopify SKU: 55370
+Gorgias Article ID: 39050
+Hero Image: images/hero/long-island-iced-tea.jpg
+Marketing Image: images/marketing/long-island-iced-tea.jpg
+Image: images/hero/long-island-iced-tea.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 86281731
+Case Barcode: 
+Case Qty: 8

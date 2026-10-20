@@ -1,0 +1,28 @@
+Name: Negroni
+Slug: negroni
+Description: Bitters, sweet vermouth, and an orange garnish provide a sweet, savory, and floral profile which make the Negroni the perfect summertime gin drink.
+Details: 
+Spirits: Gin
+Glassware: Lowball Glass
+Garnish: provide a sweet, savory, and floral profile which make the Negroni the perfect summertime gin drink
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/negroni.png","label_image_eu":"images/nutrition/negroni-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: 
+Help URL: https://bartesian.gorgias.help/en-US/negroni-39064
+Shopify Product ID: 
+Shopify Variant ID: 
+Shopify Handle: 
+Shopify SKU: 
+Gorgias Article ID: 39064
+Hero Image: images/hero/negroni.jpg
+Marketing Image: images/marketing/negroni.jpg
+Image: images/hero/negroni.jpg
+Seasonal: 0
+Enabled: 0
+Favorite: 0
+Quantity: 0
+Restock: 0
+Capsule Barcode: 
+Case Barcode: 
+Case Qty: 8

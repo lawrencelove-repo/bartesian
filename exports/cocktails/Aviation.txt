@@ -1,0 +1,28 @@
+Name: Aviation
+Slug: aviation
+Description: Bright, floral and slightly sweet, this gin favorite brings together flavors of Crème de Violette, Maraschino liqueur, and a squeeze of lemon for a drink that’s as refreshing as it is eye-catching. Once a speakeasy treasure, today it’s the perfect serve when you want something a little adventurous and a little unforgettable.
+Details: 
+Spirits: Gin
+Glassware: Shaker + Coupe Glass
+Garnish: Cherry
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/aviation.png","label_image_eu":"images/nutrition/aviation-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/aviation-cocktails?variant=38174568644807
+Help URL: https://bartesian.gorgias.help/en-US/aviation-36518
+Shopify Product ID: 2067676692529
+Shopify Variant ID: 38174568644807
+Shopify Handle: aviation-cocktails
+Shopify SKU: 55378
+Gorgias Article ID: 36518
+Hero Image: images/hero/aviation.jpg
+Marketing Image: images/marketing/aviation.jpg
+Image: images/hero/aviation.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 7
+Restock: 0
+Capsule Barcode: 57645
+Case Barcode: 850054919359
+Case Qty: 8

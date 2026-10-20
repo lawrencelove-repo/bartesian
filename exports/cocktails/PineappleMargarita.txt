@@ -1,0 +1,28 @@
+Name: Pineapple Margarita
+Slug: pineapple-margarita
+Description: With summer on the horizon, there's no better cocktail than our new Pineapple Margarita, bursting with notes of juicy tart pineapple and sweet coconut, balanced with lime and notes of orange triple sec. Pairs perfectly with our Stemless Margarita glassware.
+Details: 
+Spirits: Tequila
+Glassware: Margarita Glass
+Garnish: Pineapple
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/pineapple-margarita.png","label_image_eu":"images/nutrition/pineapple-margarita-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/pineapple-margarita-capsules?variant=41965982613703
+Help URL: https://bartesian.gorgias.help/en-US/pineapple-margarita-45861
+Shopify Product ID: 7290758955207
+Shopify Variant ID: 41965982613703
+Shopify Handle: pineapple-margarita-capsules
+Shopify SKU: 55457
+Gorgias Article ID: 45861
+Hero Image: images/hero/pineapple-margarita.jpg
+Marketing Image: images/marketing/pineapple-margarita.jpg
+Image: images/hero/pineapple-margarita.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 1
+Restock: 0
+Capsule Barcode: 205572177
+Case Barcode: 
+Case Qty: 8

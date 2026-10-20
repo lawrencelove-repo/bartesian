@@ -1,0 +1,28 @@
+Name: White Sangria
+Slug: white-sangria
+Description: Sangria is a lively, wine-based punch traditionally sweetened with fruit and fortified with additional liquor or liqueurs. Bartesian's take on sangria is an easy-sipping rum cocktail with tasting notes of buttery white wine, sweet peach, and triple sec. Serve in a wine glass or lowball garnished with frozen berries and sliced peaches.
+Details: 
+Spirits: Rum
+Glassware: Lowball Glass
+Garnish: Frozen Berries and Sliced Peaches
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/white-sangria.png","label_image_eu":"images/nutrition/white-sangria-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/white-sangria-capsules?variant=43250186944711
+Help URL: https://bartesian.gorgias.help/en-US/white-sangria-275636
+Shopify Product ID: 7697845256391
+Shopify Variant ID: 43250186944711
+Shopify Handle: white-sangria-capsules
+Shopify SKU: 55474
+Gorgias Article ID: 275636
+Hero Image: 
+Marketing Image: images/marketing/white-sangria.jpg
+Image: images/marketing/white-sangria.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 2
+Restock: 0
+Capsule Barcode: 276873835
+Case Barcode: 
+Case Qty: 8

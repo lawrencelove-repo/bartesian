@@ -1,0 +1,28 @@
+Name: Raspberry Ginger Gimlet
+Slug: raspberry-ginger-gimlet
+Description: The classic lime and gin cocktail gets a twist with flavors of sweet raspberry and a tangy ginger zing. Shake with ice and serve in a coupe glass.
+Details: A Twist on the Classic\n\nThe classic Gimlet is made with sweetened lime juice and gin mixed in a cocktail shaker and poured into a chilled cocktail glass. Our Raspberry Gimlet is a cocktail that's both familiar and excitingly different. We’ve replaced the lime juice with the flavor of raspberry syrup and ginger, creating a gin cocktail with a perfect blend that’s the ideal choice for those who love their drinks with a unique edge.\n\nCraft the Perfect Raspberry Ginger Gimlet with Bartesian\n\nCreating a Raspberry Ginger Gimlet is simple with Bartesian's premium cocktail maker—no more scrambling to a grocery store to buy lime juice and other cocktail ingredients.\n\nJust insert the Raspberry Ginger Gimlet capsule, choose your strength, and press “Mix”! In no time, you'll be enjoying this well-balanced cocktail, garnished with lime and raspberry for an extra touch of sophistication. Chill a coupe glass with ice cubes and pour your gin cocktail into the chilled coupe glass. Enjoy!\n\nWhether it's a special celebration or a relaxed evening, the Raspberry Ginger Gimlet adds flair to any event. It's a great way to impress your guests or treat yourself to a premium cocktail experience at home.\n\nBase spirit: Gin.
+Spirits: Gin
+Glassware: Coupe Glass
+Garnish: 
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/raspberry-ginger-gimlet.png","label_image_eu":"images/nutrition/raspberry-ginger-gimlet-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
+Bartesian URL: https://bartesian.com/products/raspberry-ginger-gimlet-capsules?variant=42087716651207
+Help URL: https://bartesian.gorgias.help/en-US/raspberry-ginger-gimlet-67035
+Shopify Product ID: 7318132129991
+Shopify Variant ID: 42087716651207
+Shopify Handle: raspberry-ginger-gimlet-capsules
+Shopify SKU: 55463
+Gorgias Article ID: 67035
+Hero Image: images/hero/raspberry-ginger-gimlet.jpg
+Marketing Image: images/marketing/raspberry-ginger-gimlet.jpg
+Image: images/hero/raspberry-ginger-gimlet.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 3
+Restock: 0
+Capsule Barcode: 411091245
+Case Barcode: 
+Case Qty: 8

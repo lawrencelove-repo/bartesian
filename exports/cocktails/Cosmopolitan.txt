@@ -1,0 +1,28 @@
+Name: Cosmopolitan
+Slug: cosmopolitan
+Description: Tart cranberry is balanced out by the citrus of lime and sweetness of orange to create this classic vodka cocktail. Shake with ice, serve in a martini glass, and garnish with orange for the perfect Cosmopolitan.
+Details: 
+Spirits: Vodka
+Glassware: Martini Glass
+Garnish: Orange Peel
+Pairs With: 
+Nutrition: {"label_image":"images/nutrition/cosmopolitan.png","label_image_eu":"images/nutrition/cosmopolitan-eu.jpg"}
+Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
+Bartesian URL: https://bartesian.com/products/cosmopolitan-martini-cocktails?variant=32387303211057
+Help URL: https://bartesian.gorgias.help/en-US/cosmopolitan-38999
+Shopify Product ID: 2029410877489
+Shopify Variant ID: 32387303211057
+Shopify Handle: cosmopolitan-martini-cocktails
+Shopify SKU: 55419
+Gorgias Article ID: 38999
+Hero Image: images/hero/cosmopolitan.jpg
+Marketing Image: images/marketing/cosmopolitan.jpg
+Image: images/hero/cosmopolitan.jpg
+Seasonal: 0
+Enabled: 1
+Favorite: 0
+Quantity: 2
+Restock: 0
+Capsule Barcode: 364962861
+Case Barcode: 
+Case Qty: 8
