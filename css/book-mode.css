@@ -72,6 +72,12 @@ html.book-active body {
   max-width: none;
   object-fit: cover;
   pointer-events: none;
+  /* Temporary hero fine-tuning (Book Tune panel; vars set inline on
+     .book-mode). Independent translate/scale so the Image Cut flip
+     (transform: scaleX(-1)) still composes on top. */
+  translate: var(--book-tune-x, 0%) var(--book-tune-y, 0%);
+  scale: var(--book-tune-scale, 1);
+  transform-origin: center;
 }
 
 /* Image Cut flip (Book mode): mirror the photo horizontally */
@@ -267,6 +273,124 @@ html.book-active body {
   outline-offset: 2px;
 }
 
+/* Temporary hero fine-tuning controls (removed once values are baked in) */
+.book-tune-btn {
+  position: absolute;
+  top: calc(0.7rem + env(safe-area-inset-top, 0px));
+  right: calc(0.55rem + env(safe-area-inset-right, 0px));
+  z-index: 4;
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--book-ink);
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 0.55rem 0.65rem;
+  min-height: 44px;
+  cursor: pointer;
+}
+
+.book-tune-btn:focus-visible {
+  outline: 1px solid #111;
+  outline-offset: 2px;
+}
+
+.book-tune-panel {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(2.6rem + env(safe-area-inset-bottom, 0px));
+  z-index: 6;
+  width: min(92vw, 24rem);
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+  padding: 0.85rem 0.95rem 0.95rem;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.book-tune-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--book-muted);
+}
+
+.book-tune-head button,
+.book-tune-row button {
+  appearance: none;
+  border: 1px solid #ddd;
+  background: #fff;
+  color: #111;
+  font: inherit;
+  cursor: pointer;
+}
+
+.book-tune-head button {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.45rem 0.6rem;
+  min-height: 36px;
+}
+
+.book-tune-readout {
+  margin: 0.65rem 0 0.15rem;
+  font-size: 0.98rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: #111;
+  font-variant-numeric: tabular-nums;
+}
+
+.book-tune-viewport {
+  margin: 0 0 0.7rem;
+  font-size: 0.78rem;
+  color: var(--book-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.book-tune-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.45rem;
+}
+
+.book-tune-label {
+  width: 3rem;
+  flex: 0 0 3rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--book-muted);
+}
+
+.book-tune-row button {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.4rem 0.6rem;
+  font-size: 1.05rem;
+  line-height: 1;
+}
+
+.book-tune-row button.book-tune-reset {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .book-modal-backdrop {
   position: absolute;
   inset: 0;
@@ -460,6 +584,14 @@ html.book-active body {
   .book-menu-btn {
     right: calc(0.4rem + env(safe-area-inset-right, 0px)) !important;
     left: auto !important;
+    color: #111;
+    text-shadow: 0 0 12px #fff;
+  }
+
+  /* Tune sits opposite Menu on portrait phones so they don't collide */
+  .book-tune-btn {
+    right: auto;
+    left: calc(0.4rem + env(safe-area-inset-left, 0px));
     color: #111;
     text-shadow: 0 0 12px #fff;
   }

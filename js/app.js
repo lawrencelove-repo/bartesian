@@ -1,7 +1,8 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v51";
+  const APP_VERSION = "bartesian-v53";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
+  const BOOK_TUNE_COOKIE = "bartesian_book_tune";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
   const CURRENT_USER = "Lawrence";
@@ -42,6 +43,11 @@
     cameraStatus: "",
     isAdmin: false,
     bookMenuOpen: false,
+    bookTuneOpen: false,
+    // Temporary Book hero fine-tuning (percent offsets + size multiplier).
+    // Persisted so settings survive paging; Lawrence records the winners
+    // per device/orientation and they get baked into book-mode.css.
+    bookTune: { x: 0, y: 0, scale: 1 },
   };
 
   let bookTouchStartX = 0;
@@ -107,7 +113,53 @@
     };
   }
 
+  function loadBookTune() {
+    try {
+      const raw = getCookie(BOOK_TUNE_COOKIE);
+      if (!raw) return;
+      const p = JSON.parse(raw);
+      const clamp = (v, lo, hi, fallback) =>
+        Number.isFinite(Number(v)) ? Math.min(hi, Math.max(lo, Number(v))) : fallback;
+      state.bookTune = {
+        x: clamp(p.x, -50, 50, 0),
+        y: clamp(p.y, -50, 50, 0),
+        scale: clamp(p.scale, 0.5, 2, 1),
+      };
+    } catch (_) {
+      /* ignore bad cookie */
+    }
+  }
+
+  function saveBookTune() {
+    setCookie(BOOK_TUNE_COOKIE, JSON.stringify(state.bookTune));
+  }
+
+  function adjustBookTune(action) {
+    const t = { ...state.bookTune };
+    const STEP = 2;
+    // X is stored as a shift toward the center spine: it is applied
+    // mirrored on right-hand pages (see bookTuneStyle). The arrow buttons
+    // always move the photo in the arrow's direction on screen, so on a
+    // right-hand page they adjust the stored shift in the opposite sense.
+    const spreadEl = document.querySelector("[data-book-spread]");
+    const onLeftPage = !spreadEl || spreadEl.classList.contains("image-left");
+    if (action === "left") t.x += onLeftPage ? -STEP : STEP;
+    else if (action === "right") t.x += onLeftPage ? STEP : -STEP;
+    else if (action === "up") t.y -= STEP;
+    else if (action === "down") t.y += STEP;
+    else if (action === "bigger") t.scale = Math.round((t.scale + 0.05) * 100) / 100;
+    else if (action === "smaller") t.scale = Math.round((t.scale - 0.05) * 100) / 100;
+    else if (action === "reset") { t.x = 0; t.y = 0; t.scale = 1; }
+    t.x = Math.min(50, Math.max(-50, t.x));
+    t.y = Math.min(50, Math.max(-50, t.y));
+    t.scale = Math.min(2, Math.max(0.5, t.scale));
+    state.bookTune = t;
+    saveBookTune();
+    render();
+  }
+
   loadListPrefs();
+  loadBookTune();
 
   function loadAdminFlag() {
     try {
@@ -2015,6 +2067,44 @@
     </div>`;
   }
 
+  function bookTuneStyle(imageLeft) {
+    const t = state.bookTune;
+    // Stored X shifts toward the center spine, so mirror it on right pages.
+    const appliedX = imageLeft ? t.x : -t.x;
+    return `--book-tune-x:${appliedX}%;--book-tune-y:${t.y}%;--book-tune-scale:${t.scale}`;
+  }
+
+  function renderBookTune() {
+    if (!state.bookTuneOpen) return "";
+    const t = state.bookTune;
+    const signed = (v) => (v > 0 ? "+" : "") + v + "%";
+    const w = window.innerWidth || 0;
+    const h = window.innerHeight || 0;
+    const orient = w >= h ? "landscape" : "portrait";
+    return `<div class="book-tune-panel" data-book-tune-panel>
+      <div class="book-tune-head">
+        <span>Hero tuning</span>
+        <button type="button" data-book-tune-close>Close</button>
+      </div>
+      <p class="book-tune-readout">Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%</p>
+      <p class="book-tune-viewport">${w}×${h} · ${orient}</p>
+      <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge.</p>
+      <div class="book-tune-row">
+        <span class="book-tune-label">Move</span>
+        <button type="button" data-book-tune="left" aria-label="Move image left">←</button>
+        <button type="button" data-book-tune="right" aria-label="Move image right">→</button>
+        <button type="button" data-book-tune="up" aria-label="Move image up">↑</button>
+        <button type="button" data-book-tune="down" aria-label="Move image down">↓</button>
+      </div>
+      <div class="book-tune-row">
+        <span class="book-tune-label">Size</span>
+        <button type="button" data-book-tune="smaller" aria-label="Make image smaller">−</button>
+        <button type="button" data-book-tune="bigger" aria-label="Make image bigger">+</button>
+        <button type="button" class="book-tune-reset" data-book-tune="reset">Reset</button>
+      </div>
+    </div>`;
+  }
+
   function renderBook(id) {
     const list = bookCocktailList();
     if (!list.length) {
@@ -2052,8 +2142,9 @@
       c.description ||
       "";
 
-    return `<div class="book-mode" data-book-root data-book-id="${c.id}" data-book-index="${index}">
+    return `<div class="book-mode" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
       <button type="button" class="book-menu-btn" data-book-menu-open>Menu</button>
+      <button type="button" class="book-tune-btn" data-book-tune-open>Tune</button>
       <article class="book-spread ${imageLeft ? "image-left" : "image-right"}" data-book-spread>
         <div class="book-photo ${photoSrc ? "" : "book-photo-empty"}">
           ${photoSrc ? `<img src="${esc(photoSrc)}" alt="" draggable="false" ${flipPhoto ? `class="book-flip"` : ""}>` : ""}
@@ -2078,6 +2169,7 @@
         <span class="book-page-num">${index + 1}</span>
       </article>
       <p class="book-hint">Swipe</p>
+      ${renderBookTune()}
       ${state.bookMenuOpen ? renderBookMenu(c.id) : ""}
     </div>`;
   }
@@ -2237,6 +2329,24 @@
       e.preventDefault();
       state.bookMenuOpen = false;
       render();
+      return;
+    }
+    if (e.target.closest("[data-book-tune-open]")) {
+      e.preventDefault();
+      state.bookTuneOpen = true;
+      render();
+      return;
+    }
+    if (e.target.closest("[data-book-tune-close]")) {
+      e.preventDefault();
+      state.bookTuneOpen = false;
+      render();
+      return;
+    }
+    const tuneBtn = e.target.closest("[data-book-tune]");
+    if (tuneBtn) {
+      e.preventDefault();
+      adjustBookTune(tuneBtn.getAttribute("data-book-tune"));
       return;
     }
     if (e.target.closest("[data-book-exit]")) {
@@ -3073,7 +3183,7 @@
       if (!document.documentElement.classList.contains("book-active")) return;
       if (state.bookMenuOpen) return;
       if (!e.touches || !e.touches[0]) return;
-      if (e.target.closest(".book-modal, .book-menu-btn")) return;
+      if (e.target.closest(".book-modal, .book-menu-btn, .book-tune-panel, .book-tune-btn")) return;
       bookTouchActive = true;
       bookTouchStartX = e.touches[0].clientX;
       bookTouchStartY = e.touches[0].clientY;
@@ -3159,6 +3269,12 @@
     syncBackToTop();
   }, { passive: true });
   window.addEventListener("resize", scheduleAlphaIndexSync, { passive: true });
+  // Keep the tune panel's viewport readout current after rotation.
+  window.addEventListener("orientationchange", () => {
+    setTimeout(() => {
+      if (document.documentElement.classList.contains("book-active")) render();
+    }, 250);
+  });
 
   boot();
 })();
