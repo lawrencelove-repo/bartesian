@@ -699,6 +699,32 @@ html.book-active body {
   }
 }
 
+/* iPhone landscape: baked hero tuning recorded by Lawrence 2026-10-20 —
+   Shift -68% · Move Y +26% · Size 150% (mirrored on right pages).
+   The whole book is also inset into the safe area (plus a small cushion)
+   so the photo/text stay clear of the Dynamic Island and the rounded
+   screen corners. */
+@media (pointer: coarse) and (orientation: landscape) and (max-height: 599px) {
+  .book-mode {
+    top: calc(env(safe-area-inset-top, 0px) + 0.5rem);
+    right: calc(env(safe-area-inset-right, 0px) + 0.75rem);
+    bottom: calc(env(safe-area-inset-bottom, 0px) + 0.5rem);
+    left: calc(env(safe-area-inset-left, 0px) + 0.75rem);
+    width: auto;
+    height: auto;
+  }
+
+  .book-spread.image-left .book-photo {
+    translate: -68% 26%;
+    scale: 1.5;
+  }
+
+  .book-spread.image-right .book-photo {
+    translate: 68% 26%;
+    scale: 1.5;
+  }
+}
+
 @media (orientation: landscape) and (max-height: 480px) {
   .book-copy {
     padding: 0.75rem 1rem;

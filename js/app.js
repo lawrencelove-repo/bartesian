@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v68";
+  const APP_VERSION = "bartesian-v69";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -134,6 +134,7 @@
     if (mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)")) return "ipad-landscape";
     if (mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)")) return "ipad-portrait";
     if (mq("(pointer: coarse) and (orientation: portrait) and (max-width: 599px)")) return "iphone-portrait";
+    if (mq("(pointer: coarse) and (orientation: landscape) and (max-height: 599px)")) return "iphone-landscape";
     if (mq("(hover: hover) and (pointer: fine)")) return "desktop";
     return (window.innerWidth || 0) >= (window.innerHeight || 0) ? "landscape" : "portrait";
   }
@@ -2154,6 +2155,9 @@
     }
     if (mq("(pointer: coarse) and (orientation: portrait) and (max-width: 599px)")) {
       return { x: -8, y: -32, scale: 1.35 }; // iPhone portrait
+    }
+    if (mq("(pointer: coarse) and (orientation: landscape) and (max-height: 599px)")) {
+      return { x: -68, y: 26, scale: 1.5 }; // iPhone landscape
     }
     if (mq("(hover: hover) and (pointer: fine)")) {
       return { x: -78, y: 20, scale: 1.45 }; // desktop
