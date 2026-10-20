@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v60";
+  const APP_VERSION = "bartesian-v63";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -2089,9 +2089,13 @@
     const w = window.innerWidth || 0;
     const h = window.innerHeight || 0;
     const orient = w >= h ? "landscape" : "portrait";
-    const desktopBaked =
-      typeof window.matchMedia === "function" &&
-      window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    // Form factors whose hero values are already baked into book-mode.css
+    // (keep these queries in sync with the stylesheet).
+    const mq = (q) => typeof window.matchMedia === "function" && window.matchMedia(q).matches;
+    const bakedHere =
+      mq("(hover: hover) and (pointer: fine)") ||
+      mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)") ||
+      mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)");
     return `<div class="book-tune-panel" data-book-tune-panel>
       <div class="book-tune-head">
         <span>Hero tuning</span>
@@ -2101,7 +2105,7 @@
         value="Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%" />
       <p class="book-tune-viewport">${w}×${h} · ${orient} · Size is relative to the viewport</p>
       <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge.</p>
-      ${desktopBaked ? `<p class="book-tune-viewport">Desktop hero values are baked into the CSS, so Tune buttons won't move this display (they still update the copyable settings text).</p>` : ""}
+      ${bakedHere ? `<p class="book-tune-viewport">This device/orientation's hero values are baked into the CSS, so Tune buttons won't move this display (they still update the copyable settings text).</p>` : ""}
       <div class="book-tune-row">
         <span class="book-tune-label">Move</span>
         <button type="button" data-book-tune="left" aria-label="Move image left">←</button>
