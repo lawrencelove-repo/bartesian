@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v45";
+  const APP_VERSION = "bartesian-v46";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   const ADMIN_COOKIE = "bartesian_admin";
   const USER_COOKIE = "bartesian_user";
@@ -41,7 +41,12 @@
     cameraOn: false,
     cameraStatus: "",
     isAdmin: false,
+    bookMenuOpen: false,
   };
+
+  let bookTouchStartX = 0;
+  let bookTouchStartY = 0;
+  let bookTouchActive = false;
 
   function getCookie(name) {
     const parts = document.cookie.split(";").map((p) => p.trim());
@@ -310,6 +315,10 @@
     if (parts[0] === "admin" && parts[1] === "scan") return { view: "scan" };
     if (parts[0] === "admin") return { view: "admin-barcodes" };
     if (parts[0] === "disclaimer") return { view: "disclaimer" };
+    if (parts[0] === "book") {
+      if (parts[1]) return { view: "book", id: Number(parts[1]) };
+      return { view: "book", id: null };
+    }
     return { view: "list" };
   }
 
@@ -339,6 +348,7 @@
   function shell(active, body) {
     const nav = [
       ["list", "#/", "Cocktails"],
+      ["book", "#/book", "Book Mode"],
       ["rimmers", "#/rimmers", "Rimmers"],
       ["restock", "#/restock", "Restock"],
       ["wishlist", "#/wishlist", "Wishlist"],
@@ -1948,6 +1958,168 @@
     );
   }
 
+  /** Book Mode order: spirit chapters (A–Z) then name, unless sorting by qty/rating. */
+  function bookCocktailList() {
+    const list = BartesianDB.listCocktails(listQuery());
+    const flatSort = state.sort === "quantity" || state.sort === "quantity-asc" || state.sort === "rating";
+    if (flatSort) return list;
+    const nameDesc = state.sort === "name-desc";
+    return [...list].sort((a, b) => {
+      const sa = String(a.primary_spirit || "\uffff").localeCompare(
+        String(b.primary_spirit || "\uffff"),
+        undefined,
+        { sensitivity: "base" }
+      );
+      if (sa) return sa;
+      const na = a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
+      return nameDesc ? -na : na;
+    });
+  }
+
+  function bookMetaPipe(label, value) {
+    if (value == null || value === "") return "";
+    return `<div class="book-meta-row">
+      <p class="book-meta-label">${esc(label)}</p>
+      <span class="book-meta-bar" aria-hidden="true"></span>
+      <p class="book-meta-value">${esc(value)}</p>
+    </div>`;
+  }
+
+  function bookChipSection(label, raw) {
+    if (!raw || !window.BartesianIcons) return "";
+    const chips = BartesianIcons.chipList(raw);
+    if (!chips) return "";
+    return `<div class="book-meta-row book-meta-chips">
+      <p class="book-meta-label">${esc(label)}</p>
+      <span class="book-meta-bar" aria-hidden="true"></span>
+      <div>${chips}</div>
+    </div>`;
+  }
+
+  function renderBook(id) {
+    const list = bookCocktailList();
+    if (!list.length) {
+      return `<div class="book-mode" data-book-root>
+        <button type="button" class="book-menu-btn" data-book-menu-open style="right:0.75rem;left:auto">Menu</button>
+        <div class="book-copy" style="padding:2rem">
+          <p class="book-spirit-chapter">Book Mode</p>
+          <h1 class="book-title">No cocktails</h1>
+          <hr class="book-rule" />
+          <p class="book-blurb">Nothing matches the current filters. Open the menu to adjust them, or exit Book Mode.</p>
+        </div>
+        ${state.bookMenuOpen ? renderBookMenu(null) : ""}
+      </div>`;
+    }
+
+    let index = list.findIndex((c) => c.id === id);
+    if (index < 0) index = 0;
+    const c = list[index];
+    const prev = index > 0 ? list[index - 1] : null;
+    const imageLeft = index % 2 === 0;
+    const photoSrc = primaryImage(c);
+    const spiritsText = (c.spirits || []).join(", ") || c.primary_spirit || "";
+    const showSpiritChapter =
+      !prev ||
+      String(prev.primary_spirit || "").toLowerCase() !== String(c.primary_spirit || "").toLowerCase();
+
+    const tasting =
+      (c.details && String(c.details).trim().split(/\n/)[0]) ||
+      c.description ||
+      "";
+
+    return `<div class="book-mode" data-book-root data-book-id="${c.id}" data-book-index="${index}">
+      <button type="button" class="book-menu-btn" data-book-menu-open>Menu</button>
+      <article class="book-spread ${imageLeft ? "image-left" : "image-right"}" data-book-spread>
+        <div class="book-photo ${photoSrc ? "" : "book-photo-empty"}">
+          ${photoSrc ? `<img src="${esc(photoSrc)}" alt="" draggable="false">` : ""}
+        </div>
+        <div class="book-copy">
+          ${
+            showSpiritChapter && (c.primary_spirit || spiritsText)
+              ? `<p class="book-spirit-chapter">${esc(c.primary_spirit || spiritsText)}</p>`
+              : ""
+          }
+          <h1 class="book-title">${esc(c.name)}</h1>
+          <hr class="book-rule" />
+          ${c.description ? `<p class="book-blurb">${esc(c.description)}</p>` : ""}
+          <div class="book-meta">
+            ${bookMetaPipe("Tasting notes", tasting && tasting !== c.description ? tasting : "")}
+            ${bookMetaPipe("Base spirit", spiritsText)}
+            ${bookMetaPipe("Recommended glassware", c.glassware)}
+            ${bookChipSection("Garnish", c.garnish)}
+            ${bookChipSection("Pairs well with", c.pairs_with)}
+          </div>
+        </div>
+        <span class="book-page-num">${index + 1}</span>
+      </article>
+      <p class="book-hint">Swipe</p>
+      ${state.bookMenuOpen ? renderBookMenu(c.id) : ""}
+    </div>`;
+  }
+
+  function renderBookMenu(currentId) {
+    const spirits = BartesianDB.listSpirits();
+    const exitHref = currentId ? `#/cocktail/${currentId}` : "#/";
+    return `<div class="book-modal-backdrop" data-book-menu>
+      <div class="book-modal" role="dialog" aria-modal="true" aria-label="Book menu">
+        <h2>Menu</h2>
+        <form class="book-modal-form" data-book-filters>
+          <label class="field">Search
+            <input type="search" name="search" value="${esc(state.search)}" placeholder="Search" />
+          </label>
+          <label class="field">Spirit
+            <select name="spirit">
+              <option value="">All spirits</option>
+              ${spirits
+                .map(
+                  (s) =>
+                    `<option value="${esc(s.name)}" ${state.spirit === s.name ? "selected" : ""}>${esc(s.name)}</option>`
+                )
+                .join("")}
+            </select>
+          </label>
+          <label class="field">Sort
+            <select name="sort">
+              <option value="name" ${state.sort === "name" ? "selected" : ""}>Name</option>
+              <option value="name-desc" ${state.sort === "name-desc" ? "selected" : ""}>Name Z–A</option>
+              <option value="quantity" ${state.sort === "quantity" ? "selected" : ""}>Quantity ↓</option>
+              <option value="quantity-asc" ${state.sort === "quantity-asc" ? "selected" : ""}>Quantity ↑</option>
+              <option value="rating" ${state.sort === "rating" ? "selected" : ""}>Rating</option>
+              <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
+              <option value="seasonal" ${state.sort === "seasonal" ? "selected" : ""}>Seasonal</option>
+            </select>
+          </label>
+          <div class="book-modal-checks">
+            <label><input type="checkbox" name="available" ${state.availableOnly ? "checked" : ""}/> In stock</label>
+            <label><input type="checkbox" name="favorites" ${state.favoritesOnly ? "checked" : ""}/> Favorites</label>
+          </div>
+          <div class="book-modal-actions">
+            <button type="submit">Apply</button>
+            <button type="button" class="ghost" data-book-menu-close>Close</button>
+            <button type="button" class="ghost" data-book-exit data-go="${exitHref}">Exit book mode</button>
+          </div>
+        </form>
+      </div>
+    </div>`;
+  }
+
+  function bookGoRelative(delta) {
+    const list = bookCocktailList();
+    if (!list.length) return;
+    const route = parseHash();
+    let index = list.findIndex((c) => c.id === route.id);
+    if (index < 0) index = 0;
+    const next = Math.max(0, Math.min(list.length - 1, index + delta));
+    if (list[next]) {
+      state.bookMenuOpen = false;
+      go("#/book/" + list[next].id);
+    }
+  }
+
+  function setBookActiveClass(on) {
+    document.documentElement.classList.toggle("book-active", !!on);
+  }
+
   function routeKeyFor(route) {
     return [route.view, route.itemType || "", route.id || ""].join(":");
   }
@@ -1983,35 +2155,84 @@
       if (isFirstRender || isRouteChange) window.scrollTo(0, 0);
       return;
     }
-    if (route.view === "detail") root.innerHTML = renderDetail(route.id);
-    else if (route.view === "rimmers") root.innerHTML = renderRimmers();
-    else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
-    else if (route.view === "scan") root.innerHTML = renderScan();
-    else if (route.view === "item-history") root.innerHTML = renderItemHistory(route.itemType, route.id);
-    else if (route.view === "wishlist") root.innerHTML = renderWishlist();
-    else if (route.view === "restock") root.innerHTML = renderRestock();
-    else if (route.view === "admin-barcodes") root.innerHTML = renderAdminBarcodes();
-    else if (route.view === "admin-cocktails") root.innerHTML = renderAdminCocktails();
-    else if (route.view === "admin-rimmers") root.innerHTML = renderAdminRimmers();
-    else if (route.view === "admin-packs") root.innerHTML = renderAdminPacks();
-    else if (route.view === "admin-item-edit") root.innerHTML = renderAdminItemEdit(route.itemType, route.id);
-    else if (route.view === "admin-people" || route.view === "people") root.innerHTML = renderPeople();
-    else if (route.view === "random") root.innerHTML = renderRandom();
-    else if (route.view === "settings") root.innerHTML = renderSettings();
-    else if (route.view === "disclaimer") root.innerHTML = renderDisclaimer();
-    else root.innerHTML = renderList();
+    if (route.view === "book") {
+      setBookActiveClass(true);
+      // Resolve missing id to first page in the filtered book order.
+      if (route.id == null || Number.isNaN(route.id)) {
+        const list = bookCocktailList();
+        const first = list[0];
+        root.innerHTML = renderBook(first ? first.id : null);
+        if (first && (location.hash === "#/book" || location.hash === "#/book/")) {
+          history.replaceState(null, "", "#/book/" + first.id);
+          currentRouteKey = routeKeyFor({ view: "book", id: first.id });
+        }
+      } else {
+        root.innerHTML = renderBook(route.id);
+      }
+    } else {
+      setBookActiveClass(false);
+      state.bookMenuOpen = false;
+      if (route.view === "detail") root.innerHTML = renderDetail(route.id);
+      else if (route.view === "rimmers") root.innerHTML = renderRimmers();
+      else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
+      else if (route.view === "scan") root.innerHTML = renderScan();
+      else if (route.view === "item-history") root.innerHTML = renderItemHistory(route.itemType, route.id);
+      else if (route.view === "wishlist") root.innerHTML = renderWishlist();
+      else if (route.view === "restock") root.innerHTML = renderRestock();
+      else if (route.view === "admin-barcodes") root.innerHTML = renderAdminBarcodes();
+      else if (route.view === "admin-cocktails") root.innerHTML = renderAdminCocktails();
+      else if (route.view === "admin-rimmers") root.innerHTML = renderAdminRimmers();
+      else if (route.view === "admin-packs") root.innerHTML = renderAdminPacks();
+      else if (route.view === "admin-item-edit") root.innerHTML = renderAdminItemEdit(route.itemType, route.id);
+      else if (route.view === "admin-people" || route.view === "people") root.innerHTML = renderPeople();
+      else if (route.view === "random") root.innerHTML = renderRandom();
+      else if (route.view === "settings") root.innerHTML = renderSettings();
+      else if (route.view === "disclaimer") root.innerHTML = renderDisclaimer();
+      else root.innerHTML = renderList();
+    }
     state.flash = "";
     if (isFirstRender || isRouteChange) {
       // New screens always start at the top; returning to a screen restores
       // its previous scroll spot (so Back to the list keeps your place).
       const saved = routeScrollPositions.get(nextRouteKey);
-      window.scrollTo(0, saved != null ? saved : 0);
+      window.scrollTo(0, route.view === "book" ? 0 : saved != null ? saved : 0);
     }
     scheduleAlphaIndexSync();
     syncBackToTop();
   }
 
   async function onClick(e) {
+    if (e.target.closest("[data-book-menu-open]")) {
+      e.preventDefault();
+      state.bookMenuOpen = true;
+      render();
+      return;
+    }
+    if (e.target.closest("[data-book-menu-close]")) {
+      e.preventDefault();
+      state.bookMenuOpen = false;
+      render();
+      return;
+    }
+    if (e.target.closest("[data-book-exit]")) {
+      state.bookMenuOpen = false;
+      setBookActiveClass(false);
+      // Let data-go handle navigation when present.
+    }
+    if (e.target.closest("[data-book-menu]") && !e.target.closest(".book-modal")) {
+      e.preventDefault();
+      state.bookMenuOpen = false;
+      render();
+      return;
+    }
+    // Book Mode: ignore any other in-page navigation except menu/exit.
+    if (document.documentElement.classList.contains("book-active")) {
+      const goEl = e.target.closest("[data-go]");
+      if (goEl && !e.target.closest("[data-book-exit]")) {
+        e.preventDefault();
+        return;
+      }
+    }
     if (e.target.closest("[data-back-to-top]")) {
       // Instant jump (no smooth scrolling)
       window.scrollTo(0, 0);
@@ -2415,6 +2636,24 @@
   }
 
   async function onSubmit(e) {
+    const bookForm = e.target.closest("[data-book-filters]");
+    if (bookForm) {
+      e.preventDefault();
+      const fd = new FormData(bookForm);
+      state.search = String(fd.get("search") || "");
+      state.spirit = String(fd.get("spirit") || "");
+      state.sort = String(fd.get("sort") || "name");
+      state.availableOnly = !!(bookForm.available && bookForm.available.checked);
+      state.favoritesOnly = !!(bookForm.favorites && bookForm.favorites.checked);
+      saveListPrefs();
+      state.bookMenuOpen = false;
+      const list = bookCocktailList();
+      const route = parseHash();
+      const still = list.find((c) => c.id === route.id);
+      go(still ? "#/book/" + still.id : list[0] ? "#/book/" + list[0].id : "#/book");
+      return;
+    }
+
     const listForm = e.target.closest("[data-list-filters]");
     if (listForm) {
       e.preventDefault();
@@ -2771,8 +3010,54 @@
     if (e.key === "Escape" && state.historyModal) {
       state.historyModal = null;
       render();
+      return;
+    }
+    if (!document.documentElement.classList.contains("book-active")) return;
+    if (state.bookMenuOpen) {
+      if (e.key === "Escape") {
+        state.bookMenuOpen = false;
+        render();
+      }
+      return;
+    }
+    if (e.key === "ArrowRight" || e.key === "PageDown") {
+      e.preventDefault();
+      bookGoRelative(1);
+    } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+      e.preventDefault();
+      bookGoRelative(-1);
     }
   });
+
+  document.addEventListener(
+    "touchstart",
+    (e) => {
+      if (!document.documentElement.classList.contains("book-active")) return;
+      if (state.bookMenuOpen) return;
+      if (!e.touches || !e.touches[0]) return;
+      if (e.target.closest(".book-modal, .book-menu-btn")) return;
+      bookTouchActive = true;
+      bookTouchStartX = e.touches[0].clientX;
+      bookTouchStartY = e.touches[0].clientY;
+    },
+    { passive: true }
+  );
+  document.addEventListener(
+    "touchend",
+    (e) => {
+      if (!bookTouchActive) return;
+      bookTouchActive = false;
+      if (!document.documentElement.classList.contains("book-active") || state.bookMenuOpen) return;
+      const t = e.changedTouches && e.changedTouches[0];
+      if (!t) return;
+      const dx = t.clientX - bookTouchStartX;
+      const dy = t.clientY - bookTouchStartY;
+      if (Math.abs(dx) < 56 || Math.abs(dx) < Math.abs(dy) * 1.2) return;
+      // Swipe left → next page; swipe right → previous (book metaphor).
+      bookGoRelative(dx < 0 ? 1 : -1);
+    },
+    { passive: true }
+  );
   document.addEventListener("click", (e) => {
     onClick(e).catch((err) => {
       state.flash = err.message;

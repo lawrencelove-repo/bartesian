@@ -18,6 +18,7 @@ See [PLAN.md](PLAN.md) for architecture and data model.
 - [x] Disclaimer + non-affiliation note (private use)
 - [x] Service worker shell + favicons / webmanifest stubs
 - [x] Light / clean visual direction (white UI, Bartesian-like teal accents, book-style detail sections)
+- [x] Book Mode full-bleed swipe view (spirit-grouped pages, modal filters via shared list prefs cookies)
 
 ## Next
 
