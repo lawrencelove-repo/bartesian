@@ -172,6 +172,8 @@
       stars INTEGER,
       detail TEXT NOT NULL DEFAULT '',
       barcode TEXT NOT NULL DEFAULT '',
+      logged_pack_name TEXT NOT NULL DEFAULT '',
+      logged_pack_slug TEXT NOT NULL DEFAULT '',
       FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE,
       FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE,
       FOREIGN KEY (pack_id) REFERENCES packs(id) ON DELETE CASCADE,
@@ -262,30 +264,65 @@
     await idbSet(DB_KEY, data);
   }
 
+  function resolveLoggedPack(a) {
+    let packId = a.packId != null ? Number(a.packId) : null;
+    if (packId != null && Number.isNaN(packId)) packId = null;
+    let packName = a.packName != null ? String(a.packName) : "";
+    let packSlug = a.packSlug != null ? String(a.packSlug) : "";
+    if (packId != null && (!packName || !packSlug)) {
+      try {
+        const pack = queryOne("SELECT name, slug FROM packs WHERE id = ?", [packId]);
+        if (pack) {
+          if (!packName) packName = pack.name || "";
+          if (!packSlug) packSlug = pack.slug || "";
+        }
+      } catch (_) {}
+    }
+    return { packId, packName, packSlug };
+  }
+
   function logActivity(a) {
     if (!db) return;
     try {
+      const pack = resolveLoggedPack(a);
       exec(
         `INSERT INTO activity_log
-           (created_at, kind, cocktail_id, rimmer_id, pack_id, person_id, delta, stars, detail, barcode)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+           (created_at, kind, cocktail_id, rimmer_id, pack_id, person_id, delta, stars, detail, barcode,
+            logged_pack_name, logged_pack_slug)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           a.created_at || nowIso(),
           a.kind || "event",
           a.cocktailId || null,
           a.rimmerId || null,
-          a.packId || null,
+          pack.packId,
           a.personId || null,
           a.delta != null ? Number(a.delta) : null,
           a.stars != null ? Number(a.stars) : null,
           a.detail || "",
           a.barcode || "",
+          pack.packName || "",
+          pack.packSlug || "",
         ]
       );
     } catch (_) {
       /* activity table missing on very old DB before migration */
     }
   }
+
+  const ACTIVITY_SELECT = `SELECT a.id, a.created_at, a.kind, a.cocktail_id, a.rimmer_id, a.pack_id,
+          a.person_id, a.delta, a.stars, a.detail, a.barcode,
+          a.logged_pack_name, a.logged_pack_slug,
+          c.name AS cocktail_name, c.slug AS cocktail_slug,
+          r.name AS rimmer_name, r.slug AS rimmer_slug,
+          COALESCE(NULLIF(p.name, ''), NULLIF(a.logged_pack_name, '')) AS pack_name,
+          COALESCE(NULLIF(p.slug, ''), NULLIF(a.logged_pack_slug, '')) AS pack_slug,
+          pe.name AS person_name
+        FROM activity_log a
+        LEFT JOIN cocktails c ON c.id = a.cocktail_id
+        LEFT JOIN rimmers r ON r.id = a.rimmer_id
+        LEFT JOIN packs p ON p.id = a.pack_id
+        LEFT JOIN people pe ON pe.id = a.person_id`;
 
   function tableColumns(table) {
     try {
@@ -310,7 +347,9 @@
         delta INTEGER,
         stars INTEGER,
         detail TEXT NOT NULL DEFAULT '',
-        barcode TEXT NOT NULL DEFAULT ''
+        barcode TEXT NOT NULL DEFAULT '',
+        logged_pack_name TEXT NOT NULL DEFAULT '',
+        logged_pack_slug TEXT NOT NULL DEFAULT ''
       )`,
       `CREATE TABLE IF NOT EXISTS wishlist_items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -410,6 +449,18 @@
         changed++;
       } catch (_) {}
     }
+    // Activity: denormalized pack labels (survive when pack_id is null / fill_me)
+    try {
+      const acols = tableColumns("activity_log");
+      if (acols.length && !acols.includes("logged_pack_name")) {
+        exec("ALTER TABLE activity_log ADD COLUMN logged_pack_name TEXT NOT NULL DEFAULT ''");
+        changed++;
+      }
+      if (acols.length && !acols.includes("logged_pack_slug")) {
+        exec("ALTER TABLE activity_log ADD COLUMN logged_pack_slug TEXT NOT NULL DEFAULT ''");
+        changed++;
+      }
+    } catch (_) {}
     return changed;
   }
 
@@ -697,21 +748,27 @@
     const personByName = {};
     for (const p of query("SELECT id, name FROM people")) personByName[p.name] = p.id;
     for (const a of seed.activity || []) {
+      const packSlug = a.pack_slug || "";
+      const packId =
+        packSlug && packSlug !== "fill_me" ? packSlugToId[packSlug] || null : null;
       exec(
         `INSERT INTO activity_log
-           (created_at, kind, cocktail_id, rimmer_id, pack_id, person_id, delta, stars, detail, barcode)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+           (created_at, kind, cocktail_id, rimmer_id, pack_id, person_id, delta, stars, detail, barcode,
+            logged_pack_name, logged_pack_slug)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           a.created_at || ts,
           a.kind || "event",
           a.cocktail_slug ? cocktailSlugToId[a.cocktail_slug] || null : null,
           a.rimmer_slug ? rimmerSlugToId[a.rimmer_slug] || null : null,
-          a.pack_slug ? packSlugToId[a.pack_slug] || null : null,
+          packId,
           a.person_name ? personByName[a.person_name] || null : a.person_id || null,
           a.delta != null ? Number(a.delta) : null,
           a.stars != null ? Number(a.stars) : null,
           a.detail || "",
           a.barcode || "",
+          a.pack_name || "",
+          packSlug,
         ]
       );
     }
@@ -752,21 +809,42 @@
     for (const a of seed.activity || []) {
       const cid = a.cocktail_slug ? cocktailBySlug[a.cocktail_slug] || null : null;
       const rid = a.rimmer_slug ? rimmerBySlug[a.rimmer_slug] || null : null;
-      const pid = a.pack_slug ? packBySlug[a.pack_slug] || null : null;
+      const packSlug = a.pack_slug || "";
+      const pid =
+        packSlug && packSlug !== "fill_me" ? packBySlug[packSlug] || null : null;
       const personId = a.person_name ? personByName[a.person_name] || null : null;
       const created = a.created_at || "";
       if (!created) continue;
       const dup = queryOne(
-        `SELECT id FROM activity_log WHERE created_at = ? AND kind = ?
+        `SELECT id, pack_id, logged_pack_name, logged_pack_slug FROM activity_log
+         WHERE created_at = ? AND kind = ?
            AND IFNULL(cocktail_id,0)=IFNULL(?,0) AND IFNULL(rimmer_id,0)=IFNULL(?,0)
            AND IFNULL(detail,'')=IFNULL(?, '') AND IFNULL(delta,0)=IFNULL(?,0)`,
         [created, a.kind || "event", cid, rid, a.detail || "", a.delta != null ? Number(a.delta) : null]
       );
-      if (dup) continue;
+      if (dup) {
+        // Backfill pack labels onto existing rows that were seeded without them
+        const needsPack =
+          (a.pack_name || packSlug) &&
+          !dup.pack_id &&
+          !String(dup.logged_pack_name || "").trim();
+        if (needsPack) {
+          try {
+            exec(
+              `UPDATE activity_log SET pack_id = ?, logged_pack_name = ?, logged_pack_slug = ?
+               WHERE id = ?`,
+              [pid, a.pack_name || "", packSlug, dup.id]
+            );
+            changed++;
+          } catch (_) {}
+        }
+        continue;
+      }
       logActivity({
         created_at: created,
         kind: a.kind || "event",
         cocktailId: cid, rimmerId: rid, packId: pid, personId,
+        packName: a.pack_name || "", packSlug,
         delta: a.delta, stars: a.stars, detail: a.detail || "", barcode: a.barcode || "",
       });
       changed++;
@@ -1544,17 +1622,7 @@
     },
 
     listActivity({ limit = 200, cocktailId = null, rimmerId = null } = {}) {
-      let sql = `SELECT a.*,
-          c.name AS cocktail_name, c.slug AS cocktail_slug,
-          r.name AS rimmer_name, r.slug AS rimmer_slug,
-          p.name AS pack_name, p.slug AS pack_slug,
-          pe.name AS person_name
-        FROM activity_log a
-        LEFT JOIN cocktails c ON c.id = a.cocktail_id
-        LEFT JOIN rimmers r ON r.id = a.rimmer_id
-        LEFT JOIN packs p ON p.id = a.pack_id
-        LEFT JOIN people pe ON pe.id = a.person_id
-        WHERE 1=1`;
+      let sql = ACTIVITY_SELECT + " WHERE 1=1";
       const params = [];
       if (cocktailId) { sql += " AND a.cocktail_id = ?"; params.push(cocktailId); }
       if (rimmerId) { sql += " AND a.rimmer_id = ?"; params.push(rimmerId); }
@@ -1565,22 +1633,7 @@
 
     getActivity(id) {
       try {
-        return (
-          queryOne(
-            `SELECT a.*,
-               c.name AS cocktail_name, c.slug AS cocktail_slug,
-               r.name AS rimmer_name, r.slug AS rimmer_slug,
-               p.name AS pack_name, p.slug AS pack_slug,
-               pe.name AS person_name
-             FROM activity_log a
-             LEFT JOIN cocktails c ON c.id = a.cocktail_id
-             LEFT JOIN rimmers r ON r.id = a.rimmer_id
-             LEFT JOIN packs p ON p.id = a.pack_id
-             LEFT JOIN people pe ON pe.id = a.person_id
-             WHERE a.id = ?`,
-            [id]
-          ) || null
-        );
+        return queryOne(ACTIVITY_SELECT + " WHERE a.id = ?", [id]) || null;
       } catch (_) {
         return null;
       }
@@ -1742,7 +1795,7 @@
       await persist();
     },
 
-    async adjustQuantity(cocktailId, delta, reason, barcode) {
+    async adjustQuantity(cocktailId, delta, reason, barcode, packInfo) {
       const row = queryOne("SELECT quantity, restock FROM cocktails WHERE id = ?", [cocktailId]);
       if (!row) throw new Error("Cocktail not found");
       const prev = Number(row.quantity) || 0;
@@ -1757,9 +1810,17 @@
           "INSERT INTO inventory_log (cocktail_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
           [cocktailId, actual, reason || "", barcode || "", nowIso()]
         );
+        const info = packInfo || {};
         logActivity({
           kind: actual < 0 ? "use" : "restock",
-          cocktailId, delta: actual, detail: reason || "", barcode: barcode || "",
+          cocktailId,
+          delta: actual,
+          detail: reason || "",
+          barcode: barcode || "",
+          packId: info.packId != null ? info.packId : null,
+          packName: info.packName || "",
+          packSlug: info.packSlug || "",
+          personId: info.personId != null ? info.personId : null,
         });
       }
       await persist();
@@ -1914,7 +1975,22 @@
                   : row.delta > 1
                     ? "Pack (+" + row.delta + ")"
                     : "restock_capsule";
-          const next = await this.adjustQuantity(row.id, row.delta, reason, code);
+          let packInfo = null;
+          if (preview.kind === "variety_pack" && preview.packId) {
+            packInfo = {
+              packId: preview.packId,
+              packName: preview.packName || preview.targetName || "",
+              packSlug: preview.packSlug || "",
+            };
+          } else if (preview.kind === "case" || (reason && String(reason).indexOf("Pack (+") === 0)) {
+            const base = row.name || row.slug || "Capsule";
+            packInfo = {
+              packId: null,
+              packName: base + " Capsules",
+              packSlug: slugifyText(base) + "-capsules",
+            };
+          }
+          const next = await this.adjustQuantity(row.id, row.delta, reason, code, packInfo);
           changes.push({
             name: row.name,
             type: "cocktail",

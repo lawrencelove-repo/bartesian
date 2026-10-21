@@ -1,5 +1,5 @@
 /* Bartesian app shell service worker — offline-friendly cache for static assets. */
-const CACHE_VERSION = "bartesian-v72";
+const CACHE_VERSION = "bartesian-v73";
 const PRECACHE = [
   "./",
   "./index.html",
@@ -14,6 +14,7 @@ const PRECACHE = [
   "./js/camera-scan.js",
   "./js/barcodes.js",
   "./js/icons.js",
+  "./js/activity-templates.js",
   "./js/app.js",
   "./assets/favicon/favicon.ico",
   "./assets/favicon/favicon-16x16.png",

@@ -35,8 +35,8 @@
     "cocktail_slug": "passion-fruit-margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Tropical Margarita Collection Variety Pack",
+    "pack_slug": "tropical-margarita-collection-variety-pack",
     "person_name": null
   },
   {
@@ -355,8 +355,8 @@
     "cocktail_slug": "espresso-martini",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Espresso Martini Capsules",
+    "pack_slug": "espresso-martini-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -395,8 +395,8 @@
     "cocktail_slug": "aviation",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Aviation Capsules",
+    "pack_slug": "aviation-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -415,8 +415,8 @@
     "cocktail_slug": "lychee-martini",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Lychee Martini Capsules",
+    "pack_slug": "lychee-martini-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -435,8 +435,8 @@
     "cocktail_slug": "margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Margarita Capsules",
+    "pack_slug": "margarita-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -455,8 +455,8 @@
     "cocktail_slug": "blackberry-margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Blackberry Margarita Capsules",
+    "pack_slug": "blackberry-margarita-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -475,8 +475,8 @@
     "cocktail_slug": "sidecar",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Sidecar Capsules",
+    "pack_slug": "sidecar-capsules",
     "person_name": "Kim"
   },
   {
@@ -591,7 +591,7 @@
     "stars": null,
     "detail": "manual_remove",
     "barcode": "",
-    "cocktail_name": "Jalapeño Lime Shrub",
+    "cocktail_name": "Jalape\u00f1o Lime Shrub",
     "cocktail_slug": "jalape-o-lime-shrub",
     "rimmer_name": null,
     "rimmer_slug": null,
@@ -795,8 +795,8 @@
     "cocktail_slug": "sex-on-the-beach",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Vodka Lovers Variety Pack",
+    "pack_slug": "vodka-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -835,8 +835,8 @@
     "cocktail_slug": "northside",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Poolside Vibes",
+    "pack_slug": "poolside-vibes",
     "person_name": "Lawrence"
   },
   {
@@ -855,8 +855,8 @@
     "cocktail_slug": "watermelon-margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Watermelon Margarita Capsules",
+    "pack_slug": "watermelon-margarita-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -935,8 +935,8 @@
     "cocktail_slug": "espresso-martini",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Espresso Martini Capsules",
+    "pack_slug": "espresso-martini-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -955,8 +955,8 @@
     "cocktail_slug": "white-sangria",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Staff Picks Collection",
+    "pack_slug": "staff-picks-collection",
     "person_name": "Lawrence"
   },
   {
@@ -975,8 +975,8 @@
     "cocktail_slug": "raspberry-ginger-gimlet",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Staff Picks Collection",
+    "pack_slug": "staff-picks-collection",
     "person_name": "Lawrence"
   },
   {
@@ -995,8 +995,8 @@
     "cocktail_slug": "lychee-martini",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Staff Picks Collection",
+    "pack_slug": "staff-picks-collection",
     "person_name": "Lawrence"
   },
   {
@@ -1015,8 +1015,8 @@
     "cocktail_slug": "uptown-rocks",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Gin Lovers Variety Pack",
+    "pack_slug": "gin-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1035,8 +1035,8 @@
     "cocktail_slug": "raspberry-ginger-gimlet",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Gin Lovers Variety Pack",
+    "pack_slug": "gin-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1055,8 +1055,8 @@
     "cocktail_slug": "bees-knees",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Gin Lovers Variety Pack",
+    "pack_slug": "gin-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1075,8 +1075,8 @@
     "cocktail_slug": "aviation",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Gin Lovers Variety Pack",
+    "pack_slug": "gin-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1095,8 +1095,8 @@
     "cocktail_slug": "rum-breeze",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Rum Lovers Variety Pack",
+    "pack_slug": "rum-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1115,8 +1115,8 @@
     "cocktail_slug": "painkiller",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Rum Lovers Variety Pack",
+    "pack_slug": "rum-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1135,8 +1135,8 @@
     "cocktail_slug": "mai-tai",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Rum Lovers Variety Pack",
+    "pack_slug": "rum-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1155,8 +1155,8 @@
     "cocktail_slug": "hurricane",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Rum Lovers Variety Pack",
+    "pack_slug": "rum-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1175,8 +1175,8 @@
     "cocktail_slug": "pineapple-margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Tropical Margarita Collection Variety Pack",
+    "pack_slug": "tropical-margarita-collection-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1195,8 +1195,8 @@
     "cocktail_slug": "mango-margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Tropical Margarita Collection Variety Pack",
+    "pack_slug": "tropical-margarita-collection-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1215,8 +1215,8 @@
     "cocktail_slug": "blackberry-margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Tropical Margarita Collection Variety Pack",
+    "pack_slug": "tropical-margarita-collection-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1235,8 +1235,8 @@
     "cocktail_slug": "strawberry-coconut-daiquiri",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Strawberry Coconut Daiquiri Capsules",
+    "pack_slug": "strawberry-coconut-daiquiri-capsules",
     "person_name": "Lawrence"
   },
   {
@@ -1255,8 +1255,8 @@
     "cocktail_slug": "rum-breeze",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Poolside Vibes",
+    "pack_slug": "poolside-vibes",
     "person_name": "Lawrence"
   },
   {
@@ -1275,8 +1275,8 @@
     "cocktail_slug": "margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Poolside Vibes",
+    "pack_slug": "poolside-vibes",
     "person_name": "Lawrence"
   },
   {
@@ -1295,8 +1295,8 @@
     "cocktail_slug": "ginger-peach-iced-tea",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Poolside Vibes",
+    "pack_slug": "poolside-vibes",
     "person_name": "Lawrence"
   },
   {
@@ -1315,8 +1315,8 @@
     "cocktail_slug": "lemon-drop",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Vodka Lovers Variety Pack",
+    "pack_slug": "vodka-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1375,8 +1375,8 @@
     "cocktail_slug": "old-fashioned",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Whiskey Lovers Variety Pack",
+    "pack_slug": "whiskey-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1395,8 +1395,8 @@
     "cocktail_slug": "manhattan",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Whiskey Lovers Variety Pack",
+    "pack_slug": "whiskey-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1415,8 +1415,8 @@
     "cocktail_slug": "espresso-martini",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Vodka Lovers Variety Pack",
+    "pack_slug": "vodka-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1435,8 +1435,8 @@
     "cocktail_slug": "cosmopolitan",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Vodka Lovers Variety Pack",
+    "pack_slug": "vodka-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1455,8 +1455,8 @@
     "cocktail_slug": "whiskey-sour",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Whiskey Lovers Variety Pack",
+    "pack_slug": "whiskey-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1475,8 +1475,8 @@
     "cocktail_slug": "sidecar",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Whiskey Lovers Variety Pack",
+    "pack_slug": "whiskey-lovers-variety-pack",
     "person_name": "Lawrence"
   },
   {
@@ -1491,12 +1491,12 @@
     "stars": null,
     "detail": "restock_pack",
     "barcode": "",
-    "cocktail_name": "Jalapeño Lime Shrub",
+    "cocktail_name": "Jalape\u00f1o Lime Shrub",
     "cocktail_slug": "jalape-o-lime-shrub",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Staff Picks Collection",
+    "pack_slug": "staff-picks-collection",
     "person_name": "Lawrence"
   },
   {
@@ -1515,8 +1515,8 @@
     "cocktail_slug": "whiskey-sour",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   },
   {
@@ -1535,8 +1535,8 @@
     "cocktail_slug": "uptown-rocks",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   },
   {
@@ -1555,8 +1555,8 @@
     "cocktail_slug": "rum-breeze",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   },
   {
@@ -1575,8 +1575,8 @@
     "cocktail_slug": "old-fashioned",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   },
   {
@@ -1595,8 +1595,8 @@
     "cocktail_slug": "margarita",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   },
   {
@@ -1615,8 +1615,8 @@
     "cocktail_slug": "lemon-drop",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   },
   {
@@ -1635,8 +1635,8 @@
     "cocktail_slug": "espresso-martini",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   },
   {
@@ -1655,8 +1655,8 @@
     "cocktail_slug": "cosmopolitan",
     "rimmer_name": null,
     "rimmer_slug": null,
-    "pack_name": null,
-    "pack_slug": null,
+    "pack_name": "Classic Collection Favorites",
+    "pack_slug": "classic-collection-favorites",
     "person_name": "Lawrence"
   }
 ]

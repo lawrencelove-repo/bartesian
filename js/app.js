@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v72";
+  const APP_VERSION = "bartesian-v73";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -1157,6 +1157,8 @@
 
   function formatWhen(iso) {
     if (!iso) return "";
+    const T = window.BartesianActivityTemplates;
+    if (T && T.formatWhen) return T.formatWhen(iso);
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
     return d.toLocaleString(undefined, {
@@ -1166,35 +1168,18 @@
   }
 
   function activityLabel(a) {
-    const name = a.cocktail_name || a.rimmer_name || a.pack_name || "";
-    switch (a.kind) {
-      case "use":
-        return (a.delta != null ? "Used " + Math.abs(Number(a.delta)) + " · " : "Used · ") + name +
-          (a.person_name ? " — " + a.person_name : "");
-      case "restock":
-        return (a.delta != null ? "Added +" + Number(a.delta) + " · " : "Added · ") + name +
-          (a.person_name ? " — " + a.person_name : "");
-      case "rating":
-        return "Feedback · " + name + (a.person_name ? " — " + a.person_name : "") +
-          (a.stars ? " " + a.stars + "★" : "") + (a.detail ? ": " + a.detail : "");
-      case "favorite":
-        return (a.detail === "unfavorited" ? "Unfavorited · " : "Favorited · ") + name;
-      case "barcode":
-        return "Barcode linked · " + name + (a.barcode ? " (" + a.barcode + ")" : "");
-      case "wishlist_add":
-        return "Added to Wishlist · " + name;
-      case "wishlist_remove":
-        return "Removed from Wishlist · " + name;
-      case "restock_clear":
-        return "Removed from Restock · " + name;
-      default:
-        return (a.kind || "Event") + (name ? " · " + name : "");
-    }
+    const T = window.BartesianActivityTemplates;
+    if (T && T.activityLabel) return T.activityLabel(a);
+    return a.cocktail_name || a.rimmer_name || a.pack_name || a.kind || "Event";
   }
 
   function activityRowsHtml(rows, emptyText) {
     if (!rows.length) return `<p class="empty">${esc(emptyText)}</p>`;
+    const T = window.BartesianActivityTemplates;
     return rows.map((a) => {
+      const formatted = T && T.formatActivity
+        ? T.formatActivity(a)
+        : { title: activityLabel(a), meta: formatWhen(a.created_at) };
       const adminBtns = state.isAdmin
         ? `<div class="row-actions history-actions">
              <button type="button" class="ghost small" data-history-edit="${a.id}">Edit</button>
@@ -1203,8 +1188,8 @@
         : "";
       const inner = `
         <div class="row-body">
-          <div class="row-title">${esc(activityLabel(a))}</div>
-          <div class="row-meta">${esc(formatWhen(a.created_at))}${a.barcode && a.kind !== "barcode" ? " · " + esc(a.barcode) : ""}${a.detail && a.kind !== "rating" && a.kind !== "favorite" ? " · " + esc(a.detail) : ""}</div>
+          <div class="row-title">${esc(formatted.title)}</div>
+          <div class="row-meta">${esc(formatted.meta)}</div>
           ${adminBtns}
         </div>`;
       return `<div class="cocktail-row history-row"><span class="history-dot" aria-hidden="true"></span>${inner}</div>`;
