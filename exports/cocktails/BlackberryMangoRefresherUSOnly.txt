@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Highball Glass
 Garnish: ed with blackberries
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/blackberry-mango-refresher.png","label_image_eu":"images/nutrition/blackberry-mango-refresher-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/blackberry-mango-refresher.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":0.1,"regular_oz":0.2,"strong_oz":0.3,"raw":"Mocktail = 0 oz., Light = 0.1 oz., Regular = 0.2 oz., Strong = 0.3 oz"}
 Bartesian URL: https://bartesian.com/products/blackberry-mango-capsules?variant=46120106295495
 Help URL: https://bartesian.gorgias.help/en-US/blackberry-mango-refresher-(us-only)-4332578

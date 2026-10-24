@@ -10,7 +10,7 @@ Shopify Handle: lemon-drop-variety-pack
 Gorgias Article ID: 
 Image: images/packs/lemon-drop-variety-pack.jpg
 Nutrition Image: 
-Enabled: 1
+Enabled: 0
 Items:
 	blueberry-lemon-drop: 2
 	strawberry-lemon-drop: 2

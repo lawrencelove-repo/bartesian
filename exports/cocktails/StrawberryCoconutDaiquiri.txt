@@ -6,7 +6,7 @@ Spirits: Rum
 Glassware: Lowball Glass
 Garnish: ed with lime and a strawberry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/strawberry-coconut-daiquiri.png","label_image_eu":"images/nutrition/strawberry-coconut-daiquiri-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/strawberry-coconut-daiquiri.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.0 oz"}
 Bartesian URL: https://bartesian.com/products/strawberry-coconut-daiquiri-capsules?variant=43894262333639
 Help URL: https://bartesian.gorgias.help/en-US/strawberry-coconut-daiquiri-574704

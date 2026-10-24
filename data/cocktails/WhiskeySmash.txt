@@ -6,7 +6,7 @@ Spirits: Whiskey
 Glassware: Lowball Glass
 Garnish: Lemon & Mint
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/whiskey-smash.png","label_image_eu":"images/nutrition/whiskey-smash-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/whiskey-smash.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/whiskey-smash-cocktails?variant=31660702269489
 Help URL: https://bartesian.gorgias.help/en-US/whiskey-smash-39505

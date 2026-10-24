@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v74";
+  const APP_VERSION = "bartesian-v75";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -32,10 +32,18 @@
     rimmerAvailableOnly: false,
     qtyOpenKey: "",
     historyModal: null,
+    useModal: null,
+    randomModal: null,
+    scanMatchModal: null,
     adminItemDraft: null,
+    /** Cocktail ids shown on Pack Admin edit (qty≥1 plus any added this session). */
+    packEditIds: null,
+    packEditKey: "",
+    peopleEditId: null,
     flash: "",
     randomSpirit: "",
     randomFavoritesOnly: false,
+    packSearch: "",
     scanPreview: null,
     scanDelta: -1,
     scanNameQuery: "",
@@ -332,12 +340,52 @@
       "Could not classify barcode. Choose Kind + target, then Save.";
   }
 
+  function scanMatchFromPreview(preview) {
+    if (!preview || !preview.ok) return null;
+    const first = (preview.proposed || [])[0] || {};
+    let name = preview.targetName || first.name || "Matched item";
+    let image = first.image || "";
+    const kind = preview.kind || "";
+    if ((kind === "capsule" || kind === "case") && first.id) {
+      const c = BartesianDB.getCocktail(first.id);
+      if (c) {
+        name = c.name || name;
+        image = c.marketing_image || c.hero_image || c.image || image;
+      }
+    } else if (kind === "rimmer" && first.id) {
+      const r = BartesianDB.getRimmer(first.id);
+      if (r) {
+        name = r.name || name;
+        image = r.image || image;
+      }
+    } else if (kind === "variety_pack" && preview.packId) {
+      const p = BartesianDB.getPack(preview.packId);
+      if (p) {
+        name = p.name || name;
+        image = p.image || image;
+      }
+    } else if (first.id && !image) {
+      const c = BartesianDB.getCocktail(first.id);
+      if (c) image = c.marketing_image || c.hero_image || c.image || "";
+    }
+    return {
+      name,
+      image,
+      kindLabel: preview.kindLabel || "",
+    };
+  }
+
   function applyScannedCode(code, target) {
     const normalized = BartesianBarcodes.normalizeCode(code);
     if (!normalized) return;
     if (target === "admin") {
       applyAdminLookup(normalized);
       stopCamera();
+      const adminPreview = BartesianBarcodes.resolve(BartesianDB, normalized, {
+        capsuleDelta: -1,
+        rimmerDelta: -1,
+      });
+      state.scanMatchModal = scanMatchFromPreview(adminPreview);
       render();
       return;
     }
@@ -348,6 +396,7 @@
       capsuleDelta: state.scanDelta,
       rimmerDelta: state.scanDelta,
     });
+    state.scanMatchModal = scanMatchFromPreview(state.scanPreview);
     stopCamera();
     render();
     const box = root.querySelector("[data-scan-result]");
@@ -413,6 +462,10 @@
       return { view: "rimmer-detail", id: Number(parts[1]) };
     }
     if (parts[0] === "rimmers") return { view: "rimmers" };
+    if (parts[0] === "pack" && parts[1]) {
+      return { view: "pack-detail", id: Number(parts[1]) };
+    }
+    if (parts[0] === "packs") return { view: "packs" };
     if (parts[0] === "history" && (parts[1] === "cocktail" || parts[1] === "rimmer") && parts[2]) {
       return { view: "item-history", itemType: parts[1], id: Number(parts[2]) };
     }
@@ -470,6 +523,7 @@
     const nav = [
       ["list", "#/", "Cocktails"],
       ["rimmers", "#/rimmers", "Rimmers"],
+      ["packs", "#/packs", "Packs"],
       ["restock", "#/restock", "Restock"],
       ["wishlist", "#/wishlist", "Wishlist"],
       ["random", "#/random", "Random"],
@@ -737,7 +791,14 @@
         <h1>Cocktails</h1>
         <form class="toolbar" data-list-filters>
           <div class="toolbar-controls">
-            <input type="search" name="search" placeholder="Search" value="${esc(state.search)}" />
+            <div class="toolbar-search-wrap">
+              <input type="search" name="search" placeholder="Search" value="${esc(state.search)}" />
+              ${
+                state.search
+                  ? `<button type="button" class="toolbar-search-clear" data-search-clear aria-label="Clear search">×</button>`
+                  : ""
+              }
+            </div>
             <select name="spirit">
               <option value="">All spirits</option>
               ${spirits
@@ -762,7 +823,7 @@
             <label class="check"><input type="checkbox" name="favorites" ${state.favoritesOnly ? "checked" : ""}/> Favorites</label>
           </div>
         </form>
-        <p class="count">${cocktails.length} cocktail${cocktails.length === 1 ? "" : "s"}</p>
+        ${cocktailListCountHtml(cocktails)}
         ${cocktailListShellHtml(cocktails)}
       </section>
     `
@@ -792,36 +853,36 @@
     return text ? `<p class="section-label">Alcohol</p><p class="detail-copy">${esc(text)}</p>` : "";
   }
 
-  function nutritionBlock(nutrition, rawFallback) {
+  function nutritionBlock(nutrition, rawFallback, { asSectionInner = false } = {}) {
     const labelImage = nutrition && nutrition.label_image;
-    const euImage = nutrition && nutrition.label_image_eu;
-    if (labelImage || euImage) {
+    // Prefer the normal (non-EU) label; only show EU when it's the only image.
+    const euImage =
+      !labelImage && nutrition && nutrition.label_image_eu
+        ? nutrition.label_image_eu
+        : "";
+    const image = labelImage || euImage;
+    if (image) {
+      const body = `
+        <p class="detail-copy muted">Case label (nutrition, ingredients, UPC)</p>
+        <a class="nutrition-label" href="${esc(image)}" target="_blank" rel="noopener">
+          <img src="${esc(image)}" alt="Nutrition label">
+        </a>`;
+      if (asSectionInner) return body;
       return `<section class="nutrition-section">
         <p class="section-label">Nutrition</p>
-        <p class="detail-copy muted">Case label (nutrition, ingredients, UPC)</p>
-        ${
-          labelImage
-            ? `<a class="nutrition-label" href="${esc(labelImage)}" target="_blank" rel="noopener">
-                <img src="${esc(labelImage)}" alt="Nutrition label">
-              </a>`
-            : ""
-        }
-        ${
-          euImage
-            ? `<a class="nutrition-label" href="${esc(euImage)}" target="_blank" rel="noopener">
-                <img src="${esc(euImage)}" alt="Nutrition label (EU)">
-              </a>`
-            : ""
-        }
+        ${body}
       </section>`;
     }
     if (!nutrition && !rawFallback) return "";
     const text = nutrition
       ? Object.entries(nutrition)
+          .filter(([k]) => k !== "label_image" && k !== "label_image_eu")
           .map(([k, v]) => k + ": " + v)
           .join(", ")
       : rawFallback;
-    return text ? `<p class="section-label">Nutrition</p><p class="detail-copy">${esc(text)}</p>` : "";
+    if (!text) return "";
+    if (asSectionInner) return `<p class="detail-copy">${esc(text)}</p>`;
+    return `<p class="section-label">Nutrition</p><p class="detail-copy">${esc(text)}</p>`;
   }
 
   function primaryImage(c) {
@@ -862,20 +923,31 @@
     const nutrition = parseJsonField(c.nutrition_json);
     const alcohol = parseJsonField(c.alcohol_json);
     const spiritsText = (c.spirits || []).join(", ") || "—";
+    const T = window.BartesianItemTemplates;
 
     const packList = packs.length
-      ? `<ul class="plain">${packs
-          .map(
-            (p) =>
-              `<li>${esc(p.name)} <span class="muted">(×${p.pack_qty} in pack)</span></li>`
-          )
-          .join("")}</ul>`
+      ? `<div class="list">${packs
+          .map((p) => {
+            const thumb = p.image || "";
+            return `
+              <a class="cocktail-row" href="#/pack/${p.id}" data-go="#/pack/${p.id}">
+                <span class="qty-badge" aria-label="${p.pack_qty} in pack">×${p.pack_qty}</span>
+                <div class="thumb ${thumb ? "" : "thumb-empty"}">
+                  ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
+                </div>
+                <div class="row-body">
+                  <div class="row-title">${esc(p.name)}</div>
+                  <div class="row-meta">${p.pack_qty} in pack</div>
+                </div>
+              </a>`;
+          })
+          .join("")}</div>`
       : `<p class="muted">Not in any variety packs (yet).</p>`;
 
     const rimmerList = rimmers.length
       ? `<div class="list rimmer-pair-list">${rimmers
           .map((r) => {
-            const kind = (r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase());
+            const kind = (r.kind || "rimmer").replace(/^./, (ch) => ch.toUpperCase());
             return `
               <a class="cocktail-row" href="#/rimmer/${r.id}" data-go="#/rimmer/${r.id}">
                 <span class="qty-badge ${rimmerQtyBadgeClass(Number(r.quantity) || 0, r.restock)}" aria-label="Quantity ${r.quantity}">${r.quantity}</span>
@@ -908,10 +980,8 @@
     const topSrc = heroSrc || marketingSrc || primaryImage(c);
     const midSrc = heroSrc && marketingSrc && marketingSrc !== heroSrc ? marketingSrc : "";
 
-    return shell(
-      "list",
-      `
-      <section class="panel detail">
+    const parts = {
+      hero: `
         <a class="back" href="#/" data-go="#/">← All cocktails</a>
         <div class="detail-hero">
           <div class="thumb large ${topSrc ? "" : "thumb-empty"}">
@@ -922,23 +992,18 @@
             <h1 class="detail-title">${esc(c.name)}${c.favorite ? " ★" : ""}</h1>
             <p class="spirits">${esc(spiritsText)}</p>
             <p class="detail-copy">${esc(c.description || "")}</p>
-            ${
-              c.bartesian_url
-                ? `<p><a href="${esc(c.bartesian_url)}" target="_blank" rel="noopener">View on Bartesian ↗</a></p>`
-                : ""
-            }
+            ${externalLinkHtml(c.bartesian_url, "View on Bartesian")}
             ${
               c.help_url
-                ? `<p class="muted"><a href="${esc(c.help_url)}" target="_blank" rel="noopener">Nutrition / help article ↗</a></p>`
+                ? `<p class="muted"><a href="${esc(c.help_url)}" target="_blank" rel="noopener">Nutrition / help article ${arrowGlyph()}</a></p>`
                 : ""
             }
           </div>
-        </div>
-
+        </div>`,
+      // Description already appears in the hero — only Details / Alcohol / Product here.
+      detail_layout: `
         <div class="detail-layout">
           <div>
-            <p class="section-label">Description</p>
-            <p class="detail-copy">${esc(c.description || "No description yet.")}</p>
             ${
               c.details
                 ? `<p class="section-label">Details</p>${detailsHtml(c.details)}`
@@ -972,14 +1037,13 @@
                 : ""
             }
           </div>
-        </div>
-
-        <section class="inventory-box">
-          <p class="section-label">Inventory</p>
+        </div>`,
+      inventory: `
+        <div class="inventory-box">
           <p class="qty-display"><span data-qty>${c.quantity}</span> capsule${c.quantity === 1 ? "" : "s"}</p>
           <div class="qty-actions">
             <button type="button" data-qty-delta="-1" data-id="${c.id}">−</button>
-            <button type="button" data-use-one data-id="${c.id}">Use 1</button>
+            <button type="button" data-use-one data-id="${c.id}" data-name="${esc(c.name)}">Use 1</button>
             <button type="button" data-qty-delta="1" data-id="${c.id}">+</button>
             <button type="button" class="ghost" data-toggle-fav data-id="${c.id}" data-on="${c.favorite ? 1 : 0}">
               ${c.favorite ? "Remove from Favorites" : "Add to Favorites"}
@@ -988,44 +1052,37 @@
             <button type="button" class="ghost" data-go="#/history/cocktail/${c.id}">History</button>
             ${c.restock && c.quantity === 0 ? '<span class="pill pill-restock">Restock needed</span>' : ""}
           </div>
-        </section>
+        </div>`,
+      variety_packs: packList,
+      recommended_rimmers: rimmerList,
+      ratings: `
+        <ul class="plain">${ratingRows}</ul>
+        <form class="rating-form" data-rating-form data-id="${c.id}">
+          <select name="person_id" required>
+            <option value="">Person…</option>
+            ${people.map((p) => `<option value="${p.id}">${esc(p.name)}</option>`).join("")}
+          </select>
+          <select name="stars" required>
+            <option value="5">5★</option>
+            <option value="4">4★</option>
+            <option value="3">3★</option>
+            <option value="2">2★</option>
+            <option value="1">1★</option>
+          </select>
+          <input name="comment" type="text" placeholder="Comment (optional)" />
+          <button type="submit">Save rating</button>
+        </form>`,
+      nutrition: nutritionBlock(nutrition, c.nutrition_json, { asSectionInner: true }),
+    };
 
-        <section>
-          <h2>Variety packs</h2>
-          ${packList}
-        </section>
+    const body =
+      T && T.renderSections
+        ? T.renderSections("cocktail", parts)
+        : Object.values(parts).join("\n");
 
-        ${
-          rimmerList
-            ? `<section><h2>Recommended rimmers</h2>${rimmerList}</section>`
-            : ""
-        }
-
-        <section>
-          <h2>Ratings &amp; comments</h2>
-          <ul class="plain">${ratingRows}</ul>
-          <form class="rating-form" data-rating-form data-id="${c.id}">
-            <select name="person_id" required>
-              <option value="">Person…</option>
-              ${people
-                .map((p) => `<option value="${p.id}">${esc(p.name)}</option>`)
-                .join("")}
-            </select>
-            <select name="stars" required>
-              <option value="5">5★</option>
-              <option value="4">4★</option>
-              <option value="3">3★</option>
-              <option value="2">2★</option>
-              <option value="1">1★</option>
-            </select>
-            <input name="comment" type="text" placeholder="Comment (optional)" />
-            <button type="submit">Save rating</button>
-          </form>
-        </section>
-
-        ${nutritionBlock(nutrition, c.nutrition_json)}
-      </section>
-    `
+    return shell(
+      "list",
+      `<section class="panel detail">${body}</section>${useModalHtml(people)}`
     );
   }
 
@@ -1086,6 +1143,7 @@
       return shell("rimmers", `<section class="panel"><p>Rimmer not found.</p></section>`);
     }
     const cocktails = BartesianDB.cocktailsForRimmer(id);
+    const T = window.BartesianItemTemplates;
     const cocktailList = cocktails.length
       ? `<div class="list">${cocktails
           .map((c) => {
@@ -1104,36 +1162,27 @@
           .join("")}</div>`
       : `<p class="muted">${esc(r.pairs_with || "No linked cocktails yet.")}</p>`;
 
-    return shell(
-      "rimmers",
-      `
-      <section class="panel detail">
+    const parts = {
+      hero: `
         <a class="back" href="#/rimmers" data-go="#/rimmers">← All rimmers</a>
         <div class="detail-hero">
           <div class="thumb large ${r.image ? "" : "thumb-empty"}">
             ${r.image ? `<img src="${esc(r.image)}" alt="">` : ""}
           </div>
           <div>
-            <p class="detail-kicker">${esc((r.kind || "rimmer").replace(/^./, (c) => c.toUpperCase()))} rimmer</p>
+            <p class="detail-kicker">${esc((r.kind || "rimmer").replace(/^./, (ch) => ch.toUpperCase()))} rimmer</p>
             <h1 class="detail-title">${esc(r.name)}${r.favorite ? " ★" : ""}</h1>
             <p class="detail-copy">${esc(r.description || "")}</p>
-            ${
-              r.bartesian_url
-                ? `<p><a href="${esc(r.bartesian_url)}" target="_blank" rel="noopener">View on Bartesian ↗</a></p>`
-                : ""
-            }
+            ${externalLinkHtml(r.bartesian_url, "View on Bartesian")}
           </div>
-        </div>
-        ${
-          r.nutrition_image
-            ? `<p class="section-label">Nutrition</p>
-               <a class="nutrition-label" href="${esc(r.nutrition_image)}" target="_blank" rel="noopener">
-                 <img src="${esc(r.nutrition_image)}" alt="Nutrition label">
-               </a>`
-            : ""
-        }
-        <section class="inventory-box">
-          <p class="section-label">Inventory</p>
+        </div>`,
+      nutrition: r.nutrition_image
+        ? `<a class="nutrition-label" href="${esc(r.nutrition_image)}" target="_blank" rel="noopener">
+             <img src="${esc(r.nutrition_image)}" alt="Nutrition label">
+           </a>`
+        : "",
+      inventory: `
+        <div class="inventory-box">
           <p class="qty-display"><span data-qty>${r.quantity}</span> on hand</p>
           <div class="qty-actions">
             <button type="button" data-rimmer-qty-delta="-1" data-id="${r.id}">−</button>
@@ -1145,14 +1194,16 @@
             <button type="button" class="ghost" data-go="#/history/rimmer/${r.id}">History</button>
             ${r.restock && r.quantity === 0 ? '<span class="pill pill-restock">Restock needed</span>' : ""}
           </div>
-        </section>
-        <section>
-          <h2>Cocktail pairings</h2>
-          ${cocktailList}
-        </section>
-      </section>
-    `
-    );
+        </div>`,
+      cocktail_pairings: cocktailList,
+    };
+
+    const body =
+      T && T.renderSections
+        ? T.renderSections("rimmer", parts)
+        : Object.values(parts).join("\n");
+
+    return shell("rimmers", `<section class="panel detail">${body}</section>`);
   }
 
   function formatWhen(iso) {
@@ -1182,7 +1233,7 @@
         : { title: activityLabel(a), meta: formatWhen(a.created_at) };
       const adminBtns = state.isAdmin
         ? `<div class="row-actions history-actions">
-             <button type="button" class="ghost small" data-history-edit="${a.id}">Edit</button>
+             <button type="button" class="btn-edit small" data-history-edit="${a.id}">Edit</button>
              <button type="button" class="ghost danger small" data-history-delete="${a.id}">Delete</button>
            </div>`
         : "";
@@ -1226,13 +1277,12 @@
     }
     const personField =
       m.kind === "use" || m.kind === "restock"
-        ? `<label>${m.kind === "use" ? "Consumed / used by" : "Added by"} <span class="muted">(optional)</span>
-             <input name="person_name" type="text" list="history-people-options" placeholder="Leave blank, or any name" value="${esc(m.personName || "")}" />
-           </label>
-           <datalist id="history-people-options">
-             ${(people || []).map((p) => `<option value="${esc(p.name)}"></option>`).join("")}
-           </datalist>
-           <p class="hint">A new name is added as a Person. Clearing the field leaves it blank.</p>`
+        ? personComboHtml({
+            label: m.kind === "use" ? "Consumed / used by" : "Added by",
+            value: m.personName || "",
+            people: people || [],
+            hint: "Pick from the list or type a name. A new name is added as a Person.",
+          })
         : "";
     return `<div class="modal-backdrop" data-history-modal-backdrop>
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="history-modal-title">
@@ -1281,9 +1331,181 @@
       ${historyModalHtml(people)}`);
   }
 
+  /** External-link arrow: SVG so desktop doesn't get a skinny Unicode ↗. */
+  function arrowGlyph() {
+    return `<span class="icon-link-arrow" aria-hidden="true"><svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"><path d="M5 11L11 5M11 5H6.5M11 5V9.5"/></svg></span>`;
+  }
+
   function bartesianArrow(url) {
     if (!url) return "";
-    return `<a class="icon-link" href="${esc(url)}" target="_blank" rel="noopener" aria-label="View on Bartesian" title="View on Bartesian">↗</a>`;
+    return `<a class="icon-link" href="${esc(url)}" target="_blank" rel="noopener" aria-label="View on Bartesian" title="View on Bartesian">${arrowGlyph()}</a>`;
+  }
+
+  function externalLinkHtml(url, label) {
+    if (!url) return "";
+    return `<p><a href="${esc(url)}" target="_blank" rel="noopener">${esc(label)} ${arrowGlyph()}</a></p>`;
+  }
+
+  /**
+   * Single-field person combobox with a custom dropdown overlay (works on iOS;
+   * native <datalist> does not). Type freely or pick from the list.
+   */
+  function personComboHtml({
+    name = "person_name",
+    label = "Person",
+    optional = true,
+    value = "",
+    people = [],
+    hint = "",
+  } = {}) {
+    const current = String(value || "");
+    const peopleList = people || [];
+    const options = peopleList
+      .map(
+        (p) =>
+          `<button type="button" class="person-combo-option" data-person-combo-option role="option">${esc(p.name)}</button>`
+      )
+      .join("");
+    return `
+      <label class="person-combo-label">${esc(label)}${optional ? ' <span class="muted">(optional)</span>' : ""}
+        <div class="person-combo" data-person-combo>
+          <div class="person-combo-control">
+            <input name="${esc(name)}" type="text" data-person-combo-input placeholder="Leave blank, or any name" value="${esc(current)}" autocomplete="off" aria-autocomplete="list" aria-expanded="false" aria-haspopup="listbox" />
+            <button type="button" class="person-combo-toggle" data-person-combo-toggle aria-label="Show people" tabindex="-1">▾</button>
+          </div>
+          <div class="person-combo-menu" data-person-combo-menu role="listbox" hidden>
+            ${
+              options ||
+              `<p class="person-combo-empty muted">No people yet — type a name.</p>`
+            }
+          </div>
+        </div>
+      </label>
+      ${hint ? `<p class="hint">${hint}</p>` : ""}`;
+  }
+
+  function closeAllPersonCombos(except) {
+    root.querySelectorAll("[data-person-combo].is-open").forEach((combo) => {
+      if (except && combo === except) return;
+      combo.classList.remove("is-open");
+      const menu = combo.querySelector("[data-person-combo-menu]");
+      const input = combo.querySelector("[data-person-combo-input]");
+      if (menu) menu.hidden = true;
+      if (input) input.setAttribute("aria-expanded", "false");
+    });
+  }
+
+  function openPersonCombo(combo) {
+    if (!combo) return;
+    closeAllPersonCombos(combo);
+    combo.classList.add("is-open");
+    const menu = combo.querySelector("[data-person-combo-menu]");
+    const input = combo.querySelector("[data-person-combo-input]");
+    if (menu) menu.hidden = false;
+    if (input) input.setAttribute("aria-expanded", "true");
+    filterPersonComboOptions(combo);
+  }
+
+  function filterPersonComboOptions(combo) {
+    if (!combo) return;
+    const input = combo.querySelector("[data-person-combo-input]");
+    const q = String((input && input.value) || "")
+      .trim()
+      .toLowerCase();
+    let visible = 0;
+    combo.querySelectorAll("[data-person-combo-option]").forEach((btn) => {
+      const name = String(btn.textContent || "").toLowerCase();
+      const show = !q || name.includes(q);
+      btn.hidden = !show;
+      if (show) visible++;
+    });
+    const empty = combo.querySelector(".person-combo-empty");
+    if (empty) empty.hidden = visible > 0 || !!q;
+  }
+
+  function useModalHtml(people) {
+    const m = state.useModal;
+    if (!m) return "";
+    return `<div class="modal-backdrop" data-use-modal-backdrop>
+      <div class="modal use-modal" role="dialog" aria-modal="true" aria-labelledby="use-modal-title" data-use-modal-dialog>
+        <h2 id="use-modal-title">Use 1 capsule</h2>
+        <p>${esc(m.name)}</p>
+        <form class="modal-form" data-use-one-form data-id="${m.id}">
+          ${personComboHtml({
+            label: "Consumed / used by",
+            value: "",
+            people: people || [],
+            hint: "Pick from the list or type a name. Leave blank if you prefer.",
+          })}
+          <div class="modal-actions">
+            <button type="button" class="ghost" data-use-modal-close>Cancel</button>
+            <button type="submit">Use 1</button>
+          </div>
+        </form>
+      </div>
+    </div>`;
+  }
+
+  function randomModalHtml() {
+    const pick = state.randomModal;
+    if (!pick) return "";
+    if (pick.empty) {
+      return `<div class="modal-backdrop random-modal-backdrop" data-random-modal-backdrop>
+        <div class="modal random-modal" role="dialog" aria-modal="true" data-random-modal-dialog>
+          <h2>No match</h2>
+          <p class="error">No matching in-stock cocktails.</p>
+          <div class="random-modal-actions">
+            <button type="button" class="ghost" data-random-modal-close>Close</button>
+            <button type="button" data-random-try-again>Try again</button>
+          </div>
+        </div>
+      </div>`;
+    }
+    const pickImg = primaryImage(pick);
+    const pickSpirits = (pick.spirits_csv || "").split("|").filter(Boolean).join(", ");
+    return `<div class="modal-backdrop random-modal-backdrop" data-random-modal-backdrop>
+      <div class="modal random-modal" role="dialog" aria-modal="true" aria-labelledby="random-modal-title" data-random-modal-dialog>
+        <div class="detail-hero">
+          <a class="thumb large ${pickImg ? "" : "thumb-empty"}" href="#/cocktail/${pick.id}" data-go="#/cocktail/${pick.id}" aria-label="${esc(pick.name)}">
+            ${pickImg ? `<img src="${esc(pickImg)}" alt="">` : ""}
+          </a>
+          <div>
+            <p class="detail-kicker">Cocktail${pick.seasonal ? " · Seasonal" : ""}</p>
+            <h2 id="random-modal-title" class="detail-title random-title">
+              <a class="random-title-link" href="#/cocktail/${pick.id}" data-go="#/cocktail/${pick.id}">${esc(pick.name)}${pick.favorite ? " ★" : ""}</a>
+            </h2>
+            ${pickSpirits ? `<p class="spirits">${esc(pickSpirits)}</p>` : ""}
+            <p class="detail-copy">${esc(pick.description || "")}</p>
+            <p class="muted">Qty ${pick.quantity} · ${starsLabel(pick.avg_rating)}${pick.glassware ? " · " + esc(pick.glassware) : ""}</p>
+          </div>
+        </div>
+        <div class="random-modal-actions">
+          <button type="button" class="ghost" data-random-modal-close>Close</button>
+          <button type="button" data-random-try-again>Try again</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function scanMatchModalHtml() {
+    const m = state.scanMatchModal;
+    if (!m) return "";
+    return `<div class="modal-backdrop scan-match-backdrop" data-scan-match-backdrop>
+      <div class="modal scan-match-modal" role="dialog" aria-modal="true" aria-labelledby="scan-match-title">
+        <div class="thumb large ${m.image ? "" : "thumb-empty"}">
+          ${m.image ? `<img src="${esc(m.image)}" alt="">` : ""}
+        </div>
+        <h2 id="scan-match-title">${esc(m.name)}</h2>
+        ${m.kindLabel ? `<p class="muted">${esc(m.kindLabel)}</p>` : ""}
+        <p class="hint">Tap anywhere to close</p>
+      </div>
+    </div>`;
+  }
+
+  function cocktailListCountHtml(cocktails) {
+    const n = cocktails.length;
+    const capsules = cocktails.reduce((sum, c) => sum + (Number(c.quantity) || 0), 0);
+    return `<p class="count">${n} cocktail${n === 1 ? "" : "s"} (${capsules} capsule${capsules === 1 ? "" : "s"})</p>`;
   }
 
   function renderWishlist() {
@@ -1428,21 +1650,11 @@
   }
 
   function cameraPanelHtml(target) {
-    // iPadOS/iOS: <input type="file" accept="image/*"> opens the system sheet
-    // (Take Photo / Photo Library / Browse). capture=environment jumps to camera.
     const pickers = `
       <div class="camera-actions">
-        <label class="btn-file">
-          Take photo or choose image
-          <input type="file" accept="image/*" data-image-pick="${esc(target)}" />
-        </label>
-        <label class="btn-file ghost">
-          Take photo
-          <input type="file" accept="image/*" capture="environment" data-image-pick="${esc(target)}" />
-        </label>
-        <button type="button" class="ghost" data-camera-start="${esc(target)}">Live scan</button>
+        <button type="button" data-camera-start="${esc(target)}">Live scan</button>
       </div>
-      <p class="hint">On iPad, “Take photo or choose image” uses the system prompt for Camera, Photos, or Files. Live scan needs camera permission in Safari/PWA.</p>`;
+      <p class="hint">Live scan needs camera permission in Safari/PWA.</p>`;
 
     if (!state.cameraOn || cameraTarget !== target) {
       return pickers;
@@ -1533,6 +1745,7 @@
         <p class="hint">USB scanners type into the field (Enter = look up). Capsule lids use the Bartesian decoder; case/pack labels use a built-in UPC/EAN decoder (works on iPad).</p>
         <div data-scan-result>${previewHtml}</div>
       </section>
+      ${scanMatchModalHtml()}
     `
     );
   }
@@ -1626,6 +1839,7 @@
         <h2>Saved mappings</h2>
         ${table}
       </section>
+      ${scanMatchModalHtml()}
     `
     );
   }
@@ -1652,10 +1866,116 @@
           <label class="check"><input type="checkbox" name="favorites" ${state.randomFavoritesOnly ? "checked" : ""}/> Favorites only</label>
           <button type="submit">Surprise me</button>
         </form>
-        <div data-random-result></div>
       </section>
+      ${randomModalHtml()}
     `
     );
+  }
+
+  function renderPacks() {
+    const packs = BartesianDB.listPacks({
+      search: state.packSearch,
+      enabledOnly: true,
+    });
+    const rows = packs
+      .map((p) => {
+        const items = BartesianDB.getPackItems(p.id);
+        return `
+          <a class="cocktail-row" href="#/pack/${p.id}" data-go="#/pack/${p.id}">
+            <span class="qty-badge" aria-label="${items.length} cocktails">${items.length}</span>
+            <div class="thumb ${p.image ? "" : "thumb-empty"}">
+              ${p.image ? `<img src="${esc(p.image)}" alt="">` : ""}
+            </div>
+            <div class="row-body">
+              <div class="row-title">${esc(p.name)}</div>
+              <div class="row-meta">${items.length} cocktail${items.length === 1 ? "" : "s"}</div>
+            </div>
+          </a>`;
+      })
+      .join("");
+    return shell(
+      "packs",
+      `
+      <section class="panel panel-list">
+        <p class="section-label">Menu</p>
+        <h1>Packs</h1>
+        <form class="toolbar" data-pack-filters>
+          <div class="toolbar-controls">
+            <div class="toolbar-search-wrap">
+              <input type="search" name="search" placeholder="Search" value="${esc(state.packSearch)}" />
+              ${
+                state.packSearch
+                  ? `<button type="button" class="toolbar-search-clear" data-pack-search-clear aria-label="Clear search">×</button>`
+                  : ""
+              }
+            </div>
+          </div>
+        </form>
+        <p class="count">${packs.length} pack${packs.length === 1 ? "" : "s"}</p>
+        <div class="list">${rows || `<p class="empty">No packs match.</p>`}</div>
+      </section>`
+    );
+  }
+
+  function renderPackDetail(id) {
+    const p = BartesianDB.getPack(id);
+    if (!p || !p.enabled) {
+      return shell("packs", `<section class="panel"><p>Pack not found.</p></section>`);
+    }
+    const items = BartesianDB.getPackItems(id);
+    const T = window.BartesianItemTemplates;
+    const itemList = items.length
+      ? `<div class="list">${items
+          .map((c) => {
+            const thumb = c.image || "";
+            return `
+              <a class="cocktail-row" href="#/cocktail/${c.id}" data-go="#/cocktail/${c.id}">
+                <span class="qty-badge ${qtyBadgeClass(Number(c.quantity) || 0, c.restock)}" aria-label="Quantity ${c.quantity || 0}">${c.quantity || 0}</span>
+                <div class="thumb ${thumb ? "" : "thumb-empty"}">
+                  ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
+                </div>
+                <div class="row-body">
+                  <div class="row-title">${esc(c.name)}</div>
+                  <div class="row-meta">${c.qty} in pack</div>
+                </div>
+              </a>`;
+          })
+          .join("")}</div>`
+      : `<p class="muted">No cocktails in this pack.</p>`;
+
+    const parts = {
+      hero: `
+        <a class="back" href="#/packs" data-go="#/packs">← All packs</a>
+        <div class="detail-hero">
+          <div class="thumb large ${p.image ? "" : "thumb-empty"}">
+            ${p.image ? `<img src="${esc(p.image)}" alt="">` : ""}
+          </div>
+          <div>
+            <p class="detail-kicker">Variety pack</p>
+            <h1 class="detail-title">${esc(p.name)}</h1>
+            ${p.notes ? `<p class="detail-copy">${esc(p.notes)}</p>` : ""}
+            ${externalLinkHtml(p.bartesian_url, "View on Bartesian")}
+            ${
+              p.help_url
+                ? `<p class="muted"><a href="${esc(p.help_url)}" target="_blank" rel="noopener">Help article ${arrowGlyph()}</a></p>`
+                : ""
+            }
+          </div>
+        </div>`,
+      nutrition: p.nutrition_image
+        ? `<a class="nutrition-label" href="${esc(p.nutrition_image)}" target="_blank" rel="noopener">
+             <img src="${esc(p.nutrition_image)}" alt="Nutrition label">
+           </a>`
+        : "",
+      pack_items: itemList,
+    };
+
+    const body =
+      T && T.renderSections
+        ? T.renderSections("pack", parts)
+        : Object.values(parts).join("\n");
+
+    return shell("packs", `<section class="panel detail">${body}</section>`);
   }
 
   function adminToggleBtn(attrs, on, labelOn, labelOff) {
@@ -1688,7 +2008,7 @@
             ${adminToggleBtn(`data-admin-cocktail-seasonal data-id="${c.id}"`, c.seasonal, "Seasonal ✓", "Seasonal")}
             ${adminToggleBtn(`data-admin-cocktail-enabled data-id="${c.id}"`, c.enabled, "Enabled ✓", "Disabled")}
             ${state.showAdminImageCut ? adminImageCutSelect(c) : ""}
-            <a class="btn-link small" href="#/admin/cocktails/edit/${c.id}" data-go="#/admin/cocktails/edit/${c.id}">Edit</a>
+            <a class="btn-link small btn-edit" href="#/admin/cocktails/edit/${c.id}" data-go="#/admin/cocktails/edit/${c.id}">Edit</a>
           </div>
         </div>
       </div>`).join("");
@@ -1725,7 +2045,7 @@
             <button type="button" class="ghost small" data-rimmer-qty-delta="1" data-id="${r.id}">+</button>
             ${adminToggleBtn(`data-rimmer-toggle-fav data-id="${r.id}"`, r.favorite, "Favorited ★", "Favorite")}
             ${adminToggleBtn(`data-admin-rimmer-enabled data-id="${r.id}"`, r.enabled, "Enabled ✓", "Disabled")}
-            <a class="btn-link small" href="#/admin/rimmers/edit/${r.id}" data-go="#/admin/rimmers/edit/${r.id}">Edit</a>
+            <a class="btn-link small btn-edit" href="#/admin/rimmers/edit/${r.id}" data-go="#/admin/rimmers/edit/${r.id}">Edit</a>
           </div>
         </div>
       </div>`).join("");
@@ -1760,7 +2080,7 @@
           <div class="row-meta">${esc(items.map((i) => i.name + " ×" + i.qty).join(", ") || "—")}</div>
           <div class="row-actions admin-actions">
             ${adminToggleBtn(`data-admin-pack-enabled data-id="${p.id}"`, p.enabled, "Enabled ✓", "Disabled")}
-            <a class="btn-link small" href="#/admin/packs/edit/${p.id}" data-go="#/admin/packs/edit/${p.id}">Edit</a>
+            <a class="btn-link small btn-edit" href="#/admin/packs/edit/${p.id}" data-go="#/admin/packs/edit/${p.id}">Edit</a>
           </div>
         </div>
       </div>`;
@@ -1955,14 +2275,59 @@
           ${itemField(v, "enabled", "Enabled", { type: "checkbox" })}
         </div>
         <h2>Pack items</h2>
-        <p class="hint">Quantity per cocktail in this pack (leave 0 / blank to exclude).</p>
-        <div class="check-list pack-items-list">
-          ${allCocktails.map((c) => `
-            <label class="pack-item-row">
-              <span>${esc(c.name)}</span>
-              <input name="item_qty_${c.id}" type="number" min="0" step="1" value="${qtyById.has(Number(c.id)) ? qtyById.get(Number(c.id)) : ""}" placeholder="0" />
-            </label>`).join("") || `<p class="muted">No cocktails yet.</p>`}
+        <p class="hint">Only cocktails in this pack are listed. Use +/− to change qty (Save to apply). Qty 0 on Save removes the cocktail from the pack.</p>
+        ${(() => {
+          const draftKey = itemType + ":" + (isNew ? "new" : id);
+          if (state.packEditKey !== draftKey || !Array.isArray(state.packEditIds)) {
+            state.packEditKey = draftKey;
+            state.packEditIds = [...qtyById.entries()]
+              .filter(([, q]) => Number(q) > 0)
+              .map(([cid]) => Number(cid));
+          }
+          const shownIds = state.packEditIds;
+          const shownSet = new Set(shownIds.map(Number));
+          const rows = shownIds
+            .map((cid) => allCocktails.find((c) => Number(c.id) === Number(cid)))
+            .filter(Boolean)
+            .map((c) => {
+              const q = qtyById.has(Number(c.id)) ? Number(qtyById.get(Number(c.id))) || 0 : 0;
+              const thumb = primaryImage(c);
+              return `
+            <div class="cocktail-row has-qty-open" data-pack-item-row="${c.id}">
+              <span class="qty-controls" data-qty-controls>
+                ${q > 0 ? `<button type="button" class="qty-step" data-pack-item-delta="-1" data-id="${c.id}" aria-label="Decrease">−</button>` : ""}
+                <span class="qty-badge ${qtyBadgeClass(q, false)}" data-pack-item-qty aria-label="Quantity ${q}">${q}</span>
+                <button type="button" class="qty-step" data-pack-item-delta="1" data-id="${c.id}" aria-label="Increase">+</button>
+              </span>
+              <div class="thumb ${thumb ? "" : "thumb-empty"}">
+                ${thumb ? `<img src="${esc(thumb)}" alt="">` : ""}
+              </div>
+              <div class="row-body">
+                <div class="row-title">${esc(c.name)}${c.enabled ? "" : ' <span class="pill">Disabled</span>'}</div>
+                <input type="hidden" name="item_qty_${c.id}" value="${q}" data-pack-item-input />
+              </div>
+            </div>`;
+            })
+            .join("");
+          const addOpts = allCocktails
+            .filter((c) => !shownSet.has(Number(c.id)))
+            .map(
+              (c) =>
+                `<option value="${c.id}">${esc(c.name)}${c.enabled ? "" : " (disabled)"}</option>`
+            )
+            .join("");
+          return `
+        <div class="list pack-items-edit">
+          ${rows || `<p class="muted">No cocktails in this pack yet.</p>`}
+        </div>
+        <div class="pack-add-row">
+          <select data-pack-add-select aria-label="Add cocktail">
+            <option value="">Add cocktail…</option>
+            ${addOpts}
+          </select>
+          <button type="button" data-pack-add-cocktail>Add</button>
         </div>`;
+        })()}`;
     }
 
     return shell(ITEM_LIST_SHELL[itemType], `
@@ -1990,9 +2355,25 @@
       <section class="panel">
         <p class="section-label">Admin</p>
         <h1>People</h1>
-        <p class="lede">Raters for cocktail comments. Admins see the Admin menu (saved in the <code>${esc(ADMIN_COOKIE)}</code> cookie for ${esc(CURRENT_USER)}).</p>
+        <p class="lede">Raters and “used by” names. Admins see the Admin menu (saved in the <code>${esc(ADMIN_COOKIE)}</code> cookie for ${esc(CURRENT_USER)}). Deleting a person clears their name from history (events stay) and removes their cocktail ratings.</p>
         <div class="list">
-          ${people.map((p) => `
+          ${people.map((p) => {
+            const editing = Number(state.peopleEditId) === Number(p.id);
+            if (editing) {
+              return `
+            <div class="action-row admin-row">
+              <span aria-hidden="true"></span>
+              <span aria-hidden="true"></span>
+              <div class="row-body">
+                <form class="inline-form person-edit-form" data-person-edit-form data-id="${p.id}">
+                  <input name="name" type="text" value="${esc(p.name)}" required autofocus />
+                  <button type="submit">Save</button>
+                  <button type="button" class="ghost" data-person-edit-cancel>Cancel</button>
+                </form>
+              </div>
+            </div>`;
+            }
+            return `
             <div class="action-row admin-row">
               <span aria-hidden="true"></span>
               <span aria-hidden="true"></span>
@@ -2001,8 +2382,11 @@
               </div>
               <div class="row-actions">
                 ${adminToggleBtn(`data-person-admin data-id="${p.id}" data-name="${esc(p.name)}"`, p.is_admin, "Admin ✓", "Make admin")}
+                <button type="button" class="btn-edit small" data-person-edit="${p.id}">Edit</button>
+                <button type="button" class="ghost danger small" data-person-delete="${p.id}" data-name="${esc(p.name)}">Delete</button>
               </div>
-            </div>`).join("") || `<p class="empty">None yet.</p>`}
+            </div>`;
+          }).join("") || `<p class="empty">None yet.</p>`}
         </div>
         <form class="inline-form" data-add-person>
           <input name="name" type="text" placeholder="Name" required />
@@ -2027,21 +2411,19 @@
       <section class="panel">
         <p class="section-label">Admin</p>
         <h1>Settings</h1>
-        ${adminDisplay}
+        <h2>Force refresh</h2>
+        <p>For iPad / PWA: unregister the service worker, clear caches, and reload. Keeps your local inventory database.</p>
+        <p class="muted">Current build: <code>${esc(APP_VERSION)}</code></p>
+        <button type="button" data-force-refresh>Force refresh</button>
         <h2>Export for GitHub</h2>
         <p>Downloads <code>bartesian-exports.zip</code>. Copy it to <code>exports/bartesian-exports.zip</code>, then run <code>node scripts/import-data.js</code> (or the Import debug task). That updates <code>data/</code> + seed; on next load the app applies seed quantities into local IndexedDB. Commit when ready.</p>
         <p class="hint">A normal reload keeps your browser DB. After an import, Force refresh (or hard reload) so the new seed rev is picked up — inventory counts then sync from seed.</p>
         <button type="button" data-export>Export data</button>
         <p class="hint" data-export-status></p>
-        <h2>Barcodes</h2>
-        <p><a href="#/admin/barcodes" data-go="#/admin/barcodes">Associate scanned codes</a> with cocktails, cases, packs, or rimmers. Capsule lid numbers auto-match when present in the romkal drink map.</p>
-        <h2>Force refresh</h2>
-        <p>For iPad / PWA: unregister the service worker, clear caches, and reload. Keeps your local inventory database.</p>
-        <p class="muted">Current build: <code>${esc(APP_VERSION)}</code></p>
-        <button type="button" data-force-refresh>Force refresh</button>
         <h2>Local database</h2>
         <p>Clear IndexedDB and re-seed from <code>js/seed-data.js</code>. History, Wishlist, ratings, and Restock flags are only restored if they were exported and re-imported first.</p>
         <button type="button" class="danger" data-reset>Reset local DB</button>
+        ${adminDisplay}
       </section>
     `
     );
@@ -2347,6 +2729,16 @@
       stopCamera();
     }
     if (route.view !== "item-history") state.historyModal = null;
+    if (route.view !== "detail") state.useModal = null;
+    if (route.view !== "random") state.randomModal = null;
+    if (route.view !== "scan" && route.view !== "admin-barcodes") state.scanMatchModal = null;
+    if (route.view !== "admin-item-edit" || route.itemType !== "pack") {
+      state.packEditIds = null;
+      state.packEditKey = "";
+    }
+    if (route.view !== "admin-people" && route.view !== "people") {
+      state.peopleEditId = null;
+    }
     if (ADMIN_VIEWS.includes(route.view) && !state.isAdmin) {
       root.innerHTML = shell("list", `
         <section class="panel">
@@ -2379,6 +2771,8 @@
       if (route.view === "detail") root.innerHTML = renderDetail(route.id);
       else if (route.view === "rimmers") root.innerHTML = renderRimmers();
       else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
+      else if (route.view === "packs") root.innerHTML = renderPacks();
+      else if (route.view === "pack-detail") root.innerHTML = renderPackDetail(route.id);
       else if (route.view === "scan") root.innerHTML = renderScan();
       else if (route.view === "item-history") root.innerHTML = renderItemHistory(route.itemType, route.id);
       else if (route.view === "wishlist") root.innerHTML = renderWishlist();
@@ -2520,6 +2914,189 @@
       render();
       return;
     }
+
+    if (e.target.closest("[data-use-modal-close]")) {
+      state.useModal = null;
+      render();
+      return;
+    }
+    if (
+      state.useModal &&
+      e.target.hasAttribute &&
+      e.target.hasAttribute("data-use-modal-backdrop")
+    ) {
+      state.useModal = null;
+      render();
+      return;
+    }
+
+    if (e.target.closest("[data-random-modal-close]")) {
+      state.randomModal = null;
+      render();
+      return;
+    }
+    if (
+      state.randomModal &&
+      e.target.hasAttribute &&
+      e.target.hasAttribute("data-random-modal-backdrop")
+    ) {
+      state.randomModal = null;
+      render();
+      return;
+    }
+    if (e.target.closest("[data-random-try-again]")) {
+      const form = root.querySelector("[data-random-form]");
+      if (form) {
+        const fd = new FormData(form);
+        state.randomSpirit = String(fd.get("spirit") || "");
+        state.randomFavoritesOnly = form.favorites ? form.favorites.checked : false;
+      }
+      const pick = BartesianDB.pickRandom({
+        spirit: state.randomSpirit,
+        favoritesOnly: state.randomFavoritesOnly,
+        availableOnly: true,
+      });
+      state.randomModal = pick || { empty: true };
+      render();
+      return;
+    }
+
+    if (state.scanMatchModal && e.target.closest("[data-scan-match-backdrop]")) {
+      state.scanMatchModal = null;
+      render();
+      return;
+    }
+
+    const personOption = e.target.closest("[data-person-combo-option]");
+    if (personOption) {
+      e.preventDefault();
+      const combo = personOption.closest("[data-person-combo]");
+      const input = combo && combo.querySelector("[data-person-combo-input]");
+      if (input) {
+        input.value = String(personOption.textContent || "").trim();
+        input.focus();
+      }
+      closeAllPersonCombos();
+      return;
+    }
+    const personToggle = e.target.closest("[data-person-combo-toggle]");
+    if (personToggle) {
+      e.preventDefault();
+      const combo = personToggle.closest("[data-person-combo]");
+      if (!combo) return;
+      if (combo.classList.contains("is-open")) closeAllPersonCombos();
+      else openPersonCombo(combo);
+      return;
+    }
+    if (e.target.closest("[data-person-combo-input]")) {
+      const combo = e.target.closest("[data-person-combo]");
+      openPersonCombo(combo);
+      return;
+    }
+    if (!e.target.closest("[data-person-combo]")) {
+      closeAllPersonCombos();
+    }
+
+    if (e.target.closest("[data-search-clear]")) {
+      state.search = "";
+      saveListPrefs();
+      render();
+      return;
+    }
+    if (e.target.closest("[data-pack-search-clear]")) {
+      state.packSearch = "";
+      render();
+      return;
+    }
+
+    const packItemDelta = e.target.closest("[data-pack-item-delta]");
+    if (packItemDelta) {
+      e.preventDefault();
+      const row = packItemDelta.closest("[data-pack-item-row]");
+      if (!row) return;
+      const delta = Number(packItemDelta.getAttribute("data-pack-item-delta")) || 0;
+      const input = row.querySelector("[data-pack-item-input]");
+      const badge = row.querySelector("[data-pack-item-qty]");
+      const controls = row.querySelector("[data-qty-controls]");
+      let q = Math.max(0, (Number(input && input.value) || 0) + delta);
+      if (input) input.value = String(q);
+      if (badge) {
+        badge.textContent = String(q);
+        badge.setAttribute("aria-label", "Quantity " + q);
+        badge.className = "qty-badge " + qtyBadgeClass(q, false);
+      }
+      if (controls) {
+        let minus = controls.querySelector('[data-pack-item-delta="-1"]');
+        if (q > 0 && !minus) {
+          minus = document.createElement("button");
+          minus.type = "button";
+          minus.className = "qty-step";
+          minus.setAttribute("data-pack-item-delta", "-1");
+          minus.setAttribute("data-id", packItemDelta.getAttribute("data-id") || "");
+          minus.setAttribute("aria-label", "Decrease");
+          minus.textContent = "−";
+          controls.insertBefore(minus, controls.firstChild);
+        } else if (q === 0 && minus) {
+          minus.remove();
+        }
+      }
+      return;
+    }
+
+    const packAddBtn = e.target.closest("[data-pack-add-cocktail]");
+    if (packAddBtn) {
+      e.preventDefault();
+      const form = packAddBtn.closest("[data-admin-item-form]");
+      if (!form || form.getAttribute("data-item-type") !== "pack") return;
+      const select = form.querySelector("[data-pack-add-select]");
+      const newId = Number(select && select.value);
+      if (!newId) {
+        state.flash = "Choose a cocktail to add.";
+        render();
+        return;
+      }
+      const fd = new FormData(form);
+      const text = (n) => String(fd.get(n) || "");
+      const on = (n) => fd.get(n) != null;
+      const items = [];
+      form.querySelectorAll("[data-pack-item-input]").forEach((input) => {
+        const cid = Number(String(input.name || "").replace(/^item_qty_/, ""));
+        if (!cid) return;
+        items.push({ cocktail_id: cid, qty: Number(input.value) || 0 });
+      });
+      if (!items.some((i) => Number(i.cocktail_id) === newId)) {
+        items.push({ cocktail_id: newId, qty: 0 });
+      }
+      const idAttr = form.getAttribute("data-id");
+      const editId = idAttr ? Number(idAttr) : null;
+      const draftKey = "pack:" + (editId == null ? "new" : editId);
+      state.adminItemDraft = {
+        key: draftKey,
+        values: {
+          name: text("name"),
+          slug: text("slug"),
+          barcode: text("barcode"),
+          notes: text("notes"),
+          image: text("image"),
+          nutrition_image: text("nutrition_image"),
+          bartesian_url: text("bartesian_url"),
+          help_url: text("help_url"),
+          shopify_product_id: text("shopify_product_id"),
+          shopify_variant_id: text("shopify_variant_id"),
+          shopify_handle: text("shopify_handle"),
+          gorgias_article_id: text("gorgias_article_id"),
+          enabled: on("enabled"),
+          items,
+        },
+      };
+      if (!Array.isArray(state.packEditIds)) state.packEditIds = [];
+      if (!state.packEditIds.some((id) => Number(id) === newId)) {
+        state.packEditIds = state.packEditIds.concat([newId]);
+      }
+      state.packEditKey = draftKey;
+      render();
+      return;
+    }
     const historyEdit = e.target.closest("[data-history-edit]");
     if (historyEdit) {
       const entry = BartesianDB.getActivity(Number(historyEdit.getAttribute("data-history-edit")));
@@ -2646,7 +3223,9 @@
     const useBtn = e.target.closest("[data-use-one]");
     if (useBtn) {
       const id = Number(useBtn.getAttribute("data-id"));
-      await BartesianDB.adjustQuantity(id, -1, "use_capsule");
+      const name = useBtn.getAttribute("data-name") || "";
+      const c = BartesianDB.getCocktail(id);
+      state.useModal = { id, name: name || (c && c.name) || "Cocktail" };
       render();
       return;
     }
@@ -2681,6 +3260,53 @@
       syncAdminFromDb();
       // If Lawrence was just granted/revoked sync already handled; for other people keep cookie
       render();
+      return;
+    }
+
+    const personEditBtn = e.target.closest("[data-person-edit]");
+    if (personEditBtn) {
+      state.peopleEditId = Number(personEditBtn.getAttribute("data-person-edit"));
+      render();
+      return;
+    }
+    if (e.target.closest("[data-person-edit-cancel]")) {
+      state.peopleEditId = null;
+      render();
+      return;
+    }
+    const personDeleteBtn = e.target.closest("[data-person-delete]");
+    if (personDeleteBtn) {
+      const id = Number(personDeleteBtn.getAttribute("data-person-delete"));
+      const name = personDeleteBtn.getAttribute("data-name") || "this person";
+      if (name.toLowerCase() === CURRENT_USER.toLowerCase()) {
+        if (
+          !confirm(
+            'Delete yourself ("' +
+              name +
+              '")? History keeps the events with no name; your ratings are removed. The Admin menu may disappear.'
+          )
+        ) {
+          return;
+        }
+      } else if (
+        !confirm(
+          'Delete "' +
+            name +
+            '"? History keeps their events with no name; their cocktail ratings are removed.'
+        )
+      ) {
+        return;
+      }
+      try {
+        await BartesianDB.deletePerson(id);
+        if (Number(state.peopleEditId) === id) state.peopleEditId = null;
+        syncAdminFromDb();
+        state.flash = "Deleted " + name + ".";
+        render();
+      } catch (err) {
+        state.flash = "Delete failed: " + err.message;
+        render();
+      }
       return;
     }
 
@@ -2989,30 +3615,26 @@
         favoritesOnly: state.randomFavoritesOnly,
         availableOnly: true,
       });
-      const box = root.querySelector("[data-random-result]");
-      if (!box) return;
-      if (!pick) {
-        box.innerHTML = `<p class="error">No matching in-stock cocktails.</p>`;
-        return;
+      state.randomModal = pick || { empty: true };
+      render();
+      return;
+    }
+
+    const useOneForm = e.target.closest("[data-use-one-form]");
+    if (useOneForm) {
+      e.preventDefault();
+      const id = Number(useOneForm.getAttribute("data-id"));
+      const fd = new FormData(useOneForm);
+      const personName = String(fd.get("person_name") || "").trim();
+      let personId = null;
+      if (personName) {
+        const person = await BartesianDB.addPerson(personName);
+        personId = person ? person.id : null;
       }
-      const pickImg = primaryImage(pick);
-      const pickSpirits = (pick.spirits_csv || "").split("|").filter(Boolean).join(", ");
-      box.innerHTML = `
-        <div class="random-card detail-hero">
-          <a class="thumb large ${pickImg ? "" : "thumb-empty"}" href="#/cocktail/${pick.id}" data-go="#/cocktail/${pick.id}" aria-label="${esc(pick.name)}">
-            ${pickImg ? `<img src="${esc(pickImg)}" alt="">` : ""}
-          </a>
-          <div>
-            <p class="detail-kicker">Cocktail${pick.seasonal ? " · Seasonal" : ""}</p>
-            <h2 class="detail-title random-title">
-              <a class="random-title-link" href="#/cocktail/${pick.id}" data-go="#/cocktail/${pick.id}">${esc(pick.name)}${pick.favorite ? " ★" : ""}</a>
-            </h2>
-            ${pickSpirits ? `<p class="spirits">${esc(pickSpirits)}</p>` : ""}
-            <p class="detail-copy">${esc(pick.description || "")}</p>
-            <p class="muted">Qty ${pick.quantity} · ${starsLabel(pick.avg_rating)}${pick.glassware ? " · " + esc(pick.glassware) : ""}</p>
-          </div>
-        </div>
-      `;
+      await BartesianDB.adjustQuantity(id, -1, "use_capsule", "", { personId });
+      state.useModal = null;
+      state.flash = personName ? "Used 1 · " + personName : "Used 1";
+      render();
       return;
     }
 
@@ -3094,6 +3716,8 @@
           : itemType === "rimmer" ? await BartesianDB.saveRimmer(editId, payload)
           : await BartesianDB.savePack(editId, payload);
         state.adminItemDraft = null;
+        state.packEditIds = null;
+        state.packEditKey = "";
         state.flash =
           (editId ? "Saved " : "Added ") + (saved && saved.name ? saved.name : ITEM_LABELS[itemType]) +
           ". Export from Settings to write it back to data/ for git.";
@@ -3120,6 +3744,24 @@
       const name = new FormData(personForm).get("name");
       await BartesianDB.addPerson(name);
       render();
+      return;
+    }
+
+    const personEditForm = e.target.closest("[data-person-edit-form]");
+    if (personEditForm) {
+      e.preventDefault();
+      const id = Number(personEditForm.getAttribute("data-id"));
+      const name = String(new FormData(personEditForm).get("name") || "").trim();
+      try {
+        await BartesianDB.renamePerson(id, name);
+        state.peopleEditId = null;
+        state.flash = "Updated " + name + ".";
+        syncAdminFromDb();
+        render();
+      } catch (err) {
+        state.flash = "Rename failed: " + err.message;
+        render();
+      }
       return;
     }
 
@@ -3166,6 +3808,12 @@
       return;
     }
 
+    if (e.target.matches("[data-person-combo-input]")) {
+      const combo = e.target.closest("[data-person-combo]");
+      openPersonCombo(combo);
+      return;
+    }
+
     const bookForm = e.target.closest("[data-book-filters]");
     if (bookForm) {
       syncBookApplyState(bookForm);
@@ -3178,7 +3826,25 @@
       saveListPrefs();
       const cocktails = BartesianDB.listCocktails(listQuery());
       const count = root.querySelector(".count");
-      if (count) count.textContent = `${cocktails.length} cocktail${cocktails.length === 1 ? "" : "s"}`;
+      if (count) {
+        const wrap = document.createElement("div");
+        wrap.innerHTML = cocktailListCountHtml(cocktails);
+        const next = wrap.firstElementChild;
+        if (next) count.replaceWith(next);
+      }
+      const clearBtn = listForm.querySelector("[data-search-clear]");
+      const searchWrap = listForm.querySelector(".toolbar-search-wrap");
+      if (state.search && !clearBtn && searchWrap) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "toolbar-search-clear";
+        btn.setAttribute("data-search-clear", "");
+        btn.setAttribute("aria-label", "Clear search");
+        btn.textContent = "×";
+        searchWrap.appendChild(btn);
+      } else if (!state.search && clearBtn) {
+        clearBtn.remove();
+      }
       const shellEl = root.querySelector(".list-shell");
       if (shellEl) {
         const wrap = document.createElement("div");
@@ -3187,6 +3853,13 @@
         if (next) shellEl.replaceWith(next);
       }
       scheduleAlphaIndexSync();
+      return;
+    }
+
+    const packForm = e.target.closest("[data-pack-filters]");
+    if (packForm && e.target.name === "search") {
+      state.packSearch = e.target.value;
+      render();
       return;
     }
 

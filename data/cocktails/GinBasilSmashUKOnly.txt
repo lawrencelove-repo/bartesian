@@ -6,7 +6,7 @@ Spirits: Gin
 Glassware: Lowball Glass
 Garnish: Basil Leaf
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/gin-basil-smash.png","label_image_eu":"images/nutrition/gin-basil-smash-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/gin-basil-smash.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":0.7,"regular_oz":1,"strong_oz":1.7,"raw":"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1.0 oz., Strong = 1.7 oz"}
 Bartesian URL: 
 Help URL: https://bartesian.gorgias.help/en-US/gin-basil-smash-(uk-only)-8043833

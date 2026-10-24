@@ -6,7 +6,7 @@ Spirits: Tequila
 Glassware: Lowball Glass
 Garnish: ed with a Cranberry Cheer Sugar rim
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/mistletoe-margarita.png","label_image_eu":"images/nutrition/mistletoe-margarita-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/mistletoe-margarita.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
 Help URL: https://bartesian.gorgias.help/en-US/mistletoe-margarita-3388359

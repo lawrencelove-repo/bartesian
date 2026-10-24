@@ -6,7 +6,7 @@ Spirits: Gin
 Glassware: Highball Glass
 Garnish: Lemon Peel
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/love-potion.png","label_image_eu":"images/nutrition/love-potion-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/love-potion.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
 Help URL: https://bartesian.gorgias.help/en-US/love-potion-1051826

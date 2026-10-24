@@ -71,12 +71,13 @@
     <script src="js/barcodes.js"></script>
     <script src="js/icons.js"></script>
     <script src="js/activity-templates.js"></script>
+    <script src="js/item-templates.js"></script>
     <script src="js/app.js"></script>
     <script>
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", function () {
           if (window.__bartesianPurging) return;
-          navigator.serviceWorker.register("sw.js?v=bartesian-v74").catch(function () {});
+          navigator.serviceWorker.register("sw.js?v=bartesian-v75").catch(function () {});
         });
       }
     </script>

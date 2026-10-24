@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Highball Glass
 Garnish: Lemon Wheel and Maraschino Cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/southern-blossom.png","label_image_eu":"images/nutrition/southern-blossom-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/southern-blossom.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
 Help URL: https://bartesian.gorgias.help/en-US/southern-blossom-1201767

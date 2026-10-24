@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Highball Glass
 Garnish: with a trio of honeydew melon balls for the perfect late summer sipper
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/golden-ace.png","label_image_eu":"images/nutrition/golden-ace-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/golden-ace.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/golden-ace-capsules?variant=43895115153607
 Help URL: https://bartesian.gorgias.help/en-US/golden-ace-646841

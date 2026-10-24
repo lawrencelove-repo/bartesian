@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Highball Glass
 Garnish: ed with a lemon wedge
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/19th-hole.png","label_image_eu":"images/nutrition/19th-hole-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/19th-hole.png"}
 Alcohol: {"mocktail_oz":0.0,"light_oz":1.4,"regular_oz":2.0,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: 
 Shopify Product ID: 

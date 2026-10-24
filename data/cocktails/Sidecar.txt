@@ -6,7 +6,7 @@ Spirits: Whiskey
 Glassware: Coupe Glass
 Garnish: with a lemon twist
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/sidecar.png","label_image_eu":"images/nutrition/sidecar-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/sidecar.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/sidecar-capsules?variant=41853978050759
 Help URL: https://bartesian.gorgias.help/en-US/sidecar-65193

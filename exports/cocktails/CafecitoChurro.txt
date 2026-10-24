@@ -6,7 +6,7 @@ Spirits: Tequila
 Glassware: Lowball Glass
 Garnish: ed with churro
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/caf-cito-churro.png","label_image_eu":"images/nutrition/caf-cito-churro-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/caf-cito-churro.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: 
 Help URL: https://bartesian.gorgias.help/en-US/cafecito-churro-4476621

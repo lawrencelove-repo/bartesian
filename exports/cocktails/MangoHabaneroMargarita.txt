@@ -6,7 +6,7 @@ Spirits: Tequila
 Glassware: Lowball Glass
 Garnish: with a spicy rim, lime wheel and habanero pepper. Get this limited seasonal release while it lasts
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/mango-habanero-margarita.png","label_image_eu":"images/nutrition/mango-habanero-margarita-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/mango-habanero-margarita.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/mango-habanero-margarita-capsules?variant=46099570884807
 Help URL: https://bartesian.gorgias.help/en-US/mango-habanero-margarita-6360703

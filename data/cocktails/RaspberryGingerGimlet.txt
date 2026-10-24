@@ -6,7 +6,7 @@ Spirits: Gin
 Glassware: Coupe Glass
 Garnish: 
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/raspberry-ginger-gimlet.png","label_image_eu":"images/nutrition/raspberry-ginger-gimlet-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/raspberry-ginger-gimlet.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/raspberry-ginger-gimlet-capsules?variant=42087716651207
 Help URL: https://bartesian.gorgias.help/en-US/raspberry-ginger-gimlet-67035

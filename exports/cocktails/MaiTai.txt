@@ -6,7 +6,7 @@ Spirits: Rum
 Glassware: Mai Tai Glass
 Garnish: Pineapple & Cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/mai-tai.png","label_image_eu":"images/nutrition/mai-tai-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/mai-tai.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/mai-tai-cocktails?variant=31660700860465
 Help URL: https://bartesian.gorgias.help/en-US/mai-tai-39053

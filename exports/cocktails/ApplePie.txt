@@ -6,7 +6,7 @@ Spirits: Vodka, Whiskey
 Glassware: Lowball Glass
 Garnish: Apple
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/apple-pie.png","label_image_eu":"images/nutrition/apple-pie-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/apple-pie.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2.0 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/apple-pie?variant=32387502047281
 Help URL: https://bartesian.gorgias.help/en-US/apple-pie-36517

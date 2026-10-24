@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Lowball Glass
 Garnish: Orange & Cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/amaretto-sour.png","label_image_eu":"images/nutrition/amaretto-sour-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/amaretto-sour.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":0.7,"regular_oz":1,"strong_oz":1.7,"raw":"Mocktail = 0 oz., Light = 0.7 oz., Regular = 1 oz., Strong = 1.7 oz"}
 Bartesian URL: https://bartesian.com/products/amaretto-sour-cocktails?variant=32387499491377
 Help URL: https://bartesian.gorgias.help/en-US/amaretto-sour-35050

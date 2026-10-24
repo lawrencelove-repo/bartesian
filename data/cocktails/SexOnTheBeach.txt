@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Highball Glass
 Garnish: Cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/sex-on-the-beach.png","label_image_eu":"images/nutrition/sex-on-the-beach-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/sex-on-the-beach.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/sex-on-the-beach-vodka-cocktails?variant=15685661982769
 Help URL: https://bartesian.gorgias.help/en-US/sex-on-the-beach-39082

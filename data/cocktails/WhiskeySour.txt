@@ -6,7 +6,7 @@ Spirits: Whiskey
 Glassware: Lowball Glass
 Garnish: Cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/whiskey-sour.png","label_image_eu":"images/nutrition/whiskey-sour-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/whiskey-sour.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/whiskey-sour-cocktails?variant=16352868401201
 Help URL: https://bartesian.gorgias.help/en-US/whiskey-sour-76297

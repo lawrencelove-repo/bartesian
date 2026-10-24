@@ -6,7 +6,7 @@ Spirits: Tequila
 Glassware: Margarita Glass
 Garnish: Pineapple
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/pineapple-margarita.png","label_image_eu":"images/nutrition/pineapple-margarita-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/pineapple-margarita.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/pineapple-margarita-capsules?variant=41965982613703
 Help URL: https://bartesian.gorgias.help/en-US/pineapple-margarita-45861

@@ -1158,6 +1158,37 @@
       return queryOne("SELECT * FROM people WHERE name = ? COLLATE NOCASE", [trimmed]);
     },
 
+    async renamePerson(personId, name) {
+      const trimmed = String(name || "").trim();
+      if (!trimmed) throw new Error("Name required");
+      const row = queryOne("SELECT id, name FROM people WHERE id = ?", [personId]);
+      if (!row) throw new Error("Person not found");
+      const clash = queryOne(
+        "SELECT id FROM people WHERE name = ? COLLATE NOCASE AND id != ?",
+        [trimmed, personId]
+      );
+      if (clash) throw new Error("Someone named “" + trimmed + "” already exists.");
+      if (String(row.name) !== trimmed) {
+        exec("UPDATE people SET name = ? WHERE id = ?", [trimmed, personId]);
+        await persist();
+      }
+      const p = queryOne("SELECT * FROM people WHERE id = ?", [personId]);
+      return p ? { ...p, is_admin: Number(p.is_admin || 0) === 1 } : null;
+    },
+
+    /**
+     * Delete a person. Activity rows keep their events with person_id cleared
+     * (ON DELETE SET NULL). Cocktail ratings for this person are removed
+     * (ON DELETE CASCADE — ratings require a person).
+     */
+    async deletePerson(personId) {
+      const row = queryOne("SELECT id, name FROM people WHERE id = ?", [personId]);
+      if (!row) throw new Error("Person not found");
+      exec("DELETE FROM people WHERE id = ?", [personId]);
+      await persist();
+      return { id: row.id, name: row.name };
+    },
+
     async setPersonAdmin(personId, isAdmin) {
       exec("UPDATE people SET is_admin = ? WHERE id = ?", [isAdmin ? 1 : 0, personId]);
       await persist();
@@ -1474,7 +1505,7 @@
         `SELECT p.*, pi.qty AS pack_qty
          FROM packs p
          JOIN pack_items pi ON pi.pack_id = p.id
-         WHERE pi.cocktail_id = ?
+         WHERE pi.cocktail_id = ? AND p.enabled = 1
          ORDER BY p.name COLLATE NOCASE`,
         [cocktailId]
       );
@@ -1509,7 +1540,7 @@
         `SELECT r.*
          FROM rimmers r
          JOIN cocktail_rimmers cr ON cr.rimmer_id = r.id
-         WHERE cr.cocktail_id = ?
+         WHERE cr.cocktail_id = ? AND r.enabled = 1
          ORDER BY r.name COLLATE NOCASE`,
         [cocktailId]
       ).map(rowToRimmer);
@@ -1520,7 +1551,7 @@
         `SELECT c.id, c.name, c.slug, c.image, c.quantity, c.restock
          FROM cocktails c
          JOIN cocktail_rimmers cr ON cr.cocktail_id = c.id
-         WHERE cr.rimmer_id = ?
+         WHERE cr.rimmer_id = ? AND c.enabled = 1
          ORDER BY c.name COLLATE NOCASE`,
         [rimmerId]
       );
@@ -1552,7 +1583,7 @@
 
     getPackItems(packId) {
       return query(
-        `SELECT c.id, c.name, c.slug, pi.qty
+        `SELECT c.id, c.name, c.slug, c.image, c.quantity, c.restock, pi.qty
          FROM pack_items pi
          JOIN cocktails c ON c.id = pi.cocktail_id
          WHERE pi.pack_id = ?
@@ -1855,8 +1886,17 @@
       return query(listSelect + " ORDER BY c.name COLLATE NOCASE").map(rowToCocktail);
     },
 
-    listPacks() {
-      return query("SELECT * FROM packs ORDER BY name COLLATE NOCASE");
+    listPacks({ search = "", enabledOnly = false } = {}) {
+      let sql = "SELECT * FROM packs WHERE 1=1";
+      const params = [];
+      if (enabledOnly) sql += " AND enabled = 1";
+      if (search.trim()) {
+        sql += " AND (name LIKE ? OR notes LIKE ?)";
+        const q = "%" + search.trim() + "%";
+        params.push(q, q);
+      }
+      sql += " ORDER BY name COLLATE NOCASE";
+      return query(sql, params);
     },
 
     getPack(id) {

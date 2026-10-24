@@ -6,7 +6,7 @@ Spirits: Tequila, Whiskey, Vodka, Gin, Rum
 Glassware: 
 Garnish: 
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/2026-advent-calendar-spoiler-alert.png","label_image_eu":"images/nutrition/2026-advent-calendar-spoiler-alert-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/2026-advent-calendar-spoiler-alert.png"}
 Alcohol: {}
 Bartesian URL: https://bartesian.com/products/advent-calendar?variant=47520593445063
 Shopify Product ID: 8913630003399

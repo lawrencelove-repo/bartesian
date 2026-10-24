@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Martini Glass
 Garnish: ed with licorice or a blood-red drizzle
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/vampires-kiss.png","label_image_eu":"images/nutrition/vampires-kiss-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/vampires-kiss.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/vampires-kiss-capsules?variant=46632567832775
 Help URL: https://bartesian.gorgias.help/en-US/vampires-kiss-8043822

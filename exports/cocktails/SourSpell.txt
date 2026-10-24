@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Martini Glass
 Garnish: ed with sour candy strips
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/sour-spell.png","label_image_eu":"images/nutrition/sour-spell-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/sour-spell.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/sour-spell-capsules?variant=46632563802311
 Help URL: https://bartesian.gorgias.help/en-US/sour-spell-8043821

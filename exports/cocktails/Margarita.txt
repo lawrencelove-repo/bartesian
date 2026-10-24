@@ -6,7 +6,7 @@ Spirits: Tequila
 Glassware: Margarita Glass
 Garnish: Lime
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/margarita.png","label_image_eu":"images/nutrition/margarita-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/margarita.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/margarita-cocktails?variant=15685650022449
 Help URL: https://bartesian.gorgias.help/en-US/margarita-39059

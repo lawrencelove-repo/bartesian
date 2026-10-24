@@ -6,7 +6,7 @@ Spirits: Tequila
 Glassware: Lowball
 Garnish: ed with an orange wedge and maraschino cherry
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/tequila-sunrise.png","label_image_eu":"images/nutrition/tequila-sunrise-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/tequila-sunrise.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1,"regular_oz":1.5,"strong_oz":2.5,"raw":"Mocktail = 0 oz., Light = 1.0 oz., Regular = 1.5 oz., Strong = 2.5 oz"}
 Bartesian URL: https://bartesian.com/products/tequila-sunrise-capsules?variant=43044245176519
 Help URL: https://bartesian.gorgias.help/en-US/tequila-sunrise-217642

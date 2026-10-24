@@ -6,7 +6,7 @@ Spirits: Vodka
 Glassware: Martini Glass
 Garnish: Orange Peel
 Pairs With: 
-Nutrition: {"label_image":"images/nutrition/cosmopolitan.png","label_image_eu":"images/nutrition/cosmopolitan-eu.jpg"}
+Nutrition: {"label_image":"images/nutrition/cosmopolitan.png"}
 Alcohol: {"mocktail_oz":0,"light_oz":1.4,"regular_oz":2,"strong_oz":3.4,"raw":"Mocktail = 0 oz., Light = 1.4 oz., Regular = 2 oz., Strong = 3.4 oz"}
 Bartesian URL: https://bartesian.com/products/cosmopolitan-martini-cocktails?variant=32387303211057
 Help URL: https://bartesian.gorgias.help/en-US/cosmopolitan-38999
