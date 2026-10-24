@@ -440,9 +440,19 @@ function headerValuesFromTxt(raw) {
   return map;
 }
 
+/** True when an incoming inventory value is worth inserting into a file that lacks the header. */
+function meaningfulInventoryInsert(header, value) {
+  const v = String(value ?? "").trim();
+  if (header === "Restock" || header === "Favorite") return v === "1";
+  if (header === "Quantity") return v !== "" && v !== "0";
+  if (/Barcode/i.test(header)) return v.length > 0;
+  return v.length > 0;
+}
+
 /**
  * Patch only inventory headers in an existing .txt, preserving field order and
- * catalog content. Adds a missing inventory header before the trailing blank.
+ * catalog content. Updates existing lines in place. Inserts a missing header
+ * only when the incoming value is meaningful (e.g. Restock: 1), never Restock: 0.
  */
 function patchInventoryTxt(existingRaw, incomingRaw, kind) {
   const headers = INVENTORY_HEADERS[kind] || [];
@@ -473,7 +483,7 @@ function patchInventoryTxt(existingRaw, incomingRaw, kind) {
   }
   for (const h of headers) {
     if (seen.has(h) || !updates.has(h)) continue;
-    // Insert before trailing empty lines
+    if (!meaningfulInventoryInsert(h, updates.get(h))) continue;
     let insertAt = lines.length;
     while (insertAt > 0 && lines[insertAt - 1] === "") insertAt--;
     lines.splice(insertAt, 0, h + ": " + updates.get(h));
@@ -710,94 +720,198 @@ function mergeActivityJson(incomingPath) {
   return { added, updated, total: merged.length };
 }
 
+/**
+ * Preserve existing people rows (including id / field order). Only append names
+ * that are not already present, assigning the next numeric id.
+ */
 function mergePeopleJson(incomingPath) {
   const dest = path.join(DATA_DIR, "people.json");
   const existing = readJsonIfExists(dest);
   const incoming = readJsonIfExists(incomingPath);
   if (!incoming.length) return;
+
   const byName = new Map();
+  let maxId = 0;
   for (const p of existing) {
     if (!p.name) continue;
-    byName.set(String(p.name).toLowerCase(), {
-      name: p.name,
-      is_admin: !!(p.is_admin === true || p.is_admin === 1),
-      created_at: p.created_at || "",
-    });
+    byName.set(String(p.name).toLowerCase(), p);
+    if (typeof p.id === "number" && p.id > maxId) maxId = p.id;
   }
+
+  const added = [];
   for (const p of incoming) {
     if (!p.name) continue;
     const key = String(p.name).toLowerCase();
-    const prev = byName.get(key);
-    byName.set(key, {
+    if (byName.has(key)) {
+      const prev = byName.get(key);
+      if ((p.is_admin === true || p.is_admin === 1) && !prev.is_admin) {
+        byName.set(key, { ...prev, is_admin: true });
+      }
+      continue;
+    }
+    maxId += 1;
+    const row = {
+      id: maxId,
       name: p.name,
-      is_admin: !!(p.is_admin === true || p.is_admin === 1) || !!(prev && prev.is_admin),
-      created_at: (prev && prev.created_at) || p.created_at || "",
-    });
+      created_at: p.created_at || new Date().toISOString(),
+      is_admin: !!(p.is_admin === true || p.is_admin === 1),
+    };
+    byName.set(key, row);
+    added.push(row);
   }
-  const out = [...byName.values()].sort((a, b) => a.name.localeCompare(b.name));
+
+  if (!added.length) {
+    // Still persist is_admin promotions if any
+    const promoted = [...byName.values()];
+    const same =
+      promoted.length === existing.length &&
+      JSON.stringify(promoted) === JSON.stringify(existing);
+    if (same) {
+      console.log("Merged people.json: no changes");
+      return;
+    }
+  }
+
+  const out = [];
+  const used = new Set();
+  for (const p of existing) {
+    if (!p.name) continue;
+    const key = String(p.name).toLowerCase();
+    if (used.has(key)) continue;
+    out.push(byName.get(key));
+    used.add(key);
+  }
+  for (const p of added) out.push(p);
   writeJson(dest, out);
-  console.log(`Merged people.json: ${out.length} people (ids stripped)`);
+  console.log(
+    `Merged people.json: +${added.length} new (${out.length} total, existing ids preserved)`
+  );
 }
 
+/**
+ * Preserve existing barcode rows (including id). Only append codes that are new.
+ */
 function mergeBarcodesJson(incomingPath) {
   const dest = path.join(DATA_DIR, "barcodes.json");
   const existing = readJsonIfExists(dest);
   const incoming = readJsonIfExists(incomingPath);
   if (!incoming.length) return;
+
   const byCode = new Map();
-  const portable = (b) => ({
-    code: String(b.code || "").trim(),
-    kind: b.kind || "",
-    case_qty: b.case_qty != null ? Number(b.case_qty) : 1,
-    cocktail_name: b.cocktail_name || null,
-    cocktail_slug: b.cocktail_slug || null,
-    pack_name: b.pack_name || null,
-    pack_slug: b.pack_slug || null,
-    rimmer_name: b.rimmer_name || null,
-    rimmer_slug: b.rimmer_slug || null,
-  });
+  let maxId = 0;
   for (const b of existing) {
-    const p = portable(b);
-    if (p.code) byCode.set(p.code, p);
+    const code = String(b.code || "").trim();
+    if (!code) continue;
+    byCode.set(code, b);
+    if (typeof b.id === "number" && b.id > maxId) maxId = b.id;
   }
+
+  const added = [];
   for (const b of incoming) {
-    const p = portable(b);
-    if (p.code) byCode.set(p.code, p);
+    const code = String(b.code || "").trim();
+    if (!code || byCode.has(code)) continue;
+    maxId += 1;
+    const row = {
+      id: maxId,
+      code,
+      kind: b.kind || "",
+      cocktail_id: null,
+      pack_id: null,
+      rimmer_id: null,
+      case_qty: b.case_qty != null ? Number(b.case_qty) : 1,
+      cocktail_name: b.cocktail_name || null,
+      cocktail_slug: b.cocktail_slug || null,
+      pack_name: b.pack_name || null,
+      pack_slug: b.pack_slug || null,
+      rimmer_name: b.rimmer_name || null,
+      rimmer_slug: b.rimmer_slug || null,
+    };
+    byCode.set(code, row);
+    added.push(row);
   }
-  const out = [...byCode.values()].sort((a, b) => a.code.localeCompare(b.code));
+
+  if (!added.length) {
+    console.log("Merged barcodes.json: no new codes");
+    return;
+  }
+
+  const out = [...existing.filter((b) => String(b.code || "").trim()), ...added];
   writeJson(dest, out);
-  console.log(`Merged barcodes.json: ${out.length} codes (ids stripped)`);
+  console.log(
+    `Merged barcodes.json: +${added.length} new (${out.length} total, existing ids preserved)`
+  );
 }
 
+/**
+ * Preserve existing ratings; upsert by person_name + cocktail_slug only when new
+ * or when stars/comment changed — keep prior row shape when unchanged.
+ */
 function mergeRatingsJson(incomingPath) {
   const dest = path.join(DATA_DIR, "ratings.json");
   const existing = readJsonIfExists(dest);
   const incoming = readJsonIfExists(incomingPath);
-  if (!incoming.length && !existing.length) return;
+  if (!incoming.length) return;
+
   const keyOf = (r) =>
     `${String(r.person_name || "").toLowerCase()}|${r.cocktail_slug || ""}`;
   const byKey = new Map();
-  const portable = (r) => ({
-    stars: r.stars != null ? Number(r.stars) : null,
-    comment: r.comment || r.detail || "",
-    created_at: r.created_at || "",
-    updated_at: r.updated_at || "",
-    person_name: r.person_name || null,
-    cocktail_slug: r.cocktail_slug || null,
-  });
+  let maxId = 0;
   for (const r of existing) {
-    const p = portable(r);
-    if (p.person_name && p.cocktail_slug) byKey.set(keyOf(p), p);
+    if (!r.person_name || !r.cocktail_slug) continue;
+    byKey.set(keyOf(r), r);
+    if (typeof r.id === "number" && r.id > maxId) maxId = r.id;
   }
+
+  let added = 0;
+  let updated = 0;
   for (const r of incoming) {
-    const p = portable(r);
-    if (p.person_name && p.cocktail_slug) byKey.set(keyOf(p), p);
+    if (!r.person_name || !r.cocktail_slug) continue;
+    const key = keyOf(r);
+    const prev = byKey.get(key);
+    if (prev) {
+      const stars = r.stars != null ? Number(r.stars) : prev.stars;
+      const comment = r.comment || r.detail || prev.comment || "";
+      if (stars === prev.stars && comment === (prev.comment || "")) continue;
+      byKey.set(key, {
+        ...prev,
+        stars,
+        comment,
+        updated_at: r.updated_at || new Date().toISOString(),
+      });
+      updated++;
+      continue;
+    }
+    maxId += 1;
+    byKey.set(key, {
+      id: maxId,
+      stars: r.stars != null ? Number(r.stars) : null,
+      comment: r.comment || r.detail || "",
+      created_at: r.created_at || new Date().toISOString(),
+      updated_at: r.updated_at || r.created_at || new Date().toISOString(),
+      person_name: r.person_name,
+      cocktail_slug: r.cocktail_slug,
+    });
+    added++;
   }
-  const out = [...byKey.values()].sort((a, b) =>
-    `${a.cocktail_slug}|${a.person_name}`.localeCompare(`${b.cocktail_slug}|${b.person_name}`)
-  );
+
+  if (!added && !updated) {
+    console.log("Merged ratings.json: no changes");
+    return;
+  }
+
+  const out = [];
+  const used = new Set();
+  for (const r of existing) {
+    const key = keyOf(r);
+    if (!byKey.has(key) || used.has(key)) continue;
+    out.push(byKey.get(key));
+    used.add(key);
+  }
+  for (const [key, r] of byKey) {
+    if (!used.has(key)) out.push(r);
+  }
   writeJson(dest, out);
-  console.log(`Merged ratings.json: ${out.length} ratings (ids stripped)`);
+  console.log(`Merged ratings.json: +${added} new, ~${updated} updated`);
 }
 
 function mergeWishlistJson(incomingPath) {
