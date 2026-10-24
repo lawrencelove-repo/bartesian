@@ -22,8 +22,8 @@ Image: images/hero/bees-knees.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 1
-Restock: 0
+Quantity: 0
+Restock: 1
 Capsule Barcode: 318824749
 Case Barcode: 
 Case Qty: 8

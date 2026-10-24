@@ -22,7 +22,7 @@ Image: images/hero/lychee-martini.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 8
+Quantity: 5
 Restock: 0
 Capsule Barcode: 511738965
 Case Barcode: 850054919960

@@ -3,10 +3,11 @@
  *
  * Usage:
  *   node scripts/import-data.js
- *       Merge exports/bartesian-exports.zip into data/, then rebuild seed.
+ *       Merge exports/bartesian-exports.zip into data/ (by slug, preserving
+ *       canonical filenames), remove duplicate-slug orphans, then rebuild seed.
  *
  *   node scripts/import-data.js --from-data
- *       Rebuild seed from data/ only (skip zip).
+ *       Dedupe data/ orphans if needed, then rebuild seed (skip zip).
  *
  *   node scripts/import-data.js path/to/other.zip
  *       Merge a different zip, then rebuild seed.
@@ -354,15 +355,136 @@ function findExportRoot(extractedDir) {
   return null;
 }
 
-function copyTxtDir(srcDir, destDir) {
-  if (!fs.existsSync(srcDir)) return 0;
-  fs.mkdirSync(destDir, { recursive: true });
-  let n = 0;
-  for (const f of readDirTxt(srcDir)) {
-    fs.copyFileSync(path.join(srcDir, f), path.join(destDir, f));
-    n++;
+/** Filename-only tie-break: regional / longer / less-mangled. */
+function preferFilename(a, b) {
+  const score = (f) => {
+    let s = f.length;
+    if (/(EUUK|UKOnly|USOnly)\.txt$/i.test(f)) s += 100;
+    if (/^thHole\.txt$/i.test(f)) s -= 80;
+    if (/CafCito/i.test(f)) s -= 40;
+    if (/JalapeO|JollypeO/i.test(f)) s -= 40;
+    if (/WinterPearAdise/i.test(f)) s -= 20;
+    return s;
+  };
+  const sa = score(a);
+  const sb = score(b);
+  if (sa !== sb) return sa >= sb ? a : b;
+  return a.localeCompare(b, undefined, { sensitivity: "base" }) <= 0 ? a : b;
+}
+
+/**
+ * Prefer the richer on-disk variant for a slug (more pack items, real image_cut,
+ * not a redundant *Rimmer.txt twin), then fall back to preferFilename.
+ */
+function preferFileInDir(dir, a, b, parseFn) {
+  const stem = (f) => f.replace(/\.txt$/i, "");
+  if (stem(a) + "Rimmer" === stem(b)) return a;
+  if (stem(b) + "Rimmer" === stem(a)) return b;
+
+  const meta = (f) => {
+    const raw = fs.readFileSync(path.join(dir, f), "utf8");
+    const item = parseFn(raw, f);
+    const items = Array.isArray(item.items) ? item.items.length : 0;
+    const cut = item.image_cut && item.image_cut !== "NA" ? 1 : 0;
+    const img = item.image ? 1 : 0;
+    return { rawLen: raw.length, items, cut, img };
+  };
+  const A = meta(a);
+  const B = meta(b);
+  if (A.items !== B.items) return A.items >= B.items ? a : b;
+  if (A.cut !== B.cut) return A.cut >= B.cut ? a : b;
+  if (A.img !== B.img) return A.img >= B.img ? a : b;
+  if (Math.abs(A.rawLen - B.rawLen) > 40) return A.rawLen >= B.rawLen ? a : b;
+  return preferFilename(a, b);
+}
+
+function slugFromTxt(raw, parseFn, filename) {
+  const item = parseFn(raw, filename);
+  return item && item.slug ? item.slug : "";
+}
+
+/** Map slug → preferred existing filename in destDir. */
+function indexSlugToFile(destDir, parseFn) {
+  const bySlug = new Map();
+  for (const f of readDirTxt(destDir)) {
+    const raw = fs.readFileSync(path.join(destDir, f), "utf8");
+    const slug = slugFromTxt(raw, parseFn, f);
+    if (!slug) continue;
+    if (!bySlug.has(slug)) bySlug.set(slug, f);
+    else bySlug.set(slug, preferFileInDir(destDir, bySlug.get(slug), f, parseFn));
   }
-  return n;
+  return bySlug;
+}
+
+/**
+ * Write export .txt files into dest by slug: overwrite the existing canonical
+ * filename when the slug is already present (avoids thHole.txt vs 19thHole.txt).
+ * Then delete any remaining same-slug orphans.
+ */
+function mergeTxtDirBySlug(srcDir, destDir, parseFn, kind) {
+  if (!fs.existsSync(srcDir)) return { written: 0, updated: 0, created: 0, removed: 0 };
+  fs.mkdirSync(destDir, { recursive: true });
+  const slugToFile = indexSlugToFile(destDir, parseFn);
+  let updated = 0;
+  let created = 0;
+  for (const f of readDirTxt(srcDir)) {
+    const srcPath = path.join(srcDir, f);
+    const raw = fs.readFileSync(srcPath, "utf8");
+    const slug = slugFromTxt(raw, parseFn, f);
+    const destName = (slug && slugToFile.get(slug)) || f;
+    const destPath = path.join(destDir, destName);
+    const existed = slug && slugToFile.has(slug);
+    fs.writeFileSync(destPath, raw, "utf8");
+    if (existed) {
+      updated++;
+      if (destName !== f) {
+        console.log(`Updated ${kind} ${destName} ← export ${f} (slug ${slug})`);
+      }
+    } else {
+      created++;
+      if (slug) slugToFile.set(slug, destName);
+    }
+  }
+  const removed = removeDuplicateSlugFiles(destDir, parseFn, kind, slugToFile);
+  return { written: updated + created, updated, created, removed };
+}
+
+/** Delete extra .txt files that share a slug; keep the preferred / mapped name. */
+function removeDuplicateSlugFiles(dir, parseFn, kind, preferredBySlug) {
+  if (!fs.existsSync(dir)) return 0;
+  const groups = new Map();
+  for (const f of readDirTxt(dir)) {
+    const raw = fs.readFileSync(path.join(dir, f), "utf8");
+    const slug = slugFromTxt(raw, parseFn, f);
+    if (!slug) continue;
+    if (!groups.has(slug)) groups.set(slug, []);
+    groups.get(slug).push(f);
+  }
+  let removed = 0;
+  for (const [slug, files] of groups) {
+    if (files.length < 2) continue;
+    let keep = preferredBySlug && preferredBySlug.get(slug);
+    if (!keep || !files.includes(keep)) {
+      keep = files.reduce((a, b) => preferFileInDir(dir, a, b, parseFn));
+    }
+    for (const f of files) {
+      if (f === keep) continue;
+      fs.unlinkSync(path.join(dir, f));
+      console.warn(`Removed duplicate ${kind} ${f} (kept ${keep}, slug "${slug}")`);
+      removed++;
+    }
+  }
+  return removed;
+}
+
+function dedupeDataDirs() {
+  const c = removeDuplicateSlugFiles(COCKTAILS_DIR, parseCocktailText, "cocktail");
+  const p = removeDuplicateSlugFiles(PACKS_DIR, parsePackText, "pack");
+  const r = removeDuplicateSlugFiles(RIMMERS_DIR, parseRimmerText, "rimmer");
+  if (c + p + r > 0) {
+    console.log(`Deduped data/: removed ${c} cocktail, ${p} pack, ${r} rimmer orphan(s)`);
+  }
+  return { c, p, r };
 }
 
 function mergeZipIntoData(zipPath) {
@@ -374,9 +496,9 @@ function mergeZipIntoData(zipPath) {
     if (!base) {
       throw new Error("Zip has no cocktails/, packs/, or rimmers/ folder");
     }
-    const c = copyTxtDir(path.join(base, "cocktails"), COCKTAILS_DIR);
-    const p = copyTxtDir(path.join(base, "packs"), PACKS_DIR);
-    const r = copyTxtDir(path.join(base, "rimmers"), RIMMERS_DIR);
+    const c = mergeTxtDirBySlug(path.join(base, "cocktails"), COCKTAILS_DIR, parseCocktailText, "cocktail");
+    const p = mergeTxtDirBySlug(path.join(base, "packs"), PACKS_DIR, parsePackText, "pack");
+    const r = mergeTxtDirBySlug(path.join(base, "rimmers"), RIMMERS_DIR, parseRimmerText, "rimmer");
     for (const name of ["barcodes.json", "ratings.json", "people.json", "activity.json", "wishlist.json"]) {
       const src = path.join(base, name);
       if (fs.existsSync(src)) {
@@ -384,7 +506,11 @@ function mergeZipIntoData(zipPath) {
         console.log("Copied", name);
       }
     }
-    console.log(`Merged into data/: ${c} cocktails, ${p} packs, ${r} rimmers`);
+    console.log(
+      `Merged into data/: cocktails ${c.updated} updated/${c.created} new (${c.removed} dupes removed), ` +
+        `packs ${p.updated}/${p.created} (${p.removed} dupes), ` +
+        `rimmers ${r.updated}/${r.created} (${r.removed} dupes)`
+    );
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
   }
@@ -400,23 +526,31 @@ function readJsonIfExists(file) {
   }
 }
 
-/** Duplicate .txt files share slugs (EU/UK, US-only variants); first file wins. */
+/** Safety net if on-disk dupes remain; preferFilename order matches removeDuplicateSlugFiles. */
 function dedupeBySlug(items, kind) {
-  const seen = new Set();
-  const out = [];
+  const best = new Map();
   for (const item of items) {
     if (!item.slug) continue;
-    if (seen.has(item.slug)) {
-      console.warn(`Skipping duplicate ${kind} slug "${item.slug}" from ${item._file} (kept first)`);
+    const prev = best.get(item.slug);
+    if (!prev) {
+      best.set(item.slug, item);
       continue;
     }
-    seen.add(item.slug);
-    out.push(item);
+    const keepName = preferFilename(prev._file || "", item._file || "");
+    if (keepName === item._file) {
+      console.warn(`Skipping duplicate ${kind} slug "${item.slug}" from ${prev._file} (kept ${item._file})`);
+      best.set(item.slug, item);
+    } else {
+      console.warn(`Skipping duplicate ${kind} slug "${item.slug}" from ${item._file} (kept ${prev._file})`);
+    }
   }
-  return out;
+  return [...best.values()].sort((a, b) =>
+    String(a._file || "").localeCompare(String(b._file || ""), undefined, { sensitivity: "base" })
+  );
 }
 
 function writeSeed() {
+  dedupeDataDirs();
   const cocktails = dedupeBySlug(
     readDirTxt(COCKTAILS_DIR).map((f) =>
       parseCocktailText(fs.readFileSync(path.join(COCKTAILS_DIR, f), "utf8"), f)
@@ -461,9 +595,10 @@ function main() {
   if (arg === "--help" || arg === "-h") {
     console.log(`Usage:
   node scripts/import-data.js
-      Merge exports/bartesian-exports.zip → data/, then rebuild seed.
+      Merge exports/bartesian-exports.zip → data/ by slug (keeps canonical
+      filenames, removes duplicate-slug orphans), then rebuild seed.
   node scripts/import-data.js --from-data
-      Rebuild seed from data/ only.
+      Dedupe data/ if needed, then rebuild seed (skip zip).
   node scripts/import-data.js path/to/other.zip
       Merge a different zip, then rebuild seed.
 

@@ -85,13 +85,30 @@
     return lines.join("\n");
   }
 
-  function fileStem(name, fallback) {
-    const base = String(name || fallback || "Item")
+  /**
+   * Stable zip entry name from slug (preferred) or display name.
+   * Import merges by slug into the existing data/ filename, so this does not
+   * need to match git paths exactly — but it must be stable across exports.
+   * Do not strip leading digits (that turned "19th Hole" into thHole.txt).
+   */
+  function fileStemFromSlug(slug) {
+    const parts = String(slug || "")
+      .trim()
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter(Boolean);
+    if (!parts.length) return "";
+    return parts.map((p) => p.charAt(0).toUpperCase() + p.slice(1)).join("");
+  }
+
+  function fileStem(name, slug) {
+    const fromSlug = fileStemFromSlug(slug);
+    if (fromSlug) return fromSlug;
+    const base = String(name || "Item")
       .normalize("NFKD")
       .replace(/[\u0300-\u036f]/g, "")
-      .replace(/[^a-zA-Z0-9]+/g, "")
-      .replace(/^\d+/, "");
-    return base || fallback || "Item";
+      .replace(/[^a-zA-Z0-9]+/g, "");
+    return base || "Item";
   }
 
   async function downloadZip(snapshot) {
