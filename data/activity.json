@@ -1,12 +1,97 @@
 [
   {
-    "id": 118,
+    "created_at": "2026-10-24T01:28:09.838Z",
+    "kind": "use",
+    "delta": -1,
+    "stars": null,
+    "detail": "manual_remove",
+    "barcode": "",
+    "cocktail_name": "Lychee Martini",
+    "cocktail_slug": "lychee-martini",
+    "rimmer_name": null,
+    "rimmer_slug": null,
+    "pack_name": null,
+    "pack_slug": null,
+    "person_name": null
+  },
+  {
+    "created_at": "2026-10-23T23:56:05.431Z",
+    "kind": "use",
+    "delta": -1,
+    "stars": null,
+    "detail": "manual_remove",
+    "barcode": "",
+    "cocktail_name": "Raspberry Ginger Gimlet",
+    "cocktail_slug": "raspberry-ginger-gimlet",
+    "rimmer_name": null,
+    "rimmer_slug": null,
+    "pack_name": null,
+    "pack_slug": null,
+    "person_name": null
+  },
+  {
+    "created_at": "2026-10-23T23:37:05.691Z",
+    "kind": "use",
+    "delta": -1,
+    "stars": null,
+    "detail": "use_capsule",
+    "barcode": "",
+    "cocktail_name": "Espresso Martini",
+    "cocktail_slug": "espresso-martini",
+    "rimmer_name": null,
+    "rimmer_slug": null,
+    "pack_name": null,
+    "pack_slug": null,
+    "person_name": null
+  },
+  {
+    "created_at": "2026-10-23T23:21:03.768Z",
+    "kind": "use",
+    "delta": -1,
+    "stars": null,
+    "detail": "use_capsule",
+    "barcode": "",
+    "cocktail_name": "Lychee Martini",
+    "cocktail_slug": "lychee-martini",
+    "rimmer_name": null,
+    "rimmer_slug": null,
+    "pack_name": null,
+    "pack_slug": null,
+    "person_name": null
+  },
+  {
+    "created_at": "2026-10-23T23:21:02.375Z",
+    "kind": "use",
+    "delta": -1,
+    "stars": null,
+    "detail": "use_capsule",
+    "barcode": "",
+    "cocktail_name": "Lychee Martini",
+    "cocktail_slug": "lychee-martini",
+    "rimmer_name": null,
+    "rimmer_slug": null,
+    "pack_name": null,
+    "pack_slug": null,
+    "person_name": null
+  },
+  {
+    "created_at": "2026-10-23T01:20:36.219Z",
+    "kind": "use",
+    "delta": -1,
+    "stars": null,
+    "detail": "manual_remove",
+    "barcode": "",
+    "cocktail_name": "Bee's Knees",
+    "cocktail_slug": "bees-knees",
+    "rimmer_name": null,
+    "rimmer_slug": null,
+    "pack_name": null,
+    "pack_slug": null,
+    "person_name": null
+  },
+  {
     "created_at": "2026-10-19T23:39:00.000Z",
     "kind": "use",
-    "cocktail_id": 89,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "use_capsule",
@@ -20,13 +105,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 55,
     "created_at": "2026-10-19T23:00:25.579Z",
     "kind": "restock",
-    "cocktail_id": 61,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": null,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -40,13 +120,8 @@
     "person_name": null
   },
   {
-    "id": 47,
     "created_at": "2026-10-19T22:49:34.877Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 9,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -60,13 +135,8 @@
     "person_name": null
   },
   {
-    "id": 46,
     "created_at": "2026-10-19T22:49:29.452Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 15,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -80,13 +150,8 @@
     "person_name": null
   },
   {
-    "id": 45,
     "created_at": "2026-10-19T22:49:25.589Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 4,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -100,13 +165,8 @@
     "person_name": null
   },
   {
-    "id": 44,
     "created_at": "2026-10-19T22:49:20.924Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 17,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -120,13 +180,8 @@
     "person_name": null
   },
   {
-    "id": 43,
     "created_at": "2026-10-19T22:49:15.518Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 2,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -140,13 +195,8 @@
     "person_name": null
   },
   {
-    "id": 42,
     "created_at": "2026-10-19T22:49:10.212Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 14,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -160,13 +210,8 @@
     "person_name": null
   },
   {
-    "id": 41,
     "created_at": "2026-10-19T22:49:06.701Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 11,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -180,13 +225,8 @@
     "person_name": null
   },
   {
-    "id": 40,
     "created_at": "2026-10-19T22:49:01.700Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 19,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -200,13 +240,8 @@
     "person_name": null
   },
   {
-    "id": 39,
     "created_at": "2026-10-19T22:48:53.854Z",
     "kind": "restock",
-    "cocktail_id": null,
-    "rimmer_id": 12,
-    "pack_id": null,
-    "person_id": null,
     "delta": 1,
     "stars": null,
     "detail": "manual_add",
@@ -220,13 +255,8 @@
     "person_name": null
   },
   {
-    "id": 84,
     "created_at": "2026-10-18T23:05:00.000Z",
     "kind": "use",
-    "cocktail_id": 48,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -240,13 +270,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 83,
     "created_at": "2026-10-17T23:05:00.000Z",
     "kind": "use",
-    "cocktail_id": 51,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": null,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -260,13 +285,8 @@
     "person_name": null
   },
   {
-    "id": 121,
     "created_at": "2026-10-16T23:39:00.000Z",
     "kind": "use",
-    "cocktail_id": 81,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -280,13 +300,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 99,
     "created_at": "2026-10-16T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 5,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -300,13 +315,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 103,
     "created_at": "2026-10-15T23:23:00.000Z",
     "kind": "use",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -320,13 +330,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 78,
     "created_at": "2026-10-15T23:05:00.000Z",
     "kind": "use",
-    "cocktail_id": 65,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -340,13 +345,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 125,
     "created_at": "2026-10-13T01:03:00.000Z",
     "kind": "restock",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -360,13 +360,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 82,
     "created_at": "2026-10-12T23:05:00.000Z",
     "kind": "use",
-    "cocktail_id": 51,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -380,13 +375,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 74,
     "created_at": "2026-10-12T23:04:00.000Z",
     "kind": "restock",
-    "cocktail_id": 5,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -400,13 +390,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 73,
     "created_at": "2026-10-12T23:04:00.000Z",
     "kind": "restock",
-    "cocktail_id": 45,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -420,13 +405,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 72,
     "created_at": "2026-10-12T23:04:00.000Z",
     "kind": "restock",
-    "cocktail_id": 51,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -440,13 +420,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 71,
     "created_at": "2026-10-12T23:03:00.000Z",
     "kind": "restock",
-    "cocktail_id": 9,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -460,13 +435,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 70,
     "created_at": "2026-10-12T23:03:00.000Z",
     "kind": "restock",
-    "cocktail_id": 74,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -480,13 +450,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 120,
     "created_at": "2026-10-11T23:39:00.000Z",
     "kind": "use",
-    "cocktail_id": 81,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -500,13 +465,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 115,
     "created_at": "2026-10-11T23:37:00.000Z",
     "kind": "use",
-    "cocktail_id": 69,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 8,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -520,13 +480,8 @@
     "person_name": "Angela"
   },
   {
-    "id": 98,
     "created_at": "2026-10-11T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 5,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -540,13 +495,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 94,
     "created_at": "2026-10-11T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 7,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -560,13 +510,8 @@
     "person_name": "Marvin"
   },
   {
-    "id": 93,
     "created_at": "2026-10-11T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -580,18 +525,13 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 91,
     "created_at": "2026-10-11T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 35,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
     "barcode": "",
-    "cocktail_name": "Jalape\u00f1o Lime Shrub",
+    "cocktail_name": "Jalapeño Lime Shrub",
     "cocktail_slug": "jalape-o-lime-shrub",
     "rimmer_name": null,
     "rimmer_slug": null,
@@ -600,13 +540,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 89,
     "created_at": "2026-10-11T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 45,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 9,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -620,13 +555,8 @@
     "person_name": "Mia"
   },
   {
-    "id": 80,
     "created_at": "2026-10-11T23:05:00.000Z",
     "kind": "use",
-    "cocktail_id": 59,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 8,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -640,13 +570,8 @@
     "person_name": "Angela"
   },
   {
-    "id": 76,
     "created_at": "2026-10-11T23:05:00.000Z",
     "kind": "use",
-    "cocktail_id": 74,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -660,13 +585,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 119,
     "created_at": "2026-10-10T23:39:00.000Z",
     "kind": "use",
-    "cocktail_id": 81,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -680,13 +600,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 116,
     "created_at": "2026-10-10T23:37:00.000Z",
     "kind": "use",
-    "cocktail_id": 68,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -700,13 +615,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 100,
     "created_at": "2026-10-10T23:07:00.000Z",
     "kind": "use",
-    "cocktail_id": 19,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -720,13 +630,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 96,
     "created_at": "2026-10-10T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 6,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -740,13 +645,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 87,
     "created_at": "2026-10-10T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 46,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -760,13 +660,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 97,
     "created_at": "2026-10-08T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 5,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -780,13 +675,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 38,
     "created_at": "2026-10-08T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 73,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -800,13 +690,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 102,
     "created_at": "2026-10-06T23:23:00.000Z",
     "kind": "use",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -820,13 +705,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 50,
     "created_at": "2026-10-06T22:50:00.000Z",
     "kind": "restock",
-    "cocktail_id": 57,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -840,13 +720,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 117,
     "created_at": "2026-10-04T23:38:00.000Z",
     "kind": "restock",
-    "cocktail_id": 89,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -860,13 +735,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 95,
     "created_at": "2026-10-04T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 9,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -880,13 +750,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 88,
     "created_at": "2026-10-04T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 45,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -900,13 +765,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 86,
     "created_at": "2026-10-04T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 49,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -920,13 +780,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 69,
     "created_at": "2026-10-04T23:03:00.000Z",
     "kind": "restock",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -940,13 +795,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 68,
     "created_at": "2026-10-04T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 93,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -960,13 +810,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 67,
     "created_at": "2026-10-04T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 68,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -980,13 +825,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 66,
     "created_at": "2026-10-04T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 45,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1000,13 +840,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 64,
     "created_at": "2026-10-04T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 86,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1020,13 +855,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 63,
     "created_at": "2026-10-04T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 68,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1040,13 +870,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 62,
     "created_at": "2026-10-04T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 6,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1060,13 +885,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 61,
     "created_at": "2026-10-04T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 5,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1080,13 +900,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 60,
     "created_at": "2026-10-04T23:00:00.000Z",
     "kind": "restock",
-    "cocktail_id": 69,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1100,13 +915,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 59,
     "created_at": "2026-10-04T23:00:00.000Z",
     "kind": "restock",
-    "cocktail_id": 59,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1120,13 +930,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 58,
     "created_at": "2026-10-04T23:00:00.000Z",
     "kind": "restock",
-    "cocktail_id": 46,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1140,13 +945,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 57,
     "created_at": "2026-10-04T23:00:00.000Z",
     "kind": "restock",
-    "cocktail_id": 34,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1160,13 +960,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 56,
     "created_at": "2026-10-04T23:00:00.000Z",
     "kind": "restock",
-    "cocktail_id": 65,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1180,13 +975,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 54,
     "created_at": "2026-10-04T23:00:00.000Z",
     "kind": "restock",
-    "cocktail_id": 48,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1200,13 +990,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 53,
     "created_at": "2026-10-04T23:00:00.000Z",
     "kind": "restock",
-    "cocktail_id": 9,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1220,13 +1005,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 52,
     "created_at": "2026-10-04T22:59:00.000Z",
     "kind": "restock",
-    "cocktail_id": 81,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 8,
     "stars": null,
     "detail": "Pack (+8)",
@@ -1240,13 +1020,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 51,
     "created_at": "2026-10-04T22:50:00.000Z",
     "kind": "restock",
-    "cocktail_id": 69,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1260,13 +1035,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 49,
     "created_at": "2026-10-04T22:50:00.000Z",
     "kind": "restock",
-    "cocktail_id": 51,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1280,13 +1050,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 48,
     "created_at": "2026-10-04T22:50:00.000Z",
     "kind": "restock",
-    "cocktail_id": 28,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1300,13 +1065,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 37,
     "created_at": "2026-10-04T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 38,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1320,13 +1080,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 92,
     "created_at": "2026-10-03T23:06:00.000Z",
     "kind": "use",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -1340,13 +1095,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 75,
     "created_at": "2026-10-03T23:05:00.000Z",
     "kind": "use",
-    "cocktail_id": 74,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 2,
     "delta": -1,
     "stars": null,
     "detail": "manual_remove",
@@ -1360,13 +1110,8 @@
     "person_name": "Kim"
   },
   {
-    "id": 32,
     "created_at": "2026-09-09T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 58,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1380,13 +1125,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 31,
     "created_at": "2026-09-09T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 49,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1400,13 +1140,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 36,
     "created_at": "2026-09-08T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1420,13 +1155,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 35,
     "created_at": "2026-09-08T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 19,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1440,13 +1170,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 34,
     "created_at": "2026-09-08T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 92,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1460,13 +1185,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 33,
     "created_at": "2026-09-08T22:48:00.000Z",
     "kind": "restock",
-    "cocktail_id": 74,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
@@ -1480,18 +1200,13 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 65,
     "created_at": "2026-09-07T23:01:00.000Z",
     "kind": "restock",
-    "cocktail_id": 35,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 2,
     "stars": null,
     "detail": "restock_pack",
     "barcode": "",
-    "cocktail_name": "Jalape\u00f1o Lime Shrub",
+    "cocktail_name": "Jalapeño Lime Shrub",
     "cocktail_slug": "jalape-o-lime-shrub",
     "rimmer_name": null,
     "rimmer_slug": null,
@@ -1500,13 +1215,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 30,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 92,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",
@@ -1520,13 +1230,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 29,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 86,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",
@@ -1540,13 +1245,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 28,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 69,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",
@@ -1560,13 +1260,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 27,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 58,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",
@@ -1580,13 +1275,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 26,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 51,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",
@@ -1600,13 +1290,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 25,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 38,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",
@@ -1620,13 +1305,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 24,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 22,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",
@@ -1640,13 +1320,8 @@
     "person_name": "Lawrence"
   },
   {
-    "id": 23,
     "created_at": "2026-09-07T22:46:00.000Z",
     "kind": "restock",
-    "cocktail_id": 19,
-    "rimmer_id": null,
-    "pack_id": null,
-    "person_id": 1,
     "delta": 1,
     "stars": null,
     "detail": "restock_pack",

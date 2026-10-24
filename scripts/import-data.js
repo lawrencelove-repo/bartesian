@@ -487,6 +487,177 @@ function dedupeDataDirs() {
   return { c, p, r };
 }
 
+/** Stable event key — never uses device SQLite row ids. */
+function activityFingerprint(a) {
+  return [
+    a.created_at || "",
+    a.kind || "",
+    a.cocktail_slug || "",
+    a.rimmer_slug || "",
+    a.pack_slug || a.logged_pack_slug || "",
+    a.detail || "",
+    a.delta == null ? "" : String(a.delta),
+    a.person_name || "",
+    a.stars == null ? "" : String(a.stars),
+  ].join("|");
+}
+
+/** Drop cocktail_id / person_id / id etc. Keep slug/name fields only. */
+function portableActivityRow(a) {
+  return {
+    created_at: a.created_at || "",
+    kind: a.kind || "event",
+    delta: a.delta != null ? Number(a.delta) : null,
+    stars: a.stars != null ? Number(a.stars) : null,
+    detail: a.detail || "",
+    barcode: a.barcode || "",
+    cocktail_name: a.cocktail_name || null,
+    cocktail_slug: a.cocktail_slug || null,
+    rimmer_name: a.rimmer_name || null,
+    rimmer_slug: a.rimmer_slug || null,
+    pack_name: a.pack_name || a.logged_pack_name || null,
+    pack_slug: a.pack_slug || a.logged_pack_slug || null,
+    person_name: a.person_name || null,
+  };
+}
+
+function writeJson(file, data) {
+  fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n", "utf8");
+}
+
+/** Append new activity events by fingerprint; rewrite file without SQLite ids. */
+function mergeActivityJson(incomingPath) {
+  const dest = path.join(DATA_DIR, "activity.json");
+  const existing = readJsonIfExists(dest);
+  const incoming = readJsonIfExists(incomingPath);
+  if (!incoming.length) return { added: 0, total: existing.length };
+  const seen = new Set(existing.map(activityFingerprint));
+  let added = 0;
+  const merged = existing.map(portableActivityRow);
+  for (const row of incoming) {
+    const p = portableActivityRow(row);
+    const key = activityFingerprint(p);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    merged.push(p);
+    added++;
+  }
+  merged.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
+  writeJson(dest, merged);
+  console.log(`Merged activity.json: +${added} new (total ${merged.length}, ids stripped)`);
+  return { added, total: merged.length };
+}
+
+function mergePeopleJson(incomingPath) {
+  const dest = path.join(DATA_DIR, "people.json");
+  const existing = readJsonIfExists(dest);
+  const incoming = readJsonIfExists(incomingPath);
+  if (!incoming.length) return;
+  const byName = new Map();
+  for (const p of existing) {
+    if (!p.name) continue;
+    byName.set(String(p.name).toLowerCase(), {
+      name: p.name,
+      is_admin: !!(p.is_admin === true || p.is_admin === 1),
+      created_at: p.created_at || "",
+    });
+  }
+  for (const p of incoming) {
+    if (!p.name) continue;
+    const key = String(p.name).toLowerCase();
+    const prev = byName.get(key);
+    byName.set(key, {
+      name: p.name,
+      is_admin: !!(p.is_admin === true || p.is_admin === 1) || !!(prev && prev.is_admin),
+      created_at: (prev && prev.created_at) || p.created_at || "",
+    });
+  }
+  const out = [...byName.values()].sort((a, b) => a.name.localeCompare(b.name));
+  writeJson(dest, out);
+  console.log(`Merged people.json: ${out.length} people (ids stripped)`);
+}
+
+function mergeBarcodesJson(incomingPath) {
+  const dest = path.join(DATA_DIR, "barcodes.json");
+  const existing = readJsonIfExists(dest);
+  const incoming = readJsonIfExists(incomingPath);
+  if (!incoming.length) return;
+  const byCode = new Map();
+  const portable = (b) => ({
+    code: String(b.code || "").trim(),
+    kind: b.kind || "",
+    case_qty: b.case_qty != null ? Number(b.case_qty) : 1,
+    cocktail_name: b.cocktail_name || null,
+    cocktail_slug: b.cocktail_slug || null,
+    pack_name: b.pack_name || null,
+    pack_slug: b.pack_slug || null,
+    rimmer_name: b.rimmer_name || null,
+    rimmer_slug: b.rimmer_slug || null,
+  });
+  for (const b of existing) {
+    const p = portable(b);
+    if (p.code) byCode.set(p.code, p);
+  }
+  for (const b of incoming) {
+    const p = portable(b);
+    if (p.code) byCode.set(p.code, p);
+  }
+  const out = [...byCode.values()].sort((a, b) => a.code.localeCompare(b.code));
+  writeJson(dest, out);
+  console.log(`Merged barcodes.json: ${out.length} codes (ids stripped)`);
+}
+
+function mergeRatingsJson(incomingPath) {
+  const dest = path.join(DATA_DIR, "ratings.json");
+  const existing = readJsonIfExists(dest);
+  const incoming = readJsonIfExists(incomingPath);
+  if (!incoming.length && !existing.length) return;
+  const keyOf = (r) =>
+    `${String(r.person_name || "").toLowerCase()}|${r.cocktail_slug || ""}`;
+  const byKey = new Map();
+  const portable = (r) => ({
+    stars: r.stars != null ? Number(r.stars) : null,
+    comment: r.comment || r.detail || "",
+    created_at: r.created_at || "",
+    updated_at: r.updated_at || "",
+    person_name: r.person_name || null,
+    cocktail_slug: r.cocktail_slug || null,
+  });
+  for (const r of existing) {
+    const p = portable(r);
+    if (p.person_name && p.cocktail_slug) byKey.set(keyOf(p), p);
+  }
+  for (const r of incoming) {
+    const p = portable(r);
+    if (p.person_name && p.cocktail_slug) byKey.set(keyOf(p), p);
+  }
+  const out = [...byKey.values()].sort((a, b) =>
+    `${a.cocktail_slug}|${a.person_name}`.localeCompare(`${b.cocktail_slug}|${b.person_name}`)
+  );
+  writeJson(dest, out);
+  console.log(`Merged ratings.json: ${out.length} ratings (ids stripped)`);
+}
+
+function mergeWishlistJson(incomingPath) {
+  const dest = path.join(DATA_DIR, "wishlist.json");
+  const existing = readJsonIfExists(dest);
+  const incoming = readJsonIfExists(incomingPath);
+  if (!incoming.length) return;
+  const keyOf = (w) => `${w.cocktail_slug || ""}|${w.rimmer_slug || ""}`;
+  const byKey = new Map();
+  const portable = (w) => ({
+    cocktail_slug: w.cocktail_slug || "",
+    rimmer_slug: w.rimmer_slug || "",
+    qty_wanted: Math.max(1, Number(w.qty_wanted) || 1),
+    created_at: w.created_at || "",
+    updated_at: w.updated_at || "",
+  });
+  for (const w of existing) byKey.set(keyOf(w), portable(w));
+  for (const w of incoming) byKey.set(keyOf(w), portable(w));
+  writeJson(dest, [...byKey.values()]);
+  console.log(`Merged wishlist.json: ${byKey.size} items`);
+}
+
 function mergeZipIntoData(zipPath) {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "bartesian-import-"));
   try {
@@ -499,13 +670,16 @@ function mergeZipIntoData(zipPath) {
     const c = mergeTxtDirBySlug(path.join(base, "cocktails"), COCKTAILS_DIR, parseCocktailText, "cocktail");
     const p = mergeTxtDirBySlug(path.join(base, "packs"), PACKS_DIR, parsePackText, "pack");
     const r = mergeTxtDirBySlug(path.join(base, "rimmers"), RIMMERS_DIR, parseRimmerText, "rimmer");
-    for (const name of ["barcodes.json", "ratings.json", "people.json", "activity.json", "wishlist.json"]) {
-      const src = path.join(base, name);
-      if (fs.existsSync(src)) {
-        fs.copyFileSync(src, path.join(DATA_DIR, name));
-        console.log("Copied", name);
-      }
-    }
+    const actPath = path.join(base, "activity.json");
+    if (fs.existsSync(actPath)) mergeActivityJson(actPath);
+    const peoplePath = path.join(base, "people.json");
+    if (fs.existsSync(peoplePath)) mergePeopleJson(peoplePath);
+    const barPath = path.join(base, "barcodes.json");
+    if (fs.existsSync(barPath)) mergeBarcodesJson(barPath);
+    const ratPath = path.join(base, "ratings.json");
+    if (fs.existsSync(ratPath)) mergeRatingsJson(ratPath);
+    const wishPath = path.join(base, "wishlist.json");
+    if (fs.existsSync(wishPath)) mergeWishlistJson(wishPath);
     console.log(
       `Merged into data/: cocktails ${c.updated} updated/${c.created} new (${c.removed} dupes removed), ` +
         `packs ${p.updated}/${p.created} (${p.removed} dupes), ` +
@@ -575,7 +749,8 @@ function writeSeed() {
         .map((p) => ({ name: p.name, is_admin: p.is_admin ? 1 : 0 }))
         .filter((p) => p.name)
     : [{ name: "Lawrence", is_admin: 1 }];
-  const activity = readJsonIfExists(path.join(DATA_DIR, "activity.json"));
+  // Never bake device SQLite ids into the seed (resolve by slug/name at runtime).
+  const activity = readJsonIfExists(path.join(DATA_DIR, "activity.json")).map(portableActivityRow);
   const wishlist = readJsonIfExists(path.join(DATA_DIR, "wishlist.json"));
   // Bump on every import so the browser applies seed quantities into IndexedDB.
   const rev = new Date().toISOString();

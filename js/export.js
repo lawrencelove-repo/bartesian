@@ -111,6 +111,73 @@
     return base || "Item";
   }
 
+  /**
+   * Portable JSON for git: slug/name keys only — never device SQLite row ids
+   * (those remapping across phones/browsers caused huge false diffs).
+   */
+  function sanitizeActivity(rows) {
+    return (rows || []).map((a) => ({
+      created_at: a.created_at || "",
+      kind: a.kind || "event",
+      delta: a.delta != null ? Number(a.delta) : null,
+      stars: a.stars != null ? Number(a.stars) : null,
+      detail: a.detail || "",
+      barcode: a.barcode || "",
+      cocktail_name: a.cocktail_name || null,
+      cocktail_slug: a.cocktail_slug || null,
+      rimmer_name: a.rimmer_name || null,
+      rimmer_slug: a.rimmer_slug || null,
+      pack_name: a.pack_name || a.logged_pack_name || null,
+      pack_slug: a.pack_slug || a.logged_pack_slug || null,
+      person_name: a.person_name || null,
+    }));
+  }
+
+  function sanitizePeople(rows) {
+    return (rows || [])
+      .map((p) => ({
+        name: p.name || "",
+        is_admin: !!(p.is_admin === true || p.is_admin === 1),
+        created_at: p.created_at || "",
+      }))
+      .filter((p) => p.name);
+  }
+
+  function sanitizeRatings(rows) {
+    return (rows || []).map((r) => ({
+      stars: r.stars != null ? Number(r.stars) : null,
+      comment: r.comment || r.detail || "",
+      created_at: r.created_at || "",
+      updated_at: r.updated_at || "",
+      person_name: r.person_name || null,
+      cocktail_slug: r.cocktail_slug || null,
+    }));
+  }
+
+  function sanitizeBarcodes(rows) {
+    return (rows || []).map((b) => ({
+      code: b.code || "",
+      kind: b.kind || "",
+      case_qty: b.case_qty != null ? Number(b.case_qty) : 1,
+      cocktail_name: b.cocktail_name || null,
+      cocktail_slug: b.cocktail_slug || null,
+      pack_name: b.pack_name || null,
+      pack_slug: b.pack_slug || null,
+      rimmer_name: b.rimmer_name || null,
+      rimmer_slug: b.rimmer_slug || null,
+    }));
+  }
+
+  function sanitizeWishlist(rows) {
+    return (rows || []).map((w) => ({
+      cocktail_slug: w.cocktail_slug || "",
+      rimmer_slug: w.rimmer_slug || "",
+      qty_wanted: Math.max(1, Number(w.qty_wanted) || 1),
+      created_at: w.created_at || "",
+      updated_at: w.updated_at || "",
+    }));
+  }
+
   async function downloadZip(snapshot) {
     if (!global.JSZip) throw new Error("JSZip not loaded");
     const zip = new JSZip();
@@ -126,11 +193,11 @@
     for (const r of snapshot.rimmers || []) {
       rimmers.file(fileStem(r.name, r.slug) + ".txt", rimmerToText(r));
     }
-    zip.file("ratings.json", JSON.stringify(snapshot.ratings || [], null, 2));
-    zip.file("people.json", JSON.stringify(snapshot.people || [], null, 2));
-    zip.file("barcodes.json", JSON.stringify(snapshot.barcodes || [], null, 2));
-    zip.file("activity.json", JSON.stringify(snapshot.activity || [], null, 2));
-    zip.file("wishlist.json", JSON.stringify(snapshot.wishlist || [], null, 2));
+    zip.file("ratings.json", JSON.stringify(sanitizeRatings(snapshot.ratings), null, 2));
+    zip.file("people.json", JSON.stringify(sanitizePeople(snapshot.people), null, 2));
+    zip.file("barcodes.json", JSON.stringify(sanitizeBarcodes(snapshot.barcodes), null, 2));
+    zip.file("activity.json", JSON.stringify(sanitizeActivity(snapshot.activity), null, 2));
+    zip.file("wishlist.json", JSON.stringify(sanitizeWishlist(snapshot.wishlist), null, 2));
     const blob = await zip.generateAsync({ type: "blob" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
