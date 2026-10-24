@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v73";
+  const APP_VERSION = "bartesian-v74";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
