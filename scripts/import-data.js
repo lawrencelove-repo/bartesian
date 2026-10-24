@@ -3,8 +3,8 @@
  *
  * Usage:
  *   node scripts/import-data.js
- *       Merge exports/bartesian-exports.zip into data/ (by slug, preserving
- *       canonical filenames), remove duplicate-slug orphans, then rebuild seed.
+ *       Merge zip into data/ by slug: inventory fields only on existing .txt;
+ *       JSON merges without SQLite ids; then rebuild seed.
  *
  *   node scripts/import-data.js --from-data
  *       Dedupe data/ orphans if needed, then rebuild seed (skip zip).
@@ -416,37 +416,116 @@ function indexSlugToFile(destDir, parseFn) {
   return bySlug;
 }
 
+/** Inventory / barcode headers only — never rewrite catalog copy from an export. */
+const INVENTORY_HEADERS = {
+  cocktail: [
+    "Quantity",
+    "Restock",
+    "Favorite",
+    "Capsule Barcode",
+    "Case Barcode",
+    // Case Qty is catalog packaging size — not patched from live DB defaults
+  ],
+  pack: ["Barcode"],
+  rimmer: ["Quantity", "Restock", "Favorite", "Barcode"],
+};
+
+function headerValuesFromTxt(raw) {
+  const map = new Map();
+  for (const line of String(raw || "").replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n")) {
+    const m = line.match(/^([A-Za-z][A-Za-z0-9 ]*):[ \t]*(.*)$/);
+    if (!m) continue;
+    map.set(m[1], (m[2] || "").trim());
+  }
+  return map;
+}
+
 /**
- * Write export .txt files into dest by slug: overwrite the existing canonical
- * filename when the slug is already present (avoids thHole.txt vs 19thHole.txt).
+ * Patch only inventory headers in an existing .txt, preserving field order and
+ * catalog content. Adds a missing inventory header before the trailing blank.
+ */
+function patchInventoryTxt(existingRaw, incomingRaw, kind) {
+  const headers = INVENTORY_HEADERS[kind] || [];
+  if (!headers.length) return { text: existingRaw, changed: false };
+  const incoming = headerValuesFromTxt(incomingRaw);
+  const updates = new Map();
+  for (const h of headers) {
+    if (incoming.has(h)) updates.set(h, incoming.get(h));
+  }
+  if (!updates.size) return { text: existingRaw, changed: false };
+
+  const eol = existingRaw.includes("\r\n") ? "\r\n" : "\n";
+  const lines = existingRaw.replace(/\r\n/g, "\n").replace(/\r/g, "\n").split("\n");
+  const seen = new Set();
+  let changed = false;
+  for (let i = 0; i < lines.length; i++) {
+    const m = lines[i].match(/^([A-Za-z][A-Za-z0-9 ]*):[ \t]*(.*)$/);
+    if (!m) continue;
+    const key = m[1];
+    if (!updates.has(key)) continue;
+    seen.add(key);
+    const next = updates.get(key);
+    const prev = (m[2] || "").trim();
+    if (prev !== next) {
+      lines[i] = key + ": " + next;
+      changed = true;
+    }
+  }
+  for (const h of headers) {
+    if (seen.has(h) || !updates.has(h)) continue;
+    // Insert before trailing empty lines
+    let insertAt = lines.length;
+    while (insertAt > 0 && lines[insertAt - 1] === "") insertAt--;
+    lines.splice(insertAt, 0, h + ": " + updates.get(h));
+    changed = true;
+  }
+  if (!changed) return { text: existingRaw, changed: false };
+  let text = lines.join("\n");
+  if (eol === "\r\n") text = text.replace(/\n/g, "\r\n");
+  return { text, changed: true };
+}
+
+/**
+ * Merge export .txt files into dest by slug.
+ * Existing slugs: patch inventory/barcode fields only (keeps catalog text).
+ * New slugs: write the full export file under the export filename.
  * Then delete any remaining same-slug orphans.
  */
 function mergeTxtDirBySlug(srcDir, destDir, parseFn, kind) {
-  if (!fs.existsSync(srcDir)) return { written: 0, updated: 0, created: 0, removed: 0 };
+  if (!fs.existsSync(srcDir)) return { written: 0, updated: 0, created: 0, removed: 0, unchanged: 0 };
   fs.mkdirSync(destDir, { recursive: true });
   const slugToFile = indexSlugToFile(destDir, parseFn);
   let updated = 0;
   let created = 0;
+  let unchanged = 0;
   for (const f of readDirTxt(srcDir)) {
     const srcPath = path.join(srcDir, f);
     const raw = fs.readFileSync(srcPath, "utf8");
     const slug = slugFromTxt(raw, parseFn, f);
-    const destName = (slug && slugToFile.get(slug)) || f;
-    const destPath = path.join(destDir, destName);
-    const existed = slug && slugToFile.has(slug);
-    fs.writeFileSync(destPath, raw, "utf8");
-    if (existed) {
-      updated++;
-      if (destName !== f) {
-        console.log(`Updated ${kind} ${destName} ← export ${f} (slug ${slug})`);
+    if (slug && slugToFile.has(slug)) {
+      const destName = slugToFile.get(slug);
+      const destPath = path.join(destDir, destName);
+      const existingRaw = fs.readFileSync(destPath, "utf8");
+      const patched = patchInventoryTxt(existingRaw, raw, kind);
+      if (patched.changed) {
+        fs.writeFileSync(destPath, patched.text, "utf8");
+        updated++;
+        if (destName !== f) {
+          console.log(`Inventory-updated ${kind} ${destName} ← export ${f} (slug ${slug})`);
+        }
+      } else {
+        unchanged++;
       }
     } else {
+      const destName = f;
+      fs.writeFileSync(path.join(destDir, destName), raw, "utf8");
       created++;
       if (slug) slugToFile.set(slug, destName);
+      console.log(`Created ${kind} ${destName}` + (slug ? ` (slug ${slug})` : ""));
     }
   }
   const removed = removeDuplicateSlugFiles(destDir, parseFn, kind, slugToFile);
-  return { written: updated + created, updated, created, removed };
+  return { written: updated + created, updated, created, removed, unchanged };
 }
 
 /** Delete extra .txt files that share a slug; keep the preferred / mapped name. */
@@ -487,7 +566,7 @@ function dedupeDataDirs() {
   return { c, p, r };
 }
 
-/** Stable event key — never uses device SQLite row ids. */
+/** Exact event key — never uses device SQLite row ids. */
 function activityFingerprint(a) {
   return [
     a.created_at || "",
@@ -499,6 +578,24 @@ function activityFingerprint(a) {
     a.delta == null ? "" : String(a.delta),
     a.person_name || "",
     a.stars == null ? "" : String(a.stars),
+  ].join("|");
+}
+
+/**
+ * Soft key for History edits: same minute + kind + item + detail + delta.
+ * Ignores person_name and sub-minute timestamp so assigning a person / rounding
+ * time updates the existing row instead of appending a duplicate.
+ */
+function activitySoftKey(a) {
+  const minute = String(a.created_at || "").slice(0, 16); // YYYY-MM-DDTHH:MM
+  return [
+    minute,
+    a.kind || "",
+    a.cocktail_slug || "",
+    a.rimmer_slug || "",
+    a.pack_slug || a.logged_pack_slug || "",
+    a.detail || "",
+    a.delta == null ? "" : String(a.delta),
   ].join("|");
 }
 
@@ -525,27 +622,92 @@ function writeJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n", "utf8");
 }
 
-/** Append new activity events by fingerprint; rewrite file without SQLite ids. */
+function preferActivityRow(a, b) {
+  // Prefer a filled person_name; keep the more precise timestamp when possible.
+  const ap = a.person_name ? 1 : 0;
+  const bp = b.person_name ? 1 : 0;
+  const person = ap >= bp ? a.person_name : b.person_name;
+  const aRound = /T\d{2}:\d{2}:00(\.0+)?Z$/.test(a.created_at || "");
+  const bRound = /T\d{2}:\d{2}:00(\.0+)?Z$/.test(b.created_at || "");
+  let created_at = a.created_at;
+  if (aRound && !bRound) created_at = b.created_at;
+  else if (!aRound && bRound) created_at = a.created_at;
+  else if ((b.created_at || "").length > (a.created_at || "").length) created_at = b.created_at;
+  return {
+    ...a,
+    ...b,
+    person_name: person || null,
+    created_at: created_at || b.created_at || a.created_at || "",
+    cocktail_name: b.cocktail_name || a.cocktail_name || null,
+    rimmer_name: b.rimmer_name || a.rimmer_name || null,
+    pack_name: b.pack_name || a.pack_name || null,
+    pack_slug: b.pack_slug || a.pack_slug || null,
+  };
+}
+
+function activityEditableMatch(existing, incoming) {
+  // Same drink/action in the same minute — but not two different people.
+  if (activitySoftKey(existing) !== activitySoftKey(incoming)) return false;
+  const ep = existing.person_name || "";
+  const ip = incoming.person_name || "";
+  if (ep && ip && ep !== ip) return false;
+  return true;
+}
+
+/**
+ * Merge activity: exact fingerprint skip; soft-match person/time edits 1:1
+ * (two uses in the same minute stay two rows). Strip SQLite ids.
+ */
 function mergeActivityJson(incomingPath) {
   const dest = path.join(DATA_DIR, "activity.json");
-  const existing = readJsonIfExists(dest);
-  const incoming = readJsonIfExists(incomingPath);
-  if (!incoming.length) return { added: 0, total: existing.length };
-  const seen = new Set(existing.map(activityFingerprint));
+  const existing = readJsonIfExists(dest).map(portableActivityRow);
+  const incoming = readJsonIfExists(incomingPath).map(portableActivityRow);
+  if (!incoming.length) {
+    if (existing.length) writeJson(dest, existing);
+    return { added: 0, updated: 0, total: existing.length };
+  }
+
+  const merged = existing.slice();
+  const claimed = new Set();
+  const exact = new Set(merged.map(activityFingerprint));
   let added = 0;
-  const merged = existing.map(portableActivityRow);
-  for (const row of incoming) {
-    const p = portableActivityRow(row);
-    const key = activityFingerprint(p);
-    if (seen.has(key)) continue;
-    seen.add(key);
+  let updated = 0;
+
+  for (const p of incoming) {
+    const fp = activityFingerprint(p);
+    if (exact.has(fp)) continue;
+
+    let matchIdx = -1;
+    for (let i = 0; i < merged.length; i++) {
+      if (claimed.has(i)) continue;
+      if (!activityEditableMatch(merged[i], p)) continue;
+      matchIdx = i;
+      // Prefer claiming a blank-person row when incoming has a person
+      if (!merged[i].person_name && p.person_name) break;
+    }
+
+    if (matchIdx >= 0) {
+      const prev = merged[matchIdx];
+      const next = preferActivityRow(prev, p);
+      if (JSON.stringify(prev) !== JSON.stringify(next)) updated++;
+      exact.delete(activityFingerprint(prev));
+      merged[matchIdx] = next;
+      exact.add(activityFingerprint(next));
+      claimed.add(matchIdx);
+      continue;
+    }
+
     merged.push(p);
+    exact.add(fp);
     added++;
   }
+
   merged.sort((a, b) => String(b.created_at).localeCompare(String(a.created_at)));
   writeJson(dest, merged);
-  console.log(`Merged activity.json: +${added} new (total ${merged.length}, ids stripped)`);
-  return { added, total: merged.length };
+  console.log(
+    `Merged activity.json: +${added} new, ~${updated} updated (total ${merged.length}, ids stripped)`
+  );
+  return { added, updated, total: merged.length };
 }
 
 function mergePeopleJson(incomingPath) {
@@ -681,9 +843,9 @@ function mergeZipIntoData(zipPath) {
     const wishPath = path.join(base, "wishlist.json");
     if (fs.existsSync(wishPath)) mergeWishlistJson(wishPath);
     console.log(
-      `Merged into data/: cocktails ${c.updated} updated/${c.created} new (${c.removed} dupes removed), ` +
-        `packs ${p.updated}/${p.created} (${p.removed} dupes), ` +
-        `rimmers ${r.updated}/${r.created} (${r.removed} dupes)`
+      `Merged into data/: cocktails ${c.updated} inventory-updated/${c.created} new/${c.unchanged} unchanged (${c.removed} dupes removed), ` +
+        `packs ${p.updated}/${p.created}/${p.unchanged} (${p.removed} dupes), ` +
+        `rimmers ${r.updated}/${r.created}/${r.unchanged} (${r.removed} dupes)`
     );
   } finally {
     fs.rmSync(tempDir, { recursive: true, force: true });
@@ -770,8 +932,8 @@ function main() {
   if (arg === "--help" || arg === "-h") {
     console.log(`Usage:
   node scripts/import-data.js
-      Merge exports/bartesian-exports.zip → data/ by slug (keeps canonical
-      filenames, removes duplicate-slug orphans), then rebuild seed.
+      Merge zip → data/ by slug (inventory fields only on existing .txt;
+      JSON merged without SQLite ids), then rebuild seed.
   node scripts/import-data.js --from-data
       Dedupe data/ if needed, then rebuild seed (skip zip).
   node scripts/import-data.js path/to/other.zip
