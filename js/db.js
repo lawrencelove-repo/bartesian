@@ -1662,7 +1662,7 @@
 
     listCocktails({
       search = "",
-      sort = "name",
+      sort = "spirit",
       favoritesOnly = false,
       availableOnly = false,
       seasonalOnly = false,
