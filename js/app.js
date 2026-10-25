@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v77";
+  const APP_VERSION = "bartesian-v78";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -22,7 +22,7 @@
 
   const state = {
     search: "",
-    sort: "name",
+    sort: "spirit",
     spirit: "",
     favoritesOnly: false,
     availableOnly: false,
@@ -935,12 +935,12 @@
                 .join("")}
             </select>
             <select name="sort">
-              <option value="name" ${state.sort === "name" ? "selected" : ""}>Name</option>
+              <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
+              <option value="name" ${state.sort === "name" ? "selected" : ""}>Name A–Z</option>
               <option value="name-desc" ${state.sort === "name-desc" ? "selected" : ""}>Name Z–A</option>
               <option value="quantity" ${state.sort === "quantity" ? "selected" : ""}>Quantity ↓</option>
               <option value="quantity-asc" ${state.sort === "quantity-asc" ? "selected" : ""}>Quantity ↑</option>
               <option value="rating" ${state.sort === "rating" ? "selected" : ""}>Rating</option>
-              <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
               <option value="seasonal" ${state.sort === "seasonal" ? "selected" : ""}>Seasonal</option>
             </select>
           </div>
@@ -2597,24 +2597,15 @@
     );
   }
 
-  /** Book Mode order: spirit chapters (A–Z) then name, unless sorting by qty/rating. Seasonal cocktails and refreshers are excluded from the book. */
+  /**
+   * Book Mode cocktail order follows the selected Sort (via listCocktails).
+   * Name A–Z / Z–A sort by cocktail name only (no spirit grouping).
+   * Spirit sort is spirit then name. Seasonal cocktails and refreshers are excluded.
+   */
   function bookCocktailList() {
-    const list = BartesianDB.listCocktails(listQuery()).filter(
+    return BartesianDB.listCocktails(listQuery()).filter(
       (c) => !c.seasonal && !/refresher/i.test(String(c.name || "") + " " + String(c.slug || ""))
     );
-    const flatSort = state.sort === "quantity" || state.sort === "quantity-asc" || state.sort === "rating";
-    if (flatSort) return list;
-    const nameDesc = state.sort === "name-desc";
-    return [...list].sort((a, b) => {
-      const sa = String(a.primary_spirit || "\uffff").localeCompare(
-        String(b.primary_spirit || "\uffff"),
-        undefined,
-        { sensitivity: "base" }
-      );
-      if (sa) return sa;
-      const na = a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
-      return nameDesc ? -na : na;
-    });
   }
 
   function bookMetaPipe(label, value) {
@@ -2765,7 +2756,7 @@
     const dirty =
       String(fd.get("search") || "") !== String(state.search || "") ||
       String(fd.get("spirit") || "") !== String(state.spirit || "") ||
-      String(fd.get("sort") || "name") !== String(state.sort || "name") ||
+      String(fd.get("sort") || "spirit") !== String(state.sort || "spirit") ||
       !!(form.available && form.available.checked) !== !!state.availableOnly ||
       !!(form.favorites && form.favorites.checked) !== !!state.favoritesOnly;
     applyBtn.classList.toggle("is-dirty", dirty);
@@ -2795,12 +2786,12 @@
           </label>
           <label class="field">Sort
             <select name="sort">
-              <option value="name" ${state.sort === "name" ? "selected" : ""}>Name</option>
+              <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
+              <option value="name" ${state.sort === "name" ? "selected" : ""}>Name A–Z</option>
               <option value="name-desc" ${state.sort === "name-desc" ? "selected" : ""}>Name Z–A</option>
               <option value="quantity" ${state.sort === "quantity" ? "selected" : ""}>Quantity ↓</option>
               <option value="quantity-asc" ${state.sort === "quantity-asc" ? "selected" : ""}>Quantity ↑</option>
               <option value="rating" ${state.sort === "rating" ? "selected" : ""}>Rating</option>
-              <option value="spirit" ${state.sort === "spirit" ? "selected" : ""}>Spirit</option>
               <option value="seasonal" ${state.sort === "seasonal" ? "selected" : ""}>Seasonal</option>
             </select>
           </label>
@@ -3661,7 +3652,7 @@
       const fd = new FormData(bookForm);
       state.search = String(fd.get("search") || "");
       state.spirit = String(fd.get("spirit") || "");
-      state.sort = String(fd.get("sort") || "name");
+      state.sort = String(fd.get("sort") || "spirit");
       state.availableOnly = !!(bookForm.available && bookForm.available.checked);
       state.favoritesOnly = !!(bookForm.favorites && bookForm.favorites.checked);
       saveListPrefs();
@@ -3669,7 +3660,14 @@
       const list = bookCocktailList();
       const route = parseHash();
       const still = list.find((c) => c.id === route.id);
-      go(still ? "#/book/" + still.id : list[0] ? "#/book/" + list[0].id : "#/book");
+      const nextHref = still
+        ? "#/book/" + still.id
+        : list[0]
+          ? "#/book/" + list[0].id
+          : "#/book";
+      // Same-hash Apply must still close the menu (hashchange won't fire).
+      if (location.hash === nextHref) render();
+      else go(nextHref);
       return;
     }
 
@@ -3679,7 +3677,7 @@
       const fd = new FormData(listForm);
       state.search = String(fd.get("search") || "");
       state.spirit = String(fd.get("spirit") || "");
-      state.sort = String(fd.get("sort") || "name");
+      state.sort = String(fd.get("sort") || "spirit");
       state.availableOnly = listForm.available.checked;
       state.favoritesOnly = listForm.favorites.checked;
       saveListPrefs();
