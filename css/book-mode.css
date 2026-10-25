@@ -342,6 +342,44 @@ html.book-active body {
   -webkit-user-select: text;
 }
 
+.book-tune-panel.is-dragged {
+  bottom: auto;
+  transform: none;
+}
+
+.book-tune-panel.is-dragging {
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.18);
+  opacity: 0.97;
+}
+
+.book-tune-head[data-book-tune-drag] {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0.15rem 0;
+  margin: -0.15rem 0 0;
+  min-height: 44px;
+}
+
+.book-tune-panel.is-dragging .book-tune-head[data-book-tune-drag] {
+  cursor: grabbing;
+}
+
+.book-tune-drag-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.book-tune-drag-grip {
+  letter-spacing: -0.08em;
+  opacity: 0.55;
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
 .book-tune-readout-field {
   display: block;
   width: 100%;

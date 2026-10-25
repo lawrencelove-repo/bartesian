@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v76";
+  const APP_VERSION = "bartesian-v77";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -60,6 +60,9 @@
     // switching cocktails/pages without saving discards this draft.
     // Shape: { cocktailId, form, orientation, x, y, scale, imageCut, dirty }
     bookTuneDraft: null,
+    // Dragged Tune panel position (px within .book-mode). Kept until the
+    // edit session ends (Close / leave Book Mode), including across pages.
+    bookTunePanelPos: null,
     // Admin display toggles (Settings; cookie bartesian_ui_prefs)
     showBookTuneBtn: true,
     showAdminImageCut: true,
@@ -68,6 +71,7 @@
   let bookTouchStartX = 0;
   let bookTouchStartY = 0;
   let bookTouchActive = false;
+  let bookTuneDrag = null; // { pointerId, startX, startY, origLeft, origTop, root }
 
   function getCookie(name) {
     const parts = document.cookie.split(";").map((p) => p.trim());
@@ -232,6 +236,31 @@
 
   function discardBookTuneDraft() {
     state.bookTuneDraft = null;
+  }
+
+  /** End the Tune edit session: drop draft + forget dragged panel position. */
+  function endBookTuneSession() {
+    discardBookTuneDraft();
+    state.bookTuneOpen = false;
+    state.bookTunePanelPos = null;
+    bookTuneDrag = null;
+  }
+
+  function bookTunePanelStyle() {
+    const pos = state.bookTunePanelPos;
+    if (!pos) return "";
+    return `left:${pos.left}px;top:${pos.top}px;right:auto;bottom:auto;transform:none;`;
+  }
+
+  function clampBookTunePanelPos(root, left, top, panelW, panelH) {
+    const rw = root.clientWidth || 0;
+    const rh = root.clientHeight || 0;
+    const maxL = Math.max(0, rw - panelW);
+    const maxT = Math.max(0, rh - panelH);
+    return {
+      left: Math.min(maxL, Math.max(0, left)),
+      top: Math.min(maxT, Math.max(0, top)),
+    };
   }
 
   function adjustBookTune(action) {
@@ -2634,14 +2663,16 @@
           `<option value="${opt}" ${opt === cut ? "selected" : ""}>${opt}</option>`
       )
       .join("");
-    return `<div class="book-tune-panel" data-book-tune-panel>
-      <div class="book-tune-head">
-        <span>Tune · ${esc((cocktail && cocktail.name) || "Cocktail")}</span>
+    const dragged = !!state.bookTunePanelPos;
+    return `<div class="book-tune-panel${dragged ? " is-dragged" : ""}" data-book-tune-panel style="${bookTunePanelStyle()}">
+      <div class="book-tune-head" data-book-tune-drag title="Drag to move">
+        <span class="book-tune-drag-label"><span class="book-tune-drag-grip" aria-hidden="true">⋮⋮</span> Tune · ${esc((cocktail && cocktail.name) || "Cocktail")}</span>
         <button type="button" data-book-tune-close>Close</button>
       </div>
       <input class="book-tune-readout-field" type="text" readonly aria-label="Current tuning settings (selectable)"
         value="${esc(t.form)} · ${esc(t.orientation)} · Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%${t.dirty ? " · unsaved" : ""}" />
       <p class="book-tune-viewport">${w}×${h} · Defaults to the global ${esc(t.form)}/${esc(t.orientation)} position until you Save.</p>
+      <p class="book-tune-viewport"><strong>Move panel:</strong> touch and hold the header (⋮⋮ Tune …), then drag. On desktop, click and drag the header.</p>
       <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge. Image Cut flips the photo on the matching page side.</p>
       ${t.status ? `<p class="book-tune-viewport book-tune-status">${esc(t.status)}</p>` : ""}
       <div class="book-tune-row">
@@ -2799,7 +2830,7 @@
       const stayOpen = state.bookTuneOpen;
       discardBookTuneDraft();
       if (stayOpen) beginBookTuneDraft(list[next].id);
-      else state.bookTuneOpen = false;
+      else endBookTuneSession();
       go("#/book/" + list[next].id);
     }
   }
@@ -2865,6 +2896,7 @@
         const stayOpen = state.bookTuneOpen;
         discardBookTuneDraft();
         if (stayOpen) beginBookTuneDraft(route.id);
+        else endBookTuneSession();
       }
       // Resolve missing id to first page in the filtered book order.
       if (route.id == null || Number.isNaN(route.id)) {
@@ -2881,10 +2913,9 @@
     } else {
       setBookActiveClass(false);
       state.bookMenuOpen = false;
-      // Leaving Book Mode discards any unsaved tune draft.
-      if (state.bookTuneDraft || state.bookTuneOpen) {
-        discardBookTuneDraft();
-        state.bookTuneOpen = false;
+      // Leaving Book Mode ends the Tune session (draft + panel position).
+      if (state.bookTuneDraft || state.bookTuneOpen || state.bookTunePanelPos) {
+        endBookTuneSession();
       }
       if (route.view === "detail") root.innerHTML = renderDetail(route.id);
       else if (route.view === "rimmers") root.innerHTML = renderRimmers();
@@ -2941,9 +2972,8 @@
     }
     if (e.target.closest("[data-book-tune-close]")) {
       e.preventDefault();
-      // Closing without Save discards the draft.
-      discardBookTuneDraft();
-      state.bookTuneOpen = false;
+      // Closing without Save discards the draft and panel position.
+      endBookTuneSession();
       render();
       return;
     }
@@ -2965,8 +2995,7 @@
     }
     if (e.target.closest("[data-book-exit]")) {
       state.bookMenuOpen = false;
-      discardBookTuneDraft();
-      state.bookTuneOpen = false;
+      endBookTuneSession();
       setBookActiveClass(false);
       // Let data-go handle navigation when present.
     }
@@ -4112,6 +4141,82 @@
       bookGoRelative(-1);
     }
   });
+
+  document.addEventListener(
+    "pointerdown",
+    (e) => {
+      if (!document.documentElement.classList.contains("book-active")) return;
+      if (!state.bookTuneOpen) return;
+      const handle = e.target.closest("[data-book-tune-drag]");
+      if (!handle) return;
+      // Don't start a drag from the Close button.
+      if (e.target.closest("[data-book-tune-close]")) return;
+      const panel = handle.closest("[data-book-tune-panel]");
+      const rootEl = panel && panel.closest("[data-book-root]");
+      if (!panel || !rootEl) return;
+      e.preventDefault();
+      const rootRect = rootEl.getBoundingClientRect();
+      const panelRect = panel.getBoundingClientRect();
+      // Convert current on-screen position into root-local coordinates.
+      const origLeft = panelRect.left - rootRect.left;
+      const origTop = panelRect.top - rootRect.top;
+      bookTuneDrag = {
+        pointerId: e.pointerId,
+        startX: e.clientX,
+        startY: e.clientY,
+        origLeft,
+        origTop,
+        panelW: panelRect.width,
+        panelH: panelRect.height,
+        root: rootEl,
+      };
+      try {
+        handle.setPointerCapture(e.pointerId);
+      } catch (_) {
+        /* ignore */
+      }
+      panel.classList.add("is-dragging");
+      // Cancel any pending page-swipe gesture.
+      bookTouchActive = false;
+    },
+    { passive: false }
+  );
+  document.addEventListener(
+    "pointermove",
+    (e) => {
+      if (!bookTuneDrag || e.pointerId !== bookTuneDrag.pointerId) return;
+      e.preventDefault();
+      const dx = e.clientX - bookTuneDrag.startX;
+      const dy = e.clientY - bookTuneDrag.startY;
+      const next = clampBookTunePanelPos(
+        bookTuneDrag.root,
+        bookTuneDrag.origLeft + dx,
+        bookTuneDrag.origTop + dy,
+        bookTuneDrag.panelW,
+        bookTuneDrag.panelH
+      );
+      state.bookTunePanelPos = next;
+      const panel = document.querySelector("[data-book-tune-panel]");
+      if (panel) {
+        panel.classList.add("is-dragged");
+        panel.style.left = next.left + "px";
+        panel.style.top = next.top + "px";
+        panel.style.right = "auto";
+        panel.style.bottom = "auto";
+        panel.style.transform = "none";
+      }
+    },
+    { passive: false }
+  );
+  function endBookTuneDrag(e) {
+    if (!bookTuneDrag) return;
+    if (e && e.pointerId != null && e.pointerId !== bookTuneDrag.pointerId) return;
+    const panel = document.querySelector("[data-book-tune-panel]");
+    if (panel) panel.classList.remove("is-dragging");
+    bookTuneDrag = null;
+  }
+  document.addEventListener("pointerup", endBookTuneDrag);
+  document.addEventListener("pointercancel", endBookTuneDrag);
 
   document.addEventListener(
     "touchstart",
