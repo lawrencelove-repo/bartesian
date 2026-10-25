@@ -198,6 +198,13 @@
     zip.file("barcodes.json", JSON.stringify(sanitizeBarcodes(snapshot.barcodes), null, 2));
     zip.file("activity.json", JSON.stringify(sanitizeActivity(snapshot.activity), null, 2));
     zip.file("wishlist.json", JSON.stringify(sanitizeWishlist(snapshot.wishlist), null, 2));
+    // Book Mode layouts: prefer a form-filtered snapshot from the app so each
+    // device export only updates that form factor on import.
+    const book =
+      snapshot.book && typeof snapshot.book === "object"
+        ? snapshot.book
+        : { version: 1, globals: {}, cocktails: {} };
+    zip.file("book.json", JSON.stringify(book, null, 2));
     const blob = await zip.generateAsync({ type: "blob" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
