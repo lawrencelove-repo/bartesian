@@ -2,7 +2,7 @@
   const IDB_NAME = "bartesian-sqlite";
   const IDB_STORE = "kv";
   const DB_KEY = "database";
-  const SCHEMA_VERSION = 8;
+  const SCHEMA_VERSION = 9;
   /** Bump when seed barcodes should be re-merged into an existing local DB. */
   const SEED_BARCODE_REV = 1;
 
@@ -191,6 +191,35 @@
       FOREIGN KEY (rimmer_id) REFERENCES rimmers(id) ON DELETE CASCADE
     );
 
+    CREATE TABLE IF NOT EXISTS book_globals (
+      form_factor TEXT NOT NULL,
+      orientation TEXT NOT NULL,
+      x REAL NOT NULL DEFAULT 0,
+      y REAL NOT NULL DEFAULT 0,
+      scale REAL NOT NULL DEFAULT 1,
+      updated_at TEXT NOT NULL,
+      PRIMARY KEY (form_factor, orientation)
+    );
+
+    CREATE TABLE IF NOT EXISTS book_cocktail_layouts (
+      cocktail_id INTEGER NOT NULL,
+      form_factor TEXT NOT NULL,
+      orientation TEXT NOT NULL,
+      x REAL NOT NULL DEFAULT 0,
+      y REAL NOT NULL DEFAULT 0,
+      scale REAL NOT NULL DEFAULT 1,
+      updated_at TEXT NOT NULL,
+      PRIMARY KEY (cocktail_id, form_factor, orientation),
+      FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE
+    );
+
+    CREATE TABLE IF NOT EXISTS book_cocktail_settings (
+      cocktail_id INTEGER PRIMARY KEY,
+      image_cut TEXT NOT NULL DEFAULT 'NA',
+      updated_at TEXT NOT NULL,
+      FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE
+    );
+
     INSERT INTO meta (key, value) VALUES ('schema_version', '${SCHEMA_VERSION}');
   `;
 
@@ -358,6 +387,32 @@
         qty_wanted INTEGER NOT NULL DEFAULT 1,
         created_at TEXT NOT NULL,
         updated_at TEXT NOT NULL
+      )`,
+      `CREATE TABLE IF NOT EXISTS book_globals (
+        form_factor TEXT NOT NULL,
+        orientation TEXT NOT NULL,
+        x REAL NOT NULL DEFAULT 0,
+        y REAL NOT NULL DEFAULT 0,
+        scale REAL NOT NULL DEFAULT 1,
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (form_factor, orientation)
+      )`,
+      `CREATE TABLE IF NOT EXISTS book_cocktail_layouts (
+        cocktail_id INTEGER NOT NULL,
+        form_factor TEXT NOT NULL,
+        orientation TEXT NOT NULL,
+        x REAL NOT NULL DEFAULT 0,
+        y REAL NOT NULL DEFAULT 0,
+        scale REAL NOT NULL DEFAULT 1,
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (cocktail_id, form_factor, orientation),
+        FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE
+      )`,
+      `CREATE TABLE IF NOT EXISTS book_cocktail_settings (
+        cocktail_id INTEGER PRIMARY KEY,
+        image_cut TEXT NOT NULL DEFAULT 'NA',
+        updated_at TEXT NOT NULL,
+        FOREIGN KEY (cocktail_id) REFERENCES cocktails(id) ON DELETE CASCADE
       )`,
     ];
     for (const sql of createSql) {
@@ -531,6 +586,171 @@
     if (s === "left") return "Left";
     if (s === "right") return "Right";
     return "NA";
+  }
+
+  const BOOK_FORMS = ["desktop", "ipad", "iphone"];
+  const BOOK_ORIENTS = ["landscape", "portrait"];
+
+  function normalizeBookForm(v) {
+    const s = String(v || "").trim().toLowerCase();
+    if (s === "ipad" || s === "tablet") return "ipad";
+    if (s === "iphone" || s === "phone" || s === "mobile") return "iphone";
+    if (s === "desktop" || s === "laptop") return "desktop";
+    return "";
+  }
+
+  function normalizeBookOrient(v) {
+    const s = String(v || "").trim().toLowerCase();
+    if (s === "landscape" || s === "portrait") return s;
+    return "";
+  }
+
+  function clampBookNum(v, lo, hi, fallback) {
+    const n = Number(v);
+    if (!Number.isFinite(n)) return fallback;
+    return Math.min(hi, Math.max(lo, n));
+  }
+
+  function normalizeBookLayout(row) {
+    if (!row) return null;
+    return {
+      x: clampBookNum(row.x, -100, 100, 0),
+      y: clampBookNum(row.y, -100, 100, 0),
+      scale: clampBookNum(row.scale, 0.5, 2, 1),
+    };
+  }
+
+  function upsertBookGlobalRow(form, orient, layout, ts) {
+    const f = normalizeBookForm(form);
+    const o = normalizeBookOrient(orient);
+    const L = normalizeBookLayout(layout);
+    if (!f || !o || !L) return false;
+    exec(
+      `INSERT INTO book_globals (form_factor, orientation, x, y, scale, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?)
+       ON CONFLICT(form_factor, orientation) DO UPDATE SET
+         x = excluded.x, y = excluded.y, scale = excluded.scale, updated_at = excluded.updated_at`,
+      [f, o, L.x, L.y, L.scale, ts || nowIso()]
+    );
+    return true;
+  }
+
+  function upsertBookCocktailLayoutRow(cocktailId, form, orient, layout, ts) {
+    const f = normalizeBookForm(form);
+    const o = normalizeBookOrient(orient);
+    const L = normalizeBookLayout(layout);
+    const id = Number(cocktailId);
+    if (!id || !f || !o || !L) return false;
+    exec(
+      `INSERT INTO book_cocktail_layouts (cocktail_id, form_factor, orientation, x, y, scale, updated_at)
+       VALUES (?, ?, ?, ?, ?, ?, ?)
+       ON CONFLICT(cocktail_id, form_factor, orientation) DO UPDATE SET
+         x = excluded.x, y = excluded.y, scale = excluded.scale, updated_at = excluded.updated_at`,
+      [id, f, o, L.x, L.y, L.scale, ts || nowIso()]
+    );
+    return true;
+  }
+
+  function upsertBookCocktailSettingsRow(cocktailId, imageCut, ts) {
+    const id = Number(cocktailId);
+    if (!id) return false;
+    exec(
+      `INSERT INTO book_cocktail_settings (cocktail_id, image_cut, updated_at)
+       VALUES (?, ?, ?)
+       ON CONFLICT(cocktail_id) DO UPDATE SET
+         image_cut = excluded.image_cut, updated_at = excluded.updated_at`,
+      [id, normalizeImageCut(imageCut), ts || nowIso()]
+    );
+    return true;
+  }
+
+  /** Apply book.json seed (globals + per-cocktail layouts/cut). Merges by key. */
+  function applyBookSeed(cocktailSlugToId) {
+    const seed = global.BARTESIAN_SEED || {};
+    const book = seed.book;
+    if (!book || typeof book !== "object") return 0;
+    let changed = 0;
+    const ts = nowIso();
+    const globals = book.globals || {};
+    for (const form of Object.keys(globals)) {
+      const byOrient = globals[form] || {};
+      for (const orient of Object.keys(byOrient)) {
+        if (upsertBookGlobalRow(form, orient, byOrient[orient], ts)) changed++;
+      }
+    }
+    const cocktails = book.cocktails || {};
+    for (const slug of Object.keys(cocktails)) {
+      const entry = cocktails[slug] || {};
+      const cid = cocktailSlugToId
+        ? cocktailSlugToId[slug]
+        : (queryOne("SELECT id FROM cocktails WHERE slug = ?", [slug]) || {}).id;
+      if (!cid) continue;
+      if (entry.image_cut != null && entry.image_cut !== "") {
+        if (upsertBookCocktailSettingsRow(cid, entry.image_cut, ts)) changed++;
+      }
+      for (const form of Object.keys(entry)) {
+        if (form === "image_cut" || form === "slug" || form === "name") continue;
+        const byOrient = entry[form];
+        if (!byOrient || typeof byOrient !== "object") continue;
+        for (const orient of Object.keys(byOrient)) {
+          if (upsertBookCocktailLayoutRow(cid, form, orient, byOrient[orient], ts)) changed++;
+        }
+      }
+    }
+    return changed;
+  }
+
+  function exportBookObject(formFactorFilter) {
+    const filter = normalizeBookForm(formFactorFilter) || "";
+    const globals = {};
+    const gRows = query(
+      "SELECT form_factor, orientation, x, y, scale FROM book_globals ORDER BY form_factor, orientation"
+    );
+    for (const row of gRows) {
+      if (filter && row.form_factor !== filter) continue;
+      if (!globals[row.form_factor]) globals[row.form_factor] = {};
+      globals[row.form_factor][row.orientation] = normalizeBookLayout(row);
+    }
+    const cocktails = {};
+    const settings = query(
+      `SELECT s.cocktail_id, s.image_cut, c.slug
+       FROM book_cocktail_settings s
+       JOIN cocktails c ON c.id = s.cocktail_id
+       ORDER BY c.slug`
+    );
+    for (const row of settings) {
+      if (!row.slug) continue;
+      // Include cut whenever exporting this cocktail (form-agnostic).
+      if (!cocktails[row.slug]) cocktails[row.slug] = {};
+      cocktails[row.slug].image_cut = normalizeImageCut(row.image_cut);
+    }
+    const layouts = query(
+      `SELECT l.cocktail_id, l.form_factor, l.orientation, l.x, l.y, l.scale, c.slug
+       FROM book_cocktail_layouts l
+       JOIN cocktails c ON c.id = l.cocktail_id
+       ORDER BY c.slug, l.form_factor, l.orientation`
+    );
+    for (const row of layouts) {
+      if (!row.slug) continue;
+      if (filter && row.form_factor !== filter) continue;
+      if (!cocktails[row.slug]) cocktails[row.slug] = {};
+      if (!cocktails[row.slug][row.form_factor]) cocktails[row.slug][row.form_factor] = {};
+      cocktails[row.slug][row.form_factor][row.orientation] = normalizeBookLayout(row);
+    }
+    // Drop cocktails that only had image_cut when filtering and no layouts for this form
+    if (filter) {
+      for (const slug of Object.keys(cocktails)) {
+        const entry = cocktails[slug];
+        const hasLayout = BOOK_FORMS.some(
+          (f) => f === filter && entry[f] && Object.keys(entry[f]).length
+        );
+        if (!hasLayout && entry.image_cut == null) delete cocktails[slug];
+        // Keep image_cut-only entries when this form had a save that set cut — actually
+        // image_cut alone shouldn't export on form-filtered export unless layouts exist.
+        if (!hasLayout) delete cocktails[slug];
+      }
+    }
+    return { version: 1, globals, cocktails };
   }
 
   function jsonField(v) {
@@ -730,6 +950,11 @@
       packSlugToId[p.slug] = insertPack(p, slugToId);
     }
     seedWishlistAndActivity(slugToId, rimmerSlugToId, packSlugToId);
+    try {
+      applyBookSeed(slugToId);
+    } catch (_) {
+      /* book tables missing on very old schemas before ensureExtensions */
+    }
   }
 
   function seedWishlistAndActivity(cocktailSlugToId, rimmerSlugToId, packSlugToId) {
@@ -951,6 +1176,7 @@
     if (seedRev && (!applied || applied.value !== seedRev)) {
       changed += applySeedInventory();
       try { changed += mergeSeedWishlistAndActivity(); } catch (_) {}
+      try { changed += applyBookSeed(null); } catch (_) {}
       exec(
         "INSERT OR REPLACE INTO meta (key, value) VALUES ('applied_seed_rev', ?)",
         [seedRev]
@@ -2131,7 +2357,93 @@
            JOIN cocktails c ON c.id = r.cocktail_id
            ORDER BY c.slug, p.name`
         ),
+        // Full book config for seed rebuild; UI export filters by form factor.
+        book: exportBookObject(""),
       };
+    },
+
+    getBookGlobal(formFactor, orientation) {
+      try {
+        const f = normalizeBookForm(formFactor);
+        const o = normalizeBookOrient(orientation);
+        if (!f || !o) return null;
+        const row = queryOne(
+          "SELECT x, y, scale FROM book_globals WHERE form_factor = ? AND orientation = ?",
+          [f, o]
+        );
+        return normalizeBookLayout(row);
+      } catch (_) {
+        return null;
+      }
+    },
+
+    getBookCocktailLayout(cocktailId, formFactor, orientation) {
+      try {
+        const f = normalizeBookForm(formFactor);
+        const o = normalizeBookOrient(orientation);
+        if (!cocktailId || !f || !o) return null;
+        const row = queryOne(
+          `SELECT x, y, scale FROM book_cocktail_layouts
+           WHERE cocktail_id = ? AND form_factor = ? AND orientation = ?`,
+          [cocktailId, f, o]
+        );
+        return normalizeBookLayout(row);
+      } catch (_) {
+        return null;
+      }
+    },
+
+    getBookCocktailImageCut(cocktailId) {
+      try {
+        if (!cocktailId) return null;
+        const row = queryOne(
+          "SELECT image_cut FROM book_cocktail_settings WHERE cocktail_id = ?",
+          [cocktailId]
+        );
+        return row ? normalizeImageCut(row.image_cut) : null;
+      } catch (_) {
+        return null;
+      }
+    },
+
+    /**
+     * Persist per-cocktail Book Mode layout for one form factor + orientation.
+     * Also stores image_cut in book_cocktail_settings (not cocktail.txt).
+     */
+    async saveBookCocktailTune({
+      cocktailId,
+      formFactor,
+      orientation,
+      x,
+      y,
+      scale,
+      imageCut,
+    }) {
+      const okLayout = upsertBookCocktailLayoutRow(
+        cocktailId,
+        formFactor,
+        orientation,
+        { x, y, scale }
+      );
+      if (!okLayout) throw new Error("Could not save book layout.");
+      if (imageCut != null) {
+        upsertBookCocktailSettingsRow(cocktailId, imageCut);
+      }
+      await persist();
+      return this.getBookCocktailLayout(cocktailId, formFactor, orientation);
+    },
+
+    /** Persist global Book Mode defaults for one form factor + orientation. */
+    async saveBookGlobalTune({ formFactor, orientation, x, y, scale }) {
+      const ok = upsertBookGlobalRow(formFactor, orientation, { x, y, scale });
+      if (!ok) throw new Error("Could not save book global.");
+      await persist();
+      return this.getBookGlobal(formFactor, orientation);
+    },
+
+    /** Book snapshot for export — optionally limited to one form factor. */
+    exportBook(formFactorFilter) {
+      return exportBookObject(formFactorFilter || "");
     },
   };
 

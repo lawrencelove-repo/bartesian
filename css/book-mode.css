@@ -436,6 +436,38 @@ html.book-active body {
   text-transform: uppercase;
 }
 
+.book-tune-cut {
+  flex: 1 1 auto;
+  min-height: 44px;
+  padding: 0.35rem 0.55rem;
+  font: inherit;
+  font-size: 0.9rem;
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: #fff;
+  color: inherit;
+}
+
+.book-tune-save-row {
+  margin-top: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.book-tune-save-row button {
+  flex: 1 1 auto;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.book-tune-save-row button:disabled {
+  opacity: 0.45;
+}
+
+.book-tune-status {
+  color: #1a5c3a !important;
+  font-weight: 600;
+}
+
 .book-modal-backdrop {
   position: absolute;
   inset: 0;

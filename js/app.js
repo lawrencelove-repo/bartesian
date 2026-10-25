@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v75";
+  const APP_VERSION = "bartesian-v76";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -56,18 +56,10 @@
     isAdmin: false,
     bookMenuOpen: false,
     bookTuneOpen: false,
-    // Temporary Book hero fine-tuning (percent offsets + size multiplier +
-    // photo panel dimensions). Persisted so settings survive paging;
-    // Lawrence records the winners per device/orientation and they get
-    // baked into book-mode.css.
-    // The hero is a full-viewport layer behind the fixed 50% text section,
-    // so Shift/Y/Size position and size it relative to the viewport.
-    bookTune: { x: 0, y: 0, scale: 1 },
-    // True once the user has actually tuned on this device: tuned values
-    // then stay live after the Tune panel closes (until baked into CSS).
-    // Scoped by bookTuneForm so e.g. portrait values don't leak to landscape.
-    bookTuneLive: false,
-    bookTuneForm: "",
+    // In-progress per-cocktail Book Mode edit. Only written to the DB on Save;
+    // switching cocktails/pages without saving discards this draft.
+    // Shape: { cocktailId, form, orientation, x, y, scale, imageCut, dirty }
+    bookTuneDraft: null,
     // Admin display toggles (Settings; cookie bartesian_ui_prefs)
     showBookTuneBtn: true,
     showAdminImageCut: true,
@@ -136,7 +128,7 @@
     };
   }
 
-  /** Which form-factor bucket the current viewport belongs to. */
+  /** Which form-factor bucket the current viewport belongs to (legacy key). */
   function bookFormKey() {
     const mq = (q) => typeof window.matchMedia === "function" && window.matchMedia(q).matches;
     if (mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)")) return "ipad-landscape";
@@ -147,37 +139,111 @@
     return (window.innerWidth || 0) >= (window.innerHeight || 0) ? "landscape" : "portrait";
   }
 
-  function loadBookTune() {
-    try {
-      const raw = getCookie(BOOK_TUNE_COOKIE);
-      if (!raw) return;
-      const p = JSON.parse(raw);
-      const clamp = (v, lo, hi, fallback) =>
-        Number.isFinite(Number(v)) ? Math.min(hi, Math.max(lo, Number(v))) : fallback;
-      state.bookTune = {
-        x: clamp(p.x, -100, 100, 0),
-        y: clamp(p.y, -100, 100, 0),
-        scale: clamp(p.scale, 0.5, 2, 1),
-      };
-      state.bookTuneLive = true;
-      // Older cookies have no form stamp; assume they were tuned here.
-      state.bookTuneForm = typeof p.form === "string" && p.form ? p.form : bookFormKey();
-    } catch (_) {
-      /* ignore bad cookie */
-    }
+  /** Form factor + orientation for Book Mode persistence (data/book.json). */
+  function bookDeviceInfo() {
+    const key = bookFormKey();
+    if (key === "ipad-landscape") return { form: "ipad", orientation: "landscape", key };
+    if (key === "ipad-portrait") return { form: "ipad", orientation: "portrait", key };
+    if (key === "iphone-portrait") return { form: "iphone", orientation: "portrait", key };
+    if (key === "iphone-landscape") return { form: "iphone", orientation: "landscape", key };
+    const orientation =
+      (window.innerWidth || 0) >= (window.innerHeight || 0) ? "landscape" : "portrait";
+    if (key === "desktop") return { form: "desktop", orientation, key: "desktop-" + orientation };
+    return { form: "desktop", orientation, key: "desktop-" + orientation };
   }
 
-  function saveBookTune() {
-    setCookie(BOOK_TUNE_COOKIE, JSON.stringify({ ...state.bookTune, form: state.bookTuneForm }));
+  function bakedBookTuneFor(device) {
+    const form = device && device.form;
+    const orient = device && device.orientation;
+    if (form === "ipad" && orient === "landscape") return { x: -64, y: 12, scale: 1.3 };
+    if (form === "ipad" && orient === "portrait") return { x: -66, y: 4, scale: 1.35 };
+    if (form === "iphone" && orient === "portrait") return { x: -8, y: -32, scale: 1.35 };
+    if (form === "iphone" && orient === "landscape") return { x: -68, y: 26, scale: 1.5 };
+    if (form === "desktop") return { x: -78, y: 20, scale: 1.45 };
+    return bakedBookTune();
+  }
+
+  /** Global default for this device: DB book_globals, else baked CSS values. */
+  function globalBookLayout(device) {
+    const d = device || bookDeviceInfo();
+    const fromDb = BartesianDB.getBookGlobal(d.form, d.orientation);
+    if (fromDb) return { ...fromDb, source: "global" };
+    const baked = bakedBookTuneFor(d);
+    return { ...(baked || { x: 0, y: 0, scale: 1 }), source: "baked" };
+  }
+
+  /** Image cut for Book Mode: book settings first, else cocktail.txt legacy. */
+  function bookImageCutFor(cocktail) {
+    if (!cocktail) return "NA";
+    const fromBook = BartesianDB.getBookCocktailImageCut(cocktail.id);
+    if (fromBook) return fromBook;
+    const legacy = String(cocktail.image_cut || "NA");
+    return ["Left", "Right"].includes(legacy) ? legacy : "NA";
+  }
+
+  /**
+   * Effective layout for a cocktail on this device.
+   * Draft (if editing this cocktail) > saved cocktail layout > global > baked.
+   */
+  function effectiveBookLayout(cocktail) {
+    const d = bookDeviceInfo();
+    const draft = state.bookTuneDraft;
+    if (draft && cocktail && draft.cocktailId === cocktail.id) {
+      return {
+        x: draft.x,
+        y: draft.y,
+        scale: draft.scale,
+        imageCut: draft.imageCut,
+        form: draft.form,
+        orientation: draft.orientation,
+        source: "draft",
+        dirty: !!draft.dirty,
+      };
+    }
+    const cut = bookImageCutFor(cocktail);
+    if (cocktail) {
+      const saved = BartesianDB.getBookCocktailLayout(cocktail.id, d.form, d.orientation);
+      if (saved) {
+        return { ...saved, imageCut: cut, form: d.form, orientation: d.orientation, source: "cocktail", dirty: false };
+      }
+    }
+    const g = globalBookLayout(d);
+    return { ...g, imageCut: cut, form: d.form, orientation: d.orientation, dirty: false };
+  }
+
+  function beginBookTuneDraft(cocktailId) {
+    const c = BartesianDB.getCocktail(cocktailId);
+    if (!c) return;
+    const d = bookDeviceInfo();
+    // Prefer saved cocktail layout; otherwise start from the current global.
+    const saved = BartesianDB.getBookCocktailLayout(c.id, d.form, d.orientation);
+    const base = saved || globalBookLayout(d);
+    state.bookTuneDraft = {
+      cocktailId: c.id,
+      form: d.form,
+      orientation: d.orientation,
+      x: base.x,
+      y: base.y,
+      scale: base.scale,
+      imageCut: bookImageCutFor(c),
+      dirty: false,
+    };
+  }
+
+  function discardBookTuneDraft() {
+    state.bookTuneDraft = null;
   }
 
   function adjustBookTune(action) {
-    const t = { ...state.bookTune };
+    if (!state.bookTuneDraft) return;
+    const t = { ...state.bookTuneDraft };
     const STEP = 2;
     // X is stored as a shift toward the center spine: it is applied
     // mirrored on right-hand pages (see bookTuneStyle). The arrow buttons
     // always move the photo in the arrow's direction on screen, so on a
     // right-hand page they adjust the stored shift in the opposite sense.
+    // Left vs right page (and form factor) therefore share one stored X;
+    // cut side only flips the bitmap, it does not invert the shift.
     const spreadEl = document.querySelector("[data-book-spread]");
     const onLeftPage = !spreadEl || spreadEl.classList.contains("image-left");
     if (action === "left") t.x += onLeftPage ? -STEP : STEP;
@@ -187,28 +253,56 @@
     else if (action === "bigger") t.scale = Math.round((t.scale + 0.05) * 100) / 100;
     else if (action === "smaller") t.scale = Math.round((t.scale - 0.05) * 100) / 100;
     else if (action === "reset") {
-      // Reset = erase this form factor's tuned session and go back to the
-      // server (baked CSS) settings — NOT neutral 0/0/100. Clear the live
-      // flag and the cookie so the bake takes over again on close, and
-      // show the baked preset (or neutral defaults where nothing is
-      // baked yet) in the readout while the panel is open.
-      state.bookTune = bakedBookTune() || { x: 0, y: 0, scale: 1 };
-      state.bookTuneLive = false;
-      state.bookTuneForm = "";
-      setCookie(BOOK_TUNE_COOKIE, "", 0);
+      const g = globalBookLayout({ form: t.form, orientation: t.orientation });
+      t.x = g.x;
+      t.y = g.y;
+      t.scale = g.scale;
+      t.dirty = true;
+      state.bookTuneDraft = t;
       render();
       return;
     }
-    // Full-viewport range: the image may slide completely off either edge,
-    // so any on-screen portion (75%, 50%, less) can be explored.
     t.x = Math.min(100, Math.max(-100, t.x));
     t.y = Math.min(100, Math.max(-100, t.y));
     t.scale = Math.min(2, Math.max(0.5, t.scale));
-    state.bookTune = t;
-    // Tuned settings persist after the panel closes, for this form factor.
-    state.bookTuneLive = true;
-    state.bookTuneForm = bookFormKey();
-    saveBookTune();
+    t.dirty = true;
+    t.status = "";
+    state.bookTuneDraft = t;
+    render();
+  }
+
+  async function saveBookTuneCocktail() {
+    const d = state.bookTuneDraft;
+    if (!d) return;
+    await BartesianDB.saveBookCocktailTune({
+      cocktailId: d.cocktailId,
+      formFactor: d.form,
+      orientation: d.orientation,
+      x: d.x,
+      y: d.y,
+      scale: d.scale,
+      imageCut: d.imageCut,
+    });
+    d.dirty = false;
+    d.status = "Saved for this cocktail · " + d.form + " · " + d.orientation;
+    state.bookTuneDraft = d;
+    render();
+  }
+
+  async function saveBookTuneGlobal() {
+    const d = state.bookTuneDraft;
+    if (!d) return;
+    await BartesianDB.saveBookGlobalTune({
+      formFactor: d.form,
+      orientation: d.orientation,
+      x: d.x,
+      y: d.y,
+      scale: d.scale,
+    });
+    d.status = "Saved as global default · " + d.form + " · " + d.orientation;
+    // Global changed — draft is no longer "dirty" relative to cocktail save,
+    // but cocktail-specific override was not written.
+    state.bookTuneDraft = d;
     render();
   }
 
@@ -235,8 +329,11 @@
   }
 
   loadListPrefs();
-  loadBookTune();
   loadUiPrefs();
+  // Clear legacy global tune cookie — per-cocktail layouts live in the DB / book.json.
+  try {
+    setCookie(BOOK_TUNE_COOKIE, "", 0);
+  } catch (_) {}
 
   function loadAdminFlag() {
     try {
@@ -2513,50 +2610,40 @@
 
   /** Baked hero preset for this device/orientation, if one exists in CSS. */
   function bakedBookTune() {
-    const mq = (q) => typeof window.matchMedia === "function" && window.matchMedia(q).matches;
-    if (mq("(pointer: coarse) and (orientation: landscape) and (min-width: 768px) and (min-height: 600px)")) {
-      return { x: -64, y: 12, scale: 1.3 }; // iPad landscape
-    }
-    if (mq("(pointer: coarse) and (orientation: portrait) and (min-width: 600px)")) {
-      return { x: -66, y: 4, scale: 1.35 }; // iPad portrait
-    }
-    if (mq("(pointer: coarse) and (orientation: portrait) and (max-width: 599px)")) {
-      return { x: -8, y: -32, scale: 1.35 }; // iPhone portrait
-    }
-    if (mq("(pointer: coarse) and (orientation: landscape) and (max-height: 599px)")) {
-      return { x: -68, y: 26, scale: 1.5 }; // iPhone landscape
-    }
-    if (mq("(hover: hover) and (pointer: fine)")) {
-      return { x: -78, y: 20, scale: 1.45 }; // desktop
-    }
-    return null;
+    return bakedBookTuneFor(bookDeviceInfo());
   }
 
-  function bookTuneStyle(imageLeft) {
-    const t = state.bookTune;
+  function bookTuneStyle(layout, imageLeft) {
+    const t = layout || { x: 0, y: 0, scale: 1 };
     // Stored X shifts toward the center spine, so mirror it on right pages.
+    // Page side (left/right) drives the mirror; image cut only flips the bitmap.
     const appliedX = imageLeft ? t.x : -t.x;
     return `--book-tune-x:${appliedX}%;--book-tune-y:${t.y}%;--book-tune-scale:${t.scale}`;
   }
 
-  function renderBookTune() {
-    if (!state.bookTuneOpen) return "";
-    const t = state.bookTune;
+  function renderBookTune(cocktail) {
+    if (!state.bookTuneOpen || !state.bookTuneDraft) return "";
+    const t = state.bookTuneDraft;
     const signed = (v) => (v > 0 ? "+" : "") + v + "%";
     const w = window.innerWidth || 0;
     const h = window.innerHeight || 0;
-    const orient = w >= h ? "landscape" : "portrait";
-    const bakedHere = bakedBookTune() !== null;
+    const cut = t.imageCut || "NA";
+    const cutOpts = ["NA", "Left", "Right"]
+      .map(
+        (opt) =>
+          `<option value="${opt}" ${opt === cut ? "selected" : ""}>${opt}</option>`
+      )
+      .join("");
     return `<div class="book-tune-panel" data-book-tune-panel>
       <div class="book-tune-head">
-        <span>Hero tuning</span>
+        <span>Tune · ${esc((cocktail && cocktail.name) || "Cocktail")}</span>
         <button type="button" data-book-tune-close>Close</button>
       </div>
       <input class="book-tune-readout-field" type="text" readonly aria-label="Current tuning settings (selectable)"
-        value="Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%" />
-      <p class="book-tune-viewport">${w}×${h} · ${orient} · Size is relative to the viewport</p>
-      <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge.</p>
-      ${bakedHere ? `<p class="book-tune-viewport">This device/orientation has baked CSS values; Tune starts from them, and once you change anything your tuned values stay in effect after closing (for this form factor) until they're baked in.</p>` : ""}
+        value="${esc(t.form)} · ${esc(t.orientation)} · Shift ${signed(t.x)} · Move Y ${signed(t.y)} · Size ${Math.round(t.scale * 100)}%${t.dirty ? " · unsaved" : ""}" />
+      <p class="book-tune-viewport">${w}×${h} · Defaults to the global ${esc(t.form)}/${esc(t.orientation)} position until you Save.</p>
+      <p class="book-tune-viewport">Shift + moves toward the center on both sides (mirrored on right pages); − moves toward the outer edge. Image Cut flips the photo on the matching page side.</p>
+      ${t.status ? `<p class="book-tune-viewport book-tune-status">${esc(t.status)}</p>` : ""}
       <div class="book-tune-row">
         <span class="book-tune-label">Move</span>
         <button type="button" data-book-tune="left" aria-label="Move image left">←</button>
@@ -2568,7 +2655,15 @@
         <span class="book-tune-label">Size</span>
         <button type="button" data-book-tune="smaller" aria-label="Make image smaller">−</button>
         <button type="button" data-book-tune="bigger" aria-label="Make image bigger">+</button>
-        <button type="button" class="book-tune-reset" data-book-tune="reset" title="Erase tuned changes and reload the server (baked) settings">Reset</button>
+        <button type="button" class="book-tune-reset" data-book-tune="reset" title="Revert draft to the current global position">Reset</button>
+      </div>
+      <div class="book-tune-row">
+        <span class="book-tune-label">Cut</span>
+        <select class="book-tune-cut" data-book-tune-cut aria-label="Image cut side">${cutOpts}</select>
+      </div>
+      <div class="book-tune-row book-tune-save-row">
+        <button type="button" class="book-tune-save" data-book-tune-save ${t.dirty ? "" : "disabled"}>Save</button>
+        <button type="button" class="book-tune-save-global" data-book-tune-save-global title="Update the global default for this form factor and orientation">Save as global</button>
       </div>
     </div>`;
   }
@@ -2593,17 +2688,19 @@
     const c = list[index];
     const imageLeft = index % 2 === 0;
     const photoSrc = primaryImage(c);
+    const layout = effectiveBookLayout(c);
     // Image Cut: flip horizontally only when the cut side matches the
     // side the photo sits on (left photo + Left cut, or right photo + Right
     // cut). NA, or a cut on the opposite side, displays normally.
-    const imageCut = String(c.image_cut || "NA");
+    // Cut is read from book settings (draft while editing); not cocktail.txt.
+    const imageCut = String(layout.imageCut || "NA");
     const flipPhoto =
       (imageLeft && imageCut === "Left") || (!imageLeft && imageCut === "Right");
     const spiritsText = (c.spirits || []).join(", ") || c.primary_spirit || "";
 
-    const tuneLive =
-      state.bookTuneOpen || (state.bookTuneLive && state.bookTuneForm === bookFormKey());
-    return `<div class="book-mode ${tuneLive ? "book-tuning" : ""}" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(imageLeft)}">
+    // Always drive position from JS (per-cocktail / global / baked) so saved
+    // book.json layouts override the CSS media-query bake.
+    return `<div class="book-mode book-tuning" data-book-root data-book-id="${c.id}" data-book-index="${index}" style="${bookTuneStyle(layout, imageLeft)}">
       <button type="button" class="book-menu-btn" data-book-menu-open aria-label="Open menu" title="Menu"><span aria-hidden="true">☰</span></button>
       ${state.showBookTuneBtn ? `<button type="button" class="book-tune-btn" data-book-tune-open>Tune</button>` : ""}
       <article class="book-spread ${imageLeft ? "image-left" : "image-right"}" data-book-spread>
@@ -2623,7 +2720,7 @@
         <span class="book-page-num">${index + 1}</span>
       </article>
       <p class="book-hint">Swipe</p>
-      ${renderBookTune()}
+      ${renderBookTune(c)}
       ${state.bookMenuOpen ? renderBookMenu(c.id) : ""}
     </div>`;
   }
@@ -2698,6 +2795,11 @@
     const next = Math.max(0, Math.min(list.length - 1, index + delta));
     if (list[next]) {
       state.bookMenuOpen = false;
+      // Unsaved tune edits are discarded when changing cocktails/pages.
+      const stayOpen = state.bookTuneOpen;
+      discardBookTuneDraft();
+      if (stayOpen) beginBookTuneDraft(list[next].id);
+      else state.bookTuneOpen = false;
       go("#/book/" + list[next].id);
     }
   }
@@ -2753,6 +2855,17 @@
     }
     if (route.view === "book") {
       setBookActiveClass(true);
+      // If the cocktail changed outside bookGoRelative, drop unsaved edits.
+      if (
+        state.bookTuneDraft &&
+        route.id != null &&
+        !Number.isNaN(route.id) &&
+        state.bookTuneDraft.cocktailId !== route.id
+      ) {
+        const stayOpen = state.bookTuneOpen;
+        discardBookTuneDraft();
+        if (stayOpen) beginBookTuneDraft(route.id);
+      }
       // Resolve missing id to first page in the filtered book order.
       if (route.id == null || Number.isNaN(route.id)) {
         const list = bookCocktailList();
@@ -2768,6 +2881,11 @@
     } else {
       setBookActiveClass(false);
       state.bookMenuOpen = false;
+      // Leaving Book Mode discards any unsaved tune draft.
+      if (state.bookTuneDraft || state.bookTuneOpen) {
+        discardBookTuneDraft();
+        state.bookTuneOpen = false;
+      }
       if (route.view === "detail") root.innerHTML = renderDetail(route.id);
       else if (route.view === "rimmers") root.innerHTML = renderRimmers();
       else if (route.view === "rimmer-detail") root.innerHTML = renderRimmerDetail(route.id);
@@ -2814,18 +2932,29 @@
     }
     if (e.target.closest("[data-book-tune-open]")) {
       e.preventDefault();
-      // Start tuning from the baked values for this form factor (if any)
-      // so the display doesn't jump when Tune takes over from the bake.
-      const preset = bakedBookTune();
-      if (preset) state.bookTune = preset;
+      const rootEl = e.target.closest("[data-book-root]");
+      const cocktailId = rootEl ? Number(rootEl.getAttribute("data-book-id")) : 0;
+      if (cocktailId) beginBookTuneDraft(cocktailId);
       state.bookTuneOpen = true;
       render();
       return;
     }
     if (e.target.closest("[data-book-tune-close]")) {
       e.preventDefault();
+      // Closing without Save discards the draft.
+      discardBookTuneDraft();
       state.bookTuneOpen = false;
       render();
+      return;
+    }
+    if (e.target.closest("[data-book-tune-save]")) {
+      e.preventDefault();
+      await saveBookTuneCocktail();
+      return;
+    }
+    if (e.target.closest("[data-book-tune-save-global]")) {
+      e.preventDefault();
+      await saveBookTuneGlobal();
       return;
     }
     const tuneBtn = e.target.closest("[data-book-tune]");
@@ -2836,6 +2965,8 @@
     }
     if (e.target.closest("[data-book-exit]")) {
       state.bookMenuOpen = false;
+      discardBookTuneDraft();
+      state.bookTuneOpen = false;
       setBookActiveClass(false);
       // Let data-go handle navigation when present.
     }
@@ -3467,10 +3598,17 @@
     if (e.target.closest("[data-export]")) {
       const status = root.querySelector("[data-export-status]");
       try {
-        await BartesianExport.exportAll(BartesianDB.exportSnapshot());
+        const snapshot = BartesianDB.exportSnapshot();
+        // Each device only tests one form factor — export only that form's
+        // book layouts so import deep-merges without wiping other devices.
+        const device = bookDeviceInfo();
+        snapshot.book = BartesianDB.exportBook(device.form);
+        await BartesianExport.exportAll(snapshot);
         if (status) {
           status.textContent =
-            "Downloaded bartesian-exports.zip — check your Downloads folder, then copy it to exports/ and run the import.";
+            "Downloaded bartesian-exports.zip — check your Downloads folder, then copy it to exports/ and run the import. Book layouts included for " +
+            device.form +
+            " only.";
         }
       } catch (err) {
         if (status) status.textContent = "Export failed: " + err.message;
@@ -3871,6 +4009,18 @@
   }
 
   function onChange(e) {
+    const bookCut = e.target.closest("[data-book-tune-cut]");
+    if (bookCut && state.bookTuneDraft) {
+      state.bookTuneDraft = {
+        ...state.bookTuneDraft,
+        imageCut: ["Left", "Right"].includes(bookCut.value) ? bookCut.value : "NA",
+        dirty: true,
+        status: "",
+      };
+      render();
+      return;
+    }
+
     const bookForm = e.target.closest("[data-book-filters]");
     if (bookForm) {
       syncBookApplyState(bookForm);
