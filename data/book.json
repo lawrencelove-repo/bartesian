@@ -54,6 +54,13 @@
           "y": 12,
           "scale": 1.3
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -80,
+          "y": 2,
+          "scale": 1.55
+        }
       }
     },
     "apple-pie": {
@@ -76,6 +83,13 @@
           "y": 12,
           "scale": 1.3
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -70,
+          "y": 20,
+          "scale": 1.45
+        }
       }
     },
     "aviation": {
@@ -97,6 +111,13 @@
           "x": -62,
           "y": 4,
           "scale": 1.5
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -92,
+          "y": 38,
+          "scale": 1.7
         }
       }
     },
@@ -125,6 +146,13 @@
           "y": 8,
           "scale": 1.2
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -72,
+          "y": 20,
+          "scale": 1.45
+        }
       }
     },
     "calamansi-daiquiri": {
@@ -146,6 +174,13 @@
           "x": -54,
           "y": 4,
           "scale": 1.45
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 22,
+          "scale": 1.6
         }
       }
     },
@@ -169,6 +204,13 @@
           "y": 4,
           "scale": 1.45
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -86,
+          "y": 26,
+          "scale": 1.6
+        }
       }
     },
     "ginger-peach-iced-tea": {
@@ -190,6 +232,13 @@
           "x": -54,
           "y": 4,
           "scale": 1.4
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -72,
+          "y": 20,
+          "scale": 1.35
         }
       }
     },
@@ -213,6 +262,13 @@
           "y": 4,
           "scale": 1.45
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -76,
+          "y": 20,
+          "scale": 1.4
+        }
       }
     },
     "hurricane": {
@@ -234,6 +290,13 @@
           "x": -58,
           "y": 4,
           "scale": 1.4
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 20,
+          "scale": 1.45
         }
       }
     },
@@ -257,6 +320,13 @@
           "y": 4,
           "scale": 1.35
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -76,
+          "y": 20,
+          "scale": 1.55
+        }
       }
     },
     "jungle-bird": {
@@ -273,6 +343,13 @@
           "x": -60,
           "y": 14,
           "scale": 1.35
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": 20,
+          "scale": 1.65
         }
       }
     },
@@ -296,6 +373,13 @@
           "y": -8,
           "scale": 1.1
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 10,
+          "scale": 1.7
+        }
       }
     },
     "long-island-iced-tea": {
@@ -317,6 +401,13 @@
           "x": -50,
           "y": 0,
           "scale": 1.4
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -76,
+          "y": 20,
+          "scale": 1.45
         }
       }
     },
@@ -345,6 +436,13 @@
           "y": -12,
           "scale": 1.45
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": -8,
+          "scale": 1.6
+        }
       }
     },
     "low-cal-whiskey-sour": {
@@ -366,6 +464,13 @@
           "x": -56,
           "y": -2,
           "scale": 1.45
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -70,
+          "y": 6,
+          "scale": 1.35
         }
       }
     },
@@ -389,6 +494,13 @@
           "y": 4,
           "scale": 1.35
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 26,
+          "scale": 1.55
+        }
       }
     },
     "mango-habanero-margarita": {
@@ -410,6 +522,13 @@
           "x": -58,
           "y": 0,
           "scale": 1.45
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -90,
+          "y": 20,
+          "scale": 1.65
         }
       }
     },
@@ -433,6 +552,13 @@
           "y": 2,
           "scale": 1.45
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -80,
+          "y": 20,
+          "scale": 1.55
+        }
       }
     },
     "manhattan": {
@@ -454,6 +580,13 @@
           "x": -50,
           "y": 0,
           "scale": 1.45
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -88,
+          "y": 24,
+          "scale": 1.65
         }
       }
     },
@@ -477,6 +610,13 @@
           "y": 4,
           "scale": 1.4
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 28,
+          "scale": 1.55
+        }
       }
     },
     "northside": {
@@ -498,6 +638,13 @@
           "x": -56,
           "y": -2,
           "scale": 1.5
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 20,
+          "scale": 1.55
         }
       }
     },
@@ -526,6 +673,13 @@
           "y": -12,
           "scale": 1.55
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": -8,
+          "scale": 1.6
+        }
       }
     },
     "painkiller": {
@@ -548,6 +702,13 @@
           "y": 4,
           "scale": 1.35
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -76,
+          "y": 22,
+          "scale": 1.45
+        }
       }
     },
     "paper-plane": {
@@ -569,6 +730,13 @@
           "x": -66,
           "y": 0,
           "scale": 1.5
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 20,
+          "scale": 1.6
         }
       }
     },
@@ -597,6 +765,13 @@
           "y": 4,
           "scale": 1.4
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -70,
+          "y": 12,
+          "scale": 1.4
+        }
       }
     },
     "pineapple-margarita": {
@@ -618,6 +793,13 @@
           "x": -64,
           "y": 2,
           "scale": 1.4
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 22,
+          "scale": 1.55
         }
       }
     },
@@ -641,6 +823,13 @@
           "y": 2,
           "scale": 1.45
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 26,
+          "scale": 1.6
+        }
       }
     },
     "raspberry-ginger-gimlet": {
@@ -662,6 +851,13 @@
           "x": -62,
           "y": 4,
           "scale": 1.5
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 26,
+          "scale": 1.55
         }
       }
     },
@@ -685,6 +881,13 @@
           "y": 2,
           "scale": 1.55
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -88,
+          "y": 24,
+          "scale": 1.6
+        }
       }
     },
     "rum-runner": {
@@ -707,6 +910,13 @@
           "y": 2,
           "scale": 1.5
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -86,
+          "y": 20,
+          "scale": 1.55
+        }
       }
     },
     "rum-swizzle": {
@@ -723,6 +933,13 @@
           "x": -36,
           "y": 2,
           "scale": 1.05
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -90,
+          "y": 22,
+          "scale": 1.55
         }
       }
     },
@@ -768,6 +985,13 @@
           "y": 4,
           "scale": 1.35
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 36,
+          "scale": 1.55
+        }
       }
     },
     "spicy-margarita": {
@@ -795,6 +1019,13 @@
           "y": 0,
           "scale": 1.45
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 12,
+          "scale": 1.6
+        }
       }
     },
     "strawberry-coconut-daiquiri": {
@@ -811,6 +1042,13 @@
           "x": -56,
           "y": 12,
           "scale": 1.3
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": 20,
+          "scale": 1.6
         }
       }
     },
@@ -834,6 +1072,13 @@
           "y": 16,
           "scale": 1.35
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": 28,
+          "scale": 1.55
+        }
       }
     },
     "tequila-sunrise": {
@@ -855,6 +1100,13 @@
           "x": -56,
           "y": 12,
           "scale": 1.25
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -74,
+          "y": 20,
+          "scale": 1.45
         }
       }
     },
@@ -883,6 +1135,13 @@
           "y": 4,
           "scale": 1.45
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 32,
+          "scale": 1.6
+        }
       }
     },
     "whiskey-sour": {
@@ -909,6 +1168,13 @@
           "x": -66,
           "y": -8,
           "scale": 1.5
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": 4,
+          "scale": 1.6
         }
       }
     },
@@ -937,6 +1203,13 @@
           "y": 4,
           "scale": 1.35
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 32,
+          "scale": 1.55
+        }
       }
     },
     "bees-knees": {
@@ -951,6 +1224,13 @@
           "x": -60,
           "y": 4,
           "scale": 1.4
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 20,
+          "scale": 1.55
         }
       }
     },
@@ -977,6 +1257,13 @@
           "y": 4,
           "scale": 1.4
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": 24,
+          "scale": 1.55
+        }
       }
     },
     "low-cal-margarita": {
@@ -992,6 +1279,13 @@
           "y": 4,
           "scale": 1.4
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 28,
+          "scale": 1.55
+        }
       }
     },
     "mai-tai": {
@@ -1001,6 +1295,13 @@
           "x": -60,
           "y": 12,
           "scale": 1.35
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -78,
+          "y": 12,
+          "scale": 1.55
         }
       }
     },
@@ -1017,6 +1318,13 @@
           "y": 2,
           "scale": 1.4
         }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -84,
+          "y": 34,
+          "scale": 1.6
+        }
       }
     },
     "whiskey-smash": {
@@ -1031,6 +1339,13 @@
           "x": -64,
           "y": 4,
           "scale": 1.35
+        }
+      },
+      "desktop": {
+        "landscape": {
+          "x": -82,
+          "y": 10,
+          "scale": 1.55
         }
       }
     }
