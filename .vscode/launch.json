@@ -10,17 +10,22 @@
     },
     {
       "name": "Import: merge exports/bartesian-exports.zip",
-      "type": "node-terminal",
+      "type": "node",
       "request": "launch",
-      "command": "node scripts/import-data.js",
-      "cwd": "${workspaceFolder}"
+      "program": "${workspaceFolder}/scripts/import-data.js",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart"
     },
     {
       "name": "Import: rebuild seed from data/ only",
-      "type": "node-terminal",
+      "type": "node",
       "request": "launch",
-      "command": "node scripts/import-data.js --from-data",
-      "cwd": "${workspaceFolder}"
+      "program": "${workspaceFolder}/scripts/import-data.js",
+      "args": ["--from-data"],
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "internalConsoleOptions": "openOnSessionStart"
     }
   ]
 }

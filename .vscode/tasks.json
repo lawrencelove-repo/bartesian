@@ -15,7 +15,9 @@
       "presentation": {
         "reveal": "always",
         "panel": "shared",
-        "focus": true
+        "focus": true,
+        "close": true,
+        "showReuseMessage": false
       },
       "problemMatcher": []
     },
@@ -30,7 +32,9 @@
       "presentation": {
         "reveal": "always",
         "panel": "shared",
-        "focus": true
+        "focus": true,
+        "close": true,
+        "showReuseMessage": false
       },
       "problemMatcher": []
     }
