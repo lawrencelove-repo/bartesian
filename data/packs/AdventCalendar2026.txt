@@ -8,7 +8,7 @@ Shopify Product ID: 8913630003399
 Shopify Variant ID: 47520593445063
 Shopify Handle: advent-calendar
 Gorgias Article ID: 7886629
-Image: 
+Image: images/packs/advent-calendar-2026.jpg
 Nutrition Image: 
 Enabled: 1
 Items:

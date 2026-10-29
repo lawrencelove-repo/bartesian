@@ -8,7 +8,7 @@ Shopify Product ID: 8726160474311
 Shopify Variant ID: 46631778386119
 Shopify Handle: long-island-collection
 Gorgias Article ID: 
-Image: 
+Image: images/packs/long-island-collection.jpg
 Nutrition Image: 
 Enabled: 1
 Items:

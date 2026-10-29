@@ -8,7 +8,7 @@ Shopify Product ID: 8616008286407
 Shopify Variant ID: 46171816493255
 Shopify Handle: staff-picks-collection
 Gorgias Article ID: 
-Image: 
+Image: images/packs/staff-picks-collection.jpg
 Nutrition Image: 
 Enabled: 1
 Items:

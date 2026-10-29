@@ -1630,8 +1630,12 @@
 
   function cocktailListCountHtml(cocktails) {
     const n = cocktails.length;
-    const capsules = cocktails.reduce((sum, c) => sum + (Number(c.quantity) || 0), 0);
-    return `<p class="count">${n} cocktail${n === 1 ? "" : "s"} (${capsules} capsule${capsules === 1 ? "" : "s"})</p>`;
+    let text = `${n} cocktail${n === 1 ? "" : "s"}`;
+    if (state.availableOnly) {
+      const capsules = cocktails.reduce((sum, c) => sum + (Number(c.quantity) || 0), 0);
+      text += ` (${capsules} capsule${capsules === 1 ? "" : "s"})`;
+    }
+    return `<p class="count">${text}</p>`;
   }
 
   function renderWishlist() {

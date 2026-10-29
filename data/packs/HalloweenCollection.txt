@@ -8,7 +8,7 @@ Shopify Product ID: 8726360719559
 Shopify Variant ID: 46632550432967
 Shopify Handle: halloween-collection
 Gorgias Article ID: 
-Image: 
+Image: images/packs/halloween-collection.jpg
 Nutrition Image: 
 Enabled: 1
 Items:

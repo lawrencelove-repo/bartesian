@@ -8,7 +8,7 @@ Shopify Product ID: 7646682644679
 Shopify Variant ID: 43136777289927
 Shopify Handle: tropical-margarita-collection
 Gorgias Article ID: 
-Image: 
+Image: images/packs/tropical-margarita.jpg
 Nutrition Image: 
 Enabled: 0
 Items:

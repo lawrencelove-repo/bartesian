@@ -8,7 +8,7 @@ Shopify Product ID: 7779492200647
 Shopify Variant ID: 43436952092871
 Shopify Handle: poolside-vibes-collection-variety-pack
 Gorgias Article ID: 
-Image: 
+Image: images/packs/poolside-vibes.jpg
 Nutrition Image: 
 Enabled: 1
 Items:

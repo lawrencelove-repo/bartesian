@@ -8,7 +8,7 @@ Shopify Product ID: 8119625941191
 Shopify Variant ID: 44303522562247
 Shopify Handle: classic-cocktails-favorites
 Gorgias Article ID: 
-Image: 
+Image: images/packs/classic-collection-favorites.jpg
 Nutrition Image: 
 Enabled: 1
 Items:
