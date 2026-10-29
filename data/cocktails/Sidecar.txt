@@ -22,7 +22,7 @@ Image: images/hero/sidecar.jpg
 Seasonal: 0
 Enabled: 1
 Favorite: 0
-Quantity: 7
+Quantity: 15
 Restock: 0
 Capsule Barcode: 213962797
 Case Barcode: 850054919595

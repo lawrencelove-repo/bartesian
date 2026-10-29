@@ -297,7 +297,7 @@ def main() -> None:
     # Persist index for scrape reuse
     out = ROOT / "tmp" / "scrape" / "shopify-products.json"
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(products), encoding="utf-8")
+    out.write_text(json.dumps(products, ensure_ascii=False), encoding="utf-8")
 
     c_ok, c_miss = process_dir(ROOT / "data" / "cocktails", "cocktail", idx)
     r_ok, r_miss = process_dir(ROOT / "data" / "rimmers", "rimmer", idx)

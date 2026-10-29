@@ -22,8 +22,8 @@ Image: images/hero/caramel-appletini.jpg
 Seasonal: 1
 Enabled: 1
 Favorite: 0
-Quantity: 0
+Quantity: 8
 Restock: 0
 Capsule Barcode: 
-Case Barcode: 
+Case Barcode: 850066903582
 Case Qty: 8

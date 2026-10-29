@@ -807,7 +807,7 @@ def main() -> None:
         "seasonal": sum(1 for c in cocktails if c.get("seasonal")),
     }
     (ROOT / "tmp" / "scrape" / "summary.json").write_text(
-        json.dumps(summary, indent=2), encoding="utf-8"
+        json.dumps(summary, indent=2, ensure_ascii=False), encoding="utf-8"
     )
     print("Done:", summary)
 

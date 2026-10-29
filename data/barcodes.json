@@ -1093,5 +1093,50 @@
     "pack_slug": null,
     "rimmer_name": null,
     "rimmer_slug": null
+  },
+  {
+    "id": 75,
+    "code": "850054919618",
+    "kind": "case",
+    "cocktail_id": null,
+    "pack_id": null,
+    "rimmer_id": null,
+    "case_qty": 8,
+    "cocktail_name": "Uptown Rocks",
+    "cocktail_slug": "uptown-rocks",
+    "pack_name": null,
+    "pack_slug": null,
+    "rimmer_name": null,
+    "rimmer_slug": null
+  },
+  {
+    "id": 76,
+    "code": "850066903582",
+    "kind": "case",
+    "cocktail_id": null,
+    "pack_id": null,
+    "rimmer_id": null,
+    "case_qty": 8,
+    "cocktail_name": "Caramel Appletini",
+    "cocktail_slug": "caramel-appletini",
+    "pack_name": null,
+    "pack_slug": null,
+    "rimmer_name": null,
+    "rimmer_slug": null
+  },
+  {
+    "id": 77,
+    "code": "850080186992",
+    "kind": "case",
+    "cocktail_id": null,
+    "pack_id": null,
+    "rimmer_id": null,
+    "case_qty": 8,
+    "cocktail_name": "Sour Spell",
+    "cocktail_slug": "sour-spell",
+    "pack_name": null,
+    "pack_slug": null,
+    "rimmer_name": null,
+    "rimmer_slug": null
   }
 ]

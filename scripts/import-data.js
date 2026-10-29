@@ -628,6 +628,8 @@ function portableActivityRow(a) {
   };
 }
 
+/** Write pretty JSON as UTF-8. Node keeps non-ASCII (e.g. Jalapeño) literal —
+ *  do not round-trip data/*.json through Python json.dumps without ensure_ascii=False. */
 function writeJson(file, data) {
   fs.writeFileSync(file, JSON.stringify(data, null, 2) + "\n", "utf8");
 }
