@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v79";
+  const APP_VERSION = "bartesian-v80";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -1400,7 +1400,8 @@
       const body = isRemove
         ? "This permanently removes the record from the activity log and from subsequent exports. It does <strong>not</strong> change inventory quantities."
         : "This permanently removes the record. It does <strong>not</strong> change inventory quantities.";
-      const confirmLabel = isRemove ? "Remove" : "Delete permanently";
+      const confirmLabel = isRemove ? "Confirm remove" : "Delete permanently";
+      const confirmDisabled = m.confirmEnabled ? "" : " disabled aria-disabled=\"true\"";
       return `<div class="modal-backdrop" data-history-modal-backdrop>
         <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="history-modal-title">
           <h2 id="history-modal-title">${title}</h2>
@@ -1409,7 +1410,7 @@
           <p>${body}</p>
           <div class="modal-actions">
             <button type="button" class="ghost" data-history-modal-close>Cancel</button>
-            <button type="button" class="danger" data-history-delete-confirm="${m.id}">${confirmLabel}</button>
+            <button type="button" class="danger" data-history-delete-confirm="${m.id}"${confirmDisabled}>${confirmLabel}</button>
           </div>
         </div>
       </div>`;
@@ -3304,18 +3305,35 @@
       const entry = BartesianDB.getActivity(Number(historyDelete.getAttribute("data-history-delete")));
       if (!entry) return;
       const verb = historyDelete.getAttribute("data-history-verb") === "remove" ? "remove" : "delete";
+      const modalId = entry.id;
       state.historyModal = {
         mode: "delete",
         verb,
-        id: entry.id,
+        id: modalId,
         label: activityLabel(entry),
         when: formatWhen(entry.created_at),
+        // Arm after a beat so the same tap/click that opened the dialog
+        // cannot also hit Confirm (esp. on touch).
+        confirmEnabled: false,
       };
       render();
+      setTimeout(() => {
+        if (
+          state.historyModal &&
+          state.historyModal.mode === "delete" &&
+          state.historyModal.id === modalId
+        ) {
+          state.historyModal.confirmEnabled = true;
+          render();
+        }
+      }, 350);
       return;
     }
     const historyDeleteConfirm = e.target.closest("[data-history-delete-confirm]");
     if (historyDeleteConfirm) {
+      if (historyDeleteConfirm.disabled || (state.historyModal && !state.historyModal.confirmEnabled)) {
+        return;
+      }
       const wasRemove = state.historyModal && state.historyModal.verb === "remove";
       await BartesianDB.deleteActivity(
         Number(historyDeleteConfirm.getAttribute("data-history-delete-confirm"))
