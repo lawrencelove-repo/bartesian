@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v78";
+  const APP_VERSION = "bartesian-v79";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -612,6 +612,7 @@
     if (parts[0] === "admin" && parts[1] === "rimmers") return { view: "admin-rimmers" };
     if (parts[0] === "admin" && parts[1] === "packs") return { view: "admin-packs" };
     if (parts[0] === "admin" && parts[1] === "people") return { view: "admin-people" };
+    if (parts[0] === "admin" && parts[1] === "activity") return { view: "admin-activity" };
     if (parts[0] === "admin" && parts[1] === "scan") return { view: "scan" };
     if (parts[0] === "admin") return { view: "admin-barcodes" };
     if (parts[0] === "disclaimer") return { view: "disclaimer" };
@@ -642,7 +643,7 @@
 
   const ADMIN_VIEWS = [
     "scan", "admin-barcodes", "admin-cocktails", "admin-rimmers",
-    "admin-packs", "admin-people", "people", "admin-item-edit",
+    "admin-packs", "admin-people", "admin-activity", "people", "admin-item-edit",
   ];
 
   function shell(active, body) {
@@ -663,6 +664,7 @@
       ["admin-rimmers", "#/admin/rimmers", "Rimmers"],
       ["admin-packs", "#/admin/packs", "Packs"],
       ["admin-people", "#/admin/people", "People"],
+      ["admin-activity", "#/admin/activity", "Activity"],
     ];
     const adminActive = ADMIN_VIEWS.includes(active);
     const adminMenu = state.isAdmin
@@ -1350,19 +1352,24 @@
     return a.cocktail_name || a.rimmer_name || a.pack_name || a.kind || "Event";
   }
 
-  function activityRowsHtml(rows, emptyText) {
+  function activityRowsHtml(rows, emptyText, { actions = "history" } = {}) {
     if (!rows.length) return `<p class="empty">${esc(emptyText)}</p>`;
     const T = window.BartesianActivityTemplates;
     return rows.map((a) => {
       const formatted = T && T.formatActivity
         ? T.formatActivity(a)
         : { title: activityLabel(a), meta: formatWhen(a.created_at) };
-      const adminBtns = state.isAdmin
-        ? `<div class="row-actions history-actions">
+      let adminBtns = "";
+      if (state.isAdmin && actions === "remove") {
+        adminBtns = `<div class="row-actions history-actions">
+             <button type="button" class="ghost danger small" data-history-delete="${a.id}" data-history-verb="remove">Remove</button>
+           </div>`;
+      } else if (state.isAdmin && actions === "history") {
+        adminBtns = `<div class="row-actions history-actions">
              <button type="button" class="btn-edit small" data-history-edit="${a.id}">Edit</button>
              <button type="button" class="ghost danger small" data-history-delete="${a.id}">Delete</button>
-           </div>`
-        : "";
+           </div>`;
+      }
       const inner = `
         <div class="row-body">
           <div class="row-title">${esc(formatted.title)}</div>
@@ -1388,15 +1395,21 @@
     const m = state.historyModal;
     if (!m) return "";
     if (m.mode === "delete") {
+      const isRemove = m.verb === "remove";
+      const title = isRemove ? "Remove from activity log?" : "Delete history record?";
+      const body = isRemove
+        ? "This permanently removes the record from the activity log and from subsequent exports. It does <strong>not</strong> change inventory quantities."
+        : "This permanently removes the record. It does <strong>not</strong> change inventory quantities.";
+      const confirmLabel = isRemove ? "Remove" : "Delete permanently";
       return `<div class="modal-backdrop" data-history-modal-backdrop>
         <div class="modal" role="alertdialog" aria-modal="true" aria-labelledby="history-modal-title">
-          <h2 id="history-modal-title">Delete history record?</h2>
+          <h2 id="history-modal-title">${title}</h2>
           <p>${esc(m.label)}</p>
           <p class="muted">${esc(m.when)}</p>
-          <p>This permanently removes the record. It does <strong>not</strong> change inventory quantities.</p>
+          <p>${body}</p>
           <div class="modal-actions">
             <button type="button" class="ghost" data-history-modal-close>Cancel</button>
-            <button type="button" class="danger" data-history-delete-confirm="${m.id}">Delete permanently</button>
+            <button type="button" class="danger" data-history-delete-confirm="${m.id}">${confirmLabel}</button>
           </div>
         </div>
       </div>`;
@@ -2527,6 +2540,22 @@
     );
   }
 
+  function renderAdminActivity() {
+    const rows = BartesianDB.listActivity({ limit: 1000 });
+    return shell(
+      "admin-activity",
+      `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Activity</h1>
+        <p class="lede">Every event included in <code>activity.json</code> on Export. Remove a row to drop it from the log and from subsequent exports. Inventory quantities are not changed.</p>
+        <p class="count">${rows.length} event${rows.length === 1 ? "" : "s"}</p>
+        <div class="list">${activityRowsHtml(rows, "No activity yet.", { actions: "remove" })}</div>
+      </section>
+      ${historyModalHtml([])}`
+    );
+  }
+
   function renderSettings() {
     const adminDisplay = state.isAdmin
       ? `
@@ -2856,7 +2885,9 @@
     ) {
       stopCamera();
     }
-    if (route.view !== "item-history") state.historyModal = null;
+    if (route.view !== "item-history" && route.view !== "admin-activity") {
+      state.historyModal = null;
+    }
     if (route.view !== "detail") state.useModal = null;
     if (route.view !== "random") state.randomModal = null;
     if (route.view !== "scan" && route.view !== "admin-barcodes") state.scanMatchModal = null;
@@ -2927,6 +2958,7 @@
       else if (route.view === "admin-packs") root.innerHTML = renderAdminPacks();
       else if (route.view === "admin-item-edit") root.innerHTML = renderAdminItemEdit(route.itemType, route.id);
       else if (route.view === "admin-people" || route.view === "people") root.innerHTML = renderPeople();
+      else if (route.view === "admin-activity") root.innerHTML = renderAdminActivity();
       else if (route.view === "random") root.innerHTML = renderRandom();
       else if (route.view === "settings") root.innerHTML = renderSettings();
       else if (route.view === "disclaimer") root.innerHTML = renderDisclaimer();
@@ -3271,8 +3303,10 @@
     if (historyDelete) {
       const entry = BartesianDB.getActivity(Number(historyDelete.getAttribute("data-history-delete")));
       if (!entry) return;
+      const verb = historyDelete.getAttribute("data-history-verb") === "remove" ? "remove" : "delete";
       state.historyModal = {
         mode: "delete",
+        verb,
         id: entry.id,
         label: activityLabel(entry),
         when: formatWhen(entry.created_at),
@@ -3282,11 +3316,12 @@
     }
     const historyDeleteConfirm = e.target.closest("[data-history-delete-confirm]");
     if (historyDeleteConfirm) {
+      const wasRemove = state.historyModal && state.historyModal.verb === "remove";
       await BartesianDB.deleteActivity(
         Number(historyDeleteConfirm.getAttribute("data-history-delete-confirm"))
       );
       state.historyModal = null;
-      state.flash = "History record deleted.";
+      state.flash = wasRemove ? "Activity record removed." : "History record deleted.";
       render();
       return;
     }
