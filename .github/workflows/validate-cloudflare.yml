@@ -1,0 +1,60 @@
+name: Validate Bartesian Cloudflare branch
+on:
+  push:
+    branches:
+      - main
+      - feature/cloudflare-d1
+  pull_request:
+    branches:
+      - main
+      - feature/cloudflare-d1
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Check JavaScript syntax
+        run: |
+          node --check worker/index.js
+          node --check worker/mutations.js
+          node --check js/db.js
+          node --check js/app.js
+          node --check scripts/build-worker-assets.cjs
+          node --check scripts/generate-d1-seed.cjs
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Generate and validate D1 seed (no remote writes)
+        run: |
+          npm run seed:generate
+          test -f seeds/bartesian_seed.sql
+          test -f seeds/bartesian_seed_summary.json
+          node scripts/test-seed.cjs
+      - name: Build Cloudflare assets
+        run: npm run build
+      - name: Verify Cloudflare assets and no legacy service worker
+        run: |
+          test -f dist/index.html
+          test -f dist/login.html
+          test -f dist/login.js
+          test -f dist/js/db.js
+          grep -q "BARTESIAN_CLOUDFLARE = true" dist/index.html
+          test ! -e dist/sw.js
+          ! grep -q 'navigator.serviceWorker.register' dist/index.html
+          ! grep -q 'RESEND_API_KEY\|AUTH_SECRET\|CLOUDFLARE_API_TOKEN' dist/js/db.js dist/js/app.js dist/index.html dist/login.js
+      - name: Worker / mutation unit checks
+        run: npm test
+      - name: Validate Wrangler configuration
+        run: npx wrangler deploy --dry-run --outdir /tmp/bartesian-worker-check
+        continue-on-error: true
+      - name: Note dry-run status
+        run: |
+          echo "Wrangler dry-run requires a real D1 database_id in wrangler.jsonc."
+          echo "Replace PENDING_CREATE_D1_DATABASE after creating bartesian-db."

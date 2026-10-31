@@ -226,6 +226,83 @@
   let SQL = null;
   let db = null;
 
+  // Explicit build-time flag (injected by scripts/build-worker-assets.cjs).
+  // Do not detect Cloudflare solely via hostname.
+  const cloudMode = global.BARTESIAN_CLOUDFLARE === true;
+
+  const SNAPSHOT_TABLES = [
+    "meta",
+    "people",
+    "spirits",
+    "cocktails",
+    "cocktail_spirits",
+    "rimmers",
+    "cocktail_rimmers",
+    "packs",
+    "pack_items",
+    "barcodes",
+    "ratings",
+    "inventory_log",
+    "activity_log",
+    "wishlist_items",
+    "book_globals",
+    "book_cocktail_layouts",
+    "book_cocktail_settings",
+  ];
+
+  async function remote(method, path, body) {
+    const response = await fetch(path, {
+      method,
+      credentials: "same-origin",
+      headers: body ? { "Content-Type": "application/json" } : {},
+      body: body ? JSON.stringify(body) : undefined,
+      cache: "no-store",
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(payload.error || "Bartesian server request failed (" + response.status + ")");
+    }
+    return payload;
+  }
+
+  async function reloadRemote() {
+    const snapshot = await remote("GET", "/api/snapshot");
+    const fresh = new SQL.Database();
+    fresh.run("PRAGMA foreign_keys = ON");
+    fresh.run(SEED_SQL);
+    // SEED_SQL inserts schema_version into meta; clear app tables before D1 hydrate.
+    for (const name of SNAPSHOT_TABLES.slice().reverse()) {
+      try {
+        fresh.run("DELETE FROM " + name);
+      } catch (_) {}
+    }
+    for (const name of SNAPSHOT_TABLES) {
+      for (const row of snapshot.tables?.[name] || []) {
+        const cols = Object.keys(row);
+        if (!cols.length) continue;
+        fresh.run(
+          "INSERT INTO " +
+            name +
+            " (" +
+            cols.join(",") +
+            ") VALUES (" +
+            cols.map(() => "?").join(",") +
+            ")",
+          cols.map((k) => row[k])
+        );
+      }
+    }
+    const previous = db;
+    db = fresh;
+    if (previous) previous.close();
+  }
+
+  async function cloudMutate(op, payload) {
+    const result = await remote("POST", "/api/mutate", { op, ...payload });
+    await reloadRemote();
+    return result;
+  }
+
   function openIdb() {
     return new Promise((resolve, reject) => {
       const req = indexedDB.open(IDB_NAME, 1);
@@ -289,6 +366,7 @@
   }
 
   async function persist() {
+    if (cloudMode) return;
     const data = db.export();
     await idbSet(DB_KEY, data);
   }
@@ -1336,6 +1414,10 @@
         locateFile: (file) =>
           `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.11.0/${file}`,
       });
+      if (cloudMode) {
+        await reloadRemote();
+        return;
+      }
       const saved = await idbGet(DB_KEY);
       if (saved) {
         db = new SQL.Database(new Uint8Array(saved));
@@ -1357,6 +1439,9 @@
     },
 
     async resetLocal() {
+      if (cloudMode) {
+        throw new Error("Reset local database is not available on the Cloudflare deployment.");
+      }
       await idbDelete(DB_KEY);
       createFreshDb();
       await persist();
@@ -1374,6 +1459,13 @@
     },
 
     async addPerson(name) {
+      if (cloudMode) {
+        await cloudMutate("addPerson", { name });
+        const p = queryOne("SELECT * FROM people WHERE name = ? COLLATE NOCASE", [
+          String(name || "").trim(),
+        ]);
+        return p ? { ...p, is_admin: Number(p.is_admin || 0) === 1 } : null;
+      }
       const trimmed = String(name || "").trim();
       if (!trimmed) throw new Error("Name required");
       exec("INSERT OR IGNORE INTO people (name, created_at) VALUES (?, ?)", [
@@ -1385,6 +1477,11 @@
     },
 
     async renamePerson(personId, name) {
+      if (cloudMode) {
+        await cloudMutate("renamePerson", { personId, name });
+        const p = queryOne("SELECT * FROM people WHERE id = ?", [personId]);
+        return p ? { ...p, is_admin: Number(p.is_admin || 0) === 1 } : null;
+      }
       const trimmed = String(name || "").trim();
       if (!trimmed) throw new Error("Name required");
       const row = queryOne("SELECT id, name FROM people WHERE id = ?", [personId]);
@@ -1408,6 +1505,7 @@
      * (ON DELETE CASCADE — ratings require a person).
      */
     async deletePerson(personId) {
+      if (cloudMode) return cloudMutate("deletePerson", { personId });
       const row = queryOne("SELECT id, name FROM people WHERE id = ?", [personId]);
       if (!row) throw new Error("Person not found");
       exec("DELETE FROM people WHERE id = ?", [personId]);
@@ -1416,6 +1514,11 @@
     },
 
     async setPersonAdmin(personId, isAdmin) {
+      if (cloudMode) {
+        await cloudMutate("setPersonAdmin", { personId, isAdmin: !!isAdmin });
+        const p = queryOne("SELECT * FROM people WHERE id = ?", [personId]);
+        return p ? { ...p, is_admin: Number(p.is_admin || 0) === 1 } : null;
+      }
       exec("UPDATE people SET is_admin = ? WHERE id = ?", [isAdmin ? 1 : 0, personId]);
       await persist();
       const p = queryOne("SELECT * FROM people WHERE id = ?", [personId]);
@@ -1428,27 +1531,35 @@
     },
 
     async setCocktailEnabled(id, enabled) {
+      if (cloudMode) return cloudMutate("setCocktailEnabled", { id, enabled: !!enabled });
       exec("UPDATE cocktails SET enabled = ?, updated_at = ? WHERE id = ?", [enabled ? 1 : 0, nowIso(), id]);
       await persist();
     },
 
     async setCocktailSeasonal(id, seasonal) {
+      if (cloudMode) return cloudMutate("setCocktailSeasonal", { id, seasonal: !!seasonal });
       exec("UPDATE cocktails SET seasonal = ?, updated_at = ? WHERE id = ?", [seasonal ? 1 : 0, nowIso(), id]);
       await persist();
     },
 
     async setCocktailImageCut(id, imageCut) {
+      if (cloudMode) return cloudMutate("setCocktailImageCut", { id, imageCut });
       exec("UPDATE cocktails SET image_cut = ?, updated_at = ? WHERE id = ?", [normalizeImageCut(imageCut), nowIso(), id]);
       await persist();
     },
 
     async setRimmerEnabled(id, enabled) {
+      if (cloudMode) return cloudMutate("setRimmerEnabled", { id, enabled: !!enabled });
       exec("UPDATE rimmers SET enabled = ?, updated_at = ? WHERE id = ?", [enabled ? 1 : 0, nowIso(), id]);
       await persist();
     },
 
     /** Admin edit: name + free-text type (kind column; slug/id stay put). */
     async updateRimmerDetails(id, { name, kind } = {}) {
+      if (cloudMode) {
+        await cloudMutate("updateRimmerDetails", { id, name, kind });
+        return rowToRimmer(queryOne("SELECT * FROM rimmers WHERE id = ?", [id]));
+      }
       const trimmedName = String(name || "").trim();
       if (!trimmedName) throw new Error("Rimmer name is required.");
       const trimmedKind = String(kind || "").trim();
@@ -1501,6 +1612,10 @@
 
     /** Create (id null) or fully update a cocktail — every DB field. */
     async saveCocktail(id, d) {
+      if (cloudMode) {
+        const result = await cloudMutate("saveCocktail", { id: id || null, data: d });
+        return this.getCocktail(result.id);
+      }
       const name = String(d.name || "").trim();
       if (!name) throw new Error("Cocktail name is required.");
       const slug = slugifyText(d.slug) || slugifyText(name);
@@ -1555,6 +1670,10 @@
 
     /** Create (id null) or fully update a rimmer — every DB field. */
     async saveRimmer(id, d) {
+      if (cloudMode) {
+        const result = await cloudMutate("saveRimmer", { id: id || null, data: d });
+        return this.getRimmer(result.id);
+      }
       const name = String(d.name || "").trim();
       if (!name) throw new Error("Rimmer name is required.");
       const slug = slugifyText(d.slug) || slugifyText(name);
@@ -1601,6 +1720,10 @@
 
     /** Create (id null) or fully update a variety pack — every DB field. */
     async savePack(id, d) {
+      if (cloudMode) {
+        const result = await cloudMutate("savePack", { id: id || null, data: d });
+        return this.getPack(result.id);
+      }
       const name = String(d.name || "").trim();
       if (!name) throw new Error("Pack name is required.");
       const slug = slugifyText(d.slug) || slugifyText(name);
@@ -1648,6 +1771,7 @@
     },
 
     async setPackEnabled(id, enabled) {
+      if (cloudMode) return cloudMutate("setPackEnabled", { id, enabled: !!enabled });
       exec("UPDATE packs SET enabled = ?, updated_at = ? WHERE id = ?", [enabled ? 1 : 0, nowIso(), id]);
       await persist();
     },
@@ -1784,6 +1908,12 @@
     },
 
     async adjustRimmerQuantity(rimmerId, delta, reason, barcode) {
+      if (cloudMode) {
+        const result = await cloudMutate("adjustRimmerQuantity", {
+          rimmerId, delta, reason, barcode,
+        });
+        return result.quantity;
+      }
       const row = queryOne("SELECT quantity, restock FROM rimmers WHERE id = ?", [rimmerId]);
       if (!row) throw new Error("Rimmer not found");
       const prev = Number(row.quantity) || 0;
@@ -1830,6 +1960,9 @@
     },
 
     async upsertRating({ cocktailId, personId, stars, comment }) {
+      if (cloudMode) {
+        return cloudMutate("upsertRating", { cocktailId, personId, stars, comment });
+      }
       const s = Math.max(1, Math.min(5, Number(stars) || 0));
       const ts = nowIso();
       const existing = queryOne(
@@ -1855,6 +1988,7 @@
     },
 
     async setFavorite(id, favorite) {
+      if (cloudMode) return cloudMutate("setFavorite", { id, favorite: !!favorite });
       exec("UPDATE cocktails SET favorite = ?, updated_at = ? WHERE id = ?", [
         favorite ? 1 : 0,
         nowIso(),
@@ -1868,6 +2002,7 @@
     },
 
     async setRimmerFavorite(id, favorite) {
+      if (cloudMode) return cloudMutate("setRimmerFavorite", { id, favorite: !!favorite });
       exec("UPDATE rimmers SET favorite = ?, updated_at = ? WHERE id = ?", [
         favorite ? 1 : 0, nowIso(), id,
       ]);
@@ -1898,6 +2033,7 @@
 
     /** Admin: permanently remove a history record (does not change quantities). */
     async deleteActivity(id) {
+      if (cloudMode) return cloudMutate("deleteActivity", { id });
       exec("DELETE FROM activity_log WHERE id = ?", [id]);
       await persist();
     },
@@ -1910,6 +2046,10 @@
      * deleting them leaves the entry blank (LEFT JOIN yields no name).
      */
     async updateActivity(id, { createdAt, personName } = {}) {
+      if (cloudMode) {
+        await cloudMutate("updateActivity", { id, createdAt, personName });
+        return this.getActivity(id);
+      }
       const row = queryOne("SELECT * FROM activity_log WHERE id = ?", [id]);
       if (!row) throw new Error("History record not found.");
       let created = row.created_at;
@@ -1967,6 +2107,14 @@
     },
 
     async addToWishlist({ cocktailId = null, rimmerId = null, qty = 1 } = {}) {
+      if (cloudMode) {
+        await cloudMutate("addToWishlist", { cocktailId, rimmerId, qty });
+        return this.listWishlist().find(
+          (w) =>
+            (cocktailId && Number(w.cocktail_id) === Number(cocktailId)) ||
+            (rimmerId && Number(w.rimmer_id) === Number(rimmerId))
+        );
+      }
       if (!cocktailId && !rimmerId) throw new Error("Item required");
       const existing = cocktailId
         ? queryOne("SELECT * FROM wishlist_items WHERE cocktail_id = ?", [cocktailId])
@@ -1997,6 +2145,10 @@
     },
 
     async updateWishlistQty(wishlistId, qty) {
+      if (cloudMode) {
+        await cloudMutate("updateWishlistQty", { wishlistId, qty });
+        return Math.max(1, Number(qty) || 1);
+      }
       const q = Math.max(1, Number(qty) || 1);
       exec("UPDATE wishlist_items SET qty_wanted = ?, updated_at = ? WHERE id = ?", [
         q, nowIso(), wishlistId,
@@ -2012,6 +2164,7 @@
     },
 
     async removeFromWishlist(wishlistId) {
+      if (cloudMode) return cloudMutate("removeFromWishlist", { wishlistId });
       const row = queryOne("SELECT * FROM wishlist_items WHERE id = ?", [wishlistId]);
       exec("DELETE FROM wishlist_items WHERE id = ?", [wishlistId]);
       if (row) {
@@ -2042,6 +2195,7 @@
     },
 
     async clearRestock({ cocktailId = null, rimmerId = null } = {}) {
+      if (cloudMode) return cloudMutate("clearRestock", { cocktailId, rimmerId });
       if (cocktailId) {
         exec("UPDATE cocktails SET restock = 0, updated_at = ? WHERE id = ?", [nowIso(), cocktailId]);
         logActivity({ kind: "restock_clear", cocktailId, detail: "removed from Restock" });
@@ -2053,6 +2207,12 @@
     },
 
     async adjustQuantity(cocktailId, delta, reason, barcode, packInfo) {
+      if (cloudMode) {
+        const result = await cloudMutate("adjustQuantity", {
+          cocktailId, delta, reason, barcode, packInfo,
+        });
+        return result.quantity;
+      }
       const row = queryOne("SELECT quantity, restock FROM cocktails WHERE id = ?", [cocktailId]);
       if (!row) throw new Error("Cocktail not found");
       const prev = Number(row.quantity) || 0;
@@ -2148,6 +2308,12 @@
      * kind: capsule | case | variety_pack | rimmer
      */
     async upsertBarcode({ code, kind, cocktailId, packId, rimmerId, caseQty }) {
+      if (cloudMode) {
+        await cloudMutate("upsertBarcode", {
+          code, kind, cocktailId, packId, rimmerId, caseQty,
+        });
+        return this.findBarcode(String(code || "").trim());
+      }
       const trimmed = String(code || "").trim();
       if (!trimmed) throw new Error("Barcode required");
       if (!kind) throw new Error("Kind required");
@@ -2189,6 +2355,7 @@
     },
 
     async deleteBarcode(code) {
+      if (cloudMode) return cloudMutate("deleteBarcode", { code });
       exec("DELETE FROM barcodes WHERE code = ?", [String(code || "").trim()]);
       await persist();
     },
@@ -2201,6 +2368,7 @@
       if (!preview || !preview.ok || !preview.proposed || !preview.proposed.length) {
         return { ok: false, error: (preview && preview.error) || "Nothing to apply." };
       }
+      if (cloudMode) return cloudMutate("applyResolved", { preview });
       const code = preview.code || "";
       const changes = [];
 
@@ -2419,6 +2587,12 @@
       scale,
       imageCut,
     }) {
+      if (cloudMode) {
+        await cloudMutate("saveBookCocktailTune", {
+          cocktailId, formFactor, orientation, x, y, scale, imageCut,
+        });
+        return this.getBookCocktailLayout(cocktailId, formFactor, orientation);
+      }
       const okLayout = upsertBookCocktailLayoutRow(
         cocktailId,
         formFactor,
@@ -2435,6 +2609,12 @@
 
     /** Persist global Book Mode defaults for one form factor + orientation. */
     async saveBookGlobalTune({ formFactor, orientation, x, y, scale }) {
+      if (cloudMode) {
+        await cloudMutate("saveBookGlobalTune", {
+          formFactor, orientation, x, y, scale,
+        });
+        return this.getBookGlobal(formFactor, orientation);
+      }
       const ok = upsertBookGlobalRow(formFactor, orientation, { x, y, scale });
       if (!ok) throw new Error("Could not save book global.");
       await persist();

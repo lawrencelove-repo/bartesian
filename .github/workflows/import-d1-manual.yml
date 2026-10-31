@@ -1,0 +1,56 @@
+name: Import Bartesian seed into D1 (manual, guarded)
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type IMPORT to apply schema + seed to remote bartesian-db'
+        required: true
+        default: ''
+
+permissions:
+  contents: read
+
+jobs:
+  validate-only:
+    if: ${{ github.event.inputs.confirm != 'IMPORT' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund
+      - run: npm run seed:generate
+      - run: node scripts/test-seed.cjs
+      - run: echo "Did not import. Re-run with confirm=IMPORT after reviewing the seed SQL."
+
+  import:
+    if: ${{ github.event.inputs.confirm == 'IMPORT' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feature/cloudflare-d1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund
+      - run: npm run seed:generate
+      - run: node scripts/test-seed.cjs
+      - name: Apply schema migrations (remote)
+        run: npx wrangler d1 migrations apply bartesian-db --remote
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: bfe38ff4f7a7cff066e54569c3b2560b
+      - name: Import seed SQL once
+        run: |
+          npx wrangler d1 execute bartesian-db --remote --file=seeds/bartesian_seed.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: bfe38ff4f7a7cff066e54569c3b2560b
+      - name: Verify remote counts
+        run: |
+          npx wrangler d1 execute bartesian-db --remote --command="SELECT 'cocktails' AS t, COUNT(*) AS n FROM cocktails UNION ALL SELECT 'packs', COUNT(*) FROM packs UNION ALL SELECT 'rimmers', COUNT(*) FROM rimmers UNION ALL SELECT 'people', COUNT(*) FROM people UNION ALL SELECT 'activity', COUNT(*) FROM activity_log UNION ALL SELECT 'barcodes', COUNT(*) FROM barcodes;"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: bfe38ff4f7a7cff066e54569c3b2560b

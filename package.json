@@ -1,0 +1,18 @@
+{
+  "name": "bartesian-cloudflare",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "build": "node scripts/build-worker-assets.cjs",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
+    "db:migrate:local": "wrangler d1 migrations apply bartesian-db --local",
+    "db:migrate:remote": "wrangler d1 migrations apply bartesian-db --remote",
+    "seed:generate": "node scripts/generate-d1-seed.cjs",
+    "test": "node scripts/test-seed.cjs && node scripts/test-worker-syntax.cjs",
+    "test:mutations": "node scripts/test-mutations-local.cjs"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

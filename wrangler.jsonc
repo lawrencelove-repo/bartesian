@@ -1,0 +1,24 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bartesian",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": true
+  },
+  "vars": {
+    "EMAIL_FROM": "onboarding@resend.dev",
+    "AUTHORIZED_EMAILS": "lawrencelove@yahoo.com",
+    "APP_MODE": "cloudflare"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "bartesian-db",
+      "database_id": "PENDING_CREATE_D1_DATABASE",
+      "migrations_dir": "migrations"
+    }
+  ]
+}

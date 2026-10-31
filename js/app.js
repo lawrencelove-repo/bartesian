@@ -699,7 +699,11 @@
         <footer class="footer">
           <a href="#/disclaimer" data-go="#/disclaimer">Disclaimer</a>
           <span>${esc(APP_VERSION)}</span>
-          <span>Private use only · data in git, edits local until export</span>
+          <span>${
+            window.BARTESIAN_CLOUDFLARE
+              ? "Private use only · data stored in Cloudflare D1"
+              : "Private use only · data in git, edits local until export"
+          }</span>
         </footer>
         <button type="button" class="back-to-top" data-back-to-top aria-label="Back to top">↑ Back to Top</button>
       </div>
@@ -2528,6 +2532,7 @@
   }
 
   function renderSettings() {
+    const cloud = !!window.BARTESIAN_CLOUDFLARE;
     const adminDisplay = state.isAdmin
       ? `
         <h2>Admin display options</h2>
@@ -2535,12 +2540,16 @@
         <p><label class="check"><input type="checkbox" data-ui-pref="showBookTuneBtn" ${state.showBookTuneBtn ? "checked" : ""}/> Show Tune button in Book mode</label></p>
         <p><label class="check"><input type="checkbox" data-ui-pref="showAdminImageCut" ${state.showAdminImageCut ? "checked" : ""}/> Show Image Cut in Cocktails Admin page</label></p>`
       : "";
-    return shell(
-      "settings",
-      `
-      <section class="panel">
-        <p class="section-label">Admin</p>
-        <h1>Settings</h1>
+    const cloudBlock = cloud
+      ? `
+        <h2>Cloud session</h2>
+        <p>Inventory, ratings, and catalog edits are stored in Cloudflare D1 and shared across devices after sign-in.</p>
+        <button type="button" data-logout>Log out</button>
+        <h2>Export backup</h2>
+        <p>Downloads a zip of the current server-backed catalog for offline backup or git seeding.</p>
+        <button type="button" data-export>Export data</button>
+        <p class="hint" data-export-status></p>`
+      : `
         <h2>Force refresh</h2>
         <p>For iPad / PWA: unregister the service worker, clear caches, and reload. Keeps your local inventory database.</p>
         <p class="muted">Current build: <code>${esc(APP_VERSION)}</code></p>
@@ -2552,7 +2561,15 @@
         <p class="hint" data-export-status></p>
         <h2>Local database</h2>
         <p>Clear IndexedDB and re-seed from <code>js/seed-data.js</code>. History, Wishlist, ratings, and Restock flags are only restored if they were exported and re-imported first.</p>
-        <button type="button" class="danger" data-reset>Reset local DB</button>
+        <button type="button" class="danger" data-reset>Reset local DB</button>`;
+    return shell(
+      "settings",
+      `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Settings</h1>
+        <p class="muted">Current build: <code>${esc(APP_VERSION)}</code>${cloud ? " · Cloudflare D1" : ""}</p>
+        ${cloudBlock}
         ${adminDisplay}
       </section>
     `
@@ -3597,6 +3614,20 @@
       e.preventDefault();
       stopCamera();
       render();
+      return;
+    }
+
+    if (e.target.closest("[data-logout]")) {
+      try {
+        await fetch("/api/auth/logout", {
+          method: "POST",
+          credentials: "same-origin",
+          cache: "no-store",
+        });
+      } catch (_) {
+        /* still redirect to login */
+      }
+      location.replace("/login");
       return;
     }
 
