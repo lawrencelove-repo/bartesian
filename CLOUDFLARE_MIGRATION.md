@@ -93,10 +93,11 @@ npm run dev
 | Workflow | Trigger | Purpose |
 |---|---|---|
 | `validate-cloudflare.yml` | push/PR | syntax, seed, build, asset checks, tests |
-| `deploy-cloudflare.yml` | **manual** | deploy Worker from `main` |
+| `deploy-cloudflare.yml` | push to `main` + manual | deploy Worker from `main` |
 | `import-d1-manual.yml` | **manual** (`confirm=IMPORT`) | remote schema + one-time seed |
+| `sync-worker-secrets.yml` | **manual** | copy GitHub secrets to Worker |
 
-Automatic production deploy from `main` is prepared but left manual until you approve enabling it.
+Production deploy runs automatically on every push to `main`, and can still be triggered manually.
 
 ## Backup / restore
 
