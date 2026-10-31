@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bartesian — Sign in</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(160deg, #1a1410 0%, #2c2118 45%, #12100e 100%);
+        color: #f7f1e8;
+        font: 16px "DM Sans", system-ui, sans-serif;
+      }
+      main {
+        width: min(92vw, 390px);
+        padding: 32px;
+        background: rgba(36, 28, 22, 0.92);
+        border: 1px solid rgba(232, 208, 170, 0.18);
+        border-radius: 16px;
+        box-sizing: border-box;
+      }
+      h1 {
+        margin: 0 0 8px;
+        font-family: "Libre Baskerville", Georgia, serif;
+        font-size: 1.75rem;
+      }
+      p {
+        line-height: 1.5;
+        color: #e8d8c4;
+      }
+      label {
+        display: block;
+        margin: 16px 0 6px;
+      }
+      input,
+      button {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 13px;
+        border-radius: 8px;
+        font: inherit;
+      }
+      input {
+        border: 1px solid #8a7460;
+        background: #fff;
+        color: #111;
+      }
+      button {
+        margin-top: 16px;
+        border: 0;
+        background: #c4a574;
+        color: #1a1410;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      #message {
+        min-height: 2em;
+        font-size: 14px;
+      }
+      small {
+        color: #b9a894;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Bartesian</h1>
+      <p>Request a one-time code to access the household inventory.</p>
+      <form id="request">
+        <button type="submit">Send access code</button>
+      </form>
+      <form id="verify" hidden>
+        <label for="code">Six-digit code</label>
+        <input
+          id="code"
+          inputmode="numeric"
+          autocomplete="one-time-code"
+          pattern="[0-9]{6}"
+          maxlength="6"
+          required
+        />
+        <button type="submit">Sign in</button>
+      </form>
+      <p id="message" role="status"></p>
+      <small>Codes expire after 10 minutes.</small>
+    </main>
+    <script src="/login.js"></script>
+  </body>
+</html>

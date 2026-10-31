@@ -1,0 +1,38 @@
+name: Deploy Bartesian (manual)
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund
+      - name: Build curated static assets
+        run: npm run build
+      # D1 schema/seed are applied separately; do not re-import seed on deploy.
+      - name: Deploy Worker
+        run: npx wrangler deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: bfe38ff4f7a7cff066e54569c3b2560b
+      - name: Configure Resend API secret
+        run: printf '%s' "$RESEND_API_KEY" | npx wrangler secret put RESEND_API_KEY
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: bfe38ff4f7a7cff066e54569c3b2560b
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      - name: Configure authentication signing secret
+        run: printf '%s' "$AUTH_SECRET" | npx wrangler secret put AUTH_SECRET
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: bfe38ff4f7a7cff066e54569c3b2560b
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}

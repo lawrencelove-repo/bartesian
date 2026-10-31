@@ -2,6 +2,9 @@
 Thumbs.db
 *.log
 node_modules/
-package.json
-package-lock.json
+dist/
+.wrangler/
 exports/*.zip
+tmp/
+scripts/__pycache__/
+*.pyc
