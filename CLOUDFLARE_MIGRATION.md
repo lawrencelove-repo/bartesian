@@ -10,7 +10,7 @@ Do **not** merge into `main` or deploy production until verified and approved.
 | D1 database | `bartesian-db` |
 | Binding | `DB` |
 | Account ID (shared with Recipes) | `bfe38ff4f7a7cff066e54569c3b2560b` |
-| D1 `database_id` | **Pending** — create with Wrangler, then update `wrangler.jsonc` |
+| D1 `database_id` | `8170b114-9648-4e2f-8432-30cf1d227362` |
 
 ## Architecture (implemented)
 

@@ -17,7 +17,7 @@
     {
       "binding": "DB",
       "database_name": "bartesian-db",
-      "database_id": "PENDING_CREATE_D1_DATABASE",
+      "database_id": "8170b114-9648-4e2f-8432-30cf1d227362",
       "migrations_dir": "migrations"
     }
   ]
