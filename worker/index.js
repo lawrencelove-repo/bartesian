@@ -209,12 +209,9 @@ export default {
       }
 
       if (!loggedIn) {
+        // Pass the request through unchanged. Rewriting /login → /login.html
+        // causes a redirect loop with Cloudflare Static Assets URL normalization.
         if (isLoginAsset(path)) {
-          // Serve canonical /login without .html to avoid Cloudflare asset redirect loops.
-          if (path === "/login" || path === "/login.html") {
-            const loginReq = new Request(new URL("/login.html", url), request);
-            return env.ASSETS.fetch(loginReq);
-          }
           return env.ASSETS.fetch(request);
         }
         if (
