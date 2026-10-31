@@ -10,7 +10,7 @@
   },
   "vars": {
     "EMAIL_FROM": "onboarding@resend.dev",
-    "AUTHORIZED_EMAILS": "lawrencelove@yahoo.com",
+    "AUTHORIZED_EMAILS": "lawrencelove@gmail.com",
     "APP_MODE": "cloudflare"
   },
   "d1_databases": [

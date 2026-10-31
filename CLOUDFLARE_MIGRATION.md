@@ -75,7 +75,7 @@ Required secrets (never commit):
 Worker vars (in `wrangler.jsonc`):
 
 - `EMAIL_FROM` — start with `onboarding@resend.dev` for testing; use a verified domain for production
-- `AUTHORIZED_EMAILS` — comma-separated allowlist (codes always send to the first address)
+- `AUTHORIZED_EMAILS` — comma-separated allowlist (codes always send to the first address). Initial testing: `lawrencelove@gmail.com`
 
 ## Local development
 

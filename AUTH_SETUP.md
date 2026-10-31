@@ -20,7 +20,7 @@ Private household inventory. Access is gated by email OTP (same pattern as Recip
    - `AUTH_SECRET` (cryptographically random, ≥32 bytes)
 3. Set Worker vars in `wrangler.jsonc` (or dashboard):
    - `EMAIL_FROM`
-   - `AUTHORIZED_EMAILS` (comma-separated; codes send to the first entry)
+   - `AUTHORIZED_EMAILS` (comma-separated; codes send to the first entry). Initial testing value: `lawrencelove@gmail.com` (required when `EMAIL_FROM` is `onboarding@resend.dev`)
 4. Apply D1 migrations `0001_schema.sql` and `0002_auth.sql` before relying on auth.
 5. Import seed (`seeds/bartesian_seed.sql`) once into an empty database.
 
