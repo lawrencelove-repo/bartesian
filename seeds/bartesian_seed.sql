@@ -1305,5 +1305,5 @@ INSERT INTO book_cocktail_settings (cocktail_id, image_cut, updated_at) VALUES (
 INSERT INTO book_cocktail_layouts (cocktail_id, form_factor, orientation, x, y, scale, updated_at) VALUES (91, 'ipad', 'landscape', -64, 8, 1.35, '2026-10-31T00:00:00.000Z');
 INSERT INTO book_cocktail_layouts (cocktail_id, form_factor, orientation, x, y, scale, updated_at) VALUES (91, 'ipad', 'portrait', -64, 4, 1.35, '2026-10-31T00:00:00.000Z');
 INSERT INTO book_cocktail_layouts (cocktail_id, form_factor, orientation, x, y, scale, updated_at) VALUES (91, 'desktop', 'landscape', -82, 10, 1.55, '2026-10-31T00:00:00.000Z');
-INSERT INTO meta (key, value) VALUES ('seed_imported_at', '2026-10-31T00:00:00.000Z');
-INSERT INTO meta (key, value) VALUES ('schema_version', '9');
+INSERT OR REPLACE INTO meta (key, value) VALUES ('seed_imported_at', '2026-10-31T00:00:00.000Z');
+INSERT OR REPLACE INTO meta (key, value) VALUES ('schema_version', '9');

@@ -502,8 +502,21 @@ for (const [slug, entry] of Object.entries(bookCocktails)) {
   }
 }
 
-insert("meta", ["key", "value"], ["seed_imported_at", timestamp]);
-insert("meta", ["key", "value"], ["schema_version", "9"]);
+// Use REPLACE so seed is safe after 0001_schema's INSERT OR IGNORE of schema_version.
+statements.push(
+  "INSERT OR REPLACE INTO meta (key, value) VALUES (" +
+    sqlValue("seed_imported_at") +
+    ", " +
+    sqlValue(timestamp) +
+    ");"
+);
+statements.push(
+  "INSERT OR REPLACE INTO meta (key, value) VALUES (" +
+    sqlValue("schema_version") +
+    ", " +
+    sqlValue("9") +
+    ");"
+);
 
 const seedsDir = path.join(root, "seeds");
 fs.mkdirSync(seedsDir, { recursive: true });
