@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v81";
+  const APP_VERSION = "bartesian-v84";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -2613,15 +2613,35 @@
 
   /**
    * Build confirmation rows from temporary counts vs DB quantities.
-   * Only cocktails that were bumped (including those hidden by the In stock
-   * filter) are included. Each +8 tap becomes an
-   * “Added +8 · Name — Name Capsules” line; leftover net after pack adds
-   * becomes Used 1 lines or a non-pack Added line.
+   * Only bumped cocktails are included. Net = counted − DB:
+   *   net < 0  → Used 1 × |net| (pack +8 taps are ignored; they only mattered
+   *              for reaching the physical count)
+   *   net > 0  → each +8 tap becomes “Added +8 · Name — Name Capsules”, then
+   *              leftover net after pack adds becomes Used 1 or non-pack Added
+   *   net = 0  → no lines (even if packs were tapped along the way)
    */
   function buildInventoryReviewLines() {
     const now = new Date().toISOString();
     const lines = [];
     let seq = 0;
+    const pushUse = (c, n) => {
+      for (let i = 0; i < n; i++) {
+        lines.push({
+          id: "inv-" + ++seq,
+          cocktailId: c.id,
+          cocktail_name: c.name,
+          cocktail_slug: c.slug || "",
+          kind: "use",
+          delta: -1,
+          pack_name: "",
+          pack_slug: "",
+          person_name: "",
+          party: false,
+          created_at: now,
+          detail: "inventory_count",
+        });
+      }
+    };
     const cocktails = BartesianDB.listAllCocktails().filter(
       (c) => c.enabled !== false && c.enabled !== 0
     );
@@ -2630,9 +2650,13 @@
       const counted = inventoryCountFor(c.id);
       const packAdds = inventoryPackAddsFor(c.id);
       const dbQty = Number(c.quantity) || 0;
-      if (counted === dbQty && packAdds === 0) continue;
       const net = counted - dbQty;
-      const remaining = net - packAdds * 8;
+      if (net === 0) continue;
+      if (net < 0) {
+        pushUse(c, Math.abs(net));
+        continue;
+      }
+      // Positive net: preserve +8 pack taps, then leftover vs net.
       for (let i = 0; i < packAdds; i++) {
         lines.push({
           id: "inv-" + ++seq,
@@ -2649,6 +2673,7 @@
           detail: "Pack (+8)",
         });
       }
+      const remaining = net - packAdds * 8;
       if (remaining > 0) {
         lines.push({
           id: "inv-" + ++seq,
@@ -2665,23 +2690,7 @@
           detail: "inventory_count",
         });
       } else if (remaining < 0) {
-        const uses = Math.abs(remaining);
-        for (let i = 0; i < uses; i++) {
-          lines.push({
-            id: "inv-" + ++seq,
-            cocktailId: c.id,
-            cocktail_name: c.name,
-            cocktail_slug: c.slug || "",
-            kind: "use",
-            delta: -1,
-            pack_name: "",
-            pack_slug: "",
-            person_name: "",
-            party: false,
-            created_at: now,
-            detail: "inventory_count",
-          });
-        }
+        pushUse(c, Math.abs(remaining));
       }
     }
     return lines;
