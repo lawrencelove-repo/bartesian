@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v79";
+  const APP_VERSION = "bartesian-v81";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -66,6 +66,12 @@
     // Admin display toggles (Settings; cookie bartesian_ui_prefs)
     showBookTuneBtn: true,
     showAdminImageCut: true,
+    // Admin physical inventory count (temporary until review → apply)
+    inventoryCounts: {}, // cocktailId → counted qty (starts 0)
+    inventoryPackAdds: {}, // cocktailId → number of +8 pack taps
+    inventoryTouched: {}, // cocktailId → true once any bump was used
+    inventoryInStockOnly: false,
+    inventoryReviewLines: null, // confirmation rows or null
   };
 
   let bookTouchStartX = 0;
@@ -613,6 +619,10 @@
     if (parts[0] === "admin" && parts[1] === "packs") return { view: "admin-packs" };
     if (parts[0] === "admin" && parts[1] === "people") return { view: "admin-people" };
     if (parts[0] === "admin" && parts[1] === "activity") return { view: "admin-activity" };
+    if (parts[0] === "admin" && parts[1] === "inventory") {
+      if (parts[2] === "review") return { view: "admin-inventory-review" };
+      return { view: "admin-inventory" };
+    }
     if (parts[0] === "admin" && parts[1] === "scan") return { view: "scan" };
     if (parts[0] === "admin") return { view: "admin-barcodes" };
     if (parts[0] === "disclaimer") return { view: "disclaimer" };
@@ -643,7 +653,8 @@
 
   const ADMIN_VIEWS = [
     "scan", "admin-barcodes", "admin-cocktails", "admin-rimmers",
-    "admin-packs", "admin-people", "admin-activity", "people", "admin-item-edit",
+    "admin-packs", "admin-people", "admin-activity", "admin-inventory",
+    "admin-inventory-review", "people", "admin-item-edit",
   ];
 
   function shell(active, body) {
@@ -665,6 +676,7 @@
       ["admin-packs", "#/admin/packs", "Packs"],
       ["admin-people", "#/admin/people", "People"],
       ["admin-activity", "#/admin/activity", "Activity"],
+      ["admin-inventory", "#/admin/inventory", "Inventory"],
     ];
     const adminActive = ADMIN_VIEWS.includes(active);
     const adminMenu = state.isAdmin
@@ -672,10 +684,12 @@
           <summary class="topnav-link admin-summary ${adminActive ? "on" : ""}">Admin ▾</summary>
           <div class="admin-dropdown">
             ${adminLinks
-              .map(
-                ([key, href, label]) =>
-                  `<a class="admin-dropdown-link ${active === key ? "on" : ""}" href="${href}" data-go="${href}">${label}</a>`
-              )
+              .map(([key, href, label]) => {
+                const on =
+                  active === key ||
+                  (key === "admin-inventory" && active === "admin-inventory-review");
+                return `<a class="admin-dropdown-link ${on ? "on" : ""}" href="${href}" data-go="${href}">${label}</a>`;
+              })
               .join("")}
           </div>
         </details>`
@@ -2560,6 +2574,290 @@
     );
   }
 
+  function inventoryCountFor(id) {
+    const n = Number(state.inventoryCounts[id]);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  }
+
+  function inventoryPackAddsFor(id) {
+    const n = Number(state.inventoryPackAdds[id]);
+    return Number.isFinite(n) && n > 0 ? n : 0;
+  }
+
+  function bumpInventoryCount(cocktailId, delta) {
+    const id = Number(cocktailId);
+    if (!id) return;
+    const prev = inventoryCountFor(id);
+    const next = Math.max(0, prev + Number(delta));
+    state.inventoryCounts = { ...state.inventoryCounts, [id]: next };
+    state.inventoryTouched = { ...state.inventoryTouched, [id]: true };
+    if (Number(delta) === 8) {
+      state.inventoryPackAdds = {
+        ...state.inventoryPackAdds,
+        [id]: inventoryPackAddsFor(id) + 1,
+      };
+    } else if (Number(delta) === -8) {
+      state.inventoryPackAdds = {
+        ...state.inventoryPackAdds,
+        [id]: Math.max(0, inventoryPackAddsFor(id) - 1),
+      };
+    }
+  }
+
+  function clearInventorySession() {
+    state.inventoryCounts = {};
+    state.inventoryPackAdds = {};
+    state.inventoryTouched = {};
+    state.inventoryReviewLines = null;
+  }
+
+  /**
+   * Build confirmation rows from temporary counts vs DB quantities.
+   * Only cocktails that were bumped (including those hidden by the In stock
+   * filter) are included. Each +8 tap becomes an
+   * “Added +8 · Name — Name Capsules” line; leftover net after pack adds
+   * becomes Used 1 lines or a non-pack Added line.
+   */
+  function buildInventoryReviewLines() {
+    const now = new Date().toISOString();
+    const lines = [];
+    let seq = 0;
+    const cocktails = BartesianDB.listAllCocktails().filter(
+      (c) => c.enabled !== false && c.enabled !== 0
+    );
+    for (const c of cocktails) {
+      if (!state.inventoryTouched[c.id]) continue;
+      const counted = inventoryCountFor(c.id);
+      const packAdds = inventoryPackAddsFor(c.id);
+      const dbQty = Number(c.quantity) || 0;
+      if (counted === dbQty && packAdds === 0) continue;
+      const net = counted - dbQty;
+      const remaining = net - packAdds * 8;
+      for (let i = 0; i < packAdds; i++) {
+        lines.push({
+          id: "inv-" + ++seq,
+          cocktailId: c.id,
+          cocktail_name: c.name,
+          cocktail_slug: c.slug || "",
+          kind: "restock",
+          delta: 8,
+          pack_name: c.name + " Capsules",
+          pack_slug: (c.slug || "capsule") + "-capsules",
+          person_name: "",
+          party: false,
+          created_at: now,
+          detail: "Pack (+8)",
+        });
+      }
+      if (remaining > 0) {
+        lines.push({
+          id: "inv-" + ++seq,
+          cocktailId: c.id,
+          cocktail_name: c.name,
+          cocktail_slug: c.slug || "",
+          kind: "restock",
+          delta: remaining,
+          pack_name: "",
+          pack_slug: "",
+          person_name: "",
+          party: false,
+          created_at: now,
+          detail: "inventory_count",
+        });
+      } else if (remaining < 0) {
+        const uses = Math.abs(remaining);
+        for (let i = 0; i < uses; i++) {
+          lines.push({
+            id: "inv-" + ++seq,
+            cocktailId: c.id,
+            cocktail_name: c.name,
+            cocktail_slug: c.slug || "",
+            kind: "use",
+            delta: -1,
+            pack_name: "",
+            pack_slug: "",
+            person_name: "",
+            party: false,
+            created_at: now,
+            detail: "inventory_count",
+          });
+        }
+      }
+    }
+    return lines;
+  }
+
+  function renderAdminInventory() {
+    const all = BartesianDB.listAllCocktails().filter(
+      (c) => c.enabled !== false && c.enabled !== 0
+    );
+    const rows = state.inventoryInStockOnly
+      ? all.filter((c) => (Number(c.quantity) || 0) >= 1)
+      : all;
+    const touched = Object.keys(state.inventoryTouched).filter(
+      (id) => state.inventoryTouched[id]
+    ).length;
+    const listHtml = rows.length
+      ? rows
+          .map((c) => {
+            const counted = inventoryCountFor(c.id);
+            const dbQty = Number(c.quantity) || 0;
+            const packs = inventoryPackAddsFor(c.id);
+            const isTouched = !!state.inventoryTouched[c.id];
+            return `<div class="cocktail-row inventory-count-row${isTouched ? " is-touched" : ""}" data-inventory-row="${c.id}">
+              <div class="row-body">
+                <div class="row-title inventory-count-title">
+                  <span class="inventory-count-total" aria-label="Counted">${counted}</span>
+                  <span class="inventory-count-name">${esc(c.name)}</span>
+                </div>
+                <div class="row-meta">DB ${dbQty}${packs ? " · +" + packs * 8 + " via pack taps" : ""}${isTouched ? " · counted" : ""}</div>
+                <div class="row-actions inventory-count-actions">
+                  <button type="button" class="ghost small" data-inventory-bump="${c.id}" data-delta="-8" title="Undo +8">−8</button>
+                  <button type="button" class="ghost small" data-inventory-bump="${c.id}" data-delta="-1" title="Minus one">−1</button>
+                  <button type="button" class="ghost small" data-inventory-bump="${c.id}" data-delta="1" title="Plus one">+1</button>
+                  <button type="button" class="btn-edit small" data-inventory-bump="${c.id}" data-delta="8" title="Plus eight (capsule pack)">+8</button>
+                </div>
+              </div>
+            </div>`;
+          })
+          .join("")
+      : `<p class="empty">${state.inventoryInStockOnly ? "No in-stock cocktails." : "No cocktails."}</p>`;
+    return shell(
+      "admin-inventory",
+      `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Inventory count</h1>
+        <p class="lede">Physical count starts at <strong>0</strong> for every cocktail. Tap +1 / +8 (and −1 / −8 to correct). Only cocktails you adjust are compared to the database — including ones hidden by the filter. Counts stay temporary until you review and apply.</p>
+        <div class="toolbar inventory-count-toolbar">
+          <label class="check"><input type="checkbox" data-inventory-instock ${state.inventoryInStockOnly ? "checked" : ""}/> In stock</label>
+          <span class="muted">${rows.length} shown · ${touched} counted</span>
+        </div>
+        <div class="list">${listHtml}</div>
+        <div class="inventory-count-footer">
+          <button type="button" class="ghost" data-inventory-clear>Clear counts</button>
+          <button type="button" data-inventory-review>Review deltas</button>
+        </div>
+      </section>`
+    );
+  }
+
+  function inventoryReviewRowHtml(line, people) {
+    const T = window.BartesianActivityTemplates;
+    const formatted = T && T.formatActivity
+      ? T.formatActivity(line)
+      : { title: activityLabel(line), meta: formatWhen(line.created_at) };
+    const personVal = line.party ? "Party" : line.person_name || "";
+    const personOpts =
+      `<option value="">—</option>` +
+      people
+        .map(
+          (p) =>
+            `<option value="${esc(p.name)}" ${personVal === p.name ? "selected" : ""}>${esc(p.name)}</option>`
+        )
+        .join("") +
+      (personVal && !people.some((p) => p.name === personVal)
+        ? `<option value="${esc(personVal)}" selected>${esc(personVal)}</option>`
+        : "");
+    return `<div class="cocktail-row history-row inventory-review-row" data-inventory-line="${esc(line.id)}">
+      <span class="history-dot" aria-hidden="true"></span>
+      <div class="row-body">
+        <div class="row-title">${esc(formatted.title)}</div>
+        <div class="row-meta">${esc(formatted.meta)}</div>
+        <div class="inventory-review-controls">
+          <label class="field inventory-review-person">Person
+            <select data-inventory-person="${esc(line.id)}" ${line.party ? "disabled" : ""}>${personOpts}</select>
+          </label>
+          <label class="check"><input type="checkbox" data-inventory-party="${esc(line.id)}" ${line.party ? "checked" : ""}/> Party</label>
+          <button type="button" class="ghost danger small" data-inventory-remove-line="${esc(line.id)}">Remove</button>
+        </div>
+      </div>
+    </div>`;
+  }
+
+  function renderAdminInventoryReview() {
+    const lines = state.inventoryReviewLines || [];
+    const people = BartesianDB.listPeople();
+    // Ensure Party exists as a selectable person name in the dropdown list display.
+    const peopleForSelect = people.slice();
+    if (!peopleForSelect.some((p) => p.name === "Party")) {
+      peopleForSelect.push({ id: 0, name: "Party", is_admin: false });
+      peopleForSelect.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
+    }
+    const listHtml = lines.length
+      ? lines.map((line) => inventoryReviewRowHtml(line, peopleForSelect)).join("")
+      : `<p class="empty">No differences between counted inventory and the database.</p>`;
+    return shell(
+      "admin-inventory-review",
+      `
+      <section class="panel">
+        <p class="section-label">Admin</p>
+        <h1>Inventory review</h1>
+        <p class="lede">Confirm each history line before applying. Assign a person, mark uses as Party (grouped on apply), or remove a line. Nothing is written until you apply.</p>
+        <p class="count">${lines.length} line${lines.length === 1 ? "" : "s"}</p>
+        <div class="list">${listHtml}</div>
+        <div class="inventory-count-footer">
+          <a class="ghost buttonish" href="#/admin/inventory" data-go="#/admin/inventory">← Back to count</a>
+          <button type="button" class="danger" data-inventory-apply ${lines.length ? "" : "disabled"}>Apply to database</button>
+        </div>
+      </section>`
+    );
+  }
+
+  async function applyInventoryReviewLines() {
+    const lines = (state.inventoryReviewLines || []).slice();
+    if (!lines.length) return { applied: 0 };
+
+    // Group Party uses per cocktail into a single Used N entry.
+    const partyGroups = new Map();
+    const standalone = [];
+    for (const line of lines) {
+      if ((line.kind === "use" || Number(line.delta) < 0) && line.party) {
+        const key = String(line.cocktailId);
+        const existing = partyGroups.get(key);
+        if (existing) {
+          existing.delta += Number(line.delta) || -1;
+        } else {
+          partyGroups.set(key, {
+            ...line,
+            person_name: "Party",
+            party: true,
+            delta: Number(line.delta) || -1,
+          });
+        }
+      } else {
+        standalone.push(line);
+      }
+    }
+    const merged = standalone.concat([...partyGroups.values()]);
+    const restocks = merged.filter((l) => Number(l.delta) > 0);
+    const uses = merged.filter((l) => Number(l.delta) < 0);
+    let applied = 0;
+    for (const line of restocks.concat(uses)) {
+      const delta = Number(line.delta) || 0;
+      if (!delta) continue;
+      let personId = null;
+      const pname = String(line.person_name || "").trim();
+      if (pname) {
+        const person = await BartesianDB.addPerson(pname);
+        personId = person ? person.id : null;
+      }
+      await BartesianDB.adjustQuantity(
+        line.cocktailId,
+        delta,
+        line.detail || "inventory_count",
+        "",
+        {
+          packName: line.pack_name || "",
+          packSlug: line.pack_slug || "",
+          personId,
+        }
+      );
+      applied++;
+    }
+    return { applied };
+  }
+
   function renderSettings() {
     const cloud = !!window.BARTESIAN_CLOUDFLARE;
     const adminDisplay = state.isAdmin
@@ -2976,6 +3274,14 @@
       else if (route.view === "admin-item-edit") root.innerHTML = renderAdminItemEdit(route.itemType, route.id);
       else if (route.view === "admin-people" || route.view === "people") root.innerHTML = renderPeople();
       else if (route.view === "admin-activity") root.innerHTML = renderAdminActivity();
+      else if (route.view === "admin-inventory") root.innerHTML = renderAdminInventory();
+      else if (route.view === "admin-inventory-review") {
+        if (!state.inventoryReviewLines) {
+          go("#/admin/inventory");
+          return;
+        }
+        root.innerHTML = renderAdminInventoryReview();
+      }
       else if (route.view === "random") root.innerHTML = renderRandom();
       else if (route.view === "settings") root.innerHTML = renderSettings();
       else if (route.view === "disclaimer") root.innerHTML = renderDisclaimer();
@@ -2993,6 +3299,63 @@
   }
 
   async function onClick(e) {
+    const invBump = e.target.closest("[data-inventory-bump]");
+    if (invBump) {
+      e.preventDefault();
+      bumpInventoryCount(
+        invBump.getAttribute("data-inventory-bump"),
+        Number(invBump.getAttribute("data-delta")) || 0
+      );
+      render();
+      return;
+    }
+    if (e.target.closest("[data-inventory-clear]")) {
+      e.preventDefault();
+      if (!confirm("Clear all temporary inventory counts?")) return;
+      clearInventorySession();
+      render();
+      return;
+    }
+    if (e.target.closest("[data-inventory-review]")) {
+      e.preventDefault();
+      state.inventoryReviewLines = buildInventoryReviewLines();
+      go("#/admin/inventory/review");
+      return;
+    }
+    const invRemove = e.target.closest("[data-inventory-remove-line]");
+    if (invRemove) {
+      e.preventDefault();
+      const id = invRemove.getAttribute("data-inventory-remove-line");
+      state.inventoryReviewLines = (state.inventoryReviewLines || []).filter(
+        (line) => line.id !== id
+      );
+      render();
+      return;
+    }
+    if (e.target.closest("[data-inventory-apply]")) {
+      e.preventDefault();
+      if (!(state.inventoryReviewLines || []).length) return;
+      if (
+        !confirm(
+          "Apply " +
+            state.inventoryReviewLines.length +
+            " history line(s) and update database quantities?"
+        )
+      ) {
+        return;
+      }
+      try {
+        const result = await applyInventoryReviewLines();
+        clearInventorySession();
+        state.flash = "Applied " + result.applied + " inventory change(s).";
+        go("#/admin/activity");
+      } catch (err) {
+        state.flash = "Apply failed: " + (err && err.message ? err.message : err);
+        render();
+      }
+      return;
+    }
+
     if (e.target.closest("[data-book-menu-open]")) {
       e.preventDefault();
       state.bookMenuOpen = true;
@@ -4106,6 +4469,44 @@
   }
 
   function onChange(e) {
+    if (e.target.matches("[data-inventory-instock]")) {
+      state.inventoryInStockOnly = !!e.target.checked;
+      render();
+      return;
+    }
+    const invPerson = e.target.closest("[data-inventory-person]");
+    if (invPerson && state.inventoryReviewLines) {
+      const id = invPerson.getAttribute("data-inventory-person");
+      const value = invPerson.value || "";
+      state.inventoryReviewLines = state.inventoryReviewLines.map((line) =>
+        line.id === id
+          ? { ...line, person_name: value, party: value === "Party" }
+          : line
+      );
+      render();
+      return;
+    }
+    const invParty = e.target.closest("[data-inventory-party]");
+    if (invParty && state.inventoryReviewLines) {
+      const id = invParty.getAttribute("data-inventory-party");
+      const on = !!invParty.checked;
+      state.inventoryReviewLines = state.inventoryReviewLines.map((line) =>
+        line.id === id
+          ? {
+              ...line,
+              party: on,
+              person_name: on
+                ? "Party"
+                : line.person_name === "Party"
+                  ? ""
+                  : line.person_name,
+            }
+          : line
+      );
+      render();
+      return;
+    }
+
     const bookCut = e.target.closest("[data-book-tune-cut]");
     if (bookCut && state.bookTuneDraft) {
       state.bookTuneDraft = {
