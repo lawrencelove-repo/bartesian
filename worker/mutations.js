@@ -166,6 +166,10 @@ async function adjustQuantity(db, { cocktailId, delta, reason, barcode, packInfo
     cocktailId
   );
   if (actual !== 0) {
+    const createdAt =
+      packInfo?.createdAt && !Number.isNaN(new Date(packInfo.createdAt).getTime())
+        ? String(packInfo.createdAt)
+        : nowIso();
     await run(
       db,
       "INSERT INTO inventory_log (cocktail_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
@@ -173,7 +177,7 @@ async function adjustQuantity(db, { cocktailId, delta, reason, barcode, packInfo
       actual,
       reason || "",
       barcode || "",
-      nowIso()
+      createdAt
     );
     await logActivity(db, {
       kind: actual < 0 ? "use" : "restock",
@@ -184,6 +188,8 @@ async function adjustQuantity(db, { cocktailId, delta, reason, barcode, packInfo
       packId: packInfo?.packId,
       packName: packInfo?.packName,
       packSlug: packInfo?.packSlug,
+      personId: packInfo?.personId,
+      created_at: createdAt,
     });
   }
   return { quantity: next };
