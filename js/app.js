@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v82";
+  const APP_VERSION = "bartesian-v83";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -2779,11 +2779,6 @@
       (personVal && !people.some((p) => p.name === personVal)
         ? `<option value="${esc(personVal)}" selected>${esc(personVal)}</option>`
         : "");
-    const partyDateField = line.party
-      ? `<label class="field inventory-review-party-date">Party date
-            <input type="date" data-inventory-party-date value="${esc(state.inventoryPartyDate || "")}" />
-          </label>`
-      : "";
     return `<div class="cocktail-row history-row inventory-review-row" data-inventory-line="${esc(line.id)}">
       <span class="history-dot" aria-hidden="true"></span>
       <div class="row-body">
@@ -2794,7 +2789,6 @@
             <select data-inventory-person="${esc(line.id)}" ${line.party ? "disabled" : ""}>${personOpts}</select>
           </label>
           <label class="check"><input type="checkbox" data-inventory-party="${esc(line.id)}" ${line.party ? "checked" : ""}/> Party</label>
-          ${partyDateField}
           <button type="button" class="ghost danger small" data-inventory-remove-line="${esc(line.id)}">Remove</button>
         </div>
       </div>
@@ -2810,6 +2804,15 @@
       peopleForSelect.push({ id: 0, name: "Party", is_admin: false });
       peopleForSelect.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: "base" }));
     }
+    const hasParty = lines.some((line) => line.party);
+    const partyDateBar = hasParty
+      ? `<div class="inventory-party-date-bar">
+          <label class="field inventory-review-party-date">Party date
+            <input type="date" data-inventory-party-date value="${esc(state.inventoryPartyDate || "")}" />
+          </label>
+          <span class="muted">Applies to every line marked Party.</span>
+        </div>`
+      : "";
     const listHtml = lines.length
       ? lines.map((line) => inventoryReviewRowHtml(line, peopleForSelect)).join("")
       : `<p class="empty">No differences between counted inventory and the database.</p>`;
@@ -2821,6 +2824,7 @@
         <h1>Inventory review</h1>
         <p class="lede">Confirm each history line before applying. Assign a person, mark Party (grouped on apply — pick a shared Party date), or remove a line. Nothing is written until you apply.</p>
         <p class="count">${lines.length} line${lines.length === 1 ? "" : "s"}</p>
+        ${partyDateBar}
         <div class="list">${listHtml}</div>
         <div class="inventory-count-footer">
           <a class="ghost buttonish" href="#/admin/inventory" data-go="#/admin/inventory">← Back to count</a>
