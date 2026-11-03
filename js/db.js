@@ -2223,11 +2223,15 @@
         next, restock, nowIso(), cocktailId,
       ]);
       if (actual !== 0) {
+        const info = packInfo || {};
+        const createdAt =
+          info.createdAt && !Number.isNaN(new Date(info.createdAt).getTime())
+            ? String(info.createdAt)
+            : nowIso();
         exec(
           "INSERT INTO inventory_log (cocktail_id, delta, reason, barcode, created_at) VALUES (?, ?, ?, ?, ?)",
-          [cocktailId, actual, reason || "", barcode || "", nowIso()]
+          [cocktailId, actual, reason || "", barcode || "", createdAt]
         );
-        const info = packInfo || {};
         logActivity({
           kind: actual < 0 ? "use" : "restock",
           cocktailId,
@@ -2238,6 +2242,7 @@
           packName: info.packName || "",
           packSlug: info.packSlug || "",
           personId: info.personId != null ? info.personId : null,
+          created_at: createdAt,
         });
       }
       await persist();
