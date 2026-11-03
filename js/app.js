@@ -1,6 +1,6 @@
 (function () {
   /** Keep in sync with sw.js CACHE_VERSION */
-  const APP_VERSION = "bartesian-v81";
+  const APP_VERSION = "bartesian-v82";
   const LIST_PREFS_COOKIE = "bartesian_list_prefs";
   // v2: panel-era tune values (Size relative to a 50% panel) are meaningless
   // in the viewport model and made images zoom/crop unexpectedly, so the
@@ -72,6 +72,7 @@
     inventoryTouched: {}, // cocktailId → true once any bump was used
     inventoryInStockOnly: false,
     inventoryReviewLines: null, // confirmation rows or null
+    inventoryPartyDate: "", // YYYY-MM-DD shared by all Party review lines
   };
 
   let bookTouchStartX = 0;
@@ -1409,6 +1410,24 @@
     );
   }
 
+  /** YYYY-MM-DD (local calendar day) → ISO timestamp at local noon. */
+  function partyDateToIso(dateStr) {
+    const m = String(dateStr || "").trim().match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!m) return "";
+    const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]), 12, 0, 0, 0);
+    if (Number.isNaN(d.getTime())) return "";
+    return d.toISOString();
+  }
+
+  function applyPartyDateToReviewLines(dateStr) {
+    const iso = partyDateToIso(dateStr);
+    if (!iso || !state.inventoryReviewLines) return;
+    state.inventoryPartyDate = String(dateStr || "").trim();
+    state.inventoryReviewLines = state.inventoryReviewLines.map((line) =>
+      line.party ? { ...line, created_at: iso } : line
+    );
+  }
+
   function historyModalHtml(people) {
     const m = state.historyModal;
     if (!m) return "";
@@ -2609,6 +2628,7 @@
     state.inventoryPackAdds = {};
     state.inventoryTouched = {};
     state.inventoryReviewLines = null;
+    state.inventoryPartyDate = "";
   }
 
   /**
@@ -2759,6 +2779,11 @@
       (personVal && !people.some((p) => p.name === personVal)
         ? `<option value="${esc(personVal)}" selected>${esc(personVal)}</option>`
         : "");
+    const partyDateField = line.party
+      ? `<label class="field inventory-review-party-date">Party date
+            <input type="date" data-inventory-party-date value="${esc(state.inventoryPartyDate || "")}" />
+          </label>`
+      : "";
     return `<div class="cocktail-row history-row inventory-review-row" data-inventory-line="${esc(line.id)}">
       <span class="history-dot" aria-hidden="true"></span>
       <div class="row-body">
@@ -2769,6 +2794,7 @@
             <select data-inventory-person="${esc(line.id)}" ${line.party ? "disabled" : ""}>${personOpts}</select>
           </label>
           <label class="check"><input type="checkbox" data-inventory-party="${esc(line.id)}" ${line.party ? "checked" : ""}/> Party</label>
+          ${partyDateField}
           <button type="button" class="ghost danger small" data-inventory-remove-line="${esc(line.id)}">Remove</button>
         </div>
       </div>
@@ -2793,7 +2819,7 @@
       <section class="panel">
         <p class="section-label">Admin</p>
         <h1>Inventory review</h1>
-        <p class="lede">Confirm each history line before applying. Assign a person, mark uses as Party (grouped on apply), or remove a line. Nothing is written until you apply.</p>
+        <p class="lede">Confirm each history line before applying. Assign a person, mark Party (grouped on apply — pick a shared Party date), or remove a line. Nothing is written until you apply.</p>
         <p class="count">${lines.length} line${lines.length === 1 ? "" : "s"}</p>
         <div class="list">${listHtml}</div>
         <div class="inventory-count-footer">
@@ -2851,6 +2877,7 @@
           packName: line.pack_name || "",
           packSlug: line.pack_slug || "",
           personId,
+          createdAt: line.created_at || "",
         }
       );
       applied++;
@@ -4478,11 +4505,14 @@
     if (invPerson && state.inventoryReviewLines) {
       const id = invPerson.getAttribute("data-inventory-person");
       const value = invPerson.value || "";
-      state.inventoryReviewLines = state.inventoryReviewLines.map((line) =>
-        line.id === id
-          ? { ...line, person_name: value, party: value === "Party" }
-          : line
-      );
+      const asParty = value === "Party";
+      const partyIso = asParty ? partyDateToIso(state.inventoryPartyDate) : "";
+      state.inventoryReviewLines = state.inventoryReviewLines.map((line) => {
+        if (line.id !== id) return line;
+        const next = { ...line, person_name: value, party: asParty };
+        if (asParty && partyIso) next.created_at = partyIso;
+        return next;
+      });
       render();
       return;
     }
@@ -4490,19 +4520,26 @@
     if (invParty && state.inventoryReviewLines) {
       const id = invParty.getAttribute("data-inventory-party");
       const on = !!invParty.checked;
-      state.inventoryReviewLines = state.inventoryReviewLines.map((line) =>
-        line.id === id
-          ? {
-              ...line,
-              party: on,
-              person_name: on
-                ? "Party"
-                : line.person_name === "Party"
-                  ? ""
-                  : line.person_name,
-            }
-          : line
-      );
+      const partyIso = on ? partyDateToIso(state.inventoryPartyDate) : "";
+      state.inventoryReviewLines = state.inventoryReviewLines.map((line) => {
+        if (line.id !== id) return line;
+        const next = {
+          ...line,
+          party: on,
+          person_name: on
+            ? "Party"
+            : line.person_name === "Party"
+              ? ""
+              : line.person_name,
+        };
+        if (on && partyIso) next.created_at = partyIso;
+        return next;
+      });
+      render();
+      return;
+    }
+    if (e.target.matches("[data-inventory-party-date]") && state.inventoryReviewLines) {
+      applyPartyDateToReviewLines(e.target.value || "");
       render();
       return;
     }

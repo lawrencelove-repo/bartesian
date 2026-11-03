@@ -1726,3 +1726,14 @@ a.buttonish {
   width: 100%;
   margin-top: 0.25rem;
 }
+
+.inventory-review-party-date {
+  margin: 0;
+  min-width: 9.5rem;
+}
+
+.inventory-review-party-date input[type="date"] {
+  display: block;
+  width: 100%;
+  margin-top: 0.25rem;
+}
